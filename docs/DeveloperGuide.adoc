@@ -831,17 +831,72 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 [width="59%",cols="22%,<23%,<25%,<30%",options="header",]
 |=======================================================================
 |Priority |As a ... |I want to ... |So that I can...
-|`* * *` |new user |see usage instructions |refer to instructions when I forget how to use the App
+|`* * *` |Student who hates eating alone |Find people to eat with or invite people to eat with me |Not eat alone
 
-|`* * *` |user |add a new person |
+|`* * *` |Student with many friends |Create a food jio |Not have to text all my friends or create a chat group just for eating
 
-|`* * *` |user |delete a person |remove entries that I no longer need
+|`* * *` |Diner |Be able to write Review for Restaurants |Let others know what is good and recommended for a more informed decision 
 
-|`* * *` |user |find a person by name |locate details of persons without having to go through the entire list
+|`* * *` |Diner |Be able to view the previous restaurants I’ve been to |Remember what I have eaten and my experience with the Restaurant
 
-|`* *` |user |hide <<private-contact-detail,private contact details>> by default |minimize chance of someone else seeing them by accident
+|`* * *` |Diner |Be able to keep track of my favourite restaurants |Go back to those restaurants
 
-|`*` |user with many persons in the address book |sort persons by name |locate a person easily
+|`* * *` |Sociable person |Add people to my list of friends |So that they will be in my address book
+
+|`* * *` |Sociable person |Add many friends to a group |So that we have an exclusive group to start food jios in or keep track of finances
+
+|`* * *` |Busy but sociable student |Have a platform where my timetables can be added |My friends can find a time to eat with me
+
+|`* * *` |Busy but sociable student |I want to see when my friends are free to eat |So that i can eat with my friends
+
+|`* * *` |Person who always eat as a group |Know how much should each of us pay |We can clarify the debt
+
+|`* * *` |Person who always eat as a group |Mark down our payment and balance them off |Reduce the trouble of paying off each time
+
+|`* * *` |Petty friend |Delete friends |I can only keep track of friends that I am interested in
+
+|`* * *` |user |View all my friend requests |I can decide which friend requests to accept and which ones to delete
+
+|`* * *` |user |View all my group requests |I can decide which group requests to accept and which ones to delete
+
+|`* *` |Diner |Have outdated jios delete automatically |Have an updated view of jios
+
+|`* *` |Paranoid person |Choose to accept or delete friend requests |I can better protect my privacy
+
+|`* *` |Paranoid person |Choose which group requests to accept and delete |I can better protect my privacy
+
+|`* *` |Student who wants to go for jios |I want to find the jios that fit my timetable |So that i can easily find a suitable jio without skimming through everything
+
+|`* *` |User |I want to be able to delete my account and when I want to quit using the app |Have my Privacy because #Privacy
+
+|`* *` |Person who owes other and is also owed |Simplify my debts |Save the hassle of paying and collecting from multiple people
+
+|`* *` |Save the hassle of paying and collecting from multiple people |Delete groups |When I view all the activities happening, I can view the groups that I’m interested in
+
+|`*` |Student who joins a jio |Be able to suggest alternative timings/places etc |Fit my timetable better
+
+|`*` |Selective friend |Create private jios for only my friends |Have a private meal
+
+|`*` |Sociable person |Get recommendations for friends based on mutual friends |So that I can have more friends
+
+|`*` |Time-strapped student |I want to add my times tables easily using google docs integration |So that i can easily find a common time slot with friends
+
+|`*` |Time-strapped student |I want to add my times tables easily using nusmods integration |So that i can easily find a common time slot with friends
+
+|`*` |Diner |Be able to send recommendations on certain restaurants |Notify my friends where I have eaten at
+
+|`*` |Diner |Keep track of visited restaurants outside of NUS |Have more variety in the restaurant choices
+
+|`*` |Financially strapped student |Set the address book to sort the restaurant by budget |Find the restaurant that I can avoid
+
+|`*` |Busy diner that travels around |Sort by faculty |Eat where I am heading to
+
+|`*` |Time-strapped student |Have my filter settings saved |Save time from applying the same filter each time
+
+|`*` |Vegetarian diner |Set the address book to always eliminate the non-veg restaurant |Always find the restaurant provides vegetarian food
+
+|`*` |Boutique food lover |Use the address book to find relevant restaurants for me |Easily find a restaurant suits my taste like Chinese, Western, Malay, Indian, Korean, Japanese, Vietnamese, Others
+
 |=======================================================================
 
 _{More to be added}_
