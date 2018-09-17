@@ -240,6 +240,94 @@ There is no need to save manually.
 _{explain how the user can enable/disable data encryption}_
 // end::dataencryption[]
 
+
+*TODO*
+*NEW COMMANDS ADDED FROM HERE*
+
+=== Write Review For Restaurant: `writeReview`
+
+Allows user to write reviews for a specific restaurant. +
+Format: `writeReview INDEX s/SCORE r/REVIEW`
+
+Examples:
+
+* `writeReview 3 s/3 r/Disgusting, I’ve seen better food in prisons`
+
+=== List Visited Restaurant: `listVisitedRestaurants`
+
+Returns a list of all the restaurants the User has been to before. +
+Format: `listVisitedRestaurants`
+
+=== Add Visited Restaurant: `addVisitedRestaurants `
+
+Allows user to add a restaurant into his visited restaurant list with date, price, rating/score and meal consumed. +
+Format: `addVisitedRestaurants r/RESTAURANT_ID t/DATE p/PRICE s/SCORE m/MEAL_CONSUMED`
+
+Examples:
+
+* `addVisitedRestaurants r/COM1231 t/2011-11-11 p/3 s/4 m/Lemon Chicken Rice`
+
+=== Add Favourites: `addFavourite`
+
+Allows User to add a restaurant into his account’s favourites. +
+Format: `addFavourite r/RESTAURANT ID s/Score`
+
+Examples:
+
+* `addFavourite r/COM1231 s/4`
+
+=== List Favourites: `listFavourites`
+
+Allows User to list the restaurants he has entered into his favourites. +
+Format: `listFavourites`
+
+=== Finding people to eat with: `createJio`
+
+Users can find other users to eat with through inviting users. “createJio” creates a jio that is added to the global list of jios. +
+Format: `createJio n/NAME d/DATE t/TIME p/PLACE [n/NUMBER OF PEOPLE] [--private]`
+
+****
+* Jio -- an invitation to hang out.
+* Name, date, time, place must be provided. The other parameters are optional.
+* All users will be able to view the list of jios, unless the user specifies that it is a private jio. If --private tag is added, the jio is only visible to friends.
+****
+
+Examples:
+
+* `createJio n/MALA!!! d/270918 t/1200 p/FineFood n/4`
+* `createJio n/saporeFriends d/010118 t/1800 p/Sapore --friends`
+
+=== Joining an existing jio: `joinJio`
+
+Users can join an existing jio to find people to eat with, without having to create one of their own. +
+Format: `joinJio NAME`
+
+****
+* User has to indicate the name of the jio.
+****
+
+Examples:
+
+* `joinJio MALA!!`
+
+=== Deleting old jios: `deleteJio`
+
+Users can specify a jio to delete. All old jios are automatically deleted. +
+Format: `deleteJio NAME`
+
+Examples:
+
+* `deleteJio MALA!!`
+
+=== View public and private jios: `listJio`
+
+Users can view all jios available. “listJio” will display all public jios and all private jios. +
+Format: `listJio`
+
+
+
+
+
 == FAQ
 
 *Q*: How do I transfer my data to another Computer? +
