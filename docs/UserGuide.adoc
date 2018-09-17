@@ -426,6 +426,62 @@ Examples:
 
 * `blockTime week5 tues 1800 1900`
 
+===  Free timeslot manually: `freeTime`
+
+Frees up that timeslot in the user’s timetable to signify that he is free and available to eat. +
+Format: `freeTime WEEKNUMBER DAY HHHH HHHH`
+
+Examples:
+
+* `freeTime week5 tues 1900 2100`
+
+===  See Free Time: `listTime`
+
+Views the list of free time to eat on those dates. +
+Format: `listTime WEEKNUMBER`
+
+Examples:
+
+* `listTime week5`
+
+===  Find jios that fit a user’s timetable for a given NUS academic week: `findJio`
+
+Views the list of free time to eat on those dates. +
+Format: `findJio WEEKNUMBER`
+
+Examples:
+
+* `findJio week8`
+
+===  Find common timeslots with friends: `findTime`
+
+Find common eating timeslots with a list of friends. +
+Format: `findTime [w/week number] [f/name of friend] [f/name of friend] ….`
+
+Examples:
+
+* `findTime week6 f/Aiden  f/Chelsea f/Evan Mok f/Meena f/Kate`
+
+===  Add NUSMODS schedule to block out calendar: `addNUSMODS`
+
+Block out schedules on the timetable using a NUSMODS link. +
+Format: `addNUSMODS NUSMODSLINK`
+
+Examples:
+
+* `addCalendar nusmods.com/g91j3g08sdgl13`
+
+===  Add Google Calendar schedule to block out calendar: `addCalendar`
+
+Block out schedules on the timetable using a google account. +
+Format: `addCalendar USERNAME PASSWORD`
+
+Examples:
+
+* `addCalendar aiden@gmail.com aidenpassword`
+
+
+
 
 
 
