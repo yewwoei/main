@@ -258,7 +258,7 @@ Examples:
 Returns a list of all the restaurants the User has been to before. +
 Format: `listVisitedRestaurants`
 
-=== Add Visited Restaurant: `addVisitedRestaurants `
+=== Add Visited Restaurant: `addVisitedRestaurants`
 
 Allows user to add a restaurant into his visited restaurant list with date, price, rating/score and meal consumed. +
 Format: `addVisitedRestaurants r/RESTAURANT_ID t/DATE p/PRICE s/SCORE m/MEAL_CONSUMED`
@@ -374,7 +374,7 @@ Examples:
 
 * `acceptGroup CS2103`
 
-=== Deleting group requests: `deleteGroupRequest `
+=== Deleting group requests: `deleteGroupRequest`
 
 A User can choose to delete the group request should they not want to join the group. +
 Format: `deleteGroupRequest GROUPNAME`
@@ -383,7 +383,7 @@ Examples:
 
 * `deleteGroupRequest CS2103`
 
-=== Deleting groups: `deleteGroup `
+=== Deleting groups: `deleteGroup`
 
 A User can leave a group and they will be removed from the group. +
 Format: `deleteGroup GROUPNAME`
@@ -392,7 +392,7 @@ Examples:
 
 * `deleteGroup CS2103`
 
-=== Recommend mutual friends: `findMutualFriends `
+=== Recommend mutual friends: `findMutualFriends`
 
 A User can find other users based on their mutual friends. +
 Format: `findMutualFriends`
@@ -402,17 +402,17 @@ Format: `findMutualFriends`
 A User can list all his friends. This method will internally call upon a list (Arraylist <Object>) method. +
 Format: `listFriends`
 
-=== List all groups: `listGroups `
+=== List all groups: `listGroups`
 
 A User can list all his groups. This method will internally call upon a list (Arraylist <Object>) method. +
 Format: `listGroups`
 
-=== List all friend requests: `listFriendRequests `
+=== List all friend requests: `listFriendRequests`
 
 A User can list all his friend requests. This method will internally call upon a list (Arraylist <Object>) method. +
 Format: `listFriendRequests`
 
-=== List all group requests: `listGroupRequests  `
+=== List all group requests: `listGroupRequests`
 
 A User can list all his group requests. This method will internally call upon a list (Arraylist <Object>) method. +
 Format: `listGroupRequest`
