@@ -519,7 +519,7 @@ Examples:
 ===  List debt history: `listDebtHistory`
 
 A user can list all his transaction, including the Transcation ID, user, amount and type and status. +
-Format: `listHistory`
+Format: `listDebtHistory`
 
 ===  List debtor: `listDebtor`
 
