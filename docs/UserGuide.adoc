@@ -480,12 +480,61 @@ Examples:
 
 * `addCalendar aiden@gmail.com aidenpassword`
 
+===  Sent add debt request: `addDebt`
 
+A user will send a debt request to another user with specific amount. +
+Format: `addDebt USERNAME AMOUNT`
 
+Examples:
 
+* `addDebt Kate123 4.30`
 
+===  Sent clear debt request: `clearDebt`
 
+A user can send a clear request to another user to clear the debt and the amount will be balanced off. +
+Format: `clearDebt NAME AMOUNT`
 
+Examples:
+
+* `clearDebt Kate123 4.30`
+
+===  Accept debt request: `acceptDebtRequest`
+
+A user can accept (add or clear) request from another user, then a record will be created to both of their account with the each other name, amount, and request ID. +
+Format: `acceptDebtRequest NAME REQUESTID`
+
+Examples:
+
+* `acceptDebtRequest Kate123 hxas78`
+
+===  Delete debt request: `deleteDebtRequest`
+
+A user can delete request send by other user if it is a wrong request. +
+Format: `deleteDebtRequest USERNAME REQUESTID`
+
+Examples:
+
+* `deleteDebtRequest Kate123 hxas78`
+
+===  List debt history: `listDebtHistory`
+
+A user can list all his transaction, including the Transcation ID, user, amount and type and status. +
+Format: `listHistory`
+
+===  List debtor: `listDebtor`
+
+A User can list all his debtor, including the user and amount. +
+Format: `listDebtor`
+
+===  List creditor: `listCreditor`
+
+A User can list all his creditors, including the user and amount. +
+Format: `listCreditor`
+
+===  List Debt Request: `listDebtRequest`
+
+A User can list all received request, including the type, request ID, user and amount. +
+Format: `listDebtRequest`
 
 == FAQ
 
