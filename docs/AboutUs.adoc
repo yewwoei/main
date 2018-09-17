@@ -53,6 +53,6 @@ image::katenhy.jpg[width="150", align="left"]
 {empty}[http://github.com/katenhy[github]]
 
 Role: Developer +
-Responsibilities: 
+Responsibilities:
 
 '''
