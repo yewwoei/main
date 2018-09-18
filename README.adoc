@@ -15,7 +15,7 @@ image::images/Ui.png[width="600"]
 endif::[]
 
 * This is a desktop Restaurant Address Book application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
-* The target user of this application is student diners aiming to find eating places around the National University of Singapore. 
+* The target user of this application is student diners aiming to find eating places around the National University of Singapore.
 
 == Site Map
 
@@ -29,6 +29,6 @@ endif::[]
 * Some parts of this sample application were inspired by the excellent http://code.makery.ch/library/javafx-8-tutorial/[Java FX tutorial] by
 _Marco Jakob_.
 * Libraries used: https://github.com/TestFX/TestFX[TextFX], https://bitbucket.org/controlsfx/controlsfx/[ControlsFX], https://github.com/FasterXML/jackson[Jackson], https://github.com/google/guava[Guava], https://github.com/junit-team/junit5[JUnit5]
-* Original source of code: AddressBook-Level4 project created by SE-EDU initiative at https://github.com/se-edu/ 
+* Original source of code: AddressBook-Level4 project created by SE-EDU initiative at https://github.com/se-edu/
 
 == Licence : link:LICENSE[MIT]
