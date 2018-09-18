@@ -12,12 +12,21 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 == Project Team
 
+=== Mok Ken Han Evan
+image::evanmok2401.jpg[width="150", align="left"]
+{empty}[https://github.com/evanmok2401[github]]
+
+Role: Team Lead
+Responsibilities: Testing, In charge of Overall Architecture
+
+'''
+
 === Aiden Low Yew Woei
 image::yewwoei.jpg[width="150", align="left"]
 {empty} [https://github.com/yewwoei[github]]
 
 Role: Developer +
-Responsibilities:
+Responsibilities: Integration, In charge of Logic Component
 
 '''
 
@@ -25,26 +34,17 @@ Responsibilities:
 image::meena567.jpg[width="150", align="left"]
 {empty}[https://github.com/meena567[github]]
 
-Role: Developer +
-Responsibilities:
-
-'''
-
-=== Mok Ken Han Evan
-image::evanmok2401.jpg[width="150", align="left"]
-{empty}[https://github.com/evanmok2401[github]]
-
-Role: Developer +
-Responsibilities:
+Role: Developer
+Responsibilities: Documentation, Code Quality, In charge of Storage Component
 
 '''
 
 === Chelsea Chia Jia Hwa
-image::yl_coder.jpg[width="150", align="left"]
+image::chelchia.jpg[width="150", align="left"]
 {empty}[https://github.com/chelchia[github]]
 
 Role: Developer +
-Responsibilities:
+Responsibilities: Deliverables and Deadline, In charge of Model Component
 
 '''
 
@@ -53,6 +53,6 @@ image::katenhy.jpg[width="150", align="left"]
 {empty}[http://github.com/katenhy[github]]
 
 Role: Developer +
-Responsibilities:
+Responsibilities: Scheduling and Tracking, In charge of UI Component
 
 '''
