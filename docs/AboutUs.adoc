@@ -16,7 +16,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 image::evanmok2401.jpg[width="150", align="left"]
 {empty}[https://github.com/evanmok2401[github]]
 
-Role: Team Lead
+Role: Team Lead + 
 Responsibilities: Testing, In charge of Overall Architecture
 
 '''
