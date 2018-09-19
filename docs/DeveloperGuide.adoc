@@ -907,30 +907,148 @@ _{More to be added}_
 (For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
-=== Use case: Delete person
+=== Use case #1: Meeting with friends to eat together at a place in NUS
+
+*System*: Food Jio system
+
+*Actor*: User, friends
 
 *MSS*
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User creates a jio with a unique name and specifies the time, date, place to meet.
+2. System adds jio to public list of jios.
+3. Friend views the public list of all jios.
+4. Friend joins a jio.
+5. Jio is deleted when jio is over.
+
 +
 Use case ends.
 
 *Extensions*
 
 [none]
-* 2a. The list is empty.
+* 1a. System detects an error in the entered data.
+** 1a1. System displays error message.
 +
 Use case ends.
 
-* 3a. The given index is invalid.
+* 1a. System detects an error in the entered data.
+** 1a1. System displays error message.
 +
-[none]
-** 3a1. AddressBook shows an error message.
+Use case ends.
+
+* 3a. User requests for the jio to be private
+** 3a1. Jio is only visible to friends of the user who added.
+** 3a2. Friend view the private list of jios on top of the public list of jios.
 +
-Use case resumes at step 2.
+Use case resumes from step 4.
+
+[discrete]
+=== Use case #2: Adding a Review to a Restaurant Visited
+
+*System*: Restaurant review system
+
+*Actor*: User
+
+*MSS*
+
+1. User eats at a Restaurant and finds the restaurant (with List/Find function) in NUS
+2. System returns the list of Restaurants for User to choose from
+3. User chooses the restaurant using the index and writes a review for the particular restaurant that he has chosen
+4. System checks whether review is valid
+5. System adds the review to the restaurant
+
+*Extensions:*
+
+* 4a. System detects an error in the entered data.
+** 4a1. System displays a message on how the command should be used
++
+Use case ends.
+
+[discrete]
+=== Use case #3: Adding friends and groups
+
+*System*: Friend and group system
+
+*Actor*: User, friends
+
+*MSS*
+1. User adds friend or different users to a group with a unique name.
+2. Other user can view all requests made to him.
+3. Other user in question chooses whether to accept or delete the request.
+4. The other user chooses to accept the request, they will now have a friendship or be added to the group. 
+5. User can view all friends and groups through a list. 
+
+*Extensions:*
+
+* 1a. System detects an error in the entered data.
+** 1a1. System displays a message on how the command should be used
++
+Use case ends.
+
+* 3a. System detects an error in the entered data.
+** 3a1. System displays a message on how the command should be used
++
+Use case ends.
+
+* 4a. Other user chooses to delete request.
+** 4a1. The other user will not have a friendship or be added to the group. 
++
+Use case resumes from step 5.
+
+[discrete]
+=== Use case #4: Finding a common timeslot to eat with friends
+
+*System*: Timetable system
+
+*Actor*: User
+
+*MSS*
+1. Student blocks out unavailable times and dates.
+2. Timetable System blocks out the date and prints an OK status.
+3. Step 1-2 are repeated until student sets up his timetable system.
+4. Student requests to find a common timeslot for eating with friend
+5. Timetable System finds the common free times across all the friend’s schedules and displays to user.
+
+*Extensions:*
+
+* 1a. System detects an error in the entered data.
+** 1a1. System displays a message on how the command should be used
++
+Use case ends.
+
+[discrete]
+=== Use case #5: Settling payment for a group meal
+
+*System*: Payment splitting system
+
+*Actor*: User, friends
+
+*MSS*
+1. User creates a debt request to the whole group, with the total meal fee.
+2. System splits the fee into equal amounts
+3. System sends a debt request to every other member in the group.
+4. Debtor accepts the debt request.
+5. A debt record is created to both debtor and creditor.
+6. After the debt is paid, debtor creates a clear request to user.
+7. System sends clear request to user.
+8. User accepts clear request.
+9. System records that the debt is paid.
+
+*Extensions:*
+
+* 4a. Debtor rejects the request.
+** 4a1. Debt request is deleted.
+** 4a2. System sends notification to the request sender.
++
+Use case ends.
+
+* 8a. User rejects the request.
+** 11a1. Clear request is deleted.
+** 11a2. System sends notification to the request sender.
++
+Use case ends.
+
 
 _{More to be added}_
 
@@ -940,6 +1058,9 @@ _{More to be added}_
 .  Should work on any <<mainstream-os,mainstream OS>> as long as it has Java `9` or higher installed.
 .  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
 .  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+.  It is not secure as there is no encryption of password when storing them
+.  Application and stored data is only available on one computer. The different users have to use the same application on the same computer.
+
 
 _{More to be added}_
 
@@ -951,6 +1072,9 @@ Windows, Linux, Unix, OS-X
 
 [[private-contact-detail]] Private contact detail::
 A contact detail that is not meant to be shared with others
+
+[[jio]] Jio::
+An event for users to meet up with friends (over food)
 
 [appendix]
 == Product Survey
