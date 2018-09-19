@@ -47,11 +47,6 @@ public class AddressBookParserTest {
         assertEquals(new AddCommand(person), command);
     }
 
-    @Test
-    public void parseCommand_add_alias() throws Exception {
-        Person peson = new PersonBuilder().build();
-        AddCommand
-    }
 
     @Test
     public void parseCommand_clear() throws Exception {
