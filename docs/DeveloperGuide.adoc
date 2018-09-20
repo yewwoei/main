@@ -819,7 +819,7 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Value proposition*:
 
-With the Restaurant Book, users can find restaurants based on their preferences such as cuisine or budget. This makes the process of deciding what to eat easier. At the same time, users can give reviews of the restaurants and can view reviews of other users as well. 
+With the Restaurant Book, users can find restaurants based on their preferences such as cuisine or budget. This makes the process of deciding what to eat easier. At the same time, users can give reviews of the restaurants and can view reviews of other users as well.
 Additionally, Users can add other users as friends and form groups so that they can have private food “Jios”/ sessions. Public food “Jios”, which is open to the whole of NUS, is available as well for the User. Additionally, the User can get recommendations for friends based on mutual friends or others who eat at the same restaurants. Users of the addressbook can also include their own timetable to help them organise jios and eating sessions with friends. Lastly, a user can add restaurants apart from the existing NUS restaurants in their own private Restaurant book. Through the features of the Restaurant Book, we hope the dining experience in NUS can be enhanced.
 
 
@@ -835,7 +835,7 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |`* * *` |Student with many friends |Create a food jio |Not have to text all my friends or create a chat group just for eating
 
-|`* * *` |Diner |Be able to write Review for Restaurants |Let others know what is good and recommended for a more informed decision 
+|`* * *` |Diner |Be able to write Review for Restaurants |Let others know what is good and recommended for a more informed decision
 
 |`* * *` |Diner |Be able to view the previous restaurants I’ve been to |Remember what I have eaten and my experience with the Restaurant
 
@@ -976,8 +976,8 @@ Use case ends.
 1. User adds friend or different users to a group with a unique name.
 2. Other user can view all requests made to him.
 3. Other user in question chooses whether to accept or delete the request.
-4. The other user chooses to accept the request, they will now have a friendship or be added to the group. 
-5. User can view all friends and groups through a list. 
+4. The other user chooses to accept the request, they will now have a friendship or be added to the group.
+5. User can view all friends and groups through a list.
 
 *Extensions:*
 
@@ -992,7 +992,7 @@ Use case ends.
 Use case ends.
 
 * 4a. Other user chooses to delete request.
-** 4a1. The other user will not have a friendship or be added to the group. 
+** 4a1. The other user will not have a friendship or be added to the group.
 +
 Use case resumes from step 5.
 
