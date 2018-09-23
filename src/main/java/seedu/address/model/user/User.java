@@ -103,8 +103,8 @@ public class User {
                 .append(getEmail())
                 .append(" Address: ")
                 .append(getAddress());
-                /*.append(" Friends: ");
-                getTags().forEach(builder::append);*/
+        /*.append(" Friends: ");
+        getTags().forEach(builder::append);*/
         return builder.toString();
     }
 
@@ -122,7 +122,7 @@ public class User {
      */
     public String listFriends() {
         String friendNamesList = "";
-        for(User friends: friends) {
+        for (User friends: friends) {
             friendNamesList += friends.getName() + "\n";
         }
         return friendNamesList;
