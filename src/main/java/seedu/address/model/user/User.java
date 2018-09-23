@@ -2,7 +2,6 @@ package seedu.address.model.user;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -12,6 +11,10 @@ import seedu.address.model.person.Email;
 import seedu.address.model.person.Name;
 import seedu.address.model.person.Phone;
 
+/**
+ * Represents a User in the address book.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class User {
     // Identity fields
     private final Name name;
@@ -50,8 +53,8 @@ public class User {
     }
 
     /**
-     * Returns true if both persons of the same name have at least one other identity field that is the same.
-     * This defines a weaker notion of equality between two persons.
+     * Returns true if both users of the same name have at least one other identity field that is the same.
+     * This defines a weaker notion of equality between two users.
      */
     public boolean isSameUser(User otherUser) {
         if (otherUser == this) {
@@ -64,8 +67,8 @@ public class User {
     }
 
     /**
-     * Returns true if both persons have the same identity and data fields.
-     * This defines a stronger notion of equality between two persons.
+     * Returns true if both users have the same identity and data fields.
+     * This defines a stronger notion of equality between two users.
      */
     @Override
     public boolean equals(Object other) {
@@ -101,15 +104,22 @@ public class User {
                 .append(" Address: ")
                 .append(getAddress());
                 /*.append(" Friends: ");
-        getTags().forEach(builder::append);*/
+                getTags().forEach(builder::append);*/
         return builder.toString();
     }
 
+    /**
+     * @param user User
+     * Allows a user to add other users as friends.
+     */
     public void addFriend(User user) {
         this.friends.add(user);
         user.friends.add(this);
     }
 
+    /**
+     * Returns a string of all the user's friends separated by newline character.
+     */
     public String listFriends() {
         String friendNamesList = "";
         for(User friends: friends) {
