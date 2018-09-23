@@ -11,24 +11,23 @@ import seedu.address.model.person.Phone;
 public class UserFriendListTest {
     @Test
     public void listFriendsTest() {
-        User Alice  = new User(new Name("Alice"), new Phone("899742"), new Email("alice@gmail.com"), new Address("6 Clementi Road"));
-        User Bob  = new User(new Name("Bob"), new Phone("899742"), new Email("bob@gmail.com"), new Address("6 Clementi Road"));
-        Alice.addFriend(Bob);
-        System.out.println(Alice.listFriends());
-        Assert.assertEquals(Alice.listFriends(), "Bob\n");
-        Assert.assertEquals(Bob.listFriends(),"Alice\n");
+        User alice = new User(new Name("Alice"), new Phone("8942"), new Email("alice@g.com"), new Address("6 Baker"));
+        User bob = new User(new Name("Bob"), new Phone("8942"), new Email("bob@g.com"), new Address("6 Baker"));
+        alice.addFriend(bob);
+        System.out.println(alice.listFriends());
+        Assert.assertEquals(alice.listFriends() ,"Bob\n");
+        Assert.assertEquals(bob.listFriends() ,"Alice\n");
     }
 
     @Test
     public void multipleListFriends() {
-        User Alice  = new User(new Name("Alice"), new Phone("899742"), new Email("alice@gmail.com"), new Address("6 Clementi Road"));
-        User Bob  = new User(new Name("Bob"), new Phone("899742"), new Email("bob@gmail.com"), new Address("6 Clementi Road"));
-        User Carol  = new User(new Name("Carol"), new Phone("899742"), new Email("carol@gmail.com"), new Address("6 Clementi Road"));
-        Alice.addFriend(Bob);
-        Carol.addFriend(Alice);
-        System.out.println(Alice.listFriends());
-        Assert.assertEquals(Alice.listFriends(), "Carol\nBob\n");
-        Assert.assertEquals(Bob.listFriends(),"Alice\n");
-        Assert.assertEquals(Carol.listFriends(),"Alice\n");
+        User alice = new User(new Name("Alice"), new Phone("8942"), new Email("alice@g.com"), new Address("6 Baker"));
+        User bob = new User(new Name("Bob"), new Phone("8942"), new Email("bob@g.com"), new Address("6 Baker"));
+        User carol = new User(new Name("Carol"), new Phone("8942"), new Email("carol@g.com"), new Address("6 Baker"));
+        alice.addFriend(bob);
+        carol.addFriend(alice);
+        Assert.assertEquals(alice.listFriends() , "carol\nbob\n");
+        Assert.assertEquals(bob.listFriends() ,"Alice\n");
+        Assert.assertEquals(carol.listFriends() ,"Alice\n");
     }
 }
