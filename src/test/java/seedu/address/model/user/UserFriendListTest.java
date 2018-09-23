@@ -26,7 +26,7 @@ public class UserFriendListTest {
         User carol = new User(new Name("Carol"), new Phone("8942"), new Email("carol@g.com"), new Address("6 Baker"));
         alice.addFriend(bob);
         carol.addFriend(alice);
-        Assert.assertEquals(alice.listFriends() , "carol\nbob\n");
+        Assert.assertEquals(alice.listFriends() , "Bob\nCarol\n");
         Assert.assertEquals(bob.listFriends() , "Alice\n");
         Assert.assertEquals(carol.listFriends() , "Alice\n");
     }
