@@ -15,8 +15,8 @@ public class UserFriendListTest {
         User bob = new User(new Name("Bob"), new Phone("8942"), new Email("bob@g.com"), new Address("6 Baker"));
         alice.addFriend(bob);
         System.out.println(alice.listFriends());
-        Assert.assertEquals(alice.listFriends() ,"Bob\n");
-        Assert.assertEquals(bob.listFriends() ,"Alice\n");
+        Assert.assertEquals(alice.listFriends() , "Bob\n");
+        Assert.assertEquals(bob.listFriends() , "Alice\n");
     }
 
     @Test
@@ -27,7 +27,7 @@ public class UserFriendListTest {
         alice.addFriend(bob);
         carol.addFriend(alice);
         Assert.assertEquals(alice.listFriends() , "carol\nbob\n");
-        Assert.assertEquals(bob.listFriends() ,"Alice\n");
-        Assert.assertEquals(carol.listFriends() ,"Alice\n");
+        Assert.assertEquals(bob.listFriends() , "Alice\n");
+        Assert.assertEquals(carol.listFriends() , "Alice\n");
     }
 }
