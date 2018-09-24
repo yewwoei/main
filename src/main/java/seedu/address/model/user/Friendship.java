@@ -32,4 +32,17 @@ public class Friendship {
     public User getInitiatedBy() {
         return this.initiatedBy;
     }
+
+    @Override
+    public boolean equals(Object otherFriendship) {
+        if (otherFriendship == this) {
+            return true;
+        }
+
+        Friendship other = (Friendship) otherFriendship;
+
+        return other != null
+                && other.getFriendUser().isSameUser(this.friendUser)
+                && other.getInitiatedBy().isSameUser(this.initiatedBy);
+    }
 }
