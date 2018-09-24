@@ -117,10 +117,10 @@ public class User {
      */
     public void addFriend(User user) {
         // checks to make sure that friend is not oneself
-        if(!user.isSameUser(this)) {
+        if (!user.isSameUser(this)) {
             Friendship friendship = new Friendship(this, this);
             // checks that friendship is not already in friendRequests
-            if(!user.friendRequests.contains(friendship) && !user.friends.contains(friendship)) {
+            if (!user.friendRequests.contains(friendship) && !user.friends.contains(friendship)) {
                 user.friendRequests.add(friendship);
             }
         }
@@ -164,7 +164,7 @@ public class User {
         Friendship friendship = findFriendshipInList(friendRequests, username);
         User friend = friendship.getFriendUser();
         // ensures that the person who initiated the friendship is not the one accepting
-        if(!friendship.getInitiatedBy().equals(this)) {
+        if (!friendship.getInitiatedBy().equals(this)) {
             // changes friendship to accepted
             friendship.changeFriendshipStatus();
 
@@ -173,7 +173,7 @@ public class User {
 
             // adds to friends for both parties
             friends.add(friendship);
-            Friendship friendship2 = new Friendship(this, friend,FriendshipStatus.ACCEPTED);
+            Friendship friendship2 = new Friendship(this, friend, FriendshipStatus.ACCEPTED);
             friend.friends.add(friendship2);
         }
     }
@@ -199,7 +199,7 @@ public class User {
         Friendship friendship2 = findFriendshipInList(friend.friends, this.getName());
 
         // deletes the friendship for both parties
-        if(friends.contains(friendship)) {
+        if (friends.contains(friendship)) {
             friends.remove(friendship);
             friend.friends.remove(friendship2);
         }
@@ -212,7 +212,7 @@ public class User {
      * @return Friendship between this user and user with Name username.
      */
     public Friendship findFriendshipInList(List<Friendship> list, Name username) {
-        for(Friendship friendship: list) {
+        for (Friendship friendship: list) {
             if (friendship.getFriendUser().getName().equals(username)) {
                 return friendship;
             }

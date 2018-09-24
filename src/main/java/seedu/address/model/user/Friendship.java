@@ -1,17 +1,25 @@
 package seedu.address.model.user;
 
+import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+/**
+ * Represents a Friendship in the address book.
+ * Guarantees: details are not null.
+ */
 public class Friendship {
     private FriendshipStatus friendshipStatus;
-    private User friendUser;
-    private User initiatedBy;
+    private final User friendUser;
+    private final User initiatedBy;
 
     public Friendship(User friendUser, User initiatedBy) {
+        requireAllNonNull(friendUser, initiatedBy);
         this.friendUser = friendUser;
         this.friendshipStatus = FriendshipStatus.PENDING;
         this.initiatedBy = initiatedBy;
     }
 
     public Friendship(User friendUser, User initiatedBy, FriendshipStatus friendshipStatus) {
+        requireAllNonNull(friendUser, initiatedBy, friendshipStatus);
         this.friendUser = friendUser;
         this.friendshipStatus = friendshipStatus;
         this.initiatedBy = initiatedBy;
