@@ -2,9 +2,9 @@ package seedu.address.model.user;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 
 import seedu.address.model.person.Address;
 import seedu.address.model.person.Email;
@@ -23,7 +23,8 @@ public class User {
 
     // Data fields
     private final Address address;
-    private final Set<User> friends = new HashSet<>();
+    private final List<Friendship> friendRequests = new ArrayList<>();
+    private final List<Friendship> friends = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -36,20 +37,20 @@ public class User {
         this.address = address;
     }
 
-    public String getName() {
-        return name.toString();
+    public Name getName() {
+        return name;
     }
 
-    public String getPhone() {
-        return phone.toString();
+    public Phone getPhone() {
+        return phone;
     }
 
-    public String getEmail() {
-        return email.toString();
+    public Email getEmail() {
+        return email;
     }
 
-    public String getAddress() {
-        return address.toString();
+    public Address getAddress() {
+        return address;
     }
 
     /**
@@ -109,22 +110,80 @@ public class User {
     }
 
     /**
-     * @param user User
      * Allows a user to add other users as friends.
+     * @param user User is not able to add oneself as a friend.
      */
     public void addFriend(User user) {
-        this.friends.add(user);
-        user.friends.add(this);
+        if(!user.isSameUser(this)) {
+            //this.friendRequests.add(new Friendship(user, this));
+            user.friendRequests.add(new Friendship(this, this));
+        }
     }
 
     /**
-     * Returns a string of all the user's friends separated by newline character.
+     * @return String of all the user's friends separated by newline character.
      */
     public String listFriends() {
-        String friendNamesList = "";
-        for (User friends: friends) {
-            friendNamesList += friends.getName() + "\n";
+        return listHelper(friends);
+    }
+
+    /**
+     * @return String that contains all the friendRequests received of this user separated by newline character.
+     */
+    public String listFriendRequests() {
+        return listHelper(friendRequests);
+    }
+
+    /**
+     * Helper method.
+     * @param list List that you want to print out.
+     * @return String that contains all elements in list.
+     */
+    public String listHelper(List<Friendship> list) {
+        String toReturn = "";
+        for (Friendship friendship: list) {
+            toReturn += friendship.getFriendUser().getName() + "\n";
         }
-        return friendNamesList;
+        return toReturn;
+    }
+
+    /**
+     * Ensures that the friendship can only be accepted by the party who did not initiate the request.
+     * Changes friendship status to ACCEPTED.
+     * Deletes friendship from friendRequests for the accepting party.
+     * Adds friendship to friends list for both parties.
+     * @param username Name of the friend to accept.
+     */
+    public void acceptFriendRequest(Name username) {
+        Friendship friendship = findFriendInList(friendRequests, username);
+        User friend = friendship.getFriendUser();
+        // ensures that the person who initiated the friendship is not the one accepting
+        if(!friendship.getInitiatedBy().equals(this)) {
+            // changes friendship to accepted
+            friendship.changeFriendshipStatus();
+
+            // deletes from friendRequests for both parties
+            friendRequests.remove(friendship);
+
+            // adds to friends for both parties
+            friends.add(friendship);
+            Friendship friendship2 = new Friendship(this, friend,FriendshipStatus.ACCEPTED);
+            friend.friends.add(friendship2);
+        }
+    }
+
+    /**
+     * Helper method to find friendship in list.
+     * @param list List in which you would like to search in.
+     * @param username Name of the friend that you would like to find.
+     * @return Friendship between this user and user with Name username.
+     */
+    public Friendship findFriendInList(List<Friendship> list, Name username) {
+        for(Friendship friendship: list) {
+            if (friendship.getFriendUser().getName().equals(username)) {
+                return friendship;
+            }
+        }
+        return null;
     }
 }
