@@ -24,9 +24,9 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.model.Model.PREDICATE_SHOW_ALL_PERSONS;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_PERSON;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_PERSON;
+import static seedu.address.model.Model.PREDICATE_SHOW_ALL_RESTAURANTS;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
+import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_RESTAURANT;
 import static seedu.address.testutil.TypicalRestaurants.AMY;
 import static seedu.address.testutil.TypicalRestaurants.BOB;
 import static seedu.address.testutil.TypicalRestaurants.KEYWORD_MATCHING_MEIER;
@@ -59,7 +59,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: edit all fields, command with leading spaces, trailing spaces and multiple spaces between each field
          * -> edited
          */
-        Index index = INDEX_FIRST_PERSON;
+        Index index = INDEX_FIRST_RESTAURANT;
         String command = " " + EditCommand.COMMAND_WORD + "  " + index.getOneBased() + "  " + NAME_DESC_BOB + "  "
                 + PHONE_DESC_BOB + " " + EMAIL_DESC_BOB + "  " + ADDRESS_DESC_BOB + " " + TAG_DESC_HUSBAND + " ";
         Restaurant editedRestaurant = new RestaurantBuilder(BOB).withTags(VALID_TAG_HUSBAND).build();
@@ -74,7 +74,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         command = RedoCommand.COMMAND_WORD;
         expectedResultMessage = RedoCommand.MESSAGE_SUCCESS;
         model.updateRestaurant(
-                getModel().getFilteredRestaurantList().get(INDEX_FIRST_PERSON.getZeroBased()), editedRestaurant);
+                getModel().getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased()), editedRestaurant);
         assertCommandSuccess(command, model, expectedResultMessage);
 
         /* Case: edit a restaurant with new values same as existing values -> edited */
@@ -85,7 +85,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: edit a restaurant with new values same as another
         restaurant's values but with different name -> edited */
         assertTrue(getModel().getAddressBook().getRestaurantList().contains(BOB));
-        index = INDEX_SECOND_PERSON;
+        index = INDEX_SECOND_RESTAURANT;
         assertNotEquals(getModel().getFilteredRestaurantList().get(index.getZeroBased()), BOB);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
@@ -96,14 +96,14 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         restaurant's values but with different phone and email
          * -> edited
          */
-        index = INDEX_SECOND_PERSON;
+        index = INDEX_SECOND_RESTAURANT;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
         editedRestaurant = new RestaurantBuilder(BOB).withPhone(VALID_PHONE_AMY).withEmail(VALID_EMAIL_AMY).build();
         assertCommandSuccess(command, index, editedRestaurant);
 
         /* Case: clear tags -> cleared */
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_RESTAURANT;
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + PREFIX_TAG.getPrefix();
         Restaurant restaurantToEdit = getModel().getFilteredRestaurantList().get(index.getZeroBased());
         editedRestaurant = new RestaurantBuilder(restaurantToEdit).withTags().build();
@@ -113,7 +113,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: filtered restaurant list, edit index within bounds of address book and restaurant list -> edited */
         showRestaurantsWithName(KEYWORD_MATCHING_MEIER);
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_RESTAURANT;
         assertTrue(index.getZeroBased() < getModel().getFilteredRestaurantList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
         restaurantToEdit = getModel().getFilteredRestaurantList().get(index.getZeroBased());
@@ -126,7 +126,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         showRestaurantsWithName(KEYWORD_MATCHING_MEIER);
         int invalidIndex = getModel().getAddressBook().getRestaurantList().size();
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
 
         /* -------------- Performing edit operation while a restaurant card is selected ------------------- */
 
@@ -135,7 +135,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
          * browser url changes
          */
         showAllRestaurants();
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_RESTAURANT;
         selectRestaurant(index);
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_AMY + PHONE_DESC_AMY + EMAIL_DESC_AMY
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND;
@@ -156,68 +156,68 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: invalid index (size + 1) -> rejected */
         invalidIndex = getModel().getFilteredRestaurantList().size() + 1;
         assertCommandFailure(EditCommand.COMMAND_WORD + " " + invalidIndex + NAME_DESC_BOB,
-                Messages.MESSAGE_INVALID_PERSON_DISPLAYED_INDEX);
+                Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
 
         /* Case: missing index -> rejected */
         assertCommandFailure(EditCommand.COMMAND_WORD + NAME_DESC_BOB,
                 String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE));
 
         /* Case: missing all fields -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased(),
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RESTAURANT.getOneBased(),
                 EditCommand.MESSAGE_NOT_EDITED);
 
         /* Case: invalid name -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_NAME_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RESTAURANT.getOneBased() + INVALID_NAME_DESC,
                 Name.MESSAGE_NAME_CONSTRAINTS);
 
         /* Case: invalid phone -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_PHONE_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RESTAURANT.getOneBased() + INVALID_PHONE_DESC,
                 Phone.MESSAGE_PHONE_CONSTRAINTS);
 
         /* Case: invalid email -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_EMAIL_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RESTAURANT.getOneBased() + INVALID_EMAIL_DESC,
                 Email.MESSAGE_EMAIL_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_ADDRESS_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RESTAURANT.getOneBased() + INVALID_ADDRESS_DESC,
                 Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
         /* Case: invalid tag -> rejected */
-        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_PERSON.getOneBased() + INVALID_TAG_DESC,
+        assertCommandFailure(EditCommand.COMMAND_WORD + " " + INDEX_FIRST_RESTAURANT.getOneBased() + INVALID_TAG_DESC,
                 Tag.MESSAGE_TAG_CONSTRAINTS);
 
         /* Case: edit a restaurant with new values same as another restaurant's values -> rejected */
         executeCommand(RestaurantUtil.getAddCommand(BOB));
         assertTrue(getModel().getAddressBook().getRestaurantList().contains(BOB));
-        index = INDEX_FIRST_PERSON;
+        index = INDEX_FIRST_RESTAURANT;
         assertFalse(getModel().getFilteredRestaurantList().get(index.getZeroBased()).equals(BOB));
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RESTAURANT);
 
         /* Case: edit a restaurant with new values same as another restaurant's values but with different tags
         -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RESTAURANT);
 
         /* Case: edit a restaurant with new values same as another restaurant's values but with different address
         -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_BOB
                 + ADDRESS_DESC_AMY + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RESTAURANT);
 
         /* Case: edit a restaurant with new values same as another restaurant's values but with different phone
         -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_AMY + EMAIL_DESC_BOB
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RESTAURANT);
 
         /* Case: edit a restaurant with new values same as another restaurant's values but with different email
         -> rejected */
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + NAME_DESC_BOB + PHONE_DESC_BOB + EMAIL_DESC_AMY
                 + ADDRESS_DESC_BOB + TAG_DESC_FRIEND + TAG_DESC_HUSBAND;
-        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, EditCommand.MESSAGE_DUPLICATE_RESTAURANT);
     }
 
     /**
@@ -244,10 +244,10 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         Model expectedModel = getModel();
         expectedModel.updateRestaurant(expectedModel.getFilteredRestaurantList()
                 .get(toEdit.getZeroBased()), editedRestaurant);
-        expectedModel.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
 
         assertCommandSuccess(command, expectedModel,
-                String.format(EditCommand.MESSAGE_EDIT_PERSON_SUCCESS, editedRestaurant), expectedSelectedCardIndex);
+                String.format(EditCommand.MESSAGE_EDIT_RESTAURANT_SUCCESS, editedRestaurant), expectedSelectedCardIndex);
     }
 
     /**
@@ -275,7 +275,7 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage,
             Index expectedSelectedCardIndex) {
         executeCommand(command);
-        expectedModel.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_PERSONS);
+        expectedModel.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertCommandBoxShowsDefaultStyle();
         if (expectedSelectedCardIndex != null) {

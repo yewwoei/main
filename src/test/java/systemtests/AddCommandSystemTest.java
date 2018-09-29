@@ -117,26 +117,26 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: add a duplicate restaurant -> rejected */
         command = RestaurantUtil.getAddCommand(HOON);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RESTAURANT);
 
         /* Case: add a duplicate restaurant except with different phone -> rejected */
         toAdd = new RestaurantBuilder(HOON).withPhone(VALID_PHONE_BOB).build();
         command = RestaurantUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RESTAURANT);
 
         /* Case: add a duplicate restaurant except with different email -> rejected */
         toAdd = new RestaurantBuilder(HOON).withEmail(VALID_EMAIL_BOB).build();
         command = RestaurantUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RESTAURANT);
 
         /* Case: add a duplicate restaurant except with different address -> rejected */
         toAdd = new RestaurantBuilder(HOON).withAddress(VALID_ADDRESS_BOB).build();
         command = RestaurantUtil.getAddCommand(toAdd);
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RESTAURANT);
 
         /* Case: add a duplicate restaurant except with different tags -> rejected */
         command = RestaurantUtil.getAddCommand(HOON) + " " + PREFIX_TAG.getPrefix() + "friends";
-        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_PERSON);
+        assertCommandFailure(command, AddCommand.MESSAGE_DUPLICATE_RESTAURANT);
 
         /* Case: missing name -> rejected */
         command = AddCommand.COMMAND_WORD + PHONE_DESC_AMY + EMAIL_DESC_AMY + ADDRESS_DESC_AMY;
