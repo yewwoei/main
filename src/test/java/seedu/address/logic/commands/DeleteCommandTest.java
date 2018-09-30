@@ -139,7 +139,8 @@ public class DeleteCommandTest {
         expectedModel.undoAddressBook();
         assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
 
-        assertNotEquals(restaurantToDelete, model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased()));
+        assertNotEquals(restaurantToDelete,
+                model.getFilteredRestaurantList().get(INDEX_FIRST_RESTAURANT.getZeroBased()));
         // redo -> deletes same second restaurant in unfiltered restaurant list
         expectedModel.redoAddressBook();
         assertCommandSuccess(new RedoCommand(), model, commandHistory, RedoCommand.MESSAGE_SUCCESS, expectedModel);

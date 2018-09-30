@@ -28,7 +28,8 @@ public class RestaurantListPanelTest extends GuiUnitTest {
     private static final ObservableList<Restaurant> TYPICAL_RESTAURANTS =
             FXCollections.observableList(getTypicalRestaurants());
 
-    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT = new JumpToListRequestEvent(INDEX_SECOND_RESTAURANT);
+    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT =
+            new JumpToListRequestEvent(INDEX_SECOND_RESTAURANT);
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
