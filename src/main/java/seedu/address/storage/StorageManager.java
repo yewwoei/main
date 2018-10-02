@@ -23,7 +23,7 @@ public class StorageManager extends ComponentManager implements Storage {
     private static final Logger logger = LogsCenter.getLogger(StorageManager.class);
     private AddressBookStorage addressBookStorage;
     private UserPrefsStorage userPrefsStorage;
-
+    private UsersStorage usersStorage;
 
     public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage) {
         super();
@@ -90,4 +90,30 @@ public class StorageManager extends ComponentManager implements Storage {
         }
     }
 
+    // ================ Users methods ==============================
+    public Path getUsersFilePath() {
+        return usersStorage.getUsersFilePath();
+    }
+    
+    @Override
+    public Optional<HashMap<Username, User>> readUsers() throws DataConversionException, IOException {
+        return readUsers(usersStorage.getUsersFilePath());
+    }
+
+    @Override
+    public Optional<HashMap<Username, User>> readUsers(Path filePath) throws DataConversionException, IOException {
+        logger.fine("Attempting to read data from file: " + filePath);
+        return usersStorage.readUsers(filePath);
+    }
+
+    @Override
+    public void saveUsers(HashMap<Username, User> usernameUserHashMap) throws IOException {
+        saveUsers(usernameUserHashMap, usersStorage.getUsersFilePath());
+    }
+
+    @Override
+    public void saveUsers(HashMap<Username, User> usernameUserHashMap, Path filePath) throws IOException {
+        logger.fine("Attempting to write to data file: " + filePath);
+        usersStorage.saveUsers(usernameUserHashMap, filePath);
+    }
 }
