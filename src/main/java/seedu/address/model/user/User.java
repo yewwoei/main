@@ -83,11 +83,7 @@ public class User {
         }
 
         User otherUser = (User) other;
-        return otherUser.getUsername().equals(getUsername())
-                && otherUser.getPassword().equals(getPassword())
-                && otherUser.getName().equals(getName())
-                && otherUser.getPhone().equals(getPhone())
-                && otherUser.getEmail().equals(getEmail());
+        return otherUser.getUsername().equals(getUsername());
     }
 
     @Override
