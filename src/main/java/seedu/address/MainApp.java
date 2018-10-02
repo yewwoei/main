@@ -62,7 +62,7 @@ public class MainApp extends Application {
         userPrefs = initPrefs(userPrefsStorage);
         AddressBookStorage addressBookStorage = new XmlAddressBookStorage(userPrefs.getAddressBookFilePath());
         UsersStorage usersStorage = new XmlUsersStorage(userPrefs.getUsersFilePath());
-        
+
         storage = new StorageManager(addressBookStorage, userPrefsStorage, usersStorage);
 
         initLogging(config);
@@ -93,7 +93,7 @@ public class MainApp extends Application {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
             initialAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
-            
+
             if (!usersOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with no Users");
             }

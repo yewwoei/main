@@ -34,7 +34,7 @@ public class XmlFileStorage {
             throw new DataConversionException(e);
         }
     }
-    
+
     /**
      * Saves User data to the specified file.
      */
@@ -46,7 +46,7 @@ public class XmlFileStorage {
             throw new AssertionError("Unexpected exception " + e.getMessage(), e);
         }
     }
-    
+
     /**
      * Returns users in the file or an empty address book
      */

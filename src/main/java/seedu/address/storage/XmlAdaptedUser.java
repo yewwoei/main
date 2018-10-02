@@ -22,7 +22,7 @@ public class XmlAdaptedUser {
     private String phone;
     @XmlElement(required = true)
     private String email;
-    
+
     /**
      * Constructs an XmlAdaptedRestaurant.
      * This is the no-arg constructor that is required by JAXB.
@@ -67,7 +67,7 @@ public class XmlAdaptedUser {
             throw new IllegalValueException(Username.MESSAGE_USERNAME_CONSTRAINTS);
         }
         final Username modelUsername = new Username(username);
-        
+
         if (password == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Password.class.getSimpleName()));
@@ -76,7 +76,7 @@ public class XmlAdaptedUser {
             throw new IllegalValueException(Password.MESSAGE_PASSWORD_CONSTRAINTS);
         }
         final Password modelPassword = new Password(password);
-        
+
         if (name == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
         }
@@ -100,7 +100,7 @@ public class XmlAdaptedUser {
             throw new IllegalValueException(Email.MESSAGE_EMAIL_CONSTRAINTS);
         }
         final Email modelEmail = new Email(email);
-        
+
         return new User(modelUsername, modelPassword, modelName, modelPhone, modelEmail);
     }
 

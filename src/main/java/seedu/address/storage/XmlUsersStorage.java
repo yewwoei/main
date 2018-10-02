@@ -46,7 +46,7 @@ public class XmlUsersStorage implements UsersStorage {
     public Optional<HashMap<Username, User>> readUsers(Path filePath) throws DataConversionException,
             FileNotFoundException {
         requireNonNull(filePath);
-        
+
         if (!Files.exists(filePath)) {
             logger.info("Users file " + filePath + " not found");
             return Optional.empty();

@@ -16,7 +16,7 @@ public class User {
     private final Name name;
     private final Phone phone;
     private final Email email;
-    
+
     // Data fields
     private final List<Friendship> friendRequests = new ArrayList<>();
     private final List<Friendship> friends = new ArrayList<>();
@@ -32,7 +32,7 @@ public class User {
         this.phone = phone;
         this.email = email;
     }
-    
+
     public Username getUsername() {
         return username;
     }
@@ -40,7 +40,7 @@ public class User {
     public Password getPassword() {
         return password;
     }
-    
+
     public Name getName() {
         return name;
     }
@@ -52,7 +52,7 @@ public class User {
     public Email getEmail() {
         return email;
     }
-    
+
     /**
      * Returns true if both users of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two users.

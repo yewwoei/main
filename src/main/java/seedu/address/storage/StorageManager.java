@@ -105,7 +105,7 @@ public class StorageManager extends ComponentManager implements Storage {
     public Path getUsersFilePath() {
         return usersStorage.getUsersFilePath();
     }
-    
+
     @Override
     public Optional<HashMap<Username, User>> readUsers() throws DataConversionException, IOException {
         return readUsers(usersStorage.getUsersFilePath());

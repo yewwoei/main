@@ -55,5 +55,4 @@ public class Password {
     public int hashCode() {
         return password.hashCode();
     }
-
 }

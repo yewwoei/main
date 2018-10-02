@@ -26,7 +26,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Restaurant> filteredRestaurants;
     private HashMap<Username, User> usernameUserHashMap;
-    private boolean isLoggedIn = false; 
+    private boolean isLoggedIn = false;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -39,10 +39,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
-        
     }
 
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs, 
+    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs,
                         HashMap<Username, User> usernameUserHashMap) {
         super();
         requireAllNonNull(addressBook, userPrefs, usernameUserHashMap);

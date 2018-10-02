@@ -41,7 +41,7 @@ public interface Storage extends AddressBookStorage, UserPrefsStorage, UsersStor
 
     @Override
     void saveUsers(HashMap<Username, User> usernameUserHashMap) throws IOException;
-    
+
     /**
      * Saves the current version of the Address Book to the hard disk.
      *   Creates the data file if it is missing.

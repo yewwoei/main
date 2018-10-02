@@ -8,7 +8,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidUsername(String)}
  */
 public class Username {
-    
+
     public static final String MESSAGE_USERNAME_CONSTRAINTS =
             "Usernames should only contain alphanumeric characters, and it should not be blank";
 
