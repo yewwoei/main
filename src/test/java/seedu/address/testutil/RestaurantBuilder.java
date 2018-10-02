@@ -4,7 +4,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.restaurant.Address;
-import seedu.address.model.restaurant.Email;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
 import seedu.address.model.restaurant.Restaurant;
@@ -18,19 +17,16 @@ public class RestaurantBuilder {
 
     public static final String DEFAULT_NAME = "Alice Pauline";
     public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_EMAIL = "alice@gmail.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
     private Name name;
     private Phone phone;
-    private Email email;
     private Address address;
     private Set<Tag> tags;
 
     public RestaurantBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
-        email = new Email(DEFAULT_EMAIL);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
     }
@@ -41,7 +37,6 @@ public class RestaurantBuilder {
     public RestaurantBuilder(Restaurant restaurantToCopy) {
         name = restaurantToCopy.getName();
         phone = restaurantToCopy.getPhone();
-        email = restaurantToCopy.getEmail();
         address = restaurantToCopy.getAddress();
         tags = new HashSet<>(restaurantToCopy.getTags());
     }
@@ -78,16 +73,8 @@ public class RestaurantBuilder {
         return this;
     }
 
-    /**
-     * Sets the {@code Email} of the {@code Restaurant} that we are building.
-     */
-    public RestaurantBuilder withEmail(String email) {
-        this.email = new Email(email);
-        return this;
-    }
-
     public Restaurant build() {
-        return new Restaurant(name, phone, email, address, tags);
+        return new Restaurant(name, phone, address, tags);
     }
 
 }

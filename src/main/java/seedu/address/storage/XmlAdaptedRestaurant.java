@@ -11,7 +11,6 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.restaurant.Address;
-import seedu.address.model.restaurant.Email;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
 import seedu.address.model.restaurant.Restaurant;
@@ -29,8 +28,6 @@ public class XmlAdaptedRestaurant {
     @XmlElement(required = true)
     private String phone;
     @XmlElement(required = true)
-    private String email;
-    @XmlElement(required = true)
     private String address;
 
     @XmlElement
@@ -45,10 +42,9 @@ public class XmlAdaptedRestaurant {
     /**
      * Constructs an {@code XmlAdaptedRestaurant} with the given restaurant details.
      */
-    public XmlAdaptedRestaurant(String name, String phone, String email, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedRestaurant(String name, String phone, String address, List<XmlAdaptedTag> tagged) {
         this.name = name;
         this.phone = phone;
-        this.email = email;
         this.address = address;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
@@ -63,7 +59,6 @@ public class XmlAdaptedRestaurant {
     public XmlAdaptedRestaurant(Restaurant source) {
         name = source.getName().fullName;
         phone = source.getPhone().value;
-        email = source.getEmail().value;
         address = source.getAddress().value;
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
@@ -97,14 +92,6 @@ public class XmlAdaptedRestaurant {
         }
         final Phone modelPhone = new Phone(phone);
 
-        if (email == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
-        }
-        if (!Email.isValidEmail(email)) {
-            throw new IllegalValueException(Email.MESSAGE_EMAIL_CONSTRAINTS);
-        }
-        final Email modelEmail = new Email(email);
-
         if (address == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName()));
         }
@@ -114,7 +101,7 @@ public class XmlAdaptedRestaurant {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(restaurantTags);
-        return new Restaurant(modelName, modelPhone, modelEmail, modelAddress, modelTags);
+        return new Restaurant(modelName, modelPhone, modelAddress, modelTags);
     }
 
     @Override
@@ -130,7 +117,6 @@ public class XmlAdaptedRestaurant {
         XmlAdaptedRestaurant otherRestaurant = (XmlAdaptedRestaurant) other;
         return Objects.equals(name, otherRestaurant.name)
                 && Objects.equals(phone, otherRestaurant.phone)
-                && Objects.equals(email, otherRestaurant.email)
                 && Objects.equals(address, otherRestaurant.address)
                 && tagged.equals(otherRestaurant.tagged);
     }
