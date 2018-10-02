@@ -6,7 +6,6 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditRestaurantDescriptor;
 import seedu.address.model.restaurant.Address;
-import seedu.address.model.restaurant.Email;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
 import seedu.address.model.restaurant.Restaurant;
@@ -34,7 +33,6 @@ public class EditRestaurantDescriptorBuilder {
         descriptor = new EditRestaurantDescriptor();
         descriptor.setName(restaurant.getName());
         descriptor.setPhone(restaurant.getPhone());
-        descriptor.setEmail(restaurant.getEmail());
         descriptor.setAddress(restaurant.getAddress());
         descriptor.setTags(restaurant.getTags());
     }
@@ -52,14 +50,6 @@ public class EditRestaurantDescriptorBuilder {
      */
     public EditRestaurantDescriptorBuilder withPhone(String phone) {
         descriptor.setPhone(new Phone(phone));
-        return this;
-    }
-
-    /**
-     * Sets the {@code Email} of the {@code EditRestaurantDescriptor} that we are building.
-     */
-    public EditRestaurantDescriptorBuilder withEmail(String email) {
-        descriptor.setEmail(new Email(email));
         return this;
     }
 

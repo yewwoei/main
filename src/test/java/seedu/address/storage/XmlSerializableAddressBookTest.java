@@ -16,7 +16,8 @@ import seedu.address.testutil.TypicalRestaurants;
 
 public class XmlSerializableAddressBookTest {
 
-    private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "XmlSerializableAddressBookTest");
+    private static final Path TEST_DATA_FOLDER =
+            Paths.get("src", "test", "data", "XmlSerializableAddressBookTest");
     private static final Path TYPICAL_PERSONS_FILE = TEST_DATA_FOLDER.resolve("typicalRestaurantsAddressBook.xml");
     private static final Path INVALID_PERSON_FILE = TEST_DATA_FOLDER.resolve("invalidRestaurantAddressBook.xml");
     private static final Path DUPLICATE_PERSON_FILE = TEST_DATA_FOLDER.resolve("duplicateRestaurantAddressBook.xml");
@@ -30,6 +31,12 @@ public class XmlSerializableAddressBookTest {
                 XmlSerializableAddressBook.class);
         AddressBook addressBookFromFile = dataFromFile.toModelType();
         AddressBook typicalRestaurantsAddressBook = TypicalRestaurants.getTypicalAddressBook();
+        System.out.println("yo" + addressBookFromFile + "hello");
+        System.out.println("yo" + typicalRestaurantsAddressBook + "hello");
+        System.out.println(addressBookFromFile.getRestaurantList());
+        System.out.println(typicalRestaurantsAddressBook.getRestaurantList());
+        System.out.println(typicalRestaurantsAddressBook.equals(addressBookFromFile));
+        System.out.println(typicalRestaurantsAddressBook.getRestaurantList().equals(addressBookFromFile.getRestaurantList()));
         assertEquals(addressBookFromFile, typicalRestaurantsAddressBook);
     }
 

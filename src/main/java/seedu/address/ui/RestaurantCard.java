@@ -35,8 +35,6 @@ public class RestaurantCard extends UiPart<Region> {
     @FXML
     private Label address;
     @FXML
-    private Label email;
-    @FXML
     private FlowPane tags;
 
     public RestaurantCard(Restaurant restaurant, int displayedIndex) {
@@ -46,7 +44,6 @@ public class RestaurantCard extends UiPart<Region> {
         name.setText(restaurant.getName().fullName);
         phone.setText(restaurant.getPhone().value);
         address.setText(restaurant.getAddress().value);
-        email.setText(restaurant.getEmail().value);
         restaurant.getTags().forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));
     }
 

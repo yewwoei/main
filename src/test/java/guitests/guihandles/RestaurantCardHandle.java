@@ -18,14 +18,12 @@ public class RestaurantCardHandle extends NodeHandle<Node> {
     private static final String NAME_FIELD_ID = "#name";
     private static final String ADDRESS_FIELD_ID = "#address";
     private static final String PHONE_FIELD_ID = "#phone";
-    private static final String EMAIL_FIELD_ID = "#email";
     private static final String TAGS_FIELD_ID = "#tags";
 
     private final Label idLabel;
     private final Label nameLabel;
     private final Label addressLabel;
     private final Label phoneLabel;
-    private final Label emailLabel;
     private final List<Label> tagLabels;
 
     public RestaurantCardHandle(Node cardNode) {
@@ -35,7 +33,6 @@ public class RestaurantCardHandle extends NodeHandle<Node> {
         nameLabel = getChildNode(NAME_FIELD_ID);
         addressLabel = getChildNode(ADDRESS_FIELD_ID);
         phoneLabel = getChildNode(PHONE_FIELD_ID);
-        emailLabel = getChildNode(EMAIL_FIELD_ID);
 
         Region tagsContainer = getChildNode(TAGS_FIELD_ID);
         tagLabels = tagsContainer
@@ -61,10 +58,6 @@ public class RestaurantCardHandle extends NodeHandle<Node> {
         return phoneLabel.getText();
     }
 
-    public String getEmail() {
-        return emailLabel.getText();
-    }
-
     public List<String> getTags() {
         return tagLabels
                 .stream()
@@ -79,7 +72,6 @@ public class RestaurantCardHandle extends NodeHandle<Node> {
         return getName().equals(restaurant.getName().fullName)
                 && getAddress().equals(restaurant.getAddress().value)
                 && getPhone().equals(restaurant.getPhone().value)
-                && getEmail().equals(restaurant.getEmail().value)
                 && ImmutableMultiset.copyOf(getTags()).equals(ImmutableMultiset.copyOf(restaurant.getTags().stream()
                         .map(tag -> tag.tagName)
                         .collect(Collectors.toList())));
