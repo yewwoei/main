@@ -6,35 +6,40 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import seedu.address.model.restaurant.Address;
-import seedu.address.model.restaurant.Email;
-import seedu.address.model.restaurant.Name;
-import seedu.address.model.restaurant.Phone;
-
 /**
  * Represents a User in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
 public class User {
     // Identity fields
+    private final Username username;
+    private final Password password;
     private final Name name;
     private final Phone phone;
     private final Email email;
 
     // Data fields
-    private final Address address;
     private final List<Friendship> friendRequests = new ArrayList<>();
     private final List<Friendship> friends = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
      */
-    public User(Name name, Phone phone, Email email, Address address) {
-        requireAllNonNull(name, phone, email, address);
+    public User(Username username, Password password, Name name, Phone phone, Email email) {
+        requireAllNonNull(username, password, name, phone, email);
+        this.username = username;
+        this.password = password;
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.address = address;
+    }
+
+    public Username getUsername() {
+        return username;
+    }
+
+    public Password getPassword() {
+        return password;
     }
 
     public Name getName() {
@@ -47,10 +52,6 @@ public class User {
 
     public Email getEmail() {
         return email;
-    }
-
-    public Address getAddress() {
-        return address;
     }
 
     /**
@@ -82,28 +83,27 @@ public class User {
         }
 
         User otherUser = (User) other;
-        return otherUser.getName().equals(getName())
-                && otherUser.getPhone().equals(getPhone())
-                && otherUser.getEmail().equals(getEmail())
-                && otherUser.getAddress().equals(getAddress());
+        return otherUser.getUsername().equals(getUsername());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, address);
+        return Objects.hash(username, password, name, phone, email);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getName())
+        builder.append(getUsername())
+                .append(" Password: ")
+                .append(getPassword())
+                .append(" Name: ")
+                .append(getName())
                 .append(" Phone: ")
                 .append(getPhone())
                 .append(" Email: ")
-                .append(getEmail())
-                .append(" Address: ")
-                .append(getAddress());
+                .append(getEmail());
         /*.append(" Friends: ");
         getTags().forEach(builder::append);*/
         return builder.toString();
