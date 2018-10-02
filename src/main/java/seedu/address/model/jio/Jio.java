@@ -33,7 +33,6 @@ public class Jio {
     public String getLocation() { return location.toString();}
 
 //    public ObservableList<User> getPeople() { return people.asUnmodifiableObservableList();}
-//    
 //    public void addUsers(User newUser) {
 //        this.people.add(newUser);
 //    }
