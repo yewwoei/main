@@ -2,6 +2,7 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.HashMap;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -14,6 +15,8 @@ import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -29,6 +32,14 @@ public class StorageManager extends ComponentManager implements Storage {
         super();
         this.addressBookStorage = addressBookStorage;
         this.userPrefsStorage = userPrefsStorage;
+    }
+
+    public StorageManager(AddressBookStorage addressBookStorage, UserPrefsStorage userPrefsStorage,
+                          UsersStorage usersStorage) {
+        super();
+        this.addressBookStorage = addressBookStorage;
+        this.userPrefsStorage = userPrefsStorage;
+        this.usersStorage = usersStorage;
     }
 
     // ================ UserPrefs methods ==============================
