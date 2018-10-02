@@ -3,7 +3,6 @@ package seedu.address.model.restaurant;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_EMAIL_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
@@ -37,7 +36,7 @@ public class RestaurantTest {
 
         // different phone and email -> returns false
         Restaurant editedAlice = new RestaurantBuilder(ALICE)
-                .withPhone(VALID_PHONE_BOB).withEmail(VALID_EMAIL_BOB).build();
+                .withPhone(VALID_PHONE_BOB).build();
         assertFalse(ALICE.isSameRestaurant(editedAlice));
 
         // different name -> returns false
@@ -45,14 +44,14 @@ public class RestaurantTest {
         assertFalse(ALICE.isSameRestaurant(editedAlice));
 
         // same name, same phone, different attributes -> returns true
-        editedAlice = new RestaurantBuilder(ALICE).withEmail(VALID_EMAIL_BOB).withAddress(VALID_ADDRESS_BOB)
+        editedAlice = new RestaurantBuilder(ALICE).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
         assertTrue(ALICE.isSameRestaurant(editedAlice));
 
         // same name, same email, different attributes -> returns true
         editedAlice = new RestaurantBuilder(ALICE).withPhone(VALID_PHONE_BOB).withAddress(VALID_ADDRESS_BOB)
                 .withTags(VALID_TAG_HUSBAND).build();
-        assertTrue(ALICE.isSameRestaurant(editedAlice));
+        assertFalse(ALICE.isSameRestaurant(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
         editedAlice = new RestaurantBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
@@ -83,10 +82,6 @@ public class RestaurantTest {
 
         // different phone -> returns false
         editedAlice = new RestaurantBuilder(ALICE).withPhone(VALID_PHONE_BOB).build();
-        assertFalse(ALICE.equals(editedAlice));
-
-        // different email -> returns false
-        editedAlice = new RestaurantBuilder(ALICE).withEmail(VALID_EMAIL_BOB).build();
         assertFalse(ALICE.equals(editedAlice));
 
         // different address -> returns false
