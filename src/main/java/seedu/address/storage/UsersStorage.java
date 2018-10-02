@@ -37,8 +37,5 @@ public interface UsersStorage {
      */
     void saveUsers(HashMap<Username, User> usernameUserHashMap) throws IOException;
 
-    /**
-     * @see #saveUsers(HashMap<Username, User>)
-     */
     void saveUsers(HashMap<Username, User> usernameUserHashMap, Path filePath) throws IOException;
 }

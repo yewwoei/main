@@ -2,8 +2,14 @@ package seedu.address.storage;
 
 import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
+
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.user.*;
+import seedu.address.model.user.Email;
+import seedu.address.model.user.Name;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.Phone;
+import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 /**
  * JAXB-friendly version of the User.

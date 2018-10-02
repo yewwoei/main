@@ -67,7 +67,6 @@ public class XmlUsersStorage implements UsersStorage {
     }
 
     /**
-     * Similar to {@link #saveUsers(HashMap<Username, User>)}
      * @param filePath location of the data. Cannot be null
      */
     public void saveUsers(HashMap<Username, User> usernameUserHashMap, Path filePath) throws IOException {
