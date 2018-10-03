@@ -16,17 +16,17 @@ import seedu.address.model.jio.Jio;
 public class CreateJioCommand extends Command {
     public static final String COMMAND_WORD = "createJio";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new jio and adds a jio to the book of jios. ";
-//            + "Parameters: "
-//            + PREFIX_NAME + "NAME "
-//            + PREFIX_TIME + "TIME "
-//            + PREFIX_DATE + "DATE "
-//            + PREFIX_ADDRESS + "PLACE "
-//            + "Example: " + COMMAND_WORD + " "
-//            + PREFIX_NAME + "MALA "
-//            + PREFIX_TIME + "1300 "
-//            + PREFIX_DATE + "14-11-18 "
-//            + PREFIX_ADDRESS + "Fine Food ";
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new jio and adds a jio to the jiobook.";
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + PREFIX_TIME + "TIME "
+            + PREFIX_DATE + "DATE "
+            + PREFIX_ADDRESS + "PLACE "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "MALA "
+            + PREFIX_TIME + "1300 "
+            + PREFIX_DATE + "14-11-18 "
+            + PREFIX_ADDRESS + "Fine Food ";
 
     public static final String MESSAGE_SUCCESS = "New jio added: %1$s";
     public static final String MESSAGE_DUPLICATE_JIO = "This jio already exists in the book";
@@ -62,4 +62,5 @@ public class CreateJioCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof CreateJioCommand // instanceof handles nulls
                 && toAdd.equals(((CreateJioCommand) other).toAdd));
-    }}
+    }
+}

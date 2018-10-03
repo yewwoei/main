@@ -1,11 +1,11 @@
 package seedu.address.model.jio;
 
-import seedu.address.model.restaurant.Name;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-public class Date {
+import seedu.address.model.restaurant.Name;
+
+c public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Date must be in DDMMYY format.";
 

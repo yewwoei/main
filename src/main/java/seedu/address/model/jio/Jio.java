@@ -1,41 +1,52 @@
 package seedu.address.model.jio;
 
-import javafx.collections.ObservableList;
 import seedu.address.model.restaurant.Address;
-import seedu.address.model.restaurant.UniqueRestaurantList;
 import seedu.address.model.restaurant.Name;
-import seedu.address.model.user.User;
 
 import java.util.Objects;
 
+/**
+ * Represents a Jio in the jiobook.
+ * Guarantees: details are present and not null, field values are validated, immutable.
+ */
 public class Jio {
     private Name name;
     private Time time;
     private Date date;
     private Address location;
-//    private UniqueUserList<User> people;
+    //private UniqueUserList<User> people;
 
     public Jio(Name name, Time time, Date date, Address location) {
         this.name = name;
         this.time = time;
         this.date = date;
         this.location = location;
-//        this.people = new UniqueUserList();
-//        this.people.add(creator);
+        //this.people = new UniqueUserList();
+        //this.people.add(creator);
     }
 
-    public String getName() { return name.toString();}
+    public String getName() {
+        return name.toString();
+    }
 
-    public String getTime() { return time.toString();}
+    public String getTime() {
+        return time.toString();
+    }
 
-    public String getDate() { return date.toString();}
+    public String getDate() {
+        return date.toString();
+    }
 
-    public String getLocation() { return location.toString();}
+    public String getLocation() {
+        return location.toString();
+    }
 
-//    public ObservableList<User> getPeople() { return people.asUnmodifiableObservableList();}
-//    public void addUsers(User newUser) {
-//        this.people.add(newUser);
-//    }
+    /*
+    public ObservableList<User> getPeople() { return people.asUnmodifiableObservableList();}
+    public void addUsers(User newUser) {
+        this.people.add(newUser);
+    }
+    */
 
     @Override
     public boolean equals(Object other) {
@@ -68,8 +79,8 @@ public class Jio {
                 .append(getDate())
                 .append(" Location: ")
                 .append(getLocation());
-//                .append(" People: ");
-//        this.getPeople().forEach(x -> builder.append(x.getName()));
+                //.append(" People: ");
+        //this.getPeople().forEach(x -> builder.append(x.getName()));
         return builder.toString();
     }
 
