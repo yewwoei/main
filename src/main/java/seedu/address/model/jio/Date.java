@@ -7,7 +7,7 @@ import seedu.address.model.restaurant.Name;
 
 public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS =
-            "Date must be in DDMMYY format.";
+            "Date must be in DD-MM-YY format.";
 
     /*
      * Must follow DDMMYY format.
