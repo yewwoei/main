@@ -2,13 +2,10 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.Optional;
 
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.UserData;
-import seedu.address.model.user.User;
-import seedu.address.model.user.Username;
 
 /**
  * Represents a storage for Users.

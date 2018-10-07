@@ -35,8 +35,8 @@ public class XmlSerializableUsers {
      */
     public XmlSerializableUsers(UserData userData) {
         this();
-        userData.getUsernameUserHashMap().forEach((key, value) 
-                -> user.add(new XmlAdaptedUser(value)));
+        userData.getUsernameUserHashMap().forEach((key, value)
+            -> user.add(new XmlAdaptedUser(value)));
     }
 
     /**
