@@ -13,6 +13,9 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.restaurant.Name;
 
+/**
+ * Parses input arguments and creates a new DeleteJioCommand object
+ */
 public class DeleteJioCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the AddJioCommand
