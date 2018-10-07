@@ -8,8 +8,10 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
 
+import java.util.Iterator;
 import java.util.function.Predicate;
 
 /**
@@ -25,8 +27,13 @@ public class ListJioCommand extends Command {
         requireNonNull(model);
         
         /*
+        String list = "All jios:";
+        
         ObservableList<Jio> allJios = model.getJioList();
-        allJios.forEach(jio -> );
+        Iterator<Jio> iterator = allJios.iterator();
+        while(iterator.hasNext()) {
+            list += ("\n" + iterator.next());
+        }
         */
         
         return new CommandResult(MESSAGE_SUCCESS);
