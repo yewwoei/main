@@ -54,6 +54,14 @@ public class User {
         return email;
     }
 
+    public List<Friendship> getFriendRequests() {
+        return friendRequests;
+    }
+
+    public List<Friendship> getFriends() {
+        return friends;
+    }
+
     /**
      * Returns true if both users of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two users.
@@ -118,12 +126,17 @@ public class User {
     public void addFriend(User user) {
         // checks to make sure that friend is not oneself
         if (!user.isSameUser(this)) {
-            Friendship friendship = new Friendship(this, this);
+            Friendship friendship = new Friendship(this, this, this);
             // checks that friendship is not already in friendRequests
             if (!user.friendRequests.contains(friendship) && !user.friends.contains(friendship)) {
                 user.friendRequests.add(friendship);
             }
         }
+    }
+
+    public User addFriendship(Friendship friendship) {
+        friends.add(friendship);
+        return this;
     }
 
     /**
@@ -173,7 +186,7 @@ public class User {
 
             // adds to friends for both parties
             friends.add(friendship);
-            Friendship friendship2 = new Friendship(this, friend, FriendshipStatus.ACCEPTED);
+            Friendship friendship2 = new Friendship(this, friend, this, FriendshipStatus.ACCEPTED);
             friend.friends.add(friendship2);
         }
     }
