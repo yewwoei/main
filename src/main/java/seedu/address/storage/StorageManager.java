@@ -2,7 +2,6 @@ package seedu.address.storage;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -14,9 +13,8 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.storage.DataSavingExceptionEvent;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.UserData;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.user.User;
-import seedu.address.model.user.Username;
 
 /**
  * Manages storage of AddressBook data in local storage.
@@ -107,24 +105,24 @@ public class StorageManager extends ComponentManager implements Storage {
     }
 
     @Override
-    public Optional<HashMap<Username, User>> readUsers() throws DataConversionException, IOException {
-        return readUsers(usersStorage.getUsersFilePath());
+    public Optional<UserData> readUserData() throws DataConversionException, IOException {
+        return readUserData(usersStorage.getUsersFilePath());
     }
 
     @Override
-    public Optional<HashMap<Username, User>> readUsers(Path filePath) throws DataConversionException, IOException {
+    public Optional<UserData> readUserData(Path filePath) throws DataConversionException, IOException {
         logger.fine("Attempting to read data from file: " + filePath);
-        return usersStorage.readUsers(filePath);
+        return usersStorage.readUserData(filePath);
     }
 
     @Override
-    public void saveUsers(HashMap<Username, User> usernameUserHashMap) throws IOException {
-        saveUsers(usernameUserHashMap, usersStorage.getUsersFilePath());
+    public void saveUserData(UserData userData) throws IOException {
+        saveUserData(userData, usersStorage.getUsersFilePath());
     }
 
     @Override
-    public void saveUsers(HashMap<Username, User> usernameUserHashMap, Path filePath) throws IOException {
+    public void saveUserData(UserData userData, Path filePath) throws IOException {
         logger.fine("Attempting to write to data file: " + filePath);
-        usersStorage.saveUsers(usernameUserHashMap, filePath);
+        usersStorage.saveUserData(userData, filePath);
     }
 }

@@ -1,7 +1,5 @@
 package seedu.address.model.timetable;
 
-import seedu.address.model.restaurant.Name;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
@@ -48,7 +46,7 @@ public class Time {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Name // instanceof handles nulls
+                || (other instanceof Time // instanceof handles nulls
                 && time.equals(((Time) other).time)); // state check
     }
 
