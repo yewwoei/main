@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.user.Friendship;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
@@ -20,6 +21,7 @@ public class XmlSerializableUsers {
 
     @XmlElement
     private List<XmlAdaptedUser> user;
+    private List<XmlAdaptedFriendship> friendship;
 
     /**
      * Creates an empty XmlSerializableUsers.
@@ -51,6 +53,11 @@ public class XmlSerializableUsers {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
             usernameUserHashMap.put(user.getUsername(), user);
+        }
+
+        for(XmlAdaptedFriendship f: friendship) {
+            Friendship friendship = f.toModelType(usernameUserHashMap);
+
         }
         return usernameUserHashMap;
     }
