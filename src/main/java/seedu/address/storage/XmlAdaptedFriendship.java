@@ -92,7 +92,7 @@ public class XmlAdaptedFriendship {
             throw new IllegalValueException("User does not exist in storage.");
         }
 
-        if(!friendUser.equals(me) || !friendUser.equals(friendUser)) {
+        if(!initiatedBy.equals(me) || !initiatedBy.equals(friendUser)) {
             throw new IllegalValueException("Friendship is not initiated by either party in Friendship");
         }
 

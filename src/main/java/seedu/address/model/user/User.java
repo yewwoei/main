@@ -54,6 +54,14 @@ public class User {
         return email;
     }
 
+    public List<Friendship> getFriendRequests() {
+        return friendRequests;
+    }
+
+    public List<Friendship> getFriends() {
+        return friends;
+    }
+
     /**
      * Returns true if both users of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two users.
@@ -124,6 +132,11 @@ public class User {
                 user.friendRequests.add(friendship);
             }
         }
+    }
+
+    public User addFriendship(Friendship friendship) {
+        friends.add(friendship);
+        return this;
     }
 
     /**
