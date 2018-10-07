@@ -1,18 +1,23 @@
-package seedu.address.model.jio;
+package seedu.address.model.timetable;
 
 import seedu.address.model.restaurant.Name;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+/**
+ * Represents the time in a 24 hour format, with 30 minute intervals permitted only.
+ * Guarantees: immutable; is valid as declared in {@Link #isValidTime(String)}
+ */
 public class Time {
-    public static final String MESSAGE_TIME_CONSTRAINTS =
-            "Time must be from 0000-2359 in 24h format.";
+    public static final String MESSAGE_TIME_CONSTRAINTS = "Time should only be in the 24-hour format in 30 minute" +
+            "intervals, without any colons. For example: 2330, 0000, 0130";
 
-    /*
-     * Time must follow 24h format.
+    /**
+     * Regular expression used to test whether the time falls between 0000 and 2330.
+     * Time must be in 30 minute intervals.
      */
-    public static final String TIME_VALIDATION_REGEX = "([01]?[0-9]|2[0-3])[0-5][0-9]";
+    public static final String TIME_VALIDATION_REGEX = "([01]\\d|2[0-3])([03]0)";
 
     public final String time;
 
@@ -23,14 +28,14 @@ public class Time {
      */
     public Time(String time) {
         requireNonNull(time);
-        checkArgument(isValid(time), MESSAGE_TIME_CONSTRAINTS);
+        checkArgument(isValidTime(time), MESSAGE_TIME_CONSTRAINTS);
         this.time = time;
     }
 
     /**
      * Returns true if a given string is a valid time.
      */
-    public static boolean isValid(String test) {
+    public static boolean isValidTime(String test) {
         return test.matches(TIME_VALIDATION_REGEX);
     }
 

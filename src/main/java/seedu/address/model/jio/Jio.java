@@ -1,10 +1,8 @@
 package seedu.address.model.jio;
 
-import javafx.collections.ObservableList;
 import seedu.address.model.restaurant.Address;
-import seedu.address.model.restaurant.UniqueRestaurantList;
 import seedu.address.model.restaurant.Name;
-import seedu.address.model.user.User;
+import seedu.address.model.timetable.Time;
 
 import java.util.Objects;
 
