@@ -1,9 +1,9 @@
 package seedu.address.model.jio;
 
+import java.util.Objects;
+
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Name;
-
-import java.util.Objects;
 
 /**
  * Represents a Jio in the jiobook.
@@ -79,7 +79,6 @@ public class Jio {
                 .append(getDate())
                 .append(" Location: ")
                 .append(getLocation());
-                //.append(" People: ");
         //this.getPeople().forEach(x -> builder.append(x.getName()));
         return builder.toString();
     }

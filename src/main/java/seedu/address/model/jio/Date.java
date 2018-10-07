@@ -5,6 +5,9 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import seedu.address.model.restaurant.Name;
 
+/**
+ * Represents a Jio's date.
+ */
 public class Date {
     public static final String MESSAGE_DATE_CONSTRAINTS =
             "Date must be in DD-MM-YY format.";

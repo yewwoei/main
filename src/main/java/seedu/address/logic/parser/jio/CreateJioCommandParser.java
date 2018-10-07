@@ -1,5 +1,13 @@
 package seedu.address.logic.parser.jio;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+
+import java.util.stream.Stream;
+
 import seedu.address.logic.commands.jio.CreateJioCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -12,11 +20,9 @@ import seedu.address.model.jio.Time;
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Name;
 
-import java.util.stream.Stream;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.*;
-
+/**
+ * Parses input arguments and creates a new CreateJioCommand object
+ */
 public class CreateJioCommandParser {
     /**
      * Parses the given {@code String} of arguments in the context of the AddJioCommand
@@ -36,7 +42,6 @@ public class CreateJioCommandParser {
         //Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
         //Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Address location = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        
         Time time = new Time("1200");
         Date date = new Date("01-01-18");
 
