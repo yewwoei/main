@@ -25,7 +25,7 @@ public class DeleteJioCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Jio deleted: %1$s";
 
     // TODO
-    public static final String MESSAGE_NONEXISTENT_JIO = "Jio " + this.jioName + " does not exist.";
+    public static final String MESSAGE_NONEXISTENT_JIO = "Jio does not exist.";
 
     // TODO
     private final Name jioName;
