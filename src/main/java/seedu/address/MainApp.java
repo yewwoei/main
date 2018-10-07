@@ -26,8 +26,7 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.user.User;
-import seedu.address.model.user.Username;
+import seedu.address.model.UserData;
 import seedu.address.model.util.SampleDataUtil;
 import seedu.address.storage.AddressBookStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
@@ -90,32 +89,32 @@ public class MainApp extends Application {
      */
     private Model initModelManager(Storage storage, UserPrefs userPrefs) {
         Optional<ReadOnlyAddressBook> addressBookOptional;
-        Optional<HashMap<Username, User>> usersOptional;
+        Optional<UserData> userDataOptional;
         ReadOnlyAddressBook initialAddressBook;
-        HashMap<Username, User> initalUsers;
+        UserData initalUserData;
         try {
             addressBookOptional = storage.readAddressBook();
-            usersOptional = storage.readUsers();
+            userDataOptional = storage.readUserData();
             if (!addressBookOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample AddressBook");
             }
             initialAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
 
-            if (!usersOptional.isPresent()) {
+            if (!userDataOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with no Users");
             }
-            initalUsers = usersOptional.orElse(new HashMap<>());
+            initalUserData = userDataOptional.orElse(new UserData());
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty AddressBook");
             initialAddressBook = new AddressBook();
-            initalUsers = new HashMap<>();
+            initalUserData = new UserData();
         } catch (IOException e) {
             logger.warning("Problem while reading from the file. Will be starting with an empty AddressBook");
             initialAddressBook = new AddressBook();
-            initalUsers = new HashMap<>();
+            initalUserData = new UserData();
         }
 
-        return new ModelManager(initialAddressBook, userPrefs, initalUsers);
+        return new ModelManager(initialAddressBook, userPrefs, initalUserData);
     }
 
     private void initLogging(Config config) {

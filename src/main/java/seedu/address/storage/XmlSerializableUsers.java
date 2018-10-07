@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.UserData;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
@@ -32,9 +33,10 @@ public class XmlSerializableUsers {
     /**
      * Conversion
      */
-    public XmlSerializableUsers(HashMap<Username, User> usernameUserHashMap) {
+    public XmlSerializableUsers(UserData userData) {
         this();
-        usernameUserHashMap.forEach((key, value) -> user.add(new XmlAdaptedUser(value)));
+        userData.getUsernameUserHashMap().forEach((key, value)
+            -> user.add(new XmlAdaptedUser(value)));
     }
 
     /**
@@ -43,7 +45,8 @@ public class XmlSerializableUsers {
      * @throws IllegalValueException if there were any data constraints violated or duplicates in the
      * {@code XmlAdaptedRestaurant}.
      */
-    public HashMap<Username, User> toModelType() throws IllegalValueException {
+    public UserData toModelType() throws IllegalValueException {
+        UserData userData = new UserData();
         HashMap<Username, User> usernameUserHashMap = new HashMap<>();
         for (XmlAdaptedUser u : user) {
             User user = u.toModelType();
@@ -52,7 +55,9 @@ public class XmlSerializableUsers {
             }
             usernameUserHashMap.put(user.getUsername(), user);
         }
-        return usernameUserHashMap;
+
+        userData.setHashMap(usernameUserHashMap);
+        return userData;
     }
 
     @Override

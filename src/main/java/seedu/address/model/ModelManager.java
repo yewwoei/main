@@ -3,7 +3,6 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.HashMap;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -14,8 +13,6 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.model.restaurant.Restaurant;
-import seedu.address.model.user.User;
-import seedu.address.model.user.Username;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -25,7 +22,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Restaurant> filteredRestaurants;
-    private HashMap<Username, User> usernameUserHashMap;
+    private UserData userData;
     private boolean isLoggedIn = false;
 
     /**
@@ -42,15 +39,15 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs,
-                        HashMap<Username, User> usernameUserHashMap) {
+                        UserData userData) {
         super();
-        requireAllNonNull(addressBook, userPrefs, usernameUserHashMap);
+        requireAllNonNull(addressBook, userPrefs, userData);
 
         logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
-        this.usernameUserHashMap = usernameUserHashMap;
+        this.userData = userData;
     }
 
     public ModelManager() {
