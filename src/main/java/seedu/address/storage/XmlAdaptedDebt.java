@@ -13,6 +13,8 @@ import seedu.address.model.user.Username;
 public class XmlAdaptedDebt {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Debt's %s field is missing!";
+    public static final String NOT_EXIST_FIELD_MESSAGE_FORMAT = "%s does not exist in storage.";
+    public static final String INVALID_INPUT_MESSAGE_FORMAT = "Not a vali input.";
 
     @XmlElement(required = true)
     private String creditor;
@@ -54,15 +56,17 @@ public class XmlAdaptedDebt {
         }
 
         if(!usernameUserHashmap.containsKey(new Username(creditor))){
-            throw new IllegalValueException("Creditor does not exist in storage.");
+            throw new IllegalValueException(String.format(NOT_EXIST_FIELD_MESSAGE_FORMAT,
+                    Debt.class.getSimpleName()));
         }
 
         if(!usernameUserHashmap.containsKey(new Username(debtor))){
-            throw new IllegalValueException("Debtor does not exist in storage.");
+            throw new IllegalValueException(String.format(NOT_EXIST_FIELD_MESSAGE_FORMAT,
+                    Debt.class.getSimpleName()));
         }
 
         if( amount == null || !(Double.valueOf(amount) > 0)){
-            throw new IllegalValueException("Not a vali input amount");
+            throw new IllegalValueException(String.format(INVALID_INPUT_MESSAGE_FORMAT));
         }
 
         return new Debt( usernameUserHashmap.get(new Username(creditor)),
