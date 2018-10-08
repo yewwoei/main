@@ -1,10 +1,13 @@
 package seedu.address.model.jio;
 
-import seedu.address.model.restaurant.Name;
-
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.model.restaurant.Name;
+
+/**
+ * Represents a Jio's time in the jiobook.
+ */
 public class Time {
     public static final String MESSAGE_TIME_CONSTRAINTS =
             "Time must be from 0000-2359 in 24h format.";

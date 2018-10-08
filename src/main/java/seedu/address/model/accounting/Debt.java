@@ -7,32 +7,54 @@ import seedu.address.model.user.User;
 
 public class Debt {
 
-    private User debtor;
     private User creditor;
+    private User debtor;
     private double amount;
     private String debtID;
     private DebtStatus status;
 
-    public Debt( User debtor, User creditor, double amount){
+    public Debt( User creditor, User debtor, double amount ){
         requireAllNonNull( debtor, creditor, amount);
-        this.debtor = debtor;
         this.creditor = creditor;
+        this.debtor = debtor;
         this.amount = amount;
         this.debtID = UUID.randomUUID().toString();
         this.status = DebtStatus.PENDING;
     }
 
-    public String getDebtStatus(){ return this.status.toString(); }
+    public Debt( User creditor, User debtor, double amount, String debtID, DebtStatus status ){
+        requireAllNonNull( debtor, creditor, amount);
+        this.creditor = creditor;
+        this.debtor = debtor;
+        this.amount = amount;
+        this.debtID = debtID;
+        this.status = status;
+    }
 
-    public String getDebtor(){ return this.debtor.getUsername().toString(); }
+    public DebtStatus getDebtStatus(){ return this.status; }
 
-    public String getCreditor(){ return this.creditor.getUsername().toString(); }
+    public User getDebtor(){ return this.debtor; }
+
+    public User getCreditor(){ return this.creditor; }
 
     public double getAmount(){ return this.amount; }
 
     public String getDebtID(){ return debtID; }
 
-    public void changeDebtStatus(){ this.status = DebtStatus.ACCEPTED; }
+    public String changeDebtStatus(DebtStatus changeTo){
+        if( this.getDebtStatus().toString() == "PENDING" && changeTo == DebtStatus.ACCEPTED ){
+            this.status = changeTo;
+            return "Request Accepted";
+        }
+
+        else if( this.getDebtStatus().toString() == "ACCEPTED" && changeTo == DebtStatus.CLEARED){
+            this.status = changeTo;
+            return "Debt Cleared";
+        }
+        else{
+            return "No a valid action";
+        }
+    }
 
     public boolean equals(Object other){
 
@@ -45,20 +67,23 @@ public class Debt {
         }
 
         Debt test = (Debt) other;
-        return test != null &&
-                test.getDebtID().equals(this.getDebtID());
+        return test != null
+                && test.getCreditor().equals(this.getCreditor())
+                && test.getDebtID().equals(this.getDebtID())
+                && test.getAmount()==this.getAmount()
+                && test.getDebtID().equals(this.getDebtID());
     }
 
     public String toString(){
         final StringBuilder builder = new StringBuilder();
         builder.append(" Creditor: ")
-                .append(this.getCreditor())
+                .append(this.getCreditor().getUsername().toString())
                 .append(" Debtor: ")
-                .append(this.getDebtor())
+                .append(this.getDebtor().getUsername().toString())
                 .append(" Amount: ")
-                .append(this.getAmount())
+                .append(String.valueOf(this.getAmount()))
                 .append(" Status ")
-                .append(this.getDebtStatus())
+                .append(this.getDebtStatus().toString())
                 .append(" ID: ")
                 .append(this.getDebtID());
         return builder.toString();

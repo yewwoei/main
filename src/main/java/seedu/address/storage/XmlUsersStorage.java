@@ -6,7 +6,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.Optional;
 import java.util.logging.Logger;
 
@@ -14,8 +13,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.FileUtil;
-import seedu.address.model.user.User;
-import seedu.address.model.user.Username;
+import seedu.address.model.UserData;
 
 /**
  * A class to access AddressBook data stored as an xml file on the hard disk.
@@ -35,15 +33,15 @@ public class XmlUsersStorage implements UsersStorage {
     }
 
     @Override
-    public Optional<HashMap<Username, User>> readUsers() throws DataConversionException, IOException {
-        return readUsers(filePath);
+    public Optional<UserData> readUserData() throws DataConversionException, IOException {
+        return readUserData(filePath);
     }
 
     /**
      * @param filePath location of the data. Cannot be null
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<HashMap<Username, User>> readUsers(Path filePath) throws DataConversionException,
+    public Optional<UserData> readUserData(Path filePath) throws DataConversionException,
             FileNotFoundException {
         requireNonNull(filePath);
 
@@ -62,18 +60,18 @@ public class XmlUsersStorage implements UsersStorage {
     }
 
     @Override
-    public void saveUsers(HashMap<Username, User> usernameUserHashMap) throws IOException {
-        saveUsers(usernameUserHashMap, filePath);
+    public void saveUserData(UserData userData) throws IOException {
+        saveUserData(userData, filePath);
     }
 
     /**
      * @param filePath location of the data. Cannot be null
      */
-    public void saveUsers(HashMap<Username, User> usernameUserHashMap, Path filePath) throws IOException {
-        requireNonNull(usernameUserHashMap);
+    public void saveUserData(UserData userData, Path filePath) throws IOException {
+        requireNonNull(userData);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        XmlFileStorage.saveUsersToFile(filePath, new XmlSerializableUsers(usernameUserHashMap));
+        XmlFileStorage.saveUsersToFile(filePath, new XmlSerializableUsers(userData));
     }
 }

@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.model.accounting.Debt;
+import seedu.address.model.accounting.DebtStatus;
+
 /**
  * Represents a User in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
@@ -21,6 +24,7 @@ public class User {
     // Data fields
     private final List<Friendship> friendRequests = new ArrayList<>();
     private final List<Friendship> friends = new ArrayList<>();
+    private final List<Debt> debts = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -52,6 +56,18 @@ public class User {
 
     public Email getEmail() {
         return email;
+    }
+
+    public List<Friendship> getFriendRequests() {
+        return friendRequests;
+    }
+
+    public List<Friendship> getFriends() {
+        return friends;
+    }
+
+    public List<Debt> getDebts() {
+        return debts;
     }
 
     /**
@@ -118,12 +134,17 @@ public class User {
     public void addFriend(User user) {
         // checks to make sure that friend is not oneself
         if (!user.isSameUser(this)) {
-            Friendship friendship = new Friendship(this, this);
+            Friendship friendship = new Friendship(this, this, this);
             // checks that friendship is not already in friendRequests
             if (!user.friendRequests.contains(friendship) && !user.friends.contains(friendship)) {
                 user.friendRequests.add(friendship);
             }
         }
+    }
+
+    public User addFriendship(Friendship friendship) {
+        friends.add(friendship);
+        return this;
     }
 
     /**
@@ -173,7 +194,7 @@ public class User {
 
             // adds to friends for both parties
             friends.add(friendship);
-            Friendship friendship2 = new Friendship(this, friend, FriendshipStatus.ACCEPTED);
+            Friendship friendship2 = new Friendship(this, friend, this, FriendshipStatus.ACCEPTED);
             friend.friends.add(friendship2);
         }
     }
@@ -218,5 +239,94 @@ public class User {
             }
         }
         return null;
+    }
+
+
+
+
+    public User addDebt( Debt debt) {
+        debts.add(debt);
+        return this;
+    }
+
+    public void addDebt( User debtor, double amount){
+        if( !debtor.isSameUser(this) ){
+            Debt d = new Debt( this, debtor, amount);
+            this.debts.add(d);
+            debtor.debts.add(d);
+        }
+    }
+
+    public void clearDebt(User debtor, double amount, String debtID){
+        Debt toFind = new Debt(this, debtor, amount, debtID, DebtStatus.ACCEPTED);
+        Debt changeTo = new Debt(this, debtor, amount, debtID, DebtStatus.CLEARED);
+        int i = this.debts.indexOf(toFind);
+        this.debts.set(i, changeTo);
+        i = debtor.debts.indexOf(toFind);
+        debtor.debts.set(i, changeTo);
+
+    }
+
+    public void acceptedDebtRequest( User creditor, double amount, String debtID ){
+        Debt toFind = new Debt(creditor, this, amount, debtID, DebtStatus.PENDING);
+        Debt changeTo = new Debt(creditor, this, amount, debtID, DebtStatus.ACCEPTED);
+        int i = this.debts.indexOf(toFind);
+        this.debts.set(i, changeTo);
+        i = creditor.debts.indexOf(toFind);
+        creditor.debts.set(i, changeTo);
+    }
+
+    public void deleteDebtRequest( User creditor, double amount, String debtID ){
+        Debt toFind = new Debt( creditor, this, amount, debtID, DebtStatus.PENDING);
+        this.debts.remove(toFind);
+        creditor.debts.remove(toFind);
+    }
+
+    public String listDebtHistory(){
+        String toReturn = "";
+        for( Debt d: this.debts ){
+            toReturn += d.toString() + "\n";
+        }
+        return toReturn;
+    }
+
+    public String listDebtor(){
+        String toReturn = "";
+        for( Debt d: this.debts ){
+            if( d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)){
+                toReturn += d.toString() + "\n";
+            }
+        }
+        return toReturn;
+    }
+
+    public String listCreditor(){
+        String toReturn = "";
+        for( Debt d: this.debts ){
+            if( d.getDebtor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)){
+                toReturn += d.toString() + "\n";
+            }
+        }
+        return toReturn;
+    }
+
+    public String listDebtRequestReceived(){
+        String toReturn = "";
+        for( Debt d: this.debts ){
+            if( d.getDebtor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)){
+                toReturn += d.toString() + "\n";
+            }
+        }
+        return toReturn;
+    }
+
+    public String listDebtRequestSent(){
+        String toReturn = "";
+        for( Debt d: this.debts ){
+            if( d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)){
+                toReturn += d.toString() + "\n";
+            }
+        }
+        return toReturn;
     }
 }

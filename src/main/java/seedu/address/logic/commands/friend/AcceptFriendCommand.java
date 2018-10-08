@@ -7,29 +7,34 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.user.Friendship;
 
 /**
  * Accepts a friend request.
  */
 public class AcceptFriendCommand extends Command {
-    public static final String COMMAND_WORD = "addFavourite";
+    public static final String COMMAND_WORD = "acceptFriend";
 
     // TODO
-    public static final String MESSAGE_USAGE = null;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Allows a user to accept a "
+            + "friend request.\n"
+            + "Parameters: USERNAME\n"
+            + "Example: " + COMMAND_WORD + "Meena567";
 
     // TODO
-    public static final String MESSAGE_SUCCESS = null;
+    public static final String MESSAGE_SUCCESS = "Successfully accepted friend request: %1$s";
 
     // TODO
-    public static final String MESSAGE_DUPLICATE_REVIEW = null;
+    public static final String MESSAGE_NO_REQUEST = "Sorry, that user is not in your " +
+            "friend requests' list.";
 
     // TODO
-    private final Integer toAdd;
+    private final Friendship toAdd;
 
     /**
-     * accepts friend rquest from the specified {@code Integer} friend.
+     * Accepts friend request from the specified {@code Friendship} friend.
      */
-    public AcceptFriendCommand(Integer toAdd) {
+    public AcceptFriendCommand(Friendship toAdd) {
         requireNonNull(toAdd);
         this.toAdd = toAdd;
     }
@@ -37,9 +42,10 @@ public class AcceptFriendCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         // TODO
+        // throw exceptions here
         requireNonNull(model);
 
-        return null;
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
