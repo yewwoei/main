@@ -25,7 +25,9 @@ public class XmlSerializableUsers {
 
     @XmlElement
     private List<XmlAdaptedUser> user;
+    @XmlElement
     private List<XmlAdaptedFriendship> friendship;
+    @XmlElement
     private List<XmlAdaptedDebt> debts;
 
     /**
