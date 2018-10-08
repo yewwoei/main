@@ -67,7 +67,7 @@ public class XmlAdaptedDebt {
 
         return new Debt( usernameUserHashmap.get(new Username(creditor)),
                 usernameUserHashmap.get(new Username(debtor)),
-                Double.valueOf(amount));
+                Double.valueOf(amount), debtID, DebtStatus.valueOf(status));
     }
 
     public boolean equals(Object other) {
