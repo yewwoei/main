@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.accounting.Debt;
+import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
