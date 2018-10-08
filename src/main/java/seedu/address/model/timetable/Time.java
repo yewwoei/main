@@ -23,7 +23,9 @@ public class Time {
      * Constructs a {@code Time}.
      *
      * @param time A valid time.
-       P requireNonNull(time);
+     */
+    public Time(String time) {
+        requireNonNull(time);
         checkArgument(isValidTime(time), MESSAGE_TIME_CONSTRAINTS);
         this.time = time;
     }
