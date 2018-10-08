@@ -135,7 +135,12 @@ public class User {
     }
 
     public User addFriendship(Friendship friendship) {
-        friends.add(friendship);
+        FriendshipStatus friendshipStatus = friendship.getFrienshipStatus();
+        if(friendshipStatus.equals(FriendshipStatus.ACCEPTED)) {
+            friends.add(friendship);
+        } else {
+            friendRequests.add(friendship);
+        }
         return this;
     }
 
