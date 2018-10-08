@@ -5,6 +5,12 @@ import java.util.UUID;
 
 import seedu.address.model.user.User;
 
+/**
+ * Represents a Debt in the address book.
+ * Guarantees: Information are not null.
+ *
+ */
+
 public class Debt {
 
     private User creditor;
