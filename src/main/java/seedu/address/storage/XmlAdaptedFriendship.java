@@ -71,28 +71,34 @@ public class XmlAdaptedFriendship {
                 && Objects.equals(me, otherFriendship.me);
     }
 
+    /**
+     * Constructs friendships from xml data
+     * @param usernameUserHashmap hashmap of usernames to users
+     * @return constructed friendship
+     * @throws IllegalValueException
+     */
     public Friendship toModelType(HashMap<Username, User> usernameUserHashmap) throws IllegalValueException {
-        if(friendUser == null) {
+        if (friendUser == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Friendship.class.getSimpleName()));
         }
 
-        if(me == null) {
+        if (me == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Friendship.class.getSimpleName()));
         }
 
-        if(initiatedBy == null) {
+        if (initiatedBy == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Friendship.class.getSimpleName()));
         }
 
-        if(friendshipStatus == null) {
+        if (friendshipStatus == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Friendship.class.getSimpleName()));
         }
 
-        if(!initiatedBy.equals(me) || !initiatedBy.equals(friendUser)) {
+        if (!initiatedBy.equals(me) || !initiatedBy.equals(friendUser)) {
             throw new IllegalValueException(WRONG_INITIATION_MESSAGE_FORMAT);
         }
 

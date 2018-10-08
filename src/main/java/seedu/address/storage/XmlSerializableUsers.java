@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -10,7 +9,6 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.user.Friendship;
 import seedu.address.model.UserData;
 import seedu.address.model.user.User;
-import seedu.address.model.user.Username;
 
 /**
  * An list of users that is serializable to XML format
@@ -41,8 +39,8 @@ public class XmlSerializableUsers {
     public XmlSerializableUsers(UserData userData) {
         this();
         // adds Users into the hashmap
-        userData.getUsernameUserHashMap().forEach((key, value)
-                -> user.add(new XmlAdaptedUser(value)));
+        userData.getUsernameUserHashMap().forEach((key, value) -> user
+                .add(new XmlAdaptedUser(value)));
 
         // updates hashmap with friends of all Users
         userData.getUsernameUserHashMap().forEach((key, value) -> value.getFriends()
@@ -70,12 +68,12 @@ public class XmlSerializableUsers {
             userData.getUsernameUserHashMap().put(user.getUsername(), user);
         }
 
-        for(XmlAdaptedFriendship f: friendship) {
+        for (XmlAdaptedFriendship f: friendship) {
             Friendship friendship = f.toModelType(userData.getUsernameUserHashMap());
-            if(!userData.getUsernameUserHashMap().containsKey(friendship.getMe().getUsername())) {
+            if (!userData.getUsernameUserHashMap().containsKey(friendship.getMe().getUsername())) {
                 throw new IllegalValueException(MESSAGE_NO_USER_FRIENDSHIP);
             }
-            if(!userData.getUsernameUserHashMap().containsKey(friendship.getFriendUser().getUsername())) {
+            if (!userData.getUsernameUserHashMap().containsKey(friendship.getFriendUser().getUsername())) {
                 throw new IllegalValueException(MESSAGE_NO_USER_FRIENDSHIP);
             }
 

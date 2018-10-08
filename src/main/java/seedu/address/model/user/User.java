@@ -134,9 +134,15 @@ public class User {
         }
     }
 
+    /**
+     * Used for storage purposes.
+     * Allows user to add a friend or friendRequest by taking in
+     * @param friendship
+     * @return the updated User
+     */
     public User addFriendship(Friendship friendship) {
         FriendshipStatus friendshipStatus = friendship.getFrienshipStatus();
-        if(friendshipStatus.equals(FriendshipStatus.ACCEPTED)) {
+        if (friendshipStatus.equals(FriendshipStatus.ACCEPTED)) {
             friends.add(friendship);
         } else {
             friendRequests.add(friendship);
