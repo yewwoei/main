@@ -249,17 +249,17 @@ public class User {
         return this;
     }
 
-    public void addDebt( User debtor, double amount){
-        if( !debtor.isSameUser(this) ){
-            Debt d = new Debt( this, debtor, amount);
+    public void addDebt(User debtor, double amount) {
+        if (!debtor.isSameUser(this)) {
+            Debt d = new Debt(this, debtor, amount);
             this.debts.add(d);
             debtor.debts.add(d);
         }
     }
 
-    public void clearDebt(User debtor, double amount, String debtID){
-        Debt toFind = new Debt(this, debtor, amount, debtID, DebtStatus.ACCEPTED);
-        Debt changeTo = new Debt(this, debtor, amount, debtID, DebtStatus.CLEARED);
+    public void clearDebt(User debtor, double amount, String debtId) {
+        Debt toFind = new Debt(this, debtor, amount, debtId, DebtStatus.ACCEPTED);
+        Debt changeTo = new Debt(this, debtor, amount, debtId, DebtStatus.CLEARED);
         int i = this.debts.indexOf(toFind);
         this.debts.set(i, changeTo);
         i = debtor.debts.indexOf(toFind);
@@ -267,63 +267,63 @@ public class User {
 
     }
 
-    public void acceptedDebtRequest( User creditor, double amount, String debtID ){
-        Debt toFind = new Debt(creditor, this, amount, debtID, DebtStatus.PENDING);
-        Debt changeTo = new Debt(creditor, this, amount, debtID, DebtStatus.ACCEPTED);
+    public void acceptedDebtRequest(User creditor, double amount, String debtId) {
+        Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
+        Debt changeTo = new Debt(creditor, this, amount, debtId, DebtStatus.ACCEPTED);
         int i = this.debts.indexOf(toFind);
         this.debts.set(i, changeTo);
         i = creditor.debts.indexOf(toFind);
         creditor.debts.set(i, changeTo);
     }
 
-    public void deleteDebtRequest( User creditor, double amount, String debtID ){
-        Debt toFind = new Debt( creditor, this, amount, debtID, DebtStatus.PENDING);
+    public void deleteDebtRequest(User creditor, double amount, String debtId) {
+        Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
         this.debts.remove(toFind);
         creditor.debts.remove(toFind);
     }
 
-    public String listDebtHistory(){
+    public String listDebtHistory() {
         String toReturn = "";
-        for( Debt d: this.debts ){
+        for (Debt d: this.debts) {
             toReturn += d.toString() + "\n";
         }
         return toReturn;
     }
 
-    public String listDebtor(){
+    public String listDebtor() {
         String toReturn = "";
-        for( Debt d: this.debts ){
-            if( d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)){
+        for (Debt d: this.debts) {
+            if (d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
                 toReturn += d.toString() + "\n";
             }
         }
         return toReturn;
     }
 
-    public String listCreditor(){
+    public String listCreditor() {
         String toReturn = "";
-        for( Debt d: this.debts ){
-            if( d.getDebtor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)){
+        for (Debt d: this.debts) {
+            if (d.getDebtor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
                 toReturn += d.toString() + "\n";
             }
         }
         return toReturn;
     }
 
-    public String listDebtRequestReceived(){
+    public String listDebtRequestReceived() {
         String toReturn = "";
-        for( Debt d: this.debts ){
-            if( d.getDebtor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)){
+        for (Debt d: this.debts) {
+            if (d.getDebtor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
                 toReturn += d.toString() + "\n";
             }
         }
         return toReturn;
     }
 
-    public String listDebtRequestSent(){
+    public String listDebtRequestSent() {
         String toReturn = "";
-        for( Debt d: this.debts ){
-            if( d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)){
+        for (Debt d: this.debts) {
+            if ( d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
                 toReturn += d.toString() + "\n";
             }
         }
