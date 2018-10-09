@@ -36,7 +36,6 @@ public class XmlAdaptedDebt {
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedDebt() {}
-    
     /**
      * Constructs an {@code XmlAdaptedDebt} with the given debt details.
      */
@@ -47,7 +46,6 @@ public class XmlAdaptedDebt {
         this.debtId = debtId;
         this.status = status;
     }
-    
     /**
      * Converts a given Debt into this class for JAXB use.
      * @param source future changes to this will not affect the created XmlAdaptedDebt.
