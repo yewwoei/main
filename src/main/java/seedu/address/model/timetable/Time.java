@@ -8,8 +8,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@Link #isValidTime(String)}
  */
 public class Time {
-    public static final String MESSAGE_TIME_CONSTRAINTS = "Time should only be in the 24-hour format in 30 minute" +
-            "intervals, without any colons. For example: 2330, 0000, 0130";
+    public static final String MESSAGE_TIME_CONSTRAINTS = "Time should only be in the 24-hour format in 30 minute"
+            + "intervals, without any colons. For example: 2330, 0000, 0130";
 
     /**
      * Regular expression used to test whether the time falls between 0000 and 2330.

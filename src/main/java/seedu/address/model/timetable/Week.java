@@ -10,8 +10,8 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Week {
 
     public static final String MESSAGE_WEEK_CONSTRAINTS =
-            "Week should only be one of the following: 1, 2, 3, 4, 5, 6, " +
-                    "recess, 7, 8, 9, 10, 11, 12, 13, reading, 14, 15";
+            "Week should only be one of the following: 1, 2, 3, 4, 5, 6, "
+            + "recess, 7, 8, 9, 10, 11, 12, 13, reading, 14, 15";
 
     public static final String WEEK_VALIDATION_REGEX =
             "[1-9]|1[0-5]|recess|reading";
