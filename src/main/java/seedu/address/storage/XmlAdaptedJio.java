@@ -1,5 +1,8 @@
 package seedu.address.storage;
 
+import javax.xml.bind.annotation.XmlElement;
+import java.util.Objects;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Address;
@@ -8,10 +11,6 @@ import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Day;
 import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
-
-
-import javax.xml.bind.annotation.XmlElement;
-import java.util.Objects;
 
 /**
  * JAXB-friendly version of the User.

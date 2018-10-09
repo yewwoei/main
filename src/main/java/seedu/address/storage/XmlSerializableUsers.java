@@ -43,7 +43,7 @@ public class XmlSerializableUsers {
      */
     public XmlSerializableUsers(UserData userData) {
         this();
-      
+
         // adds Users into the hashmap
         userData.getUsernameUserHashMap().forEach((key, value) -> user
                 .add(new XmlAdaptedUser(value)));
