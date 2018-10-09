@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.UserData;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.user.Friendship;
 import seedu.address.model.user.User;
 
@@ -18,11 +19,14 @@ public class XmlSerializableUsers {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "User list contains duplicate User(s).";
     public static final String MESSAGE_NO_USER_FRIENDSHIP = "User required for friendship not found";
+    public static final String MESSAGE_NO_USER_DEBTS = "User required for debts record not found";
 
     @XmlElement
     private List<XmlAdaptedUser> user;
     @XmlElement
     private List<XmlAdaptedFriendship> friendship;
+    @XmlElement
+    private List<XmlAdaptedDebt> debts;
 
     /**
      * Creates an empty XmlSerializableUsers.
@@ -31,6 +35,7 @@ public class XmlSerializableUsers {
     public XmlSerializableUsers() {
         user = new ArrayList<>();
         friendship = new ArrayList<>();
+        debts = new ArrayList<>();
     }
 
     /**
@@ -41,15 +46,14 @@ public class XmlSerializableUsers {
         // adds Users into the hashmap
         userData.getUsernameUserHashMap().forEach((key, value) -> user
                 .add(new XmlAdaptedUser(value)));
-
         // updates hashmap with friends of all Users
         userData.getUsernameUserHashMap().forEach((key, value) -> value.getFriends()
                 .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
-
         // updates hashmap with friendRequests of all Users
         userData.getUsernameUserHashMap().forEach((key, value) -> value.getFriendRequests()
                 .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
-
+        userData.getUsernameUserHashMap().forEach((key, value) -> value.getDebts()
+                .forEach(d -> debts.add(new XmlAdaptedDebt(d))));
     }
 
     /**
@@ -79,6 +83,23 @@ public class XmlSerializableUsers {
 
             userData.getUsernameUserHashMap().put(friendship.getMe().getUsername(),
                     userData.getUsernameUserHashMap().get(friendship.getMe().getUsername()).addFriendship(friendship));
+
+        }
+
+        for (XmlAdaptedDebt d: debts) {
+            Debt debts = d.toModelType(userData.getUsernameUserHashMap());
+            if (!userData.getUsernameUserHashMap().containsKey(debts.getCreditor().getUsername())) {
+                throw new IllegalValueException(MESSAGE_NO_USER_DEBTS);
+            }
+            if (!userData.getUsernameUserHashMap().containsKey(debts.getDebtor().getUsername())) {
+                throw new IllegalValueException(MESSAGE_NO_USER_DEBTS);
+            }
+
+            userData.getUsernameUserHashMap().put(debts.getCreditor().getUsername(),
+                    userData.getUsernameUserHashMap().get(debts.getCreditor().getUsername()).addDebt(debts));
+
+            userData.getUsernameUserHashMap().put(debts.getDebtor().getUsername(),
+                    userData.getUsernameUserHashMap().get(debts.getDebtor().getUsername()).addDebt(debts));
 
         }
         return userData;
