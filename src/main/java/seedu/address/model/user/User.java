@@ -134,6 +134,11 @@ public class User {
         }
     }
 
+    /**
+     * Add friendship to list of user friends
+     * @param friendship Friendship containing information about user and friend.
+     * @return User that has been modified
+     */
     public User addFriendship(Friendship friendship) {
         friends.add(friendship);
         return this;

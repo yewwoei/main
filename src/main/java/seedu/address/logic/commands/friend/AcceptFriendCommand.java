@@ -25,8 +25,8 @@ public class AcceptFriendCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Successfully accepted friend request: %1$s";
 
     // TODO
-    public static final String MESSAGE_NO_REQUEST = "Sorry, that user is not in your " +
-            "friend requests' list.";
+    public static final String MESSAGE_NO_REQUEST = "Sorry, that user is not in your "
+            + "friend requests' list.";
 
     // TODO
     private final Friendship toAdd;

@@ -9,7 +9,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import java.util.stream.Stream;
 
-import javafx.event.WeakEventHandler;
 import seedu.address.logic.commands.jio.CreateJioCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;

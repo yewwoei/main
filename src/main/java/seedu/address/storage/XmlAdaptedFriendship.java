@@ -68,31 +68,36 @@ public class XmlAdaptedFriendship {
                 && Objects.equals(me, otherFriendship.me);
     }
 
+    /**
+     * Converts this jaxb-friendly adapted friendship object into the model's Friendship object.
+     *
+     * @throws IllegalValueException if there were any data constraints violated in the adapted restaurant
+     */
     public Friendship toModelType(HashMap<Username, User> usernameUserHashmap) throws IllegalValueException {
-        if(friendUser == null) {
+        if (friendUser == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Friendship.class.getSimpleName()));
         }
 
-        if(me == null) {
+        if (me == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Friendship.class.getSimpleName()));
         }
 
-        if(initiatedBy == null) {
+        if (initiatedBy == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Friendship.class.getSimpleName()));
         }
 
-        if(!usernameUserHashmap.containsKey(new Username(friendUser))) {
+        if (!usernameUserHashmap.containsKey(new Username(friendUser))) {
             throw new IllegalValueException("Friend User does not exist in storage.");
         }
 
-        if(!usernameUserHashmap.containsKey(new Username(me))) {
+        if (!usernameUserHashmap.containsKey(new Username(me))) {
             throw new IllegalValueException("User does not exist in storage.");
         }
 
-        if(!initiatedBy.equals(me) || !initiatedBy.equals(friendUser)) {
+        if (!initiatedBy.equals(me) || !initiatedBy.equals(friendUser)) {
             throw new IllegalValueException("Friendship is not initiated by either party in Friendship");
         }
 
