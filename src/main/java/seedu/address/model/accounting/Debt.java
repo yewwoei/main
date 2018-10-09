@@ -50,7 +50,7 @@ public class Debt {
     }
     public String getDebtId() {
         return debtId;
-    }   
+    }
     /**
      * Method to change a debt status.
      * @param changeTo
@@ -77,7 +77,7 @@ public class Debt {
 
         if (other == this) {
             return true;
-        } 
+        }
         if (!(other instanceof Debt)) {
             return false;
         }
