@@ -52,8 +52,8 @@ public class XmlSerializableUsers {
                 .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
 
         // updates hashmap with friendRequests of all Users
-        //userData.getUsernameUserHashMap().forEach((key, value) -> value.getFriendRequests()
-        //        .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
+        userData.getUsernameUserHashMap().forEach((key, value) -> value.getFriendRequests()
+                .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
       
         userData.getUsernameUserHashMap().forEach((key, value) -> value.getDebts()
                 .forEach(d -> debts.add(new XmlAdaptedDebt(d))));
