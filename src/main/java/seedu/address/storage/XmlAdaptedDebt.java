@@ -72,7 +72,7 @@ public class XmlAdaptedDebt {
 
         return new Debt(usernameUserHashmap.get(new Username(creditor)),
                 usernameUserHashmap.get(new Username(debtor)),
-                Double.valueOf(amount), debtID, DebtStatus.valueOf(status));
+                Double.valueOf(amount), debtId, DebtStatus.valueOf(status));
     }
 
     public boolean equals(Object other) {
@@ -88,6 +88,6 @@ public class XmlAdaptedDebt {
         return otherDebt != null
                 && Objects.equals(creditor, otherDebt.creditor)
                 && Objects.equals(debtor, otherDebt.debtor)
-                && Objects.equals(debtID, otherDebt.debtID);
+                && Objects.equals(debtId, otherDebt.debtId);
     }
 }
