@@ -101,7 +101,7 @@ public class XmlAdaptedDebt {
             return false;
         }
 
-        XmlAdaptedDebt otherDebt = (XmlAdaptedDebt)other;
+        XmlAdaptedDebt otherDebt = (XmlAdaptedDebt) other;
         return otherDebt != null
                 && Objects.equals(creditor, otherDebt.creditor)
                 && Objects.equals(debtor, otherDebt.debtor)
