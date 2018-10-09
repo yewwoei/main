@@ -8,10 +8,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.UserData;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.user.Friendship;
 import seedu.address.model.user.User;
 //import seedu.address.model.user.Username;
-import seedu.address.model.accounting.Debt;
 
 /**
  * An list of users that is serializable to XML format
