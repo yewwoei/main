@@ -33,7 +33,7 @@ public class Debt {
         this.creditor = creditor;
         this.debtor = debtor;
         this.amount = amount;
-        this.debtId = debtID;
+        this.debtId = debtId;
         this.status = status;
     }
     
