@@ -46,6 +46,11 @@ public class Debt {
     
     public String getDebtId() { return debtId; }
     
+    /**
+     * Method to change a debt status.
+     * @param changeTo
+     * @return String describe the changing result
+     */
     public String changeDebtStatus(DebtStatus changeTo) {
         if (this.getDebtStatus().toString() == "PENDING" && changeTo == DebtStatus.ACCEPTED) {
             this.status = changeTo;
@@ -61,7 +66,13 @@ public class Debt {
             return "No a valid action";
         }
     }
-
+    
+    /**
+     * Method to check if two (Debt) objects equals.
+     * @param other
+     * @return a boolean of the result.
+     */
+    @Override
     public boolean equals(Object other) {
 
         if (other == this) {
@@ -79,7 +90,11 @@ public class Debt {
                 && test.getAmount() == this.getAmount()
                 && test.getDebtId().equals(this.getDebtId());
     }
-
+    
+    /**
+     * Method to convert a debt to String.
+     * @return a String representing the debt
+     */
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(" Creditor: ")
