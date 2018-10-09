@@ -1,17 +1,17 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+//import java.util.HashMap;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.user.Friendship;
-import seedu.address.model.accounting.Debt;
 import seedu.address.model.UserData;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
+import seedu.address.model.accounting.Debt;
+import seedu.address.model.user.Friendship;
 
 /**
  * An list of users that is serializable to XML format
@@ -71,12 +71,12 @@ public class XmlSerializableUsers {
             userData.getUsernameUserHashMap().put(user.getUsername(), user);
         }
 
-        for(XmlAdaptedFriendship f: friendship) {
+        for (XmlAdaptedFriendship f: friendship) {
             Friendship friendship = f.toModelType(userData.getUsernameUserHashMap());
-            if(!userData.getUsernameUserHashMap().containsKey(friendship.getMe().getUsername())) {
+            if (!userData.getUsernameUserHashMap().containsKey(friendship.getMe().getUsername())) {
                 throw new IllegalValueException(MESSAGE_NO_USER_FRIENDSHIP);
             }
-            if(!userData.getUsernameUserHashMap().containsKey(friendship.getFriendUser().getUsername())) {
+            if (!userData.getUsernameUserHashMap().containsKey(friendship.getFriendUser().getUsername())) {
                 throw new IllegalValueException(MESSAGE_NO_USER_FRIENDSHIP);
             }
 
@@ -85,12 +85,12 @@ public class XmlSerializableUsers {
 
         }
 
-        for( XmlAdaptedDebt d: debts) {
+        for (XmlAdaptedDebt d: debts) {
             Debt debts = d.toModelType(userData.getUsernameUserHashMap());
-            if(!userData.getUsernameUserHashMap().containsKey(debts.getCreditor().getUsername())) {
+            if (!userData.getUsernameUserHashMap().containsKey(debts.getCreditor().getUsername())) {
                 throw new IllegalValueException(MESSAGE_NO_USER_DEBTS);
             }
-            if(!userData.getUsernameUserHashMap().containsKey(debts.getDebtor().getUsername())) {
+            if (!userData.getUsernameUserHashMap().containsKey(debts.getDebtor().getUsername())) {
                 throw new IllegalValueException(MESSAGE_NO_USER_DEBTS);
             }
 
