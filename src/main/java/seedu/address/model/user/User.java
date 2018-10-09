@@ -268,7 +268,7 @@ public class User {
      * Method for the creditor to clear a debt.
      * @param debtor the debtor of the clearing debt.
      * @param amount the amount of the clearing debt.
-     * @param debtID the debtId of the clearing debt.
+     * @param debtId the debtId of the clearing debt.
      */
     public void clearDebt(User debtor, double amount, String debtId) {
         Debt toFind = new Debt(this, debtor, amount, debtId, DebtStatus.ACCEPTED);
@@ -284,7 +284,7 @@ public class User {
      * Method for debtor to accepted a received debt.
      * @param creditor the creditor of the accepting debt.
      * @param amount the amount of the accepting debt.
-     * @param debtID the debtId of the accepting debt.
+     * @param debtId the debtId of the accepting debt.
      */
     public void acceptedDebtRequest(User creditor, double amount, String debtId) {
         Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
@@ -299,7 +299,7 @@ public class User {
      * Method for debtor to reject and delete a received debt.
      * @param creditor the creditor of the deleting debt.
      * @param amount the amount of the deleting debt.
-     * @param debtID the debtId of the deleting debt.
+     * @param debtId the debtId of the deleting debt.
      */
     public void deleteDebtRequest(User creditor, double amount, String debtId) {
         Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
@@ -321,7 +321,8 @@ public class User {
 
     /**
      * Method to list all the debtor.
-     * @return a String of all debt which creditor is the user and have a accepted status, , include creditor, debtor, amount, debt ID and status.
+     * @return a String of all debt which creditor is the user and have a accepted status,
+     * include creditor, debtor, amount, debt ID and status.
      */
     public String listDebtor() {
         String toReturn = "";
@@ -335,7 +336,8 @@ public class User {
 
     /**
      * Method to list all the creditor.
-     * @return a String of all debt which debtor is the user and have a accepted status, , include creditor, debtor, amount, debt ID and status.
+     * @return a String of all debt which debtor is the user and have a accepted status,
+     * include creditor, debtor, amount, debt ID and status.
      */
     public String listCreditor() {
         String toReturn = "";
@@ -349,7 +351,8 @@ public class User {
 
     /**
      * Method to list all received request.
-     * @return a String of all debt which debtor is the user and have a pending status, , include creditor, debtor, amount, debt ID and status.
+     * @return a String of all debt which debtor is the user and have a pending status,
+     * include creditor, debtor, amount, debt ID and status.
      */
     public String listDebtRequestReceived() {
         String toReturn = "";
@@ -363,12 +366,13 @@ public class User {
 
     /**
      * Method to list all sent request.
-     * @return a String of all debt which creditor is the user and have a pending status, , include creditor, debtor, amount, debt ID and status.
+     * @return a String of all debt which creditor is the user and have a pending status,
+     * include creditor, debtor, amount, debt ID and status.
      */
     public String listDebtRequestSent() {
         String toReturn = "";
         for (Debt d: this.debts) {
-            if ( d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
+            if (d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
                 toReturn += d.toString() + "\n";
             }
         }
