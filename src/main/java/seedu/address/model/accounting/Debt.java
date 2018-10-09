@@ -36,22 +36,19 @@ public class Debt {
         this.debtId = debtId;
         this.status = status;
     }
+    
     public DebtStatus getDebtStatus() {
         return this.status;
     }
-    
     public User getDebtor() {
         return this.debtor;
     }
-    
     public User getCreditor() {
         return this.creditor;
     }
-    
     public double getAmount() {
         return this.amount;
     }
-    
     public String getDebtId() {
         return debtId;
     }
@@ -65,14 +62,10 @@ public class Debt {
         if (this.getDebtStatus().toString() == "PENDING" && changeTo == DebtStatus.ACCEPTED) {
             this.status = changeTo;
             return "Request Accepted";
-        }
-
-        else if(this.getDebtStatus().toString() == "ACCEPTED" && changeTo == DebtStatus.CLEARED) {
+        } else if(this.getDebtStatus().toString() == "ACCEPTED" && changeTo == DebtStatus.CLEARED) {
             this.status = changeTo;
             return "Debt Cleared";
-        }
-        
-        else {
+        } else {
             return "No a valid action";
         }
     }
@@ -87,12 +80,9 @@ public class Debt {
 
         if (other == this) {
             return true;
-        }
-
-        if (!(other instanceof Debt)) {
+        } if (!(other instanceof Debt)) {
             return false;
         }
-
         Debt test = (Debt) other;
         return test != null
                 && test.getCreditor().equals(this.getCreditor())
@@ -119,5 +109,4 @@ public class Debt {
                 .append(this.getDebtId());
         return builder.toString();
     }
-
 }
