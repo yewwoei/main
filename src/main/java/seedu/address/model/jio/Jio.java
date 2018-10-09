@@ -4,6 +4,8 @@ import java.util.Objects;
 
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Name;
+import seedu.address.model.timetable.Time;
+
 
 /**
  * Represents a Jio in the jiobook.

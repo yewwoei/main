@@ -44,18 +44,18 @@ public class XmlSerializableUsers {
     public XmlSerializableUsers(UserData userData) {
         this();
         // adds Users into the hashmap
-         userData.getUsernameUserHashMap().forEach((key, value) -> user
-                 .add(new XmlAdaptedUser(value)));
+        userData.getUsernameUserHashMap().forEach((key, value) -> user
+                .add(new XmlAdaptedUser(value)));
 
-         // updates hashmap with friends of all Users
-         userData.getUsernameUserHashMap().forEach((key, value) -> value.getFriends()
-                 .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
+        // updates hashmap with friends of all Users
+        userData.getUsernameUserHashMap().forEach((key, value) -> value.getFriends()
+                .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
 
-         // updates hashmap with friendRequests of all Users
-         userData.getUsernameUserHashMap().forEach((key, value) -> value.getFriendRequests()
-                 .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
-        
-        userData.getUsernameUserHashMap().forEach((key, value) -> value.getDebts()
+        // updates hashmap with friendRequests of all Users
+        userData.getUsernameUserHashMap().forEach((key, value) -> value.getFriendRequests()
+                .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
+      
+     userData.getUsernameUserHashMap().forEach((key, value) -> value.getDebts()
                 .forEach(d -> debts.add(new XmlAdaptedDebt(d))));
     }
 
