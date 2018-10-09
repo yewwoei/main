@@ -244,7 +244,7 @@ public class User {
 
 
 
-    public User addDebt( Debt debt) {
+    public User addDebt(Debt debt) {
         debts.add(debt);
         return this;
     }
