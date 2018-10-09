@@ -25,16 +25,16 @@ public class Jio {
         //this.people.add(creator);
     }
 
-    public String getName() {
-        return name.toString();
+    public Name getName() {
+        return name;
     }
 
-    public String getDate() {
-        return date.toString();
+    public Date getDate() {
+        return date;
     }
 
-    public String getLocation() {
-        return location.toString();
+    public Address getLocation() {
+        return location;
     }
 
     /*
