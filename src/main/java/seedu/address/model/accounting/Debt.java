@@ -36,15 +36,25 @@ public class Debt {
         this.debtId = debtId;
         this.status = status;
     }
-    public DebtStatus getDebtStatus() { return this.status; }
+    public DebtStatus getDebtStatus() {
+        return this.status;
+    }
     
-    public User getDebtor() { return this.debtor; }
+    public User getDebtor() {
+        return this.debtor;
+    }
     
-    public User getCreditor() { return this.creditor; }
+    public User getCreditor() {
+        return this.creditor;
+    }
     
-    public double getAmount() { return this.amount; }
+    public double getAmount() {
+        return this.amount;
+    }
     
-    public String getDebtId() { return debtId; }
+    public String getDebtId() {
+        return debtId;
+    }
     
     /**
      * Method to change a debt status.
