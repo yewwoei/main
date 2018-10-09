@@ -16,7 +16,7 @@ public class Date {
     private final Time time;
 
     /**
-     * Every fiel dmust be present and not null.
+     * Every field must be present and not null.
      */
     public Date(Week week, Day day, Time time) {
         requireAllNonNull(week, day, time);

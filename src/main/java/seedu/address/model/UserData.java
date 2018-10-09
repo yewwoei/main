@@ -16,10 +16,6 @@ public class UserData {
         usernameUserHashMap = new HashMap<>();
     }
 
-    public void setHashMap(HashMap<Username, User> updatedHashMap) {
-        usernameUserHashMap = updatedHashMap;
-    }
-
     public HashMap<Username, User> getUsernameUserHashMap() {
         return usernameUserHashMap;
     }
