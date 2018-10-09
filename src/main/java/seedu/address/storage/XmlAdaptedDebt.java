@@ -24,25 +24,25 @@ public class XmlAdaptedDebt {
     @XmlElement(required = true)
     private String amount;
     @XmlElement(required = true)
-    private String debtID;
+    private String debtId;
     @XmlElement(required = true)
     private String status;
 
     public XmlAdaptedDebt() {}
 
 
-    public XmlAdaptedDebt( String creditor, String debtor, String amount, String debtID, String status){
+    public XmlAdaptedDebt(String creditor, String debtor, String amount, String debtId, String status) {
         this.creditor = creditor;
         this.debtor = debtor;
         this.amount = amount;
-        this.debtID = debtID;
+        this.debtId = debtId;
         this.status = status;
     }
-    public XmlAdaptedDebt( Debt source ){
+    public XmlAdaptedDebt(Debt source) {
         creditor = source.getCreditor().getUsername().toString();
         debtor = source.getDebtor().getUsername().toString();
         amount = String.valueOf(source.getAmount());
-        debtID = source.getDebtID();
+        debtId = source.getDebtId();
         status = source.getDebtStatus().toString();
     }
 
@@ -51,26 +51,26 @@ public class XmlAdaptedDebt {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Debt.class.getSimpleName()));
         }
-        if(debtor == null){
+        if (debtor == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Debt.class.getSimpleName()));
         }
 
-        if(!usernameUserHashmap.containsKey(new Username(creditor))){
+        if (!usernameUserHashmap.containsKey(new Username(creditor))) {
             throw new IllegalValueException(String.format(NOT_EXIST_FIELD_MESSAGE_FORMAT,
                     Debt.class.getSimpleName()));
         }
 
-        if(!usernameUserHashmap.containsKey(new Username(debtor))){
+        if (!usernameUserHashmap.containsKey(new Username(debtor))) {
             throw new IllegalValueException(String.format(NOT_EXIST_FIELD_MESSAGE_FORMAT,
                     Debt.class.getSimpleName()));
         }
 
-        if( amount == null || !(Double.valueOf(amount) > 0)){
+        if (amount == null || !(Double.valueOf(amount) > 0)) {
             throw new IllegalValueException(String.format(INVALID_INPUT_MESSAGE_FORMAT));
         }
 
-        return new Debt( usernameUserHashmap.get(new Username(creditor)),
+        return new Debt(usernameUserHashmap.get(new Username(creditor)),
                 usernameUserHashmap.get(new Username(debtor)),
                 Double.valueOf(amount), debtID, DebtStatus.valueOf(status));
     }
@@ -84,7 +84,7 @@ public class XmlAdaptedDebt {
             return false;
         }
 
-        XmlAdaptedDebt otherDebt = (XmlAdaptedDebt) other;
+        XmlAdaptedDebt otherDebt = (XmlAdaptedDebt)other;
         return otherDebt != null
                 && Objects.equals(creditor, otherDebt.creditor)
                 && Objects.equals(debtor, otherDebt.debtor)
