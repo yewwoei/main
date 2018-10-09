@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.user.Friendship;
 import seedu.address.model.UserData;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -18,9 +19,11 @@ import seedu.address.model.user.Username;
 public class XmlSerializableUsers {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "User list contains duplicate User(s).";
+    public static final String MESSAGE_NO_USER_FRIENDSHIP = "User required for friendship not found";
 
     @XmlElement
     private List<XmlAdaptedUser> user;
+    private List<XmlAdaptedFriendship> friendship;
 
     /**
      * Creates an empty XmlSerializableUsers.
@@ -28,6 +31,7 @@ public class XmlSerializableUsers {
      */
     public XmlSerializableUsers() {
         user = new ArrayList<>();
+        friendship = new ArrayList<>();
     }
 
     /**
@@ -36,7 +40,11 @@ public class XmlSerializableUsers {
     public XmlSerializableUsers(UserData userData) {
         this();
         userData.getUsernameUserHashMap().forEach((key, value)
-            -> user.add(new XmlAdaptedUser(value)));
+                -> user.add(new XmlAdaptedUser(value)));
+
+        userData.getUsernameUserHashMap().forEach((key, value) -> value.getFriends()
+                .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
+
     }
 
     /**
@@ -47,16 +55,27 @@ public class XmlSerializableUsers {
      */
     public UserData toModelType() throws IllegalValueException {
         UserData userData = new UserData();
-        HashMap<Username, User> usernameUserHashMap = new HashMap<>();
         for (XmlAdaptedUser u : user) {
             User user = u.toModelType();
-            if (usernameUserHashMap.containsKey(user.getUsername())) {
+            if (userData.getUsernameUserHashMap().containsKey(user.getUsername())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            usernameUserHashMap.put(user.getUsername(), user);
+            userData.getUsernameUserHashMap().put(user.getUsername(), user);
         }
 
-        userData.setHashMap(usernameUserHashMap);
+        for(XmlAdaptedFriendship f: friendship) {
+            Friendship friendship = f.toModelType(userData.getUsernameUserHashMap());
+            if(!userData.getUsernameUserHashMap().containsKey(friendship.getMe().getUsername())) {
+                throw new IllegalValueException(MESSAGE_NO_USER_FRIENDSHIP);
+            }
+            if(!userData.getUsernameUserHashMap().containsKey(friendship.getFriendUser().getUsername())) {
+                throw new IllegalValueException(MESSAGE_NO_USER_FRIENDSHIP);
+            }
+
+            userData.getUsernameUserHashMap().put(friendship.getMe().getUsername(),
+                    userData.getUsernameUserHashMap().get(friendship.getMe().getUsername()).addFriendship(friendship));
+
+        }
         return userData;
     }
 
