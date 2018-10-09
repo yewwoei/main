@@ -76,7 +76,7 @@ public class Debt {
         Debt test = (Debt) other;
         return test != null
                 && test.getCreditor().equals(this.getCreditor())
-                && test.getDebtID().equals(this.getDebtID())
+                && test.getDebtId().equals(this.getDebtId())
                 && test.getAmount() == this.getAmount()
                 && test.getDebtId().equals(this.getDebtId());
     }
