@@ -36,7 +36,6 @@ public class Debt {
         this.debtId = debtId;
         this.status = status;
     }
-    
     public DebtStatus getDebtStatus() {
         return this.status;
     }
@@ -51,8 +50,7 @@ public class Debt {
     }
     public String getDebtId() {
         return debtId;
-    }
-    
+    }   
     /**
      * Method to change a debt status.
      * @param changeTo
@@ -62,14 +60,13 @@ public class Debt {
         if (this.getDebtStatus().toString() == "PENDING" && changeTo == DebtStatus.ACCEPTED) {
             this.status = changeTo;
             return "Request Accepted";
-        } else if(this.getDebtStatus().toString() == "ACCEPTED" && changeTo == DebtStatus.CLEARED) {
+        } else if (this.getDebtStatus().toString() == "ACCEPTED" && changeTo == DebtStatus.CLEARED) {
             this.status = changeTo;
             return "Debt Cleared";
         } else {
             return "No a valid action";
         }
     }
-    
     /**
      * Method to check if two (Debt) objects equals.
      * @param other
@@ -80,7 +77,8 @@ public class Debt {
 
         if (other == this) {
             return true;
-        } if (!(other instanceof Debt)) {
+        } 
+        if (!(other instanceof Debt)) {
             return false;
         }
         Debt test = (Debt) other;
@@ -90,7 +88,6 @@ public class Debt {
                 && test.getAmount() == this.getAmount()
                 && test.getDebtId().equals(this.getDebtId());
     }
-    
     /**
      * Method to convert a debt to String.
      * @return a String representing the debt
