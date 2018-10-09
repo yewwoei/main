@@ -2,11 +2,11 @@ package seedu.address.model.accounting;
 
 import java.util.UUID;
 
-public class DebtID {
+public class DebtId {
 
     private String id;
 
-    public DebtID() {
+    public DebtId() {
         this.id = UUID.randomUUID().toString();
     }
 
