@@ -160,18 +160,30 @@ public class AddCommandTest {
         // To be Done Later, fake tests for now
         @Override
         public void addUser(User user) {}
+
         @Override
-        public boolean hasUser(Username username) { return true; }
+        public boolean hasUser(Username username) {
+            return true;
+        }
+
         @Override
-        public boolean verifyLogin(Username username, Password password) { return true; }
+        public boolean verifyLogin(Username username, Password password) {
+            return true;
+        }
+
         @Override
-        public boolean isCurrentlyLoggedIn(){ return true; }
+        public boolean isCurrentlyLoggedIn() {
+            return true;
+        }
+
         @Override
-        public void loginUser(User user){};
+        public void loginUser(User user){}
+
         @Override
-        public void loginUser(Username username){};
+        public void loginUser(Username username){}
+
         @Override
-        public void logoutUser() {};
+        public void logoutUser() {}
     }
 
     /**
