@@ -29,7 +29,8 @@ public class DeleteFriendRequestCommandParser implements Parser<DeleteFriendRequ
 
         if (!arePrefixesPresent(argMultimap, PREFIX_USERNAME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteFriendRequestCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    DeleteFriendRequestCommand.MESSAGE_USAGE));
         }
 
         Username friendUsername = ParserUserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get());
