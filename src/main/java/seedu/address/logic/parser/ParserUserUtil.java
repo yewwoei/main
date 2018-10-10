@@ -5,10 +5,10 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.user.Name;
-import seedu.address.model.user.Phone;
 import seedu.address.model.user.Email;
+import seedu.address.model.user.Name;
 import seedu.address.model.user.Password;
+import seedu.address.model.user.Phone;
 import seedu.address.model.user.Username;
 
 /**
