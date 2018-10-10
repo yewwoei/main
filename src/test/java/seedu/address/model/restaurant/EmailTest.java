@@ -1,4 +1,4 @@
-package seedu.address.model.restaurant;
+package seedu.address.model.user;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

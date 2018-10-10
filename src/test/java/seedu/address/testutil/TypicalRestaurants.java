@@ -27,6 +27,7 @@ public class TypicalRestaurants {
             .withTags("friends").build();
     public static final Restaurant BENSON = new RestaurantBuilder().withName("Benson Meier")
             .withAddress("311, Clementi Ave 2, #02-25")
+            .withPhone("98765432")
             .withTags("owesMoney", "friends").build();
     public static final Restaurant CARL = new RestaurantBuilder().withName("Carl Kurz").withPhone("95352563")
             .withAddress("wall street").build();
