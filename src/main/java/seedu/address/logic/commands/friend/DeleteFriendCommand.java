@@ -21,11 +21,11 @@ public class DeleteFriendCommand extends Command {
             + "Parameters: "
             + PREFIX_USERNAME + "USERNAME\n"
             + "Example: " + COMMAND_WORD + " "
-            +PREFIX_USERNAME + "Meena567";
+            + PREFIX_USERNAME + "Meena567";
 
     public static final String MESSAGE_SUCCESS = "Successfully deleted friend with username: %1$s";
-    public static final String MESSAGE_NO_SUCH_FRIEND = "Sorry, the friend that you want to " +
-            "delete does not exist in your list of friends";
+    public static final String MESSAGE_NO_SUCH_FRIEND = "Sorry, the friend that you want to "
+            + "delete does not exist in your list of friends";
 
     private final Username toDelete;
 
@@ -42,7 +42,7 @@ public class DeleteFriendCommand extends Command {
         requireNonNull(model);
 
         // throw exception if you try to delete a friend who is not in friends
-        if(!model.hasUsernameFriend(toDelete)) {
+        if (!model.hasUsernameFriend(toDelete)) {
             throw new CommandException(MESSAGE_NO_SUCH_FRIEND);
         }
 

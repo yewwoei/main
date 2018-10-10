@@ -43,17 +43,17 @@ public class AddFriendCommand extends Command {
         requireNonNull(model);
 
         // throw exception if trying to add friend if request is already sent
-        if(model.hasUsernameFriendRequest(toAdd)) {
+        if (model.hasUsernameFriendRequest(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_FRIEND_REQUEST);
         }
 
         // throw exception if trying to add friend if already friends
-        if(model.hasUsernameFriend(toAdd)) {
+        if (model.hasUsernameFriend(toAdd)) {
             throw new CommandException(MESSAGE_FRIEND_ALREADY);
         }
 
         // throw exception if trying to add oneself as a friend
-        if(model.isSameAsCurrentUser(toAdd)) {
+        if (model.isSameAsCurrentUser(toAdd)) {
             throw new CommandException(MESSAGE_CANNOT_ADD_ONESELF);
         }
 

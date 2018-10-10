@@ -8,7 +8,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.user.Friendship;
 import seedu.address.model.user.Username;
 
 /**
@@ -43,7 +42,7 @@ public class AcceptFriendCommand extends Command {
         requireNonNull(model);
 
         // throw exception if you try to accept a friend request that does not accept
-        if(!model.hasUsernameFriendRequest(toAdd)) {
+        if (!model.hasUsernameFriendRequest(toAdd)) {
             throw new CommandException(MESSAGE_NO_REQUEST);
         }
 

@@ -15,7 +15,6 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.user.Friendship;
-import seedu.address.model.user.FriendshipStatus;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;

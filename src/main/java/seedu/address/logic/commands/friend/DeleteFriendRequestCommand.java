@@ -16,12 +16,12 @@ import seedu.address.model.user.Username;
 public class DeleteFriendRequestCommand extends Command {
     public static final String COMMAND_WORD = "deleteFriendRequest";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a friend request from the " +
-            "list of friend requests.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Deletes a friend request from the "
+            + "list of friend requests.\n"
             + "Parameters: "
             + PREFIX_USERNAME + "USERNAME\n"
             + "Example: " + COMMAND_WORD + " "
-            +PREFIX_USERNAME + "Meena567";
+            + PREFIX_USERNAME + "Meena567";
 
     public static final String MESSAGE_SUCCESS = "Successfully deleted friend request of user : %1$s";
     public static final String MESSAGE_NO_SUCH_REQUEST = "Sorry, that User did not send you a friend request.";
@@ -42,7 +42,7 @@ public class DeleteFriendRequestCommand extends Command {
         requireNonNull(model);
 
         // throw exception if no such user sent friendRequest
-        if(!model.hasUsernameFriendRequest(toDelete)) {
+        if (!model.hasUsernameFriendRequest(toDelete)) {
             throw new CommandException(MESSAGE_NO_SUCH_REQUEST);
         }
 
