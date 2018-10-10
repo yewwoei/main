@@ -20,6 +20,9 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 import seedu.address.testutil.RestaurantBuilder;
 
 public class AddCommandTest {
@@ -152,6 +155,35 @@ public class AddCommandTest {
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
         }
+
+
+        // To be Done Later, fake tests for now
+        @Override
+        public void addUser(User user) {}
+
+        @Override
+        public boolean hasUser(Username username) {
+            return true;
+        }
+
+        @Override
+        public boolean verifyLogin(Username username, Password password) {
+            return true;
+        }
+
+        @Override
+        public boolean isCurrentlyLoggedIn() {
+            return true;
+        }
+
+        @Override
+        public void loginUser(User user){}
+
+        @Override
+        public void loginUser(Username username){}
+
+        @Override
+        public void logoutUser() {}
     }
 
     /**

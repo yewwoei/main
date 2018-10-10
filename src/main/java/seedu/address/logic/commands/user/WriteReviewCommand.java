@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.restaurant;
+package seedu.address.logic.commands.user;
 
 import static java.util.Objects.requireNonNull;
 
@@ -9,7 +9,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Adds a review to the restaurant.
+ * Adds a review to the user.
  */
 public class WriteReviewCommand extends Command {
     public static final String COMMAND_WORD = "writeReview";

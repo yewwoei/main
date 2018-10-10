@@ -12,6 +12,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.jio.CreateJioCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.ParserRestaurantUtil;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -41,11 +42,11 @@ public class CreateJioCommandParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateJioCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Name name = ParserRestaurantUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Week week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
         Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
-        Address location = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Address location = ParserRestaurantUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Date date = new Date(week, day, time);
 
         Jio jio = new Jio(name, date, location);

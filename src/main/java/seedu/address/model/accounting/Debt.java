@@ -36,9 +36,6 @@ public class Debt {
         this.debtId = debtId;
         this.status = status;
     }
-    public DebtStatus getDebtStatus() {
-        return this.status;
-    }
     public User getDebtor() {
         return this.debtor;
     }
@@ -50,6 +47,9 @@ public class Debt {
     }
     public String getDebtId() {
         return debtId;
+    }
+    public DebtStatus getDebtStatus() {
+        return this.status;
     }
     /**
      * Method to change a debt status.

@@ -67,24 +67,23 @@ public class XmlSerializableUsers {
         UserData userData = new UserData();
         for (XmlAdaptedUser u : user) {
             User user = u.toModelType();
-            if (userData.getUsernameUserHashMap().containsKey(user.getUsername())) {
+            if (userData.hasUser(user.getUsername())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            userData.getUsernameUserHashMap().put(user.getUsername(), user);
+            userData.addUser(user);
         }
 
         for (XmlAdaptedFriendship f: friendship) {
             Friendship friendship = f.toModelType(userData.getUsernameUserHashMap());
-            if (!userData.getUsernameUserHashMap().containsKey(friendship.getMe().getUsername())) {
+            if (!userData.hasUser(friendship.getMe().getUsername())) {
                 throw new IllegalValueException(MESSAGE_NO_USER_FRIENDSHIP);
             }
-            if (!userData.getUsernameUserHashMap().containsKey(friendship.getFriendUser().getUsername())) {
+            if (!userData.hasUser(friendship.getFriendUser().getUsername())) {
                 throw new IllegalValueException(MESSAGE_NO_USER_FRIENDSHIP);
             }
 
-            userData.getUsernameUserHashMap().put(friendship.getMe().getUsername(),
-                    userData.getUsernameUserHashMap().get(friendship.getMe().getUsername()).addFriendship(friendship));
-
+            userData.addUser(friendship.getMe().getUsername(),
+                    userData.getUser(friendship.getMe().getUsername()).addFriendship(friendship));
         }
 
         for (XmlAdaptedDebt d: debts) {

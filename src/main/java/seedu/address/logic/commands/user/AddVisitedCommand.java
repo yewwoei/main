@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.restaurant;
+package seedu.address.logic.commands.user;
 
 import static java.util.Objects.requireNonNull;
 
@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.restaurant.Restaurant;
 
 /**
- * Adds a restaurant to visited list.
+ * Adds a user to visited list.
  */
 public class AddVisitedCommand extends Command {
     public static final String COMMAND_WORD = "addVisited";

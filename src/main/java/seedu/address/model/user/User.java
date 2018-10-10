@@ -252,20 +252,12 @@ public class User {
         return null;
     }
 
-<<<<<<< HEAD
-
-=======
->>>>>>> ffbf56b90dcd06d7a09b22dd5973684b606955ed
     /**
      * Method to add a debts to a user.
      * @param debt a debt to add.
      * @return the user who the debt added to.
      */
-<<<<<<< HEAD
-    public User addDebt( Debt debt) {
-=======
     public User addDebt(Debt debt) {
->>>>>>> ffbf56b90dcd06d7a09b22dd5973684b606955ed
         debts.add(debt);
         return this;
     }
@@ -275,15 +267,9 @@ public class User {
      * @param debtor the debtor of the adding debt
      * @param amount the amount of the adding debt
      */
-<<<<<<< HEAD
-    public void addDebt( User debtor, double amount){
-        if( !debtor.isSameUser(this) ){
-            Debt d = new Debt( this, debtor, amount);
-=======
     public void addDebt(User debtor, double amount) {
         if (!debtor.isSameUser(this)) {
             Debt d = new Debt(this, debtor, amount);
->>>>>>> ffbf56b90dcd06d7a09b22dd5973684b606955ed
             this.debts.add(d);
             debtor.debts.add(d);
         }
@@ -293,19 +279,11 @@ public class User {
      * Method for the creditor to clear a debt.
      * @param debtor the debtor of the clearing debt.
      * @param amount the amount of the clearing debt.
-<<<<<<< HEAD
-     * @param debtID the debtId of the clearing debt.
-     */
-    public void clearDebt(User debtor, double amount, String debtID){
-        Debt toFind = new Debt(this, debtor, amount, debtID, DebtStatus.ACCEPTED);
-        Debt changeTo = new Debt(this, debtor, amount, debtID, DebtStatus.CLEARED);
-=======
      * @param debtId the debtId of the clearing debt.
      */
     public void clearDebt(User debtor, double amount, String debtId) {
         Debt toFind = new Debt(this, debtor, amount, debtId, DebtStatus.ACCEPTED);
         Debt changeTo = new Debt(this, debtor, amount, debtId, DebtStatus.CLEARED);
->>>>>>> ffbf56b90dcd06d7a09b22dd5973684b606955ed
         int i = this.debts.indexOf(toFind);
         this.debts.set(i, changeTo);
         i = debtor.debts.indexOf(toFind);
@@ -317,19 +295,11 @@ public class User {
      * Method for debtor to accepted a received debt.
      * @param creditor the creditor of the accepting debt.
      * @param amount the amount of the accepting debt.
-<<<<<<< HEAD
-     * @param debtID the debtId of the accepting debt.
-     */
-    public void acceptedDebtRequest( User creditor, double amount, String debtID ){
-        Debt toFind = new Debt(creditor, this, amount, debtID, DebtStatus.PENDING);
-        Debt changeTo = new Debt(creditor, this, amount, debtID, DebtStatus.ACCEPTED);
-=======
      * @param debtId the debtId of the accepting debt.
      */
     public void acceptedDebtRequest(User creditor, double amount, String debtId) {
         Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
         Debt changeTo = new Debt(creditor, this, amount, debtId, DebtStatus.ACCEPTED);
->>>>>>> ffbf56b90dcd06d7a09b22dd5973684b606955ed
         int i = this.debts.indexOf(toFind);
         this.debts.set(i, changeTo);
         i = creditor.debts.indexOf(toFind);
@@ -340,17 +310,10 @@ public class User {
      * Method for debtor to reject and delete a received debt.
      * @param creditor the creditor of the deleting debt.
      * @param amount the amount of the deleting debt.
-<<<<<<< HEAD
-     * @param debtID the debtId of the deleting debt.
-     */
-    public void deleteDebtRequest( User creditor, double amount, String debtID ){
-        Debt toFind = new Debt( creditor, this, amount, debtID, DebtStatus.PENDING);
-=======
      * @param debtId the debtId of the deleting debt.
      */
     public void deleteDebtRequest(User creditor, double amount, String debtId) {
         Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
->>>>>>> ffbf56b90dcd06d7a09b22dd5973684b606955ed
         this.debts.remove(toFind);
         creditor.debts.remove(toFind);
     }
@@ -359,11 +322,7 @@ public class User {
      * Method to list all the debt record.
      * @return a String contain all the debt history of this user, include creditor, debtor, amount, debt ID and status.
      */
-<<<<<<< HEAD
-    public String listDebtHistory(){
-=======
     public String listDebtHistory() {
->>>>>>> ffbf56b90dcd06d7a09b22dd5973684b606955ed
         String toReturn = "";
         for (Debt d: this.debts) {
             toReturn += d.toString() + "\n";
@@ -373,16 +332,10 @@ public class User {
 
     /**
      * Method to list all the debtor.
-<<<<<<< HEAD
-     * @return a String of all debt which creditor is the user and have a accepted status, , include creditor, debtor, amount, debt ID and status.
-     */
-    public String listDebtor(){
-=======
      * @return a String of all debt which creditor is the user and have a accepted status,
      * include creditor, debtor, amount, debt ID and status.
      */
     public String listDebtor() {
->>>>>>> ffbf56b90dcd06d7a09b22dd5973684b606955ed
         String toReturn = "";
         for (Debt d: this.debts) {
             if (d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
@@ -394,16 +347,10 @@ public class User {
 
     /**
      * Method to list all the creditor.
-<<<<<<< HEAD
-     * @return a String of all debt which debtor is the user and have a accepted status, , include creditor, debtor, amount, debt ID and status.
-     */
-    public String listCreditor(){
-=======
      * @return a String of all debt which debtor is the user and have a accepted status,
      * include creditor, debtor, amount, debt ID and status.
      */
     public String listCreditor() {
->>>>>>> ffbf56b90dcd06d7a09b22dd5973684b606955ed
         String toReturn = "";
         for (Debt d: this.debts) {
             if (d.getDebtor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
@@ -415,16 +362,10 @@ public class User {
 
     /**
      * Method to list all received request.
-<<<<<<< HEAD
-     * @return a String of all debt which debtor is the user and have a pending status, , include creditor, debtor, amount, debt ID and status.
-     */
-    public String listDebtRequestReceived(){
-=======
      * @return a String of all debt which debtor is the user and have a pending status,
      * include creditor, debtor, amount, debt ID and status.
      */
     public String listDebtRequestReceived() {
->>>>>>> ffbf56b90dcd06d7a09b22dd5973684b606955ed
         String toReturn = "";
         for (Debt d: this.debts) {
             if (d.getDebtor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
@@ -436,16 +377,10 @@ public class User {
 
     /**
      * Method to list all sent request.
-<<<<<<< HEAD
-     * @return a String of all debt which creditor is the user and have a pending status, , include creditor, debtor, amount, debt ID and status.
-     */
-    public String listDebtRequestSent(){
-=======
      * @return a String of all debt which creditor is the user and have a pending status,
      * include creditor, debtor, amount, debt ID and status.
      */
     public String listDebtRequestSent() {
->>>>>>> ffbf56b90dcd06d7a09b22dd5973684b606955ed
         String toReturn = "";
         for (Debt d: this.debts) {
             if (d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)) {

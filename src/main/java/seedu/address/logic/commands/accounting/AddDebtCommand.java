@@ -45,10 +45,11 @@ public class AddDebtCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        requireNonNull(model);
-        model.addDebt(toAdd);
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.toString()));
+        //requireNonNull(model);
+        //model.addDebt(toAdd);
+        //model.commitAddressBook();
+        //return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.toString()));
+        return null;
     }
 
     @Override

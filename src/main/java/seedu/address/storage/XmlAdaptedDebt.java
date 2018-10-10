@@ -36,37 +36,18 @@ public class XmlAdaptedDebt {
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedDebt() {}
-<<<<<<< HEAD
 
     /**
      * Constructs an {@code XmlAdaptedDebt} with the given debt details.
      */
-    public XmlAdaptedDebt( String creditor, String debtor, String amount, String debtId, String status){
-=======
-    /**
-     * Constructs an {@code XmlAdaptedDebt} with the given debt details.
-     */
     public XmlAdaptedDebt(String creditor, String debtor, String amount, String debtId, String status) {
->>>>>>> ffbf56b90dcd06d7a09b22dd5973684b606955ed
         this.creditor = creditor;
         this.debtor = debtor;
         this.amount = amount;
         this.debtId = debtId;
         this.status = status;
     }
-<<<<<<< HEAD
 
-    /**
-     * Converts a given Debt into this class for JAXB use.
-     *
-     * @param source future changes to this will not affect the created XmlAdaptedDebt.
-     */
-    public XmlAdaptedDebt( Debt source ){
-        creditor = source.getCreditor().getUsername().toString();
-        debtor = source.getDebtor().getUsername().toString();
-        amount = String.valueOf(source.getAmount());
-        debtId = source.getDebtID();
-=======
     /**
      * Converts a given Debt into this class for JAXB use.
      * @param source future changes to this will not affect the created XmlAdaptedDebt.
@@ -76,7 +57,6 @@ public class XmlAdaptedDebt {
         debtor = source.getDebtor().getUsername().toString();
         amount = String.valueOf(source.getAmount());
         debtId = source.getDebtId();
->>>>>>> ffbf56b90dcd06d7a09b22dd5973684b606955ed
         status = source.getDebtStatus().toString();
     }
 
@@ -104,13 +84,12 @@ public class XmlAdaptedDebt {
                     Debt.class.getSimpleName()));
         }
 
-<<<<<<< HEAD
-        if( amount == null || !(Double.valueOf(amount) > 0)){
+        if( amount == null || !(Double.valueOf(amount) > 0)) {
             throw new IllegalValueException("Not a valid input amount");
-=======
+        }
+
         if (amount == null || !(Double.valueOf(amount) > 0)) {
             throw new IllegalValueException(String.format(INVALID_INPUT_MESSAGE_FORMAT));
->>>>>>> ffbf56b90dcd06d7a09b22dd5973684b606955ed
         }
 
         return new Debt(usernameUserHashmap.get(new Username(creditor)),
