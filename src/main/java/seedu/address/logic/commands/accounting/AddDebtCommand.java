@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.accounting;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -17,18 +19,25 @@ public class AddDebtCommand extends Command {
 
     // TODO
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Creates a request to debtor and add to record. ";
+            + ": Creates a request to debtor and add to record. "
+            + "Parameters: "
+            + PREFIX_NAME + "DEBTOR"
+            + PREFIX_AMOUNT + "AMOUNT"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "Kate Ng"
+            + PREFIX_AMOUNT + "6.5";
 
     // TODO
-    public static final String MESSAGE_SUCCESS = " Debt Request sent";
-
-    // TODO
-    public static final String MESSAGE_DUPLICATE_REVIEW = null;
+    public static final String MESSAGE_SUCCESS = "Debt Request sent:: %1$s";
 
     // TODO
     private final Debt toAdd;
 
-
+    /**
+     * Creates an AddDebtCommand to add the specified {@code Debt}model.addRestaurant(toAdd);
+        model.commitAddressBook();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+     */
     public AddDebtCommand(Debt toAdd) {
         requireNonNull(toAdd);
         this.toAdd = toAdd;
@@ -36,10 +45,10 @@ public class AddDebtCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        // TODO
         requireNonNull(model);
-
-        return null;
+        model.addDebt(toAdd);
+        model.commitAddressBook();
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd.toString()));
     }
 
     @Override
