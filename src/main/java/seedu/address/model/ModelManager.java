@@ -194,8 +194,34 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addFriend(Username friendUsername) {
         User friendUser = userData.getUser(friendUsername);
-        Friendship friendship = new Friendship(friendUser, currentUser, currentUser, FriendshipStatus.PENDING);
-        currentUser.addFriend(friendship);
+        currentUser.addFriend(friendUser);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void acceptFriend(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        currentUser.acceptFriendRequest(friendUser);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean isSameAsCurrentUser(Username username) {
+        User toCheck = userData.getUser(username);
+        return toCheck.equals(currentUser);
+    }
+
+    @Override
+    public void deleteFriend(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        currentUser.deleteFriend(friendUser);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void deleteFriendRequest(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        currentUser.deleteFriendRequest(friendUser);
         indicateUserDataChanged();
     }
 

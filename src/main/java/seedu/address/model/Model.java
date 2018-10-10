@@ -103,6 +103,14 @@ public interface Model {
 
     void addFriend(Username friendUsername);
 
+    void acceptFriend(Username friendUsername);
+
+    boolean isSameAsCurrentUser(Username username);
+
+    void deleteFriend(Username friendUsername);
+
+    void deleteFriendRequest(Username friendUsername);
+
     //=========== Undo/Redo/Commit ===============================================================================
 
     /**
