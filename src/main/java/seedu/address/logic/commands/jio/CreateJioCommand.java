@@ -2,9 +2,10 @@ package seedu.address.logic.commands.jio;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
@@ -22,13 +23,15 @@ public class CreateJioCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a new jio and adds a jio to the jiobook."
             + "Parameters: "
             + PREFIX_NAME + "NAME "
+            + PREFIX_WEEK + "WEEK "
+            + PREFIX_DAY + "DAY "
             + PREFIX_TIME + "TIME "
-            + PREFIX_DATE + "DATE "
-            + PREFIX_ADDRESS + "PLACE "
+            + PREFIX_ADDRESS + "ADDRESS "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_NAME + "MALA "
+            + PREFIX_WEEK + "7 "
+            + PREFIX_DAY + "wed "
             + PREFIX_TIME + "1300 "
-            + PREFIX_DATE + "14-11-18 "
             + PREFIX_ADDRESS + "Fine Food ";
 
     public static final String MESSAGE_SUCCESS = "New jio added: %1$s";

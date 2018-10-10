@@ -4,7 +4,7 @@ import java.util.Objects;
 
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Name;
-import seedu.address.model.timetable.Time;
+import seedu.address.model.timetable.Date;
 
 
 /**
@@ -13,34 +13,28 @@ import seedu.address.model.timetable.Time;
  */
 public class Jio {
     private Name name;
-    private Time time;
     private Date date;
     private Address location;
     //private UniqueUserList<User> people;
 
-    public Jio(Name name, Time time, Date date, Address location) {
+    public Jio(Name name, Date date, Address location) {
         this.name = name;
-        this.time = time;
         this.date = date;
         this.location = location;
         //this.people = new UniqueUserList();
         //this.people.add(creator);
     }
 
-    public String getName() {
-        return name.toString();
+    public Name getName() {
+        return name;
     }
 
-    public String getTime() {
-        return time.toString();
+    public Date getDate() {
+        return date;
     }
 
-    public String getDate() {
-        return date.toString();
-    }
-
-    public String getLocation() {
-        return location.toString();
+    public Address getLocation() {
+        return location;
     }
 
     /*
@@ -68,15 +62,13 @@ public class Jio {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, time, date, location);
+        return Objects.hash(name, date, location);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append(getName())
-                .append(" Time: ")
-                .append(getTime())
                 .append(" Date: ")
                 .append(getDate())
                 .append(" Location: ")
