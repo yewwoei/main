@@ -19,8 +19,10 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RedoCommand;
 import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
+import seedu.address.logic.commands.jio.CreateJioCommand;
 import seedu.address.logic.commands.user.SignUpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.jio.CreateJioCommandParser;
 
 /**
  * Parses user input.
@@ -93,6 +95,8 @@ public class AddressBookParser {
         // Friend Commands
 
         // Jio Commands
+        case CreateJioCommand.COMMAND_WORD:
+            return new CreateJioCommandParser().parse(arguments);
 
         // Group Commands
 

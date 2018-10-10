@@ -13,4 +13,7 @@ public class CliSyntax {
     public static final Prefix PREFIX_TAG = new Prefix("t/");
     public static final Prefix PREFIX_USERNAME = new Prefix("u/");
     public static final Prefix PREFIX_PASSWORD = new Prefix("pwd/");
+    public static final Prefix PREFIX_WEEK = new Prefix("w/");
+    public static final Prefix PREFIX_DAY = new Prefix("d/");
+    public static final Prefix PREFIX_TIME = new Prefix("h/");
 }

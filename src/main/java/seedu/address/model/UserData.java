@@ -33,6 +33,14 @@ public class UserData {
     public void addUser(User user) {
         usernameUserHashMap.put(user.getUsername(), user);
     }
-    
+
+    public void addUser(Username username, User user) {
+        usernameUserHashMap.put(username, user);
+    }
+
+    public User getUser(Username username) {
+        return usernameUserHashMap.get(username);
+    }
+
     public void removeUser(User user) { usernameUserHashMap.remove(user.getUsername()); }
 }

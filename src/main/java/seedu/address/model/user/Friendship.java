@@ -9,20 +9,23 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 public class Friendship {
     private FriendshipStatus friendshipStatus;
     private final User friendUser;
+    private final User me;
     private final User initiatedBy;
 
-    public Friendship(User friendUser, User initiatedBy) {
+    public Friendship(User friendUser, User initiatedBy, User me) {
         requireAllNonNull(friendUser, initiatedBy);
         this.friendUser = friendUser;
         this.friendshipStatus = FriendshipStatus.PENDING;
+        this.me = me;
         this.initiatedBy = initiatedBy;
     }
 
-    public Friendship(User friendUser, User initiatedBy, FriendshipStatus friendshipStatus) {
+    public Friendship(User friendUser, User initiatedBy, User me, FriendshipStatus friendshipStatus) {
         requireAllNonNull(friendUser, initiatedBy, friendshipStatus);
         this.friendUser = friendUser;
         this.friendshipStatus = friendshipStatus;
         this.initiatedBy = initiatedBy;
+        this.me = me;
     }
 
     public void changeFriendshipStatus() {
@@ -31,6 +34,10 @@ public class Friendship {
 
     public FriendshipStatus getFrienshipStatus() {
         return this.friendshipStatus;
+    }
+
+    public User getMe() {
+        return this.me;
     }
 
     public User getFriendUser() {
