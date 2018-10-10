@@ -4,11 +4,17 @@ import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 /**
  * The API of the Model component.
  */
 public interface Model {
+
+    //=========== Model Manager Miscellaneous Methods =+==========================================================
+
     /** {@code Predicate} that always evaluate to true */
     Predicate<Restaurant> PREDICATE_SHOW_ALL_RESTAURANTS = unused -> true;
 
@@ -18,6 +24,10 @@ public interface Model {
     /** Returns the AddressBook */
     ReadOnlyAddressBook getAddressBook();
 
+    /** Returns true if a user is currently logged into the Makan Book */
+    boolean isCurrentlyLoggedIn();
+
+    //=========== Model Manager Restaurants Methods =+============================================================
     /**
      * Returns true if a restaurant with the same identity as {@code restaurant} exists in the address book.
      */
@@ -43,6 +53,8 @@ public interface Model {
      */
     void updateRestaurant(Restaurant target, Restaurant editedRestaurant);
 
+    //=========== Filtered Restaurant List Accessors =============================================================
+
     /** Returns an unmodifiable view of the filtered restaurant list */
     ObservableList<Restaurant> getFilteredRestaurantList();
 
@@ -51,6 +63,41 @@ public interface Model {
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredRestaurantList(Predicate<Restaurant> predicate);
+
+    //=========== Model Manager User Methods =+===================================================================
+
+    /**
+     * Returns true if a user with the same identity as {@code user} exists in the User Data.
+     */
+    boolean hasUser(Username username);
+
+    /**
+     * Checks that the {@code password} matches that
+     * must not be the same as another existing user in the UserData.
+     */
+    boolean verifyLogin(Username username, Password password);
+
+    /**
+     * Adds the given user.
+     * {@code user} must not already exist in the User Data.
+     */
+    void addUser(User user);
+
+    /**
+     * Allows the {@code user} to be logged in immediately after they sign up.
+     * There should not be anyone currently logged in before.
+     */
+    void loginUser(User user);
+
+    /**
+     * Allows a User to log into the account with {@code username}.
+     * There should not be anyone currently logged in before.
+     */
+    void loginUser(Username username);
+
+    void logoutUser();
+
+    //=========== Undo/Redo/Commit ===============================================================================
 
     /**
      * Returns true if the model has previous address book states to restore.

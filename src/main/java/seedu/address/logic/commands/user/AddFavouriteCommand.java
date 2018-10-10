@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.restaurant;
+package seedu.address.logic.commands.user;
 
 import static java.util.Objects.requireNonNull;
 
@@ -10,7 +10,7 @@ import seedu.address.model.Model;
 import seedu.address.model.restaurant.Restaurant;
 
 /**
- * Adds a favourite restaurant to the user's profile.
+ * Adds a favourite user to the user's profile.
  */
 public class AddFavouriteCommand extends Command {
     public static final String COMMAND_WORD = "addFavourite";
