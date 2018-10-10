@@ -21,7 +21,7 @@ public class AddFriendCommand extends Command {
             + "Parameters: "
             + PREFIX_NAME + "USERNAME\n"
             + "Example: " + COMMAND_WORD + " "
-            +PREFIX_NAME + "Meena567";
+            + PREFIX_NAME + "Meena567";
 
     // TODO
     public static final String MESSAGE_SUCCESS = "Friend request sent to: %1$s";
