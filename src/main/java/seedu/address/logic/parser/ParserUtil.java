@@ -7,6 +7,9 @@ import seedu.address.model.timetable.Week;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Contains utility methods used for parsing strings in the various *Parser classes.
+ */
 public class ParserUtil {
     /**
      * Parses a {@code String week} into an {@code Week}.

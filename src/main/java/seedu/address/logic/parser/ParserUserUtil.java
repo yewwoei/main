@@ -12,7 +12,7 @@ import seedu.address.model.user.Password;
 import seedu.address.model.user.Username;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings related to Users in the various *Parser classes.
  */
 public class ParserUserUtil {
 

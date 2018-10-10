@@ -25,6 +25,9 @@ public class UserData {
         return usernameUserHashMap.containsKey(username);
     }
 
+    /**
+     * Returns true if the {@code Password} matches that of the user with {@code Username}.
+     */
     public boolean verifyLogin(Username username, Password password) {
         User userToCheck = usernameUserHashMap.get(username);
         return userToCheck.getPassword().equals(password);
@@ -42,5 +45,7 @@ public class UserData {
         return usernameUserHashMap.get(username);
     }
 
-    public void removeUser(User user) { usernameUserHashMap.remove(user.getUsername()); }
+    public void removeUser(User user) {
+        usernameUserHashMap.remove(user.getUsername());
+    }
 }

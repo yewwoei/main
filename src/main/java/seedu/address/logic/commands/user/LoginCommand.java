@@ -1,5 +1,9 @@
 package seedu.address.logic.commands.user;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_PASSWORD;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -7,9 +11,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Username;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.*;
 
 /**
  * Signs a user up into the address book.
@@ -28,8 +29,8 @@ public class LoginCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Successfully Logged In";
     public static final String MESSAGE_ALREADY_LOGGEDIN = "User is already logged in";
-    public static final String MESSAGE_NO_SUCH_USER = "No such user found. Please sign up to ues the" +
-            " features of Makan Book";
+    public static final String MESSAGE_NO_SUCH_USER = "No such user found. Please sign up to ues the"
+            + " features of Makan Book";
     public static final String MESSAGE_INCORRECT_PASSWORD = "This password you entered is Incorrect";
 
     private final Username toLogin;

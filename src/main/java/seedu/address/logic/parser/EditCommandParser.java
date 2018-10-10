@@ -43,13 +43,16 @@ public class EditCommandParser implements Parser<EditCommand> {
 
         EditRestaurantDescriptor editRestaurantDescriptor = new EditRestaurantDescriptor();
         if (argMultimap.getValue(PREFIX_NAME).isPresent()) {
-            editRestaurantDescriptor.setName(ParserRestaurantUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
+            editRestaurantDescriptor.setName(
+                    ParserRestaurantUtil.parseName(argMultimap.getValue(PREFIX_NAME).get()));
         }
         if (argMultimap.getValue(PREFIX_PHONE).isPresent()) {
-            editRestaurantDescriptor.setPhone(ParserRestaurantUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
+            editRestaurantDescriptor.setPhone(
+                    ParserRestaurantUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get()));
         }
         if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
-            editRestaurantDescriptor.setAddress(ParserRestaurantUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
+            editRestaurantDescriptor.setAddress(
+                    ParserRestaurantUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get()));
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editRestaurantDescriptor::setTags);
 

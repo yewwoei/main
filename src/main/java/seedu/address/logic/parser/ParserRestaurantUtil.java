@@ -15,7 +15,7 @@ import seedu.address.model.restaurant.Phone;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods used for parsing strings in the various *Parser classes.
+ * Contains utility methods used for parsing strings related to restaurants in the various *Parser classes.
  */
 public class ParserRestaurantUtil {
 
