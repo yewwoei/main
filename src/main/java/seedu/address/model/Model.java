@@ -97,6 +97,12 @@ public interface Model {
 
     void logoutUser();
 
+    boolean hasUsernameFriendRequest(Username friendUsername);
+
+    boolean hasUsernameFriend(Username friendUsername);
+
+    void addFriend(Username friendUsername);
+
     //=========== Undo/Redo/Commit ===============================================================================
 
     /**

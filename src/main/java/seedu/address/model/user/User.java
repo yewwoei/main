@@ -135,11 +135,12 @@ public class User {
         // checks to make sure that friend is not oneself
         if (!user.isSameUser(this)) {
             Friendship friendship = new Friendship(this, this, this);
-            // checks that friendship is not already in friendRequests
-            if (!user.friendRequests.contains(friendship) && !user.friends.contains(friendship)) {
-                user.friendRequests.add(friendship);
-            }
+            user.friendRequests.add(friendship);
         }
+    }
+
+    public void addFriend(Friendship friendship) {
+        this.friendRequests.add(friendship);
     }
 
     /**

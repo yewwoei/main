@@ -75,15 +75,15 @@ public class XmlSerializableUsers {
 
         for (XmlAdaptedFriendship f: friendship) {
             Friendship friendship = f.toModelType(userData.getUsernameUserHashMap());
-            if (!userData.hasUser(friendship.getMe().getUsername())) {
+            if (!userData.hasUser(friendship.getMyUsername())) {
                 throw new IllegalValueException(MESSAGE_NO_USER_FRIENDSHIP);
             }
-            if (!userData.hasUser(friendship.getFriendUser().getUsername())) {
+            if (!userData.hasUser(friendship.getFriendUsername())) {
                 throw new IllegalValueException(MESSAGE_NO_USER_FRIENDSHIP);
             }
 
-            userData.addUser(friendship.getMe().getUsername(),
-                    userData.getUser(friendship.getMe().getUsername()).addFriendship(friendship));
+            userData.addUser(friendship.getMyUsername(),
+                    userData.getUser(friendship.getMyUsername()).addFriendship(friendship));
         }
 
         for (XmlAdaptedDebt d: debts) {

@@ -14,6 +14,8 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.user.Friendship;
+import seedu.address.model.user.FriendshipStatus;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -173,6 +175,28 @@ public class ModelManager extends ComponentManager implements Model {
     public void logoutUser() {
         this.currentUser = null;
         this.isLoggedIn = false;
+    }
+
+    @Override
+    public boolean hasUsernameFriendRequest(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        return currentUser.getFriendRequests()
+                .contains(new Friendship(friendUser, currentUser, currentUser));
+    }
+
+    @Override
+    public boolean hasUsernameFriend(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        return currentUser.getFriends()
+                .contains(new Friendship(friendUser, currentUser, currentUser));
+    }
+
+    @Override
+    public void addFriend(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        Friendship friendship = new Friendship(friendUser, currentUser, currentUser, FriendshipStatus.PENDING);
+        currentUser.addFriend(friendship);
+        indicateUserDataChanged();
     }
 
 
