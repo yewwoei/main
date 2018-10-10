@@ -159,7 +159,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.currentUser = user;
         this.isLoggedIn = true;
     }
-    
+
     @Override
     public void loginUser(Username username) {
         requireAllNonNull(username);

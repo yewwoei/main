@@ -20,7 +20,7 @@ public class UserData {
     public HashMap<Username, User> getUsernameUserHashMap() {
         return usernameUserHashMap;
     }
-    
+
     public boolean hasUser(Username username) {
         return usernameUserHashMap.containsKey(username);
     }
@@ -29,7 +29,7 @@ public class UserData {
         User userToCheck = usernameUserHashMap.get(username);
         return userToCheck.getPassword().equals(password);
     }
-    
+
     public void addUser(User user) {
         usernameUserHashMap.put(user.getUsername(), user);
     }

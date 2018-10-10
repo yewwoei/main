@@ -14,7 +14,7 @@ import seedu.address.model.user.Username;
 public interface Model {
 
     //=========== Model Manager Miscellaneous Methods =+==========================================================
-    
+
     /** {@code Predicate} that always evaluate to true */
     Predicate<Restaurant> PREDICATE_SHOW_ALL_RESTAURANTS = unused -> true;
 

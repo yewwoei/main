@@ -60,7 +60,7 @@ public class LoginCommand extends Command {
         if (!model.verifyLogin(toLogin, password)) {
             throw new CommandException(MESSAGE_INCORRECT_PASSWORD);
         }
-        
+
         model.loginUser(toLogin);
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }

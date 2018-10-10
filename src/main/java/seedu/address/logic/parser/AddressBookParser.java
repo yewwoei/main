@@ -87,7 +87,7 @@ public class AddressBookParser {
         case RedoCommand.COMMAND_WORD:
             return new RedoCommand();
 
-        case SignUpCommand.COMMAND_WORD: 
+        case SignUpCommand.COMMAND_WORD:
             return new SignUpCommandParser().parse(arguments);
 
         // Restaurant Commands
