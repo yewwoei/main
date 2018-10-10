@@ -2,9 +2,10 @@ package seedu.address.logic.parser.jio;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import java.util.stream.Stream;
 
@@ -14,11 +15,13 @@ import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.jio.Date;
 import seedu.address.model.jio.Jio;
-import seedu.address.model.jio.Time;
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Name;
+import seedu.address.model.timetable.Date;
+import seedu.address.model.timetable.Day;
+import seedu.address.model.timetable.Time;
+import seedu.address.model.timetable.Week;
 
 /**
  * Parses input arguments and creates a new CreateJioCommand object
@@ -31,21 +34,21 @@ public class CreateJioCommandParser {
      */
     public CreateJioCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_TIME, PREFIX_DATE, PREFIX_ADDRESS);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_WEEK, PREFIX_DAY, PREFIX_TIME, PREFIX_ADDRESS);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_TIME, PREFIX_DATE, PREFIX_ADDRESS)
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_WEEK, PREFIX_DAY, PREFIX_TIME, PREFIX_ADDRESS)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateJioCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        //Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
-        //Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
+        Week week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
+        Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
+        Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
         Address location = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
-        Time time = new Time("1200");
-        Date date = new Date("01-01-18");
+        Date date = new Date(week, day, time);
 
-        Jio jio = new Jio(name, time, date, location);
+        Jio jio = new Jio(name, date, location);
 
         return new CreateJioCommand(jio);
     }
