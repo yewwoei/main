@@ -7,9 +7,13 @@ import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.accounting.Debt;
+import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
+/**
+ * JAXB-friendly version of Debts
+ */
 public class XmlAdaptedDebt {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Debt's %s field is missing!";
@@ -21,28 +25,44 @@ public class XmlAdaptedDebt {
     @XmlElement(required = true)
     private String amount;
     @XmlElement(required = true)
-    private String debtID;
+    private String debtId;
     @XmlElement(required = true)
     private String status;
 
+    /**
+     * Constructs an XmlAdaptedDebt.
+     * This is the no-arg constructor that is required by JAXB.
+     */
     public XmlAdaptedDebt() {}
 
-
-    public XmlAdaptedDebt( String creditor, String debtor, String amount, String debtID, String status){
+    /**
+     * Constructs an {@code XmlAdaptedDebt} with the given debt details.
+     */
+    public XmlAdaptedDebt( String creditor, String debtor, String amount, String debtId, String status){
         this.creditor = creditor;
         this.debtor = debtor;
         this.amount = amount;
-        this.debtID = debtID;
+        this.debtId = debtId;
         this.status = status;
     }
+
+    /**
+     * Converts a given Debt into this class for JAXB use.
+     *
+     * @param source future changes to this will not affect the created XmlAdaptedDebt.
+     */
     public XmlAdaptedDebt( Debt source ){
         creditor = source.getCreditor().getUsername().toString();
         debtor = source.getDebtor().getUsername().toString();
         amount = String.valueOf(source.getAmount());
-        debtID = source.getDebtID();
+        debtId = source.getDebtID();
         status = source.getDebtStatus().toString();
     }
 
+    /**
+     * Converts this jaxb-friendly adapted debt object into the model's Debt object.
+     * @throws IllegalValueException if there were any data constraints violated in the adapted debt
+     */
     public Debt toModelType (HashMap<Username, User> usernameUserHashmap) throws IllegalValueException {
         if (creditor == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
@@ -62,14 +82,15 @@ public class XmlAdaptedDebt {
         }
 
         if( amount == null || !(Double.valueOf(amount) > 0)){
-            throw new IllegalValueException("Not a vali input amount");
+            throw new IllegalValueException("Not a valid input amount");
         }
 
         return new Debt( usernameUserHashmap.get(new Username(creditor)),
                 usernameUserHashmap.get(new Username(debtor)),
-                Double.valueOf(amount));
+                Double.valueOf(amount), debtId, DebtStatus.valueOf(status));
     }
 
+    @Override
     public boolean equals(Object other) {
         if (other == this) {
             return true;
@@ -83,6 +104,6 @@ public class XmlAdaptedDebt {
         return otherDebt != null
                 && Objects.equals(creditor, otherDebt.creditor)
                 && Objects.equals(debtor, otherDebt.debtor)
-                && Objects.equals(debtID, otherDebt.debtID);
+                && Objects.equals(debtId, otherDebt.debtId);
     }
 }

@@ -242,13 +242,21 @@ public class User {
     }
 
 
-
-
+    /**
+     * Method to add a debts to a user.
+     * @param debt a debt to add.
+     * @return the user who the debt added to.
+     */
     public User addDebt( Debt debt) {
         debts.add(debt);
         return this;
     }
 
+    /**
+     * Method for the credotir to create and add a debt.
+     * @param debtor the debtor of the adding debt
+     * @param amount the amount of the adding debt
+     */
     public void addDebt( User debtor, double amount){
         if( !debtor.isSameUser(this) ){
             Debt d = new Debt( this, debtor, amount);
@@ -257,6 +265,12 @@ public class User {
         }
     }
 
+    /**
+     * Method for the creditor to clear a debt.
+     * @param debtor the debtor of the clearing debt.
+     * @param amount the amount of the clearing debt.
+     * @param debtID the debtId of the clearing debt.
+     */
     public void clearDebt(User debtor, double amount, String debtID){
         Debt toFind = new Debt(this, debtor, amount, debtID, DebtStatus.ACCEPTED);
         Debt changeTo = new Debt(this, debtor, amount, debtID, DebtStatus.CLEARED);
@@ -267,6 +281,12 @@ public class User {
 
     }
 
+    /**
+     * Method for debtor to accepted a received debt.
+     * @param creditor the creditor of the accepting debt.
+     * @param amount the amount of the accepting debt.
+     * @param debtID the debtId of the accepting debt.
+     */
     public void acceptedDebtRequest( User creditor, double amount, String debtID ){
         Debt toFind = new Debt(creditor, this, amount, debtID, DebtStatus.PENDING);
         Debt changeTo = new Debt(creditor, this, amount, debtID, DebtStatus.ACCEPTED);
@@ -276,12 +296,22 @@ public class User {
         creditor.debts.set(i, changeTo);
     }
 
+    /**
+     * Method for debtor to reject and delete a received debt.
+     * @param creditor the creditor of the deleting debt.
+     * @param amount the amount of the deleting debt.
+     * @param debtID the debtId of the deleting debt.
+     */
     public void deleteDebtRequest( User creditor, double amount, String debtID ){
         Debt toFind = new Debt( creditor, this, amount, debtID, DebtStatus.PENDING);
         this.debts.remove(toFind);
         creditor.debts.remove(toFind);
     }
 
+    /**
+     * Method to list all the debt record.
+     * @return a String contain all the debt history of this user, include creditor, debtor, amount, debt ID and status.
+     */
     public String listDebtHistory(){
         String toReturn = "";
         for( Debt d: this.debts ){
@@ -290,6 +320,10 @@ public class User {
         return toReturn;
     }
 
+    /**
+     * Method to list all the debtor.
+     * @return a String of all debt which creditor is the user and have a accepted status, , include creditor, debtor, amount, debt ID and status.
+     */
     public String listDebtor(){
         String toReturn = "";
         for( Debt d: this.debts ){
@@ -300,6 +334,10 @@ public class User {
         return toReturn;
     }
 
+    /**
+     * Method to list all the creditor.
+     * @return a String of all debt which debtor is the user and have a accepted status, , include creditor, debtor, amount, debt ID and status.
+     */
     public String listCreditor(){
         String toReturn = "";
         for( Debt d: this.debts ){
@@ -310,6 +348,10 @@ public class User {
         return toReturn;
     }
 
+    /**
+     * Method to list all received request.
+     * @return a String of all debt which debtor is the user and have a pending status, , include creditor, debtor, amount, debt ID and status.
+     */
     public String listDebtRequestReceived(){
         String toReturn = "";
         for( Debt d: this.debts ){
@@ -320,6 +362,10 @@ public class User {
         return toReturn;
     }
 
+    /**
+     * Method to list all sent request.
+     * @return a String of all debt which creditor is the user and have a pending status, , include creditor, debtor, amount, debt ID and status.
+     */
     public String listDebtRequestSent(){
         String toReturn = "";
         for( Debt d: this.debts ){

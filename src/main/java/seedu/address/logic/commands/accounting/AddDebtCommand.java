@@ -17,7 +17,7 @@ public class AddDebtCommand extends Command {
 
     // TODO
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Creates a request to debtor and add to record. " ;
+            + ": Creates a request to debtor and add to record. ";
 
     // TODO
     public static final String MESSAGE_SUCCESS = " Debt Request sent";
