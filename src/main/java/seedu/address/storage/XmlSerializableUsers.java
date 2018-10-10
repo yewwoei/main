@@ -47,16 +47,13 @@ public class XmlSerializableUsers {
      */
     public UserData toModelType() throws IllegalValueException {
         UserData userData = new UserData();
-        HashMap<Username, User> usernameUserHashMap = new HashMap<>();
         for (XmlAdaptedUser u : user) {
             User user = u.toModelType();
-            if (usernameUserHashMap.containsKey(user.getUsername())) {
+            if (userData.hasUser(user.getUsername())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_PERSON);
             }
-            usernameUserHashMap.put(user.getUsername(), user);
+            userData.addUser(user);
         }
-
-        userData.setHashMap(usernameUserHashMap);
         return userData;
     }
 

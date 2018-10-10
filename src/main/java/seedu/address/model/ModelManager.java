@@ -12,7 +12,11 @@ import javafx.collections.transformation.FilteredList;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 /**
  * Represents the in-memory model of the address book data.
@@ -24,6 +28,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final FilteredList<Restaurant> filteredRestaurants;
     private UserData userData;
     private boolean isLoggedIn = false;
+    private User currentUser = null;
 
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
@@ -54,6 +59,12 @@ public class ModelManager extends ComponentManager implements Model {
         this(new AddressBook(), new UserPrefs());
     }
 
+    //=========== Model Manager Miscellaneous Methods =+==========================================================
+
+    public boolean isCurrentlyLoggedIn() {
+        return this.isLoggedIn;
+    }
+
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
         versionedAddressBook.resetData(newData);
@@ -69,6 +80,13 @@ public class ModelManager extends ComponentManager implements Model {
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
     }
+
+    /** Raises an event to indicate the model has changed */
+    private void indicateUserDataChanged() {
+        raise(new UserDataChangedEvent(userData));
+    }
+
+    //=========== Model Manager Restaurants Methods =+============================================================
 
     @Override
     public boolean hasRestaurant(Restaurant restaurant) {
@@ -114,7 +132,51 @@ public class ModelManager extends ComponentManager implements Model {
         filteredRestaurants.setPredicate(predicate);
     }
 
-    //=========== Undo/Redo =================================================================================
+    //=========== Model Manager User Methods =+===================================================================
+
+    @Override
+    public boolean hasUser(Username username) {
+        requireNonNull(username);
+        return userData.hasUser(username);
+    }
+
+    @Override
+    public boolean verifyLogin(Username username, Password password) {
+        requireAllNonNull(username);
+        requireAllNonNull(password);
+        return userData.verifyLogin(username, password);
+    }
+
+    @Override
+    public void addUser(User user) {
+        userData.addUser(user);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void loginUser(User user) {
+        requireAllNonNull(user);
+        this.currentUser = user;
+        this.isLoggedIn = true;
+    }
+    
+    @Override
+    public void loginUser(Username username) {
+        requireAllNonNull(username);
+        User userToLogin = userData.getUsernameUserHashMap().get(username);
+        requireAllNonNull(userToLogin);
+        this.currentUser = userToLogin;
+        this.isLoggedIn = true;
+    }
+
+    @Override
+    public void logoutUser() {
+        this.currentUser = null;
+        this.isLoggedIn = false;
+    }
+
+
+    //=========== Undo/Redo/Commit ===============================================================================
 
     @Override
     public boolean canUndoAddressBook() {
