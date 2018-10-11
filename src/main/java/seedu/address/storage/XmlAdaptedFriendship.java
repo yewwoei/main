@@ -6,8 +6,8 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.user.Friendship;
-import seedu.address.model.user.FriendshipStatus;
+import seedu.address.model.group.Friendship;
+import seedu.address.model.group.FriendshipStatus;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 

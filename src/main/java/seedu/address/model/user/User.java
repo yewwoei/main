@@ -3,11 +3,15 @@ package seedu.address.model.user;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Friendship;
+import seedu.address.model.group.FriendshipStatus;
+import seedu.address.model.group.Group;
 
 /**
  * Represents a User in the address book.
@@ -24,6 +28,8 @@ public class User {
     // Data fields
     private final List<Friendship> friendRequests = new ArrayList<>();
     private final List<Friendship> friends = new ArrayList<>();
+    private final List<Group> groupRequests = new ArrayList<>();
+    private final List<Group> groups = new ArrayList<>();
     private final List<Debt> debts = new ArrayList<>();
 
     /**
@@ -64,6 +70,14 @@ public class User {
 
     public List<Friendship> getFriends() {
         return friends;
+    }
+
+    public List<Group> getGroupRequests() {
+        return groupRequests;
+    }
+
+    public List<Group> getGroups() {
+        return groups;
     }
 
     public List<Debt> getDebts() {
@@ -134,10 +148,6 @@ public class User {
     public void addFriend(User user) {
         Friendship friendship = new Friendship(this, this, this);
         user.friendRequests.add(friendship);
-    }
-
-    public void addFriend(Friendship friendship) {
-        this.friendRequests.add(friendship);
     }
 
     /**
@@ -244,6 +254,35 @@ public class User {
         }
         return null;
     }
+
+    public void createGroup(String groupName) {
+        Group group = new Group(groupName, this);
+        this.groups.add(group);
+    }
+
+    public void createGroup(String groupName, User... users) {
+        Group group = new Group(groupName, this, users);
+        this.groups.add(group);
+        List<User> listUsers = Arrays.asList(users);
+        listUsers.forEach(user -> user.addGroupRequest(group));
+    }
+
+    public void addGroupRequest(Group group) {
+        this.groupRequests.add(group);
+    }
+
+    public void acceptGroupRequest(Group group) {
+        this.groupRequests.remove(group);
+        this.groups.add(group);
+        group.changeMemberStatus(this);
+    }
+
+    public void deleteGroupRequest(Group group) {
+        this.groupRequests.remove(group);
+        group.removePendingUser(this);
+    }
+
+    
 
     /**
      * Method to add a debts to a user.
