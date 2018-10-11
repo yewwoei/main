@@ -72,7 +72,7 @@ public class UserData {
         jios.add(jio);
     }
     
-    public void removeJio(Name jioName) {
+    public void removeJioOfName(Name jioName) {
         jios.removeIf(jio -> jio.getName().equals(jioName));
     }
 
