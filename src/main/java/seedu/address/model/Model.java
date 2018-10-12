@@ -15,19 +15,28 @@ public interface Model {
 
     //=========== Model Manager Miscellaneous Methods =+==========================================================
 
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Restaurant> PREDICATE_SHOW_ALL_RESTAURANTS = unused -> true;
 
-    /** Clears existing backing model and replaces with the provided new data. */
+    /**
+     * Clears existing backing model and replaces with the provided new data.
+     */
     void resetData(ReadOnlyAddressBook newData);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns true if a user is currently logged into the Makan Book */
+    /**
+     * Returns true if a user is currently logged into the Makan Book
+     */
     boolean isCurrentlyLoggedIn();
 
     //=========== Model Manager Restaurants Methods =+============================================================
+
     /**
      * Returns true if a restaurant with the same identity as {@code restaurant} exists in the address book.
      */
@@ -55,11 +64,14 @@ public interface Model {
 
     //=========== Filtered Restaurant List Accessors =============================================================
 
-    /** Returns an unmodifiable view of the filtered restaurant list */
+    /**
+     * Returns an unmodifiable view of the filtered restaurant list
+     */
     ObservableList<Restaurant> getFilteredRestaurantList();
 
     /**
      * Updates the filter of the filtered restaurant list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredRestaurantList(Predicate<Restaurant> predicate);
@@ -123,4 +135,28 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    //========== Model Manager Debt methods ======================================================================
+
+    boolean hasDebtId(String debtId);
+
+    void addDebt(Username debtorUsername, double amount);
+
+    void clearDebt(Username debtorUsername, double amount, String debtId);
+
+    void acceptedDebtRequest(Username creditorUsername, double amount, String debtId);
+
+    void deleteDebtRequest(Username creditorUsername, double amount, String debtId);
+
+    String listDebtHistory();
+
+    String listDebtor();
+
+    String listCreditor();
+
+    String listDebtRequestReceived();
+
+    String listDebtRequestSent();
+
 }
+

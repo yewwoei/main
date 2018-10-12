@@ -263,7 +263,7 @@ public class User {
     }
 
     /**
-     * Method for the credotir to create and add a debt.
+     * Method for the creditor to create and add a debt.
      * @param debtor the debtor of the adding debt
      * @param amount the amount of the adding debt
      */
@@ -338,7 +338,7 @@ public class User {
     public String listDebtor() {
         String toReturn = "";
         for (Debt d: this.debts) {
-            if (d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
+            if (d.getCreditor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
                 toReturn += d.toString() + "\n";
             }
         }
@@ -353,7 +353,7 @@ public class User {
     public String listCreditor() {
         String toReturn = "";
         for (Debt d: this.debts) {
-            if (d.getDebtor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
+            if (d.getDebtor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
                 toReturn += d.toString() + "\n";
             }
         }
@@ -368,7 +368,7 @@ public class User {
     public String listDebtRequestReceived() {
         String toReturn = "";
         for (Debt d: this.debts) {
-            if (d.getDebtor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
+            if (d.getDebtor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
                 toReturn += d.toString() + "\n";
             }
         }
@@ -383,7 +383,7 @@ public class User {
     public String listDebtRequestSent() {
         String toReturn = "";
         for (Debt d: this.debts) {
-            if (d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
+            if (d.getCreditor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
                 toReturn += d.toString() + "\n";
             }
         }

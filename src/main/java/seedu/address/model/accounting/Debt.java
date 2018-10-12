@@ -37,15 +37,19 @@ public class Debt {
         this.status = status;
     }
     public User getDebtor() {
+
         return this.debtor;
     }
     public User getCreditor() {
+
         return this.creditor;
     }
     public double getAmount() {
+
         return this.amount;
     }
     public String getDebtId() {
+
         return debtId;
     }
     public DebtStatus getDebtStatus() {

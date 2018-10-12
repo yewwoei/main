@@ -13,6 +13,8 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
+import seedu.address.model.accounting.Debt;
+import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -175,6 +177,70 @@ public class ModelManager extends ComponentManager implements Model {
         this.isLoggedIn = false;
     }
 
+    @Override
+    public boolean hasDebtId(String debtId){
+        boolean result = false;
+        for(int i = 0; i < currentUser.getDebts().size(); i++) {
+            if(currentUser.getDebts().get(i).getDebtId() == debtId) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public void addDebt(Username debtorUsername, double amount) {
+        User debtor = userData.getUser(debtorUsername);
+        currentUser.addDebt(debtor, amount);
+        indicateUserDataChanged();
+
+    }
+
+    @Override
+    public void clearDebt(Username debtorUsername, double amount, String debtId) {
+        User debtor = userData.getUser(debtorUsername);
+        currentUser.clearDebt(debtor, amount, debtId);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void acceptedDebtRequest(Username creditorUsername, double amount, String debtId) {
+        User creditor = userData.getUser(creditorUsername);
+        currentUser.acceptedDebtRequest(creditor, amount, debtId);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void deleteDebtRequest(Username creditorUsername, double amount, String debtId) {
+        User creditor = userData.getUser(creditorUsername);
+        currentUser.deleteDebtRequest(creditor, amount, debtId);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public String listDebtHistory() {
+        return currentUser.listDebtHistory();
+    }
+
+    @Override
+    public String listDebtor() {
+        return currentUser.listDebtor();
+    }
+
+    @Override
+    public String listCreditor() {
+        return currentUser.listCreditor();
+    }
+
+    @Override
+    public String listDebtRequestReceived() {
+        return currentUser.listDebtRequestReceived();
+    }
+
+    @Override
+    public String listDebtRequestSent() {
+        return currentUser.listDebtRequestSent();
+    }
 
     //=========== Undo/Redo/Commit ===============================================================================
 
