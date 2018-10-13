@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-
 import java.util.Objects;
 
 import javax.xml.bind.annotation.XmlElement;

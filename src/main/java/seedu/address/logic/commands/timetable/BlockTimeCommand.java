@@ -17,7 +17,8 @@ import seedu.address.model.Model;
 public class BlockTimeCommand extends Command {
     public static final String COMMAND_WORD = "blockTime";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Blocks out a time on your timetable in 30 minute chunks. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Blocks out a time on your timetable in 30 minute chunks. "
             + "Parameters: "
             + PREFIX_WEEK + "NUS WEEK "
             + PREFIX_DAY + "DAY "
@@ -34,7 +35,8 @@ public class BlockTimeCommand extends Command {
     private final String toBlock;
 
     /**
-     * Creates a BlockTimeCommand to add the specified {@code String} toBlock, that ranges from week 1 - 6, recess, 7 - 13,
+     * Creates a BlockTimeCommand to add the specified {@code String} toBlock,
+     * that ranges from week 1 - 6, recess, 7 - 13,
      * reading, 14, 15.
      */
     public BlockTimeCommand(String toBlock) {
