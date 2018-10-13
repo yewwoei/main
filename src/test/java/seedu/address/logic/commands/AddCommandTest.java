@@ -182,11 +182,6 @@ public class AddCommandTest {
         }
         
         @Override
-        public boolean hasDebtId(DebtId debtId) {
-            return false;
-        }
-        
-        @Override
         public void addDebt(Username debtorUsername, Amount amount) {
         }
         
