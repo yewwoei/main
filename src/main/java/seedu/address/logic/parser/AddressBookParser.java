@@ -94,7 +94,7 @@ public class AddressBookParser {
 
         case LoginCommand.COMMAND_WORD:
             return new LoginCommandParser().parse(arguments);
-             
+
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
 

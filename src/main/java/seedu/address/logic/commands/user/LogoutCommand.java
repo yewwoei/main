@@ -14,9 +14,9 @@ import seedu.address.model.Model;
 public class LogoutCommand extends Command {
 
     public static final String COMMAND_WORD = "Logout";
-    
+
     public static final String MESSAGE_SUCCESS = "Successfully Logged Out";
-    
+
     public static final String MESSAGE_NO_USER_CURRENTLY_LOGGEDIN = "There is no user currently logged in";
 
     /**
