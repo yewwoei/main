@@ -5,6 +5,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
+import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -145,6 +146,8 @@ public interface Model {
     boolean matchAmount(DebtId debtId, Amount amount);
 
     boolean matchUser(DebtId debtId, Username user);
+
+    boolean matchStatus(DebtId debtId, DebtStatus status);
 
     void addDebt(Username debtorUsername, Amount amount);
 

@@ -15,6 +15,7 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
+import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -214,6 +215,21 @@ public class ModelManager extends ComponentManager implements Model {
         }
         if (currentUser.getDebts().get(count).getDebtor().equals(user)
                 || currentUser.getDebts().get(count).getCreditor().equals(user)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean matchStatus(DebtId debtId, DebtStatus status) {
+        int count = 0;
+        for (int i = 0; i < currentUser.getDebts().size(); i++) {
+            if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
+                count = i;
+                break;
+            }
+        }
+        if (currentUser.getDebts().get(count).getDebtStatus().equals(status)){
             return true;
         }
         return false;

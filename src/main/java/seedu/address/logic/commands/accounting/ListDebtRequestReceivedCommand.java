@@ -9,19 +9,19 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * List the logged in user's debtors.
+ * List the logged in user's debt requests.
  */
-public class ListDebtorCommand extends Command {
-    public static final String COMMAND_WORD = "listDebtor";
+public class ListDebtRequestReceivedCommand extends Command {
+    public static final String COMMAND_WORD = "listDebtRequests";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": List all login user's debtor.";
-
+            + ": List all request login user received.";
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        model.listDebtor();
+        model.listDebtRequestReceived();
         return null;
     }
+
 }
 

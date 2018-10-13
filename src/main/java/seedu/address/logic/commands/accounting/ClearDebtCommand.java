@@ -13,6 +13,7 @@ import seedu.address.model.Model;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
+import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.user.Username;
 
 /**
@@ -37,6 +38,7 @@ public class ClearDebtCommand extends Command {
     public static final String MESSAGE_NO_SUCH_DEBT = "Input debt not exist.";
     public static final String MESSAGE_AMOUNT_NOT_MATCH = "Input amount does not match the debt.";
     public static final String MESSAGE_USER_NOT_MATCH = "Input user does not match the debt";
+    public static final String MESSAGE_DEBT_NOT_ACCEPTED = "The debt is not accepted";
 
     private final Username debtor;
     private final Amount amount;
@@ -66,6 +68,9 @@ public class ClearDebtCommand extends Command {
         }
         if (!model.matchUser(debtId, debtor)) {
             throw new CommandException(MESSAGE_USER_NOT_MATCH);
+        }
+        if(model.matchStatus(debtId, DebtStatus.ACCEPTED)) {
+            throw new CommandException(MESSAGE_DEBT_NOT_ACCEPTED);
         }
         model.clearDebt(debtor, amount, debtId);
         return new CommandResult(String.format(MESSAGE_SUCCESS,debtor,amount,debtId));

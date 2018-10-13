@@ -12,6 +12,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
+import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.user.Username;
 
 /**
@@ -37,6 +38,7 @@ public class AcceptDebtRequestCommand extends Command {
     public static final String MESSAGE_NO_SUCH_DEBT = "Input debt not exist.";
     public static final String MESSAGE_AMOUNT_NOT_MATCH = "Input amount does not match the debt.";
     public static final String MESSAGE_USER_NOT_MATCH = "Input user does not match the debt";
+    public static final String MESSAGE_DEBT_NOT_PENDING = "The debt is not under request.";
 
     private final Username creditor;
     private final Amount amount;
@@ -66,6 +68,9 @@ public class AcceptDebtRequestCommand extends Command {
         }
         if (!model.matchUser(debtId, creditor)) {
             throw new CommandException(MESSAGE_USER_NOT_MATCH);
+        }
+        if(model.matchStatus(debtId, DebtStatus.PENDING)) {
+            throw new CommandException(MESSAGE_DEBT_NOT_PENDING);
         }
         model.acceptedDebtRequest(creditor, amount, debtId);
         return new CommandResult(String.format(MESSAGE_SUCCESS,creditor,amount,debtId));

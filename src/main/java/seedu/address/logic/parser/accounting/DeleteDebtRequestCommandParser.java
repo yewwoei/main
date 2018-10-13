@@ -7,8 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.accounting.AcceptDebtRequestCommand;
-import seedu.address.logic.commands.accounting.ClearDebtCommand;
 import seedu.address.logic.commands.accounting.DeleteDebtRequestCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -28,7 +26,7 @@ public class DeleteDebtRequestCommandParser implements Parser<DeleteDebtRequestC
                 ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_AMOUNT, PREFIX_DEBTID);
         if (!arePrefixesPresent(argMultimap, PREFIX_USERNAME, PREFIX_AMOUNT, PREFIX_DEBTID)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearDebtCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteDebtRequestCommand.MESSAGE_USAGE));
         }
         Username creditorUsername = ParserUserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get());
         Amount amount = ParserUserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
