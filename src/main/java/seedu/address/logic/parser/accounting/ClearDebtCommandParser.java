@@ -18,6 +18,9 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.user.Username;
 
+/**
+ * Parses input arguments and creates a new ClearDebtCommand object
+ */
 public class ClearDebtCommandParser implements Parser<ClearDebtCommand> {
 
     @Override
