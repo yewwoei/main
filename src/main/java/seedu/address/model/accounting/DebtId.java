@@ -13,10 +13,10 @@ public class DebtId {
     private String id;
 
     public DebtId() {
-        Date Now = new Date();
+        Date now = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyMMddHHmmssSS");
-        String datetime = ft.format(Now);
-        this.id = datetime;
+        String strNow = ft.format(now);
+        this.id = strNow;
     }
 
     public DebtId(String debtId) {
