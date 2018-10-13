@@ -1,9 +1,7 @@
 package seedu.address.model.timetable;
 
-import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
-
-import java.util.Objects;
+import static java.util.Objects.requireNonNull;
 
 import com.google.common.collect.Ordering;
 
@@ -11,7 +9,7 @@ import com.google.common.collect.Ordering;
  * Represents a Week from the NUS academic calendar.
  * Guarantees: immutable; is valid as declared in {@Link isValidWeek(String)}
  */
-public class Week implements Comparable<Week>{
+public class Week implements Comparable<Week> {
 
     public static final String MESSAGE_WEEK_CONSTRAINTS =
             "Week should only be one of the following: 1, 2, 3, 4, 5, 6, "
