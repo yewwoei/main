@@ -180,19 +180,15 @@ public class AddCommandTest {
         public boolean matchStatus(DebtId debtId, DebtStatus status) {
             return false;
         }
-        
         @Override
         public void addDebt(Username debtorUsername, Amount amount) {
         }
-        
         @Override
         public void clearDebt(Username debtorUsername, Amount amount, DebtId debtId) {
         }
-        
         @Override
         public void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
         }
-        
         @Override
         public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
         }
