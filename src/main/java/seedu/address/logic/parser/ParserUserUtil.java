@@ -109,6 +109,12 @@ public class ParserUserUtil {
         return new Email(trimmedEmail);
     }
 
+    /**
+     * Parses a {@code String debtId} into an {@code DebtId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code debtId} is invalid.
+     */
     public static DebtId parseDebtId(String debtId) throws ParseException {
         requireNonNull(debtId);
         String trimmedDebtId = debtId.trim();
@@ -118,6 +124,12 @@ public class ParserUserUtil {
         return new DebtId(trimmedDebtId);
     }
 
+    /**
+     * Parses a {@code String amount} into an {@code Amount}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code amount} is invalid.
+     */
     public static Amount parseAmount(String amount) throws ParseException {
         requireNonNull(amount);
         String trimmedAmount = amount.trim();
