@@ -43,7 +43,9 @@ public class AddFriendCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        if(!model.isCurrentlyLoggedIn()) {
+        System.out.println(!model.isCurrentlyLoggedIn());
+
+        if (!model.isCurrentlyLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGGED_IN);
         }
 

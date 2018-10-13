@@ -9,6 +9,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.UserData;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.group.Friendship;
+import seedu.address.model.jio.Jio;
 import seedu.address.model.user.User;
 
 /**
@@ -20,6 +21,7 @@ public class XmlSerializableUsers {
     public static final String MESSAGE_DUPLICATE_PERSON = "User list contains duplicate User(s).";
     public static final String MESSAGE_NO_USER_FRIENDSHIP = "User required for friendship not found";
     public static final String MESSAGE_NO_USER_DEBTS = "User required for debts record not found";
+    public static final String MESSAGE_DUPLICATE_JIO = "This jio already exists in the book";
 
     @XmlElement
     private List<XmlAdaptedUser> user;
@@ -27,6 +29,8 @@ public class XmlSerializableUsers {
     private List<XmlAdaptedFriendship> friendship;
     @XmlElement
     private List<XmlAdaptedDebt> debts;
+    @XmlElement
+    private List<XmlAdaptedJio> jios;
 
     /**
      * Creates an empty XmlSerializableUsers.
@@ -36,6 +40,7 @@ public class XmlSerializableUsers {
         user = new ArrayList<>();
         friendship = new ArrayList<>();
         debts = new ArrayList<>();
+        jios = new ArrayList<>();
     }
 
     /**
@@ -55,6 +60,8 @@ public class XmlSerializableUsers {
                 .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
         userData.getUsernameUserHashMap().forEach((key, value) -> value.getDebts()
                 .forEach(d -> debts.add(new XmlAdaptedDebt(d))));
+        // updates jios list
+        userData.getJios().forEach(jio -> jios.add(new XmlAdaptedJio(jio)));
     }
 
     /**
@@ -102,6 +109,15 @@ public class XmlSerializableUsers {
                     userData.getUsernameUserHashMap().get(debts.getDebtor().getUsername()).addDebt(debts));
 
         }
+
+        for (XmlAdaptedJio j: jios) {
+            Jio jio = j.toModelType();
+            if (!userData.hasJio(jio)) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_JIO);
+            }
+            userData.addJio(jio);
+        }
+
         return userData;
     }
 

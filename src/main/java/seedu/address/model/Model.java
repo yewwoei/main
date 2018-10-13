@@ -3,6 +3,8 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -110,6 +112,16 @@ public interface Model {
     void deleteFriend(Username friendUsername);
 
     void deleteFriendRequest(Username friendUsername);
+
+    //=========== Jio methods ===============================================================================
+
+    boolean hasJio(Jio jio);
+
+    boolean hasJioName(Name jioName);
+
+    void removeJioOfName(Name jioName);
+
+    void addJio(Jio jio);
 
     //=========== Undo/Redo/Commit ===============================================================================
 

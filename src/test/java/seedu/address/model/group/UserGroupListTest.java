@@ -1,5 +1,7 @@
 package seedu.address.model.group;
 
+import java.util.ArrayList;
+
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -18,12 +20,24 @@ public class UserGroupListTest {
         Group group = alice.createGroup("My Lonely Club");
         Assert.assertEquals(alice.listGroups() , "My Lonely Club\n");
         Assert.assertEquals(alice.listGroupRequests() , "");
-        Assert.assertEquals(group.getAcceptedUsers(), alice);
-        //Assert.assertEquals(group.);
+        ArrayList<User> listAcceptedUsers = new ArrayList<>();
+        listAcceptedUsers.add(alice);
+        ArrayList<User> listPendingUsers = new ArrayList<>();
+        Assert.assertEquals(group.getAcceptedUsers(), listAcceptedUsers);
+        Assert.assertEquals(group.getPendingUsers(), listPendingUsers);
     }
 
     @Test
-    public void listSingleUserGroup() {
-
+    public void multiplePendingUsers() {
+        User alice = new User(new Username("Alice"), new Password("password"), new Name("Alice"),
+                new Phone("8942"), new Email("alice@g.com"));
+        Group group = alice.createGroup("My Lonely Club");
+        Assert.assertEquals(alice.listGroups() , "My Lonely Club\n");
+        Assert.assertEquals(alice.listGroupRequests() , "");
+        ArrayList<User> listAcceptedUsers = new ArrayList<>();
+        listAcceptedUsers.add(alice);
+        ArrayList<User> listPendingUsers = new ArrayList<>();
+        Assert.assertEquals(group.getAcceptedUsers(), listAcceptedUsers);
+        Assert.assertEquals(group.getPendingUsers(), listPendingUsers);
     }
 }

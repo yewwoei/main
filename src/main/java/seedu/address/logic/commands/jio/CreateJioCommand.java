@@ -52,14 +52,13 @@ public class CreateJioCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
-        /*
         if (model.hasJio(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_JIO); //Jio has already been created
         }
 
         model.addJio(toAdd);
-        model.commitAddressBook();
-        */
+        //model.commitAddressBook(); //TODO: Check if need to commit. If need, then create commit method
+
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

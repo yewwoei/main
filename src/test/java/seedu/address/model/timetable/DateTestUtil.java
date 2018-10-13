@@ -4,7 +4,6 @@ package seedu.address.model.timetable;
  * Contains helper final Strings for testing Dates and its constituents: Time, Week, Day.
  */
 public class DateTestUtil {
-
     /** Valid Strings */
     // Time fields
     public static final String VALID_TIME_START = "0000";
