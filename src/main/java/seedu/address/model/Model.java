@@ -167,8 +167,8 @@ public interface Model {
     void commitAddressBook();
 
     //========== Model Manager Debt methods ======================================================================
-
-   boolean hasDebtId(DebtId debtId);
+    
+    boolean hasDebtId(DebtId debtId);
 
     boolean matchAmount(DebtId debtId, Amount amount);
 
