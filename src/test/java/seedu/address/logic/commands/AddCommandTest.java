@@ -19,6 +19,8 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -158,6 +160,23 @@ public class AddCommandTest {
 
 
         // To be Done Later, fake tests for now
+
+        @Override
+        public boolean hasJio(Jio jio) {
+            return true;
+        }
+
+        @Override
+        public boolean hasJioName(Name jioName) {
+            return true;
+        }
+
+        @Override
+        public void removeJioOfName(Name jioName) {}
+
+        @Override
+        public void addJio(Jio jio) {}
+        
         @Override
         public void addUser(User user) {}
 
