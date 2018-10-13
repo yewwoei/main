@@ -4,7 +4,6 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import seedu.address.model.user.Username;
@@ -36,6 +35,12 @@ public class BusyDates {
         return this.username;
     }
 
+    /**
+     * Provides an immutable date list for the NUS week, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     * @param week THE NUS Week.
+     * @return an immutable date list.
+     */
     public List<Date> getBusyDatesForWeek(Week week) {
         // the TreeSet<Date> for the week.
         List<Date> weekDates = dates.get(week);
