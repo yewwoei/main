@@ -1,26 +1,47 @@
 package seedu.address.model.timetable;
 
-/*import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.model.timetable.DateTestUtil.VALID_TIME_END;
-import static seedu.address.model.timetable.DateTestUtil.VALID_TIME_MID;
-import static seedu.address.model.timetable.DateTestUtil.VALID_TIME_START;
-import static seedu.address.model.timetable.DateTestUtil.INVALID_TIME_END;
-import static seedu.address.model.timetable.DateTestUtil.INVALID_TIME_MID;*/
 
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.rules.ExpectedException;
 
+import seedu.address.testutil.Assert;
+
+/**
+ * Unit test for the Time model class.
+ */
 public class TimeTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    @Test
+    public void constructor_null_throwsNullPointerException() {
+        Assert.assertThrows(NullPointerException.class, () -> new Time(null));
+    }
 
     @Test
-    public void nullTime_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        Time time = new Time(null);
+    public void constructor_invalidTime_throwsIllegalArgumentException() {
+        Assert.assertThrows(IllegalArgumentException.class, () -> new Time(""));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new Time("1445"));
+        Assert.assertThrows(IllegalArgumentException.class, () -> new Time("2400"));
     }
+
+    @Test
+    public void isValidTime() {
+        // null time
+        Assert.assertThrows(NullPointerException.class, () -> Time.isValidTime(null));
+
+        // invalid name
+        assertFalse(Time.isValidTime("")); // empty-string
+        assertFalse(Time.isValidTime(" ")); // spaces only
+        assertFalse(Time.isValidTime("^")); // only numbers are allowed.
+        assertFalse(Time.isValidTime("hello")); // cannot have non-numerical characters
+
+        // valid time
+        assertTrue(Time.isValidTime("0000"));
+        assertTrue(Time.isValidTime("1000"));
+        assertTrue(Time.isValidTime("1800"));
+        assertTrue(Time.isValidTime("2000"));
+        assertTrue(Time.isValidTime("2330"));
+
+    }
+
 }
