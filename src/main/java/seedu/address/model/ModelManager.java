@@ -332,7 +332,7 @@ public class ModelManager extends ComponentManager implements Model {
     public String listDebtRequestSent() {
         return currentUser.listDebtRequestSent();
     }
-    
+
     @Override
     public void deleteFriendRequest(Username friendUsername) {
         User friendUser = userData.getUser(friendUsername);
