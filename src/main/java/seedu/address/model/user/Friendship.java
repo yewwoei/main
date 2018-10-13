@@ -48,6 +48,14 @@ public class Friendship {
         return this.initiatedBy;
     }
 
+    public Username getMyUsername() {
+        return me.getUsername();
+    }
+
+    public Username getFriendUsername() {
+        return friendUser.getUsername();
+    }
+
     @Override
     public boolean equals(Object otherFriendship) {
         if (otherFriendship == this) {
@@ -58,6 +66,6 @@ public class Friendship {
 
         return other != null
                 && other.getFriendUser().isSameUser(this.friendUser)
-                && other.getInitiatedBy().isSameUser(this.initiatedBy);
+                && other.getMe().isSameUser(this.me);
     }
 }

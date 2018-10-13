@@ -42,13 +42,12 @@ public class DeleteJioCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         // TODO
         requireNonNull(model);
-        /*
-        if(!model.hasJioName(jioName)) {
+
+        if (!model.hasJioName(jioName)) {
             throw new CommandException(MESSAGE_NONEXISTENT_JIO); //Jio does not exist
         }
-        model.deleteJio(jioName);
-        model.commitAddressBook();
-        */
+        model.removeJioOfName(jioName);
+        //model.commitAddressBook(); //TODO: Check if need to commit. If need, then create commit method
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, jioName));
     }
