@@ -1,8 +1,8 @@
 package seedu.address.logic.parser.accounting;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import java.util.stream.Stream;
 
@@ -16,6 +16,9 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.user.Username;
 
+/**
+ * Parses input arguments and creates a new AddDebtCommand object
+ */
 public class AddDebtCommandParser implements Parser<AddDebtCommand> {
 
     @Override
