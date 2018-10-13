@@ -27,6 +27,8 @@ public class XmlSerializableUsers {
     private List<XmlAdaptedFriendship> friendship;
     @XmlElement
     private List<XmlAdaptedDebt> debts;
+    @XmlElement
+    private List<XmlAdaptedBlockedDate> date;
 
     /**
      * Creates an empty XmlSerializableUsers.
@@ -84,6 +86,11 @@ public class XmlSerializableUsers {
 
             userData.addUser(friendship.getMe().getUsername(),
                     userData.getUser(friendship.getMe().getUsername()).addFriendship(friendship));
+        }
+
+        //
+        for (XmlAdaptedBlockedDate d: date) {
+
         }
 
         for (XmlAdaptedDebt d: debts) {
