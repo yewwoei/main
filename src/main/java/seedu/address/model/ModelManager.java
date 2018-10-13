@@ -13,6 +13,8 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
+import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.user.Friendship;
 import seedu.address.model.user.Password;
@@ -133,7 +135,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredRestaurants.setPredicate(predicate);
     }
 
-    //=========== Model Manager User Methods =+===================================================================
+    //=========== Model Manager User Methods ====================================================================
 
     @Override
     public boolean hasUser(Username username) {
@@ -221,6 +223,34 @@ public class ModelManager extends ComponentManager implements Model {
     public void deleteFriendRequest(Username friendUsername) {
         User friendUser = userData.getUser(friendUsername);
         currentUser.deleteFriendRequest(friendUser);
+        indicateUserDataChanged();
+    }
+
+
+    //=========== Jio methods ===============================================================================
+
+    @Override
+    public boolean hasJio(Jio jio) {
+        requireNonNull(jio);
+        return userData.hasJio(jio);
+    }
+
+    @Override
+    public boolean hasJioName(Name jioName) {
+        requireNonNull(jioName);
+        return userData.hasJioName(jioName);
+    }
+
+    @Override
+    public void removeJioOfName(Name jioName) {
+        userData.removeJioOfName(jioName);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void addJio(Jio jio) {
+        userData.addJio(jio);
+        updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
         indicateUserDataChanged();
     }
 

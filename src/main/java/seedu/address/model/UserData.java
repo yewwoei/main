@@ -1,7 +1,11 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
+import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Name;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -12,13 +16,19 @@ import seedu.address.model.user.Username;
 public class UserData {
 
     private HashMap<Username, User> usernameUserHashMap;
+    private List<Jio> jios;
 
     public UserData() {
         usernameUserHashMap = new HashMap<>();
+        jios = new ArrayList<>();
     }
 
     public HashMap<Username, User> getUsernameUserHashMap() {
         return usernameUserHashMap;
+    }
+
+    public List<Jio> getJios() {
+        return jios;
     }
 
     public boolean hasUser(Username username) {
@@ -48,4 +58,23 @@ public class UserData {
     public void removeUser(User user) {
         usernameUserHashMap.remove(user.getUsername());
     }
+
+    // Jios methods
+    public boolean hasJioName(Name jioName) {
+        return jios.stream().anyMatch(jio -> jio.getName().equals(jioName));
+    }
+
+    public boolean hasJio(Jio j) {
+        return jios.stream().anyMatch(jio -> jio.equals(j));
+    }
+
+    public void addJio(Jio jio) {
+        jios.add(jio);
+    }
+
+    public void removeJioOfName(Name jioName) {
+        jios.removeIf(jio -> jio.getName().equals(jioName));
+    }
+
+
 }
