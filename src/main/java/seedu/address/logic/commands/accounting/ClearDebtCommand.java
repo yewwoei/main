@@ -11,7 +11,6 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.accounting.Amount;
-import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.user.Username;
@@ -60,7 +59,7 @@ public class ClearDebtCommand extends Command {
         if (!model.hasUser(debtor)) {
             throw new CommandException(MESSAGE_NO_SUCH_USER);
         }
-        if (!model.hasDebtId(debtId)){
+        if (!model.hasDebtId(debtId)) {
             throw new CommandException(MESSAGE_NO_SUCH_DEBT);
         }
         if (!model.matchAmount(debtId, amount)) {
@@ -69,10 +68,10 @@ public class ClearDebtCommand extends Command {
         if (!model.matchUser(debtId, debtor)) {
             throw new CommandException(MESSAGE_USER_NOT_MATCH);
         }
-        if(model.matchStatus(debtId, DebtStatus.ACCEPTED)) {
+        if (model.matchStatus(debtId, DebtStatus.ACCEPTED)) {
             throw new CommandException(MESSAGE_DEBT_NOT_ACCEPTED);
         }
         model.clearDebt(debtor, amount, debtId);
-        return new CommandResult(String.format(MESSAGE_SUCCESS,debtor,amount,debtId));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, debtor, amount, debtId));
     }
 }
