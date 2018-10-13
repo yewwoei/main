@@ -121,6 +121,7 @@ public class UniqueBusySchedule {
         List<Date> allDates = listOfWeekDates.stream()
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
+        Collections.sort(allDates);
         return Collections.unmodifiableList(allDates);
     }
     /**
