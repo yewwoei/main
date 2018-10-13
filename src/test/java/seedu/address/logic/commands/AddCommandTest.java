@@ -181,24 +181,19 @@ public class AddCommandTest {
             return false;
         }
         
-        @Override
         public boolean hasDebtId(String debtId) {
             return false;
         }
         
-        @Override
         public void addDebt(Username debtorUsername, double amount) {
         }
 
-        @Override
         public void clearDebt(Username debtorUsername, double amount, String debtId) {
         }
 
-        @Override
         public void acceptedDebtRequest(Username creditorUsername, double amount, String debtId) {
         }
 
-        @Override
         public void deleteDebtRequest(Username creditorUsername, double amount, String debtId) {
         }
 
