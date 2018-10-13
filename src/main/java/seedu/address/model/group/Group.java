@@ -51,4 +51,16 @@ public class Group {
     public void removePendingUser(User user) {
         pendingUsers.remove(user);
     }
+
+    public void removeAcceptedUser(User user) {
+        acceptedUsers.remove(user);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        Group otherGroup = (Group) other;
+        return otherGroup.groupName.equals(groupName)
+                && otherGroup.acceptedUsers.equals(acceptedUsers)
+                && otherGroup.pendingUsers.equals(pendingUsers);
+    }
 }

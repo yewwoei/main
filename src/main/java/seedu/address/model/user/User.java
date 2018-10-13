@@ -170,14 +170,14 @@ public class User {
      * @return String of all the user's friends separated by newline character.
      */
     public String listFriends() {
-        return listHelper(friends);
+        return listHelperFriend(friends);
     }
 
     /**
      * @return String that contains all the friendRequests received of this user separated by newline character.
      */
     public String listFriendRequests() {
-        return listHelper(friendRequests);
+        return listHelperFriend(friendRequests);
     }
 
     /**
@@ -185,7 +185,7 @@ public class User {
      * @param list List that you want to print out.
      * @return String that contains all elements in list.
      */
-    public String listHelper(List<Friendship> list) {
+    public String listHelperFriend(List<Friendship> list) {
         String toReturn = "";
         for (Friendship friendship: list) {
             toReturn += friendship.getFriendUser().getName() + "\n";
@@ -255,16 +255,18 @@ public class User {
         return null;
     }
 
-    public void createGroup(String groupName) {
+    public Group createGroup(String groupName) {
         Group group = new Group(groupName, this);
         this.groups.add(group);
+        return group;
     }
 
-    public void createGroup(String groupName, User... users) {
+    public Group createGroup(String groupName, User... users) {
         Group group = new Group(groupName, this, users);
         this.groups.add(group);
         List<User> listUsers = Arrays.asList(users);
         listUsers.forEach(user -> user.addGroupRequest(group));
+        return group;
     }
 
     public void addGroupRequest(Group group) {
@@ -282,7 +284,30 @@ public class User {
         group.removePendingUser(this);
     }
 
-    
+    public void deleteGroup(Group group) {
+        this.groups.remove(group);
+        group.removeAcceptedUser(this);
+    }
+
+    public String listHelperGroup(List<Group> list) {
+        String toReturn = "";
+        for (Group group: list) {
+            toReturn += group.getGroupName() + "\n";
+        }
+        return toReturn;
+    }
+
+    public String listGroups() {
+        return listHelperGroup(groups);
+    }
+
+    public String listGroupRequests() {
+        return listHelperGroup(groupRequests);
+    }
+
+    public void addGroupMembers(Group group, User... users) {
+        group.addMembers(users);
+    }
 
     /**
      * Method to add a debts to a user.
