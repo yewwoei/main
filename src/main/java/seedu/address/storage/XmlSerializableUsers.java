@@ -43,10 +43,11 @@ public class XmlSerializableUsers {
         friendship = new ArrayList<>();
         debts = new ArrayList<>();
         jios = new ArrayList<>();
+        busyDates = new ArrayList<>();
     }
 
     /**
-     * Conversion
+     * Conversion from Model into XML.
      */
     public XmlSerializableUsers(UserData userData) {
         this();
@@ -64,6 +65,8 @@ public class XmlSerializableUsers {
                 .forEach(d -> debts.add(new XmlAdaptedDebt(d))));
         // updates jios list
         userData.getJios().forEach(jio -> jios.add(new XmlAdaptedJio(jio)));
+        // adds busy dates for the user inside.
+        userData.getUsernameUserHashMap().forEach((key, value) -> )
     }
 
     /**
@@ -112,6 +115,8 @@ public class XmlSerializableUsers {
                     userData.getUsernameUserHashMap().get(debts.getDebtor().getUsername()).addDebt(debts));
 
         }
+
+        for (XmlAdaptedBusyDates bd : busyDates)
 
         for (XmlAdaptedJio j: jios) {
             Jio jio = j.toModelType();

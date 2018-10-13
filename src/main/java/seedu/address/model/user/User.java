@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.timetable.BusyDates;
 
 /**
  * Represents a User in the address book.
@@ -25,6 +26,7 @@ public class User {
     private final List<Friendship> friendRequests = new ArrayList<>();
     private final List<Friendship> friends = new ArrayList<>();
     private final List<Debt> debts = new ArrayList<>();
+    private final BusyDates  busyDates = new BusyDates;
 
     /**
      * Every field must be present and not null.
