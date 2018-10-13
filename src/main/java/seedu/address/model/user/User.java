@@ -134,14 +134,12 @@ public class User {
      * @param user User is not able to add oneself as a friend.
      */
     public void addFriend(User user) {
-        // checks to make sure that friend is not oneself
-        if (!user.isSameUser(this)) {
-            Friendship friendship = new Friendship(this, this, this);
-            // checks that friendship is not already in friendRequests
-            if (!user.friendRequests.contains(friendship) && !user.friends.contains(friendship)) {
-                user.friendRequests.add(friendship);
-            }
-        }
+        Friendship friendship = new Friendship(this, this, this);
+        user.friendRequests.add(friendship);
+    }
+
+    public void addFriend(Friendship friendship) {
+        this.friendRequests.add(friendship);
     }
 
     /**
@@ -192,10 +190,10 @@ public class User {
      * Changes friendship status to ACCEPTED.
      * Deletes friendship from friendRequests for the accepting party.
      * Adds friendship to friends list for both parties.
-     * @param username Name of the friend to accept.
+     * @param user Username of the friend to accept.
      */
-    public void acceptFriendRequest(Name username) {
-        Friendship friendship = findFriendshipInList(friendRequests, username);
+    public void acceptFriendRequest(User user) {
+        Friendship friendship = findFriendshipInList(friendRequests, user);
         User friend = friendship.getFriendUser();
         // ensures that the RESTAURANT who initiated the friendship is not the one accepting
         if (!friendship.getInitiatedBy().equals(this)) {
@@ -214,40 +212,35 @@ public class User {
 
     /**
      * Deletes the friendship request of the user with name username
-     * @param username Name of the user that you want to delete friendRequest of
+     * @param user Username of the user that you want to delete friendRequest of
      */
-    public void deleteFriendRequest(Name username) {
-        Friendship friendship = findFriendshipInList(friendRequests, username);
+    public void deleteFriendRequest(User user) {
+        Friendship friendship = findFriendshipInList(friendRequests, user);
         friendRequests.remove(friendship);
     }
 
     /**
      * Deletes the friendship for both parties when delete is initiated by one party.
      * Deletes friendship only if friendship exists.
-     * @param username Name of the friend you want to delete
+     * @param user Username of the friend you want to delete
      */
-    public void deleteFriend(Name username) {
+    public void deleteFriend(User user) {
         // gets the friendship for both parties
-        Friendship friendship = findFriendshipInList(friends, username);
-        User friend = friendship.getFriendUser();
-        Friendship friendship2 = findFriendshipInList(friend.friends, this.getName());
-
-        // deletes the friendship for both parties
-        if (friends.contains(friendship)) {
-            friends.remove(friendship);
-            friend.friends.remove(friendship2);
-        }
+        Friendship friendship = findFriendshipInList(friends, user);
+        Friendship friendship2 = findFriendshipInList(user.friends, this);
+        friends.remove(friendship);
+        user.friends.remove(friendship2);
     }
 
     /**
      * Helper method to find friendship in list.
      * @param list List in which you would like to search in.
-     * @param username Name of the friend that you would like to find.
+     * @param user Username of the friend that you would like to find.
      * @return Friendship between this user and user with Name username.
      */
-    public Friendship findFriendshipInList(List<Friendship> list, Name username) {
+    public Friendship findFriendshipInList(List<Friendship> list, User user) {
         for (Friendship friendship: list) {
-            if (friendship.getFriendUser().getName().equals(username)) {
+            if (friendship.getFriendUser().equals(user)) {
                 return friendship;
             }
         }

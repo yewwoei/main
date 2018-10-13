@@ -29,6 +29,8 @@ import seedu.address.logic.commands.accounting.ListDebtRequestReceivedCommand;
 import seedu.address.logic.commands.accounting.ListDebtRequestSentCommand;
 import seedu.address.logic.commands.accounting.ListDebtorCommand;
 import seedu.address.logic.commands.jio.CreateJioCommand;
+import seedu.address.logic.commands.user.LoginCommand;
+import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.commands.user.SignUpCommand;
 import seedu.address.logic.parser.accounting.AcceptDebtRequestCommandParser;
 import seedu.address.logic.parser.accounting.AddDebtCommandParser;
@@ -108,6 +110,12 @@ public class AddressBookParser {
 
         case SignUpCommand.COMMAND_WORD:
             return new SignUpCommandParser().parse(arguments);
+
+        case LoginCommand.COMMAND_WORD:
+            return new LoginCommandParser().parse(arguments);
+
+        case LogoutCommand.COMMAND_WORD:
+            return new LogoutCommand();
 
         // Restaurant Commands
 

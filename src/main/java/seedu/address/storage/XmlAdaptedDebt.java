@@ -6,7 +6,9 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
+import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -56,7 +58,7 @@ public class XmlAdaptedDebt {
         creditor = source.getCreditor().getUsername().toString();
         debtor = source.getDebtor().getUsername().toString();
         amount = String.valueOf(source.getAmount());
-        debtId = source.getDebtId();
+        debtId = source.getDebtId().toString();
         status = source.getDebtStatus().toString();
     }
 
@@ -94,7 +96,7 @@ public class XmlAdaptedDebt {
 
         return new Debt(usernameUserHashmap.get(new Username(creditor)),
                 usernameUserHashmap.get(new Username(debtor)),
-                Double.valueOf(amount), debtId, DebtStatus.valueOf(status));
+                new Amount(amount), new DebtId(debtId), DebtStatus.valueOf(status));
     }
 
     @Override
@@ -111,6 +113,8 @@ public class XmlAdaptedDebt {
         return otherDebt != null
                 && Objects.equals(creditor, otherDebt.creditor)
                 && Objects.equals(debtor, otherDebt.debtor)
+                && Objects.equals(amount, otherDebt.amount)
+                && Objects.equals(status, otherDebt.status)
                 && Objects.equals(debtId, otherDebt.debtId);
     }
 }

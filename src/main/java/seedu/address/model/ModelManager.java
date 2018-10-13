@@ -16,7 +16,10 @@ import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.user.Friendship;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -135,7 +138,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredRestaurants.setPredicate(predicate);
     }
 
-    //=========== Model Manager User Methods =+===================================================================
+    //=========== Model Manager User Methods ====================================================================
 
     @Override
     public boolean hasUser(Username username) {
@@ -258,6 +261,47 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasUsernameFriendRequest(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        return currentUser.getFriendRequests()
+                .contains(new Friendship(friendUser, currentUser, currentUser));
+    }
+
+    @Override
+    public boolean hasUsernameFriend(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        return currentUser.getFriends()
+                .contains(new Friendship(friendUser, currentUser, currentUser));
+    }
+
+    @Override
+    public void addFriend(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        currentUser.addFriend(friendUser);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void acceptFriend(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        currentUser.acceptFriendRequest(friendUser);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean isSameAsCurrentUser(Username username) {
+        User toCheck = userData.getUser(username);
+        return toCheck.equals(currentUser);
+    }
+
+    @Override
+    public void deleteFriend(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        currentUser.deleteFriend(friendUser);
+        indicateUserDataChanged();
+    }
+
+    @Override
     public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
         User creditor = userData.getUser(creditorUsername);
         currentUser.deleteDebtRequest(creditor, amount, debtId);
@@ -287,6 +331,39 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public String listDebtRequestSent() {
         return currentUser.listDebtRequestSent();
+    }
+    public void deleteFriendRequest(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        currentUser.deleteFriendRequest(friendUser);
+        indicateUserDataChanged();
+    }
+
+
+    //=========== Jio methods ===============================================================================
+
+    @Override
+    public boolean hasJio(Jio jio) {
+        requireNonNull(jio);
+        return userData.hasJio(jio);
+    }
+
+    @Override
+    public boolean hasJioName(Name jioName) {
+        requireNonNull(jioName);
+        return userData.hasJioName(jioName);
+    }
+
+    @Override
+    public void removeJioOfName(Name jioName) {
+        userData.removeJioOfName(jioName);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void addJio(Jio jio) {
+        userData.addJio(jio);
+        updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
+        indicateUserDataChanged();
     }
 
     //=========== Undo/Redo/Commit ===============================================================================
