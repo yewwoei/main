@@ -182,7 +182,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasDebtId(DebtId debtId){
+    public boolean hasDebtId(DebtId debtId) {
         boolean result = false;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
             if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
@@ -232,7 +232,7 @@ public class ModelManager extends ComponentManager implements Model {
                 break;
             }
         }
-        if (currentUser.getDebts().get(count).getDebtStatus().equals(status)){
+        if (currentUser.getDebts().get(count).getDebtStatus().equals(status)) {
             return true;
         }
         return false;
@@ -332,6 +332,8 @@ public class ModelManager extends ComponentManager implements Model {
     public String listDebtRequestSent() {
         return currentUser.listDebtRequestSent();
     }
+    
+    @Override
     public void deleteFriendRequest(Username friendUsername) {
         User friendUser = userData.getUser(friendUsername);
         currentUser.deleteFriendRequest(friendUser);
