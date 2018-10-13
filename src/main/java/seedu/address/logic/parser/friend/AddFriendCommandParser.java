@@ -30,7 +30,7 @@ public class AddFriendCommandParser implements Parser<AddFriendCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_USERNAME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddFriendCommand.MESSAGE_USAGE));
         }
 
         Username friendUsername = ParserUserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get());
