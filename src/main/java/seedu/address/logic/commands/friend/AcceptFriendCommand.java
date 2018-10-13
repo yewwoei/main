@@ -26,6 +26,7 @@ public class AcceptFriendCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Successfully accepted friend request of: %1$s";
     public static final String MESSAGE_NO_REQUEST = "Sorry, that user is not in your "
             + "friend requests' list.";
+    public static final String MESSAGE_NOT_LOGGED_IN = "You must login before accepting friends";
 
     private final Username toAdd;
 
@@ -40,6 +41,10 @@ public class AcceptFriendCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if(!model.isCurrentlyLoggedIn()) {
+            throw new CommandException(MESSAGE_NOT_LOGGED_IN);
+        }
 
         // throw exception if you try to accept a friend request that does not accept
         if (!model.hasUsernameFriendRequest(toAdd)) {

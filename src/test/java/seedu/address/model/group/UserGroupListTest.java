@@ -15,8 +15,15 @@ public class UserGroupListTest {
     public void createGroup() {
         User alice = new User(new Username("Alice"), new Password("password"), new Name("Alice"),
                 new Phone("8942"), new Email("alice@g.com"));
-        alice.createGroup("My Lonely Club");
+        Group group = alice.createGroup("My Lonely Club");
         Assert.assertEquals(alice.listGroups() , "My Lonely Club\n");
         Assert.assertEquals(alice.listGroupRequests() , "");
+        Assert.assertEquals(group.getAcceptedUsers(), alice);
+        //Assert.assertEquals(group.);
+    }
+
+    @Test
+    public void listSingleUserGroup() {
+
     }
 }

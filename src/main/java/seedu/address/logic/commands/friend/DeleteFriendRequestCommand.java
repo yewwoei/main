@@ -25,6 +25,7 @@ public class DeleteFriendRequestCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Successfully deleted friend request of user : %1$s";
     public static final String MESSAGE_NO_SUCH_REQUEST = "Sorry, that User did not send you a friend request.";
+    public static final String MESSAGE_NOT_LOGGED_IN = "You must login before deleting friend requests.";
 
     private final Username toDelete;
 
@@ -40,6 +41,10 @@ public class DeleteFriendRequestCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if(!model.isCurrentlyLoggedIn()) {
+            throw new CommandException(MESSAGE_NOT_LOGGED_IN);
+        }
 
         // throw exception if no such user sent friendRequest
         if (!model.hasUsernameFriendRequest(toDelete)) {
