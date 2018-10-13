@@ -17,6 +17,7 @@ public class ListDebtRequestSentCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": List all request login user sent.";
 
+    @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         model.listDebtRequestSent();
