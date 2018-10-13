@@ -60,7 +60,7 @@ public class AcceptDebtRequestCommand extends Command {
         if (!model.hasUser(creditor)) {
             throw new CommandException(MESSAGE_NO_SUCH_USER);
         }
-        if (!model.hasDebtId(debtId)){
+        if (!model.hasDebtId(debtId)) {
             throw new CommandException(MESSAGE_NO_SUCH_DEBT);
         }
         if (!model.matchAmount(debtId, amount)) {
@@ -69,10 +69,10 @@ public class AcceptDebtRequestCommand extends Command {
         if (!model.matchUser(debtId, creditor)) {
             throw new CommandException(MESSAGE_USER_NOT_MATCH);
         }
-        if(model.matchStatus(debtId, DebtStatus.PENDING)) {
+        if (model.matchStatus(debtId, DebtStatus.PENDING)) {
             throw new CommandException(MESSAGE_DEBT_NOT_PENDING);
         }
         model.acceptedDebtRequest(creditor, amount, debtId);
-        return new CommandResult(String.format(MESSAGE_SUCCESS,creditor,amount,debtId));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, creditor, amount, debtId));
     }
 }
