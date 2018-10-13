@@ -21,7 +21,7 @@ public class XmlAdaptedBusySchedule {
     @XmlElement(required = true)
     private String username; // user that the blocked date belongs to.
 
-    @XmlElement
+    @XmlElement(name = "date")
     private List<XmlAdaptedDate> allXmlDates = new ArrayList<XmlAdaptedDate>();
 
     /**
@@ -87,7 +87,7 @@ public class XmlAdaptedBusySchedule {
         }
 
         final Username modelUsername = new Username(username);
-
+        return null;
     }
 
 }

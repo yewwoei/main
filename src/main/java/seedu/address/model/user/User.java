@@ -8,6 +8,7 @@ import java.util.Objects;
 
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.timetable.UniqueBusySchedule;
 
 /**
  * Represents a User in the address book.
@@ -25,6 +26,8 @@ public class User {
     private final List<Friendship> friendRequests = new ArrayList<>();
     private final List<Friendship> friends = new ArrayList<>();
     private final List<Debt> debts = new ArrayList<>();
+    private final UniqueBusySchedule busySchedule;
+
     /**
      * Every field must be present and not null.
      */
@@ -35,6 +38,7 @@ public class User {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.busySchedule = new UniqueBusySchedule(this.username);
     }
 
     public Username getUsername() {
@@ -67,6 +71,10 @@ public class User {
 
     public List<Debt> getDebts() {
         return debts;
+    }
+
+    public UniqueBusySchedule getBusySchedule() {
+        return busySchedule;
     }
 
     /**

@@ -1,6 +1,7 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -11,6 +12,7 @@ import seedu.address.model.accounting.Debt;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.user.Friendship;
 import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 /**
  * An list of users that is serializable to XML format
@@ -32,7 +34,7 @@ public class XmlSerializableUsers {
     @XmlElement
     private List<XmlAdaptedJio> jios;
     @XmlElement
-    private List<XmlAdaptedBusyDates> busySchedules;
+    private List<XmlAdaptedBusySchedule> busySchedules;
 
     /**
      * Creates an empty XmlSerializableUsers.
@@ -43,7 +45,7 @@ public class XmlSerializableUsers {
         friendship = new ArrayList<>();
         debts = new ArrayList<>();
         jios = new ArrayList<>();
-        busyDates = new ArrayList<>();
+        busySchedules = new ArrayList<>();
     }
 
     /**
@@ -52,20 +54,28 @@ public class XmlSerializableUsers {
     public XmlSerializableUsers(UserData userData) {
         this();
 
+        List<User> allUsers = new ArrayList<User>(userData.getUsernameUserHashMap().values());
+
         // adds Users into the hashmap
-        userData.getUsernameUserHashMap().forEach((key, value) -> user
-                .add(new XmlAdaptedUser(value)));
+        allUsers.forEach(( individualUser -> user
+                .add(new XmlAdaptedUser(individualUser)));
+
         // updates hashmap with friends of all Users
-        userData.getUsernameUserHashMap().forEach((key, value) -> value.getFriends()
+        allUsers.forEach(individualUser -> individualUser.getFriends()
                 .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
+
         // updates hashmap with friendRequests of all Users
-        userData.getUsernameUserHashMap().forEach((key, value) -> value.getFriendRequests()
+        allUsers.forEach(individualUser -> individualUser.getFriendRequests()
                 .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
-        userData.getUsernameUserHashMap().forEach((key, value) -> value.getDebts()
+        allUsers.forEach(individualUser -> individualUser.getDebts()
                 .forEach(d -> debts.add(new XmlAdaptedDebt(d))));
+
         // updates jios list
         userData.getJios().forEach(jio -> jios.add(new XmlAdaptedJio(jio)));
 
+        // adds all schedules into the user data in preparation for XML Storage.
+        allUsers.forEach(individualUser ->
+                busySchedules.add(new XmlAdaptedBusySchedule(individualUser.getBusySchedule()));
     }
 
     /**
