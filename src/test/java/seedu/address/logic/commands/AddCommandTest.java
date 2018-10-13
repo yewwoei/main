@@ -176,7 +176,7 @@ public class AddCommandTest {
 
         @Override
         public void addJio(Jio jio) {}
-        
+
         @Override
         public void addUser(User user) {}
 

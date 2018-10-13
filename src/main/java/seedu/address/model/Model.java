@@ -110,8 +110,8 @@ public interface Model {
     void removeJioOfName(Name jioName);
 
     void addJio(Jio jio);
-        
-        
+
+
     //=========== Undo/Redo/Commit ===============================================================================
 
     /**
