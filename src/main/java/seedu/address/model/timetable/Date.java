@@ -65,12 +65,13 @@ public class Date implements Comparable<Date> {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("NUS Week: ")
+        builder.append("[NUS Week: ")
                 .append(getWeek())
-                .append(" ")
+                .append(" Day:")
                 .append(getDay())
-                .append(" ")
-                .append(getTime());
+                .append(" Time:")
+                .append(getTime())
+                .append("]");
         return builder.toString();
     }
 
