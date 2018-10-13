@@ -10,8 +10,6 @@ import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
-import static java.util.Objects.requireNonNull;
-
 /**
  * The API of the Model component.
  */

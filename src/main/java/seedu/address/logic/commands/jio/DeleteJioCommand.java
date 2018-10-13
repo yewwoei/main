@@ -43,7 +43,7 @@ public class DeleteJioCommand extends Command {
         // TODO
         requireNonNull(model);
 
-        if(!model.hasJioName(jioName)) {
+        if (!model.hasJioName(jioName)) {
             throw new CommandException(MESSAGE_NONEXISTENT_JIO); //Jio does not exist
         }
         model.removeJioOfName(jioName);
