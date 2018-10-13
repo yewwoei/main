@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import seedu.address.model.timetable.exceptions.DateNotFoundException;
 import seedu.address.model.timetable.exceptions.DuplicateDateException;
@@ -17,7 +18,7 @@ import seedu.address.model.user.Username;
  * Represents a user's busy schedule in the MakanBook.
  * Guarantees: data values are validated and immutable.
  */
-public class UniqueBusyDateList {
+public class UniqueBusySchedule {
 
     // Identity fields
     private final Username username;
@@ -25,7 +26,7 @@ public class UniqueBusyDateList {
     // Data fields
     private final HashMap<Week, List<Date>> internalSchedule;
 
-    public UniqueBusyDateList(Username username) {
+    public UniqueBusySchedule(Username username) {
         requireNonNull(username);
         this.username = username;
 
@@ -59,10 +60,9 @@ public class UniqueBusyDateList {
      */
     public boolean contains(Date toCheck) {
         requireNonNull(toCheck);
-        Collection<List<Date>> weeks = internalSchedule.values();
-        return weeks.stream()
-                    .anyMatch( dateList -> dateList.stream()
-                                                   .anyMatch(date -> date.equals(toCheck)));
+        // get the list of busy dates for that week.
+        List<Date> weekDates = internalSchedule.get(toCheck.getWeek());
+        return weekDates.stream().anyMatch(date -> date.equals(toCheck));
 
     }
 
@@ -112,13 +112,24 @@ public class UniqueBusyDateList {
     }
 
     /**
+     * Returns an immutable sorted date list for the NUS week, which throws {@code UnsupportedOperationException}
+     * if modificaiton is attempted.
+     * @return the immutable list of all dates.
+     */
+    public List<Date> getAllDatesOnSchedule() {
+        List<List<Date>> listOfWeekDates = new ArrayList<>(internalSchedule.values());
+        List<Date> allDates = listOfWeekDates.stream()
+                .flatMap(Collection::stream)
+                .collect(Collectors.toList());
+        return Collections.unmodifiableList(allDates);
+    }
+    /**
      * Adds a date into the schedule of busyDates if it has not already been added.
      *
      * @param date the date to be added.
      */
     public void addDate(Date date) {
         Week weekNum = date.getWeek();
-
     }
 
     @Override

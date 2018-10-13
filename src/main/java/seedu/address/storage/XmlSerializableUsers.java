@@ -32,7 +32,7 @@ public class XmlSerializableUsers {
     @XmlElement
     private List<XmlAdaptedJio> jios;
     @XmlElement
-    private List<XmlAdaptedBlockedDate> busyDates;
+    private List<XmlAdaptedBusyDates> busySchedules;
 
     /**
      * Creates an empty XmlSerializableUsers.
@@ -65,8 +65,7 @@ public class XmlSerializableUsers {
                 .forEach(d -> debts.add(new XmlAdaptedDebt(d))));
         // updates jios list
         userData.getJios().forEach(jio -> jios.add(new XmlAdaptedJio(jio)));
-        // adds busy dates for the user inside.
-        userData.getUsernameUserHashMap().forEach((key, value) -> )
+
     }
 
     /**
@@ -115,8 +114,6 @@ public class XmlSerializableUsers {
                     userData.getUsernameUserHashMap().get(debts.getDebtor().getUsername()).addDebt(debts));
 
         }
-
-        for (XmlAdaptedBusyDates bd : busyDates)
 
         for (XmlAdaptedJio j: jios) {
             Jio jio = j.toModelType();
