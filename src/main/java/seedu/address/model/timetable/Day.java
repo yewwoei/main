@@ -14,7 +14,7 @@ public class Day {
     public static final String MESSAGE_DAY_CONSTRAINTS =
             "Days are case insensitive and should be one of the following: Mon, Tue, Wed, Thu, Fri, Sat, Sun";
 
-    public static final String DAY_VALIDATION_REGEX = "((mon|tue|wed|thu|fri|sat|sun))";
+    public static final String DAY_VALIDATION_REGEX = "((mon|tue|wed|thu|fri|sat|sun))$";
 
     public final String value;
 
