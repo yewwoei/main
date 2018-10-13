@@ -99,6 +99,20 @@ public interface Model {
 
     void logoutUser();
 
+    boolean hasUsernameFriendRequest(Username friendUsername);
+
+    boolean hasUsernameFriend(Username friendUsername);
+
+    void addFriend(Username friendUsername);
+
+    void acceptFriend(Username friendUsername);
+
+    boolean isSameAsCurrentUser(Username username);
+
+    void deleteFriend(Username friendUsername);
+
+    void deleteFriendRequest(Username friendUsername);
+
     //=========== Jio methods ===============================================================================
 
     boolean hasJio(Jio jio);
