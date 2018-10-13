@@ -106,4 +106,5 @@ public class ParserUserUtil {
         }
         return new Email(trimmedEmail);
     }
+
 }
