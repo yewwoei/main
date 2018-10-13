@@ -2,6 +2,9 @@ package seedu.address.model.accounting;
 
 import static java.util.Objects.requireNonNull;
 
+/**
+ * Class representing the debt amount.
+ */
 public class Amount {
 
     public static final String MESSAGE_AMOUNT_CONSTRAINTS =
