@@ -1,8 +1,6 @@
 package seedu.address.model.accounting;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.UUID;
-
 import seedu.address.model.user.User;
 
 /**
@@ -19,7 +17,7 @@ public class Debt {
     private DebtId debtId;
     private DebtStatus status;
 
-    public Debt(User creditor, User debtor, Amount amount){
+    public Debt(User creditor, User debtor, Amount amount) {
         requireAllNonNull(debtor, creditor, amount);
         this.creditor = creditor;
         this.debtor = debtor;
@@ -53,8 +51,7 @@ public class Debt {
     }
     /**
      * Method to change a debt status.
-     * @param changeTo
-     * @return String describe the changing result
+     * @param changeTo represent the new debt status
      */
     public void changeDebtStatus(DebtStatus changeTo) {
         if (this.getDebtStatus().toString() == "PENDING" && changeTo == DebtStatus.ACCEPTED) {
