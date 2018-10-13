@@ -23,19 +23,20 @@ public class SignUpCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Signs a user up to use Makan Book features. "
             + "Parameters: "
-            + PREFIX_USERNAME + "USERNAME"
-            + PREFIX_PASSWORD + "PASSWORD"
+            + PREFIX_USERNAME + "USERNAME "
+            + PREFIX_PASSWORD + "PASSWORD "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
             + PREFIX_EMAIL + "EMAIL "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_USERNAME + "johnnydoe"
-            + PREFIX_PASSWORD + "p@ssw0rd"
+            + PREFIX_USERNAME + "johnnydoe "
+            + PREFIX_PASSWORD + "p@ssw0rd "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
-            + PREFIX_EMAIL + "johnd@example.com ";
+            + PREFIX_EMAIL + "johnd@example.com";
 
     public static final String MESSAGE_SUCCESS = "Successfully Registered";
+    public static final String MESSAGE_ALREADY_LOGGEDIN = "User is already logged in";
     public static final String MESSAGE_DUPLICATE_USERNAME = "This username already exists in the Makan Book";
 
     private final User toAdd;
@@ -51,6 +52,10 @@ public class SignUpCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+
+        if (model.isCurrentlyLoggedIn()) {
+            throw new CommandException(MESSAGE_ALREADY_LOGGEDIN);
+        }
 
         if (model.hasUser(toAdd.getUsername())) {
             throw new CommandException(MESSAGE_DUPLICATE_USERNAME);
