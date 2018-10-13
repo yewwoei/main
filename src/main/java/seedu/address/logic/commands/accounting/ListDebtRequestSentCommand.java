@@ -12,7 +12,7 @@ import seedu.address.model.Model;
  * List the logged in user's debt requests.
  */
 public class ListDebtRequestSentCommand extends Command {
-    public static final String COMMAND_WORD = "listDebtRequests";
+    public static final String COMMAND_WORD = "listDebtSentRequest";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": List all request login user sent.";
