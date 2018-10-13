@@ -1,7 +1,7 @@
 package seedu.address.model.timetable;
 
-import static seedu.address.commons.util.AppUtil.checkArgument;
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.util.regex.Pattern;
 
@@ -18,11 +18,13 @@ public class Day implements Comparable<Day> {
 
     public static final String DAY_VALIDATION_REGEX = "((mon|tue|wed|thu|fri|sat|sun))$";
 
+    /** Provides the ordering of the days for compareTo */
+    private static final Ordering<String> dayOrdering = Ordering.explicit("mon", "tue",
+            "wed", "thu", "fri", "sat", "sun");
+
     public final String value;
 
-    /** Provides the ordering of the days for compareTo */
-    private static final Ordering<String> dayOrdering = Ordering.explicit("mon","tue"
-            , "wed", "thu", "fri", "sat", "sun");
+
 
     /**
      * Constructs a {@code Day}.
