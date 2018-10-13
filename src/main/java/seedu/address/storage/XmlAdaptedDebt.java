@@ -86,7 +86,7 @@ public class XmlAdaptedDebt {
                     Debt.class.getSimpleName()));
         }
 
-        if( amount == null || !(Double.valueOf(amount) > 0)) {
+        if (amount == null || !(Double.valueOf(amount) > 0)) {
             throw new IllegalValueException("Not a valid input amount");
         }
 
