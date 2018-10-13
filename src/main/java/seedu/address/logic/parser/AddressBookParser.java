@@ -148,7 +148,7 @@ public class AddressBookParser {
 
         case ListDebtRequestReceivedCommand.COMMAND_WORD:
             return new ListDebtRequestReceivedCommandParser().parse(arguments);
-            
+
         // Other Additional Makan Book Commands
 
         default:
