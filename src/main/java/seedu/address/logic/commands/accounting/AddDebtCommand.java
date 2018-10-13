@@ -57,7 +57,7 @@ public class AddDebtCommand extends Command {
             throw new CommandException(MESSAGE_INVALID_AMOUNT);
         }
         model.addDebt(debtor, amount);
-        return new CommandResult(String.format(MESSAGE_SUCCESS,debtor,amount));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, debtor, amount));
     }
 
 }
