@@ -18,6 +18,9 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.user.Username;
 
+/**
+ * Parses input arguments and creates a new AcceptDebtRequestCommand object
+ */
 public class AcceptDebtRequestCommandParser implements Parser<AcceptDebtRequestCommand> {
 
     @Override
@@ -26,7 +29,8 @@ public class AcceptDebtRequestCommandParser implements Parser<AcceptDebtRequestC
                 ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_AMOUNT, PREFIX_DEBTID);
         if (!arePrefixesPresent(argMultimap, PREFIX_USERNAME, PREFIX_AMOUNT, PREFIX_DEBTID)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AcceptDebtRequestCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, 
+                                                        AcceptDebtRequestCommand.MESSAGE_USAGE));
         }
         Username creditorUsername = ParserUserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get());
         Amount amount = ParserUserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
