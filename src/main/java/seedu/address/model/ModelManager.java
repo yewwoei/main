@@ -13,8 +13,8 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
-import seedu.address.model.accounting.Debt;
-import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.DebtId;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -178,10 +178,10 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasDebtId(String debtId){
+    public boolean hasDebtId(DebtId debtId){
         boolean result = false;
-        for(int i = 0; i < currentUser.getDebts().size(); i++) {
-            if(currentUser.getDebts().get(i).getDebtId() == debtId) {
+        for (int i = 0; i < currentUser.getDebts().size(); i++) {
+            if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
                 result = true;
             }
         }
@@ -189,7 +189,38 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addDebt(Username debtorUsername, double amount) {
+    public boolean matchAmount(DebtId debtId, Amount amount) {
+        int count = 0;
+        for (int i = 0; i < currentUser.getDebts().size(); i++) {
+            if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
+                count = i;
+                break;
+            }
+        }
+        if (currentUser.getDebts().get(count).getAmount().equals(amount)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean matchUser(DebtId debtId, Username user) {
+        int count = 0;
+        for (int i = 0; i < currentUser.getDebts().size(); i++) {
+            if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
+                count = i;
+                break;
+            }
+        }
+        if (currentUser.getDebts().get(count).getDebtor().equals(user)
+                || currentUser.getDebts().get(count).getCreditor().equals(user)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void addDebt(Username debtorUsername, Amount amount) {
         User debtor = userData.getUser(debtorUsername);
         currentUser.addDebt(debtor, amount);
         indicateUserDataChanged();
@@ -197,21 +228,21 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void clearDebt(Username debtorUsername, double amount, String debtId) {
+    public void clearDebt(Username debtorUsername, Amount amount, DebtId debtId) {
         User debtor = userData.getUser(debtorUsername);
         currentUser.clearDebt(debtor, amount, debtId);
         indicateUserDataChanged();
     }
 
     @Override
-    public void acceptedDebtRequest(Username creditorUsername, double amount, String debtId) {
+    public void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
         User creditor = userData.getUser(creditorUsername);
         currentUser.acceptedDebtRequest(creditor, amount, debtId);
         indicateUserDataChanged();
     }
 
     @Override
-    public void deleteDebtRequest(Username creditorUsername, double amount, String debtId) {
+    public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
         User creditor = userData.getUser(creditorUsername);
         currentUser.deleteDebtRequest(creditor, amount, debtId);
         indicateUserDataChanged();

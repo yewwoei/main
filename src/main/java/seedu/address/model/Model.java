@@ -3,6 +3,8 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.DebtId;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -138,15 +140,19 @@ public interface Model {
 
     //========== Model Manager Debt methods ======================================================================
 
-    boolean hasDebtId(String debtId);
+   boolean hasDebtId(DebtId debtId);
 
-    void addDebt(Username debtorUsername, double amount);
+    boolean matchAmount(DebtId debtId, Amount amount);
 
-    void clearDebt(Username debtorUsername, double amount, String debtId);
+    boolean matchUser(DebtId debtId, Username user);
 
-    void acceptedDebtRequest(Username creditorUsername, double amount, String debtId);
+    void addDebt(Username debtorUsername, Amount amount);
 
-    void deleteDebtRequest(Username creditorUsername, double amount, String debtId);
+    void clearDebt(Username debtorUsername, Amount amount, DebtId debtId);
+
+    void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId);
+
+    void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId);
 
     String listDebtHistory();
 

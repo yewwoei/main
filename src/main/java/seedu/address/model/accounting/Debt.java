@@ -81,7 +81,7 @@ public class Debt {
         return test != null
                 && test.getCreditor().equals(this.getCreditor())
                 && test.getDebtor().equals(this.getDebtor())
-                && test.getAmount() == this.getAmount()
+                && test.getAmount().equals(this.getAmount())
                 && test.getDebtId().equals(this.getDebtId())
                 && test.getDebtStatus().equals(this.getDebtStatus());
     }
@@ -96,11 +96,11 @@ public class Debt {
                 .append(" Debtor: ")
                 .append(this.getDebtor().getUsername().toString())
                 .append(" Amount: ")
-                .append(String.valueOf(this.getAmount()))
+                .append(String.valueOf(this.getAmount().toDouble()))
                 .append(" Status ")
                 .append(this.getDebtStatus().toString())
                 .append(" ID: ")
-                .append(this.getDebtId());
+                .append(this.getDebtId().toString());
         return builder.toString();
     }
 }

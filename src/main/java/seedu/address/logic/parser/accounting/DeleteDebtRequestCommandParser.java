@@ -1,12 +1,15 @@
 package seedu.address.logic.parser.accounting;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DEBTID;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.accounting.AddDebtCommand;
+import seedu.address.logic.commands.accounting.AcceptDebtRequestCommand;
+import seedu.address.logic.commands.accounting.ClearDebtCommand;
+import seedu.address.logic.commands.accounting.DeleteDebtRequestCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -14,21 +17,23 @@ import seedu.address.logic.parser.ParserUserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.DebtId;
 import seedu.address.model.user.Username;
 
-public class AddDebtCommandParser implements Parser<AddDebtCommand> {
+public class DeleteDebtRequestCommandParser implements Parser<DeleteDebtRequestCommand> {
 
     @Override
-    public AddDebtCommand parse(String args) throws ParseException {
+    public DeleteDebtRequestCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_AMOUNT);
-        if (!arePrefixesPresent(argMultimap, PREFIX_USERNAME, PREFIX_AMOUNT)
+                ArgumentTokenizer.tokenize(args, PREFIX_USERNAME, PREFIX_AMOUNT, PREFIX_DEBTID);
+        if (!arePrefixesPresent(argMultimap, PREFIX_USERNAME, PREFIX_AMOUNT, PREFIX_DEBTID)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDebtCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ClearDebtCommand.MESSAGE_USAGE));
         }
-        Username debtorUsername = ParserUserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get());
+        Username creditorUsername = ParserUserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get());
         Amount amount = ParserUserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
-        return new AddDebtCommand(debtorUsername, amount);
+        DebtId debtId = ParserUserUtil.parseDebtId(argMultimap.getValue(PREFIX_DEBTID).get());
+        return new DeleteDebtRequestCommand(creditorUsername, amount, debtId);
     }
 
     /**

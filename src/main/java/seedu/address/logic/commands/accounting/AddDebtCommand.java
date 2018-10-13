@@ -9,6 +9,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.accounting.Amount;
 import seedu.address.model.user.Username;
 
 /**
@@ -28,16 +29,18 @@ public class AddDebtCommand extends Command {
             + PREFIX_AMOUNT + "6.5";
 
     public static final String MESSAGE_SUCCESS = "Debt Request sent: %1$s %2$s";
+    public static final String MESSAGE_NO_SUCH_USER = "Input user not exist.";
+    public static final String MESSAGE_INVALID_AMOUNT = "Input amount is invalid.";
 
     private final Username debtor;
-    private final double amount;
+    private final Amount amount;
 
     /**
      * Creates an AddDebtCommand to add the specified {@code Debt}model.addRestaurant(toAdd);
         model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
      */
-    public AddDebtCommand(Username debtor, double amount) {
+    public AddDebtCommand(Username debtor, Amount amount) {
         requireNonNull(debtor);
         requireNonNull(amount);
         this.debtor = debtor;
@@ -47,6 +50,12 @@ public class AddDebtCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        if (!model.hasUser(debtor)) {
+            throw new CommandException(MESSAGE_NO_SUCH_USER);
+        }
+        if (!(amount.toDouble() > 0)) {
+            throw new CommandException(MESSAGE_INVALID_AMOUNT);
+        }
         model.addDebt(debtor, amount);
         return new CommandResult(String.format(MESSAGE_SUCCESS,debtor,amount));
     }

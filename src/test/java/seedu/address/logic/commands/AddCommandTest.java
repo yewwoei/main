@@ -156,6 +156,56 @@ public class AddCommandTest {
             throw new AssertionError("This method should not be called.");
         }
 
+        @Override
+        public boolean hasDebtId(String debtId) {
+            return false;
+        }
+
+        @Override
+        public void addDebt(Username debtorUsername, double amount) {
+
+        }
+
+        @Override
+        public void clearDebt(Username debtorUsername, double amount, String debtId) {
+
+        }
+
+        @Override
+        public void acceptedDebtRequest(Username creditorUsername, double amount, String debtId) {
+
+        }
+
+        @Override
+        public void deleteDebtRequest(Username creditorUsername, double amount, String debtId) {
+
+        }
+
+        @Override
+        public String listDebtHistory() {
+            return null;
+        }
+
+        @Override
+        public String listDebtor() {
+            return null;
+        }
+
+        @Override
+        public String listCreditor() {
+            return null;
+        }
+
+        @Override
+        public String listDebtRequestReceived() {
+            return null;
+        }
+
+        @Override
+        public String listDebtRequestSent() {
+            return null;
+        }
+
 
         // To be Done Later, fake tests for now
         @Override
