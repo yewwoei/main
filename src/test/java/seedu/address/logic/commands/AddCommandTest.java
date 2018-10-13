@@ -162,38 +162,45 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasDebtId(DebtId debtId) { return false; }
+        public boolean hasDebtId(DebtId debtId) {
+            return false;
+        }
 
         @Override
-        public boolean matchAmount(DebtId debtId, Amount amount) { return false; }
+        public boolean matchAmount(DebtId debtId, Amount amount) {
+            return false;
+        }
 
         @Override
-        public boolean matchUser(DebtId debtId, Username user) { return false; }
+        public boolean matchUser(DebtId debtId, Username user) {
+            return false;
+        }
 
         @Override
-        public boolean matchStatus(DebtId debtId, DebtStatus status) { return false; }
+        public boolean matchStatus(DebtId debtId, DebtStatus status) {
+            return false;
+        }
+        
+        @Override
+        public boolean hasDebtId(String debtId) {
+            return false;
+        }
+        
+        @Override
+        public void addDebt(Username debtorUsername, double amount) {
+        }
 
         @Override
-        public void addDebt(Username debtorUsername, Amount amount) {}
+        public void clearDebt(Username debtorUsername, double amount, String debtId) {
+        }
 
         @Override
-        public void clearDebt(Username debtorUsername, Amount amount, DebtId debtId) {}
+        public void acceptedDebtRequest(Username creditorUsername, double amount, String debtId) {
+        }
 
         @Override
-        public void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {}
-
-        @Override
-        public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {}
-
-        public boolean hasDebtId(String debtId) { return false; }
-
-        public void addDebt(Username debtorUsername, double amount) {}
-
-        public void clearDebt(Username debtorUsername, double amount, String debtId) {}
-
-        public void acceptedDebtRequest(Username creditorUsername, double amount, String debtId) {}
-
-        public void deleteDebtRequest(Username creditorUsername, double amount, String debtId) {}
+        public void deleteDebtRequest(Username creditorUsername, double amount, String debtId) {
+        }
 
         @Override
         public String listDebtHistory() {
