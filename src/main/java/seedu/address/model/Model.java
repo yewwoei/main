@@ -99,9 +99,11 @@ public interface Model {
 
     void logoutUser();
 
-    boolean hasUsernameFriendRequest(Username friendUsername);
+    boolean hasUsernameSentRequest(Username friendUsername);
 
     boolean hasUsernameFriend(Username friendUsername);
+
+    boolean hasUsernameFriendRequest(Username friendusername);
 
     void addFriend(Username friendUsername);
 

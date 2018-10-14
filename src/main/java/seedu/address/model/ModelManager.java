@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -179,17 +180,38 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasUsernameFriendRequest(Username friendUsername) {
-        User friendUser = userData.getUser(friendUsername);
-        return currentUser.getFriendRequests()
-                .contains(new Friendship(friendUser, currentUser, currentUser));
+    public boolean hasUsernameSentRequest(Username friendUsername) {
+        User friend = userData.getUser(friendUsername);
+        Username myUsername = currentUser.getUsername();
+        List<Friendship> friendRequestLists = friend.getFriendRequests();
+        for(Friendship f: friendRequestLists) {
+            if(f.getFriendUsername().equals(myUsername)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasUsernameFriendRequest(Username friendusername) {
+        List<Friendship> friendRequestsLists = currentUser.getFriendRequests();
+        for(Friendship f: friendRequestsLists) {
+            if(f.getFriendUsername().equals(friendusername)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
     public boolean hasUsernameFriend(Username friendUsername) {
-        User friendUser = userData.getUser(friendUsername);
-        return currentUser.getFriends()
-                .contains(new Friendship(friendUser, currentUser, currentUser));
+        List<Friendship> friendsLists = currentUser.getFriends();
+        for(Friendship f: friendsLists) {
+            if(f.getFriendUsername().equals(friendUsername)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

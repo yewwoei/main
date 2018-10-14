@@ -28,7 +28,8 @@ public class Group {
 
     public void addMembers(User... users) {
         List<User> toAdd = Arrays.asList(users);
-        toAdd.forEach(user -> pendingUsers.add(user));
+        toAdd.forEach(user -> {pendingUsers.add(user);
+        user.addGroupRequest(this);});
     }
 
     public String getGroupName() {

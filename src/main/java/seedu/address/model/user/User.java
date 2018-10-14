@@ -146,7 +146,7 @@ public class User {
      * @param user User is not able to add oneself as a friend.
      */
     public void addFriend(User user) {
-        Friendship friendship = new Friendship(this, this, this);
+        Friendship friendship = new Friendship(this, this, user);
         user.friendRequests.add(friendship);
     }
 
@@ -201,9 +201,11 @@ public class User {
      * @param user Username of the friend to accept.
      */
     public void acceptFriendRequest(User user) {
+        // me in friendship is currentUser, friendUser is user and initiatedBy is friendUser
         Friendship friendship = findFriendshipInList(friendRequests, user);
+        // friendUser; this is me
         User friend = friendship.getFriendUser();
-        // ensures that the RESTAURANT who initiated the friendship is not the one accepting
+        // ensures that the user who initiated the friendship is not the one accepting
         if (!friendship.getInitiatedBy().equals(this)) {
             // changes friendship to accepted
             friendship.changeFriendshipStatus();
@@ -213,7 +215,8 @@ public class User {
 
             // adds to friends for both parties
             friends.add(friendship);
-            Friendship friendship2 = new Friendship(this, friend, this, FriendshipStatus.ACCEPTED);
+            // for friendship2, i need to make friendUser this and me as friendUser and initiatedBy as friendUser
+            Friendship friendship2 = new Friendship(this, friend, friend, FriendshipStatus.ACCEPTED);
             friend.friends.add(friendship2);
         }
     }
