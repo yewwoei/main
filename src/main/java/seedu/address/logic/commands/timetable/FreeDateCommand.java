@@ -20,8 +20,8 @@ public class FreeDateCommand extends Command {
     public static final String COMMAND_WORD = "freeDate";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Frees up a time on your timetable in 30 minute chunks. " +
-            "Parameters: "
+            + ": Frees up a time on your timetable in 30 minute chunks. "
+            + "Parameters: "
             + PREFIX_WEEK + "NUS WEEK "
             + PREFIX_DAY + "DAY "
             + PREFIX_TIME + "<24-HOUR-TIME> \n"

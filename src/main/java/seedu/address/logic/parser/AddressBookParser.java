@@ -116,8 +116,8 @@ public class AddressBookParser {
         case BlockDateCommand.COMMAND_WORD:
             return new BlockDateCommandParser().parse(arguments);
 
-            case FreeDateCommand.COMMAND_WORD:
-                return new FreeDateCommandParser().parse(arguments);
+        case FreeDateCommand.COMMAND_WORD:
+            return new FreeDateCommandParser().parse(arguments);
         // Accounting Commands
 
         // Other Additional Makan Book Commands

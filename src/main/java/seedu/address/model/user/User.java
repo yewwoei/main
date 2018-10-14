@@ -415,9 +415,12 @@ public class User {
         busySchedule.add(date);
     }
 
+    /**
+     * Frees up a time on the user's schedule.
+     */
     public void freeDateOnSchedule(Date date) {
         requireNonNull(date);
-        if(!busySchedule.contains(date)) {
+        if (!busySchedule.contains(date)) {
             throw new DateNotFoundException();
         }
         busySchedule.remove(date);
