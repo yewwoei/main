@@ -236,6 +236,13 @@ public class ModelManager extends ComponentManager implements Model {
         indicateUserDataChanged();
     }
 
+    @Override
+    public void freeDateForCurrentUser(Date date) {
+        requireNonNull(date);
+        currentUser.freeDateOnSchedule(date);
+        indicateUserDataChanged();
+    }
+
 
     //=========== Jio methods ===============================================================================
 

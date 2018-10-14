@@ -11,6 +11,7 @@ import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.UniqueBusySchedule;
+import seedu.address.model.timetable.exceptions.DateNotFoundException;
 import seedu.address.model.timetable.exceptions.DuplicateDateException;
 
 /**
@@ -412,5 +413,14 @@ public class User {
             throw new DuplicateDateException();
         }
         busySchedule.add(date);
+    }
+
+    public void freeDateOnSchedule(Date date) {
+        requireNonNull(date);
+        if(!busySchedule.contains(date)) {
+            throw new DateNotFoundException();
+        }
+        busySchedule.remove(date);
+
     }
 }

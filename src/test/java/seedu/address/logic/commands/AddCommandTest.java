@@ -237,6 +237,9 @@ public class AddCommandTest {
         @Override
         public void blockDateForCurrentUser(Date date) {}
 
+        @Override
+        public void freeDateForCurrentUser(Date date) {}
+
     }
 
     /**
