@@ -2,11 +2,9 @@ package seedu.address.storage;
 
 import java.util.HashMap;
 import java.util.Objects;
-import java.util.logging.Logger;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.group.Friendship;
 import seedu.address.model.group.FriendshipStatus;
@@ -17,7 +15,6 @@ import seedu.address.model.user.Username;
  * JAXB-friendly version of Friendship
  */
 public class XmlAdaptedFriendship {
-    private static final Logger logger = LogsCenter.getLogger(XmlAdaptedFriendship.class);
     public static final String WRONG_INITIATION_MESSAGE_FORMAT = "Friendship initiated by third party!";
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "friendship's %s field is missing!";
 
