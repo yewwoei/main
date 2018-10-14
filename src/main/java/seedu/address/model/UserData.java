@@ -63,7 +63,7 @@ public class UserData {
     public boolean hasJioName(Name jioName) {
         return jios.stream().anyMatch(jio -> jio.getName().equals(jioName));
     }
-  
+
     public boolean hasJio(Jio j) {
         return jios.stream().anyMatch(jio -> jio.equals(j));
     }
@@ -91,4 +91,3 @@ public class UserData {
         return usernameUserHashMap.hashCode();
     }
 }
-
