@@ -13,7 +13,7 @@ import seedu.address.model.timetable.Week;
 /**
  * JAXB-friendly adapted version of the Blocked Timeslot.
  */
-public class XmlAdaptedBlockedDate {
+public class XmlAdaptedDate {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "The block-off Date's %s field is missing!";
 
@@ -27,15 +27,15 @@ public class XmlAdaptedBlockedDate {
 
 
     /**
-     * Constructs an XmlAdaptedBlockedDate.
+     * Constructs an XmlAdaptedDate.
      * This is the no-arg constructor that is required by JAXB.
      */
-    public XmlAdaptedBlockedDate() {}
+    public XmlAdaptedDate() {}
 
     /**
      * Constructs a {@code XmlAdaptedTimeBlock} with the given Date details.
      */
-    public XmlAdaptedBlockedDate(String week, String day, String time) {
+    public XmlAdaptedDate(String week, String day, String time) {
         this.week = week;
         this.day = day;
         this.time = time;
@@ -46,7 +46,7 @@ public class XmlAdaptedBlockedDate {
      *
      * @param source future changes to this will not affect the created XmlAdaptedTimeBlock
      */
-    public XmlAdaptedBlockedDate(Date source) {
+    public XmlAdaptedDate(Date source) {
         this.week = source.getWeek().toString();
         this.day = source.getDay().toString();
         this.time = source.getTime().toString();
@@ -103,7 +103,7 @@ public class XmlAdaptedBlockedDate {
             return false;
         }
 
-        XmlAdaptedBlockedDate otherTime = (XmlAdaptedBlockedDate) other;
+        XmlAdaptedDate otherTime = (XmlAdaptedDate) other;
         return Objects.equals(week, otherTime.week)
                 && Objects.equals(time, otherTime.time)
                 && Objects.equals(day, otherTime.day);
