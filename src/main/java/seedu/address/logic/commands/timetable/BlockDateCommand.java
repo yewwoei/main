@@ -14,10 +14,10 @@ import seedu.address.model.Model;
 import seedu.address.model.timetable.Date;
 
 /**
- * Blocks out a time on the logged in user's timetable.
+ * Blocks out a date on the logged in user's timetable.
  */
 public class BlockDateCommand extends Command {
-    public static final String COMMAND_WORD = "blockTime";
+    public static final String COMMAND_WORD = "blockDate";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Blocks out a time on your timetable in 30 minute chunks. "
