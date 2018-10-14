@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -58,7 +57,7 @@ public class XmlSerializableUsers {
         List<User> allUsers = new ArrayList<User>(userData.getUsernameUserHashMap().values());
 
         // adds Users into the hashmap
-        allUsers.forEach( individualUser -> user
+        allUsers.forEach(individualUser -> user
                 .add(new XmlAdaptedUser(individualUser)));
 
         // updates hashmap with friends of all Users

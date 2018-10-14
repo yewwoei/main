@@ -52,7 +52,7 @@ public class XmlAdaptedBusySchedule {
     }
 
     /**
-     * Helper method to obtain a List<XmlAdaptedDate> from a UniqueBusySchedule
+     * Helper method to obtain a XMLAdaptedDate list from a UniqueBusySchedule
      */
     private List<XmlAdaptedDate> retrieveDateList(UniqueBusySchedule source) {
 
@@ -79,7 +79,8 @@ public class XmlAdaptedBusySchedule {
         }
 
         if (username == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Username.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Username.class.getSimpleName()));
         }
 
         if (!Username.isValidUsername(username)) {
