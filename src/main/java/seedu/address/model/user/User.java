@@ -12,6 +12,7 @@ import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
 import seedu.address.model.group.FriendshipStatus;
 import seedu.address.model.group.Group;
+import seedu.address.model.timetable.UniqueBusySchedule;
 
 /**
  * Represents a User in the address book.
@@ -31,6 +32,7 @@ public class User {
     private final List<Group> groupRequests = new ArrayList<>();
     private final List<Group> groups = new ArrayList<>();
     private final List<Debt> debts = new ArrayList<>();
+    private final UniqueBusySchedule busySchedule;
 
     /**
      * Every field must be present and not null.
@@ -42,6 +44,7 @@ public class User {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.busySchedule = new UniqueBusySchedule(this.username);
     }
 
     public Username getUsername() {
@@ -82,6 +85,10 @@ public class User {
 
     public List<Debt> getDebts() {
         return debts;
+    }
+
+    public UniqueBusySchedule getBusySchedule() {
+        return busySchedule;
     }
 
     /**
@@ -201,24 +208,18 @@ public class User {
      * @param user Username of the friend to accept.
      */
     public void acceptFriendRequest(User user) {
-        // me in friendship is currentUser, friendUser is user and initiatedBy is friendUser
         Friendship friendship = findFriendshipInList(friendRequests, user);
-        // friendUser; this is me
         User friend = friendship.getFriendUser();
-        // ensures that the user who initiated the friendship is not the one accepting
-        if (!friendship.getInitiatedBy().equals(this)) {
-            // changes friendship to accepted
-            friendship.changeFriendshipStatus();
+        // changes friendship to accepted
+        friendship.changeFriendshipStatus();
 
-            // deletes from friendRequests for both parties
-            friendRequests.remove(friendship);
+        // deletes from friendRequests for both parties
+        friendRequests.remove(friendship);
 
-            // adds to friends for both parties
-            friends.add(friendship);
-            // for friendship2, i need to make friendUser this and me as friendUser and initiatedBy as friendUser
-            Friendship friendship2 = new Friendship(this, friend, friend, FriendshipStatus.ACCEPTED);
-            friend.friends.add(friendship2);
-        }
+        // adds to friends for both parties
+        friends.add(friendship);
+        Friendship friendship2 = new Friendship(this, friend, friend, FriendshipStatus.ACCEPTED);
+        friend.friends.add(friendship2);
     }
 
     /**
@@ -448,5 +449,15 @@ public class User {
             }
         }
         return toReturn;
+    }
+
+    // ==================== TIMETABLE COMMANDS ======================= //
+    /**
+     * Adds the constructed model UniqueBusySchedule to the user.
+     * This current user's UniqueBusySchedule must be empty.
+     */
+    public void addUniqueBusySchedule(UniqueBusySchedule schedule) {
+        assert(this.busySchedule.isEmpty());
+        this.busySchedule.addAll(schedule);
     }
 }

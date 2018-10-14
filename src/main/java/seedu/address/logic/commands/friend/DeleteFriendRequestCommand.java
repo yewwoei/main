@@ -47,7 +47,7 @@ public class DeleteFriendRequestCommand extends Command {
         }
 
         // throw exception if no such user sent friendRequest
-        if (!model.hasUsernameSentRequest(toDelete)) {
+        if (!model.hasUsernameFriendRequest(toDelete)) {
             throw new CommandException(MESSAGE_NO_SUCH_REQUEST);
         }
 
