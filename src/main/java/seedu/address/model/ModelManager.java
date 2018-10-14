@@ -67,6 +67,10 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Model Manager Miscellaneous Methods =+==========================================================
 
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
     public boolean isCurrentlyLoggedIn() {
         return this.isLoggedIn;
     }
@@ -350,13 +354,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasJioName(Name jioName) {
+    public boolean hasJioName(seedu.address.model.user.Name jioName) {
         requireNonNull(jioName);
         return userData.hasJioName(jioName);
     }
 
     @Override
-    public void removeJioOfName(Name jioName) {
+    public void removeJioOfName(seedu.address.model.user.Name jioName) {
         userData.removeJioOfName(jioName);
         indicateUserDataChanged();
     }

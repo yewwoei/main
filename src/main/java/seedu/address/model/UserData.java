@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import seedu.address.model.jio.Jio;
-import seedu.address.model.restaurant.Name;
+import seedu.address.model.user.Name;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;

@@ -6,12 +6,9 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.jio.DeleteJioCommand;
-import seedu.address.logic.parser.ArgumentMultimap;
-import seedu.address.logic.parser.ArgumentTokenizer;
-import seedu.address.logic.parser.ParserRestaurantUtil;
-import seedu.address.logic.parser.Prefix;
+import seedu.address.logic.parser.*;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.restaurant.Name;
+import seedu.address.model.user.Name;
 
 /**
  * Parses input arguments and creates a new DeleteJioCommand object
@@ -31,7 +28,7 @@ public class DeleteJioCommandParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteJioCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserRestaurantUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Name name = ParserUserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
         return new DeleteJioCommand(name);
     }

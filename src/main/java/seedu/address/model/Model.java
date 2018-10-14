@@ -36,6 +36,11 @@ public interface Model {
     ReadOnlyAddressBook getAddressBook();
 
     /**
+     * Returns the AddressBook
+     */
+    User getCurrentUser();
+
+    /**
      * Returns true if a user is currently logged into the Makan Book
      */
     boolean isCurrentlyLoggedIn();
@@ -132,9 +137,9 @@ public interface Model {
 
     boolean hasJio(Jio jio);
 
-    boolean hasJioName(Name jioName);
+    boolean hasJioName(seedu.address.model.user.Name jioName);
 
-    void removeJioOfName(Name jioName);
+    void removeJioOfName(seedu.address.model.user.Name jioName);
 
     void addJio(Jio jio);
 

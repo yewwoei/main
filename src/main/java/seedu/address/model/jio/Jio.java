@@ -1,10 +1,14 @@
 package seedu.address.model.jio;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.model.restaurant.Address;
-import seedu.address.model.restaurant.Name;
 import seedu.address.model.timetable.Date;
+import seedu.address.model.user.Name;
+import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 
 /**
@@ -15,14 +19,20 @@ public class Jio {
     private Name name;
     private Date date;
     private Address location;
-    //private UniqueUserList<User> people;
+    private List<User> people;
+
+    public Jio(Name name, Date date, Address location, User creator) {
+        this.name = name;
+        this.date = date;
+        this.location = location;
+        this.people = new ArrayList<>();
+        this.people.add(creator);
+    }
 
     public Jio(Name name, Date date, Address location) {
         this.name = name;
         this.date = date;
         this.location = location;
-        //this.people = new UniqueUserList();
-        //this.people.add(creator);
     }
 
     public Name getName() {
@@ -37,12 +47,15 @@ public class Jio {
         return location;
     }
 
-    /*
-    public ObservableList<User> getPeople() { return people.asUnmodifiableObservableList();}
+    public List<User> getPeople() { return people;}
+    
+    public void hasUser(User newUser) {
+        this.people.stream().anyMatch(user -> newUser.equals(user));
+    }
+
     public void addUsers(User newUser) {
         this.people.add(newUser);
     }
-    */
 
     @Override
     public boolean equals(Object other) {
@@ -72,8 +85,9 @@ public class Jio {
                 .append(" Date: ")
                 .append(getDate())
                 .append(" Location: ")
-                .append(getLocation());
-        //this.getPeople().forEach(x -> builder.append(x.getName()));
+                .append(getLocation())
+                .append(" People: ");
+        this.getPeople().forEach(x -> builder.append(x));
         return builder.toString();
     }
 
