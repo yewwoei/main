@@ -34,7 +34,7 @@ public class AddDebtCommand extends Command {
 
     private final Username debtor;
     private final Amount amount;
-    
+
     public AddDebtCommand(Username debtor, Amount amount) {
         requireNonNull(debtor);
         requireNonNull(amount);
