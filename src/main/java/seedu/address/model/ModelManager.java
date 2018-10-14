@@ -13,6 +13,9 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
+import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.DebtId;
+import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
@@ -179,6 +182,85 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasDebtId(DebtId debtId) {
+        boolean result = false;
+        for (int i = 0; i < currentUser.getDebts().size(); i++) {
+            if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean matchAmount(DebtId debtId, Amount amount) {
+        int count = 0;
+        for (int i = 0; i < currentUser.getDebts().size(); i++) {
+            if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
+                count = i;
+                break;
+            }
+        }
+        if (currentUser.getDebts().get(count).getAmount().equals(amount)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean matchUser(DebtId debtId, Username user) {
+        int count = 0;
+        for (int i = 0; i < currentUser.getDebts().size(); i++) {
+            if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
+                count = i;
+                break;
+            }
+        }
+        if (currentUser.getDebts().get(count).getDebtor().equals(user)
+                || currentUser.getDebts().get(count).getCreditor().equals(user)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean matchStatus(DebtId debtId, DebtStatus status) {
+        int count = 0;
+        for (int i = 0; i < currentUser.getDebts().size(); i++) {
+            if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
+                count = i;
+                break;
+            }
+        }
+        if (currentUser.getDebts().get(count).getDebtStatus().equals(status)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void addDebt(Username debtorUsername, Amount amount) {
+        User debtor = userData.getUser(debtorUsername);
+        currentUser.addDebt(debtor, amount);
+        indicateUserDataChanged();
+
+    }
+
+    @Override
+    public void clearDebt(Username debtorUsername, Amount amount, DebtId debtId) {
+        User debtor = userData.getUser(debtorUsername);
+        currentUser.clearDebt(debtor, amount, debtId);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
+        User creditor = userData.getUser(creditorUsername);
+        currentUser.acceptedDebtRequest(creditor, amount, debtId);
+        indicateUserDataChanged();
+    }
+
+    @Override
     public boolean hasUsernameFriendRequest(Username friendUsername) {
         User friendUser = userData.getUser(friendUsername);
         return currentUser.getFriendRequests()
@@ -220,6 +302,38 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
+        User creditor = userData.getUser(creditorUsername);
+        currentUser.deleteDebtRequest(creditor, amount, debtId);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public String listDebtHistory() {
+        return currentUser.listDebtHistory();
+    }
+
+    @Override
+    public String listDebtor() {
+        return currentUser.listDebtor();
+    }
+
+    @Override
+    public String listCreditor() {
+        return currentUser.listCreditor();
+    }
+
+    @Override
+    public String listDebtRequestReceived() {
+        return currentUser.listDebtRequestReceived();
+    }
+
+    @Override
+    public String listDebtRequestSent() {
+        return currentUser.listDebtRequestSent();
+    }
+
+    @Override
     public void deleteFriendRequest(Username friendUsername) {
         User friendUser = userData.getUser(friendUsername);
         currentUser.deleteFriendRequest(friendUser);
@@ -253,7 +367,6 @@ public class ModelManager extends ComponentManager implements Model {
         updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
         indicateUserDataChanged();
     }
-
 
     //=========== Undo/Redo/Commit ===============================================================================
 

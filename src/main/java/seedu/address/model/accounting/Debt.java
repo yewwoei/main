@@ -1,8 +1,6 @@
 package seedu.address.model.accounting;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
-import java.util.UUID;
-
 import seedu.address.model.user.User;
 
 /**
@@ -15,20 +13,20 @@ public class Debt {
 
     private User creditor;
     private User debtor;
-    private double amount;
-    private String debtId;
+    private Amount amount;
+    private DebtId debtId;
     private DebtStatus status;
 
-    public Debt(User creditor, User debtor, double amount) {
+    public Debt(User creditor, User debtor, Amount amount) {
         requireAllNonNull(debtor, creditor, amount);
         this.creditor = creditor;
         this.debtor = debtor;
         this.amount = amount;
-        this.debtId = UUID.randomUUID().toString();
+        this.debtId = new DebtId();
         this.status = DebtStatus.PENDING;
     }
 
-    public Debt(User creditor, User debtor, double amount, String debtId, DebtStatus status) {
+    public Debt(User creditor, User debtor, Amount amount, DebtId debtId, DebtStatus status) {
         requireAllNonNull(debtor, creditor, amount);
         this.creditor = creditor;
         this.debtor = debtor;
@@ -36,35 +34,30 @@ public class Debt {
         this.debtId = debtId;
         this.status = status;
     }
-    public DebtStatus getDebtStatus() {
-        return this.status;
-    }
     public User getDebtor() {
         return this.debtor;
     }
     public User getCreditor() {
         return this.creditor;
     }
-    public double getAmount() {
+    public Amount getAmount() {
         return this.amount;
     }
-    public String getDebtId() {
+    public DebtId getDebtId() {
         return debtId;
+    }
+    public DebtStatus getDebtStatus() {
+        return this.status;
     }
     /**
      * Method to change a debt status.
-     * @param changeTo
-     * @return String describe the changing result
+     * @param changeTo represent the new debt status
      */
-    public String changeDebtStatus(DebtStatus changeTo) {
+    public void changeDebtStatus(DebtStatus changeTo) {
         if (this.getDebtStatus().toString() == "PENDING" && changeTo == DebtStatus.ACCEPTED) {
             this.status = changeTo;
-            return "Request Accepted";
         } else if (this.getDebtStatus().toString() == "ACCEPTED" && changeTo == DebtStatus.CLEARED) {
             this.status = changeTo;
-            return "Debt Cleared";
-        } else {
-            return "No a valid action";
         }
     }
     /**
@@ -84,9 +77,10 @@ public class Debt {
         Debt test = (Debt) other;
         return test != null
                 && test.getCreditor().equals(this.getCreditor())
+                && test.getDebtor().equals(this.getDebtor())
+                && test.getAmount().equals(this.getAmount())
                 && test.getDebtId().equals(this.getDebtId())
-                && test.getAmount() == this.getAmount()
-                && test.getDebtId().equals(this.getDebtId());
+                && test.getDebtStatus().equals(this.getDebtStatus());
     }
     /**
      * Method to convert a debt to String.
@@ -99,11 +93,11 @@ public class Debt {
                 .append(" Debtor: ")
                 .append(this.getDebtor().getUsername().toString())
                 .append(" Amount: ")
-                .append(String.valueOf(this.getAmount()))
+                .append(String.valueOf(this.getAmount().toDouble()))
                 .append(" Status ")
                 .append(this.getDebtStatus().toString())
                 .append(" ID: ")
-                .append(this.getDebtId());
+                .append(this.getDebtId().toString());
         return builder.toString();
     }
 }
