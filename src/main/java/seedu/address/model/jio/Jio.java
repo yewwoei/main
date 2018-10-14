@@ -33,6 +33,7 @@ public class Jio {
         this.name = name;
         this.date = date;
         this.location = location;
+        this.people = new ArrayList<>();
     }
 
     public Name getName() {
@@ -87,7 +88,7 @@ public class Jio {
                 .append(" Location: ")
                 .append(getLocation())
                 .append(" People: ");
-        this.getPeople().forEach(x -> builder.append(x));
+        this.getPeople().forEach(x -> builder.append(x.getName()));
         return builder.toString();
     }
 

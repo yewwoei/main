@@ -35,7 +35,8 @@ public class CreateJioCommand extends Command {
             + PREFIX_ADDRESS + "Fine Food ";
 
     public static final String MESSAGE_SUCCESS = "New jio added: %1$s";
-    public static final String MESSAGE_DUPLICATE_JIO = "This jio already exists in the book";
+    public static final String MESSAGE_DUPLICATE_JIO = "A jio with the same name already exists";
+    public static final String MESSAGE_NOT_LOGGED_IN = "You must log in to use this command";
 
     private final Jio toAdd;
 
@@ -52,6 +53,11 @@ public class CreateJioCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         
+        // Check if user is logged in
+        if (!model.isCurrentlyLoggedIn()) {
+            throw new CommandException(MESSAGE_NOT_LOGGED_IN);
+        }
+
         // Add creator to the jio
         toAdd.addUsers(model.getCurrentUser());
 
