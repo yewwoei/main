@@ -31,6 +31,8 @@ public class XmlSerializableUsers {
     private List<XmlAdaptedDebt> debts;
     @XmlElement
     private List<XmlAdaptedJio> jios;
+    @XmlElement
+    private List<XmlAdaptedBlockedDate> busyDates;
 
     /**
      * Creates an empty XmlSerializableUsers.
@@ -92,6 +94,7 @@ public class XmlSerializableUsers {
             userData.addUser(friendship.getMyUsername(),
                     userData.getUser(friendship.getMyUsername()).addFriendship(friendship));
         }
+
 
         for (XmlAdaptedDebt d: debts) {
             Debt debts = d.toModelType(userData.getUsernameUserHashMap());

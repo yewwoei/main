@@ -16,6 +16,7 @@ import seedu.address.model.timetable.Week;
 public class XmlAdaptedBlockedDate {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "The block-off Date's %s field is missing!";
+
     @XmlElement(required = true)
     private String week;
     @XmlElement(required = true)
@@ -24,8 +25,9 @@ public class XmlAdaptedBlockedDate {
     private String time;
 
 
+
     /**
-     * Constructs an XmlAdaptedTag.
+     * Constructs an XmlAdaptedBlockedDate.
      * This is the no-arg constructor that is required by JAXB.
      */
     public XmlAdaptedBlockedDate() {}
