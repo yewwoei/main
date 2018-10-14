@@ -233,6 +233,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void blockDateForCurrentUser(Date date) {
         requireNonNull(date);
         currentUser.blockDateOnSchedule(date);
+        indicateUserDataChanged();
     }
 
 

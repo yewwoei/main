@@ -21,8 +21,8 @@ public class XmlAdaptedBusySchedule {
     @XmlElement(required = true)
     private String username; // user that the blocked date belongs to.
 
-    @XmlElement(name = "date")
-    private List<XmlAdaptedDate> allXmlDates = new ArrayList<XmlAdaptedDate>();
+    @XmlElement
+    private List<XmlAdaptedDate> xmlDates = new ArrayList<XmlAdaptedDate>();
 
     /**
      * Constructs an XmlAdaptedBusyDates.
@@ -36,7 +36,7 @@ public class XmlAdaptedBusySchedule {
     public XmlAdaptedBusySchedule(String username, List<XmlAdaptedDate> dates) {
         this.username = username;
         if (dates != null) {
-            this.allXmlDates = new ArrayList<>(dates);
+            this.xmlDates = new ArrayList<>(dates);
         }
     }
 
@@ -48,7 +48,7 @@ public class XmlAdaptedBusySchedule {
      */
     public XmlAdaptedBusySchedule(UniqueBusySchedule source) {
         this.username = source.getUsername().toString();
-        this.allXmlDates = retrieveDateList(source);
+        this.xmlDates = retrieveDateList(source);
     }
 
     /**
@@ -74,7 +74,7 @@ public class XmlAdaptedBusySchedule {
      */
     public UniqueBusySchedule toModelType() throws IllegalValueException {
         final List<Date> allDates = new ArrayList<>();
-        for (XmlAdaptedDate date : allXmlDates) {
+        for (XmlAdaptedDate date : xmlDates) {
             allDates.add(date.toModelType());
         }
 
