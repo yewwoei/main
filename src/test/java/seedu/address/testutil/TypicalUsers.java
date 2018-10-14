@@ -1,12 +1,15 @@
 package seedu.address.testutil;
 
-import seedu.address.model.UserData;
-import seedu.address.model.user.User;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.UserData;
+import seedu.address.model.user.User;
+
+/**
+ * A utility class containing a list of {@code User} objects to be used in tests.
+ */
 public class TypicalUsers {
     public static final User ASA = new UserBuilder()
             .withUsername("Cockburn123")
