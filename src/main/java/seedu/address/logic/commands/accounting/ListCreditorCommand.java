@@ -14,20 +14,14 @@ import seedu.address.model.Model;
 public class ListCreditorCommand extends Command {
     public static final String COMMAND_WORD = "listCreditor";
 
-    // TODO
-    public static final String MESSAGE_USAGE = null;
-
-    // TODO
-    public static final String MESSAGE_SUCCESS = null;
-
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": List all login user's creditor.";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        // TODO
         requireNonNull(model);
-
+        model.listCreditor();
         return null;
     }
-
 }
 
