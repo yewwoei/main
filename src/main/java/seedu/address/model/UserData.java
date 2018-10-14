@@ -48,4 +48,20 @@ public class UserData {
     public void removeUser(User user) {
         usernameUserHashMap.remove(user.getUsername());
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof UserData)) {
+            return false;
+        }
+        UserData otherUserData = (UserData) other;
+        return other == this // short circuit if same object
+                || usernameUserHashMap.equals(otherUserData.getUsernameUserHashMap());
+    }
+
+    @Override
+    public int hashCode() {
+        return usernameUserHashMap.hashCode();
+    }
 }
+
