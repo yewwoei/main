@@ -96,5 +96,5 @@ public class TypicalUsers {
     public static List<User> getTypicalUsers() {
         return new ArrayList<>(Arrays.asList(ASA, BENNY, CARLY, DANEL, ELLIE, FIOXA, GOMES));
     }
-    
+
 }
