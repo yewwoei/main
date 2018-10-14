@@ -111,8 +111,8 @@ public class AddressBookParser {
         // Group Commands
 
         // Timetable Commands
-            case BlockDateCommand.COMMAND_WORD:
-                return new BlockDateCommandParser().parse(arguments);
+        case BlockDateCommand.COMMAND_WORD:
+            return new BlockDateCommandParser().parse(arguments);
 
         // Accounting Commands
 
