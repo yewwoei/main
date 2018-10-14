@@ -69,7 +69,7 @@ public class UserGroupListTest {
         Assert.assertEquals(bob.listGroups() , "My Lonely Club\n");
         Assert.assertEquals(bob.listGroupRequests() , "");
         Assert.assertEquals(carol.listGroups() , "");
-        Assert.assertEquals(carol.listGroupRequests() ,"My Lonely Club\n");
+        Assert.assertEquals(carol.listGroupRequests() , "My Lonely Club\n");
         ArrayList<User> listAcceptedUsers = new ArrayList<>();
         listAcceptedUsers.add(alice);
         listAcceptedUsers.add(bob);
@@ -94,7 +94,7 @@ public class UserGroupListTest {
         Assert.assertEquals(bob.listGroups() , "My Lonely Club\n");
         Assert.assertEquals(bob.listGroupRequests() , "");
         Assert.assertEquals(carol.listGroups() , "");
-        Assert.assertEquals(carol.listGroupRequests() ,"My Lonely Club\n");
+        Assert.assertEquals(carol.listGroupRequests() , "My Lonely Club\n");
         ArrayList<User> listAcceptedUsers = new ArrayList<>();
         listAcceptedUsers.add(alice);
         listAcceptedUsers.add(bob);
@@ -120,7 +120,7 @@ public class UserGroupListTest {
         Assert.assertEquals(bob.listGroups() , "");
         Assert.assertEquals(bob.listGroupRequests() , "");
         Assert.assertEquals(carol.listGroups() , "");
-        Assert.assertEquals(carol.listGroupRequests() ,"My Lonely Club\n");
+        Assert.assertEquals(carol.listGroupRequests() , "My Lonely Club\n");
         ArrayList<User> listAcceptedUsers = new ArrayList<>();
         listAcceptedUsers.add(alice);
         ArrayList<User> listPendingUsers = new ArrayList<>();
