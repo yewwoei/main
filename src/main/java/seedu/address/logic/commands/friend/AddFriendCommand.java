@@ -65,7 +65,7 @@ public class AddFriendCommand extends Command {
         }
 
         // throw exception if trying to add someone who has sent you a friend request
-        if(model.hasUsernameFriendRequest(toAdd)) {
+        if (model.hasUsernameFriendRequest(toAdd)) {
             throw new CommandException(MESSAGE_ACCEPT_EXISTING_REQUEST);
         }
 

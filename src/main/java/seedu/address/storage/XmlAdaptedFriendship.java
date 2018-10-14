@@ -18,8 +18,8 @@ import seedu.address.model.user.Username;
  */
 public class XmlAdaptedFriendship {
     private static final Logger logger = LogsCenter.getLogger(XmlAdaptedFriendship.class);
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "friendship's %s field is missing!";
     public static final String WRONG_INITIATION_MESSAGE_FORMAT = "Friendship initiated by third party!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "friendship's %s field is missing!";
 
     @XmlElement(required = true)
     private String friendUser;

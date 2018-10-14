@@ -16,8 +16,8 @@ import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Name;
-import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.group.Friendship;
+import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -184,8 +184,8 @@ public class ModelManager extends ComponentManager implements Model {
         User friend = userData.getUser(friendUsername);
         Username myUsername = currentUser.getUsername();
         List<Friendship> friendRequestLists = friend.getFriendRequests();
-        for(Friendship f: friendRequestLists) {
-            if(f.getFriendUsername().equals(myUsername)) {
+        for (Friendship f: friendRequestLists) {
+            if (f.getFriendUsername().equals(myUsername)) {
                 return true;
             }
         }
@@ -195,8 +195,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasUsernameFriendRequest(Username friendusername) {
         List<Friendship> friendRequestsLists = currentUser.getFriendRequests();
-        for(Friendship f: friendRequestsLists) {
-            if(f.getFriendUsername().equals(friendusername)) {
+        for (Friendship f: friendRequestsLists) {
+            if (f.getFriendUsername().equals(friendusername)) {
                 return true;
             }
         }
@@ -206,8 +206,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasUsernameFriend(Username friendUsername) {
         List<Friendship> friendsLists = currentUser.getFriends();
-        for(Friendship f: friendsLists) {
-            if(f.getFriendUsername().equals(friendUsername)) {
+        for (Friendship f: friendsLists) {
+            if (f.getFriendUsername().equals(friendUsername)) {
                 return true;
             }
         }
