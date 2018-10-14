@@ -2,9 +2,11 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.UserData;
 import seedu.address.model.accounting.Debt;
@@ -17,6 +19,8 @@ import seedu.address.model.user.User;
  */
 @XmlRootElement(name = "users")
 public class XmlSerializableUsers {
+
+    private static final Logger logger = LogsCenter.getLogger(XmlUsersStorage.class);
 
     public static final String MESSAGE_DUPLICATE_PERSON = "User list contains duplicate User(s).";
     public static final String MESSAGE_NO_USER_FRIENDSHIP = "User required for friendship not found";
@@ -112,7 +116,7 @@ public class XmlSerializableUsers {
 
         for (XmlAdaptedJio j: jios) {
             Jio jio = j.toModelType();
-            if (!userData.hasJio(jio)) {
+            if (userData.hasJio(jio)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_JIO);
             }
             userData.addJio(jio);
