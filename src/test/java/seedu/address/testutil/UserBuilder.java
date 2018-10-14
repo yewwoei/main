@@ -17,7 +17,7 @@ public class UserBuilder {
     public static final String DEFAULT_NAME = "Alison Cockburn";
     public static final String DEFAULT_PHONE = "99919001";
     public static final String DEFAULT_EMAIL = "cockburn123@example.com";
-    
+
     private Username username;
     private Password password;
     private Name name;
