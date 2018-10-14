@@ -5,6 +5,8 @@ import static java.util.Objects.requireNonNull;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.DebtId;
 import seedu.address.model.user.Email;
 import seedu.address.model.user.Name;
 import seedu.address.model.user.Password;
@@ -105,5 +107,35 @@ public class ParserUserUtil {
             throw new ParseException(Email.MESSAGE_EMAIL_CONSTRAINTS);
         }
         return new Email(trimmedEmail);
+    }
+
+    /**
+     * Parses a {@code String debtId} into an {@code DebtId}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code debtId} is invalid.
+     */
+    public static DebtId parseDebtId(String debtId) throws ParseException {
+        requireNonNull(debtId);
+        String trimmedDebtId = debtId.trim();
+        if (!DebtId.isValidDebtId(trimmedDebtId)) {
+            throw new ParseException(DebtId.MESSAGE_DEBTID_CONSTRAINTS);
+        }
+        return new DebtId(trimmedDebtId);
+    }
+
+    /**
+     * Parses a {@code String amount} into an {@code Amount}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code amount} is invalid.
+     */
+    public static Amount parseAmount(String amount) throws ParseException {
+        requireNonNull(amount);
+        String trimmedAmount = amount.trim();
+        if (!Amount.isValidAmount(trimmedAmount)) {
+            throw new ParseException(Amount.MESSAGE_AMOUNT_CONSTRAINTS);
+        }
+        return new Amount(trimmedAmount);
     }
 }

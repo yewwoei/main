@@ -8,7 +8,7 @@ import java.util.Objects;
  * Represents a date in the address book.
  * Guarantees: details are present and not null, field values are validated, immutable.
  */
-public class Date {
+public class Date implements Comparable<Date> {
 
     // Data fields
     private final Week week;
@@ -65,12 +65,28 @@ public class Date {
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append("NUS Week: ")
+        builder.append("[NUS Week: ")
                 .append(getWeek())
-                .append(" ")
+                .append(" Day:")
                 .append(getDay())
-                .append(" ")
-                .append(getTime());
+                .append(" Time:")
+                .append(getTime())
+                .append("]");
         return builder.toString();
+    }
+
+    @Override
+    public int compareTo(Date other) {
+        int result = this.week.compareTo(other.week);
+        if (result != 0) {
+            return result;
+        }
+
+        result = this.day.compareTo(other.day);
+        if (result != 0) {
+            return result;
+        }
+
+        return this.time.compareTo(other.time);
     }
 }

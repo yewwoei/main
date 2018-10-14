@@ -3,11 +3,13 @@ package seedu.address.model.timetable;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import com.google.common.collect.Ordering;
+
 /**
  * Represents a Week from the NUS academic calendar.
  * Guarantees: immutable; is valid as declared in {@Link isValidWeek(String)}
  */
-public class Week {
+public class Week implements Comparable<Week> {
 
     public static final String MESSAGE_WEEK_CONSTRAINTS =
             "Week should only be one of the following: 1, 2, 3, 4, 5, 6, "
@@ -16,7 +18,13 @@ public class Week {
     public static final String WEEK_VALIDATION_REGEX =
             "[1-9]|1[0-5]|recess|reading";
 
+    /** Provides the ordering of the weeks for compareTo */
+    private static final Ordering<String> weekOrdering = Ordering.explicit(
+            "1", "2", "3", "4", "5", "6", "recess", "7",
+            "8", "9", "10", "11", "12", "13", "reading", "14", "15");
+
     public final String value;
+
 
     /**
      * Constructs a {@code Week}.
@@ -51,5 +59,10 @@ public class Week {
     @Override
     public int hashCode() {
         return value.hashCode();
+    }
+
+    @Override
+    public int compareTo(Week other) {
+        return weekOrdering.compare(this.value, other.value);
     }
 }

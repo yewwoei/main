@@ -6,8 +6,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
+import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.timetable.UniqueBusySchedule;
 
 /**
  * Represents a User in the address book.
@@ -25,6 +28,7 @@ public class User {
     private final List<Friendship> friendRequests = new ArrayList<>();
     private final List<Friendship> friends = new ArrayList<>();
     private final List<Debt> debts = new ArrayList<>();
+    private final UniqueBusySchedule busySchedule;
 
     /**
      * Every field must be present and not null.
@@ -36,6 +40,7 @@ public class User {
         this.name = name;
         this.phone = phone;
         this.email = email;
+        this.busySchedule = new UniqueBusySchedule(this.username);
     }
 
     public Username getUsername() {
@@ -68,6 +73,10 @@ public class User {
 
     public List<Debt> getDebts() {
         return debts;
+    }
+
+    public UniqueBusySchedule getBusySchedule() {
+        return busySchedule;
     }
 
     /**
@@ -132,14 +141,12 @@ public class User {
      * @param user User is not able to add oneself as a friend.
      */
     public void addFriend(User user) {
-        // checks to make sure that friend is not oneself
-        if (!user.isSameUser(this)) {
-            Friendship friendship = new Friendship(this, this, this);
-            // checks that friendship is not already in friendRequests
-            if (!user.friendRequests.contains(friendship) && !user.friends.contains(friendship)) {
-                user.friendRequests.add(friendship);
-            }
-        }
+        Friendship friendship = new Friendship(this, this, this);
+        user.friendRequests.add(friendship);
+    }
+
+    public void addFriend(Friendship friendship) {
+        this.friendRequests.add(friendship);
     }
 
     /**
@@ -190,10 +197,10 @@ public class User {
      * Changes friendship status to ACCEPTED.
      * Deletes friendship from friendRequests for the accepting party.
      * Adds friendship to friends list for both parties.
-     * @param username Name of the friend to accept.
+     * @param user Username of the friend to accept.
      */
-    public void acceptFriendRequest(Name username) {
-        Friendship friendship = findFriendshipInList(friendRequests, username);
+    public void acceptFriendRequest(User user) {
+        Friendship friendship = findFriendshipInList(friendRequests, user);
         User friend = friendship.getFriendUser();
         // ensures that the RESTAURANT who initiated the friendship is not the one accepting
         if (!friendship.getInitiatedBy().equals(this)) {
@@ -212,40 +219,35 @@ public class User {
 
     /**
      * Deletes the friendship request of the user with name username
-     * @param username Name of the user that you want to delete friendRequest of
+     * @param user Username of the user that you want to delete friendRequest of
      */
-    public void deleteFriendRequest(Name username) {
-        Friendship friendship = findFriendshipInList(friendRequests, username);
+    public void deleteFriendRequest(User user) {
+        Friendship friendship = findFriendshipInList(friendRequests, user);
         friendRequests.remove(friendship);
     }
 
     /**
      * Deletes the friendship for both parties when delete is initiated by one party.
      * Deletes friendship only if friendship exists.
-     * @param username Name of the friend you want to delete
+     * @param user Username of the friend you want to delete
      */
-    public void deleteFriend(Name username) {
+    public void deleteFriend(User user) {
         // gets the friendship for both parties
-        Friendship friendship = findFriendshipInList(friends, username);
-        User friend = friendship.getFriendUser();
-        Friendship friendship2 = findFriendshipInList(friend.friends, this.getName());
-
-        // deletes the friendship for both parties
-        if (friends.contains(friendship)) {
-            friends.remove(friendship);
-            friend.friends.remove(friendship2);
-        }
+        Friendship friendship = findFriendshipInList(friends, user);
+        Friendship friendship2 = findFriendshipInList(user.friends, this);
+        friends.remove(friendship);
+        user.friends.remove(friendship2);
     }
 
     /**
      * Helper method to find friendship in list.
      * @param list List in which you would like to search in.
-     * @param username Name of the friend that you would like to find.
+     * @param user Username of the friend that you would like to find.
      * @return Friendship between this user and user with Name username.
      */
-    public Friendship findFriendshipInList(List<Friendship> list, Name username) {
+    public Friendship findFriendshipInList(List<Friendship> list, User user) {
         for (Friendship friendship: list) {
-            if (friendship.getFriendUser().getName().equals(username)) {
+            if (friendship.getFriendUser().equals(user)) {
                 return friendship;
             }
         }
@@ -263,16 +265,14 @@ public class User {
     }
 
     /**
-     * Method for the credotir to create and add a debt.
+     * Method for the creditor to create and add a debt.
      * @param debtor the debtor of the adding debt
      * @param amount the amount of the adding debt
      */
-    public void addDebt(User debtor, double amount) {
-        if (!debtor.isSameUser(this)) {
-            Debt d = new Debt(this, debtor, amount);
-            this.debts.add(d);
-            debtor.debts.add(d);
-        }
+    public void addDebt(User debtor, Amount amount) {
+        Debt d = new Debt(this, debtor, amount);
+        this.debts.add(d);
+        debtor.debts.add(d);
     }
 
     /**
@@ -281,7 +281,7 @@ public class User {
      * @param amount the amount of the clearing debt.
      * @param debtId the debtId of the clearing debt.
      */
-    public void clearDebt(User debtor, double amount, String debtId) {
+    public void clearDebt(User debtor, Amount amount, DebtId debtId) {
         Debt toFind = new Debt(this, debtor, amount, debtId, DebtStatus.ACCEPTED);
         Debt changeTo = new Debt(this, debtor, amount, debtId, DebtStatus.CLEARED);
         int i = this.debts.indexOf(toFind);
@@ -297,7 +297,7 @@ public class User {
      * @param amount the amount of the accepting debt.
      * @param debtId the debtId of the accepting debt.
      */
-    public void acceptedDebtRequest(User creditor, double amount, String debtId) {
+    public void acceptedDebtRequest(User creditor, Amount amount, DebtId debtId) {
         Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
         Debt changeTo = new Debt(creditor, this, amount, debtId, DebtStatus.ACCEPTED);
         int i = this.debts.indexOf(toFind);
@@ -312,7 +312,7 @@ public class User {
      * @param amount the amount of the deleting debt.
      * @param debtId the debtId of the deleting debt.
      */
-    public void deleteDebtRequest(User creditor, double amount, String debtId) {
+    public void deleteDebtRequest(User creditor, Amount amount, DebtId debtId) {
         Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
         this.debts.remove(toFind);
         creditor.debts.remove(toFind);
@@ -338,7 +338,7 @@ public class User {
     public String listDebtor() {
         String toReturn = "";
         for (Debt d: this.debts) {
-            if (d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
+            if (d.getCreditor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
                 toReturn += d.toString() + "\n";
             }
         }
@@ -353,7 +353,7 @@ public class User {
     public String listCreditor() {
         String toReturn = "";
         for (Debt d: this.debts) {
-            if (d.getDebtor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
+            if (d.getDebtor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
                 toReturn += d.toString() + "\n";
             }
         }
@@ -368,7 +368,7 @@ public class User {
     public String listDebtRequestReceived() {
         String toReturn = "";
         for (Debt d: this.debts) {
-            if (d.getDebtor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
+            if (d.getDebtor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
                 toReturn += d.toString() + "\n";
             }
         }
@@ -383,10 +383,20 @@ public class User {
     public String listDebtRequestSent() {
         String toReturn = "";
         for (Debt d: this.debts) {
-            if (d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
+            if (d.getCreditor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
                 toReturn += d.toString() + "\n";
             }
         }
         return toReturn;
+    }
+
+    // ==================== TIMETABLE COMMANDS ======================= //
+    /**
+     * Adds the constructed model UniqueBusySchedule to the user.
+     * This current user's UniqueBusySchedule must be empty.
+     */
+    public void addUniqueBusySchedule(UniqueBusySchedule schedule) {
+        assert(this.busySchedule.isEmpty());
+        this.busySchedule.addAll(schedule);
     }
 }
