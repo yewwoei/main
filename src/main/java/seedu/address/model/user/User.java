@@ -1,5 +1,6 @@
 package seedu.address.model.user;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -8,7 +9,9 @@ import java.util.Objects;
 
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.UniqueBusySchedule;
+import seedu.address.model.timetable.exceptions.DuplicateDateException;
 
 /**
  * Represents a User in the address book.
@@ -396,7 +399,18 @@ public class User {
      * This current user's UniqueBusySchedule must be empty.
      */
     public void addUniqueBusySchedule(UniqueBusySchedule schedule) {
-        assert(this.busySchedule.isEmpty());
-        this.busySchedule.addAll(schedule);
+        assert(busySchedule.isEmpty());
+        busySchedule.addAll(schedule);
+    }
+
+    /**
+     * Blocks out a time on the user's schedule.
+     */
+    public void blockDateOnSchedule(Date date) {
+        requireNonNull(date);
+        if (busySchedule.contains(date)) {
+            throw new DuplicateDateException();
+        }
+        busySchedule.add(date);
     }
 }

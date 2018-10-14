@@ -9,10 +9,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Finds a common time to eat among a list of friends.
+ * Lists the available times to eat for the logged in user during a specified week number.
  */
-public class FindTimeCommand extends Command {
-    public static final String COMMAND_WORD = "findTime";
+public class ListScheduleCommand extends Command {
+    public static final String COMMAND_WORD = "listTime";
 
     // TODO
     public static final String MESSAGE_USAGE = null;
@@ -24,14 +24,14 @@ public class FindTimeCommand extends Command {
     public static final String MESSAGE_DUPLICATE_REVIEW = null;
 
     // TODO
-    private final Integer friends;
+    private final Integer weekNumber;
 
     /**
-     * Creates a FindTimeCommand to find a common eating timeslot among the {@code Integer} friends.
+     * Creates a ListScheduleCommand view the free time on the logged in user's timetable.
      */
-    public FindTimeCommand(Integer friends) {
-        requireNonNull(friends);
-        this.friends = friends;
+    public ListScheduleCommand(Integer weekNumber) {
+        requireNonNull(weekNumber);
+        this.weekNumber = weekNumber;
     }
 
     @Override
@@ -45,7 +45,7 @@ public class FindTimeCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof FindTimeCommand // instanceof handles nulls
-                && friends.equals(((FindTimeCommand) other).friends));
+                || (other instanceof ListScheduleCommand // instanceof handles nulls
+                && weekNumber.equals(((ListScheduleCommand) other).weekNumber));
     }
 }

@@ -16,6 +16,7 @@ import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.timetable.Date;
 import seedu.address.model.user.Friendship;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -224,6 +225,14 @@ public class ModelManager extends ComponentManager implements Model {
         User friendUser = userData.getUser(friendUsername);
         currentUser.deleteFriendRequest(friendUser);
         indicateUserDataChanged();
+    }
+
+    // =================== Timetable methods ===============================
+
+    @Override
+    public void blockDateForCurrentUser(Date date) {
+        requireNonNull(date);
+        currentUser.blockDateOnSchedule(date);
     }
 
 

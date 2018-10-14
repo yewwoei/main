@@ -9,10 +9,10 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 
 /**
- * Lists the available times to eat for the logged in user during a specified week number.
+ * Frees up the time on the user's timetable.
  */
-public class ListTimeCommand extends Command {
-    public static final String COMMAND_WORD = "listTime";
+public class FreeDateCommand extends Command {
+    public static final String COMMAND_WORD = "freeTime";
 
     // TODO
     public static final String MESSAGE_USAGE = null;
@@ -23,15 +23,14 @@ public class ListTimeCommand extends Command {
     // TODO
     public static final String MESSAGE_DUPLICATE_REVIEW = null;
 
-    // TODO
-    private final Integer weekNumber;
+    private final Integer toFree;
 
     /**
-     * Creates a ListTimeCommand view the free time on the logged in user's timetable.
+     * Creates a WriteReview to add the specified {@code Integer} review, that ranges from 1 - 5.
      */
-    public ListTimeCommand(Integer weekNumber) {
-        requireNonNull(weekNumber);
-        this.weekNumber = weekNumber;
+    public FreeDateCommand(Integer toFree) {
+        requireNonNull(toFree);
+        this.toFree = toFree;
     }
 
     @Override
@@ -45,7 +44,7 @@ public class ListTimeCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof ListTimeCommand // instanceof handles nulls
-                && weekNumber.equals(((ListTimeCommand) other).weekNumber));
+                || (other instanceof FreeDateCommand // instanceof handles nulls
+                && toFree.equals(((FreeDateCommand) other).toFree));
     }
 }
