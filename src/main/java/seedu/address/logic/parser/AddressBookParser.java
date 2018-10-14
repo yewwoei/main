@@ -21,12 +21,14 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.jio.CreateJioCommand;
 import seedu.address.logic.commands.timetable.BlockDateCommand;
+import seedu.address.logic.commands.timetable.FreeDateCommand;
 import seedu.address.logic.commands.user.LoginCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.commands.user.SignUpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.jio.CreateJioCommandParser;
 import seedu.address.logic.parser.timetable.BlockDateCommandParser;
+import seedu.address.logic.parser.timetable.FreeDateCommandParser;
 
 /**
  * Parses user input.
@@ -114,6 +116,8 @@ public class AddressBookParser {
         case BlockDateCommand.COMMAND_WORD:
             return new BlockDateCommandParser().parse(arguments);
 
+            case FreeDateCommand.COMMAND_WORD:
+                return new FreeDateCommandParser().parse(arguments);
         // Accounting Commands
 
         // Other Additional Makan Book Commands
