@@ -259,12 +259,25 @@ public class User {
         return null;
     }
 
+    /**
+     * Allows a user to just create a group with the group name.
+     * User creating will automatically be added into the group.
+     * @param groupName name of the group
+     * @return group Group created
+     */
     public Group createGroup(String groupName) {
         Group group = new Group(groupName, this);
         this.groups.add(group);
         return group;
     }
 
+    /**
+     * Allows a user to create a group and add users simultaneously.
+     * User creating will automatically be added into the group.
+     * @param groupName name of the group
+     * @param users list of users who are to be added to the group
+     * @return group Group created
+     */
     public Group createGroup(String groupName, User... users) {
         Group group = new Group(groupName, this, users);
         this.groups.add(group);
@@ -273,26 +286,51 @@ public class User {
         return group;
     }
 
+    /**
+     * Adds a group request to this User
+     * @param group
+     */
     public void addGroupRequest(Group group) {
         this.groupRequests.add(group);
     }
 
+    /**
+     * group is removed from the groupRequests list.
+     * group is added to the groups list.
+     * status is changed in the group.
+     * @param group
+     */
     public void acceptGroupRequest(Group group) {
         this.groupRequests.remove(group);
         this.groups.add(group);
         group.changeMemberStatus(this);
     }
 
+    /**
+     * group is removed from the groupRequests list.
+     * User is removed from group's pendingUsers list
+     * @param group
+     */
     public void deleteGroupRequest(Group group) {
         this.groupRequests.remove(group);
         group.removePendingUser(this);
     }
 
+    /**
+     * group is removed from the groups list.
+     * User is removed from group's acceptedUsers list
+     * @param group
+     */
     public void deleteGroup(Group group) {
         this.groups.remove(group);
         group.removeAcceptedUser(this);
     }
 
+    /**
+     * Helper function to list either groups or groupRequests
+     * @param list
+     * @return String of the group names
+     */
     public String listHelperGroup(List<Group> list) {
         String toReturn = "";
         for (Group group: list) {
@@ -301,14 +339,27 @@ public class User {
         return toReturn;
     }
 
+    /**
+     * Returns list of groups
+     * @return String accepted group names that have been accepted
+     */
     public String listGroups() {
         return listHelperGroup(groups);
     }
 
+    /**
+     * Returns list of groupRequests
+     * @return String of group names that have yet to be accepted
+     */
     public String listGroupRequests() {
         return listHelperGroup(groupRequests);
     }
 
+    /**
+     * User can add new members after the creation of the group
+     * @param group Group that members should be added to
+     * @param users Users to be added
+     */
     public void addGroupMembers(Group group, User... users) {
         group.addMembers(users);
     }

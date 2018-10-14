@@ -18,8 +18,8 @@ import seedu.address.model.user.Username;
  */
 public class XmlAdaptedFriendship {
     private static final Logger logger = LogsCenter.getLogger(XmlAdaptedFriendship.class);
-    public static final String WRONG_INITIATION_MESSAGE_FORMAT = "Friendship initiated by third party!";
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "friendship's %s field is missing!";
+    public static final String MESSAGE_WRONG_INITIATION = "Friendship initiated by third party!";
+    public static final String MESSAGE_MISSING_FIELD = "friendship's %s field is missing!";
 
     @XmlElement(required = true)
     private String friendUser;
@@ -82,29 +82,29 @@ public class XmlAdaptedFriendship {
      */
     public Friendship toModelType(HashMap<Username, User> usernameUserHashmap) throws IllegalValueException {
         if (friendUser == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+            throw new IllegalValueException(String.format(MESSAGE_MISSING_FIELD,
                     Friendship.class.getSimpleName()));
         }
 
         if (me == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+            throw new IllegalValueException(String.format(MESSAGE_MISSING_FIELD,
                     Friendship.class.getSimpleName()));
         }
 
         if (initiatedBy == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+            throw new IllegalValueException(String.format(MESSAGE_MISSING_FIELD,
                     Friendship.class.getSimpleName()));
         }
 
         if (friendshipStatus == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+            throw new IllegalValueException(String.format(MESSAGE_MISSING_FIELD,
                     Friendship.class.getSimpleName()));
         }
 
         if (!initiatedBy.equals(me) && !initiatedBy.equals(friendUser)) {
             System.out.println("me is :" + me);
             System.out.println("friendUser is:" + friendUser);
-            throw new IllegalValueException(WRONG_INITIATION_MESSAGE_FORMAT);
+            throw new IllegalValueException(MESSAGE_WRONG_INITIATION);
         }
 
         return new Friendship(usernameUserHashmap.get(new Username(friendUser)),
