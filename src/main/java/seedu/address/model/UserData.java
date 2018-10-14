@@ -76,7 +76,7 @@ public class UserData {
         jios.removeIf(jio -> jio.getName().equals(jioName));
     }
 
-  @Override
+    @Override
     public boolean equals(Object other) {
         if (!(other instanceof UserData)) {
             return false;
