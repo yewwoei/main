@@ -47,7 +47,7 @@ public class UserFriendListTest {
         User bob = new User(new Username("Bob"), new Password("password"), new Name("Bob"),
                 new Phone("2433"), new Email("bob@g.com"));
         alice.addFriend(bob);
-        bob.acceptFriendRequest(new Name("Alice"));
+        bob.acceptFriendRequest(alice);
         Assert.assertEquals(alice.listFriendRequests() , "");
         Assert.assertEquals(bob.listFriendRequests() , "");
         Assert.assertEquals(alice.listFriends(), "Bob\n");
@@ -64,21 +64,13 @@ public class UserFriendListTest {
                 new Phone("2433"), new Email("carol@g.com"));
         alice.addFriend(bob);
         alice.addFriend(carol);
-        bob.acceptFriendRequest(new Name("Alice"));
-        carol.acceptFriendRequest(new Name("Alice"));
+        bob.acceptFriendRequest(alice);
+        carol.acceptFriendRequest(alice);
         Assert.assertEquals(alice.listFriendRequests() , "");
         Assert.assertEquals(bob.listFriendRequests() , "");
         Assert.assertEquals(alice.listFriends(), "Bob\nCarol\n");
         Assert.assertEquals(bob.listFriends(), "Alice\n");
         Assert.assertEquals(carol.listFriends(), "Alice\n");
-    }
-
-    @Test
-    public void addingOneselfAsFriend() {
-        User alice = new User(new Username("Alice"), new Password("password"), new Name("Alice"),
-                new Phone("8942"), new Email("alice@g.com"));
-        alice.addFriend(alice);
-        Assert.assertEquals(alice.listFriendRequests() , "");
     }
 
     @Test
@@ -88,7 +80,7 @@ public class UserFriendListTest {
         User bob = new User(new Username("Bob"), new Password("password"), new Name("Bob"),
                 new Phone("2433"), new Email("bob@g.com"));
         alice.addFriend(bob);
-        bob.deleteFriendRequest(new Name("Alice"));
+        bob.deleteFriendRequest(alice);
         Assert.assertEquals(alice.listFriendRequests() , "");
         Assert.assertEquals(bob.listFriendRequests() , "");
     }
@@ -100,7 +92,7 @@ public class UserFriendListTest {
         User bob = new User(new Username("Bob"), new Password("password"), new Name("Bob"),
                 new Phone("2433"), new Email("bob@g.com"));
         alice.addFriend(bob);
-        bob.deleteFriendRequest(new Name("Alice"));
+        bob.deleteFriendRequest(alice);
         alice.addFriend(bob);
         Assert.assertEquals(alice.listFriendRequests() , "");
         Assert.assertEquals(bob.listFriendRequests() , "Alice\n");
@@ -110,27 +102,9 @@ public class UserFriendListTest {
     public void multipleFriendRequestToSameUser() {
         User alice = new User(new Username("Alice"), new Password("password"), new Name("Alice"),
                 new Phone("8942"), new Email("alice@g.com"));
-        User bob = new User(new Username("Bob"), new Password("password"), new Name("Bob"),
-                new Phone("2433"), new Email("bob@g.com"));
-        alice.addFriend(bob);
-        alice.addFriend(bob);
-        Assert.assertEquals(alice.listFriendRequests() , "");
-        Assert.assertEquals(bob.listFriendRequests() , "Alice\n");
-    }
-
-    @Test
-    public void friendRequestAfterFriends() {
-        User alice = new User(new Username("Alice"), new Password("password"), new Name("Alice"),
+        User bob = new User(new Username("Alice"), new Password("password"), new Name("Alice"),
                 new Phone("8942"), new Email("alice@g.com"));
-        User bob = new User(new Username("Bob"), new Password("password"), new Name("Bob"),
-                new Phone("2433"), new Email("bob@g.com"));
-        alice.addFriend(bob);
-        bob.acceptFriendRequest(new Name("Alice"));
-        alice.addFriend(bob);
-        Assert.assertEquals(alice.listFriendRequests() , "");
-        Assert.assertEquals(bob.listFriendRequests() , "");
-        Assert.assertEquals(alice.listFriends() , "Bob\n");
-        Assert.assertEquals(bob.listFriends() , "Alice\n");
+        Assert.assertTrue(alice.equals(bob));
     }
 
     @Test
@@ -140,8 +114,8 @@ public class UserFriendListTest {
         User bob = new User(new Username("Bob"), new Password("password"), new Name("Bob"),
                 new Phone("2433"), new Email("bob@g.com"));
         alice.addFriend(bob);
-        bob.acceptFriendRequest(new Name("Alice"));
-        alice.deleteFriend(new Name("Bob"));
+        bob.acceptFriendRequest(alice);
+        alice.deleteFriend(bob);
         Assert.assertEquals(alice.listFriends() , "");
         Assert.assertEquals(bob.listFriends() , "");
     }
@@ -156,10 +130,10 @@ public class UserFriendListTest {
                 new Phone("2433"), new Email("carol@g.com"));
         alice.addFriend(bob);
         alice.addFriend(carol);
-        bob.acceptFriendRequest(new Name("Alice"));
-        carol.acceptFriendRequest(new Name("Alice"));
-        alice.deleteFriend(new Name("Bob"));
-        carol.deleteFriend(new Name("Alice"));
+        bob.acceptFriendRequest(alice);
+        carol.acceptFriendRequest(alice);
+        alice.deleteFriend(bob);
+        carol.deleteFriend(alice);
         Assert.assertEquals(alice.listFriends() , "");
         Assert.assertEquals(bob.listFriends() , "");
         Assert.assertEquals(carol.listFriends() , "");

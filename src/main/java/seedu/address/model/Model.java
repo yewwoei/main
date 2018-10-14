@@ -3,6 +3,11 @@ package seedu.address.model;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.DebtId;
+import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -15,19 +20,28 @@ public interface Model {
 
     //=========== Model Manager Miscellaneous Methods =+==========================================================
 
-    /** {@code Predicate} that always evaluate to true */
+    /**
+     * {@code Predicate} that always evaluate to true
+     */
     Predicate<Restaurant> PREDICATE_SHOW_ALL_RESTAURANTS = unused -> true;
 
-    /** Clears existing backing model and replaces with the provided new data. */
+    /**
+     * Clears existing backing model and replaces with the provided new data.
+     */
     void resetData(ReadOnlyAddressBook newData);
 
-    /** Returns the AddressBook */
+    /**
+     * Returns the AddressBook
+     */
     ReadOnlyAddressBook getAddressBook();
 
-    /** Returns true if a user is currently logged into the Makan Book */
+    /**
+     * Returns true if a user is currently logged into the Makan Book
+     */
     boolean isCurrentlyLoggedIn();
 
     //=========== Model Manager Restaurants Methods =+============================================================
+
     /**
      * Returns true if a restaurant with the same identity as {@code restaurant} exists in the address book.
      */
@@ -55,11 +69,14 @@ public interface Model {
 
     //=========== Filtered Restaurant List Accessors =============================================================
 
-    /** Returns an unmodifiable view of the filtered restaurant list */
+    /**
+     * Returns an unmodifiable view of the filtered restaurant list
+     */
     ObservableList<Restaurant> getFilteredRestaurantList();
 
     /**
      * Updates the filter of the filtered restaurant list to filter by the given {@code predicate}.
+     *
      * @throws NullPointerException if {@code predicate} is null.
      */
     void updateFilteredRestaurantList(Predicate<Restaurant> predicate);
@@ -97,6 +114,31 @@ public interface Model {
 
     void logoutUser();
 
+    boolean hasUsernameFriendRequest(Username friendUsername);
+
+    boolean hasUsernameFriend(Username friendUsername);
+
+    void addFriend(Username friendUsername);
+
+    void acceptFriend(Username friendUsername);
+
+    boolean isSameAsCurrentUser(Username username);
+
+    void deleteFriend(Username friendUsername);
+
+    void deleteFriendRequest(Username friendUsername);
+
+    //=========== Jio methods ===============================================================================
+
+    boolean hasJio(Jio jio);
+
+    boolean hasJioName(Name jioName);
+
+    void removeJioOfName(Name jioName);
+
+    void addJio(Jio jio);
+
+
     //=========== Undo/Redo/Commit ===============================================================================
 
     /**
@@ -123,4 +165,33 @@ public interface Model {
      * Saves the current address book state for undo/redo.
      */
     void commitAddressBook();
+
+    //========== Model Manager Debt methods ======================================================================
+    boolean hasDebtId(DebtId debtId);
+
+    boolean matchAmount(DebtId debtId, Amount amount);
+
+    boolean matchUser(DebtId debtId, Username user);
+
+    boolean matchStatus(DebtId debtId, DebtStatus status);
+
+    void addDebt(Username debtorUsername, Amount amount);
+
+    void clearDebt(Username debtorUsername, Amount amount, DebtId debtId);
+
+    void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId);
+
+    void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId);
+
+    String listDebtHistory();
+
+    String listDebtor();
+
+    String listCreditor();
+
+    String listDebtRequestReceived();
+
+    String listDebtRequestSent();
+
 }
+

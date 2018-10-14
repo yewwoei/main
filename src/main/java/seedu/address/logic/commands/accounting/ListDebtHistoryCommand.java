@@ -14,18 +14,13 @@ import seedu.address.model.Model;
 public class ListDebtHistoryCommand extends Command {
     public static final String COMMAND_WORD = "listDebtHistory";
 
-    // TODO
-    public static final String MESSAGE_USAGE = null;
-
-    // TODO
-    public static final String MESSAGE_SUCCESS = null;
-
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": List all login user's Debt History.";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        // TODO
         requireNonNull(model);
-
+        model.listDebtHistory();
         return null;
     }
 

@@ -13,7 +13,13 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
+import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.DebtId;
+import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.user.Friendship;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -132,7 +138,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredRestaurants.setPredicate(predicate);
     }
 
-    //=========== Model Manager User Methods =+===================================================================
+    //=========== Model Manager User Methods ====================================================================
 
     @Override
     public boolean hasUser(Username username) {
@@ -175,6 +181,192 @@ public class ModelManager extends ComponentManager implements Model {
         this.isLoggedIn = false;
     }
 
+    @Override
+    public boolean hasDebtId(DebtId debtId) {
+        boolean result = false;
+        for (int i = 0; i < currentUser.getDebts().size(); i++) {
+            if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
+                result = true;
+            }
+        }
+        return result;
+    }
+
+    @Override
+    public boolean matchAmount(DebtId debtId, Amount amount) {
+        int count = 0;
+        for (int i = 0; i < currentUser.getDebts().size(); i++) {
+            if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
+                count = i;
+                break;
+            }
+        }
+        if (currentUser.getDebts().get(count).getAmount().equals(amount)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean matchUser(DebtId debtId, Username user) {
+        int count = 0;
+        for (int i = 0; i < currentUser.getDebts().size(); i++) {
+            if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
+                count = i;
+                break;
+            }
+        }
+        if (currentUser.getDebts().get(count).getDebtor().equals(user)
+                || currentUser.getDebts().get(count).getCreditor().equals(user)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean matchStatus(DebtId debtId, DebtStatus status) {
+        int count = 0;
+        for (int i = 0; i < currentUser.getDebts().size(); i++) {
+            if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
+                count = i;
+                break;
+            }
+        }
+        if (currentUser.getDebts().get(count).getDebtStatus().equals(status)) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void addDebt(Username debtorUsername, Amount amount) {
+        User debtor = userData.getUser(debtorUsername);
+        currentUser.addDebt(debtor, amount);
+        indicateUserDataChanged();
+
+    }
+
+    @Override
+    public void clearDebt(Username debtorUsername, Amount amount, DebtId debtId) {
+        User debtor = userData.getUser(debtorUsername);
+        currentUser.clearDebt(debtor, amount, debtId);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
+        User creditor = userData.getUser(creditorUsername);
+        currentUser.acceptedDebtRequest(creditor, amount, debtId);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean hasUsernameFriendRequest(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        return currentUser.getFriendRequests()
+                .contains(new Friendship(friendUser, currentUser, currentUser));
+    }
+
+    @Override
+    public boolean hasUsernameFriend(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        return currentUser.getFriends()
+                .contains(new Friendship(friendUser, currentUser, currentUser));
+    }
+
+    @Override
+    public void addFriend(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        currentUser.addFriend(friendUser);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void acceptFriend(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        currentUser.acceptFriendRequest(friendUser);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean isSameAsCurrentUser(Username username) {
+        User toCheck = userData.getUser(username);
+        return toCheck.equals(currentUser);
+    }
+
+    @Override
+    public void deleteFriend(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        currentUser.deleteFriend(friendUser);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
+        User creditor = userData.getUser(creditorUsername);
+        currentUser.deleteDebtRequest(creditor, amount, debtId);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public String listDebtHistory() {
+        return currentUser.listDebtHistory();
+    }
+
+    @Override
+    public String listDebtor() {
+        return currentUser.listDebtor();
+    }
+
+    @Override
+    public String listCreditor() {
+        return currentUser.listCreditor();
+    }
+
+    @Override
+    public String listDebtRequestReceived() {
+        return currentUser.listDebtRequestReceived();
+    }
+
+    @Override
+    public String listDebtRequestSent() {
+        return currentUser.listDebtRequestSent();
+    }
+
+    @Override
+    public void deleteFriendRequest(Username friendUsername) {
+        User friendUser = userData.getUser(friendUsername);
+        currentUser.deleteFriendRequest(friendUser);
+        indicateUserDataChanged();
+    }
+
+
+    //=========== Jio methods ===============================================================================
+
+    @Override
+    public boolean hasJio(Jio jio) {
+        requireNonNull(jio);
+        return userData.hasJio(jio);
+    }
+
+    @Override
+    public boolean hasJioName(Name jioName) {
+        requireNonNull(jioName);
+        return userData.hasJioName(jioName);
+    }
+
+    @Override
+    public void removeJioOfName(Name jioName) {
+        userData.removeJioOfName(jioName);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void addJio(Jio jio) {
+        userData.addJio(jio);
+        updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
+        indicateUserDataChanged();
+    }
 
     //=========== Undo/Redo/Commit ===============================================================================
 

@@ -7,7 +7,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Represents the time in a 24 hour format, with 30 minute intervals permitted only.
  * Guarantees: immutable; is valid as declared in {@Link #isValidTime(String)}
  */
-public class Time {
+public class Time implements Comparable<Time> {
     public static final String MESSAGE_TIME_CONSTRAINTS = "Time should only be in the 24-hour format in 30 minute"
             + "intervals, without any colons. For example: 2330, 0000, 0130";
 
@@ -55,4 +55,12 @@ public class Time {
         return time.hashCode();
     }
 
+    /**
+     * Makes the Time class comparable, with earlier times preceding the later times.
+     * @param other the other Time.
+     */
+    @Override
+    public int compareTo(Time other) {
+        return this.time.compareTo(other.time);
+    }
 }
