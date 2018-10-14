@@ -34,12 +34,7 @@ public class AddDebtCommand extends Command {
 
     private final Username debtor;
     private final Amount amount;
-
-    /**
-     * Creates an AddDebtCommand to add the specified {@code Debt}model.addRestaurant(toAdd);
-        model.commitAddressBook();
-        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
-     */
+    
     public AddDebtCommand(Username debtor, Amount amount) {
         requireNonNull(debtor);
         requireNonNull(amount);
