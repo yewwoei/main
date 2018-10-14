@@ -10,6 +10,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.UserData;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.jio.Jio;
+import seedu.address.model.timetable.UniqueBusySchedule;
 import seedu.address.model.user.Friendship;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -57,7 +58,7 @@ public class XmlSerializableUsers {
         List<User> allUsers = new ArrayList<User>(userData.getUsernameUserHashMap().values());
 
         // adds Users into the hashmap
-        allUsers.forEach(( individualUser -> user
+        allUsers.forEach( individualUser -> user
                 .add(new XmlAdaptedUser(individualUser)));
 
         // updates hashmap with friends of all Users
@@ -75,7 +76,7 @@ public class XmlSerializableUsers {
 
         // adds all schedules into the user data in preparation for XML Storage.
         allUsers.forEach(individualUser ->
-                busySchedules.add(new XmlAdaptedBusySchedule(individualUser.getBusySchedule()));
+                busySchedules.add(new XmlAdaptedBusySchedule(individualUser.getBusySchedule())));
     }
 
     /**
@@ -105,6 +106,21 @@ public class XmlSerializableUsers {
 
             userData.addUser(friendship.getMyUsername(),
                     userData.getUser(friendship.getMyUsername()).addFriendship(friendship));
+        }
+
+        /** Converts the UserData's timetable information into the model's {@code UniqueBusySchedule} object
+         * and stores it in the respective user object.
+         */
+        for (XmlAdaptedBusySchedule busySchedule : busySchedules) {
+
+            // Bbtain the Models.
+            UniqueBusySchedule currentSchedule = busySchedule.toModelType();
+            Username currentUsername = currentSchedule.getUsername();
+            // Get the user.
+            User currentUser = userData.getUser(currentUsername);
+
+            // Add the schedule into the user.
+            currentUser.addUniqueBusySchedule(currentSchedule);
         }
 
 

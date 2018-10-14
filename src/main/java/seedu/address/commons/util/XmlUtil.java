@@ -65,7 +65,7 @@ public class XmlUtil {
         Marshaller m = context.createMarshaller();
         m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 
-        m.marswhal(data, file.toFile());
+        m.marshal(data, file.toFile());
     }
 
 }

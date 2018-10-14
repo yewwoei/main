@@ -30,6 +30,7 @@ public class UniqueBusySchedule {
         requireNonNull(username);
         this.username = username;
 
+        // initialising the HashMap with the weeks.
         this.internalSchedule = new HashMap<Week, List<Date>>() {
             {
                 put(new Week("1"), new ArrayList<Date>());
@@ -51,8 +52,6 @@ public class UniqueBusySchedule {
                 put(new Week("15"), new ArrayList<Date>());
             }
         };
-
-
     }
 
     /**
@@ -78,6 +77,16 @@ public class UniqueBusySchedule {
         // modify the key value of the hashmap.
         List<Date> weekDates = internalSchedule.get(toAdd.getWeek());
         weekDates.add(toAdd);
+    }
+
+    /** Adds all the uniqueBusySchedule dates from another schedule into the current schedule.
+     * The current schedule must not have any dates stored.
+     */
+    public void addAll(UniqueBusySchedule otherSchedule) {
+        assert(this.internalSchedule.isEmpty());
+        // change all the reference pointers to point to otherSchedule's reference.
+        List<Date> allDates = otherSchedule.getAllDatesOnSchedule();
+        allDates.stream().forEach(this::add);
     }
 
     /**
@@ -123,6 +132,16 @@ public class UniqueBusySchedule {
                 .collect(Collectors.toList());
         Collections.sort(allDates);
         return Collections.unmodifiableList(allDates);
+    }
+
+    /**
+     * Returns true if there aren't any busy dates stored thus far.
+     */
+    public boolean isEmpty() {
+        return internalSchedule.values()
+                .stream()
+                .map(lst -> lst.isEmpty())
+                .anyMatch(test -> test == false);
     }
     /**
      * Adds a date into the schedule of busyDates if it has not already been added.

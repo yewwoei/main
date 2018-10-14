@@ -87,7 +87,11 @@ public class XmlAdaptedBusySchedule {
         }
 
         final Username modelUsername = new Username(username);
-        return null;
+
+        UniqueBusySchedule schedule = new UniqueBusySchedule(modelUsername);
+        // add all dates.
+        allDates.stream().forEach(schedule::add);
+        return schedule;
     }
 
 }

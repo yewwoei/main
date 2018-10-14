@@ -389,4 +389,14 @@ public class User {
         }
         return toReturn;
     }
+
+    // ==================== TIMETABLE COMMANDS ======================= //
+    /**
+     * Adds the constructed model UniqueBusySchedule to the user.
+     * This current user's UniqueBusySchedule must be empty.
+     */
+    public void addUniqueBusySchedule(UniqueBusySchedule schedule) {
+        assert(this.busySchedule.isEmpty());
+        this.busySchedule.addAll(schedule);
+    }
 }
