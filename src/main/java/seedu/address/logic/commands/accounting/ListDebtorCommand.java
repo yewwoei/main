@@ -23,7 +23,7 @@ public class ListDebtorCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        if(!model.isCurrentlyLoggedIn()){
+        if (!model.isCurrentlyLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGGED_IN);
         }
         model.listDebtor();
