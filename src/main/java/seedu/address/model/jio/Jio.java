@@ -19,14 +19,14 @@ public class Jio {
     private Name name;
     private Date date;
     private Address location;
-    private List<User> people;
+    private List<Username> people;
 
     public Jio(Name name, Date date, Address location, User creator) {
         this.name = name;
         this.date = date;
         this.location = location;
         this.people = new ArrayList<>();
-        this.people.add(creator);
+        this.people.add(creator.getUsername());
     }
 
     public Jio(Name name, Date date, Address location) {
@@ -48,14 +48,14 @@ public class Jio {
         return location;
     }
 
-    public List<User> getPeople() { return people;}
+    public List<Username> getPeople() { return people;}
     
     public void hasUser(User newUser) {
-        this.people.stream().anyMatch(user -> newUser.equals(user));
+        this.people.stream().anyMatch(user -> newUser.getUsername().equals(user));
     }
 
-    public void addUsers(User newUser) {
-        this.people.add(newUser);
+    public void addUser(User newUser) {
+        this.people.add(newUser.getUsername());
     }
 
     @Override
@@ -88,7 +88,7 @@ public class Jio {
                 .append(" Location: ")
                 .append(getLocation())
                 .append(" People: ");
-        this.getPeople().forEach(x -> builder.append(x.getName()));
+        this.getPeople().forEach(x -> builder.append(x));
         return builder.toString();
     }
 

@@ -59,7 +59,7 @@ public class CreateJioCommand extends Command {
         }
 
         // Add creator to the jio
-        toAdd.addUsers(model.getCurrentUser());
+        toAdd.addUser(model.getCurrentUser());
 
         if (model.hasJio(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_JIO); //Jio has already been created
