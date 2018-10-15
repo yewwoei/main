@@ -168,17 +168,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean matchAmount(DebtId debtId, Amount amount) {
+        public boolean matchDebtToAmount(DebtId debtId, Amount amount) {
             return false;
         }
 
         @Override
-        public boolean matchUser(DebtId debtId, Username user) {
+        public boolean matchDebtToUser(DebtId debtId, Username user) {
             return false;
         }
 
         @Override
-        public boolean matchStatus(DebtId debtId, DebtStatus status) {
+        public boolean matchDebtToStatus(DebtId debtId, DebtStatus status) {
             return false;
         }
         @Override

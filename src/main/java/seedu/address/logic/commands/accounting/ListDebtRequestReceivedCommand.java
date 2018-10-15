@@ -16,9 +16,16 @@ public class ListDebtRequestReceivedCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": List all request login user received.";
+
+    public static final String MESSAGE_NOT_LOGGED_IN =
+            "You must login before listing your received debt request.";
+
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        if(!model.isCurrentlyLoggedIn()){
+            throw new CommandException(MESSAGE_NOT_LOGGED_IN);
+        }
         model.listDebtRequestReceived();
         return null;
     }
