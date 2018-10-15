@@ -233,6 +233,7 @@ public class ModelManager extends ComponentManager implements Model {
                 || currentUser.getDebts().get(count).getCreditor().equals(user)) {
             return true;
         }
+        return false;
     }
     
     @Override
