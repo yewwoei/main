@@ -240,6 +240,10 @@ public class AddCommandTest {
         @Override
         public void freeDateForCurrentUser(Date date) {}
 
+        @Override
+        public boolean hasDateForCurrentUser(Date date) {}
+
+
     }
 
     /**
