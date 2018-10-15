@@ -32,7 +32,7 @@ public class FreeDateCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Time has been unblocked on your schedule: %1$s";
 
-    public static final String MESSAGE_DUPLICATE_REVIEW = "This time block is already free on your schedule.";
+    public static final String MESSAGE_DATE_NOT_FOUND = "This time block is already free on your schedule.";
 
     private final Date toFree;
 
@@ -50,7 +50,11 @@ public class FreeDateCommand extends Command {
 
         // ensure that the user is logged in.
         if (!model.isCurrentlyLoggedIn()) {
-            throw new NotLoggedInCommandException(this.COMMAND_WORD);
+            throw new NotLoggedInCommandException(COMMAND_WORD);
+        }
+
+        if (!model.hasDateForCurrentUser(toFree)) {
+            throw new CommandException(MESSAGE_DATE_NOT_FOUND);
         }
 
         model.freeDateForCurrentUser(this.toFree);

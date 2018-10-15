@@ -120,6 +120,8 @@ public interface Model {
 
     void freeDateForCurrentUser(Date date);
 
+    boolean hasDateForCurrentUser(Date date);
+
     //=========== Jio methods ===============================================================================
 
     boolean hasJio(Jio jio);

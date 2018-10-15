@@ -243,6 +243,12 @@ public class ModelManager extends ComponentManager implements Model {
         indicateUserDataChanged();
     }
 
+    @Override
+    public boolean hasDateForCurrentUser(Date date) {
+        requireNonNull(date);
+        return currentUser.hasDateOnSchedule(date);
+    }
+
 
     //=========== Jio methods ===============================================================================
 

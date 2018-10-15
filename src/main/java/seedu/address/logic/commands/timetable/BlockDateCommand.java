@@ -32,7 +32,7 @@ public class BlockDateCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New time added on your schedule: %1$s.";
 
-    public static final String MESSAGE_DUPLICATE_REVIEW = "This time block already exists in your schedule.";
+    public static final String MESSAGE_DUPLICATE_DATE = "This busy date already exists in your schedule.";
 
     private final Date toBlock;
 
@@ -53,6 +53,10 @@ public class BlockDateCommand extends Command {
         // ensure that the user is logged in.
         if (!model.isCurrentlyLoggedIn()) {
             throw new NotLoggedInCommandException(this.COMMAND_WORD);
+        }
+
+        if (model.hasDateForCurrentUser(toBlock)) {
+            throw new CommandException(MESSAGE_DUPLICATE_DATE);
         }
 
         model.blockDateForCurrentUser(this.toBlock);

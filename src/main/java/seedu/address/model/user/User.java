@@ -426,4 +426,12 @@ public class User {
         busySchedule.remove(date);
 
     }
+
+    /**
+     * Checks if the date is contained in the user's schedule.
+     */
+    public boolean hasDateOnSchedule(Date date) {
+        requireNonNull(date);
+        return busySchedule.contains(date);
+    }
 }
