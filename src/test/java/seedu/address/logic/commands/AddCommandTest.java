@@ -241,7 +241,7 @@ public class AddCommandTest {
         public void freeDateForCurrentUser(Date date) {}
 
         @Override
-        public boolean hasDateForCurrentUser(Date date) {}
+        public boolean hasDateForCurrentUser(Date date) { return true; }
 
 
     }
