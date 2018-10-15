@@ -239,6 +239,7 @@ public class ModelManager extends ComponentManager implements Model {
         return false;
     }
     
+    
     @Override
     public boolean hasUsernameFriendRequest(Username friendusername) {
         List<Friendship> friendRequestsLists = currentUser.getFriendRequests();
