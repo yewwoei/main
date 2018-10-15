@@ -6,6 +6,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
 
 /**
@@ -24,7 +25,7 @@ public class ListCreditorCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         if (!model.isCurrentlyLoggedIn()) {
-            throw new CommandException(MESSAGE_NOT_LOGGED_IN);
+            throw new NotLoggedInCommandException(COMMAND_WORD);
         }
         model.listCreditor();
         return null;

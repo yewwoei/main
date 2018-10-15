@@ -9,6 +9,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
@@ -58,7 +59,7 @@ public class ClearDebtCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         if (!model.isCurrentlyLoggedIn()) {
-            throw new CommandException(MESSAGE_NOT_LOGGED_IN);
+            throw new NotLoggedInCommandException(COMMAND_WORD);
         }
         if (!model.hasUser(debtor)) {
             throw new CommandException(MESSAGE_NO_SUCH_USER);
