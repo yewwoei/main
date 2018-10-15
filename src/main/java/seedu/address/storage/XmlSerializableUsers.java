@@ -10,9 +10,9 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.UserData;
 import seedu.address.model.accounting.Debt;
+import seedu.address.model.group.Friendship;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.timetable.UniqueBusySchedule;
-import seedu.address.model.user.Friendship;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
@@ -116,7 +116,7 @@ public class XmlSerializableUsers {
          */
         for (XmlAdaptedBusySchedule busySchedule : busySchedules) {
 
-            // Bbtain the Models.
+            // Obtain the Models.
             UniqueBusySchedule currentSchedule = busySchedule.toModelType();
             Username currentUsername = currentSchedule.getUsername();
             // Get the user.

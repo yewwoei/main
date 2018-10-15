@@ -1,6 +1,9 @@
-package seedu.address.model.user;
+package seedu.address.model.group;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
+
+import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 /**
  * Represents a Friendship in the address book.
