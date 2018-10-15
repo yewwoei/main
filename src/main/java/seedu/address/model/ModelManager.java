@@ -22,7 +22,6 @@ import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.timetable.Date;
-import seedu.address.model.user.Friendship;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
