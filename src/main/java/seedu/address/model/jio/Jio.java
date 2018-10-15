@@ -48,8 +48,10 @@ public class Jio {
         return location;
     }
 
-    public List<Username> getPeople() { return people;}
-    
+    public List<Username> getPeople() {
+        return people;
+    }
+
     public void hasUser(User newUser) {
         this.people.stream().anyMatch(user -> newUser.getUsername().equals(user));
     }

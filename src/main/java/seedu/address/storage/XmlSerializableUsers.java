@@ -22,12 +22,12 @@ import seedu.address.model.user.Username;
 @XmlRootElement(name = "users")
 public class XmlSerializableUsers {
 
-    private static final Logger logger = LogsCenter.getLogger(XmlUsersStorage.class);
-
     public static final String MESSAGE_DUPLICATE_PERSON = "User list contains duplicate User(s).";
     public static final String MESSAGE_NO_USER_FRIENDSHIP = "User required for friendship not found";
     public static final String MESSAGE_NO_USER_DEBTS = "User required for debts record not found";
     public static final String MESSAGE_DUPLICATE_JIO = "This jio already exists in the book";
+
+    private static final Logger logger = LogsCenter.getLogger(XmlUsersStorage.class);
 
     @XmlElement
     private List<XmlAdaptedUser> user;

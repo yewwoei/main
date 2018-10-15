@@ -45,7 +45,8 @@ public class XmlAdaptedJio {
     /**
      * Constructs an {@code XmlAdaptedJio} with the given jio details.
      */
-    public XmlAdaptedJio(String name, String week, String day, String time, String address, List<XmlAdaptedUsername> people) {
+    public XmlAdaptedJio(String name, String week, String day, String time, String address,
+                         List<XmlAdaptedUsername> people) {
         this.name = name;
         this.week = week;
         this.day = day;
