@@ -228,15 +228,20 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasJioName(Name jioName) {
+        public boolean hasJioName(seedu.address.model.user.Name jioName) {
             return true;
         }
 
         @Override
-        public void removeJioOfName(Name jioName) {}
+        public void removeJioOfName(seedu.address.model.user.Name jioName) {}
 
         @Override
         public void addJio(Jio jio) {}
+
+        @Override
+        public User getCurrentUser() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public void addUser(User user) {}
