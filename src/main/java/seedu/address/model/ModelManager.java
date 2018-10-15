@@ -14,10 +14,10 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
-import seedu.address.model.group.Friendship;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Friendship;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
@@ -195,6 +195,9 @@ public class ModelManager extends ComponentManager implements Model {
         return false;
     }
 
+    /**
+    * Returns whether there is a debtId
+    */
     public boolean hasDebtId(DebtId debtId) {
         boolean result = false;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
@@ -246,7 +249,10 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return false;
     }
-
+    
+    /**
+    * Whether status matches
+    */
     public boolean matchStatus(DebtId debtId, DebtStatus status) {
         int count = 0;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
