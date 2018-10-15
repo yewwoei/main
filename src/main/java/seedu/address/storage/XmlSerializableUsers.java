@@ -22,6 +22,7 @@ import seedu.address.model.user.Username;
 public class XmlSerializableUsers {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "User list contains duplicate User(s).";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Group name already exists.";
     public static final String MESSAGE_NO_USER_FRIENDSHIP = "User required for friendship not found";
     public static final String MESSAGE_NO_USER_DEBTS = "User required for debts record not found";
     public static final String MESSAGE_DUPLICATE_JIO = "This jio already exists in the book";
@@ -30,6 +31,8 @@ public class XmlSerializableUsers {
     private List<XmlAdaptedUser> user;
     @XmlElement
     private List<XmlAdaptedFriendship> friendship;
+    @XmlElement
+    private List<XmlAdaptedFriendship> groups;
     @XmlElement
     private List<XmlAdaptedDebt> debts;
     @XmlElement
@@ -44,6 +47,7 @@ public class XmlSerializableUsers {
     public XmlSerializableUsers() {
         user = new ArrayList<>();
         friendship = new ArrayList<>();
+        groups = new ArrayList<>();
         debts = new ArrayList<>();
         jios = new ArrayList<>();
         busySchedules = new ArrayList<>();
@@ -70,6 +74,9 @@ public class XmlSerializableUsers {
                 .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
         allUsers.forEach(individualUser -> individualUser.getDebts()
                 .forEach(d -> debts.add(new XmlAdaptedDebt(d))));
+
+        // updates groups list
+        userData.getGroups().forEach(group -> groups.add(new XmlAdaptedGroup(group)));
 
         // updates jios list
         userData.getJios().forEach(jio -> jios.add(new XmlAdaptedJio(jio)));

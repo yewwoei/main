@@ -16,4 +16,5 @@ public class CliSyntax {
     public static final Prefix PREFIX_WEEK = new Prefix("w/");
     public static final Prefix PREFIX_DAY = new Prefix("d/");
     public static final Prefix PREFIX_TIME = new Prefix("h/");
+    public static final Prefix PREFIX_GROUP = new Prefix("g/");
 }

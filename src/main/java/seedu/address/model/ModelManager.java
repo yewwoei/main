@@ -248,7 +248,6 @@ public class ModelManager extends ComponentManager implements Model {
         indicateUserDataChanged();
     }
 
-
     //=========== Jio methods ===============================================================================
 
     @Override
