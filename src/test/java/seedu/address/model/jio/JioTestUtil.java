@@ -1,18 +1,18 @@
 package seedu.address.model.jio;
 
 import seedu.address.model.restaurant.Address;
-import seedu.address.model.restaurant.Name;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Day;
 import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
+import seedu.address.model.user.Name;
 
 public class JioTestUtil {
-    
+
     private static Name LUNCH_NAME = new Name("lunch");
     private static Date LUNCH_DATE = new Date(new Week("1"), new Day("mon"), new Time("1200"));
     private static Address LUNCH_ADDRESS = new Address("finefood");
-    
+
     public static final Jio LUNCH = new Jio(LUNCH_NAME, LUNCH_DATE, LUNCH_ADDRESS);
     public static final Jio LUNCH_COPY = new Jio(LUNCH_NAME, LUNCH_DATE, LUNCH_ADDRESS);
 
