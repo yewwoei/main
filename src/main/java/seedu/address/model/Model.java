@@ -9,6 +9,7 @@ import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.timetable.Date;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -127,6 +128,14 @@ public interface Model {
     void deleteFriend(Username friendUsername);
 
     void deleteFriendRequest(Username friendUsername);
+
+    //============ Timetable commands ==========================
+
+    void blockDateForCurrentUser(Date date);
+
+    void freeDateForCurrentUser(Date date);
+
+    boolean hasDateForCurrentUser(Date date);
 
     //=========== Jio methods ===============================================================================
 

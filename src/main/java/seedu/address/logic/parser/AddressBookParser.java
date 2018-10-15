@@ -29,6 +29,8 @@ import seedu.address.logic.commands.accounting.ListDebtRequestReceivedCommand;
 import seedu.address.logic.commands.accounting.ListDebtRequestSentCommand;
 import seedu.address.logic.commands.accounting.ListDebtorCommand;
 import seedu.address.logic.commands.jio.CreateJioCommand;
+import seedu.address.logic.commands.timetable.BlockDateCommand;
+import seedu.address.logic.commands.timetable.FreeDateCommand;
 import seedu.address.logic.commands.user.LoginCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.commands.user.SignUpCommand;
@@ -43,6 +45,8 @@ import seedu.address.logic.parser.accounting.ListDebtRequestSentCommandParser;
 import seedu.address.logic.parser.accounting.ListDebtorCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.logic.parser.jio.CreateJioCommandParser;
+import seedu.address.logic.parser.timetable.BlockDateCommandParser;
+import seedu.address.logic.parser.timetable.FreeDateCommandParser;
 
 
 /**
@@ -128,7 +132,11 @@ public class AddressBookParser {
         // Group Commands
 
         // Timetable Commands
+        case BlockDateCommand.COMMAND_WORD:
+            return new BlockDateCommandParser().parse(arguments);
 
+        case FreeDateCommand.COMMAND_WORD:
+            return new FreeDateCommandParser().parse(arguments);
         // Accounting Commands
         case AddDebtCommand.COMMAND_WORD:
             return new AddDebtCommandParser().parse(arguments);
