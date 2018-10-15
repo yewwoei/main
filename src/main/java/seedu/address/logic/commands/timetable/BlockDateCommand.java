@@ -52,7 +52,7 @@ public class BlockDateCommand extends Command {
 
         // ensure that the user is logged in.
         if (!model.isCurrentlyLoggedIn()) {
-            throw new NotLoggedInCommandException(this.COMMAND_WORD);
+            throw new NotLoggedInCommandException(COMMAND_WORD);
         }
 
         if (model.hasDateForCurrentUser(toBlock)) {
