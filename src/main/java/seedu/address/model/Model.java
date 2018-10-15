@@ -115,9 +115,11 @@ public interface Model {
 
     void logoutUser();
 
-    boolean hasUsernameFriendRequest(Username friendUsername);
+    boolean hasUsernameSentRequest(Username friendUsername);
 
     boolean hasUsernameFriend(Username friendUsername);
+
+    boolean hasUsernameFriendRequest(Username friendusername);
 
     void addFriend(Username friendUsername);
 
@@ -146,7 +148,6 @@ public interface Model {
     void removeJioOfName(Name jioName);
 
     void addJio(Jio jio);
-
 
     //=========== Undo/Redo/Commit ===============================================================================
 

@@ -28,6 +28,10 @@ import seedu.address.logic.commands.accounting.ListDebtHistoryCommand;
 import seedu.address.logic.commands.accounting.ListDebtRequestReceivedCommand;
 import seedu.address.logic.commands.accounting.ListDebtRequestSentCommand;
 import seedu.address.logic.commands.accounting.ListDebtorCommand;
+import seedu.address.logic.commands.friend.AcceptFriendCommand;
+import seedu.address.logic.commands.friend.AddFriendCommand;
+import seedu.address.logic.commands.friend.DeleteFriendCommand;
+import seedu.address.logic.commands.friend.DeleteFriendRequestCommand;
 import seedu.address.logic.commands.jio.CreateJioCommand;
 import seedu.address.logic.commands.timetable.BlockDateCommand;
 import seedu.address.logic.commands.timetable.FreeDateCommand;
@@ -44,6 +48,10 @@ import seedu.address.logic.parser.accounting.ListDebtRequestReceivedCommandParse
 import seedu.address.logic.parser.accounting.ListDebtRequestSentCommandParser;
 import seedu.address.logic.parser.accounting.ListDebtorCommandParser;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.logic.parser.friend.AcceptFriendCommandParser;
+import seedu.address.logic.parser.friend.AddFriendCommandParser;
+import seedu.address.logic.parser.friend.DeleteFriendCommandParser;
+import seedu.address.logic.parser.friend.DeleteFriendRequestCommandParser;
 import seedu.address.logic.parser.jio.CreateJioCommandParser;
 import seedu.address.logic.parser.timetable.BlockDateCommandParser;
 import seedu.address.logic.parser.timetable.FreeDateCommandParser;
@@ -124,12 +132,23 @@ public class AddressBookParser {
         // Restaurant Commands
 
         // Friend Commands
+        case AddFriendCommand.COMMAND_WORD:
+            return new AddFriendCommandParser().parse(arguments);
+
+        case AcceptFriendCommand.COMMAND_WORD:
+            return new AcceptFriendCommandParser().parse(arguments);
+
+        case DeleteFriendCommand.COMMAND_WORD:
+            return new DeleteFriendCommandParser().parse(arguments);
+
+        case DeleteFriendRequestCommand.COMMAND_WORD:
+            return new DeleteFriendRequestCommandParser().parse(arguments);
+
+        // Group Commands
 
         // Jio Commands
         case CreateJioCommand.COMMAND_WORD:
             return new CreateJioCommandParser().parse(arguments);
-
-        // Group Commands
 
         // Timetable Commands
         case BlockDateCommand.COMMAND_WORD:

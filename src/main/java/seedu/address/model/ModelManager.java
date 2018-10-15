@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -16,11 +17,11 @@ import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Friendship;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.timetable.Date;
-import seedu.address.model.user.Friendship;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -183,6 +184,21 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+   public boolean hasUsernameSentRequest(Username friendUsername) {
+        User friend = userData.getUser(friendUsername);
+        Username myUsername = currentUser.getUsername();
+        List<Friendship> friendRequestLists = friend.getFriendRequests();
+        for (Friendship f: friendRequestLists) {
+            if (f.getFriendUsername().equals(myUsername)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+    * Returns whether there is a debtId
+    */
     public boolean hasDebtId(DebtId debtId) {
         boolean result = false;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
@@ -225,6 +241,18 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasUsernameFriendRequest(Username friendusername) {
+        List<Friendship> friendRequestsLists = currentUser.getFriendRequests();
+        for (Friendship f: friendRequestsLists) {
+            if (f.getFriendUsername().equals(friendusername)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+    * Whether status matches
+    */
     public boolean matchStatus(DebtId debtId, DebtStatus status) {
         int count = 0;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
@@ -262,17 +290,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasUsernameFriendRequest(Username friendUsername) {
-        User friendUser = userData.getUser(friendUsername);
-        return currentUser.getFriendRequests()
-                .contains(new Friendship(friendUser, currentUser, currentUser));
-    }
-
-    @Override
     public boolean hasUsernameFriend(Username friendUsername) {
-        User friendUser = userData.getUser(friendUsername);
-        return currentUser.getFriends()
-                .contains(new Friendship(friendUser, currentUser, currentUser));
+        List<Friendship> friendsLists = currentUser.getFriends();
+        for (Friendship f: friendsLists) {
+            if (f.getFriendUsername().equals(friendUsername)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

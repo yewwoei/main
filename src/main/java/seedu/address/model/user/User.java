@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -11,6 +12,9 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Friendship;
+import seedu.address.model.group.FriendshipStatus;
+import seedu.address.model.group.Group;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.UniqueBusySchedule;
 import seedu.address.model.timetable.exceptions.DateNotFoundException;
@@ -31,6 +35,8 @@ public class User {
     // Data fields
     private final List<Friendship> friendRequests = new ArrayList<>();
     private final List<Friendship> friends = new ArrayList<>();
+    private final List<Group> groupRequests = new ArrayList<>();
+    private final List<Group> groups = new ArrayList<>();
     private final List<Debt> debts = new ArrayList<>();
     private final UniqueBusySchedule busySchedule;
 
@@ -73,6 +79,14 @@ public class User {
 
     public List<Friendship> getFriends() {
         return friends;
+    }
+
+    public List<Group> getGroupRequests() {
+        return groupRequests;
+    }
+
+    public List<Group> getGroups() {
+        return groups;
     }
 
     public List<Debt> getDebts() {
@@ -145,12 +159,8 @@ public class User {
      * @param user User is not able to add oneself as a friend.
      */
     public void addFriend(User user) {
-        Friendship friendship = new Friendship(this, this, this);
+        Friendship friendship = new Friendship(this, this, user);
         user.friendRequests.add(friendship);
-    }
-
-    public void addFriend(Friendship friendship) {
-        this.friendRequests.add(friendship);
     }
 
     /**
@@ -173,14 +183,14 @@ public class User {
      * @return String of all the user's friends separated by newline character.
      */
     public String listFriends() {
-        return listHelper(friends);
+        return listHelperFriend(friends);
     }
 
     /**
      * @return String that contains all the friendRequests received of this user separated by newline character.
      */
     public String listFriendRequests() {
-        return listHelper(friendRequests);
+        return listHelperFriend(friendRequests);
     }
 
     /**
@@ -188,7 +198,7 @@ public class User {
      * @param list List that you want to print out.
      * @return String that contains all elements in list.
      */
-    public String listHelper(List<Friendship> list) {
+    public String listHelperFriend(List<Friendship> list) {
         String toReturn = "";
         for (Friendship friendship: list) {
             toReturn += friendship.getFriendUser().getName() + "\n";
@@ -206,19 +216,16 @@ public class User {
     public void acceptFriendRequest(User user) {
         Friendship friendship = findFriendshipInList(friendRequests, user);
         User friend = friendship.getFriendUser();
-        // ensures that the RESTAURANT who initiated the friendship is not the one accepting
-        if (!friendship.getInitiatedBy().equals(this)) {
-            // changes friendship to accepted
-            friendship.changeFriendshipStatus();
+        // changes friendship to accepted
+        friendship.changeFriendshipStatus();
 
-            // deletes from friendRequests for both parties
-            friendRequests.remove(friendship);
+        // deletes from friendRequests for both parties
+        friendRequests.remove(friendship);
 
-            // adds to friends for both parties
-            friends.add(friendship);
-            Friendship friendship2 = new Friendship(this, friend, this, FriendshipStatus.ACCEPTED);
-            friend.friends.add(friendship2);
-        }
+        // adds to friends for both parties
+        friends.add(friendship);
+        Friendship friendship2 = new Friendship(this, friend, friend, FriendshipStatus.ACCEPTED);
+        friend.friends.add(friendship2);
     }
 
     /**
@@ -256,6 +263,111 @@ public class User {
             }
         }
         return null;
+    }
+
+    /**
+     * Allows a user to just create a group with the group name.
+     * User creating will automatically be added into the group.
+     * @param groupName name of the group
+     * @return group Group created
+     */
+    public Group createGroup(String groupName) {
+        Group group = new Group(groupName, this);
+        this.groups.add(group);
+        return group;
+    }
+
+    /**
+     * Allows a user to create a group and add users simultaneously.
+     * User creating will automatically be added into the group.
+     * @param groupName name of the group
+     * @param users list of users who are to be added to the group
+     * @return group Group created
+     */
+    public Group createGroup(String groupName, User... users) {
+        Group group = new Group(groupName, this, users);
+        this.groups.add(group);
+        List<User> listUsers = Arrays.asList(users);
+        listUsers.forEach(user -> user.addGroupRequest(group));
+        return group;
+    }
+
+    /**
+     * Adds a group request to this User
+     * @param group
+     */
+    public void addGroupRequest(Group group) {
+        this.groupRequests.add(group);
+    }
+
+    /**
+     * group is removed from the groupRequests list.
+     * group is added to the groups list.
+     * status is changed in the group.
+     * @param group
+     */
+    public void acceptGroupRequest(Group group) {
+        this.groupRequests.remove(group);
+        this.groups.add(group);
+        group.changeMemberStatus(this);
+    }
+
+    /**
+     * group is removed from the groupRequests list.
+     * User is removed from group's pendingUsers list
+     * @param group
+     */
+    public void deleteGroupRequest(Group group) {
+        this.groupRequests.remove(group);
+        group.removePendingUser(this);
+    }
+
+    /**
+     * group is removed from the groups list.
+     * User is removed from group's acceptedUsers list
+     * @param group
+     */
+    public void deleteGroup(Group group) {
+        this.groups.remove(group);
+        group.removeAcceptedUser(this);
+    }
+
+    /**
+     * Helper function to list either groups or groupRequests
+     * @param list
+     * @return String of the group names
+     */
+    public String listHelperGroup(List<Group> list) {
+        String toReturn = "";
+        for (Group group: list) {
+            toReturn += group.getGroupName() + "\n";
+        }
+        return toReturn;
+    }
+
+    /**
+     * Returns list of groups
+     * @return String accepted group names that have been accepted
+     */
+    public String listGroups() {
+        return listHelperGroup(groups);
+    }
+
+    /**
+     * Returns list of groupRequests
+     * @return String of group names that have yet to be accepted
+     */
+    public String listGroupRequests() {
+        return listHelperGroup(groupRequests);
+    }
+
+    /**
+     * User can add new members after the creation of the group
+     * @param group Group that members should be added to
+     * @param users Users to be added
+     */
+    public void addGroupMembers(Group group, User... users) {
+        group.addMembers(users);
     }
 
     /**

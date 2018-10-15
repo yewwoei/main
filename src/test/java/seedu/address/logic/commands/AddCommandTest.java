@@ -266,7 +266,12 @@ public class AddCommandTest {
         public void logoutUser() {}
 
         @Override
-        public boolean hasUsernameFriendRequest(Username friendUsername) {
+        public boolean hasUsernameSentRequest(Username friendUsername) {
+            return true;
+        }
+
+        @Override
+        public boolean hasUsernameFriendRequest(Username friendusername) {
             return true;
         }
 
