@@ -7,6 +7,9 @@ import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
 import seedu.address.model.user.Name;
 
+/**
+ * Contains helper final Strings for testing Jio.
+ */
 public class JioTestUtil {
 
     private static Name lunchName = new Name("lunch");
