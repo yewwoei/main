@@ -11,21 +11,15 @@ import seedu.address.model.Model;
 /**
  * List the logged in user's debt requests.
  */
-public class ListDebtRequestsCommand extends Command {
-    public static final String COMMAND_WORD = "listDebtRequests";
+public class ListDebtRequestReceivedCommand extends Command {
+    public static final String COMMAND_WORD = "listDebtReceivedRequest";
 
-    // TODO
-    public static final String MESSAGE_USAGE = null;
-
-    // TODO
-    public static final String MESSAGE_SUCCESS = null;
-
-
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": List all request login user received.";
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        // TODO
         requireNonNull(model);
-
+        model.listDebtRequestReceived();
         return null;
     }
 

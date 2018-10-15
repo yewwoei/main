@@ -7,7 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
+import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
 import seedu.address.model.group.FriendshipStatus;
@@ -375,16 +377,14 @@ public class User {
     }
 
     /**
-     * Method for the credotir to create and add a debt.
+     * Method for the creditor to create and add a debt.
      * @param debtor the debtor of the adding debt
      * @param amount the amount of the adding debt
      */
-    public void addDebt(User debtor, double amount) {
-        if (!debtor.isSameUser(this)) {
-            Debt d = new Debt(this, debtor, amount);
-            this.debts.add(d);
-            debtor.debts.add(d);
-        }
+    public void addDebt(User debtor, Amount amount) {
+        Debt d = new Debt(this, debtor, amount);
+        this.debts.add(d);
+        debtor.debts.add(d);
     }
 
     /**
@@ -393,7 +393,7 @@ public class User {
      * @param amount the amount of the clearing debt.
      * @param debtId the debtId of the clearing debt.
      */
-    public void clearDebt(User debtor, double amount, String debtId) {
+    public void clearDebt(User debtor, Amount amount, DebtId debtId) {
         Debt toFind = new Debt(this, debtor, amount, debtId, DebtStatus.ACCEPTED);
         Debt changeTo = new Debt(this, debtor, amount, debtId, DebtStatus.CLEARED);
         int i = this.debts.indexOf(toFind);
@@ -409,7 +409,7 @@ public class User {
      * @param amount the amount of the accepting debt.
      * @param debtId the debtId of the accepting debt.
      */
-    public void acceptedDebtRequest(User creditor, double amount, String debtId) {
+    public void acceptedDebtRequest(User creditor, Amount amount, DebtId debtId) {
         Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
         Debt changeTo = new Debt(creditor, this, amount, debtId, DebtStatus.ACCEPTED);
         int i = this.debts.indexOf(toFind);
@@ -424,7 +424,7 @@ public class User {
      * @param amount the amount of the deleting debt.
      * @param debtId the debtId of the deleting debt.
      */
-    public void deleteDebtRequest(User creditor, double amount, String debtId) {
+    public void deleteDebtRequest(User creditor, Amount amount, DebtId debtId) {
         Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
         this.debts.remove(toFind);
         creditor.debts.remove(toFind);
@@ -450,7 +450,7 @@ public class User {
     public String listDebtor() {
         String toReturn = "";
         for (Debt d: this.debts) {
-            if (d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
+            if (d.getCreditor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
                 toReturn += d.toString() + "\n";
             }
         }
@@ -465,7 +465,7 @@ public class User {
     public String listCreditor() {
         String toReturn = "";
         for (Debt d: this.debts) {
-            if (d.getDebtor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
+            if (d.getDebtor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
                 toReturn += d.toString() + "\n";
             }
         }
@@ -480,7 +480,7 @@ public class User {
     public String listDebtRequestReceived() {
         String toReturn = "";
         for (Debt d: this.debts) {
-            if (d.getDebtor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
+            if (d.getDebtor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
                 toReturn += d.toString() + "\n";
             }
         }
@@ -495,7 +495,7 @@ public class User {
     public String listDebtRequestSent() {
         String toReturn = "";
         for (Debt d: this.debts) {
-            if (d.getCreditor().equals(this.name) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
+            if (d.getCreditor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
                 toReturn += d.toString() + "\n";
             }
         }

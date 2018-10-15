@@ -19,6 +19,9 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.DebtId;
+import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
@@ -156,6 +159,63 @@ public class AddCommandTest {
         @Override
         public void commitAddressBook() {
             throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean hasDebtId(DebtId debtId) {
+            return false;
+        }
+
+        @Override
+        public boolean matchAmount(DebtId debtId, Amount amount) {
+            return false;
+        }
+
+        @Override
+        public boolean matchUser(DebtId debtId, Username user) {
+            return false;
+        }
+
+        @Override
+        public boolean matchStatus(DebtId debtId, DebtStatus status) {
+            return false;
+        }
+        @Override
+        public void addDebt(Username debtorUsername, Amount amount) {
+        }
+        @Override
+        public void clearDebt(Username debtorUsername, Amount amount, DebtId debtId) {
+        }
+        @Override
+        public void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
+        }
+        @Override
+        public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
+        }
+
+        @Override
+        public String listDebtHistory() {
+            return null;
+        }
+
+        @Override
+        public String listDebtor() {
+            return null;
+        }
+
+        @Override
+        public String listCreditor() {
+            return null;
+        }
+
+        @Override
+        public String listDebtRequestReceived() {
+            return null;
+        }
+
+        @Override
+        public String listDebtRequestSent() {
+            return null;
         }
 
 
