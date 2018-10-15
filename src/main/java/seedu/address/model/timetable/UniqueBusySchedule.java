@@ -99,7 +99,7 @@ public class UniqueBusySchedule {
         if (!weekDates.remove(toRemove)) {
             throw new DateNotFoundException();
         }
-
+        weekDates.remove(toRemove);
     }
 
     public Username getUsername() {

@@ -33,6 +33,8 @@ import seedu.address.logic.commands.friend.AddFriendCommand;
 import seedu.address.logic.commands.friend.DeleteFriendCommand;
 import seedu.address.logic.commands.friend.DeleteFriendRequestCommand;
 import seedu.address.logic.commands.jio.CreateJioCommand;
+import seedu.address.logic.commands.timetable.BlockDateCommand;
+import seedu.address.logic.commands.timetable.FreeDateCommand;
 import seedu.address.logic.commands.user.LoginCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.commands.user.SignUpCommand;
@@ -51,6 +53,8 @@ import seedu.address.logic.parser.friend.AddFriendCommandParser;
 import seedu.address.logic.parser.friend.DeleteFriendCommandParser;
 import seedu.address.logic.parser.friend.DeleteFriendRequestCommandParser;
 import seedu.address.logic.parser.jio.CreateJioCommandParser;
+import seedu.address.logic.parser.timetable.BlockDateCommandParser;
+import seedu.address.logic.parser.timetable.FreeDateCommandParser;
 
 
 /**
@@ -147,7 +151,11 @@ public class AddressBookParser {
             return new CreateJioCommandParser().parse(arguments);
 
         // Timetable Commands
+        case BlockDateCommand.COMMAND_WORD:
+            return new BlockDateCommandParser().parse(arguments);
 
+        case FreeDateCommand.COMMAND_WORD:
+            return new FreeDateCommandParser().parse(arguments);
         // Accounting Commands
         case AddDebtCommand.COMMAND_WORD:
             return new AddDebtCommandParser().parse(arguments);

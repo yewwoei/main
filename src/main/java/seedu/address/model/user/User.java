@@ -1,5 +1,6 @@
 package seedu.address.model.user;
 
+import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
@@ -14,7 +15,10 @@ import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
 import seedu.address.model.group.FriendshipStatus;
 import seedu.address.model.group.Group;
+import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.UniqueBusySchedule;
+import seedu.address.model.timetable.exceptions.DateNotFoundException;
+import seedu.address.model.timetable.exceptions.DuplicateDateException;
 
 /**
  * Represents a User in the address book.
@@ -508,7 +512,38 @@ public class User {
      * This current user's UniqueBusySchedule must be empty.
      */
     public void addUniqueBusySchedule(UniqueBusySchedule schedule) {
-        assert(this.busySchedule.isEmpty());
-        this.busySchedule.addAll(schedule);
+        assert(busySchedule.isEmpty());
+        busySchedule.addAll(schedule);
+    }
+
+    /**
+     * Blocks out a time on the user's schedule.
+     */
+    public void blockDateOnSchedule(Date date) {
+        requireNonNull(date);
+        if (busySchedule.contains(date)) {
+            throw new DuplicateDateException();
+        }
+        busySchedule.add(date);
+    }
+
+    /**
+     * Frees up a time on the user's schedule.
+     */
+    public void freeDateOnSchedule(Date date) {
+        requireNonNull(date);
+        if (!busySchedule.contains(date)) {
+            throw new DateNotFoundException();
+        }
+        busySchedule.remove(date);
+
+    }
+
+    /**
+     * Checks if the date is contained in the user's schedule.
+     */
+    public boolean hasDateOnSchedule(Date date) {
+        requireNonNull(date);
+        return busySchedule.contains(date);
     }
 }
