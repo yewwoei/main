@@ -210,7 +210,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean matchAmount(DebtId debtId, Amount amount) {
+    public boolean matchDebtToAmount(DebtId debtId, Amount amount) {
         int count = 0;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
             if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
@@ -225,7 +225,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean matchUser(DebtId debtId, Username user) {
+    public boolean matchDebtToUser(DebtId debtId, Username user) {
         int count = 0;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
             if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
@@ -250,10 +250,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return false;
     }
-    /**
-    * Whether status matches
-    */
-    public boolean matchStatus(DebtId debtId, DebtStatus status) {
+    @Override
+    public boolean matchDebtToStatus(DebtId debtId, DebtStatus status) {
         int count = 0;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
             if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
