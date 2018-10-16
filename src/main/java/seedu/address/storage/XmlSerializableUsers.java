@@ -79,7 +79,7 @@ public class XmlSerializableUsers {
                 .forEach(d -> debts.add(new XmlAdaptedDebt(d))));
 
         // updates groups list
-        userData.getGroups().forEach(group -> groups.add(new XmlAdaptedGroup(group)));
+        // userData.getGroups().forEach(group -> groups.add(new XmlAdaptedGroup(group)));
 
         // updates jios list
         userData.getJios().forEach(jio -> jios.add(new XmlAdaptedJio(jio)));
