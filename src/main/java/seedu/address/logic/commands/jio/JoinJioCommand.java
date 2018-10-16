@@ -28,6 +28,7 @@ public class JoinJioCommand extends Command {
     private Name jioName;
 
     public static final String MESSAGE_NONEXISTENT_JIO = "This jio does not exist";
+    public static final String MESSAGE_USER_IN_JIO = "You have already joined this jio";
 
 
     /**
@@ -47,12 +48,13 @@ public class JoinJioCommand extends Command {
             throw new CommandException(COMMAND_WORD);
         }
 
+        // Check if jio exists
         if (model.hasJioName(jioName)) {
             throw new CommandException(MESSAGE_NONEXISTENT_JIO); //Jio has already been created
         }
 
         // Add user to the jio
-        model.addUserToJioOfName(jioName, model.getCurrentUser());
+        model.addCurrentUserToJioOfName(jioName);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, jioName));
     }

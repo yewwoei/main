@@ -148,7 +148,7 @@ public interface Model {
 
     void createJio(Jio jio);
 
-    void addUserToJioOfName(seedu.address.model.user.Name jioName, User user);
+    void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName);
 
     //=========== Undo/Redo/Commit ===============================================================================
 

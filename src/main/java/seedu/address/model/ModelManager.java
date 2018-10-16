@@ -21,7 +21,6 @@ import seedu.address.model.group.Friendship;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.timetable.Date;
-import seedu.address.model.user.Name;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -416,8 +415,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addUserToJioOfName(seedu.address.model.user.Name jioName, User user) {
-        userData.addUserToJioOfName(jioName, user);
+    public void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName) {
+        userData.addUserToJioOfName(jioName, currentUser);
         indicateUserDataChanged();
     }
 
