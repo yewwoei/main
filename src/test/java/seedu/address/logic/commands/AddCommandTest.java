@@ -238,6 +238,14 @@ public class AddCommandTest {
         public void createJio(Jio jio) {}
 
         @Override
+        public boolean isCurrentUserInJioOfName(seedu.address.model.user.Name jioName) {
+            return true;
+        }
+
+        @Override
+        public void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName) {}
+
+        @Override
         public void addUser(User user) {}
 
         @Override

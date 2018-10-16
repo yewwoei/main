@@ -52,8 +52,8 @@ public class Jio {
         return people;
     }
 
-    public void hasUser(User newUser) {
-        this.people.stream().anyMatch(user -> newUser.getUsername().equals(user));
+    public boolean hasUser(User newUser) {
+        return this.people.stream().anyMatch(user -> newUser.getUsername().equals(user));
     }
 
     public void addUser(User newUser) {

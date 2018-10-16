@@ -37,9 +37,8 @@ public class CreateJioCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New jio added: %1$s";
     public static final String MESSAGE_DUPLICATE_JIO = "A jio with the same name already exists";
-    public static final String MESSAGE_NOT_LOGGED_IN = "You must log in to use this command";
 
-    private final Jio toAdd;
+    private Jio toAdd;
 
 
     /**
@@ -56,7 +55,7 @@ public class CreateJioCommand extends Command {
 
         // Check if user is logged in
         if (!model.isCurrentlyLoggedIn()) {
-            throw new NotLoggedInCommandException(MESSAGE_NOT_LOGGED_IN);
+            throw new NotLoggedInCommandException(COMMAND_WORD);
         }
 
         if (model.hasJio(toAdd)) {
