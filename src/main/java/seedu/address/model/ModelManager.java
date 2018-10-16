@@ -68,10 +68,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Model Manager Miscellaneous Methods =+==========================================================
 
-    public User getCurrentUser() {
-        return currentUser;
-    }
-
     public boolean isCurrentlyLoggedIn() {
         return this.isLoggedIn;
     }
@@ -413,7 +409,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addJio(Jio jio) {
+    public void createJio(Jio jio) {
+        jio.addUser(currentUser);
         userData.addJio(jio);
         updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
         indicateUserDataChanged();

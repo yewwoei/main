@@ -63,7 +63,7 @@ public class CreateJioCommand extends Command {
             throw new CommandException(MESSAGE_DUPLICATE_JIO); //Jio has already been created
         }
 
-        model.addJio(toAdd);
+        model.createJio(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
