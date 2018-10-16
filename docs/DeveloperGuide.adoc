@@ -419,6 +419,42 @@ Initially, I considered asking the initiating User to enter all the information 
 This is so that I would be able to construct the User from the the information provided. However, this would be too
 inconvenient for the User and thus the hashmap mentioned before was used.
 
+=== Payment Splitting Feature
+==== Current Implementation
+The payment splitting feature allow user to keep record for their debts, especially for gathering. Creditor can use
+the `addDebt` to create a request to debtor. A record of this debt will be made with a "pending" status and store to
+both user. Debtor can then use the `acceptDebtRequest` to accept the request from creditor, which the status will be
+changed to "accepted", or reject and delete the request by `deleteDebtRequest`, which the the debt record will be
+deleted and removed from the storage. If the debt has been repaid, the creditor can use the `clearDebt` to mark the
+debt as "cleared". Only the user who initialized the debt(creditor) can clear the debt, and only the other user(debtor)
+can accept or delete the debt. An accepted debt needed to be confirmed by both users.
+==== How the feature is implemented
+The Debt class store creditor, debtor, amount, status and id(timestamp).
+The creditor and debtor must be a user, amount should be larger than zero,
+there are three status - PENDING, ACCEPTED and CLEARED and the id is a 15 digits long string to identify the debt.
+Debts are stored as an XML element under users.xml with all the above attributes mentioned as a string.
+==== Why it is implemented that way
+The debt is under "pending" when it is created, it is treated as a request to the debtor. The debtor needs to accept
+and make it to a "accepted" debt. The "accepted" debt need to be confirm by both side because we want to ensure its
+accuracy. Also, only the user who initialize the debt(creditor) can clear the debt to prevent the debtor clear or delete
+it for self benefit.
+==== Alternatives considered.
+===== Alternative 1: The debt can create by one user and do not need to be accepted
+Pros:
+* Easy to store
+* Easy to mange
+Cons:
+* Lost accuracy
+* Not fair to user
+===== Alternative 2: The debt store separately instead of under user
+Pros:
+* Easy to store
+* Easy to retrieve
+* Easy to implement
+Cons:
+* Cannot achieve confirmation by user
+* It is cumbersome to user
+
 === Jio Feature
 ==== Current Implementation
 A `Jio` object stores information about the jio in the following objects: `Name`, `Week`, `Day`, `Time`, `Address`. The
@@ -461,6 +497,7 @@ do not touch current user at all, but pass `Jio` objects on to `ModelManager`.
 ** Pros: All information about User is stored for possible retrieval in the future (eg. to view user timetables).
 ** Cons: Difficult to store in Xml file. Users cannot easily be converted in to a single string.
 ** Cons: May be storing unnecessary information.
+>>>>>>> bc00f9fe52fee994a6a1c17b326858f148ea5dcc
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
