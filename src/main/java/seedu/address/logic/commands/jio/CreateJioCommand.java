@@ -11,6 +11,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
 import seedu.address.model.jio.Jio;
 
@@ -35,7 +36,8 @@ public class CreateJioCommand extends Command {
             + PREFIX_ADDRESS + "Fine Food ";
 
     public static final String MESSAGE_SUCCESS = "New jio added: %1$s";
-    public static final String MESSAGE_DUPLICATE_JIO = "This jio already exists in the book";
+    public static final String MESSAGE_DUPLICATE_JIO = "A jio with the same name already exists";
+    public static final String MESSAGE_NOT_LOGGED_IN = "You must log in to use this command";
 
     private final Jio toAdd;
 
@@ -52,13 +54,16 @@ public class CreateJioCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        // Check if user is logged in
+        if (!model.isCurrentlyLoggedIn()) {
+            throw new NotLoggedInCommandException(MESSAGE_NOT_LOGGED_IN);
+        }
+
         if (model.hasJio(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_JIO); //Jio has already been created
         }
 
-        model.addJio(toAdd);
-        //model.commitAddressBook(); //TODO: Check if need to commit. If need, then create commit method
-
+        model.createJio(toAdd);
         return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 

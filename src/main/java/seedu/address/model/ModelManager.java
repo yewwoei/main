@@ -19,7 +19,6 @@ import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
 import seedu.address.model.jio.Jio;
-import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.user.Password;
@@ -398,19 +397,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasJioName(Name jioName) {
+    public boolean hasJioName(seedu.address.model.user.Name jioName) {
         requireNonNull(jioName);
         return userData.hasJioName(jioName);
     }
 
     @Override
-    public void removeJioOfName(Name jioName) {
+    public void removeJioOfName(seedu.address.model.user.Name jioName) {
         userData.removeJioOfName(jioName);
         indicateUserDataChanged();
     }
 
     @Override
-    public void addJio(Jio jio) {
+    public void createJio(Jio jio) {
+        jio.addUser(currentUser);
         userData.addJio(jio);
         updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
         indicateUserDataChanged();

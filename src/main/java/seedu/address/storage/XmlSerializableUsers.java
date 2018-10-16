@@ -2,10 +2,11 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.logging.Logger;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.UserData;
 import seedu.address.model.accounting.Debt;
@@ -25,6 +26,8 @@ public class XmlSerializableUsers {
     public static final String MESSAGE_NO_USER_FRIENDSHIP = "User required for friendship not found";
     public static final String MESSAGE_NO_USER_DEBTS = "User required for debts record not found";
     public static final String MESSAGE_DUPLICATE_JIO = "This jio already exists in the book";
+
+    private static final Logger logger = LogsCenter.getLogger(XmlUsersStorage.class);
 
     @XmlElement
     private List<XmlAdaptedUser> user;
@@ -113,7 +116,7 @@ public class XmlSerializableUsers {
          */
         for (XmlAdaptedBusySchedule busySchedule : busySchedules) {
 
-            // Bbtain the Models.
+            // Obtain the Models.
             UniqueBusySchedule currentSchedule = busySchedule.toModelType();
             Username currentUsername = currentSchedule.getUsername();
             // Get the user.
@@ -143,7 +146,7 @@ public class XmlSerializableUsers {
 
         for (XmlAdaptedJio j: jios) {
             Jio jio = j.toModelType();
-            if (!userData.hasJio(jio)) {
+            if (userData.hasJio(jio)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_JIO);
             }
             userData.addJio(jio);
