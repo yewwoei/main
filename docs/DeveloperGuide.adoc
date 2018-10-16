@@ -361,6 +361,64 @@ can be entered through the Command Line Interface. The implementation is aided b
 of whether a user is currently signed in and which user it is. In doing so, data relating to this particular user during his session
 can be saved.
 
+=== Adding, accepting and deleting friends and friend requests
+==== Current Implementation for Friendships
+Friendships can have two statuses - ACCEPTED and PENDING. User A can send a friend request to User B which would then store
+a friendship with User A as PENDING under User B alone. User B can choose to accept or delete the friend request. If User
+chooses to delete the friend request, the PENDING friendship under User B will be deleted. If User B chooses to accept the
+friend request, the friendship status will be changed from PENDING to ACCEPTED for User B and an identical friendship will
+be added to User A, the one who initiated the friendship.
+
+Now moving on to deletion of friends. Assuming that two Users C and D are friends with each other, and User C deletes his
+or her friendship with User D. This would delete the friendship stored under both User C and User D even if User D did not
+initiate the deletion of friendship. It is also possible to list the existing list of friends (ACCEPTED) and friend
+requests (PENDING).
+
+The Friendship class itself stores 'me' (currently logged in User), 'friendUser' (other party in the friendship),
+'friendshipStatus' (status of the friendship) and 'initiatedBy' (which party the friendship was initiated by).
+There is a restriction such that the 'initiatedBy' must be either 'me' or 'friendUser'. A friendship is immutable once
+created. Friendships are stored as an XML element under users.xml with the four attributes mentioned above.
+
+==== Why the current implementation for Friendships
+The PENDING friendships are only stored under the User who did not initiate the friendship. This so that when the
+listFriendRequests command is called so as to allow the User to accept and delete the friend requests accordingly,
+it only makes sense for the User to see the friendships that they wish to accept or delete (i.e. friendships not
+initiated by them). Thus, friend requests are only stored under the User who did not initiate the friendship.
+
+There are two separate lists for friendships - one for friend requests and one for friends. This is to aid the listing
+functions and avoid confusion by simplifying the friendships stored under User.
+
+===== Exceptions and why they are thrown
+There are several exceptions thrown for the friendship commands. An exception is thrown for all friendship commands
+should there be no User logged in currently. Specifically for the adding of friends (i.e. sending
+friend requests) a User cannot send a request to himself. Moreover, if the User has previously sent a request which has
+yet to be accepted by the other User, the initiating User cannot send another request. However, if the recipient User
+has deleted the friend request, then the initiating User is able to send a new friend request. A blocking feature is to
+be made in v2.0. Moreover, a User cannot send a friend request to another User with whom they are already friends with.
+
+When it comes to accepting friendships, there are several exceptions thrown too. If the User tries to accept a friend
+request not in their list of friend requests an exception is thrown. Similarly, an exception is thrown if the User tries
+to delete a friend request not in their list of friend requests or a friend who is not in their list of friends.
+
+==== Alternatives considered for Friendships
+For a while, I considered storing all friendships (both friend requests and friends) in the same list. However, I decided
+against this as this made things potentially confusing especially for a new developer coming in to retrieve only friends
+or friend requests.
+
+===== XML storage
+Initially, I faced a problem balancing making the code more OOP (to preserve the true spirit of software engineering) and
+storing friendships as an XML element. XML elements only take in Strings and not objects. However to store friendships,
+the elements stored include Users ('friendUser', 'me' and 'initiatedBy'). Thus, I considered sacrificing the OOP-nature
+of Friendships as proposed above and instead merely storing usernames as strings for the User.
+
+To get around this problem, a hashmap mapping Username to the User is passed to the class doing the XML storage and loading
+of Friendships. Thus, OOP is not sacrificed as User is still the data type of the attributes stored in Friendship and
+Friendships can be created from the XML element with the aid of the hashmap.
+
+Initially, I considered asking the initiating User to enter all the information about the other User to add them as a friend.
+This is so that I would be able to construct the User from the the information provided. However, this would be too
+inconvenient for the User and thus the hashmap mentioned before was used.
+
 === Jio Feature
 ==== Current Implementation
 A `Jio` object stores information about the jio in the following objects: `Name`, `Week`, `Day`, `Time`, `Address`. The
@@ -403,7 +461,6 @@ do not touch current user at all, but pass `Jio` objects on to `ModelManager`.
 ** Pros: All information about User is stored for possible retrieval in the future (eg. to view user timetables).
 ** Cons: Difficult to store in Xml file. Users cannot easily be converted in to a single string.
 ** Cons: May be storing unnecessary information.
-
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption
