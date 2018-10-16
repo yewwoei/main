@@ -18,4 +18,6 @@ public class CliSyntax {
     public static final Prefix PREFIX_AMOUNT = new Prefix("amt/");
     public static final Prefix PREFIX_DEBTID = new Prefix("id/");
     public static final Prefix PREFIX_TIME = new Prefix("h/");
+    public static final Prefix PREFIX_RATING = new Prefix("rate/");
+    public static final Prefix PREFIX_REVIEW = new Prefix("rvw/");
 }
