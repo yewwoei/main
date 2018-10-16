@@ -385,7 +385,6 @@ public class ModelManager extends ComponentManager implements Model {
         return currentUser.hasDateOnSchedule(date);
     }
 
-
     //=========== Jio methods ===============================================================================
 
     @Override
