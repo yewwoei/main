@@ -49,7 +49,7 @@ public class JoinJioCommand extends Command {
         }
 
         // Check if jio exists
-        if (model.hasJioName(jioName)) {
+        if (!model.hasJioName(jioName)) {
             throw new CommandException(MESSAGE_NONEXISTENT_JIO); //Jio has already been created
         }
 
