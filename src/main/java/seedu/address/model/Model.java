@@ -8,7 +8,9 @@ import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Name;
+import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -113,7 +115,11 @@ public interface Model {
     void loginUser(Username username);
 
     void logoutUser();
+    
+    void addReview(Rating rating, WrittenReview writtenReview);
 
+    //=========== Model Manager Friend-Related Methods =+===================================================================
+    
     boolean hasUsernameFriendRequest(Username friendUsername);
 
     boolean hasUsernameFriend(Username friendUsername);

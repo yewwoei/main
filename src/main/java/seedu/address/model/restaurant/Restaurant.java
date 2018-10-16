@@ -22,6 +22,7 @@ public class Restaurant {
     // Data fields
     private final Address address;
     private final Set<Tag> tags = new HashSet<>();
+    private final Reviews reviews;
 
     /**
      * Every field must be present and not null.
@@ -32,6 +33,7 @@ public class Restaurant {
         this.phone = phone;
         this.address = address;
         this.tags.addAll(tags);
+        this.reviews = null;
     }
 
     public Name getName() {

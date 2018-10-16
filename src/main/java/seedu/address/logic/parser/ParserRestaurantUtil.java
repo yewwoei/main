@@ -9,9 +9,7 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.restaurant.Address;
-import seedu.address.model.restaurant.Name;
-import seedu.address.model.restaurant.Phone;
+import seedu.address.model.restaurant.*;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -105,4 +103,35 @@ public class ParserRestaurantUtil {
         }
         return tagSet;
     }
+
+    /**
+     * Parses a {@code String rating} into a {@code Rating}.
+     * Leading and trailing whitespaces will be trimmed and converted into an int.
+     *
+     * @throws ParseException if the given {@code Rating} is invalid.
+     */
+    public static Rating parseRating(String rating) throws ParseException {
+        requireNonNull(rating);
+        String trimmedRating = rating.trim();
+        try {
+            int ratingValue = Integer.parseInt(trimmedRating);
+            if (!Rating.isValidRating(ratingValue)) {
+                throw new ParseException(Rating.MESSAGE_RATING_CONSTRAINTS);
+            }
+            return new Rating(ratingValue);
+        } catch (NumberFormatException e) {
+            throw new ParseException(Rating.MESSAGE_RATING_CONSTRAINTS);
+        }
+    }
+
+    /**
+     * Parses a {@code String review} into an {@code WrittenReview}.
+     * Leading and trailing whitespaces will be trimmed.
+     */
+    public static WrittenReview parseWrittenReview(String review) {
+        requireNonNull(review);
+        String trimmedReview = review.trim();
+        return new WrittenReview(trimmedReview);
+    }
+
 }

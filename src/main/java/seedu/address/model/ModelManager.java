@@ -17,8 +17,7 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.jio.Jio;
-import seedu.address.model.restaurant.Name;
-import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.restaurant.*;
 import seedu.address.model.user.Friendship;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -29,7 +28,6 @@ import seedu.address.model.user.Username;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Restaurant> filteredRestaurants;
     private UserData userData;
@@ -179,6 +177,13 @@ public class ModelManager extends ComponentManager implements Model {
     public void logoutUser() {
         this.currentUser = null;
         this.isLoggedIn = false;
+    }
+
+    @Override
+    public void addReview(Rating rating, WrittenReview writtenReview) {
+        UserReview newUserReview = new UserReview(this.currentUser.getUsername(), rating, writtenReview);
+        versionedAddressBook.addReview(newUserReview);
+        userData.addReview(newUserReview);
     }
 
     @Override

@@ -14,6 +14,8 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditRestaurantDescriptor;
 import seedu.address.logic.commands.user.WriteReviewCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.restaurant.Rating;
+import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,14 +42,12 @@ public class WriteReviewCommandParser implements Parser<WriteReviewCommand> {
                     WriteReviewCommand.MESSAGE_USAGE), pe);
         }
 
-        float rating = ParserRestaurantUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
-        Phone phone = ParserRestaurantUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
-        Address address = ParserRestaurantUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Rating rating = ParserRestaurantUtil.parseRating(argMultimap.getValue(PREFIX_RATING).get());
+        WrittenReview writtenReview = ParserRestaurantUtil.parserWrittenReview(
+                argMultimap.getValue(PREFIX_REVIEW).get());
         Set<Tag> tagList = ParserRestaurantUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
         Restaurant restaurant = new Restaurant(name, phone, address, tagList);
-
-        return new AddCommand(restaurant);
 
         return new WriteReviewCommand(index, editRestaurantDescriptor);
     }
