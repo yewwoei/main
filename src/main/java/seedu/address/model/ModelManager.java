@@ -15,7 +15,6 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.accounting.Amount;
-import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
