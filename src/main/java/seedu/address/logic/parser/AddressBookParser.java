@@ -32,6 +32,7 @@ import seedu.address.logic.commands.jio.CreateJioCommand;
 import seedu.address.logic.commands.user.LoginCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.commands.user.SignUpCommand;
+import seedu.address.logic.commands.user.WriteReviewCommand;
 import seedu.address.logic.parser.accounting.AcceptDebtRequestCommandParser;
 import seedu.address.logic.parser.accounting.AddDebtCommandParser;
 import seedu.address.logic.parser.accounting.ClearDebtCommandParser;
@@ -116,6 +117,9 @@ public class AddressBookParser {
 
         case LogoutCommand.COMMAND_WORD:
             return new LogoutCommand();
+
+        case WriteReviewCommand.COMMAND_WORD:
+            return new WriteReviewCommandParser().parse(arguments);    
 
         // Restaurant Commands
 
