@@ -178,11 +178,11 @@ public interface Model {
     //========== Model Manager Debt methods ======================================================================
     boolean hasDebtId(DebtId debtId);
 
-    boolean matchAmount(DebtId debtId, Amount amount);
+    boolean matchDebtToAmount(DebtId debtId, Amount amount);
 
-    boolean matchUser(DebtId debtId, Username user);
+    boolean matchDebtToUser(DebtId debtId, Username user);
 
-    boolean matchStatus(DebtId debtId, DebtStatus status);
+    boolean matchDebtToStatus(DebtId debtId, DebtStatus status);
 
     void addDebt(Username debtorUsername, Amount amount);
 
