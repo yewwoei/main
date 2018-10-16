@@ -415,6 +415,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean isCurrentUserInJioOfName(seedu.address.model.user.Name jioName) {
+        requireNonNull(jioName);
+        return userData.isCurrentUserInJioOfName(jioName, currentUser);
+    }
+
+    @Override
     public void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName) {
         userData.addUserToJioOfName(jioName, currentUser);
         indicateUserDataChanged();

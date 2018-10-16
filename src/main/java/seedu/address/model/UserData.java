@@ -59,7 +59,7 @@ public class UserData {
         usernameUserHashMap.remove(user.getUsername());
     }
 
-    // Jios methods
+    //=========== Jio methods ===============================================================================
     public boolean hasJioName(Name jioName) {
         return jios.stream().anyMatch(jio -> jio.getName().equals(jioName));
     }
@@ -74,6 +74,10 @@ public class UserData {
 
     public void removeJioOfName(Name jioName) {
         jios.removeIf(jio -> jio.getName().equals(jioName));
+    }
+
+    public boolean isCurrentUserInJioOfName(Name jioName, User user) {
+        return jios.stream().anyMatch(jio -> (jio.getName().equals(jioName) && jio.hasUser(user)));
     }
 
     public void addUserToJioOfName(Name jioName, User user) {

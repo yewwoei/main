@@ -53,6 +53,11 @@ public class JoinJioCommand extends Command {
             throw new CommandException(MESSAGE_NONEXISTENT_JIO); //Jio has already been created
         }
 
+        // Check if user is already in jio
+        if (model.isCurrentUserInJioOfName(jioName)) {
+            throw new CommandException(MESSAGE_USER_IN_JIO);
+        }
+
         // Add user to the jio
         model.addCurrentUserToJioOfName(jioName);
 
