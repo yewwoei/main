@@ -33,7 +33,7 @@ public class ClearDebtCommand extends Command {
             + PREFIX_AMOUNT + "6.5"
             + PREFIX_DEBTID + "16101400043732";
 
-    public static final String MESSAGE_SUCCESS = " %1$s's debt(ID: %3$s) of %2$s SGD is cleared.";
+    public static final String MESSAGE_SUCCESS = " %1$s's debt(ID: %3$s) of %2$f SGD is cleared.";
     public static final String MESSAGE_NO_SUCH_USER = "Input user not exist.";
     public static final String MESSAGE_NO_SUCH_DEBT = "Input debt not exist.";
     public static final String MESSAGE_AMOUNT_NOT_MATCH = "Input amount does not match the debt.";
@@ -73,10 +73,10 @@ public class ClearDebtCommand extends Command {
         if (!model.matchDebtToUser(debtId, debtor)) {
             throw new CommandException(MESSAGE_USER_NOT_MATCH);
         }
-        if (model.matchDebtToStatus(debtId, DebtStatus.ACCEPTED)) {
+        if (!model.matchDebtToStatus(debtId, DebtStatus.ACCEPTED)) {
             throw new CommandException(MESSAGE_DEBT_NOT_ACCEPTED);
         }
         model.clearDebt(debtor, amount, debtId);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, debtor, amount, debtId));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, debtor, amount.toDouble(), debtId));
     }
 }

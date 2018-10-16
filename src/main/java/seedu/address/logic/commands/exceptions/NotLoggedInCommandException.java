@@ -20,5 +20,6 @@ public class NotLoggedInCommandException extends CommandException {
      */
     public NotLoggedInCommandException(String message, Throwable cause) {
         super(message, cause);
+
     }
 }

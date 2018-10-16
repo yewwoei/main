@@ -224,6 +224,29 @@ The `redo` command fails as there are no `undo` commands executed previously.
 Clears all entries from the address book. +
 Format: `clear`
 
+=== Signing Up for a Makan Book Account: `SignUp`
+
+Allows a User to create an account for use in the Makan Book. Automatic Log In upon Sign Up. +
+Format: `SignUp u/USERNAME pwd/PASSWORD n/NAME p/PHONE_NUMBER e/EMAIL`
+
+Example:
+
+* `SignUp u/davemyth pwd/pwd123123 n/Dave Batik p/92225822 e/davebaumb@gmail.com`
+
+=== Log In into an existing Makan Book Account: `Login`
+
+Allows a User to log into an existing account in the Makan Book. +
+Format: `Login u/USERNAME pwd/PASSWORD`
+
+Example:
+
+* `Login u/davemyth pwd/pwd123123`
+
+=== Log Out of an existing Session: `Logout`
+
+Allows a User to log out of an existing session.
+Format: `Logout`
+
 === Exiting the program : `exit`
 
 Exits the program. +
@@ -247,7 +270,7 @@ _{explain how the user can enable/disable data encryption}_
 === Write Review For Restaurant: `writeReview`
 
 Allows user to write reviews for a specific restaurant. +
-Format: `writeReview INDEX s/SCORE r/REVIEW`
+Format: `writeReview INDEX r/RATING rvw/REVIEW`
 
 Examples:
 

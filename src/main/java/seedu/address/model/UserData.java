@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.user.Name;
 import seedu.address.model.user.Password;
@@ -16,6 +17,7 @@ import seedu.address.model.user.Username;
 public class UserData {
 
     private HashMap<Username, User> usernameUserHashMap;
+    private List<Group> groups;
     private List<Jio> jios;
 
     public UserData() {
@@ -25,6 +27,10 @@ public class UserData {
 
     public HashMap<Username, User> getUsernameUserHashMap() {
         return usernameUserHashMap;
+    }
+
+    public List<Group> getGroups() {
+        return groups;
     }
 
     public List<Jio> getJios() {
@@ -91,4 +97,18 @@ public class UserData {
         });
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof UserData)) {
+            return false;
+        }
+        UserData otherUserData = (UserData) other;
+        return other == this // short circuit if same object
+                || usernameUserHashMap.equals(otherUserData.getUsernameUserHashMap());
+    }
+
+    @Override
+    public int hashCode() {
+        return usernameUserHashMap.hashCode();
+    }
 }

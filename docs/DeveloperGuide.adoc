@@ -234,6 +234,7 @@ The `Storage` component,
 
 * can save `UserPref` objects in json format and read it back.
 * can save the Address Book data in xml format and read it back.
+* can save the User data in xml format and read it back.
 
 [[Design-Commons]]
 === Common classes
@@ -242,7 +243,35 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 == Implementation
 
-This section describes some noteworthy details on how certain features are implemented.
+This section describes some noteworthy details on how certain components and features are implemented.
+
+=== Storage Component Design
+==== Current Implementation
+The storage of Makan book is split into two different xml files namely `users.xml` and `addressbook.xml` where data
+relating to users are stored in the formal and data relating to restaurants are stored in the latter. As of the current
+version of Makan Book, all users are sharing the same restaurant addressbook. Should one user add a restaurant into the
+restaurant addressbook, all users using the Makan Book will be able to see the addition, likewise for deletion.
+
+===== Aspect: Ease of Maintenance
+* **Alternative 1 (current choice):** Split Storage into into two different components.
+** Dividing storage into two different components meant the creation of multiple other classes
+for the storing of data relating to users such as `UserData` and `XmlSerializableUsers`.
+** However, this was deemed necessary and appropriate as User and Restaurant is abstracted out and encapsulated.
+Should there be a reset of Users, the restaurant data would remain unaffected.
+** Pros: Abstraction of Data that are separate.
+** Pros: Easier to maintain.
+** Cons: Time costs to implement.
+
+* **Alternative 2:** Storing the data of Users and Restaurants in the same `addressbook.xml` file.
+** Pros: Easier to implement.
+** Cons: Difficult to maintain and scale. All sorts of data relating to users will be stored together with restaurants.
+
+==== Design Considerations
+===== Aspect: The Possibility for abuse
+The current implementation makes it possible any users to abuse the restaurant addressbook.
+Users can add, edit and delete restaurants for all users. In the upcoming implementation, we are lookng to restrict it
+to only users who log in. Additionally, an administrator account can be created to approve of such additions by users.
+These will be in the future versions of the Makan Book.
 
 // tag::undoredo[]
 === Undo/Redo feature
@@ -323,6 +352,152 @@ image::UndoRedoActivityDiagram.png[width="650"]
 ** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
 ** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
 // end::undoredo[]
+
+=== Sign Up, Login and Logout Feature
+==== Current Implementation
+The current implementation of Makan Book does not allow the usage of all the features. Certain features require registration
+or login of an account. For instance, the adding of friends can only be done upon log in. Sign Up, Login and Logout commands
+can be entered through the Command Line Interface. The implementation is aided by the current `modelManager` which keeps track
+of whether a user is currently signed in and which user it is. In doing so, data relating to this particular user during his session
+can be saved.
+
+=== Adding, accepting and deleting friends and friend requests
+==== Current Implementation for Friendships
+Friendships can have two statuses - ACCEPTED and PENDING. User A can send a friend request to User B which would then store
+a friendship with User A as PENDING under User B alone. User B can choose to accept or delete the friend request. If User
+chooses to delete the friend request, the PENDING friendship under User B will be deleted. If User B chooses to accept the
+friend request, the friendship status will be changed from PENDING to ACCEPTED for User B and an identical friendship will
+be added to User A, the one who initiated the friendship.
+
+Now moving on to deletion of friends. Assuming that two Users C and D are friends with each other, and User C deletes his
+or her friendship with User D. This would delete the friendship stored under both User C and User D even if User D did not
+initiate the deletion of friendship. It is also possible to list the existing list of friends (ACCEPTED) and friend
+requests (PENDING).
+
+The Friendship class itself stores 'me' (currently logged in User), 'friendUser' (other party in the friendship),
+'friendshipStatus' (status of the friendship) and 'initiatedBy' (which party the friendship was initiated by).
+There is a restriction such that the 'initiatedBy' must be either 'me' or 'friendUser'. A friendship is immutable once
+created. Friendships are stored as an XML element under users.xml with the four attributes mentioned above.
+
+==== Why the current implementation for Friendships
+The PENDING friendships are only stored under the User who did not initiate the friendship. This so that when the
+listFriendRequests command is called so as to allow the User to accept and delete the friend requests accordingly,
+it only makes sense for the User to see the friendships that they wish to accept or delete (i.e. friendships not
+initiated by them). Thus, friend requests are only stored under the User who did not initiate the friendship.
+
+There are two separate lists for friendships - one for friend requests and one for friends. This is to aid the listing
+functions and avoid confusion by simplifying the friendships stored under User.
+
+===== Exceptions and why they are thrown
+There are several exceptions thrown for the friendship commands. An exception is thrown for all friendship commands
+should there be no User logged in currently. Specifically for the adding of friends (i.e. sending
+friend requests) a User cannot send a request to himself. Moreover, if the User has previously sent a request which has
+yet to be accepted by the other User, the initiating User cannot send another request. However, if the recipient User
+has deleted the friend request, then the initiating User is able to send a new friend request. A blocking feature is to
+be made in v2.0. Moreover, a User cannot send a friend request to another User with whom they are already friends with.
+
+When it comes to accepting friendships, there are several exceptions thrown too. If the User tries to accept a friend
+request not in their list of friend requests an exception is thrown. Similarly, an exception is thrown if the User tries
+to delete a friend request not in their list of friend requests or a friend who is not in their list of friends.
+
+==== Alternatives considered for Friendships
+For a while, I considered storing all friendships (both friend requests and friends) in the same list. However, I decided
+against this as this made things potentially confusing especially for a new developer coming in to retrieve only friends
+or friend requests.
+
+===== XML storage
+Initially, I faced a problem balancing making the code more OOP (to preserve the true spirit of software engineering) and
+storing friendships as an XML element. XML elements only take in Strings and not objects. However to store friendships,
+the elements stored include Users ('friendUser', 'me' and 'initiatedBy'). Thus, I considered sacrificing the OOP-nature
+of Friendships as proposed above and instead merely storing usernames as strings for the User.
+
+To get around this problem, a hashmap mapping Username to the User is passed to the class doing the XML storage and loading
+of Friendships. Thus, OOP is not sacrificed as User is still the data type of the attributes stored in Friendship and
+Friendships can be created from the XML element with the aid of the hashmap.
+
+Initially, I considered asking the initiating User to enter all the information about the other User to add them as a friend.
+This is so that I would be able to construct the User from the the information provided. However, this would be too
+inconvenient for the User and thus the hashmap mentioned before was used.
+
+=== Payment Splitting Feature
+==== Current Implementation
+The payment splitting feature allow user to keep record for their debts, especially for gathering. Creditor can use
+the `addDebt` to create a request to debtor. A record of this debt will be made with a "pending" status and store to
+both user. Debtor can then use the `acceptDebtRequest` to accept the request from creditor, which the status will be
+changed to "accepted", or reject and delete the request by `deleteDebtRequest`, which the the debt record will be
+deleted and removed from the storage. If the debt has been repaid, the creditor can use the `clearDebt` to mark the
+debt as "cleared". Only the user who initialized the debt(creditor) can clear the debt, and only the other user(debtor)
+can accept or delete the debt. An accepted debt needed to be confirmed by both users.
+==== How the feature is implemented
+The Debt class store creditor, debtor, amount, status and id(timestamp).
+The creditor and debtor must be a user, amount should be larger than zero,
+there are three status - PENDING, ACCEPTED and CLEARED and the id is a 15 digits long string to identify the debt.
+Debts are stored as an XML element under users.xml with all the above attributes mentioned as a string.
+==== Why it is implemented that way
+The debt is under "pending" when it is created, it is treated as a request to the debtor. The debtor needs to accept
+and make it to a "accepted" debt. The "accepted" debt need to be confirm by both side because we want to ensure its
+accuracy. Also, only the user who initialize the debt(creditor) can clear the debt to prevent the debtor clear or delete
+it for self benefit.
+==== Alternatives considered.
+===== Alternative 1: The debt can create by one user and do not need to be accepted
+Pros:
+* Easy to store
+* Easy to mange
+Cons:
+* Lost accuracy
+* Not fair to user
+===== Alternative 2: The debt store separately instead of under user
+Pros:
+* Easy to store
+* Easy to retrieve
+* Easy to implement
+Cons:
+* Cannot achieve confirmation by user
+* It is cumbersome to user
+
+=== Jio Feature
+==== Current Implementation
+A `Jio` object stores information about the jio in the following objects: `Name`, `Week`, `Day`, `Time`, `Address`. The
+`Jio` object also stores the people going on the jio as a list of `Username`. A `Jio` object cannot be modified after
+creation, except to add a user (ie. append `Username` to the list). Jios are stored in the users.xml with each object
+as an Xml element.
+
+===== Jio-related Commands
+`createJio` is implemented by creating a `Jio` object with the specified parameters, but an empty list of `Username`.
+The `Jio` object is eventually passed to `ModelManager`, which adds the current user to the `Jio` and stores it in `UserData`.
+Similarly, `joinJio` relies on `ModelManager` to add the current user to the jio. It also performs a check that the
+user is not already in the list of `Username`, otherwise a `CommandException` is thrown.
+All jio commands require the user to be logged in due to usage of current user, otherwise a `NotLoggedInCommandException`
+is thrown. `joinJio` and `deleteJio` perform additional checks for whether the `Jio` exists, otherwise a `CommandException`
+is thrown.
+
+==== Reasons for this implementation
+`ModelManager` exclusively handles all operations related to current user for encapsulation. Thus, the command classes
+do not touch current user at all, but pass `Jio` objects on to `ModelManager`.
+
+==== Alternatives Considered
+===== Aspect: Storing jio
+
+* **Alternative 1 (current choice):** Jios are stored separately.
+** Pros: Easy to implement.
+** Pros: Easy to retrieve jio from storage by searching for jio name.
+** Pros: Jio can listed easily.
+** Cons: Jio creator needs to be stored as an additional attribute if needed.
+* **Alternative 2:** Storing jios in User.
+** Pros: A jio can be identified by its creator
+** Cons: Difficult to list jios. Need to iterate through users.
+** Cons: Hard to retrieve a particular jio.
+
+===== Aspect: Storing people going on jio
+
+* **Alternative 1 (current choice):** List of Username.
+** Pros: Easy to implement and list.
+** Cons: Users must have unique usernames.
+* **Alternative 2:** Storing a list of User instead.
+** Pros: All information about User is stored for possible retrieval in the future (eg. to view user timetables).
+** Cons: Difficult to store in Xml file. Users cannot easily be converted in to a single string.
+** Cons: May be storing unnecessary information.
+>>>>>>> bc00f9fe52fee994a6a1c17b326858f148ea5dcc
 
 // tag::dataencryption[]
 === [Proposed] Data Encryption

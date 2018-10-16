@@ -25,4 +25,10 @@ public class Amount {
         return test.matches(AMOUNT_VALIDATION_REGEX);
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof Amount
+                && amount == ((Amount) other).amount);
+    }
 }
