@@ -235,12 +235,7 @@ public class AddCommandTest {
         public void removeJioOfName(seedu.address.model.user.Name jioName) {}
 
         @Override
-        public void addJio(Jio jio) {}
-
-        @Override
-        public User getCurrentUser() {
-            throw new AssertionError("This method should not be called.");
-        }
+        public void createJio(Jio jio) {}
 
         @Override
         public void addUser(User user) {}
