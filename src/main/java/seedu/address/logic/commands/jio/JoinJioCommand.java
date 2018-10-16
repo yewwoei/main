@@ -1,12 +1,15 @@
 package seedu.address.logic.commands.jio;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.jio.Jio;
+import seedu.address.model.user.Name;
 
 /**
  * Joins a jio.
@@ -14,19 +17,52 @@ import seedu.address.model.Model;
 public class JoinJioCommand extends Command {
     public static final String COMMAND_WORD = "joinJio";
 
-    // TODO
-    public static final String MESSAGE_USAGE = null;
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds user to the specified jio"
+            + "Parameters: "
+            + PREFIX_NAME + "NAME "
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_NAME + "MALA ";
 
-    // TODO
-    public static final String MESSAGE_SUCCESS = null;
+    public static final String MESSAGE_SUCCESS = "Jio joined: %1$s";
 
+    private Name jioName;
+
+    public static final String MESSAGE_NOT_LOGGED_IN = "You must log in to use this command";
+    public static final String MESSAGE_NONEXISTENT_JIO = "This jio does not exist";
+
+
+    /**
+     * Creates an JoinJioCommand to add the specified {@code Jio}
+     */
+    public JoinJioCommand(Name jioName) {
+        requireNonNull(jioName);
+        this.jioName = jioName;
+    }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        // TODO
         requireNonNull(model);
+        
+        // Check if user is logged in
+        if (!model.isCurrentlyLoggedIn()) {
+            throw new CommandException(MESSAGE_NOT_LOGGED_IN);
+        }
 
-        return null;
+        if (model.hasJioName(jioName)) {
+            throw new CommandException(MESSAGE_NONEXISTENT_JIO); //Jio has already been created
+        }
+
+        // Add user to the jio
+        model.addUserToJioOfName(jioName, model.getCurrentUser());
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, jioName));
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this // short circuit if same object
+                || (other instanceof JoinJioCommand // instanceof handles nulls
+                && jioName.equals(((JoinJioCommand) other).jioName));
     }
 
 }

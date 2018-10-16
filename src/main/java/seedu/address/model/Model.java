@@ -153,6 +153,8 @@ public interface Model {
 
     void addJio(Jio jio);
 
+    void addUserToJioOfName(seedu.address.model.user.Name jioName, User user);
+
     //=========== Undo/Redo/Commit ===============================================================================
 
     /**

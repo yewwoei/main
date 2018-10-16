@@ -76,5 +76,12 @@ public class UserData {
         jios.removeIf(jio -> jio.getName().equals(jioName));
     }
 
+    public void addUserToJioOfName(Name jioName, User user) {
+        jios.stream().forEach(jio -> {
+            if (jio.getName().equals(jioName)) {
+                jio.addUser(user);
+            }
+        });
+    }
 
 }

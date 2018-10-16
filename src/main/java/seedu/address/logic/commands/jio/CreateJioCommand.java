@@ -38,7 +38,7 @@ public class CreateJioCommand extends Command {
     public static final String MESSAGE_DUPLICATE_JIO = "A jio with the same name already exists";
     public static final String MESSAGE_NOT_LOGGED_IN = "You must log in to use this command";
 
-    private final Jio toAdd;
+    private Jio toAdd;
 
 
     /**
