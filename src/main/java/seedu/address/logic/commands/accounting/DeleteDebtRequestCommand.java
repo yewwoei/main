@@ -34,7 +34,7 @@ public class DeleteDebtRequestCommand extends Command {
             + PREFIX_AMOUNT + "6.5"
             + PREFIX_DEBTID + "16101400043732";
 
-    public static final String MESSAGE_SUCCESS = "Debt request(ID: %3$s) from %1$s of %2$s SGD has been deleted.";
+    public static final String MESSAGE_SUCCESS = "Debt request(ID: %3$s) from %1$s of %2$f SGD has been deleted.";
     public static final String MESSAGE_NO_SUCH_USER = "Input user not exist.";
     public static final String MESSAGE_NO_SUCH_DEBT = "Input debt not exist.";
     public static final String MESSAGE_AMOUNT_NOT_MATCH = "Input amount does not match the debt.";
