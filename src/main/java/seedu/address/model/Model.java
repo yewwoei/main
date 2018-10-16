@@ -7,7 +7,6 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.jio.Jio;
-import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.user.Password;
@@ -143,11 +142,11 @@ public interface Model {
 
     boolean hasJio(Jio jio);
 
-    boolean hasJioName(Name jioName);
+    boolean hasJioName(seedu.address.model.user.Name jioName);
 
-    void removeJioOfName(Name jioName);
+    void removeJioOfName(seedu.address.model.user.Name jioName);
 
-    void addJio(Jio jio);
+    void createJio(Jio jio);
 
     //=========== Undo/Redo/Commit ===============================================================================
 
@@ -179,11 +178,11 @@ public interface Model {
     //========== Model Manager Debt methods ======================================================================
     boolean hasDebtId(DebtId debtId);
 
-    boolean matchAmount(DebtId debtId, Amount amount);
+    boolean matchDebtToAmount(DebtId debtId, Amount amount);
 
-    boolean matchUser(DebtId debtId, Username user);
+    boolean matchDebtToUser(DebtId debtId, Username user);
 
-    boolean matchStatus(DebtId debtId, DebtStatus status);
+    boolean matchDebtToStatus(DebtId debtId, DebtStatus status);
 
     void addDebt(Username debtorUsername, Amount amount);
 

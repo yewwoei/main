@@ -33,6 +33,8 @@ import seedu.address.logic.commands.friend.AddFriendCommand;
 import seedu.address.logic.commands.friend.DeleteFriendCommand;
 import seedu.address.logic.commands.friend.DeleteFriendRequestCommand;
 import seedu.address.logic.commands.jio.CreateJioCommand;
+import seedu.address.logic.commands.jio.DeleteJioCommand;
+import seedu.address.logic.commands.jio.ListJioCommand;
 import seedu.address.logic.commands.timetable.BlockDateCommand;
 import seedu.address.logic.commands.timetable.FreeDateCommand;
 import seedu.address.logic.commands.user.LoginCommand;
@@ -53,6 +55,7 @@ import seedu.address.logic.parser.friend.AddFriendCommandParser;
 import seedu.address.logic.parser.friend.DeleteFriendCommandParser;
 import seedu.address.logic.parser.friend.DeleteFriendRequestCommandParser;
 import seedu.address.logic.parser.jio.CreateJioCommandParser;
+import seedu.address.logic.parser.jio.DeleteJioCommandParser;
 import seedu.address.logic.parser.timetable.BlockDateCommandParser;
 import seedu.address.logic.parser.timetable.FreeDateCommandParser;
 
@@ -149,6 +152,14 @@ public class AddressBookParser {
         // Jio Commands
         case CreateJioCommand.COMMAND_WORD:
             return new CreateJioCommandParser().parse(arguments);
+
+        case DeleteJioCommand.COMMAND_WORD:
+            return new DeleteJioCommandParser().parse(arguments);
+
+        case ListJioCommand.COMMAND_WORD:
+            return new ListJioCommand();
+
+        // Group Commands
 
         // Timetable Commands
         case BlockDateCommand.COMMAND_WORD:

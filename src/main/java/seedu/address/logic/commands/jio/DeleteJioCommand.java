@@ -7,8 +7,9 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
-import seedu.address.model.restaurant.Name;
+import seedu.address.model.user.Name;
 
 /**
  * Deletes a jio the user started.
@@ -24,8 +25,8 @@ public class DeleteJioCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Jio deleted: %1$s";
 
-    // TODO
     public static final String MESSAGE_NONEXISTENT_JIO = "Jio does not exist.";
+    public static final String MESSAGE_NOT_LOGGED_IN = "You must log in to use this command";
 
     // TODO
     private final Name jioName;
@@ -42,6 +43,11 @@ public class DeleteJioCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         // TODO
         requireNonNull(model);
+
+        // Check if user is logged in
+        if (!model.isCurrentlyLoggedIn()) {
+            throw new NotLoggedInCommandException(MESSAGE_NOT_LOGGED_IN);
+        }
 
         if (!model.hasJioName(jioName)) {
             throw new CommandException(MESSAGE_NONEXISTENT_JIO); //Jio does not exist

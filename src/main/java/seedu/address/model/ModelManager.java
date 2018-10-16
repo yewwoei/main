@@ -19,7 +19,6 @@ import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
 import seedu.address.model.jio.Jio;
-import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.user.Password;
@@ -210,7 +209,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean matchAmount(DebtId debtId, Amount amount) {
+    public boolean matchDebtToAmount(DebtId debtId, Amount amount) {
         int count = 0;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
             if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
@@ -225,7 +224,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean matchUser(DebtId debtId, Username user) {
+    public boolean matchDebtToUser(DebtId debtId, Username user) {
         int count = 0;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
             if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
@@ -250,10 +249,8 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return false;
     }
-    /**
-    * Whether status matches
-    */
-    public boolean matchStatus(DebtId debtId, DebtStatus status) {
+    @Override
+    public boolean matchDebtToStatus(DebtId debtId, DebtStatus status) {
         int count = 0;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
             if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
@@ -397,19 +394,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasJioName(Name jioName) {
+    public boolean hasJioName(seedu.address.model.user.Name jioName) {
         requireNonNull(jioName);
         return userData.hasJioName(jioName);
     }
 
     @Override
-    public void removeJioOfName(Name jioName) {
+    public void removeJioOfName(seedu.address.model.user.Name jioName) {
         userData.removeJioOfName(jioName);
         indicateUserDataChanged();
     }
 
     @Override
-    public void addJio(Jio jio) {
+    public void createJio(Jio jio) {
+        jio.addUser(currentUser);
         userData.addJio(jio);
         updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
         indicateUserDataChanged();

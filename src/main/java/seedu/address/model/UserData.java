@@ -6,7 +6,7 @@ import java.util.List;
 
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
-import seedu.address.model.restaurant.Name;
+import seedu.address.model.user.Name;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -82,5 +82,19 @@ public class UserData {
         jios.removeIf(jio -> jio.getName().equals(jioName));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof UserData)) {
+            return false;
+        }
+        UserData otherUserData = (UserData) other;
+        return other == this // short circuit if same object
+                || usernameUserHashMap.equals(otherUserData.getUsernameUserHashMap());
+    }
+
+    @Override
+    public int hashCode() {
+        return usernameUserHashMap.hashCode();
+    }
 
 }
