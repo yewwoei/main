@@ -76,5 +76,19 @@ public class UserData {
         jios.removeIf(jio -> jio.getName().equals(jioName));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (!(other instanceof UserData)) {
+            return false;
+        }
+        UserData otherUserData = (UserData) other;
+        return other == this // short circuit if same object
+                || usernameUserHashMap.equals(otherUserData.getUsernameUserHashMap());
+    }
+
+    @Override
+    public int hashCode() {
+        return usernameUserHashMap.hashCode();
+    }
 
 }
