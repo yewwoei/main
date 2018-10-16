@@ -11,6 +11,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
 import seedu.address.model.jio.Jio;
 
@@ -55,11 +56,8 @@ public class CreateJioCommand extends Command {
 
         // Check if user is logged in
         if (!model.isCurrentlyLoggedIn()) {
-            throw new CommandException(MESSAGE_NOT_LOGGED_IN);
+            throw new NotLoggedInCommandException(MESSAGE_NOT_LOGGED_IN);
         }
-
-        // Add creator to the jio
-        toAdd.addUser(model.getCurrentUser());
 
         if (model.hasJio(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_JIO); //Jio has already been created

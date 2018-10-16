@@ -7,6 +7,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
 import seedu.address.model.user.Name;
 
@@ -45,7 +46,7 @@ public class DeleteJioCommand extends Command {
 
         // Check if user is logged in
         if (!model.isCurrentlyLoggedIn()) {
-            throw new CommandException(MESSAGE_NOT_LOGGED_IN);
+            throw new NotLoggedInCommandException(MESSAGE_NOT_LOGGED_IN);
         }
 
         if (!model.hasJioName(jioName)) {
