@@ -8,7 +8,6 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.jio.Jio;
 import seedu.address.model.user.Name;
 
 /**
@@ -25,10 +24,10 @@ public class JoinJioCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Jio joined: %1$s";
 
-    private Name jioName;
-
     public static final String MESSAGE_NONEXISTENT_JIO = "This jio does not exist";
     public static final String MESSAGE_USER_IN_JIO = "You have already joined this jio";
+
+    private Name jioName;
 
 
     /**
@@ -42,7 +41,7 @@ public class JoinJioCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-        
+
         // Check if user is logged in
         if (!model.isCurrentlyLoggedIn()) {
             throw new CommandException(COMMAND_WORD);

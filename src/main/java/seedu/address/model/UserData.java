@@ -80,6 +80,9 @@ public class UserData {
         return jios.stream().anyMatch(jio -> (jio.getName().equals(jioName) && jio.hasUser(user)));
     }
 
+    /**
+     * Adds user to the specified jio. Assumes check for the existence of jio already done.
+     */
     public void addUserToJioOfName(Name jioName, User user) {
         jios.stream().forEach(jio -> {
             if (jio.getName().equals(jioName)) {
