@@ -73,10 +73,10 @@ public class ClearDebtCommand extends Command {
         if (!model.matchDebtToUser(debtId, debtor)) {
             throw new CommandException(MESSAGE_USER_NOT_MATCH);
         }
-        if (model.matchDebtToStatus(debtId, DebtStatus.ACCEPTED)) {
+        if (!model.matchDebtToStatus(debtId, DebtStatus.ACCEPTED)) {
             throw new CommandException(MESSAGE_DEBT_NOT_ACCEPTED);
         }
         model.clearDebt(debtor, amount, debtId);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, debtor, amount, debtId));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, debtor, amount.toDouble(), debtId));
     }
 }

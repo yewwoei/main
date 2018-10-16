@@ -34,7 +34,7 @@ public class AcceptDebtRequestCommand extends Command {
             + PREFIX_AMOUNT + "6.5"
             + PREFIX_DEBTID + "16101400043732";
 
-    public static final String MESSAGE_SUCCESS = "Debt request(ID: %3$s) from %1$s of %2$s SGD has been accepted.";
+    public static final String MESSAGE_SUCCESS = "Debt request(ID: %3$s) from %1$s of %2$f SGD has been accepted.";
     public static final String MESSAGE_NO_SUCH_USER = "Input user not exist.";
     public static final String MESSAGE_NO_SUCH_DEBT = "Input debt not exist.";
     public static final String MESSAGE_AMOUNT_NOT_MATCH = "Input amount does not match the debt.";
@@ -73,10 +73,10 @@ public class AcceptDebtRequestCommand extends Command {
         if (!model.matchDebtToUser(debtId, creditor)) {
             throw new CommandException(MESSAGE_USER_NOT_MATCH);
         }
-        if (model.matchDebtToStatus(debtId, DebtStatus.PENDING)) {
+        if (!model.matchDebtToStatus(debtId, DebtStatus.PENDING)) {
             throw new CommandException(MESSAGE_DEBT_NOT_PENDING);
         }
         model.acceptedDebtRequest(creditor, amount, debtId);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, creditor, amount, debtId));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, creditor, amount.toDouble(), debtId));
     }
 }

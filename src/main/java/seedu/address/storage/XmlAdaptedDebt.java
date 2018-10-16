@@ -57,7 +57,7 @@ public class XmlAdaptedDebt {
     public XmlAdaptedDebt(Debt source) {
         creditor = source.getCreditor().getUsername().toString();
         debtor = source.getDebtor().getUsername().toString();
-        amount = String.valueOf(source.getAmount());
+        amount = String.valueOf(source.getAmount().toDouble());
         debtId = source.getDebtId().toString();
         status = source.getDebtStatus().toString();
     }

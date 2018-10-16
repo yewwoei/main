@@ -77,10 +77,10 @@ public class DeleteDebtRequestCommand extends Command {
         if (!model.matchDebtToUser(debtId, creditor)) {
             throw new CommandException(MESSAGE_USER_NOT_MATCH);
         }
-        if (model.matchDebtToStatus(debtId, DebtStatus.PENDING)) {
+        if (!model.matchDebtToStatus(debtId, DebtStatus.PENDING)) {
             throw new CommandException(MESSAGE_DEBT_NOT_PENDING);
         }
         model.deleteDebtRequest(creditor, amount, debtId);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, creditor, amount, debtId));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, creditor, amount.toDouble(), debtId));
     }
 }

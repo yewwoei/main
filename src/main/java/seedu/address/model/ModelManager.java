@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
@@ -211,14 +212,18 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean matchDebtToAmount(DebtId debtId, Amount amount) {
         int count = 0;
+        boolean check = false;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
             if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
                 count = i;
+                check = true;
                 break;
             }
         }
-        if (currentUser.getDebts().get(count).getAmount().equals(amount)) {
-            return true;
+        if (check) {
+            if (currentUser.getDebts().get(count).getAmount().equals(amount)) {
+                return true;
+            }
         }
         return false;
     }
@@ -226,15 +231,19 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean matchDebtToUser(DebtId debtId, Username user) {
         int count = 0;
+        boolean check = false;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
             if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
                 count = i;
+                check = true;
                 break;
             }
         }
-        if (currentUser.getDebts().get(count).getDebtor().equals(user)
-                || currentUser.getDebts().get(count).getCreditor().equals(user)) {
-            return true;
+        if (check) {
+            if (currentUser.getDebts().get(count).getDebtor().getUsername().equals(user)
+                    || currentUser.getDebts().get(count).getCreditor().getUsername().equals(user)) {
+                return true;
+            }
         }
         return false;
     }
@@ -249,17 +258,22 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return false;
     }
+
     @Override
     public boolean matchDebtToStatus(DebtId debtId, DebtStatus status) {
         int count = 0;
+        boolean check = false;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
             if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
                 count = i;
+                check = true;
                 break;
             }
         }
-        if (currentUser.getDebts().get(count).getDebtStatus().equals(status)) {
-            return true;
+        if (check) {
+            if (currentUser.getDebts().get(count).getDebtStatus() == status) {
+                return true;
+            }
         }
         return false;
     }

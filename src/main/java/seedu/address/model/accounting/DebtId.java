@@ -8,8 +8,8 @@ import java.util.Date;
 public class DebtId {
 
     public static final String MESSAGE_DEBTID_CONSTRAINTS =
-            "Debt ID should only contain numbers, and it should be 14 digits long";
-    public static final String DEBTID_VALIDATION_REGEX = "\\d{14}";
+            "Debt ID should only contain numbers, and it should be 15 digits long";
+    public static final String DEBTID_VALIDATION_REGEX = "\\d{15}";
     private String id;
 
     public DebtId() {
@@ -30,5 +30,12 @@ public class DebtId {
 
     public static boolean isValidDebtId(String test) {
         return test.matches(DEBTID_VALIDATION_REGEX);
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof DebtId
+                && id.equals(((DebtId) other).id));
     }
 }
