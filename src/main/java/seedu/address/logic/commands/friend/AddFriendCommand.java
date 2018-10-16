@@ -50,7 +50,7 @@ public class AddFriendCommand extends Command {
             throw new CommandException(MESSAGE_NOT_LOGGED_IN);
         }
 
-        if(!model.hasUser(toAdd)) {
+        if (!model.hasUser(toAdd)) {
             throw new CommandException(MESSAGE_NO_SUCH_USER);
         }
 
