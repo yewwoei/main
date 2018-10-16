@@ -247,7 +247,7 @@ This section describes some noteworthy details on how certain components and fea
 
 === Storage Component Design
 ==== Current Implementation
-The storage of Makan book is split into two different xml files namely `users.xml` and `addressbook.xml` where data 
+The storage of Makan book is split into two different xml files namely `users.xml` and `addressbook.xml` where data
 relating to users are stored in the formal and data relating to restaurants are stored in the latter. As of the current
 version of Makan Book, all users are sharing the same restaurant addressbook. Should one user add a restaurant into the
 restaurant addressbook, all users using the Makan Book will be able to see the addition, likewise for deletion.
@@ -255,7 +255,7 @@ restaurant addressbook, all users using the Makan Book will be able to see the a
 ===== Aspect: Ease of Maintenance
 * **Alternative 1 (current choice):** Split Storage into into two different components.
 ** Dividing storage into two different components meant the creation of multiple other classes
-for the storing of data relating to users such as `UserData` and `XmlSerializableUsers`. 
+for the storing of data relating to users such as `UserData` and `XmlSerializableUsers`.
 ** However, this was deemed necessary and appropriate as User and Restaurant is abstracted out and encapsulated.
 Should there be a reset of Users, the restaurant data would remain unaffected.
 ** Pros: Abstraction of Data that are separate.
@@ -268,7 +268,7 @@ Should there be a reset of Users, the restaurant data would remain unaffected.
 
 ==== Design Considerations
 ===== Aspect: The Possibility for abuse
-The current implementation makes it possible any users to abuse the restaurant addressbook. 
+The current implementation makes it possible any users to abuse the restaurant addressbook.
 Users can add, edit and delete restaurants for all users. In the upcoming implementation, we are lookng to restrict it
 to only users who log in. Additionally, an administrator account can be created to approve of such additions by users.
 These will be in the future versions of the Makan Book.
@@ -356,7 +356,7 @@ image::UndoRedoActivityDiagram.png[width="650"]
 === Sign Up, Login and Logout Feature
 ==== Current Implementation
 The current implementation of Makan Book does not allow the usage of all the features. Certain features require registration
-or login of an account. For instance, the adding of friends can only be done upon log in. Sign Up, Login and Logout commands 
+or login of an account. For instance, the adding of friends can only be done upon log in. Sign Up, Login and Logout commands
 can be entered through the Command Line Interface. The implementation is aided by the current `modelManager` which keeps track
 of whether a user is currently signed in and which user it is. In doing so, data relating to this particular user during his session
 can be saved.
