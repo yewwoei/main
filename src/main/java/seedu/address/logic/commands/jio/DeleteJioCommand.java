@@ -26,7 +26,6 @@ public class DeleteJioCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Jio deleted: %1$s";
 
     public static final String MESSAGE_NONEXISTENT_JIO = "Jio does not exist.";
-    public static final String MESSAGE_NOT_LOGGED_IN = "You must log in to use this command";
 
     // TODO
     private final Name jioName;
@@ -46,7 +45,7 @@ public class DeleteJioCommand extends Command {
 
         // Check if user is logged in
         if (!model.isCurrentlyLoggedIn()) {
-            throw new NotLoggedInCommandException(MESSAGE_NOT_LOGGED_IN);
+            throw new NotLoggedInCommandException(COMMAND_WORD);
         }
 
         if (!model.hasJioName(jioName)) {

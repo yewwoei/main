@@ -27,7 +27,6 @@ public class JoinJioCommand extends Command {
 
     private Name jioName;
 
-    public static final String MESSAGE_NOT_LOGGED_IN = "You must log in to use this command";
     public static final String MESSAGE_NONEXISTENT_JIO = "This jio does not exist";
 
 
@@ -45,7 +44,7 @@ public class JoinJioCommand extends Command {
         
         // Check if user is logged in
         if (!model.isCurrentlyLoggedIn()) {
-            throw new CommandException(MESSAGE_NOT_LOGGED_IN);
+            throw new CommandException(COMMAND_WORD);
         }
 
         if (model.hasJioName(jioName)) {
