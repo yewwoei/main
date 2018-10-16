@@ -361,6 +361,50 @@ can be entered through the Command Line Interface. The implementation is aided b
 of whether a user is currently signed in and which user it is. In doing so, data relating to this particular user during his session
 can be saved.
 
+=== Jio Feature
+==== Current Implementation
+A `Jio` object stores information about the jio in the following objects: `Name`, `Week`, `Day`, `Time`, `Address`. The
+`Jio` object also stores the people going on the jio as a list of `Username`. A `Jio` object cannot be modified after
+creation, except to add a user (ie. append `Username` to the list). Jios are stored in the users.xml with each object
+as an Xml element.
+
+===== Jio-related Commands
+`createJio` is implemented by creating a `Jio` object with the specified parameters, but an empty list of `Username`.
+The `Jio` object is eventually passed to `ModelManager`, which adds the current user to the `Jio` and stores it in `UserData`.
+Similarly, `joinJio` relies on `ModelManager` to add the current user to the jio. It also performs a check that the
+user is not already in the list of `Username`, otherwise a `CommandException` is thrown.
+All jio commands require the user to be logged in due to usage of current user, otherwise a `NotLoggedInCommandException`
+is thrown. `joinJio` and `deleteJio` perform additional checks for whether the `Jio` exists, otherwise a `CommandException`
+is thrown. 
+
+==== Reasons for this implementation
+`ModelManager` exclusively handles all operations related to current user for encapsulation. Thus, the command classes
+do not touch current user at all, but pass `Jio` objects on to `ModelManager`.
+
+==== Alternatives Considered
+===== Aspect: Storing jio
+
+* **Alternative 1 (current choice):** Jios are stored separately.
+** Pros: Easy to implement.
+** Pros: Easy to retrieve jio from storage by searching for jio name.
+** Pros: Jio can listed easily.
+** Cons: Jio creator needs to be stored as an additional attribute if needed.
+* **Alternative 2:** Storing jios in User.
+** Pros: A jio can be identified by its creator
+** Cons: Difficult to list jios. Need to iterate through users.
+** Cons: Hard to retrieve a particular jio.
+
+===== Aspect: Storing people going on jio
+
+* **Alternative 1 (current choice):** List of Username.
+** Pros: Easy to implement and list.
+** Cons: Users must have unique usernames.
+* **Alternative 2:** Storing a list of User instead.
+** Pros: All information about User is stored for possible retrieval in the future (eg. to view user timetables).
+** Cons: Difficult to store in Xml file. Users cannot easily be converted in to a single string.
+** Cons: May be storing unnecessary information.
+
+
 // tag::dataencryption[]
 === [Proposed] Data Encryption
 
