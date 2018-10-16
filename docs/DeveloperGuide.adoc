@@ -433,7 +433,7 @@ Similarly, `joinJio` relies on `ModelManager` to add the current user to the jio
 user is not already in the list of `Username`, otherwise a `CommandException` is thrown.
 All jio commands require the user to be logged in due to usage of current user, otherwise a `NotLoggedInCommandException`
 is thrown. `joinJio` and `deleteJio` perform additional checks for whether the `Jio` exists, otherwise a `CommandException`
-is thrown. 
+is thrown.
 
 ==== Reasons for this implementation
 `ModelManager` exclusively handles all operations related to current user for encapsulation. Thus, the command classes
