@@ -19,7 +19,10 @@ import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
 import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.restaurant.UserReview;
+import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -184,8 +187,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addReview(Rating rating, WrittenReview writtenReview) {
         UserReview newUserReview = new UserReview(this.currentUser.getUsername(), rating, writtenReview);
-        versionedAddressBook.addReview(newUserReview);
-        userData.addReview(newUserReview);
     }
 
 
