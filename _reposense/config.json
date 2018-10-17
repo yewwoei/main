@@ -12,6 +12,42 @@
     },
     {
       "githubId": "yewwoei"
+    },
+    {
+      "githubId": "Meena567",
+      "displayName": "Solayappan Meenakshi",
+      "authorNames": ["Meena567"],
+      "ignoreGlobList": ["**.css"]
+    },
+    {
+      "githubId": "chelchia",
+      "displayName": "Chelsea Chia Jia Hwa",
+      "authorNames": ["chelchia"],
+      "ignoreGlobList": ["**.css"]
+    },
+    {
+      "githubId": "katenhy",
+      "displayName": "Ng Hoi Ying",
+      "authorNames": ["Ng Hoi Ying, Kate"],
+      "ignoreGlobList": ["**.css"]
+    },
+    {
+      "githubId": "katenhy",
+      "displayName": "Ng Hoi Ying",
+      "authorNames": ["katenhy"],
+      "ignoreGlobList": ["**.css"]
+    },
+    {
+      "githubId": "evanmok2401",
+      "displayName": "Evan Mok",
+      "authorNames": ["Evan Mok"],
+      "ignoreGlobList": ["**.css"]
+    },
+    {
+      "githubId": "Navekom",
+      "displayName": "Evan Mok",
+      "authorNames": ["Navekom"],
+      "ignoreGlobList": ["**.css"]
     }
   ]
 }

@@ -44,7 +44,7 @@ public class Debt {
         return this.amount;
     }
     public DebtId getDebtId() {
-        return debtId;
+        return this.debtId;
     }
     public DebtStatus getDebtStatus() {
         return this.status;

@@ -5,7 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.jio.DeleteJioCommand;
+import seedu.address.logic.commands.jio.JoinJioCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserUserUtil;
@@ -14,26 +14,26 @@ import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.user.Name;
 
 /**
- * Parses input arguments and creates a new DeleteJioCommand object
+ * Parses input arguments and creates a new JoinJioCommand object
  */
-public class DeleteJioCommandParser {
+public class JoinJioCommandParser {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddJioCommand
-     * and returns an AddJioCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the JoinJioCommand
+     * and returns an JoinJioCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
-    public DeleteJioCommand parse(String args) throws ParseException {
+    public JoinJioCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteJioCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, JoinJioCommand.MESSAGE_USAGE));
         }
 
         Name name = ParserUserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
 
-        return new DeleteJioCommand(name);
+        return new JoinJioCommand(name);
     }
 
     /**
@@ -44,3 +44,4 @@ public class DeleteJioCommandParser {
         return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
     }
 }
+

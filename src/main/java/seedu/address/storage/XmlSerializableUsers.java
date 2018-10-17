@@ -2,15 +2,17 @@ package seedu.address.storage;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.UserData;
 import seedu.address.model.accounting.Debt;
+import seedu.address.model.group.Friendship;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.timetable.UniqueBusySchedule;
-import seedu.address.model.user.Friendship;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
@@ -21,14 +23,19 @@ import seedu.address.model.user.Username;
 public class XmlSerializableUsers {
 
     public static final String MESSAGE_DUPLICATE_PERSON = "User list contains duplicate User(s).";
+    public static final String MESSAGE_DUPLICATE_GROUP = "Group name already exists.";
     public static final String MESSAGE_NO_USER_FRIENDSHIP = "User required for friendship not found";
     public static final String MESSAGE_NO_USER_DEBTS = "User required for debts record not found";
     public static final String MESSAGE_DUPLICATE_JIO = "This jio already exists in the book";
+
+    private static final Logger logger = LogsCenter.getLogger(XmlUsersStorage.class);
 
     @XmlElement
     private List<XmlAdaptedUser> user;
     @XmlElement
     private List<XmlAdaptedFriendship> friendship;
+    @XmlElement
+    private List<XmlAdaptedFriendship> groups;
     @XmlElement
     private List<XmlAdaptedDebt> debts;
     @XmlElement
@@ -43,6 +50,7 @@ public class XmlSerializableUsers {
     public XmlSerializableUsers() {
         user = new ArrayList<>();
         friendship = new ArrayList<>();
+        groups = new ArrayList<>();
         debts = new ArrayList<>();
         jios = new ArrayList<>();
         busySchedules = new ArrayList<>();
@@ -69,6 +77,9 @@ public class XmlSerializableUsers {
                 .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
         allUsers.forEach(individualUser -> individualUser.getDebts()
                 .forEach(d -> debts.add(new XmlAdaptedDebt(d))));
+
+        // updates groups list
+        // userData.getGroups().forEach(group -> groups.add(new XmlAdaptedGroup(group)));
 
         // updates jios list
         userData.getJios().forEach(jio -> jios.add(new XmlAdaptedJio(jio)));
@@ -112,7 +123,7 @@ public class XmlSerializableUsers {
          */
         for (XmlAdaptedBusySchedule busySchedule : busySchedules) {
 
-            // Bbtain the Models.
+            // Obtain the Models.
             UniqueBusySchedule currentSchedule = busySchedule.toModelType();
             Username currentUsername = currentSchedule.getUsername();
             // Get the user.
@@ -142,7 +153,7 @@ public class XmlSerializableUsers {
 
         for (XmlAdaptedJio j: jios) {
             Jio jio = j.toModelType();
-            if (!userData.hasJio(jio)) {
+            if (userData.hasJio(jio)) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_JIO);
             }
             userData.addJio(jio);

@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
 
@@ -16,9 +17,10 @@ import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Friendship;
 import seedu.address.model.jio.Jio;
-import seedu.address.model.restaurant.*;
-import seedu.address.model.user.Friendship;
+import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.timetable.Date;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -186,7 +188,24 @@ public class ModelManager extends ComponentManager implements Model {
         userData.addReview(newUserReview);
     }
 
+
+    //=========== Friendship methods =============================================================================
     @Override
+    public boolean hasUsernameSentRequest(Username friendUsername) {
+        User friend = userData.getUser(friendUsername);
+        Username myUsername = currentUser.getUsername();
+        List<Friendship> friendRequestLists = friend.getFriendRequests();
+        for (Friendship f: friendRequestLists) {
+            if (f.getFriendUsername().equals(myUsername)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+    * Returns whether there is a debtId
+    */
     public boolean hasDebtId(DebtId debtId) {
         boolean result = false;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
@@ -198,47 +217,70 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean matchAmount(DebtId debtId, Amount amount) {
+    public boolean matchDebtToAmount(DebtId debtId, Amount amount) {
         int count = 0;
+        boolean check = false;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
             if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
                 count = i;
+                check = true;
                 break;
             }
         }
-        if (currentUser.getDebts().get(count).getAmount().equals(amount)) {
-            return true;
+        if (check) {
+            if (currentUser.getDebts().get(count).getAmount().equals(amount)) {
+                return true;
+            }
         }
         return false;
     }
 
     @Override
-    public boolean matchUser(DebtId debtId, Username user) {
+    public boolean matchDebtToUser(DebtId debtId, Username user) {
         int count = 0;
+        boolean check = false;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
             if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
                 count = i;
+                check = true;
                 break;
             }
         }
-        if (currentUser.getDebts().get(count).getDebtor().equals(user)
-                || currentUser.getDebts().get(count).getCreditor().equals(user)) {
-            return true;
+        if (check) {
+            if (currentUser.getDebts().get(count).getDebtor().getUsername().equals(user)
+                    || currentUser.getDebts().get(count).getCreditor().getUsername().equals(user)) {
+                return true;
+            }
         }
         return false;
     }
 
     @Override
-    public boolean matchStatus(DebtId debtId, DebtStatus status) {
+    public boolean hasUsernameFriendRequest(Username friendUsername) {
+        List<Friendship> friendRequestsLists = currentUser.getFriendRequests();
+        for (Friendship f: friendRequestsLists) {
+            if (f.getFriendUsername().equals(friendUsername)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean matchDebtToStatus(DebtId debtId, DebtStatus status) {
         int count = 0;
+        boolean check = false;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
             if (currentUser.getDebts().get(i).getDebtId().equals(debtId)) {
                 count = i;
+                check = true;
                 break;
             }
         }
-        if (currentUser.getDebts().get(count).getDebtStatus().equals(status)) {
-            return true;
+        if (check) {
+            if (currentUser.getDebts().get(count).getDebtStatus() == status) {
+                return true;
+            }
         }
         return false;
     }
@@ -266,17 +308,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasUsernameFriendRequest(Username friendUsername) {
-        User friendUser = userData.getUser(friendUsername);
-        return currentUser.getFriendRequests()
-                .contains(new Friendship(friendUser, currentUser, currentUser));
-    }
-
-    @Override
     public boolean hasUsernameFriend(Username friendUsername) {
-        User friendUser = userData.getUser(friendUsername);
-        return currentUser.getFriends()
-                .contains(new Friendship(friendUser, currentUser, currentUser));
+        List<Friendship> friendsLists = currentUser.getFriends();
+        for (Friendship f: friendsLists) {
+            if (f.getFriendUsername().equals(friendUsername)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -345,6 +384,27 @@ public class ModelManager extends ComponentManager implements Model {
         indicateUserDataChanged();
     }
 
+    // =================== Timetable methods ===============================
+
+    @Override
+    public void blockDateForCurrentUser(Date date) {
+        requireNonNull(date);
+        currentUser.blockDateOnSchedule(date);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void freeDateForCurrentUser(Date date) {
+        requireNonNull(date);
+        currentUser.freeDateOnSchedule(date);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean hasDateForCurrentUser(Date date) {
+        requireNonNull(date);
+        return currentUser.hasDateOnSchedule(date);
+    }
 
     //=========== Jio methods ===============================================================================
 
@@ -355,21 +415,37 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasJioName(Name jioName) {
+    public boolean hasJioName(seedu.address.model.user.Name jioName) {
         requireNonNull(jioName);
         return userData.hasJioName(jioName);
     }
 
     @Override
-    public void removeJioOfName(Name jioName) {
+    public void removeJioOfName(seedu.address.model.user.Name jioName) {
+        requireNonNull(jioName);
         userData.removeJioOfName(jioName);
         indicateUserDataChanged();
     }
 
     @Override
-    public void addJio(Jio jio) {
+    public void createJio(Jio jio) {
+        requireNonNull(jio);
+        jio.addUser(currentUser);
         userData.addJio(jio);
         updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean isCurrentUserInJioOfName(seedu.address.model.user.Name jioName) {
+        requireNonNull(jioName);
+        return userData.isCurrentUserInJioOfName(jioName, currentUser);
+    }
+
+    @Override
+    public void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName) {
+        requireNonNull(jioName);
+        userData.addUserToJioOfName(jioName, currentUser);
         indicateUserDataChanged();
     }
 

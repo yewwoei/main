@@ -13,16 +13,17 @@ import seedu.address.logic.commands.jio.CreateJioCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.ParserRestaurantUtil;
+import seedu.address.logic.parser.ParserUserUtil;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Address;
-import seedu.address.model.restaurant.Name;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Day;
 import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
+import seedu.address.model.user.Name;
 
 /**
  * Parses input arguments and creates a new CreateJioCommand object
@@ -42,7 +43,7 @@ public class CreateJioCommandParser {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateJioCommand.MESSAGE_USAGE));
         }
 
-        Name name = ParserRestaurantUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
+        Name name = ParserUserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Week week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
         Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
         Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());

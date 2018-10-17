@@ -4,8 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
-import seedu.address.model.restaurant.Name;
+import seedu.address.model.user.Name;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -16,6 +17,7 @@ import seedu.address.model.user.Username;
 public class UserData {
 
     private HashMap<Username, User> usernameUserHashMap;
+    private List<Group> groups;
     private List<Jio> jios;
 
     public UserData() {
@@ -25,6 +27,10 @@ public class UserData {
 
     public HashMap<Username, User> getUsernameUserHashMap() {
         return usernameUserHashMap;
+    }
+
+    public List<Group> getGroups() {
+        return groups;
     }
 
     public List<Jio> getJios() {
@@ -59,7 +65,7 @@ public class UserData {
         usernameUserHashMap.remove(user.getUsername());
     }
 
-    // Jios methods
+    //=========== Jio methods ===============================================================================
     public boolean hasJioName(Name jioName) {
         return jios.stream().anyMatch(jio -> jio.getName().equals(jioName));
     }
@@ -76,6 +82,21 @@ public class UserData {
         jios.removeIf(jio -> jio.getName().equals(jioName));
     }
 
+    public boolean isCurrentUserInJioOfName(Name jioName, User user) {
+        return jios.stream().anyMatch(jio -> (jio.getName().equals(jioName) && jio.hasUser(user)));
+    }
+
+    /**
+     * Adds user to the specified jio. Assumes check for the existence of jio already done.
+     */
+    public void addUserToJioOfName(Name jioName, User user) {
+        jios.stream().forEach(jio -> {
+            if (jio.getName().equals(jioName)) {
+                jio.addUser(user);
+            }
+        });
+    }
+
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof UserData)) {
@@ -90,5 +111,4 @@ public class UserData {
     public int hashCode() {
         return usernameUserHashMap.hashCode();
     }
-
 }

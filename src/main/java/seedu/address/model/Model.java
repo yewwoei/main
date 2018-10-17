@@ -11,6 +11,7 @@ import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.restaurant.WrittenReview;
+import seedu.address.model.timetable.Date;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -117,12 +118,12 @@ public interface Model {
     void logoutUser();
     
     void addReview(Rating rating, WrittenReview writtenReview);
-
-    //=========== Model Manager Friend-Related Methods =+===================================================================
     
-    boolean hasUsernameFriendRequest(Username friendUsername);
+    boolean hasUsernameSentRequest(Username friendUsername);
 
     boolean hasUsernameFriend(Username friendUsername);
+
+    boolean hasUsernameFriendRequest(Username friendUsername);
 
     void addFriend(Username friendUsername);
 
@@ -134,16 +135,27 @@ public interface Model {
 
     void deleteFriendRequest(Username friendUsername);
 
+    //============ Timetable commands ==========================
+
+    void blockDateForCurrentUser(Date date);
+
+    void freeDateForCurrentUser(Date date);
+
+    boolean hasDateForCurrentUser(Date date);
+
     //=========== Jio methods ===============================================================================
 
     boolean hasJio(Jio jio);
 
-    boolean hasJioName(Name jioName);
+    boolean hasJioName(seedu.address.model.user.Name jioName);
 
-    void removeJioOfName(Name jioName);
+    void removeJioOfName(seedu.address.model.user.Name jioName);
 
-    void addJio(Jio jio);
+    void createJio(Jio jio);
 
+    boolean isCurrentUserInJioOfName(seedu.address.model.user.Name jioName);
+
+    void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName);
 
     //=========== Undo/Redo/Commit ===============================================================================
 
@@ -175,11 +187,11 @@ public interface Model {
     //========== Model Manager Debt methods ======================================================================
     boolean hasDebtId(DebtId debtId);
 
-    boolean matchAmount(DebtId debtId, Amount amount);
+    boolean matchDebtToAmount(DebtId debtId, Amount amount);
 
-    boolean matchUser(DebtId debtId, Username user);
+    boolean matchDebtToUser(DebtId debtId, Username user);
 
-    boolean matchStatus(DebtId debtId, DebtStatus status);
+    boolean matchDebtToStatus(DebtId debtId, DebtStatus status);
 
     void addDebt(Username debtorUsername, Amount amount);
 

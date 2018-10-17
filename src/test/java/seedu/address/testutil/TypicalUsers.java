@@ -69,24 +69,10 @@ public class TypicalUsers {
             .withPhone("97715001")
             .withEmail("ipatmail@gmail.com").build();
 
-    // Manually added - Restaurant's details found in {@code CommandTestUtil}
-    public static final User ANG = new UserBuilder()
-            .withUsername("leeHsienLoong")
-            .withPassword("pAssw0rd")
-            .withName("Ang More Kio")
-            .withPhone("98822221")
-            .withEmail("amkgrc@gmail.com").build();
-    public static final User BOON = new UserBuilder()
-            .withUsername("leeKongChian")
-            .withPassword("pAssw0rd")
-            .withName("Shanmu Boon Lay")
-            .withPhone("98722221")
-            .withEmail("boonlaygrc@gmail.com").build();
-
     private TypicalUsers() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical restaurants.
+     * Returns {@code UserData} with all the typical users.
      */
     public static UserData getTypicalUserData() {
         UserData userData = new UserData();

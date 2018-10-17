@@ -1,4 +1,4 @@
-package seedu.address.user;
+package seedu.address.model.group;
 
 import org.junit.Assert;
 import org.junit.Test;

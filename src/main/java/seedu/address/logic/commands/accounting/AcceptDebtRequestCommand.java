@@ -9,6 +9,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
@@ -33,7 +34,7 @@ public class AcceptDebtRequestCommand extends Command {
             + PREFIX_AMOUNT + "6.5"
             + PREFIX_DEBTID + "16101400043732";
 
-    public static final String MESSAGE_SUCCESS = "Debt Request Accepted: %1$s %2$s %3$s";
+    public static final String MESSAGE_SUCCESS = "Debt request(ID: %3$s) from %1$s of %2$f SGD has been accepted.";
     public static final String MESSAGE_NO_SUCH_USER = "Input user not exist.";
     public static final String MESSAGE_NO_SUCH_DEBT = "Input debt not exist.";
     public static final String MESSAGE_AMOUNT_NOT_MATCH = "Input amount does not match the debt.";
@@ -57,22 +58,25 @@ public class AcceptDebtRequestCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        if (!model.isCurrentlyLoggedIn()) {
+            throw new NotLoggedInCommandException(COMMAND_WORD);
+        }
         if (!model.hasUser(creditor)) {
             throw new CommandException(MESSAGE_NO_SUCH_USER);
         }
         if (!model.hasDebtId(debtId)) {
             throw new CommandException(MESSAGE_NO_SUCH_DEBT);
         }
-        if (!model.matchAmount(debtId, amount)) {
+        if (!model.matchDebtToAmount(debtId, amount)) {
             throw new CommandException(MESSAGE_AMOUNT_NOT_MATCH);
         }
-        if (!model.matchUser(debtId, creditor)) {
+        if (!model.matchDebtToUser(debtId, creditor)) {
             throw new CommandException(MESSAGE_USER_NOT_MATCH);
         }
-        if (model.matchStatus(debtId, DebtStatus.PENDING)) {
+        if (!model.matchDebtToStatus(debtId, DebtStatus.PENDING)) {
             throw new CommandException(MESSAGE_DEBT_NOT_PENDING);
         }
         model.acceptedDebtRequest(creditor, amount, debtId);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, creditor, amount, debtId));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, creditor, amount.toDouble(), debtId));
     }
 }

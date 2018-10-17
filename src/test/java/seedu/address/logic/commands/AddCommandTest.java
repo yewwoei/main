@@ -23,8 +23,8 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.jio.Jio;
-import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.timetable.Date;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -167,17 +167,17 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean matchAmount(DebtId debtId, Amount amount) {
+        public boolean matchDebtToAmount(DebtId debtId, Amount amount) {
             return false;
         }
 
         @Override
-        public boolean matchUser(DebtId debtId, Username user) {
+        public boolean matchDebtToUser(DebtId debtId, Username user) {
             return false;
         }
 
         @Override
-        public boolean matchStatus(DebtId debtId, DebtStatus status) {
+        public boolean matchDebtToStatus(DebtId debtId, DebtStatus status) {
             return false;
         }
         @Override
@@ -227,15 +227,23 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasJioName(Name jioName) {
+        public boolean hasJioName(seedu.address.model.user.Name jioName) {
             return true;
         }
 
         @Override
-        public void removeJioOfName(Name jioName) {}
+        public void removeJioOfName(seedu.address.model.user.Name jioName) {}
 
         @Override
-        public void addJio(Jio jio) {}
+        public void createJio(Jio jio) {}
+
+        @Override
+        public boolean isCurrentUserInJioOfName(seedu.address.model.user.Name jioName) {
+            return true;
+        }
+
+        @Override
+        public void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName) {}
 
         @Override
         public void addUser(User user) {}
@@ -265,7 +273,12 @@ public class AddCommandTest {
         public void logoutUser() {}
 
         @Override
-        public boolean hasUsernameFriendRequest(Username friendUsername) {
+        public boolean hasUsernameSentRequest(Username friendUsername) {
+            return true;
+        }
+
+        @Override
+        public boolean hasUsernameFriendRequest(Username friendusername) {
             return true;
         }
 
@@ -290,6 +303,20 @@ public class AddCommandTest {
 
         @Override
         public void deleteFriendRequest(Username friendUsername) {}
+
+        // ========= timetable commands =========
+
+        @Override
+        public void blockDateForCurrentUser(Date date) {}
+
+        @Override
+        public void freeDateForCurrentUser(Date date) {}
+
+        @Override
+        public boolean hasDateForCurrentUser(Date date) {
+            return true;
+        }
+
 
     }
 

@@ -9,6 +9,7 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
@@ -32,12 +33,13 @@ public class ClearDebtCommand extends Command {
             + PREFIX_AMOUNT + "6.5"
             + PREFIX_DEBTID + "16101400043732";
 
-    public static final String MESSAGE_SUCCESS = "Debt Clear: %1$s %2$s %3$s";
+    public static final String MESSAGE_SUCCESS = " %1$s's debt(ID: %3$s) of %2$f SGD is cleared.";
     public static final String MESSAGE_NO_SUCH_USER = "Input user not exist.";
     public static final String MESSAGE_NO_SUCH_DEBT = "Input debt not exist.";
     public static final String MESSAGE_AMOUNT_NOT_MATCH = "Input amount does not match the debt.";
     public static final String MESSAGE_USER_NOT_MATCH = "Input user does not match the debt";
     public static final String MESSAGE_DEBT_NOT_ACCEPTED = "The debt is not accepted";
+    public static final String MESSAGE_NOT_LOGGED_IN = "You must login before clearing a debt.";
 
     private final Username debtor;
     private final Amount amount;
@@ -56,22 +58,25 @@ public class ClearDebtCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        if (!model.isCurrentlyLoggedIn()) {
+            throw new NotLoggedInCommandException(COMMAND_WORD);
+        }
         if (!model.hasUser(debtor)) {
             throw new CommandException(MESSAGE_NO_SUCH_USER);
         }
         if (!model.hasDebtId(debtId)) {
             throw new CommandException(MESSAGE_NO_SUCH_DEBT);
         }
-        if (!model.matchAmount(debtId, amount)) {
+        if (!model.matchDebtToAmount(debtId, amount)) {
             throw new CommandException(MESSAGE_AMOUNT_NOT_MATCH);
         }
-        if (!model.matchUser(debtId, debtor)) {
+        if (!model.matchDebtToUser(debtId, debtor)) {
             throw new CommandException(MESSAGE_USER_NOT_MATCH);
         }
-        if (model.matchStatus(debtId, DebtStatus.ACCEPTED)) {
+        if (!model.matchDebtToStatus(debtId, DebtStatus.ACCEPTED)) {
             throw new CommandException(MESSAGE_DEBT_NOT_ACCEPTED);
         }
         model.clearDebt(debtor, amount, debtId);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, debtor, amount, debtId));
+        return new CommandResult(String.format(MESSAGE_SUCCESS, debtor, amount.toDouble(), debtId));
     }
 }

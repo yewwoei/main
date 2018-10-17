@@ -1,10 +1,14 @@
 package seedu.address.model.jio;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 import seedu.address.model.restaurant.Address;
-import seedu.address.model.restaurant.Name;
 import seedu.address.model.timetable.Date;
+import seedu.address.model.user.Name;
+import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 
 /**
@@ -15,14 +19,21 @@ public class Jio {
     private Name name;
     private Date date;
     private Address location;
-    //private UniqueUserList<User> people;
+    private List<Username> people;
+
+    public Jio(Name name, Date date, Address location, User creator) {
+        this.name = name;
+        this.date = date;
+        this.location = location;
+        this.people = new ArrayList<>();
+        this.people.add(creator.getUsername());
+    }
 
     public Jio(Name name, Date date, Address location) {
         this.name = name;
         this.date = date;
         this.location = location;
-        //this.people = new UniqueUserList();
-        //this.people.add(creator);
+        this.people = new ArrayList<>();
     }
 
     public Name getName() {
@@ -37,12 +48,17 @@ public class Jio {
         return location;
     }
 
-    /*
-    public ObservableList<User> getPeople() { return people.asUnmodifiableObservableList();}
-    public void addUsers(User newUser) {
-        this.people.add(newUser);
+    public List<Username> getPeople() {
+        return people;
     }
-    */
+
+    public boolean hasUser(User newUser) {
+        return this.people.stream().anyMatch(user -> newUser.getUsername().equals(user));
+    }
+
+    public void addUser(User newUser) {
+        this.people.add(newUser.getUsername());
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -72,8 +88,9 @@ public class Jio {
                 .append(" Date: ")
                 .append(getDate())
                 .append(" Location: ")
-                .append(getLocation());
-        //this.getPeople().forEach(x -> builder.append(x.getName()));
+                .append(getLocation())
+                .append(" People: ");
+        this.getPeople().forEach(x -> builder.append(x));
         return builder.toString();
     }
 

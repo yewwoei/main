@@ -1,16 +1,20 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Address;
-import seedu.address.model.restaurant.Name;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Day;
 import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
+import seedu.address.model.user.Name;
+import seedu.address.model.user.Username;
 
 /**
  * JAXB-friendly version of the User.
@@ -29,6 +33,8 @@ public class XmlAdaptedJio {
     private String time;
     @XmlElement(required = true)
     private String address;
+    @XmlElement
+    private List<XmlAdaptedUsername> people = new ArrayList<>();
 
     /**
      * Constructs an XmlAdaptedJio.
@@ -39,12 +45,16 @@ public class XmlAdaptedJio {
     /**
      * Constructs an {@code XmlAdaptedJio} with the given jio details.
      */
-    public XmlAdaptedJio(String name, String week, String day, String time, String address) {
+    public XmlAdaptedJio(String name, String week, String day, String time, String address,
+                         List<XmlAdaptedUsername> people) {
         this.name = name;
         this.week = week;
         this.day = day;
         this.time = time;
         this.address = address;
+        if (people != null) {
+            this.people = new ArrayList<>(people);
+        }
     }
 
     /**
@@ -58,6 +68,9 @@ public class XmlAdaptedJio {
         day = source.getDate().getDay().toString();
         time = source.getDate().getTime().toString();
         address = source.getLocation().toString();
+        people = source.getPeople().stream()
+                .map(XmlAdaptedUsername::new)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -110,6 +123,12 @@ public class XmlAdaptedJio {
         }
         final Address modelAddress = new Address(address);
 
+        final List<Username> modelPeople = new ArrayList<>();
+        for (XmlAdaptedUsername username : people) {
+            modelPeople.add(username.toModelType());
+        }
+
+
         return new Jio(modelName, modelDate, modelAddress);
     }
 
@@ -128,7 +147,8 @@ public class XmlAdaptedJio {
                 && Objects.equals(week, otherJio.week)
                 && Objects.equals(day, otherJio.day)
                 && Objects.equals(time, otherJio.time)
-                && Objects.equals(address, otherJio.address);
+                && Objects.equals(address, otherJio.address)
+                && people.equals(otherJio.people);
     }
 }
 

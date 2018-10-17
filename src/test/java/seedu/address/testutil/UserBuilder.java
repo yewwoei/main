@@ -44,7 +44,7 @@ public class UserBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code User} that we are building.
+     * Sets the {@code Username} of the {@code User} that we are building.
      */
     public UserBuilder withUsername(String username) {
         this.username = new Username(username);
@@ -52,7 +52,7 @@ public class UserBuilder {
     }
 
     /**
-     * Sets the {@code Name} of the {@code User} that we are building.
+     * Sets the {@code Password} of the {@code User} that we are building.
      */
     public UserBuilder withPassword(String password) {
         this.password = new Password(password);
@@ -60,7 +60,7 @@ public class UserBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code User} that we are building.
+     * Sets the {@code Name} of the {@code User} that we are building.
      */
     public UserBuilder withName(String name) {
         this.name = new Name(name);
@@ -68,7 +68,7 @@ public class UserBuilder {
     }
 
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code Restaurant} that we are building.
+     * Sets the {@code Phone} of the {@code User} that we are building.
      */
     public UserBuilder withPhone(String phone) {
         this.phone = new Phone(phone);
@@ -76,7 +76,7 @@ public class UserBuilder {
     }
 
     /**
-     * Sets the {@code Address} of the {@code Restaurant} that we are building.
+     * Sets the {@code Email} of the {@code User} that we are building.
      */
     public UserBuilder withEmail(String email) {
         this.email = new Email(email);

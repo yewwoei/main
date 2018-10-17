@@ -25,8 +25,12 @@ public class AddFriendCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Friend request sent to: %1$s";
 
     public static final String MESSAGE_DUPLICATE_FRIEND_REQUEST = "You have already sent friend request to this User";
+    public static final String MESSAGE_NO_SUCH_USER = "Sorry, the username does not exist";
     public static final String MESSAGE_FRIEND_ALREADY = "You are already friends with this user";
     public static final String MESSAGE_CANNOT_ADD_ONESELF = "You cannot add yourself as a friend";
+    public static final String MESSAGE_NOT_LOGGED_IN = "You must login before adding friends";
+    public static final String MESSAGE_ACCEPT_EXISTING_REQUEST = "You have that user's friend request."
+            + " Please accept that request instead of adding them as a friend.";
 
     private final Username toAdd;
 
@@ -42,8 +46,16 @@ public class AddFriendCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        if (!model.isCurrentlyLoggedIn()) {
+            throw new CommandException(MESSAGE_NOT_LOGGED_IN);
+        }
+
+        if (!model.hasUser(toAdd)) {
+            throw new CommandException(MESSAGE_NO_SUCH_USER);
+        }
+
         // throw exception if trying to add friend if request is already sent
-        if (model.hasUsernameFriendRequest(toAdd)) {
+        if (model.hasUsernameSentRequest(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_FRIEND_REQUEST);
         }
 
@@ -55,6 +67,11 @@ public class AddFriendCommand extends Command {
         // throw exception if trying to add oneself as a friend
         if (model.isSameAsCurrentUser(toAdd)) {
             throw new CommandException(MESSAGE_CANNOT_ADD_ONESELF);
+        }
+
+        // throw exception if trying to add someone who has sent you a friend request
+        if (model.hasUsernameFriendRequest(toAdd)) {
+            throw new CommandException(MESSAGE_ACCEPT_EXISTING_REQUEST);
         }
 
         model.addFriend(toAdd);

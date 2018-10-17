@@ -6,8 +6,8 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.user.Friendship;
-import seedu.address.model.user.FriendshipStatus;
+import seedu.address.model.group.Friendship;
+import seedu.address.model.group.FriendshipStatus;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
@@ -15,8 +15,8 @@ import seedu.address.model.user.Username;
  * JAXB-friendly version of Friendship
  */
 public class XmlAdaptedFriendship {
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "friendship's %s field is missing!";
     public static final String WRONG_INITIATION_MESSAGE_FORMAT = "Friendship initiated by third party!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "friendship's %s field is missing!";
 
     @XmlElement(required = true)
     private String friendUser;
@@ -98,7 +98,9 @@ public class XmlAdaptedFriendship {
                     Friendship.class.getSimpleName()));
         }
 
-        if (!initiatedBy.equals(me) || !initiatedBy.equals(friendUser)) {
+        if (!initiatedBy.equals(me) && !initiatedBy.equals(friendUser)) {
+            System.out.println("me is :" + me);
+            System.out.println("friendUser is:" + friendUser);
             throw new IllegalValueException(WRONG_INITIATION_MESSAGE_FORMAT);
         }
 
