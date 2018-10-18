@@ -140,6 +140,8 @@ public interface Model {
 
     //=========== Jio methods ===============================================================================
 
+    ObservableList<Jio> getJioList();
+
     boolean hasJio(Jio jio);
 
     boolean hasJioName(seedu.address.model.user.Name jioName);
