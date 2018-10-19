@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.timetable.Date;
@@ -130,6 +131,10 @@ public interface Model {
 
     void deleteFriendRequest(Username friendUsername);
 
+    boolean hasGroup(Group group);
+
+    void addGroup(Group group);
+
     //============ Timetable commands ==========================
 
     void blockDateForCurrentUser(Date date);
@@ -142,15 +147,15 @@ public interface Model {
 
     boolean hasJio(Jio jio);
 
-    boolean hasJioName(seedu.address.model.user.Name jioName);
+    boolean hasJioName(Name jioName);
 
-    void removeJioOfName(seedu.address.model.user.Name jioName);
+    void removeJioOfName(Name jioName);
 
     void createJio(Jio jio);
 
-    boolean isCurrentUserInJioOfName(seedu.address.model.user.Name jioName);
+    boolean isCurrentUserInJioOfName(Name jioName);
 
-    void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName);
+    void addCurrentUserToJioOfName(Name jioName);
 
     //=========== Undo/Redo/Commit ===============================================================================
 

@@ -6,7 +6,7 @@ import java.util.Objects;
 
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.timetable.Date;
-import seedu.address.model.user.Name;
+import seedu.address.model.Name;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 

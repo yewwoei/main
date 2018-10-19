@@ -6,7 +6,6 @@ import java.util.List;
 
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
-import seedu.address.model.user.Name;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -17,11 +16,12 @@ import seedu.address.model.user.Username;
 public class UserData {
 
     private HashMap<Username, User> usernameUserHashMap;
-    private List<Group> groups;
+    private HashMap<String, Group> groupHashMap;
     private List<Jio> jios;
 
     public UserData() {
         usernameUserHashMap = new HashMap<>();
+        groupHashMap = new HashMap<>();
         jios = new ArrayList<>();
     }
 
@@ -29,8 +29,8 @@ public class UserData {
         return usernameUserHashMap;
     }
 
-    public List<Group> getGroups() {
-        return groups;
+    public HashMap<String, Group> getGroupHashmap() {
+        return groupHashMap;
     }
 
     public List<Jio> getJios() {
@@ -63,6 +63,15 @@ public class UserData {
 
     public void removeUser(User user) {
         usernameUserHashMap.remove(user.getUsername());
+    }
+
+    //=========== Friend methods ============================================================================
+    public boolean hasGroup(String groupName) {
+        return groupHashMap.containsKey(groupName);
+    }
+
+    public void addGroup(Group group) {
+        groupHashMap.put(group.getGroupName(), group);
     }
 
     //=========== Jio methods ===============================================================================

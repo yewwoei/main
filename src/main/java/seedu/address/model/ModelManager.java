@@ -18,6 +18,7 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.timetable.Date;
@@ -338,6 +339,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        String groupName = group.getGroupName();
+        return userData.hasGroup(groupName);
+    }
+
+    @Override
+    public void addGroup(Group group) {
+        userData.addGroup(group);
+        group.addCreator(currentUser);
+        indicateUserDataChanged();
+    }
+
+    @Override
     public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
         User creditor = userData.getUser(creditorUsername);
         currentUser.deleteDebtRequest(creditor, amount, debtId);
@@ -407,13 +422,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasJioName(seedu.address.model.user.Name jioName) {
+    public boolean hasJioName(Name jioName) {
         requireNonNull(jioName);
         return userData.hasJioName(jioName);
     }
 
     @Override
-    public void removeJioOfName(seedu.address.model.user.Name jioName) {
+    public void removeJioOfName(Name jioName) {
         requireNonNull(jioName);
         userData.removeJioOfName(jioName);
         indicateUserDataChanged();
@@ -429,13 +444,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean isCurrentUserInJioOfName(seedu.address.model.user.Name jioName) {
+    public boolean isCurrentUserInJioOfName(Name jioName) {
         requireNonNull(jioName);
         return userData.isCurrentUserInJioOfName(jioName, currentUser);
     }
 
     @Override
-    public void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName) {
+    public void addCurrentUserToJioOfName(Name jioName) {
         requireNonNull(jioName);
         userData.addUserToJioOfName(jioName, currentUser);
         indicateUserDataChanged();
