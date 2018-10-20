@@ -82,7 +82,7 @@ public class UserData {
         jios.removeIf(jio -> jio.getName().equals(jioName));
     }
 
-    public boolean isCurrentUserInJioOfName(Name jioName, User user) {
+    public boolean isUserInJioOfName(Name jioName, User user) {
         return jios.stream().anyMatch(jio -> (jio.getName().equals(jioName) && jio.hasUser(user)));
     }
 
@@ -95,6 +95,11 @@ public class UserData {
                 jio.addUser(user);
             }
         });
+    }
+
+    public boolean isCreatorOfJio(Name jioName, User user) {
+        return jios.stream().anyMatch(
+                jio -> (jio.getName().equals(jioName) && jio.getCreator().equals(user.getUsername())));
     }
 
     @Override

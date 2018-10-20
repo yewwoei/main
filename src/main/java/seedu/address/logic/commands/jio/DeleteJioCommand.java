@@ -26,8 +26,9 @@ public class DeleteJioCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Jio deleted: %1$s";
 
     public static final String MESSAGE_NONEXISTENT_JIO = "Jio does not exist.";
+    public static final String MESSAGE_NOT_CREATOR = "You are not the creator of this jio. Only the creator can" +
+            "delete a jio.";
 
-    // TODO
     private final Name jioName;
 
     /**
@@ -48,11 +49,17 @@ public class DeleteJioCommand extends Command {
             throw new NotLoggedInCommandException(COMMAND_WORD);
         }
 
+        // Check if jio exists
         if (!model.hasJioName(jioName)) {
-            throw new CommandException(MESSAGE_NONEXISTENT_JIO); //Jio does not exist
+            throw new CommandException(MESSAGE_NONEXISTENT_JIO);
         }
+
+        // Check if user is creator
+        if (!model.isCurrentUserCreatorOfJio(jioName)) {
+            throw new CommandException(MESSAGE_NOT_CREATOR);
+        }
+        
         model.removeJioOfName(jioName);
-        //model.commitAddressBook(); //TODO: Check if need to commit. If need, then create commit method
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, jioName));
     }

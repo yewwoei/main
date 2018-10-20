@@ -432,7 +432,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean isCurrentUserInJioOfName(seedu.address.model.user.Name jioName) {
         requireNonNull(jioName);
-        return userData.isCurrentUserInJioOfName(jioName, currentUser);
+        return userData.isUserInJioOfName(jioName, currentUser);
     }
 
     @Override
@@ -440,6 +440,12 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(jioName);
         userData.addUserToJioOfName(jioName, currentUser);
         indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean isCurrentUserCreatorOfJio(seedu.address.model.user.Name jioName) {
+        requireNonNull(jioName);
+        return userData.isCreatorOfJio(jioName, currentUser);
     }
 
     //=========== Undo/Redo/Commit ===============================================================================
