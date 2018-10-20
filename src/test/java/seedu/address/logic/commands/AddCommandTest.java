@@ -184,7 +184,7 @@ public class AddCommandTest {
         public void addDebt(Username debtorUsername, Amount amount) {
         }
         @Override
-        public void clearDebt(Username debtorUsername, Amount amount, DebtId debtId) {
+        public void clearDebt(Username debtorUsername, Amount amount) {
         }
         @Override
         public void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
@@ -315,6 +315,11 @@ public class AddCommandTest {
         @Override
         public boolean hasDateForCurrentUser(Date date) {
             return true;
+        }
+
+        @Override
+        public ObservableList<Jio> getJioList() {
+            return null;
         }
 
 

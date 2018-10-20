@@ -15,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
@@ -280,6 +281,29 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean debtExist(Username debtorUsername) {
+        for (Debt d: currentUser.getDebts()) {
+            if (d.getCreditor().getUsername().equals(currentUser.getUsername())
+                    && d.getDebtor().getUsername().equals(debtorUsername)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean allowToClear(Username debtorUsername, Amount amount) {
+        for (Debt d: currentUser.getDebts()) {
+            if (d.getCreditor().getUsername().equals(currentUser.getUsername())
+                    && d.getDebtor().getUsername().equals(debtorUsername)
+                    && d.getAmount().toDouble() >= amount.toDouble()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void addDebt(Username debtorUsername, Amount amount) {
         User debtor = userData.getUser(debtorUsername);
         currentUser.addDebt(debtor, amount);
@@ -288,9 +312,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void clearDebt(Username debtorUsername, Amount amount, DebtId debtId) {
+    public void clearDebt(Username debtorUsername, Amount amount) {
         User debtor = userData.getUser(debtorUsername);
-        currentUser.clearDebt(debtor, amount, debtId);
+        currentUser.clearDebt(debtor, amount);
         indicateUserDataChanged();
     }
 
