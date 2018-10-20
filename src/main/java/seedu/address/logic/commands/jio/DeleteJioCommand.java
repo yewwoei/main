@@ -58,7 +58,7 @@ public class DeleteJioCommand extends Command {
         if (!model.isCurrentUserCreatorOfJio(jioName)) {
             throw new CommandException(MESSAGE_NOT_CREATOR);
         }
-        
+
         model.removeJioOfName(jioName);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, jioName));
