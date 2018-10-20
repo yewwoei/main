@@ -3,6 +3,8 @@ package seedu.address.model.user;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import seedu.address.storage.XmlAdaptedUsername;
+
 /**
  * Represents a User's username.
  * Guarantees: immutable; is valid as declared in {@link #isValidUsername(String)}
@@ -46,9 +48,15 @@ public class Username {
 
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Username // instanceof handles nulls
-                && username.equals(((Username) other).username)); // state check
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Username)) {
+            return false;
+        }
+
+        return username.equals(((Username) other).username);
     }
 
     @Override

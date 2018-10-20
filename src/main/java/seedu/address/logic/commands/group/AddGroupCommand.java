@@ -43,10 +43,12 @@ public class AddGroupCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        // throw exception if no user is currently logged in
         if (!model.isCurrentlyLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGGED_IN);
         }
 
+        // throw exception if that group already exists
         if(model.hasGroup(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }

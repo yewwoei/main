@@ -127,7 +127,14 @@ public class XmlSerializableUsers {
             if(userData.hasGroup(group.getGroupName())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
             }
+
+            // adds all the groups into group hashmap
             userData.addGroup(group);
+
+            // updates Users as to which groups they have
+            group.getAcceptedUsers().forEach(user -> userData.getUser(user.getUsername()).addGroup(group));
+            group.getAcceptedUsers().forEach(user -> user.addGroup(group));
+            group.getPendingUsers().forEach(user -> user.addGroupPending(group));
         }
 
         /** Converts the UserData's timetable information into the model's {@code UniqueBusySchedule} object

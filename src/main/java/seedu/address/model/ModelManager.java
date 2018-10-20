@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -350,6 +351,85 @@ public class ModelManager extends ComponentManager implements Model {
         userData.addGroup(group);
         group.addCreator(currentUser);
         indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean hasGroupRequest(Name groupName) {
+        List<Group> listGroups = currentUser.getGroupRequests();
+        for(Group g: listGroups) {
+            if(groupName.toString().equals(g.getGroupName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isInGroup(Group group) {
+        currentUser.getGroups().forEach(grouper -> System.out.println(grouper.getGroupName()));
+        System.out.println("finished groups");
+        List<Group> listGroups = currentUser.getGroups();
+        for(Group g: listGroups) {
+            if(group.equals(g)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void acceptGroupRequest(Name groupName) {
+        Group group = userData.getGroupHashmap().get(groupName.toString());
+        currentUser.acceptGroupRequest(group);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void addPendingUsersGroup(Group group) {
+        List<Username> listUsernames = group.getPendingUsernames();
+        String groupName = group.getGroupName();
+        Group toAddto = userData.getGroupHashmap().get(groupName);
+        List<User> listUsers = new ArrayList<>();
+        listUsernames.forEach(username -> listUsers.add(userData.getUser(username)));
+        toAddto.addMembers(listUsers);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean isAllValidUsers(Group group) {
+        List<Username> listUsernames = group.getPendingUsernames();
+        for(Username u: listUsernames) {
+            if(!userData.hasUser(u)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean hasUsersInGroup(Group group) {
+        List<Username> listUsernames = group.getPendingUsernames();
+        String groupName = group.getGroupName();
+        Group originalGroup = userData.getGroupHashmap().get(groupName);
+        List<User> acceptedUsers = originalGroup.getAcceptedUsers();
+
+        // checking to see if any Users are already in the list of acceptedUsers
+        return acceptedUsers.stream().anyMatch(
+                accUser -> listUsernames.stream().anyMatch(
+                        user -> accUser.getUsername().equals(user)));
+    }
+
+    @Override
+    public boolean hasRequestForUsers(Group group) {
+        List<Username> listUsernames = group.getPendingUsernames();
+        String groupName = group.getGroupName();
+        Group originalGroup = userData.getGroupHashmap().get(groupName);
+        List<User> pendingUsers = originalGroup.getPendingUsers();
+
+        // checking to see if any Users are already in the list of pendingUsers
+        return pendingUsers.stream().anyMatch(
+                accUser -> listUsernames.stream().anyMatch(
+                        user -> accUser.getUsername().equals(user)));
     }
 
     @Override

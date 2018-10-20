@@ -6,6 +6,7 @@ import java.util.List;
 
 import seedu.address.model.Name;
 import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 /**
  * Group class for users to create and join groups.
@@ -16,6 +17,7 @@ public class Group {
     private Name groupName;
     private List<User> acceptedUsers;
     private List<User> pendingUsers;
+    private List<Username> pendingUsernames;
 
     public Group(Name groupName) {
         this.groupName = groupName;
@@ -44,8 +46,17 @@ public class Group {
         this.pendingUsers = pendingUsers;
     }
 
+    public Group(Name groupName, List<Username> pendingUsers) {
+        this.groupName = groupName;
+        this.pendingUsernames = pendingUsers;
+    }
+
     public void addCreator(User user) {
         this.acceptedUsers.add(user);
+    }
+
+    public List<Username> getPendingUsernames() {
+        return pendingUsernames;
     }
 
     /**
@@ -55,6 +66,17 @@ public class Group {
     public void addMembers(User... users) {
         List<User> toAdd = Arrays.asList(users);
         toAdd.forEach(user -> {
+            pendingUsers.add(user);
+            user.addGroupRequest(this);
+        });
+    }
+
+    /**
+     * Allows any user to add members into the group after creation of group
+     * @param listUsers
+     */
+    public void addMembers(List<User> listUsers) {
+        listUsers.forEach(user -> {
             pendingUsers.add(user);
             user.addGroupRequest(this);
         });

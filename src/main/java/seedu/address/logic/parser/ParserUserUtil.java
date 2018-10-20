@@ -2,11 +2,18 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
+import seedu.address.model.tag.Tag;
 import seedu.address.model.user.Email;
 import seedu.address.model.Name;
 import seedu.address.model.user.Password;
@@ -152,5 +159,32 @@ public class ParserUserUtil {
             throw new ParseException(Amount.MESSAGE_AMOUNT_CONSTRAINTS);
         }
         return new Amount(trimmedAmount);
+    }
+
+    /**
+     * Parses a {@code String tag} into a {@code Tag}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code tag} is invalid.
+     */
+    public static Tag parseTag(String tag) throws ParseException {
+        requireNonNull(tag);
+        String trimmedTag = tag.trim();
+        if (!Tag.isValidTagName(trimmedTag)) {
+            throw new ParseException(Tag.MESSAGE_TAG_CONSTRAINTS);
+        }
+        return new Tag(trimmedTag);
+    }
+
+    /**
+     * Parses {@code Collection<String> usernames} into a {@code List<Username>}.
+     */
+    public static List<Username> parseUsernames(Collection<String> usernames) throws ParseException {
+        requireNonNull(usernames);
+        final List<Username> usernameList = new ArrayList<>();
+        for (String u : usernames) {
+            usernameList.add(parseUsername(u));
+        }
+        return usernameList;
     }
 }

@@ -81,7 +81,6 @@ public class XmlAdaptedGroup {
      * @throws IllegalValueException if there were any data constraints violated in the adapted group
      */
     public Group toModelType(HashMap<Username, User> usernameUserHashMap) throws IllegalValueException {
-        System.out.println("inside toModelType for groups");
         if (groupName == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Group.class.getSimpleName()));
         }
@@ -94,11 +93,13 @@ public class XmlAdaptedGroup {
         final List<User> modelAcceptedUsers = new ArrayList<>();
         final List<User> modelPendingUsers = new ArrayList<>();
 
-        for(XmlAdaptedUsername username: acceptedUsers) {
+        for(XmlAdaptedUsername u: acceptedUsers) {
+            Username username = u.toModelType();
             modelAcceptedUsers.add(usernameUserHashMap.get(username));
         }
 
-        for(XmlAdaptedUsername username: pendingUsers) {
+        for(XmlAdaptedUsername u: pendingUsers) {
+            Username username = u.toModelType();
             modelPendingUsers.add(usernameUserHashMap.get(username));
         }
 

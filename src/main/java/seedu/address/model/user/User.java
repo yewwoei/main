@@ -295,6 +295,14 @@ public class User {
         return group;
     }
 
+    public void addGroup(Group group) {
+        this.groups.add(group);
+    }
+
+    public void addGroupPending(Group group) {
+        this.groupRequests.add(group);
+    }
+
     /**
      * Adds a group request to this User
      * @param group

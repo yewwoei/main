@@ -133,7 +133,21 @@ public interface Model {
 
     boolean hasGroup(Group group);
 
+    boolean hasGroupRequest(Name groupName);
+
     void addGroup(Group group);
+
+    void acceptGroupRequest(Name groupName);
+
+    boolean isInGroup(Group group);
+
+    void addPendingUsersGroup(Group group);
+
+    boolean isAllValidUsers(Group group);
+
+    boolean hasUsersInGroup(Group group);
+
+    boolean hasRequestForUsers(Group group);
 
     //============ Timetable commands ==========================
 

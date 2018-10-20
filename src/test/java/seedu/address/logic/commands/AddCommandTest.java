@@ -314,6 +314,37 @@ public class AddCommandTest {
         @Override
         public void addGroup(Group group) {}
 
+        @Override
+        public boolean hasGroupRequest(Name groupName) {
+            return true;
+        }
+
+        @Override
+        public void acceptGroupRequest(Name groupName) {}
+
+        @Override
+        public boolean isInGroup(Group group) {
+            return true;
+        }
+
+        @Override
+        public void addPendingUsersGroup(Group group) {}
+
+        @Override
+        public boolean isAllValidUsers(Group group) {
+            return true;
+        }
+
+        @Override
+        public boolean hasUsersInGroup(Group group) {
+            return true;
+        }
+
+        @Override
+        public boolean hasRequestForUsers(Group group) {
+            return true;
+        }
+
         // ========= timetable commands =========
 
         @Override
