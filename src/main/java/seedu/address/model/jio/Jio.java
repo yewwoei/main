@@ -22,13 +22,11 @@ public class Jio {
     private List<Username> people;
     private Username creator;
 
-    public Jio(Name name, Date date, Address location, User creator) {
+    public Jio(Name name, Date date, Address location, Username creator) {
         this.name = name;
         this.date = date;
         this.location = location;
-        this.people = new ArrayList<>();
-        this.people.add(creator.getUsername());
-        this.creator = creator.getUsername();
+        this.creator = creator;
     }
 
     public Jio(Name name, Date date, Address location) {
