@@ -423,6 +423,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void createJio(Jio jio) {
         requireNonNull(jio);
         jio.addUser(currentUser);
+        jio.setCreator(currentUser);
         userData.addJio(jio);
         updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
         indicateUserDataChanged();
