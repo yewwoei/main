@@ -345,6 +345,12 @@ public class AddCommandTest {
             return true;
         }
 
+        @Override
+        public void deleteGroup(Group group) {}
+
+        @Override
+        public void deleteGroupRequest(Name groupName) {}
+
         // ========= timetable commands =========
 
         @Override

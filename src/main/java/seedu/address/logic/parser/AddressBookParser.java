@@ -35,6 +35,8 @@ import seedu.address.logic.commands.friend.DeleteFriendRequestCommand;
 import seedu.address.logic.commands.group.AcceptGroupCommand;
 import seedu.address.logic.commands.group.AddGroupCommand;
 import seedu.address.logic.commands.group.AddMembersCommand;
+import seedu.address.logic.commands.group.DeleteGroupCommand;
+import seedu.address.logic.commands.group.DeleteGroupRequestCommand;
 import seedu.address.logic.commands.jio.CreateJioCommand;
 import seedu.address.logic.commands.jio.DeleteJioCommand;
 import seedu.address.logic.commands.jio.JoinJioCommand;
@@ -61,6 +63,8 @@ import seedu.address.logic.parser.friend.DeleteFriendRequestCommandParser;
 import seedu.address.logic.parser.group.AcceptGroupCommandParser;
 import seedu.address.logic.parser.group.AddGroupCommandParser;
 import seedu.address.logic.parser.group.AddMembersCommandParser;
+import seedu.address.logic.parser.group.DeleteGroupCommandParser;
+import seedu.address.logic.parser.group.DeleteGroupRequestCommandParser;
 import seedu.address.logic.parser.jio.CreateJioCommandParser;
 import seedu.address.logic.parser.jio.DeleteJioCommandParser;
 import seedu.address.logic.parser.jio.JoinJioCommandParser;
@@ -164,6 +168,12 @@ public class AddressBookParser {
 
         case AddMembersCommand.COMMAND_WORD:
             return new AddMembersCommandParser().parse(arguments);
+
+        case DeleteGroupCommand.COMMAND_WORD:
+            return new DeleteGroupCommandParser().parse(arguments);
+
+        case DeleteGroupRequestCommand.COMMAND_WORD:
+            return new DeleteGroupRequestCommandParser().parse(arguments);
 
         // Jio Commands
         case CreateJioCommand.COMMAND_WORD:

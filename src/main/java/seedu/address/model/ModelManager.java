@@ -366,8 +366,6 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public boolean isInGroup(Group group) {
-        currentUser.getGroups().forEach(grouper -> System.out.println(grouper.getGroupName()));
-        System.out.println("finished groups");
         List<Group> listGroups = currentUser.getGroups();
         for(Group g: listGroups) {
             if(group.equals(g)) {
@@ -430,6 +428,21 @@ public class ModelManager extends ComponentManager implements Model {
         return pendingUsers.stream().anyMatch(
                 accUser -> listUsernames.stream().anyMatch(
                         user -> accUser.getUsername().equals(user)));
+    }
+
+    @Override
+    public void deleteGroup(Group group) {
+        String groupName = group.getGroupName();
+        Group toDelete = userData.getGroupHashmap().get(groupName);
+        currentUser.deleteGroup(toDelete);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void deleteGroupRequest(Name groupName) {
+        Group toDelete = userData.getGroupHashmap().get(groupName.toString());
+        currentUser.deleteGroupRequest(toDelete);
+        indicateUserDataChanged();
     }
 
     @Override

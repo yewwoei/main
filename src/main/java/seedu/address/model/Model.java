@@ -149,6 +149,10 @@ public interface Model {
 
     boolean hasRequestForUsers(Group group);
 
+    void deleteGroup(Group group);
+
+    void deleteGroupRequest(Name groupName);
+
     //============ Timetable commands ==========================
 
     void blockDateForCurrentUser(Date date);
