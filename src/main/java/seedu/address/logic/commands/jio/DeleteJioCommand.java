@@ -9,7 +9,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
-import seedu.address.model.user.Name;
+import seedu.address.model.Name;
 
 /**
  * Deletes a jio the user started.

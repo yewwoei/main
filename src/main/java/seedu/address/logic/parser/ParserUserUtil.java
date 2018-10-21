@@ -2,13 +2,17 @@ package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Name;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.user.Email;
-import seedu.address.model.user.Name;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Phone;
 import seedu.address.model.user.Username;
@@ -80,6 +84,21 @@ public class ParserUserUtil {
     }
 
     /**
+     * Parses a {@code String groupName} into a {@code Name}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code groupName} is invalid.
+     */
+    public static Name parseGroup(String groupName) throws ParseException {
+        requireNonNull(groupName);
+        String trimmedName = groupName.trim();
+        if (!Name.isValidName(groupName)) {
+            throw new ParseException(Name.MESSAGE_NAME_CONSTRAINTS);
+        }
+        return new Name(trimmedName);
+    }
+
+    /**
      * Parses a {@code String phone} into a {@code Phone}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -137,5 +156,17 @@ public class ParserUserUtil {
             throw new ParseException(Amount.MESSAGE_AMOUNT_CONSTRAINTS);
         }
         return new Amount(trimmedAmount);
+    }
+
+    /**
+     * Parses {@code Collection<String> usernames} into a {@code List<Username>}.
+     */
+    public static List<Username> parseUsernames(Collection<String> usernames) throws ParseException {
+        requireNonNull(usernames);
+        final List<Username> usernameList = new ArrayList<>();
+        for (String u : usernames) {
+            usernameList.add(parseUsername(u));
+        }
+        return usernameList;
     }
 }
