@@ -124,7 +124,7 @@ public class XmlSerializableUsers {
 
         for (XmlAdaptedGroup g: groups) {
             Group group = g.toModelType(userData.getUsernameUserHashMap());
-            if(userData.hasGroup(group.getGroupName())) {
+            if (userData.hasGroup(group.getGroupName())) {
                 throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
             }
 

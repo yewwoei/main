@@ -49,7 +49,7 @@ public class AddGroupCommand extends Command {
         }
 
         // throw exception if that group already exists
-        if(model.hasGroup(toAdd)) {
+        if (model.hasGroup(toAdd)) {
             throw new CommandException(MESSAGE_DUPLICATE_GROUP);
         }
 

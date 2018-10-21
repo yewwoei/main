@@ -17,13 +17,13 @@ import seedu.address.logic.parser.ParserUserUtil;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Name;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Day;
 import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
-import seedu.address.model.Name;
 
 /**
  * Parses input arguments and creates a new CreateJioCommand object

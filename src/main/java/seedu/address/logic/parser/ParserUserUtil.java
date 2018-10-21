@@ -4,18 +4,16 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Name;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.user.Email;
-import seedu.address.model.Name;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Phone;
 import seedu.address.model.user.Username;

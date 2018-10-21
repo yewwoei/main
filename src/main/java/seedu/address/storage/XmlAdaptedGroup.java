@@ -36,12 +36,13 @@ public class XmlAdaptedGroup {
     /**
      * Constructs an {@code XmlAdaptedGroup} with the given group details.
      */
-    public XmlAdaptedGroup(String groupName, List<XmlAdaptedUsername> acceptedUsers, List<XmlAdaptedUsername> pendingUsers) {
+    public XmlAdaptedGroup(String groupName, List<XmlAdaptedUsername> acceptedUsers,
+                           List<XmlAdaptedUsername> pendingUsers) {
         this.groupName = groupName;
-        if(acceptedUsers != null) {
+        if (acceptedUsers != null) {
             this.acceptedUsers = acceptedUsers;
         }
-        if(pendingUsers != null) {
+        if (pendingUsers != null) {
             this.pendingUsers = pendingUsers;
         }
     }
@@ -85,7 +86,7 @@ public class XmlAdaptedGroup {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Group.class.getSimpleName()));
         }
 
-        if(!Name.isValidName(groupName)) {
+        if (!Name.isValidName(groupName)) {
             throw new IllegalValueException(Name.MESSAGE_NAME_CONSTRAINTS);
         }
 
@@ -93,12 +94,12 @@ public class XmlAdaptedGroup {
         final List<User> modelAcceptedUsers = new ArrayList<>();
         final List<User> modelPendingUsers = new ArrayList<>();
 
-        for(XmlAdaptedUsername u: acceptedUsers) {
+        for (XmlAdaptedUsername u: acceptedUsers) {
             Username username = u.toModelType();
             modelAcceptedUsers.add(usernameUserHashMap.get(username));
         }
 
-        for(XmlAdaptedUsername u: pendingUsers) {
+        for (XmlAdaptedUsername u: pendingUsers) {
             Username username = u.toModelType();
             modelPendingUsers.add(usernameUserHashMap.get(username));
         }

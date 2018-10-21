@@ -3,8 +3,6 @@ package seedu.address.model.user;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
-import seedu.address.storage.XmlAdaptedUsername;
-
 /**
  * Represents a User's username.
  * Guarantees: immutable; is valid as declared in {@link #isValidUsername(String)}

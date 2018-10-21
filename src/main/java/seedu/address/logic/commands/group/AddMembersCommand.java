@@ -66,12 +66,12 @@ public class AddMembersCommand extends Command {
         }
 
         // throw exception if User is already part of the group
-        if(model.hasUsersInGroup(toAdd)) {
+        if (model.hasUsersInGroup(toAdd)) {
             throw new CommandException(MESSAGE_ALREADY_IN_GROUP);
         }
 
         // throw exception if User already has group request
-        if(model.hasRequestForUsers(toAdd)) {
+        if (model.hasRequestForUsers(toAdd)) {
             throw new CommandException(MESSAGE_HAS_REQUEST);
         }
 

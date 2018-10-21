@@ -11,8 +11,8 @@ import java.util.stream.Stream;
 
 import seedu.address.logic.commands.user.SignUpCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.user.Email;
 import seedu.address.model.Name;
+import seedu.address.model.user.Email;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Phone;
 import seedu.address.model.user.User;

@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.Name;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Day;
 import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
-import seedu.address.model.Name;
 import seedu.address.model.user.Username;
 
 /**

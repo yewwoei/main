@@ -356,8 +356,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean hasGroupRequest(Name groupName) {
         List<Group> listGroups = currentUser.getGroupRequests();
-        for(Group g: listGroups) {
-            if(groupName.toString().equals(g.getGroupName())) {
+        for (Group g: listGroups) {
+            if (groupName.toString().equals(g.getGroupName())) {
                 return true;
             }
         }
@@ -367,8 +367,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean isInGroup(Group group) {
         List<Group> listGroups = currentUser.getGroups();
-        for(Group g: listGroups) {
-            if(group.equals(g)) {
+        for (Group g: listGroups) {
+            if (group.equals(g)) {
                 return true;
             }
         }
@@ -396,8 +396,8 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean isAllValidUsers(Group group) {
         List<Username> listUsernames = group.getPendingUsernames();
-        for(Username u: listUsernames) {
-            if(!userData.hasUser(u)) {
+        for (Username u: listUsernames) {
+            if (!userData.hasUser(u)) {
                 return false;
             }
         }
@@ -412,9 +412,9 @@ public class ModelManager extends ComponentManager implements Model {
         List<User> acceptedUsers = originalGroup.getAcceptedUsers();
 
         // checking to see if any Users are already in the list of acceptedUsers
-        return acceptedUsers.stream().anyMatch(
-                accUser -> listUsernames.stream().anyMatch(
-                        user -> accUser.getUsername().equals(user)));
+        return acceptedUsers.stream()
+                .anyMatch(accUser -> listUsernames.stream()
+                        .anyMatch(user -> accUser.getUsername().equals(user)));
     }
 
     @Override
@@ -425,9 +425,9 @@ public class ModelManager extends ComponentManager implements Model {
         List<User> pendingUsers = originalGroup.getPendingUsers();
 
         // checking to see if any Users are already in the list of pendingUsers
-        return pendingUsers.stream().anyMatch(
-                accUser -> listUsernames.stream().anyMatch(
-                        user -> accUser.getUsername().equals(user)));
+        return pendingUsers.stream()
+                .anyMatch(accUser -> listUsernames.stream()
+                        .anyMatch(user -> accUser.getUsername().equals(user)));
     }
 
     @Override
