@@ -97,9 +97,15 @@ public class UserData {
         });
     }
 
+    /**
+     * Checks if the specified user is the creator of the jio with the specified name.
+     * @param jioName name of jio to be checked
+     * @param user current user
+     * @return True if the user is the creator of jio, false otherwise.
+     */
     public boolean isCreatorOfJio(Name jioName, User user) {
         return jios.stream().anyMatch(
-                jio -> (jio.getName().equals(jioName) && jio.getCreator().equals(user.getUsername())));
+            jio -> (jio.getName().equals(jioName) && jio.getCreator().equals(user.getUsername())));
     }
 
     @Override

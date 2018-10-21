@@ -26,8 +26,8 @@ public class DeleteJioCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Jio deleted: %1$s";
 
     public static final String MESSAGE_NONEXISTENT_JIO = "Jio does not exist.";
-    public static final String MESSAGE_NOT_CREATOR = "You are not the creator of this jio. Only the creator can " +
-            "delete a jio.";
+    public static final String MESSAGE_NOT_CREATOR = "You are not the creator of this jio. Only the creator can "
+            + "delete a jio.";
 
     private final Name jioName;
 
