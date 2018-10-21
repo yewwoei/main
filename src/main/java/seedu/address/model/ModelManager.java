@@ -284,7 +284,8 @@ public class ModelManager extends ComponentManager implements Model {
     public boolean debtExist(Username debtorUsername) {
         for (Debt d: currentUser.getDebts()) {
             if (d.getCreditor().getUsername().equals(currentUser.getUsername())
-                    && d.getDebtor().getUsername().equals(debtorUsername)) {
+                    && d.getDebtor().getUsername().equals(debtorUsername)
+                    && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
                 return true;
             }
         }
@@ -296,6 +297,7 @@ public class ModelManager extends ComponentManager implements Model {
         for (Debt d: currentUser.getDebts()) {
             if (d.getCreditor().getUsername().equals(currentUser.getUsername())
                     && d.getDebtor().getUsername().equals(debtorUsername)
+                    && d.getDebtStatus().equals(DebtStatus.ACCEPTED)
                     && d.getAmount().toDouble() >= amount.toDouble()) {
                 return true;
             }

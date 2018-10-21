@@ -20,7 +20,7 @@ public class XmlAdaptedDebt {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Debt's %s field is missing!";
     public static final String NOT_EXIST_FIELD_MESSAGE_FORMAT = "%s does not exist in storage.";
-    public static final String INVALID_INPUT_MESSAGE_FORMAT = "Not a vali input.";
+    public static final String INVALID_INPUT_MESSAGE_FORMAT = "Not a valid input.";
 
     @XmlElement(required = true)
     private String creditor;

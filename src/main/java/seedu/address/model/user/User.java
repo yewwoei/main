@@ -409,28 +409,11 @@ public class User {
         }
         if (balAmount == 0) {
             this.debts.get(count).changeDebtStatus(DebtStatus.CLEARED);
-        }
-        if (balAmount > 0){
-            this.debts.add(new Debt(this, debtor, amount, DebtStatus.CLEARED));
-            Amount amt = new Amount(String.valueOf(Math.round(balAmount*100)/100));
-            this.debts.get(count).changeDebtAmount(amt);
-        }
-
-        balAmount = (amount.toDouble())*(-1);
-        for (Debt d: debtor.debts) {
-            if ((d.getCreditor().equals(this))
-                    && (d.getDebtor().equals(debtor))
-                    && (d.getDebtStatus().equals(DebtStatus.ACCEPTED))) {
-                balAmount += d.getAmount().toDouble();
-                count = debtor.debts.indexOf(d);
-            }
-        }
-        if (balAmount == 0) {
             debtor.debts.get(count).changeDebtStatus(DebtStatus.CLEARED);
         }
         if (balAmount > 0){
-            debtor.debts.add(new Debt(this, debtor, amount, DebtStatus.CLEARED));
             Amount amt = new Amount(String.valueOf(Math.round(balAmount*100)/100));
+            this.debts.get(count).changeDebtAmount(amt);
             debtor.debts.get(count).changeDebtAmount(amt);
         }
     }
@@ -443,8 +426,6 @@ public class User {
      */
     public void acceptedDebtRequest(User creditor, Amount amount, DebtId debtId) {
         double balAmount = amount.toDouble();
-        Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
-        int pos = this.getDebts().indexOf(toFind);
         boolean exist = false;
         for (Debt d: this.debts) {
             if ((d.getCreditor().equals(creditor))
@@ -462,71 +443,58 @@ public class User {
                 exist = true;
             }
         }
-        if (!exist) {
-            this.debts.remove(pos);
-            Debt toAdd = new Debt(creditor, this, amount, debtId, DebtStatus.ACCEPTED);
-            this.debts.add(toAdd);
-        }
-        else {
-            if (balAmount == 0) {
-                this.debts.get(pos).changeDebtStatus(DebtStatus.BALANCED);
-            }
-            if (balAmount > 0) {
-                //this.debts.add(new Debt(creditor, this, amount, DebtStatus.BALANCED));
-                Amount amt = new Amount(String.valueOf(Math.round(balAmount*100)/100));
-                Debt toAdd = new Debt(creditor, this, amt, DebtStatus.ACCEPTED);
-                this.debts.remove(toFind);
-                this.debts.add(toAdd);
-            }
-            if (balAmount < 0) {
-                //this.debts.add(new Debt(creditor, this, amount, DebtStatus.BALANCED));
-                Amount amt = new Amount(String.valueOf(Math.round(balAmount*(-100))/100));
-                Debt toAdd = new Debt(this, creditor, amt, DebtStatus.ACCEPTED);
-                this.debts.remove(toFind);
-                this.debts.add(toAdd);
-            }
-        }
-
-        balAmount = amount.toDouble();
-        pos = creditor.getDebts().indexOf(toFind);
-        exist = false;
         for (Debt d: creditor.debts) {
             if ((d.getCreditor().equals(creditor))
                     && (d.getDebtor().equals(this))
                     && (d.getDebtStatus().equals(DebtStatus.ACCEPTED))) {
-                balAmount  += d.getAmount().toDouble();
                 d.changeDebtStatus(DebtStatus.BALANCED);
-                exist = true;
             }
             if ((d.getCreditor().equals(this))
                     && (d.getDebtor().equals(creditor))
                     && (d.getDebtStatus().equals(DebtStatus.ACCEPTED))) {
-                balAmount  -= d.getAmount().toDouble();
                 d.changeDebtStatus(DebtStatus.BALANCED);
-                exist = true;
             }
         }
+        Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
+        int pos = this.getDebts().indexOf(toFind);
         if (!exist) {
-            creditor.debts.remove(pos);
             Debt toAdd = new Debt(creditor, this, amount, debtId, DebtStatus.ACCEPTED);
+            this.debts.remove(pos);
+            this.debts.add(toAdd);
+            pos = creditor.getDebts().indexOf(toFind);
+            creditor.debts.remove(pos);
             creditor.debts.add(toAdd);
         }
         else {
             if (balAmount == 0) {
-                creditor.debts.get(pos).changeDebtStatus(DebtStatus.BALANCED);
+                Debt toAdd = new Debt(creditor, this, amount, debtId, DebtStatus.BALANCED);
+                pos = this.getDebts().indexOf(toFind);
+                this.debts.add(toAdd);
+                this.debts.remove(pos);
+                pos = creditor.getDebts().indexOf(toFind);
+                creditor.debts.remove(pos);
+                creditor.debts.add(toAdd);
             }
             if (balAmount > 0) {
-                //creditor.debts.add(new Debt(creditor, this, amount, DebtStatus.BALANCED));
+                //this.debts.add(new Debt(creditor, this, amount, DebtStatus.BALANCED));
                 Amount amt = new Amount(String.valueOf(Math.round(balAmount*100)/100));
                 Debt toAdd = new Debt(creditor, this, amt, DebtStatus.ACCEPTED);
-                creditor.debts.remove(toFind);
+                pos = this.getDebts().indexOf(toFind);
+                this.debts.remove(pos);
+                this.debts.add(toAdd);
+                pos = creditor.getDebts().indexOf(toFind);
+                creditor.debts.remove(pos);
                 creditor.debts.add(toAdd);
             }
             if (balAmount < 0) {
-                //creditor.debts.add(new Debt(creditor, this, amount, DebtStatus.BALANCED));
+                //this.debts.add(new Debt(creditor, this, amount, DebtStatus.BALANCED));
                 Amount amt = new Amount(String.valueOf(Math.round(balAmount*(-100))/100));
                 Debt toAdd = new Debt(this, creditor, amt, DebtStatus.ACCEPTED);
-                creditor.debts.remove(toFind);
+                pos = this.getDebts().indexOf(toFind);
+                this.debts.remove(pos);
+                this.debts.add(toAdd);
+                pos = creditor.getDebts().indexOf(toFind);
+                creditor.debts.remove(pos);
                 creditor.debts.add(toAdd);
             }
         }

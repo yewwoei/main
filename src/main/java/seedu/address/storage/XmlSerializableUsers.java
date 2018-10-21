@@ -133,22 +133,22 @@ public class XmlSerializableUsers {
             currentUser.addUniqueBusySchedule(currentSchedule);
         }
 
-
         for (XmlAdaptedDebt d: debts) {
-            Debt debts = d.toModelType(userData.getUsernameUserHashMap());
-            if (!userData.getUsernameUserHashMap().containsKey(debts.getCreditor().getUsername())) {
+            Debt debt = d.toModelType(userData.getUsernameUserHashMap());
+            if (!userData.getUsernameUserHashMap().containsKey(debt.getCreditor().getUsername())) {
                 throw new IllegalValueException(MESSAGE_NO_USER_DEBTS);
             }
-            if (!userData.getUsernameUserHashMap().containsKey(debts.getDebtor().getUsername())) {
+            if (!userData.getUsernameUserHashMap().containsKey(debt.getDebtor().getUsername())) {
                 throw new IllegalValueException(MESSAGE_NO_USER_DEBTS);
             }
-
-            userData.getUsernameUserHashMap().put(debts.getCreditor().getUsername(),
-                    userData.getUsernameUserHashMap().get(debts.getCreditor().getUsername()).addDebt(debts));
-
-            userData.getUsernameUserHashMap().put(debts.getDebtor().getUsername(),
-                    userData.getUsernameUserHashMap().get(debts.getDebtor().getUsername()).addDebt(debts));
-
+            if (!userData.getUsernameUserHashMap().get(debt.getCreditor().getUsername()).getDebts().contains(debt)) {
+                userData.getUsernameUserHashMap().put(debt.getCreditor().getUsername(),
+                        userData.getUsernameUserHashMap().get(debt.getCreditor().getUsername()).addDebt(debt));
+            }
+            if (!userData.getUsernameUserHashMap().get(debt.getDebtor().getUsername()).getDebts().contains(debt)) {
+                userData.getUsernameUserHashMap().put(debt.getDebtor().getUsername(),
+                        userData.getUsernameUserHashMap().get(debt.getDebtor().getUsername()).addDebt(debt));
+            }
         }
 
         for (XmlAdaptedJio j: jios) {
