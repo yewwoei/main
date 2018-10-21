@@ -1,11 +1,11 @@
 package seedu.address.model.jio;
 
+import seedu.address.model.Name;
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Day;
 import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
-import seedu.address.model.Name;
 
 /**
  * Contains helper final Strings for testing Jio.
