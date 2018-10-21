@@ -551,7 +551,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean isCurrentUserCreatorOfJio(seedu.address.model.user.Name jioName) {
+    public boolean isCurrentUserCreatorOfJio(Name jioName) {
         requireNonNull(jioName);
         return userData.isCreatorOfJio(jioName, currentUser);
     }

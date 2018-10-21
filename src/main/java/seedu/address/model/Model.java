@@ -175,7 +175,7 @@ public interface Model {
 
     void addCurrentUserToJioOfName(Name jioName);
 
-    boolean isCurrentUserCreatorOfJio(seedu.address.model.user.Name jioName);
+    boolean isCurrentUserCreatorOfJio(Name jioName);
 
     //=========== Undo/Redo/Commit ===============================================================================
 
