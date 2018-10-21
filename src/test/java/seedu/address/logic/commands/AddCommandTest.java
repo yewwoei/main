@@ -248,6 +248,11 @@ public class AddCommandTest {
         public void addCurrentUserToJioOfName(Name jioName) {}
 
         @Override
+        public boolean isCurrentUserCreatorOfJio(Name jioName) {
+            return true;
+        }
+
+        @Override
         public void addUser(User user) {}
 
         @Override

@@ -531,6 +531,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void createJio(Jio jio) {
         requireNonNull(jio);
         jio.addUser(currentUser);
+        jio.setCreator(currentUser);
         userData.addJio(jio);
         updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
         indicateUserDataChanged();
@@ -539,7 +540,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean isCurrentUserInJioOfName(Name jioName) {
         requireNonNull(jioName);
-        return userData.isCurrentUserInJioOfName(jioName, currentUser);
+        return userData.isUserInJioOfName(jioName, currentUser);
     }
 
     @Override
@@ -547,6 +548,12 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(jioName);
         userData.addUserToJioOfName(jioName, currentUser);
         indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean isCurrentUserCreatorOfJio(Name jioName) {
+        requireNonNull(jioName);
+        return userData.isCreatorOfJio(jioName, currentUser);
     }
 
     //=========== Undo/Redo/Commit ===============================================================================

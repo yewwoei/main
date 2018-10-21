@@ -33,8 +33,10 @@ public class XmlAdaptedJio {
     private String time;
     @XmlElement(required = true)
     private String address;
-    @XmlElement
+    @XmlElement(required = true)
     private List<XmlAdaptedUsername> people = new ArrayList<>();
+    @XmlElement(required = true)
+    private XmlAdaptedUsername creator;
 
     /**
      * Constructs an XmlAdaptedJio.
@@ -46,7 +48,7 @@ public class XmlAdaptedJio {
      * Constructs an {@code XmlAdaptedJio} with the given jio details.
      */
     public XmlAdaptedJio(String name, String week, String day, String time, String address,
-                         List<XmlAdaptedUsername> people) {
+                         List<XmlAdaptedUsername> people, XmlAdaptedUsername creator) {
         this.name = name;
         this.week = week;
         this.day = day;
@@ -55,6 +57,7 @@ public class XmlAdaptedJio {
         if (people != null) {
             this.people = new ArrayList<>(people);
         }
+        this.creator = creator;
     }
 
     /**
@@ -71,6 +74,7 @@ public class XmlAdaptedJio {
         people = source.getPeople().stream()
                 .map(XmlAdaptedUsername::new)
                 .collect(Collectors.toList());
+        creator = new XmlAdaptedUsername(source.getCreator());
     }
 
     /**
@@ -123,13 +127,16 @@ public class XmlAdaptedJio {
         }
         final Address modelAddress = new Address(address);
 
+        // Creator
+        Username modelCreator = creator.toModelType();
+
         final List<Username> modelPeople = new ArrayList<>();
         for (XmlAdaptedUsername username : people) {
             modelPeople.add(username.toModelType());
         }
 
 
-        return new Jio(modelName, modelDate, modelAddress);
+        return new Jio(modelName, modelDate, modelAddress, modelCreator);
     }
 
     @Override

@@ -175,6 +175,8 @@ public interface Model {
 
     void addCurrentUserToJioOfName(Name jioName);
 
+    boolean isCurrentUserCreatorOfJio(Name jioName);
+
     //=========== Undo/Redo/Commit ===============================================================================
 
     /**
