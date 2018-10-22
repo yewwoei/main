@@ -3,6 +3,7 @@ package seedu.address.logic.parser.jio;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
@@ -18,6 +19,7 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Name;
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.timetable.Date;
@@ -36,13 +38,14 @@ public class CreateJioCommandParser {
      */
     public CreateJioCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_WEEK, PREFIX_DAY, PREFIX_TIME, PREFIX_ADDRESS);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_WEEK, PREFIX_DAY, PREFIX_TIME, PREFIX_ADDRESS, PREFIX_GROUP);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_WEEK, PREFIX_DAY, PREFIX_TIME, PREFIX_ADDRESS)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, CreateJioCommand.MESSAGE_USAGE));
         }
 
+        Jio jio;
         Name name = ParserUserUtil.parseName(argMultimap.getValue(PREFIX_NAME).get());
         Week week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
         Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
@@ -50,7 +53,13 @@ public class CreateJioCommandParser {
         Address location = ParserRestaurantUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Date date = new Date(week, day, time);
 
-        Jio jio = new Jio(name, date, location);
+        if (arePrefixesPresent(argMultimap, PREFIX_GROUP)) {
+            Name groupName = ParserUserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get());
+            jio = new Jio(name, date, location, groupName);
+        } else {
+            jio = new Jio(name, date, location);
+        }
+
 
         return new CreateJioCommand(jio);
     }

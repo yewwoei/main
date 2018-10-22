@@ -532,6 +532,13 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(jio);
         jio.addUser(currentUser);
         jio.setCreator(currentUser);
+        
+        //add group to jio if any
+        if (jio.isGroupJio()) {
+            Group group = userData.getGroupHashmap().get(jio.getGroupName().fullName);
+            group.getAcceptedUsers().stream().forEach(user -> jio.addUser(user));
+        }
+        
         userData.addJio(jio);
         updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
         indicateUserDataChanged();
