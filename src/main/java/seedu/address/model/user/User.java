@@ -403,6 +403,21 @@ public class User {
     }
 
     /**
+     * Method for the creditor to create and add debts.
+     * @param group the group of debtor of the adding debt
+     * @param amount the total amount of the adding debt
+     */
+    public void addGroupDebt(User currentUser, Group group, Amount amount) {
+        Amount amt = new Amount(String.valueOf
+                ((Math.round((amount.toDouble())/(group.getAcceptedUsers().size()))*100)/100));
+        for (User u: group.getAcceptedUsers()) {
+            if (!u.equals(currentUser)) {
+                addDebt(u,amt);
+            }
+        }
+    }
+
+    /**
      * Method for the creditor to clear a debt.
      * @param debtor the debtor of the clearing debt.
      * @param amount the amount of the clearing debt.
@@ -614,7 +629,6 @@ public class User {
      * This current user's UniqueBusySchedule must be empty.
      */
     public void addUniqueBusySchedule(UniqueBusySchedule schedule) {
-        assert(busySchedule.isEmpty());
         busySchedule.addAll(schedule);
     }
 

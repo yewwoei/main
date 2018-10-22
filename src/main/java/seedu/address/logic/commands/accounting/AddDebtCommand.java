@@ -14,7 +14,7 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.user.Username;
 
 /**
- * Adds a debt to a user.
+ * Add debt to a user.
  */
 public class AddDebtCommand extends Command {
     public static final String COMMAND_WORD = "addDebt";

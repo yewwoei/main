@@ -221,6 +221,8 @@ public interface Model {
 
     void addDebt(Username debtorUsername, Amount amount);
 
+    void addGroupDebt(Group group, Amount amount);
+
     void clearDebt(Username debtorUsername, Amount amount);
 
     void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId);

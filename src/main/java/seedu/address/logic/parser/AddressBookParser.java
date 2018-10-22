@@ -21,6 +21,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.accounting.AcceptDebtRequestCommand;
 import seedu.address.logic.commands.accounting.AddDebtCommand;
+import seedu.address.logic.commands.accounting.AddGroupDebtCommand;
 import seedu.address.logic.commands.accounting.ClearDebtCommand;
 import seedu.address.logic.commands.accounting.DeleteDebtRequestCommand;
 import seedu.address.logic.commands.accounting.ListCreditorCommand;
@@ -48,6 +49,7 @@ import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.commands.user.SignUpCommand;
 import seedu.address.logic.parser.accounting.AcceptDebtRequestCommandParser;
 import seedu.address.logic.parser.accounting.AddDebtCommandParser;
+import seedu.address.logic.parser.accounting.AddGroupDebtCommandParser;
 import seedu.address.logic.parser.accounting.ClearDebtCommandParser;
 import seedu.address.logic.parser.accounting.DeleteDebtRequestCommandParser;
 import seedu.address.logic.parser.accounting.ListCreditorCommandParser;
@@ -194,9 +196,13 @@ public class AddressBookParser {
 
         case FreeDateCommand.COMMAND_WORD:
             return new FreeDateCommandParser().parse(arguments);
+
         // Accounting Commands
         case AddDebtCommand.COMMAND_WORD:
             return new AddDebtCommandParser().parse(arguments);
+
+        case AddGroupDebtCommand.COMMAND_WORD:
+            return new AddGroupDebtCommandParser().parse(arguments);
 
         case ClearDebtCommand.COMMAND_WORD:
             return new ClearDebtCommandParser().parse(arguments);

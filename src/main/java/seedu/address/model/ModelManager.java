@@ -316,6 +316,14 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void addGroupDebt(Group group, Amount amount) {
+        String groupName = group.getGroupName();
+        Group toAdd = userData.getGroupHashmap().get(groupName);
+        currentUser.addGroupDebt(currentUser, toAdd, amount);
+        indicateUserDataChanged();
+    }
+
+    @Override
     public void clearDebt(Username debtorUsername, Amount amount) {
         User debtor = userData.getUser(debtorUsername);
         currentUser.clearDebt(debtor, amount);
