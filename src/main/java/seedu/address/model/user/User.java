@@ -523,7 +523,6 @@ public class User {
      * This current user's UniqueBusySchedule must be empty.
      */
     public void addUniqueBusySchedule(UniqueBusySchedule schedule) {
-        assert(busySchedule.isEmpty());
         busySchedule.addAll(schedule);
     }
 
