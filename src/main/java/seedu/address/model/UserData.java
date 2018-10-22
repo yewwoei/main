@@ -6,7 +6,6 @@ import java.util.List;
 
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
-import seedu.address.model.user.Name;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -17,11 +16,12 @@ import seedu.address.model.user.Username;
 public class UserData {
 
     private HashMap<Username, User> usernameUserHashMap;
-    private List<Group> groups;
+    private HashMap<String, Group> groupHashMap;
     private List<Jio> jios;
 
     public UserData() {
         usernameUserHashMap = new HashMap<>();
+        groupHashMap = new HashMap<>();
         jios = new ArrayList<>();
     }
 
@@ -29,8 +29,8 @@ public class UserData {
         return usernameUserHashMap;
     }
 
-    public List<Group> getGroups() {
-        return groups;
+    public HashMap<String, Group> getGroupHashmap() {
+        return groupHashMap;
     }
 
     public List<Jio> getJios() {
@@ -65,6 +65,15 @@ public class UserData {
         usernameUserHashMap.remove(user.getUsername());
     }
 
+    //=========== Friend methods ============================================================================
+    public boolean hasGroup(String groupName) {
+        return groupHashMap.containsKey(groupName);
+    }
+
+    public void addGroup(Group group) {
+        groupHashMap.put(group.getGroupName(), group);
+    }
+
     //=========== Jio methods ===============================================================================
     public boolean hasJioName(Name jioName) {
         return jios.stream().anyMatch(jio -> jio.getName().equals(jioName));
@@ -82,7 +91,7 @@ public class UserData {
         jios.removeIf(jio -> jio.getName().equals(jioName));
     }
 
-    public boolean isCurrentUserInJioOfName(Name jioName, User user) {
+    public boolean isUserInJioOfName(Name jioName, User user) {
         return jios.stream().anyMatch(jio -> (jio.getName().equals(jioName) && jio.hasUser(user)));
     }
 
@@ -95,6 +104,17 @@ public class UserData {
                 jio.addUser(user);
             }
         });
+    }
+
+    /**
+     * Checks if the specified user is the creator of the jio with the specified name.
+     * @param jioName name of jio to be checked
+     * @param user current user
+     * @return True if the user is the creator of jio, false otherwise.
+     */
+    public boolean isCreatorOfJio(Name jioName, User user) {
+        return jios.stream().anyMatch(
+            jio -> (jio.getName().equals(jioName) && jio.getCreator().equals(user.getUsername())));
     }
 
     @Override

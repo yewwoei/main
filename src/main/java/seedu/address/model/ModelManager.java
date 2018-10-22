@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -19,6 +20,7 @@ import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.timetable.Date;
@@ -366,6 +368,112 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean hasGroup(Group group) {
+        requireNonNull(group);
+        String groupName = group.getGroupName();
+        return userData.hasGroup(groupName);
+    }
+
+    @Override
+    public void addGroup(Group group) {
+        userData.addGroup(group);
+        group.addCreator(currentUser);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean hasGroupRequest(Name groupName) {
+        List<Group> listGroups = currentUser.getGroupRequests();
+        for (Group g: listGroups) {
+            if (groupName.toString().equals(g.getGroupName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isInGroup(Group group) {
+        List<Group> listGroups = currentUser.getGroups();
+        for (Group g: listGroups) {
+            if (group.equals(g)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public void acceptGroupRequest(Name groupName) {
+        Group group = userData.getGroupHashmap().get(groupName.toString());
+        currentUser.acceptGroupRequest(group);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void addPendingUsersGroup(Group group) {
+        List<Username> listUsernames = group.getPendingUsernames();
+        String groupName = group.getGroupName();
+        Group toAddto = userData.getGroupHashmap().get(groupName);
+        List<User> listUsers = new ArrayList<>();
+        listUsernames.forEach(username -> listUsers.add(userData.getUser(username)));
+        toAddto.addMembers(listUsers);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean isAllValidUsers(Group group) {
+        List<Username> listUsernames = group.getPendingUsernames();
+        for (Username u: listUsernames) {
+            if (!userData.hasUser(u)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean hasUsersInGroup(Group group) {
+        List<Username> listUsernames = group.getPendingUsernames();
+        String groupName = group.getGroupName();
+        Group originalGroup = userData.getGroupHashmap().get(groupName);
+        List<User> acceptedUsers = originalGroup.getAcceptedUsers();
+
+        // checking to see if any Users are already in the list of acceptedUsers
+        return acceptedUsers.stream()
+                .anyMatch(accUser -> listUsernames.stream()
+                        .anyMatch(user -> accUser.getUsername().equals(user)));
+    }
+
+    @Override
+    public boolean hasRequestForUsers(Group group) {
+        List<Username> listUsernames = group.getPendingUsernames();
+        String groupName = group.getGroupName();
+        Group originalGroup = userData.getGroupHashmap().get(groupName);
+        List<User> pendingUsers = originalGroup.getPendingUsers();
+
+        // checking to see if any Users are already in the list of pendingUsers
+        return pendingUsers.stream()
+                .anyMatch(accUser -> listUsernames.stream()
+                        .anyMatch(user -> accUser.getUsername().equals(user)));
+    }
+
+    @Override
+    public void deleteGroup(Group group) {
+        String groupName = group.getGroupName();
+        Group toDelete = userData.getGroupHashmap().get(groupName);
+        currentUser.deleteGroup(toDelete);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void deleteGroupRequest(Name groupName) {
+        Group toDelete = userData.getGroupHashmap().get(groupName.toString());
+        currentUser.deleteGroupRequest(toDelete);
+        indicateUserDataChanged();
+    }
+
+    @Override
     public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
         User creditor = userData.getUser(creditorUsername);
         currentUser.deleteDebtRequest(creditor, amount, debtId);
@@ -440,13 +548,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasJioName(seedu.address.model.user.Name jioName) {
+    public boolean hasJioName(Name jioName) {
         requireNonNull(jioName);
         return userData.hasJioName(jioName);
     }
 
     @Override
-    public void removeJioOfName(seedu.address.model.user.Name jioName) {
+    public void removeJioOfName(Name jioName) {
         requireNonNull(jioName);
         userData.removeJioOfName(jioName);
         indicateUserDataChanged();
@@ -456,22 +564,29 @@ public class ModelManager extends ComponentManager implements Model {
     public void createJio(Jio jio) {
         requireNonNull(jio);
         jio.addUser(currentUser);
+        jio.setCreator(currentUser);
         userData.addJio(jio);
         updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
         indicateUserDataChanged();
     }
 
     @Override
-    public boolean isCurrentUserInJioOfName(seedu.address.model.user.Name jioName) {
+    public boolean isCurrentUserInJioOfName(Name jioName) {
         requireNonNull(jioName);
-        return userData.isCurrentUserInJioOfName(jioName, currentUser);
+        return userData.isUserInJioOfName(jioName, currentUser);
     }
 
     @Override
-    public void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName) {
+    public void addCurrentUserToJioOfName(Name jioName) {
         requireNonNull(jioName);
         userData.addUserToJioOfName(jioName, currentUser);
         indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean isCurrentUserCreatorOfJio(Name jioName) {
+        requireNonNull(jioName);
+        return userData.isCreatorOfJio(jioName, currentUser);
     }
 
     //=========== Undo/Redo/Commit ===============================================================================

@@ -18,10 +18,12 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.Name;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.timetable.Date;
@@ -227,23 +229,28 @@ public class AddCommandTest {
         }
 
         @Override
-        public boolean hasJioName(seedu.address.model.user.Name jioName) {
+        public boolean hasJioName(Name jioName) {
             return true;
         }
 
         @Override
-        public void removeJioOfName(seedu.address.model.user.Name jioName) {}
+        public void removeJioOfName(Name jioName) {}
 
         @Override
         public void createJio(Jio jio) {}
 
         @Override
-        public boolean isCurrentUserInJioOfName(seedu.address.model.user.Name jioName) {
+        public boolean isCurrentUserInJioOfName(Name jioName) {
             return true;
         }
 
         @Override
-        public void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName) {}
+        public void addCurrentUserToJioOfName(Name jioName) {}
+
+        @Override
+        public boolean isCurrentUserCreatorOfJio(Name jioName) {
+            return true;
+        }
 
         @Override
         public void addUser(User user) {}
@@ -303,6 +310,51 @@ public class AddCommandTest {
 
         @Override
         public void deleteFriendRequest(Username friendUsername) {}
+
+        @Override
+        public boolean hasGroup(Group group) {
+            return true;
+        }
+
+        @Override
+        public void addGroup(Group group) {}
+
+        @Override
+        public boolean hasGroupRequest(Name groupName) {
+            return true;
+        }
+
+        @Override
+        public void acceptGroupRequest(Name groupName) {}
+
+        @Override
+        public boolean isInGroup(Group group) {
+            return true;
+        }
+
+        @Override
+        public void addPendingUsersGroup(Group group) {}
+
+        @Override
+        public boolean isAllValidUsers(Group group) {
+            return true;
+        }
+
+        @Override
+        public boolean hasUsersInGroup(Group group) {
+            return true;
+        }
+
+        @Override
+        public boolean hasRequestForUsers(Group group) {
+            return true;
+        }
+
+        @Override
+        public void deleteGroup(Group group) {}
+
+        @Override
+        public void deleteGroupRequest(Name groupName) {}
 
         // ========= timetable commands =========
 

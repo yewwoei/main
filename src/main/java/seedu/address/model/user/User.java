@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.model.Name;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
@@ -268,10 +269,11 @@ public class User {
     /**
      * Allows a user to just create a group with the group name.
      * User creating will automatically be added into the group.
-     * @param groupName name of the group
+     * @param name name of the group
      * @return group Group created
      */
-    public Group createGroup(String groupName) {
+    public Group createGroup(String name) {
+        Name groupName = new Name(name);
         Group group = new Group(groupName, this);
         this.groups.add(group);
         return group;
@@ -280,16 +282,25 @@ public class User {
     /**
      * Allows a user to create a group and add users simultaneously.
      * User creating will automatically be added into the group.
-     * @param groupName name of the group
+     * @param name name of the group
      * @param users list of users who are to be added to the group
      * @return group Group created
      */
-    public Group createGroup(String groupName, User... users) {
+    public Group createGroup(String name, User... users) {
+        Name groupName = new Name(name);
         Group group = new Group(groupName, this, users);
         this.groups.add(group);
         List<User> listUsers = Arrays.asList(users);
         listUsers.forEach(user -> user.addGroupRequest(group));
         return group;
+    }
+
+    public void addGroup(Group group) {
+        this.groups.add(group);
+    }
+
+    public void addGroupPending(Group group) {
+        this.groupRequests.add(group);
     }
 
     /**
