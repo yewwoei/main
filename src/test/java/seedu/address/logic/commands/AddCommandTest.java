@@ -225,12 +225,12 @@ public class AddCommandTest {
 
         @Override
         public boolean hasJio(Jio jio) {
-            return true;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
         public boolean hasJioName(Name jioName) {
-            return true;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
@@ -241,7 +241,7 @@ public class AddCommandTest {
 
         @Override
         public boolean isCurrentUserInJioOfName(Name jioName) {
-            return true;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
