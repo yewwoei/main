@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.Name;
 import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 /**
  * Group class for users to create and join groups.
@@ -12,23 +14,49 @@ import seedu.address.model.user.User;
  * Groups can only be joined by invitation only unlike jios.
  */
 public class Group {
-    private String groupName;
-    private ArrayList<User> acceptedUsers;
-    private ArrayList<User> pendingUsers;
+    private Name groupName;
+    private List<User> acceptedUsers;
+    private List<User> pendingUsers;
+    private List<Username> pendingUsernames;
 
-    public Group(String groupName, User creator) {
+    public Group(Name groupName) {
+        this.groupName = groupName;
+        this.acceptedUsers = new ArrayList<>();
+        this.pendingUsers = new ArrayList<>();
+    }
+
+    public Group(Name groupName, User creator) {
         this.groupName = groupName;
         this.acceptedUsers = new ArrayList<>();
         acceptedUsers.add(creator);
         this.pendingUsers = new ArrayList<>();
     }
 
-    public Group(String groupName, User creator, User... users) {
+    public Group(Name groupName, User creator, User... users) {
         this.groupName = groupName;
         this.acceptedUsers = new ArrayList<>();
         acceptedUsers.add(creator);
         List<User> toAdd = Arrays.asList(users);
         this.pendingUsers = new ArrayList<>(toAdd);
+    }
+
+    public Group(Name groupName, List<User> acceptedUsers, List<User> pendingUsers) {
+        this.groupName = groupName;
+        this.acceptedUsers = acceptedUsers;
+        this.pendingUsers = pendingUsers;
+    }
+
+    public Group(Name groupName, List<Username> pendingUsers) {
+        this.groupName = groupName;
+        this.pendingUsernames = pendingUsers;
+    }
+
+    public void addCreator(User user) {
+        this.acceptedUsers.add(user);
+    }
+
+    public List<Username> getPendingUsernames() {
+        return pendingUsernames;
     }
 
     /**
@@ -44,11 +72,22 @@ public class Group {
     }
 
     /**
+     * Allows any user to add members into the group after creation of group
+     * @param listUsers
+     */
+    public void addMembers(List<User> listUsers) {
+        listUsers.forEach(user -> {
+            pendingUsers.add(user);
+            user.addGroupRequest(this);
+        });
+    }
+
+    /**
      * Gets the group name
      * @return groupName
      */
     public String getGroupName() {
-        return groupName;
+        return groupName.toString();
     }
 
     /**
@@ -100,8 +139,6 @@ public class Group {
     @Override
     public boolean equals(Object other) {
         Group otherGroup = (Group) other;
-        return otherGroup.groupName.equals(groupName)
-                && otherGroup.acceptedUsers.equals(acceptedUsers)
-                && otherGroup.pendingUsers.equals(pendingUsers);
+        return otherGroup.groupName.equals(groupName);
     }
 }

@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.model.Name;
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.timetable.Date;
-import seedu.address.model.user.Name;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
@@ -20,13 +20,13 @@ public class Jio {
     private Date date;
     private Address location;
     private List<Username> people;
+    private Username creator;
 
-    public Jio(Name name, Date date, Address location, User creator) {
+    public Jio(Name name, Date date, Address location, Username creator) {
         this.name = name;
         this.date = date;
         this.location = location;
-        this.people = new ArrayList<>();
-        this.people.add(creator.getUsername());
+        this.creator = creator;
     }
 
     public Jio(Name name, Date date, Address location) {
@@ -34,6 +34,7 @@ public class Jio {
         this.date = date;
         this.location = location;
         this.people = new ArrayList<>();
+        this.creator = null;
     }
 
     public Name getName() {
@@ -52,12 +53,20 @@ public class Jio {
         return people;
     }
 
+    public Username getCreator() {
+        return creator;
+    }
+
     public boolean hasUser(User newUser) {
         return this.people.stream().anyMatch(user -> newUser.getUsername().equals(user));
     }
 
     public void addUser(User newUser) {
         this.people.add(newUser.getUsername());
+    }
+
+    public void setCreator(User user) {
+        this.creator = user.getUsername();
     }
 
     @Override

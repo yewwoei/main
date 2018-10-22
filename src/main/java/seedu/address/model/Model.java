@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.timetable.Date;
@@ -130,6 +131,28 @@ public interface Model {
 
     void deleteFriendRequest(Username friendUsername);
 
+    boolean hasGroup(Group group);
+
+    boolean hasGroupRequest(Name groupName);
+
+    void addGroup(Group group);
+
+    void acceptGroupRequest(Name groupName);
+
+    boolean isInGroup(Group group);
+
+    void addPendingUsersGroup(Group group);
+
+    boolean isAllValidUsers(Group group);
+
+    boolean hasUsersInGroup(Group group);
+
+    boolean hasRequestForUsers(Group group);
+
+    void deleteGroup(Group group);
+
+    void deleteGroupRequest(Name groupName);
+
     //============ Timetable commands ==========================
 
     void blockDateForCurrentUser(Date date);
@@ -142,15 +165,17 @@ public interface Model {
 
     boolean hasJio(Jio jio);
 
-    boolean hasJioName(seedu.address.model.user.Name jioName);
+    boolean hasJioName(Name jioName);
 
-    void removeJioOfName(seedu.address.model.user.Name jioName);
+    void removeJioOfName(Name jioName);
 
     void createJio(Jio jio);
 
-    boolean isCurrentUserInJioOfName(seedu.address.model.user.Name jioName);
+    boolean isCurrentUserInJioOfName(Name jioName);
 
-    void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName);
+    void addCurrentUserToJioOfName(Name jioName);
+
+    boolean isCurrentUserCreatorOfJio(Name jioName);
 
     //=========== Undo/Redo/Commit ===============================================================================
 
