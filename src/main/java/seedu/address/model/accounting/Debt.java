@@ -17,7 +17,6 @@ public class Debt {
     private DebtId debtId;
     private DebtStatus status;
 
-    public Debt() {}
 
     public Debt(User creditor, User debtor, Amount amount) {
         requireAllNonNull(debtor, creditor, amount);
@@ -62,24 +61,17 @@ public class Debt {
     }
     /**
      * Method to change a debt status.
-     * @param changeTo represent the new debt status
+     * @param changeTo represent the new debt status.
      */
     public void changeDebtStatus(DebtStatus changeTo) {
         this.status = changeTo;
     }
     /**
      * Method to change a debt amount.
+     * @param changeTo represent the new debt amount.
      */
     public void changeDebtAmount(Amount changeTo) {
         this.amount = changeTo;
-    }
-    /**
-     *
-     */
-    public void swapUser() {
-        User temp = this.creditor;
-        this.creditor = debtor;
-        this.debtor = temp;
     }
     /**
      * Method to check if two (Debt) objects equals.
