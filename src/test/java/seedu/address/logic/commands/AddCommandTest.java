@@ -386,12 +386,6 @@ public class AddCommandTest {
             return true;
         }
 
-        @Override
-        public ObservableList<Jio> getJioList() {
-            return null;
-        }
-
-
     }
 
     /**
