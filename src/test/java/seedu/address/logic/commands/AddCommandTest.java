@@ -183,11 +183,28 @@ public class AddCommandTest {
         public boolean matchDebtToStatus(DebtId debtId, DebtStatus status) {
             return false;
         }
+
+        @Override
+        public boolean debtExist(Username debtorUsername) {
+            return false;
+        }
+
+        @Override
+        public boolean allowToClear(Username debtorUsername, Amount amount) {
+            return false;
+        }
+
         @Override
         public void addDebt(Username debtorUsername, Amount amount) {
         }
+
         @Override
-        public void clearDebt(Username debtorUsername, Amount amount, DebtId debtId) {
+        public void addGroupDebt(Name groupName, Amount amount) {
+
+        }
+
+        @Override
+        public void clearDebt(Username debtorUsername, Amount amount) {
         }
         @Override
         public void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
@@ -369,7 +386,6 @@ public class AddCommandTest {
         public boolean hasDateForCurrentUser(Date date) {
             return true;
         }
-
 
     }
 

@@ -17,6 +17,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
@@ -33,7 +34,6 @@ import seedu.address.model.user.Username;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Restaurant> filteredRestaurants;
     private UserData userData;
@@ -135,7 +135,6 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<Restaurant> getFilteredRestaurantList() {
         return FXCollections.unmodifiableObservableList(filteredRestaurants);
     }
-
     @Override
     public void updateFilteredRestaurantList(Predicate<Restaurant> predicate) {
         requireNonNull(predicate);
@@ -281,6 +280,31 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean debtExist(Username debtorUsername) {
+        for (Debt d: currentUser.getDebts()) {
+            if (d.getCreditor().getUsername().equals(currentUser.getUsername())
+                    && d.getDebtor().getUsername().equals(debtorUsername)
+                    && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean allowToClear(Username debtorUsername, Amount amount) {
+        for (Debt d: currentUser.getDebts()) {
+            if (d.getCreditor().getUsername().equals(currentUser.getUsername())
+                    && d.getDebtor().getUsername().equals(debtorUsername)
+                    && d.getDebtStatus().equals(DebtStatus.ACCEPTED)
+                    && d.getAmount().toDouble() >= amount.toDouble()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void addDebt(Username debtorUsername, Amount amount) {
         User debtor = userData.getUser(debtorUsername);
         currentUser.addDebt(debtor, amount);
@@ -289,9 +313,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void clearDebt(Username debtorUsername, Amount amount, DebtId debtId) {
+    public void addGroupDebt(Name groupName, Amount amount) {
+        Group toAdd = userData.getGroupHashmap().get(groupName);
+        currentUser.addGroupDebt(currentUser, toAdd, amount);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void clearDebt(Username debtorUsername, Amount amount) {
         User debtor = userData.getUser(debtorUsername);
-        currentUser.clearDebt(debtor, amount, debtId);
+        currentUser.clearDebt(debtor, amount);
         indicateUserDataChanged();
     }
 
@@ -368,6 +399,9 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean isInGroup(Name groupName) {
         List<Group> listGroups = currentUser.getGroups();
+        //for (Group g: listGroups) {
+        //    System.out.println(g.getGroupName());
+        //}
         for (Group g: listGroups) {
             System.out.println("in group: " + g.getGroupName());
         }
@@ -378,7 +412,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return false;
     }
-
     @Override
     public void acceptGroupRequest(Name groupName) {
         Group group = userData.getGroupHashmap().get(groupName);
@@ -509,7 +542,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Jio methods ===============================================================================
-
     @Override
     public boolean hasJio(Jio jio) {
         requireNonNull(jio);

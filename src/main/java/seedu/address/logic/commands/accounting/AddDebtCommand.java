@@ -14,7 +14,7 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.user.Username;
 
 /**
- * Adds a debt to a user.
+ * Add debt to a user.
  */
 public class AddDebtCommand extends Command {
     public static final String COMMAND_WORD = "addDebt";
@@ -33,6 +33,7 @@ public class AddDebtCommand extends Command {
     public static final String MESSAGE_NO_SUCH_USER = "Input user not exist.";
     public static final String MESSAGE_INVALID_AMOUNT = "Input amount must be larger than zero.";
     public static final String MESSAGE_NOT_LOGGED_IN = "You must login before adding a debt.";
+    public static final String MESSAGE_CANNOT_ADD_DEBT_TO_ONESELF = "You cannot create debt to yourself.";
 
     private final Username debtor;
     private final Amount amount;
@@ -52,6 +53,9 @@ public class AddDebtCommand extends Command {
         }
         if (!model.hasUser(debtor)) {
             throw new CommandException(MESSAGE_NO_SUCH_USER);
+        }
+        if (model.isSameAsCurrentUser(debtor)) {
+            throw new CommandException(MESSAGE_CANNOT_ADD_DEBT_TO_ONESELF);
         }
         if (!(amount.toDouble() > 0)) {
             throw new CommandException(MESSAGE_INVALID_AMOUNT);

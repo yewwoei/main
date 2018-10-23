@@ -214,9 +214,15 @@ public interface Model {
 
     boolean matchDebtToStatus(DebtId debtId, DebtStatus status);
 
+    boolean debtExist(Username debtorUsername);
+
+    boolean allowToClear(Username debtorUsername, Amount amount);
+
     void addDebt(Username debtorUsername, Amount amount);
 
-    void clearDebt(Username debtorUsername, Amount amount, DebtId debtId);
+    void addGroupDebt(Name groupName, Amount amount);
+
+    void clearDebt(Username debtorUsername, Amount amount);
 
     void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId);
 
