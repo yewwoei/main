@@ -9,6 +9,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.Name;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.group.Group;
 
@@ -33,13 +34,13 @@ public class AddGroupDebtCommand extends Command {
     public static final String MESSAGE_NOT_IN_GROUP = "Sorry, you are not a part of the group. ";
     public static final String MESSAGE_INVALID_AMOUNT = "Input amount must be larger than zero.";
 
-    private final Group group;
+    private final Name groupName;
     private final Amount amount;
 
-    public AddGroupDebtCommand(Group group, Amount amount) {
-        requireNonNull(group);
+    public AddGroupDebtCommand(Name groupName, Amount amount) {
+        requireNonNull(groupName);
         requireNonNull(amount);
-        this.group = group;
+        this.groupName = groupName;
         this.amount = amount;
     }
 
@@ -48,16 +49,16 @@ public class AddGroupDebtCommand extends Command {
         if (!model.isCurrentlyLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGGED_IN);
         }
-        if (!model.hasGroup(group)) {
+        if (!model.hasGroup(groupName)) {
             throw new CommandException(MESSAGE_GROUP_NOT_EXIST);
         }
-        if (!model.isInGroup(group)) {
+        if (!model.isInGroup(groupName)) {
             throw new CommandException(MESSAGE_NOT_IN_GROUP);
         }
         if (!(amount.toDouble() > 0)) {
             throw new CommandException(MESSAGE_INVALID_AMOUNT);
         }
-        model.addGroupDebt(group, amount);
-        return new CommandResult(String.format(MESSAGE_SUCCESS, group, amount.toDouble()));
+        model.addGroupDebt(groupName, amount);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, groupName, amount.toDouble()));
     }
 }

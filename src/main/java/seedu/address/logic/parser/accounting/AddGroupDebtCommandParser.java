@@ -31,9 +31,8 @@ public class AddGroupDebtCommandParser implements Parser<AddGroupDebtCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddGroupDebtCommand.MESSAGE_USAGE));
         }
         Name groupName = ParserUserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get());
-        Group group = new Group(groupName);
         Amount amount = ParserUserUtil.parseAmount(argMultimap.getValue(PREFIX_AMOUNT).get());
-        return new AddGroupDebtCommand(group, amount);
+        return new AddGroupDebtCommand(groupName, amount);
     }
 
     /**

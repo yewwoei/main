@@ -199,7 +199,7 @@ public class AddCommandTest {
         }
 
         @Override
-        public void addGroupDebt(Group group, Amount amount) {
+        public void addGroupDebt(Name groupName, Amount amount) {
 
         }
 

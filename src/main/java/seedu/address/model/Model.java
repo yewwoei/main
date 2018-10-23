@@ -220,7 +220,7 @@ public interface Model {
 
     void addDebt(Username debtorUsername, Amount amount);
 
-    void addGroupDebt(Group group, Amount amount);
+    void addGroupDebt(Name groupName, Amount amount);
 
     void clearDebt(Username debtorUsername, Amount amount);
 
