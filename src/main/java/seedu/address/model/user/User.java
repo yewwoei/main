@@ -409,10 +409,10 @@ public class User {
      */
     public void addGroupDebt(User currentUser, Group group, Amount amount) {
         Amount amt = new Amount(String.valueOf
-                ((Math.round((amount.toDouble())/(group.getAcceptedUsers().size()))*100)/100));
+                ((Math.round((amount.toDouble()) / (group.getAcceptedUsers().size())) * 100) / 100));
         for (User u: group.getAcceptedUsers()) {
             if (!u.equals(currentUser)) {
-                addDebt(u,amt);
+                addDebt(u, amt);
             }
         }
     }
@@ -423,7 +423,7 @@ public class User {
      * @param amount the amount of the clearing debt.
      */
     public void clearDebt(User debtor, Amount amount) {
-        double balAmount = (amount.toDouble())*(-1);
+        double balAmount = (amount.toDouble()) * (-1);
         int count = 0;
         for (Debt d: this.debts) {
             if ((d.getCreditor().equals(this))
@@ -437,8 +437,8 @@ public class User {
             this.debts.get(count).changeDebtStatus(DebtStatus.CLEARED);
             debtor.debts.get(count).changeDebtStatus(DebtStatus.CLEARED);
         }
-        if (balAmount > 0){
-            Amount amt = new Amount(String.valueOf(Math.round(balAmount*100)/100));
+        if (balAmount > 0) {
+            Amount amt = new Amount(String.valueOf(Math.round(balAmount * 100) / 100));
             Debt toAdd = new Debt(this, debtor, amount, DebtStatus.CLEARED);
             this.debts.add(toAdd);
             this.debts.get(count).changeDebtAmount(amt);
@@ -460,14 +460,14 @@ public class User {
             if ((d.getCreditor().equals(creditor))
                     && (d.getDebtor().equals(this))
                     && (d.getDebtStatus().equals(DebtStatus.ACCEPTED))) {
-                balAmount  += d.getAmount().toDouble();
+                balAmount += d.getAmount().toDouble();
                 d.changeDebtStatus(DebtStatus.BALANCED);
                 exist = true;
             }
             if ((d.getCreditor().equals(this))
                     && (d.getDebtor().equals(creditor))
                     && (d.getDebtStatus().equals(DebtStatus.ACCEPTED))) {
-                balAmount  -= d.getAmount().toDouble();
+                balAmount -= d.getAmount().toDouble();
                 d.changeDebtStatus(DebtStatus.BALANCED);
                 exist = true;
             }
@@ -510,7 +510,7 @@ public class User {
             }
             if (balAmount > 0) {
                 //this.debts.add(new Debt(creditor, this, amount, DebtStatus.BALANCED));
-                Amount amt = new Amount(String.valueOf(Math.round(balAmount*100)/100));
+                Amount amt = new Amount(String.valueOf(Math.round(balAmount * 100) / 100));
                 Debt toAdd = new Debt(creditor, this, amt, DebtStatus.ACCEPTED);
                 Debt record = new Debt(creditor, this, amount, DebtStatus.BALANCED);
                 pos = this.getDebts().indexOf(toFind);
@@ -524,7 +524,7 @@ public class User {
             }
             if (balAmount < 0) {
                 //this.debts.add(new Debt(creditor, this, amount, DebtStatus.BALANCED));
-                Amount amt = new Amount(String.valueOf(Math.round(balAmount*(-100))/100));
+                Amount amt = new Amount(String.valueOf(Math.round(balAmount * (-100)) / 100));
                 Debt toAdd = new Debt(this, creditor, amt, DebtStatus.ACCEPTED);
                 Debt record = new Debt(creditor, this, amount, DebtStatus.BALANCED);
                 pos = this.getDebts().indexOf(toFind);

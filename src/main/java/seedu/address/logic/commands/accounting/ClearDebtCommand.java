@@ -2,7 +2,6 @@ package seedu.address.logic.commands.accounting;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DEBTID;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import seedu.address.logic.CommandHistory;
@@ -12,8 +11,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
 import seedu.address.model.accounting.Amount;
-import seedu.address.model.accounting.DebtId;
-import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.user.Username;
 
 /**
@@ -57,10 +54,10 @@ public class ClearDebtCommand extends Command {
         if (!model.hasUser(debtor)) {
             throw new CommandException(MESSAGE_NO_SUCH_USER);
         }
-        if (!model.debtExist(debtor)){
+        if (!model.debtExist(debtor)) {
             throw new CommandException(MESSAGE_NO_DEBT_BETWEEN);
         }
-        if (!model.allowToClear(debtor, amount)){
+        if (!model.allowToClear(debtor, amount)) {
             throw new CommandException(MESSAGE_INVALID_AMOUNT);
         }
         if (model.isSameAsCurrentUser(debtor)) {

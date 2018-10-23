@@ -134,7 +134,6 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<Restaurant> getFilteredRestaurantList() {
         return FXCollections.unmodifiableObservableList(filteredRestaurants);
     }
-    
     @Override
     public void updateFilteredRestaurantList(Predicate<Restaurant> predicate) {
         requireNonNull(predicate);
@@ -410,7 +409,6 @@ public class ModelManager extends ComponentManager implements Model {
         }
         return false;
     }
-
     @Override
     public void acceptGroupRequest(Name groupName) {
         Group group = userData.getGroupHashmap().get(groupName.toString());
