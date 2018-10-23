@@ -15,7 +15,6 @@ import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Name;
 import seedu.address.model.accounting.Amount;
-import seedu.address.model.group.Group;
 
 /**
  * Parses input arguments and creates a new AddGroupDebtCommand object

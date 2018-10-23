@@ -11,7 +11,6 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.Name;
 import seedu.address.model.accounting.Amount;
-import seedu.address.model.group.Group;
 
 /**
  * Add debt to a group.
