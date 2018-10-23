@@ -86,8 +86,8 @@ public class Group {
      * Gets the group name
      * @return groupName
      */
-    public String getGroupName() {
-        return groupName.toString();
+    public Name getGroupName() {
+        return groupName;
     }
 
     /**

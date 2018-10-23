@@ -13,7 +13,6 @@ import seedu.address.logic.parser.ParserUserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Name;
-import seedu.address.model.group.Group;
 
 /**
  * Parses input arguments and creates a new AddGroupCommand object
@@ -35,9 +34,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
         Name name = ParserUserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get());
 
-        Group group = new Group(name);
-
-        return new AddGroupCommand(group);
+        return new AddGroupCommand(name);
     }
 
     /**
