@@ -31,12 +31,6 @@
           <Menu mnemonicParsing="false" text="Help">
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
-          <Menu mnemonicParsing="false" text="Features">
-            <MenuItem fx:id="restaurant" mnemonicParsing="false" onAction="#handleFeature" text="Restaurant" />
-            <MenuItem fx:id="friends" mnemonicParsing="false" onAction="#handleFeature" text="Friends" />
-            <MenuItem fx:id="jios" mnemonicParsing="false" onAction="#handleFeature" text="Jios" />
-            <MenuItem fx:id="debts" mnemonicParsing="false" onAction="#handleFeature" text="Debts" />
-          </Menu>
         </MenuBar>
 
         <StackPane VBox.vgrow="NEVER" fx:id="commandBoxPlaceholder" styleClass="pane-with-border">

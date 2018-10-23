@@ -163,8 +163,6 @@ public interface Model {
 
     //=========== Jio methods ===============================================================================
 
-    ObservableList<Jio> getJioList();
-
     boolean hasJio(Jio jio);
 
     boolean hasJioName(Name jioName);

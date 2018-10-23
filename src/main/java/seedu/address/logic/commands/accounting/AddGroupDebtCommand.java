@@ -51,7 +51,7 @@ public class AddGroupDebtCommand extends Command {
         if (!model.hasGroup(group)) {
             throw new CommandException(MESSAGE_GROUP_NOT_EXIST);
         }
-        if (!model.hasUsersInGroup(group)) {
+        if (!model.isInGroup(group)) {
             throw new CommandException(MESSAGE_NOT_IN_GROUP);
         }
         if (!(amount.toDouble() > 0)) {

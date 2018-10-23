@@ -35,7 +35,6 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private RestaurantListPanel restaurantListPanel;
-    private JioListPanel jioListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -199,15 +198,6 @@ public class MainWindow extends UiPart<Stage> {
     private void handleShowHelpEvent(ShowHelpRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         handleHelp();
-    }
-
-    /**
-     * Opens the help window or focuses on it if it's already opened.
-     */
-    @FXML
-    public void handleFeature() {
-        jioListPanel = new JioListPanel(logic.getJioList());
-        restaurantListPanelPlaceholder.getChildren().add(jioListPanel.getRoot());
     }
 
 }

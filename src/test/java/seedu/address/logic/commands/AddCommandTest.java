@@ -182,9 +182,26 @@ public class AddCommandTest {
         public boolean matchDebtToStatus(DebtId debtId, DebtStatus status) {
             return false;
         }
+
+        @Override
+        public boolean debtExist(Username debtorUsername) {
+            return false;
+        }
+
+        @Override
+        public boolean allowToClear(Username debtorUsername, Amount amount) {
+            return false;
+        }
+
         @Override
         public void addDebt(Username debtorUsername, Amount amount) {
         }
+
+        @Override
+        public void addGroupDebt(Group group, Amount amount) {
+
+        }
+
         @Override
         public void clearDebt(Username debtorUsername, Amount amount) {
         }

@@ -4,7 +4,6 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
 
 /**
@@ -22,9 +21,6 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of restaurants */
     ObservableList<Restaurant> getFilteredRestaurantList();
-
-    /** Returns an unmodifiable view of the filtered list of jios */
-    ObservableList<Jio> getJioList();
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();

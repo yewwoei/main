@@ -33,10 +33,8 @@ import seedu.address.model.user.Username;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Restaurant> filteredRestaurants;
-    //private final FilteredList<Jio> filteredJios;
     private UserData userData;
     private boolean isLoggedIn = false;
     private User currentUser = null;
@@ -52,7 +50,6 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
-        //filteredJios = new FilteredList<Jio>(userData.getJios());
     }
 
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs,
@@ -403,6 +400,9 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean isInGroup(Group group) {
         List<Group> listGroups = currentUser.getGroups();
+        //for (Group g: listGroups) {
+        //    System.out.println(g.getGroupName());
+        //}
         for (Group g: listGroups) {
             if (group.equals(g)) {
                 return true;
@@ -543,12 +543,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Jio methods ===============================================================================
-
-    @Override
-    public ObservableList<Jio> getJioList() {
-        return FXCollections.observableArrayList(userData.getJios());
-    }
-
     @Override
     public boolean hasJio(Jio jio) {
         requireNonNull(jio);
