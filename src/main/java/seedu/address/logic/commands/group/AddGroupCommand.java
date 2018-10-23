@@ -8,7 +8,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.Group;
+import seedu.address.model.Name;
 
 /**
  * adds a user into a group the logged in user is in.
@@ -29,12 +29,12 @@ public class AddGroupCommand extends Command {
             + " Please choose a different group name.";
 
     // TODO
-    private final Group toAdd;
+    private final Name toAdd;
 
     /**
      * Creates a group request to add the specified {@code Integer} friend.
      */
-    public AddGroupCommand(Group toAdd) {
+    public AddGroupCommand(Name toAdd) {
         requireNonNull(toAdd);
         this.toAdd = toAdd;
     }
