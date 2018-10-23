@@ -13,7 +13,6 @@ import seedu.address.logic.parser.ParserUserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Name;
-import seedu.address.model.group.Group;
 
 /**
  * Parses input arguments and creates a new DeleteGroupCommand object
@@ -35,9 +34,8 @@ public class DeleteGroupCommandParser implements Parser<DeleteGroupCommand> {
         }
 
         Name groupName = ParserUserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get());
-        Group group = new Group(groupName);
 
-        return new DeleteGroupCommand(group);
+        return new DeleteGroupCommand(groupName);
     }
 
     /**

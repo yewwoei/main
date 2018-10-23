@@ -4,12 +4,16 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
+import java.util.List;
+
+import javafx.util.Pair;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.Group;
+import seedu.address.model.Name;
+import seedu.address.model.user.Username;
 
 /**
  * Allows Users to add other Users into groups.
@@ -36,19 +40,21 @@ public class AddMembersCommand extends Command {
             + "No users were added to the group.";
     public static final String MESSAGE_HAS_REQUEST = "Sorry, User already has a request for that group.";
 
-    private final Group toAdd;
+    private final Pair<Name, List<Username>> toAdd;
 
     /**
      * Creates an AddMembersCommand to add the specified {@code List<Username>}
      */
-    public AddMembersCommand(Group group) {
-        requireNonNull(group);
-        toAdd = group;
+    public AddMembersCommand(Pair<Name, List<Username>> pair) {
+        requireNonNull(pair);
+        toAdd = pair;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
+        Name groupName = toAdd.getKey();
+        List<Username> listUsernames = toAdd.getValue();
 
         // throw exception if no user is currently logged in
         if (!model.isCurrentlyLoggedIn()) {
@@ -56,12 +62,12 @@ public class AddMembersCommand extends Command {
         }
 
         // throw exception if current user is not part of the group
-        if (!model.isInGroup(toAdd)) {
+        if (!model.isInGroup(groupName)) {
             throw new CommandException(MESSAGE_NOT_IN_GROUP);
         }
 
         // throw exception if all the Users specified are not real users
-        if (!model.isAllValidUsers(toAdd)) {
+        if (!model.isAllValidUsers(listUsernames)) {
             throw new CommandException(MESSAGE_USER_DOES_NOT_EXIST);
         }
 

@@ -53,7 +53,7 @@ public class XmlAdaptedGroup {
      * @param source future changes to this will not affect the created XmlAdadptedGroup
      */
     public XmlAdaptedGroup(Group source) {
-        groupName = source.getGroupName();
+        groupName = source.getGroupName().toString();
         acceptedUsers = source.getAcceptedUsers().stream()
                 .map(user -> new XmlAdaptedUsername(user.getUsername()))
                 .collect(Collectors.toList());

@@ -17,7 +17,7 @@ public class AcceptGroupCommand extends Command {
     public static final String COMMAND_WORD = "acceptGroup";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Allows a user to accept a "
-            + "friend request from another user.\n"
+            + "group request.\n"
             + "Parameters: "
             + PREFIX_GROUP + "GROUP NAME\n"
             + "Example: " + COMMAND_WORD + " "
@@ -25,8 +25,8 @@ public class AcceptGroupCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Successfully accepted group request of: %1$s";
     public static final String MESSAGE_NO_REQUEST = "Sorry, that group is not in your "
-            + "friend requests' list.";
-    public static final String MESSAGE_NOT_LOGGED_IN = "You must login before accepting friends";
+            + "group requests' list.";
+    public static final String MESSAGE_NOT_LOGGED_IN = "You must login before accepting group";
 
     private final Name groupName;
 

@@ -11,6 +11,7 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.util.Pair;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
@@ -340,16 +341,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasGroup(Group group) {
-        requireNonNull(group);
-        String groupName = group.getGroupName();
+    public boolean hasGroup(Name groupName) {
+        requireNonNull(groupName);
         return userData.hasGroup(groupName);
     }
 
     @Override
-    public void addGroup(Group group) {
+    public void addGroup(Name groupName) {
+        Group group = new Group(groupName, currentUser);
+        currentUser.addGroup(group);
         userData.addGroup(group);
-        group.addCreator(currentUser);
         indicateUserDataChanged();
     }
 
@@ -357,7 +358,7 @@ public class ModelManager extends ComponentManager implements Model {
     public boolean hasGroupRequest(Name groupName) {
         List<Group> listGroups = currentUser.getGroupRequests();
         for (Group g: listGroups) {
-            if (groupName.toString().equals(g.getGroupName())) {
+            if (groupName.equals(g.getGroupName())) {
                 return true;
             }
         }
@@ -365,10 +366,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean isInGroup(Group group) {
+    public boolean isInGroup(Name groupName) {
         List<Group> listGroups = currentUser.getGroups();
         for (Group g: listGroups) {
-            if (group.equals(g)) {
+            System.out.println("in group: " + g.getGroupName());
+        }
+        for (Group g: listGroups) {
+            if (groupName.equals(g.getGroupName())) {
                 return true;
             }
         }
@@ -377,15 +381,15 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void acceptGroupRequest(Name groupName) {
-        Group group = userData.getGroupHashmap().get(groupName.toString());
+        Group group = userData.getGroupHashmap().get(groupName);
         currentUser.acceptGroupRequest(group);
         indicateUserDataChanged();
     }
 
     @Override
-    public void addPendingUsersGroup(Group group) {
-        List<Username> listUsernames = group.getPendingUsernames();
-        String groupName = group.getGroupName();
+    public void addPendingUsersGroup(Pair<Name, List<Username>> pair) {
+        List<Username> listUsernames = pair.getValue();
+        Name groupName = pair.getKey();
         Group toAddto = userData.getGroupHashmap().get(groupName);
         List<User> listUsers = new ArrayList<>();
         listUsernames.forEach(username -> listUsers.add(userData.getUser(username)));
@@ -394,8 +398,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean isAllValidUsers(Group group) {
-        List<Username> listUsernames = group.getPendingUsernames();
+    public boolean isAllValidUsers(List<Username> listUsernames) {
         for (Username u: listUsernames) {
             if (!userData.hasUser(u)) {
                 return false;
@@ -405,9 +408,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasUsersInGroup(Group group) {
-        List<Username> listUsernames = group.getPendingUsernames();
-        String groupName = group.getGroupName();
+    public boolean hasUsersInGroup(Pair<Name, List<Username>> pair) {
+        List<Username> listUsernames = pair.getValue();
+        Name groupName = pair.getKey();
         Group originalGroup = userData.getGroupHashmap().get(groupName);
         List<User> acceptedUsers = originalGroup.getAcceptedUsers();
 
@@ -418,9 +421,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasRequestForUsers(Group group) {
-        List<Username> listUsernames = group.getPendingUsernames();
-        String groupName = group.getGroupName();
+    public boolean hasRequestForUsers(Pair<Name, List<Username>> pair) {
+        List<Username> listUsernames = pair.getValue();
+        Name groupName = pair.getKey();
         Group originalGroup = userData.getGroupHashmap().get(groupName);
         List<User> pendingUsers = originalGroup.getPendingUsers();
 
@@ -431,8 +434,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void deleteGroup(Group group) {
-        String groupName = group.getGroupName();
+    public void deleteGroup(Name groupName) {
         Group toDelete = userData.getGroupHashmap().get(groupName);
         currentUser.deleteGroup(toDelete);
         indicateUserDataChanged();
@@ -440,7 +442,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public void deleteGroupRequest(Name groupName) {
-        Group toDelete = userData.getGroupHashmap().get(groupName.toString());
+        Group toDelete = userData.getGroupHashmap().get(groupName);
         currentUser.deleteGroupRequest(toDelete);
         indicateUserDataChanged();
     }

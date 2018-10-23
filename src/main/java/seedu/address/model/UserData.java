@@ -16,7 +16,7 @@ import seedu.address.model.user.Username;
 public class UserData {
 
     private HashMap<Username, User> usernameUserHashMap;
-    private HashMap<String, Group> groupHashMap;
+    private HashMap<Name, Group> groupHashMap;
     private List<Jio> jios;
 
     public UserData() {
@@ -29,7 +29,7 @@ public class UserData {
         return usernameUserHashMap;
     }
 
-    public HashMap<String, Group> getGroupHashmap() {
+    public HashMap<Name, Group> getGroupHashmap() {
         return groupHashMap;
     }
 
@@ -66,7 +66,7 @@ public class UserData {
     }
 
     //=========== Friend methods ============================================================================
-    public boolean hasGroup(String groupName) {
+    public boolean hasGroup(Name groupName) {
         return groupHashMap.containsKey(groupName);
     }
 
