@@ -130,13 +130,12 @@ public class XmlAdaptedJio {
         // Creator
         Username modelCreator = creator.toModelType();
 
-        final List<Username> modelPeople = new ArrayList<>();
+        List<Username> modelPeople = new ArrayList<>();
         for (XmlAdaptedUsername username : people) {
             modelPeople.add(username.toModelType());
         }
 
-
-        return new Jio(modelName, modelDate, modelAddress, modelCreator);
+        return new Jio(modelName, modelDate, modelAddress, modelPeople, modelCreator);
     }
 
     @Override

@@ -48,6 +48,14 @@ public class Jio {
         this.groupName = Optional.of(groupName);
     }
 
+    public Jio(Name name, Date date, Address location, List<Username> people, Username creator) {
+        this.name = name;
+        this.date = date;
+        this.location = location;
+        this.people = new ArrayList<>(people);
+        this.creator = creator;
+    }
+
     public Name getName() {
         return name;
     }
