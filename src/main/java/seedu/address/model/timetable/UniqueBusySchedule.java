@@ -82,7 +82,6 @@ public class UniqueBusySchedule {
      * The current schedule must not have any dates stored.
      */
     public void addAll(UniqueBusySchedule otherSchedule) {
-        assert(this.internalSchedule.isEmpty());
         // change all the reference pointers to point to otherSchedule's reference.
         List<Date> allDates = otherSchedule.getAllDatesOnSchedule();
         allDates.stream().forEach(this::add);
