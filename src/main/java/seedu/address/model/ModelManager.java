@@ -537,7 +537,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         //add group to jio if any
         if (jio.isGroupJio()) {
-            Group group = userData.getGroupHashmap().get(jio.getGroupName().fullName);
+            Group group = userData.getGroupHashmap().get(jio.getGroupName());
             group.getAcceptedUsers().stream().forEach(user -> jio.addUser(user));
         }
 

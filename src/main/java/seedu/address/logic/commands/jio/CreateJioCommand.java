@@ -66,7 +66,7 @@ public class CreateJioCommand extends Command {
         }
 
         // Check if the group for a groupjio exists
-        if (toAdd.isGroupJio() && !model.hasGroup(new Group(toAdd.getGroupName()))) {
+        if (toAdd.isGroupJio() && !model.hasGroup(toAdd.getGroupName())) {
             throw new CommandException(MESSAGE_NO_GROUP);
         }
 
