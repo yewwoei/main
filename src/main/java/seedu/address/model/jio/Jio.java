@@ -76,6 +76,10 @@ public class Jio {
         return this.people.stream().anyMatch(user -> newUser.getUsername().equals(user));
     }
 
+    /**
+     * Adds a user to the list of people (ie.Username) in the jio.
+     * @param newUser user to be added
+     */
     public void addUser(User newUser) {
         if (!this.hasUser(newUser)) {
             this.people.add(newUser.getUsername());

@@ -19,7 +19,6 @@ import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Name;
-import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.timetable.Date;
@@ -38,7 +37,8 @@ public class CreateJioCommandParser {
      */
     public CreateJioCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_WEEK, PREFIX_DAY, PREFIX_TIME, PREFIX_ADDRESS, PREFIX_GROUP);
+                ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_WEEK, PREFIX_DAY, PREFIX_TIME, PREFIX_ADDRESS,
+                        PREFIX_GROUP);
 
         if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_WEEK, PREFIX_DAY, PREFIX_TIME, PREFIX_ADDRESS)
                 || !argMultimap.getPreamble().isEmpty()) {
