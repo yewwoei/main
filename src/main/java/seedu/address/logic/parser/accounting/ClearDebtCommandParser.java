@@ -14,7 +14,6 @@ import seedu.address.logic.parser.ParserUserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounting.Amount;
-import seedu.address.model.accounting.DebtId;
 import seedu.address.model.user.Username;
 
 /**

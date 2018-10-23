@@ -495,8 +495,7 @@ public class User {
             //creditor.debts.get(pos).changeDebtStatus(DebtStatus.ACCEPTED);
             creditor.debts.remove(pos);
             creditor.debts.add(toAdd);
-        }
-        else {
+        } else {
             if (balAmount == 0) {
                 //this.debts.get(pos).changeDebtStatus(DebtStatus.BALANCED);
                 Debt toAdd = new Debt(creditor, this, amount, debtId, DebtStatus.BALANCED);
