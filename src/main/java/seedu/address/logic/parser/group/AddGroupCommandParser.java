@@ -35,9 +35,7 @@ public class AddGroupCommandParser implements Parser<AddGroupCommand> {
 
         Name name = ParserUserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get());
 
-        Group group = new Group(name);
-
-        return new AddGroupCommand(group);
+        return new AddGroupCommand(name);
     }
 
     /**

@@ -1,8 +1,10 @@
 package seedu.address.model;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
@@ -131,25 +133,25 @@ public interface Model {
 
     void deleteFriendRequest(Username friendUsername);
 
-    boolean hasGroup(Group group);
+    boolean hasGroup(Name group);
 
     boolean hasGroupRequest(Name groupName);
 
-    void addGroup(Group group);
+    void addGroup(Name groupName);
 
     void acceptGroupRequest(Name groupName);
 
-    boolean isInGroup(Group group);
+    boolean isInGroup(Name groupName);
 
-    void addPendingUsersGroup(Group group);
+    void addPendingUsersGroup(Pair<Name, List<Username>> pair);
 
-    boolean isAllValidUsers(Group group);
+    boolean isAllValidUsers(List<Username> listUsernames);
 
-    boolean hasUsersInGroup(Group group);
+    boolean hasUsersInGroup(Pair<Name, List<Username>> pair);
 
-    boolean hasRequestForUsers(Group group);
+    boolean hasRequestForUsers(Pair<Name, List<Username>> pair);
 
-    void deleteGroup(Group group);
+    void deleteGroup(Name groupName);
 
     void deleteGroupRequest(Name groupName);
 

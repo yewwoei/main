@@ -7,6 +7,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 import java.util.List;
 import java.util.stream.Stream;
 
+import javafx.util.Pair;
 import seedu.address.logic.commands.group.AddMembersCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -39,9 +40,8 @@ public class AddMembersCommandParser implements Parser<AddMembersCommand> {
         Name groupName = ParserUserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get());
         List<Username> userList = ParserUserUtil.parseUsernames(argMultimap.getAllValues(PREFIX_USERNAME));
 
-        Group group = new Group(groupName, userList);
-
-        return new AddMembersCommand(group);
+        Pair<Name, List<Username>> pair = new Pair(groupName, userList);
+        return new AddMembersCommand(pair);
     }
 
     /**
