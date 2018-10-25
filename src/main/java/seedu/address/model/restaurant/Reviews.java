@@ -1,5 +1,6 @@
 package seedu.address.model.restaurant;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -7,27 +8,56 @@ import java.util.List;
  * Represents a Restaurant's reviews in the address book.
  */
 public class Reviews {
-    
+
     private List<UserReview> userReviewList;
-    private float restaurantRating;
+    private double restaurantRating;
+    private String restaurantRatingValue;
+    private static DecimalFormat df = new DecimalFormat("#.00");
 
     /**
      * Constructs {@code Reviews}.
      */
     public Reviews() {
         userReviewList = new ArrayList<>();
+        restaurantRating = 0.00;
+        this.restaurantRatingValue = "0.00";
     }
+
+    /**
+     * Constructs {@code Reviews} from the given inputs.
+     */
+    public Reviews(String restaurantRatingValue, List<UserReview> userReviewList) {
+        this.userReviewList = userReviewList;
+        this.restaurantRating = Double.parseDouble(restaurantRatingValue);
+        this.restaurantRatingValue = df.format(restaurantRating);
+    }
+
     
-    public void addUserReview(UserReview userReview) {
+    public String getRestaurantRatingValue() {
+        return restaurantRatingValue;
+    }
+
+    public List<UserReview> getUserReviewList() {
+        return userReviewList;
+    }
+
+    /**
+     * Adds a User Review to the Reviews Object of a restaurant.
+     * 
+     * The restaurantRatingValue of a restaurant is the average rating of a restaurant and
+     * is updated each time a {@code userReview} is added.
+     */
+    public Reviews addUserReview(UserReview userReview) {
         userReviewList.add(userReview);
-        restaurantRating = (restaurantRating + (float) userReview.getRating()) / userReviewList.size();
+        if (userReviewList.size() == 1) {
+            restaurantRating = (double) userReview.getRating();
+            this.restaurantRatingValue = df.format(restaurantRating);
+            return this;
+        }
+        restaurantRating = restaurantRating + (double) userReview.getRating();
+        Double tempCalculation = restaurantRating / userReviewList.size();
+        this.restaurantRatingValue = df.format(tempCalculation);
+        return this;
     }
-    
-    public float getRestaurantRating() {
-        return restaurantRating;
-    }
-    
 
 }
-
-
