@@ -27,13 +27,13 @@ public class Restaurant {
     /**
      * Every field must be present and not null.
      */
-    public Restaurant(Name name, Phone phone, Address address, Set<Tag> tags) {
+    public Restaurant(Name name, Phone phone, Address address, Set<Tag> tags, Reviews reviews) {
         requireAllNonNull(name, phone, address, tags);
         this.name = name;
         this.phone = phone;
         this.address = address;
         this.tags.addAll(tags);
-        this.reviews = null;
+        this.reviews = reviews;
     }
 
     public Name getName() {
@@ -46,6 +46,10 @@ public class Restaurant {
 
     public Address getAddress() {
         return address;
+    }
+
+    public Reviews getReviews() {
+        return reviews;
     }
 
     /**
@@ -68,6 +72,13 @@ public class Restaurant {
         return otherRestaurant != null
                 && otherRestaurant.getName().equals(getName())
                 && otherRestaurant.getPhone().equals(getPhone());
+    }
+
+    /**
+     * Adds a {@code userReview} into the Reviews object.
+     */
+    public void addUserReview(UserReview userReview) {
+        reviews.addUserReview(userReview);
     }
 
     /**
