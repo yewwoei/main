@@ -23,8 +23,8 @@ public class TypicalUsers {
             .withName("Benny Tobias")
             .withPhone("99332001")
             .withEmail("benny123@example.com").build();
-    public static final User CARLY = new UserBuilder()
-            .withUsername("carlymaximus")
+    public static final User CARRLY = new UserBuilder()
+            .withUsername("carrlymaximus")
             .withPassword("pAssw0rd")
             .withName("Carly Maximus")
             .withPhone("99209001")
@@ -83,7 +83,7 @@ public class TypicalUsers {
     }
 
     public static List<User> getTypicalUsers() {
-        return new ArrayList<>(Arrays.asList(ASA, BENNY, CARLY, DANEL, ELLIE, FIOXA, GOMES));
+        return new ArrayList<>(Arrays.asList(ASA, BENNY, CARRLY, DANEL, ELLIE, FIOXA, GOMES));
     }
 
 }
