@@ -25,6 +25,7 @@ import seedu.address.model.restaurant.UserReview;
 import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.user.Password;
+import seedu.address.model.user.RestaurantReview;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
@@ -185,10 +186,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void addReview(Rating rating, WrittenReview writtenReview) {
-        UserReview newUserReview = new UserReview(this.currentUser.getUsername(), rating, writtenReview);
+    public void addUserReview(Restaurant restaurant, Rating rating, WrittenReview writtenReview) {
+        UserReview newUserReview = new UserReview(currentUser.getUsername(), rating, writtenReview);
+        // Add to AddressBook
+        versionedAddressBook.addUserReviewToRestaurant(restaurant, newUserReview);
+        indicateAddressBookChanged();
+        // Add to UserData
+        RestaurantReview newRestauratnReview = new RestaurantReview(restaurant.getName(), rating, writtenReview);
+        currentUser.addRestaurantReviewToUser(newRestauratnReview);
+        indicateUserDataChanged();
     }
-
 
     //=========== Friendship methods =============================================================================
     @Override
@@ -291,7 +298,6 @@ public class ModelManager extends ComponentManager implements Model {
         User debtor = userData.getUser(debtorUsername);
         currentUser.addDebt(debtor, amount);
         indicateUserDataChanged();
-
     }
 
     @Override

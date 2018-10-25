@@ -87,19 +87,17 @@ public interface Model {
     //=========== Model Manager User Methods =+===================================================================
 
     /**
-     * Returns true if a user with the same identity as {@code user} exists in the User Data.
+     * Returns true if a user with the {@code username} exists in User Data.
      */
     boolean hasUser(Username username);
 
     /**
-     * Checks that the {@code password} matches that
-     * must not be the same as another existing user in the UserData.
+     * Returns true if the {@code password} matches the password of the user with {@code username}.
      */
     boolean verifyLogin(Username username, Password password);
 
     /**
-     * Adds the given user.
-     * {@code user} must not already exist in the User Data.
+     * Adds the given {@code user}. The user must not already exist in the User Data.
      */
     void addUser(User user);
 
@@ -115,10 +113,18 @@ public interface Model {
      */
     void loginUser(Username username);
 
+    /**
+     * Allows a current User to logout of their account.
+     */
     void logoutUser();
-    
-    void addReview(Rating rating, WrittenReview writtenReview);
-    
+
+    /**
+     * Creates a UserReview and a RestaurantReview for storage into both RestaurantAddressBook and UserData.
+     */
+    void addUserReview(Restaurant restaurant, Rating rating, WrittenReview writtenReview);
+
+    //=========== Model Manager User Methods =+===================================================================
+
     boolean hasUsernameSentRequest(Username friendUsername);
 
     boolean hasUsernameFriend(Username friendUsername);
