@@ -7,6 +7,7 @@ import java.util.List;
 import javafx.collections.ObservableList;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.restaurant.UniqueRestaurantList;
+import seedu.address.model.restaurant.UserReview;
 
 /**
  * Wraps all data at the address-book level
@@ -94,7 +95,15 @@ public class AddressBook implements ReadOnlyAddressBook {
         restaurants.remove(key);
     }
 
+    /**
+     * Updates the given restaurant {@code target} with a {@code userReview}.
+     */
+    public void addUserReviewToRestaurant(Restaurant target, UserReview userReview) {
+        requireNonNull(target);
+        requireNonNull(userReview);
 
+        restaurants.addUserReviewToRestaurant(target, userReview);
+    }
 
     //// util methods
 
