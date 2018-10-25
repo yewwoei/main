@@ -14,6 +14,7 @@ import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.restaurant.Reviews;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -29,7 +30,9 @@ public class XmlAdaptedRestaurant {
     private String phone;
     @XmlElement(required = true)
     private String address;
-
+    
+    @XmlElement
+    private XmlAdaptedReviews reviews;
     @XmlElement
     private List<XmlAdaptedTag> tagged = new ArrayList<>();
 
@@ -42,15 +45,17 @@ public class XmlAdaptedRestaurant {
     /**
      * Constructs an {@code XmlAdaptedRestaurant} with the given restaurant details.
      */
-    public XmlAdaptedRestaurant(String name, String phone, String address, List<XmlAdaptedTag> tagged) {
+    public XmlAdaptedRestaurant(String name, String phone, String address, List<XmlAdaptedTag> tagged,
+                                XmlAdaptedReviews reviews) {
         this.name = name;
         this.phone = phone;
         this.address = address;
         if (tagged != null) {
             this.tagged = new ArrayList<>(tagged);
         }
+        this.reviews = reviews;
     }
-
+    
     /**
      * Converts a given Restaurant into this class for JAXB use.
      *
@@ -63,6 +68,7 @@ public class XmlAdaptedRestaurant {
         tagged = source.getTags().stream()
                 .map(XmlAdaptedTag::new)
                 .collect(Collectors.toList());
+        reviews = new XmlAdaptedReviews(source.getReviews());
     }
 
     /**
@@ -101,7 +107,15 @@ public class XmlAdaptedRestaurant {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(restaurantTags);
-        return new Restaurant(modelName, modelPhone, modelAddress, modelTags);
+
+        Reviews checkReviews;
+        if (reviews == null) {
+            checkReviews = new Reviews();
+        }
+        checkReviews =  reviews.toModelType();
+        final Reviews modelReviews = checkReviews;
+
+        return new Restaurant(modelName, modelPhone, modelAddress, modelTags, modelReviews);
     }
 
     @Override
@@ -118,6 +132,7 @@ public class XmlAdaptedRestaurant {
         return Objects.equals(name, otherRestaurant.name)
                 && Objects.equals(phone, otherRestaurant.phone)
                 && Objects.equals(address, otherRestaurant.address)
-                && tagged.equals(otherRestaurant.tagged);
+                && tagged.equals(otherRestaurant.tagged)
+                && reviews.equals(otherRestaurant.reviews);
     }
 }

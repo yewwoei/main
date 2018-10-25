@@ -13,6 +13,7 @@ import seedu.address.model.accounting.Debt;
 import seedu.address.model.group.Friendship;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.timetable.UniqueBusySchedule;
+import seedu.address.model.user.RestaurantReview;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
@@ -42,6 +43,8 @@ public class XmlSerializableUsers {
     private List<XmlAdaptedJio> jios;
     @XmlElement
     private List<XmlAdaptedBusySchedule> busySchedules;
+    @XmlElement
+    private List<XmlAdaptedRestaurantReview> restaurantReviews;
 
     /**
      * Creates an empty XmlSerializableUsers.
@@ -54,6 +57,7 @@ public class XmlSerializableUsers {
         debts = new ArrayList<>();
         jios = new ArrayList<>();
         busySchedules = new ArrayList<>();
+        restaurantReviews = new ArrayList<>();
     }
 
     /**
