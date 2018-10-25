@@ -17,7 +17,9 @@ import org.junit.rules.ExpectedException;
 
 import seedu.address.model.AddressBook;
 import seedu.address.storage.XmlAdaptedRestaurant;
+import seedu.address.storage.XmlAdaptedReviews;
 import seedu.address.storage.XmlAdaptedTag;
+import seedu.address.storage.XmlAdaptedUserReview;
 import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.AddressBookBuilder;
 import seedu.address.testutil.RestaurantBuilder;
@@ -36,10 +38,21 @@ public class XmlUtilTest {
 
     private static final String INVALID_PHONE = "9482asf424";
 
-    private static final String VALID_NAME = "Hans Muster";
-    private static final String VALID_PHONE = "9482424";
-    private static final String VALID_ADDRESS = "4th street";
-    private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(new XmlAdaptedTag("friends"));
+    private static final String VALID_NAME = "Waa Cow";
+    private static final String VALID_PHONE = "63421111";
+    private static final String VALID_ADDRESS = "Stephen Riady Centre";
+    private static final List<XmlAdaptedTag> VALID_TAGS = Collections.singletonList(
+            new XmlAdaptedTag("Western"));
+    private static final String VALID_USERNAME = "navekom";
+    private static final String VALID_WRITTEN_REVIEW = "I tried the Ultimate Beef Sushi" +
+            " Experience and they were delicious.";
+    private static final String VALID_USER_RATING = "3";
+    private static final String VALID_OVERALL_RATING = "3.00";
+
+    private static final XmlAdaptedUserReview VALID_USER_REVIEW = new XmlAdaptedUserReview(VALID_USER_RATING,
+            VALID_USERNAME, VALID_WRITTEN_REVIEW);
+    private static final XmlAdaptedReviews VALID_REVIEWS = new XmlAdaptedReviews(VALID_OVERALL_RATING,
+            Collections.singletonList(VALID_USER_REVIEW));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -71,7 +84,7 @@ public class XmlUtilTest {
     @Test
     public void getDataFromFile_validFile_validResult() throws Exception {
         AddressBook dataFromFile = XmlUtil.getDataFromFile(VALID_FILE, XmlSerializableAddressBook.class).toModelType();
-        assertEquals(9, dataFromFile.getRestaurantList().size());
+        assertEquals(7, dataFromFile.getRestaurantList().size());
     }
 
     @Test
@@ -79,7 +92,7 @@ public class XmlUtilTest {
         XmlAdaptedRestaurant actualRestaurant = XmlUtil.getDataFromFile(
                 MISSING_RESTAURANT_FIELD_FILE, XmlAdaptedRestaurantWithRootElement.class);
         XmlAdaptedRestaurant expectedRestaurant = new XmlAdaptedRestaurant(
-                null, VALID_PHONE, VALID_ADDRESS, VALID_TAGS);
+                null, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, VALID_REVIEWS);
         assertEquals(expectedRestaurant, actualRestaurant);
     }
 
@@ -88,7 +101,7 @@ public class XmlUtilTest {
         XmlAdaptedRestaurant actualRestaurant = XmlUtil.getDataFromFile(
                 INVALID_RESTAURANT_FIELD_FILE, XmlAdaptedRestaurantWithRootElement.class);
         XmlAdaptedRestaurant expectedRestaurant = new XmlAdaptedRestaurant(
-                VALID_NAME, INVALID_PHONE, VALID_ADDRESS, VALID_TAGS);
+                VALID_NAME, INVALID_PHONE, VALID_ADDRESS, VALID_TAGS, VALID_REVIEWS);
         assertEquals(expectedRestaurant, actualRestaurant);
     }
 
@@ -97,7 +110,7 @@ public class XmlUtilTest {
         XmlAdaptedRestaurant actualRestaurant = XmlUtil.getDataFromFile(
                 VALID_RESTAURANT_FILE, XmlAdaptedRestaurantWithRootElement.class);
         XmlAdaptedRestaurant expectedRestaurant = new XmlAdaptedRestaurant(
-                VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS);
+                VALID_NAME, VALID_PHONE, VALID_ADDRESS, VALID_TAGS, VALID_REVIEWS);
         assertEquals(expectedRestaurant, actualRestaurant);
     }
 
