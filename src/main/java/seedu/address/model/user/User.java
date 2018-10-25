@@ -39,6 +39,7 @@ public class User {
     private final List<Group> groups = new ArrayList<>();
     private final List<Debt> debts = new ArrayList<>();
     private final UniqueBusySchedule busySchedule;
+    private final List<RestaurantReview> restaurantReviews = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -95,6 +96,10 @@ public class User {
 
     public UniqueBusySchedule getBusySchedule() {
         return busySchedule;
+    }
+
+    public List<RestaurantReview> getRestaurantReviews() {
+        return restaurantReviews;
     }
 
     /**
@@ -545,5 +550,13 @@ public class User {
     public boolean hasDateOnSchedule(Date date) {
         requireNonNull(date);
         return busySchedule.contains(date);
+    }
+
+    /**
+     * Adds a restaurantReview to the user's list of restaurantReviews.
+     */
+    public void addRestaurantReviewToUser(RestaurantReview newRestauratnReview) {
+        requireNonNull(newRestauratnReview);
+        restaurantReviews.add(newRestauratnReview);
     }
 }
