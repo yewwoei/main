@@ -12,7 +12,11 @@ public class UserReview {
     private WrittenReview review;
 
     /**
-     * Constructs {@code UserReview with the relevant input}.
+     * Constructs {@code UserReview}.
+     * 
+     * @param username A valid Username.
+     * @param rating A valid Rating.
+     * @param review A valid WrittenReview.
      */
     public UserReview(Username username, Rating rating, WrittenReview review) {
         this.username = username;

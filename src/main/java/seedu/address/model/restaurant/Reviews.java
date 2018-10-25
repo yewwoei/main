@@ -24,7 +24,10 @@ public class Reviews {
     }
 
     /**
-     * Constructs {@code Reviews} from the given inputs.
+     * Constructs {@code Reviews}.
+     * 
+     * @param restaurantRatingValue The overall rating of a restaurant.
+     * @param userReviewList A list of UserReview.
      */
     public Reviews(String restaurantRatingValue, List<UserReview> userReviewList) {
         this.userReviewList = userReviewList;
