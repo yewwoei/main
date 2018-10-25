@@ -7,13 +7,13 @@ import java.util.stream.Collectors;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.Name;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Day;
 import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
-import seedu.address.model.user.Name;
 import seedu.address.model.user.Username;
 
 /**
@@ -33,8 +33,10 @@ public class XmlAdaptedJio {
     private String time;
     @XmlElement(required = true)
     private String address;
-    @XmlElement
+    @XmlElement(required = true)
     private List<XmlAdaptedUsername> people = new ArrayList<>();
+    @XmlElement(required = true)
+    private XmlAdaptedUsername creator;
 
     /**
      * Constructs an XmlAdaptedJio.
@@ -46,7 +48,7 @@ public class XmlAdaptedJio {
      * Constructs an {@code XmlAdaptedJio} with the given jio details.
      */
     public XmlAdaptedJio(String name, String week, String day, String time, String address,
-                         List<XmlAdaptedUsername> people) {
+                         List<XmlAdaptedUsername> people, XmlAdaptedUsername creator) {
         this.name = name;
         this.week = week;
         this.day = day;
@@ -55,6 +57,7 @@ public class XmlAdaptedJio {
         if (people != null) {
             this.people = new ArrayList<>(people);
         }
+        this.creator = creator;
     }
 
     /**
@@ -71,6 +74,7 @@ public class XmlAdaptedJio {
         people = source.getPeople().stream()
                 .map(XmlAdaptedUsername::new)
                 .collect(Collectors.toList());
+        creator = new XmlAdaptedUsername(source.getCreator());
     }
 
     /**
@@ -123,13 +127,15 @@ public class XmlAdaptedJio {
         }
         final Address modelAddress = new Address(address);
 
-        final List<Username> modelPeople = new ArrayList<>();
+        // Creator
+        Username modelCreator = creator.toModelType();
+
+        List<Username> modelPeople = new ArrayList<>();
         for (XmlAdaptedUsername username : people) {
             modelPeople.add(username.toModelType());
         }
 
-
-        return new Jio(modelName, modelDate, modelAddress);
+        return new Jio(modelName, modelDate, modelAddress, modelPeople, modelCreator);
     }
 
     @Override

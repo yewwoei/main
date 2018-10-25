@@ -1,8 +1,10 @@
 package seedu.address.model;
 
+import java.util.List;
 import java.util.function.Predicate;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
@@ -141,6 +143,28 @@ public interface Model {
 
     void deleteFriendRequest(Username friendUsername);
 
+    boolean hasGroup(Name group);
+
+    boolean hasGroupRequest(Name groupName);
+
+    void addGroup(Name groupName);
+
+    void acceptGroupRequest(Name groupName);
+
+    boolean isInGroup(Name groupName);
+
+    void addPendingUsersGroup(Pair<Name, List<Username>> pair);
+
+    boolean isAllValidUsers(List<Username> listUsernames);
+
+    boolean hasUsersInGroup(Pair<Name, List<Username>> pair);
+
+    boolean hasRequestForUsers(Pair<Name, List<Username>> pair);
+
+    void deleteGroup(Name groupName);
+
+    void deleteGroupRequest(Name groupName);
+
     //============ Timetable commands ==========================
 
     void blockDateForCurrentUser(Date date);
@@ -153,15 +177,17 @@ public interface Model {
 
     boolean hasJio(Jio jio);
 
-    boolean hasJioName(seedu.address.model.user.Name jioName);
+    boolean hasJioName(Name jioName);
 
-    void removeJioOfName(seedu.address.model.user.Name jioName);
+    void removeJioOfName(Name jioName);
 
     void createJio(Jio jio);
 
-    boolean isCurrentUserInJioOfName(seedu.address.model.user.Name jioName);
+    boolean isCurrentUserInJioOfName(Name jioName);
 
-    void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName);
+    void addCurrentUserToJioOfName(Name jioName);
+
+    boolean isCurrentUserCreatorOfJio(Name jioName);
 
     //=========== Undo/Redo/Commit ===============================================================================
 
@@ -199,9 +225,15 @@ public interface Model {
 
     boolean matchDebtToStatus(DebtId debtId, DebtStatus status);
 
+    boolean debtExist(Username debtorUsername);
+
+    boolean allowToClear(Username debtorUsername, Amount amount);
+
     void addDebt(Username debtorUsername, Amount amount);
 
-    void clearDebt(Username debtorUsername, Amount amount, DebtId debtId);
+    void addGroupDebt(Name groupName, Amount amount);
+
+    void clearDebt(Username debtorUsername, Amount amount);
 
     void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId);
 

@@ -3,10 +3,11 @@ package seedu.address.model.jio;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
+import seedu.address.model.Name;
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.timetable.Date;
-import seedu.address.model.user.Name;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
@@ -20,13 +21,14 @@ public class Jio {
     private Date date;
     private Address location;
     private List<Username> people;
+    private Username creator;
+    private Optional<Name> groupName = Optional.empty();
 
-    public Jio(Name name, Date date, Address location, User creator) {
+    public Jio(Name name, Date date, Address location, Username creator) {
         this.name = name;
         this.date = date;
         this.location = location;
-        this.people = new ArrayList<>();
-        this.people.add(creator.getUsername());
+        this.creator = creator;
     }
 
     public Jio(Name name, Date date, Address location) {
@@ -34,6 +36,24 @@ public class Jio {
         this.date = date;
         this.location = location;
         this.people = new ArrayList<>();
+        this.creator = null;
+    }
+
+    public Jio(Name name, Date date, Address location, Name groupName) {
+        this.name = name;
+        this.date = date;
+        this.location = location;
+        this.people = new ArrayList<>();
+        this.creator = null;
+        this.groupName = Optional.of(groupName);
+    }
+
+    public Jio(Name name, Date date, Address location, List<Username> people, Username creator) {
+        this.name = name;
+        this.date = date;
+        this.location = location;
+        this.people = new ArrayList<>(people);
+        this.creator = creator;
     }
 
     public Name getName() {
@@ -52,12 +72,34 @@ public class Jio {
         return people;
     }
 
+    public Username getCreator() {
+        return creator;
+    }
+
+    public Name getGroupName() {
+        return groupName.get();
+    }
+
     public boolean hasUser(User newUser) {
         return this.people.stream().anyMatch(user -> newUser.getUsername().equals(user));
     }
 
+    /**
+     * Adds a user to the list of people (ie.Username) in the jio.
+     * @param newUser user to be added
+     */
     public void addUser(User newUser) {
-        this.people.add(newUser.getUsername());
+        if (!this.hasUser(newUser)) {
+            this.people.add(newUser.getUsername());
+        }
+    }
+
+    public void setCreator(User user) {
+        this.creator = user.getUsername();
+    }
+
+    public boolean isGroupJio() {
+        return this.groupName.isPresent();
     }
 
     @Override

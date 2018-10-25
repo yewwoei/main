@@ -8,8 +8,8 @@ import java.util.Date;
 public class DebtId {
 
     public static final String MESSAGE_DEBTID_CONSTRAINTS =
-            "Debt ID should only contain numbers, and it should be 15 digits long";
-    public static final String DEBTID_VALIDATION_REGEX = "\\d{15}";
+            "Debt ID should only contain numbers, and it should be 13-15 digits long";
+    public static final String DEBTID_VALIDATION_REGEX = "\\d{13,15}";
     private String id;
 
     public DebtId() {

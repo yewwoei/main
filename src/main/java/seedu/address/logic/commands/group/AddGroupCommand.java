@@ -8,7 +8,7 @@ import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.Group;
+import seedu.address.model.Name;
 
 /**
  * adds a user into a group the logged in user is in.
@@ -16,25 +16,25 @@ import seedu.address.model.group.Group;
 public class AddGroupCommand extends Command {
     public static final String COMMAND_WORD = "addGroup";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a group."
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Creates a group with the given group name."
             + "Parameters: "
             + PREFIX_GROUP + "GROUP\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_GROUP + "My Lonely Club";
 
     public static final String MESSAGE_SUCCESS = "Group created: %1$s";
-    public static final String MESSAGE_NOT_LOGGED_IN = "You must login before adding friends";
+    public static final String MESSAGE_NOT_LOGGED_IN = "You must login before creating groups.";
 
     public static final String MESSAGE_DUPLICATE_GROUP = "Sorry, a group with that name exists."
             + " Please choose a different group name.";
 
     // TODO
-    private final Group toAdd;
+    private final Name toAdd;
 
     /**
      * Creates a group request to add the specified {@code Integer} friend.
      */
-    public AddGroupCommand(Group toAdd) {
+    public AddGroupCommand(Name toAdd) {
         requireNonNull(toAdd);
         this.toAdd = toAdd;
     }
@@ -43,11 +43,18 @@ public class AddGroupCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        // throw exception if no user is currently logged in
         if (!model.isCurrentlyLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGGED_IN);
         }
 
-        return null;
+        // throw exception if that group already exists
+        if (model.hasGroup(toAdd)) {
+            throw new CommandException(MESSAGE_DUPLICATE_GROUP);
+        }
+
+        model.addGroup(toAdd);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
     }
 
     @Override
