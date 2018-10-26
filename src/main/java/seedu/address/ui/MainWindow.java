@@ -53,6 +53,9 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane restaurantListPanelPlaceholder;
 
     @FXML
+    private StackPane jioListPanelPlaceholder;
+
+    @FXML
     private StackPane resultDisplayPlaceholder;
 
     @FXML
@@ -207,7 +210,7 @@ public class MainWindow extends UiPart<Stage> {
     @FXML
     public void handleFeature() {
         jioListPanel = new JioListPanel(logic.getJioList());
-        restaurantListPanelPlaceholder.getChildren().add(jioListPanel.getRoot());
+        jioListPanelPlaceholder.getChildren().add(jioListPanel.getRoot());
     }
 
 }
