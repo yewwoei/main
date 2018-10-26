@@ -547,6 +547,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Jio methods ===============================================================================
+
+    @Override
+    public ObservableList<Jio> getJioList() {
+        return FXCollections.observableArrayList(userData.getJios());
+    }
+
     @Override
     public boolean hasJio(Jio jio) {
         requireNonNull(jio);
