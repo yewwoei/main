@@ -43,7 +43,7 @@ public class XmlAdaptedRestaurantReview {
      */
     public XmlAdaptedRestaurantReview(RestaurantReview restaurantReview) {
         rating = String.valueOf(restaurantReview.getRating());
-        restaurantName = restaurantReview.getResturantName();
+        restaurantName = restaurantReview.getRestaurantName();
         writtenReview = restaurantReview.getWrittenReview();
     }
 

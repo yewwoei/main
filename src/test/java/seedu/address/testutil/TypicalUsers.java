@@ -5,18 +5,28 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.UserData;
+import seedu.address.model.restaurant.Name;
+import seedu.address.model.restaurant.Rating;
+import seedu.address.model.restaurant.WrittenReview;
+import seedu.address.model.user.RestaurantReview;
 import seedu.address.model.user.User;
 
 /**
  * A utility class containing a list of {@code User} objects to be used in tests.
  */
 public class TypicalUsers {
+
+    private static RestaurantReview TYPICAL_RESTAURANT_REVIEWS = new RestaurantReview(new Name("Waa Cow"), new Rating(4),
+            new WrittenReview("I tried the Beef Sushi Bowl and it was amazing."));
+    
     public static final User ASA = new UserBuilder()
             .withUsername("Cockburn123")
             .withPassword("pAssw0rd")
             .withName("Asa Cockburn")
             .withPhone("99919001")
-            .withEmail("cockburn123@example.com").build();
+            .withEmail("cockburn123@example.com")
+            .withReviews(TYPICAL_RESTAURANT_REVIEWS)
+            .build();
     public static final User BENNY = new UserBuilder()
             .withUsername("benny123")
             .withPassword("pAssw0rd")

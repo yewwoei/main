@@ -26,7 +26,7 @@ public class RestaurantReview {
         this.review = review;
     }
 
-    public String getResturantName() {
+    public String getRestaurantName() {
         return restaurantName.fullName;
     }
 
@@ -36,5 +36,21 @@ public class RestaurantReview {
 
     public String getWrittenReview() {
         return review.writtenReview;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof RestaurantReview)) {
+            return false;
+        }
+
+        RestaurantReview otherRR = (RestaurantReview) other;
+        return getRestaurantName().equals(otherRR.getRestaurantName())
+                && getRating() == otherRR.getRating()
+                && getWrittenReview().equals(otherRR.getWrittenReview());
     }
 }

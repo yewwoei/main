@@ -132,13 +132,14 @@ public class User {
         }
 
         User otherUser = (User) other;
-        return otherUser.getUsername().equals(getUsername());
+        return otherUser.getUsername().equals(getUsername()) 
+                && getRestaurantReviews().equals(otherUser.getRestaurantReviews());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(username, password, name, phone, email);
+        return Objects.hash(username, password, name, phone, email, restaurantReviews);
     }
 
     @Override
@@ -670,8 +671,8 @@ public class User {
     /**
      * Adds a restaurantReview to the user's list of restaurantReviews.
      */
-    public void addRestaurantReviewToUser(RestaurantReview newRestauratnReview) {
-        requireNonNull(newRestauratnReview);
-        restaurantReviews.add(newRestauratnReview);
+    public void addRestaurantReviewToUser(RestaurantReview newRestaurantReview) {
+        requireNonNull(newRestaurantReview);
+        restaurantReviews.add(newRestaurantReview);
     }
 }
