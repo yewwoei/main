@@ -18,6 +18,7 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.timetable.Date;
@@ -142,6 +143,11 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Model Manager User Methods ====================================================================
+
+    @Override
+    public ObservableList<Group> getGroupList() {
+        return FXCollections.observableArrayList(userData.getGroups());
+    }
 
     @Override
     public boolean hasUser(Username username) {

@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.timetable.Date;
@@ -82,6 +83,11 @@ public interface Model {
     void updateFilteredRestaurantList(Predicate<Restaurant> predicate);
 
     //=========== Model Manager User Methods =+===================================================================
+
+    /**
+     * Returns an unmodifiable view of the group list
+     */
+    ObservableList<Group> getGroupList();
 
     /**
      * Returns true if a user with the same identity as {@code user} exists in the User Data.

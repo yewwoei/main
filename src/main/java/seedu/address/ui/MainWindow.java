@@ -19,6 +19,8 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.group.Group;
+import seedu.address.model.jio.Jio;
 
 /**
  * The Main Window. Provides the basic application layout containing
@@ -35,7 +37,8 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private BrowserPanel browserPanel;
     private RestaurantListPanel restaurantListPanel;
-    private JioListPanel jioListPanel;
+    private ListPanel<Jio> jioListPanel;
+    private ListPanel<Group> groupListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -53,7 +56,7 @@ public class MainWindow extends UiPart<Stage> {
     private StackPane restaurantListPanelPlaceholder;
 
     @FXML
-    private StackPane jioListPanelPlaceholder;
+    private StackPane featuresListPanelPlaceholder;
 
     @FXML
     private StackPane resultDisplayPlaceholder;
@@ -205,12 +208,21 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Opens the help window or focuses on it if it's already opened.
+     * Updates list panel with jios.
      */
     @FXML
-    public void handleFeature() {
-        jioListPanel = new JioListPanel(logic.getJioList());
-        jioListPanelPlaceholder.getChildren().add(jioListPanel.getRoot());
+    public void handleJio() {
+        jioListPanel = new ListPanel<>(logic.getJioList());
+        featuresListPanelPlaceholder.getChildren().add(jioListPanel.getRoot());
+    }
+
+    /**
+     * Updates list panel with jios.
+     */
+    @FXML
+    public void handleGroup() {
+        groupListPanel = new ListPanel<>(logic.getGroupList());
+        featuresListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
     }
 
 }

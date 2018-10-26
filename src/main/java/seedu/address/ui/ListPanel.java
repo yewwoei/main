@@ -2,15 +2,15 @@ package seedu.address.ui;
 
 import com.google.common.eventbus.Subscribe;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.ui.JioPanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
 import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Restaurant;
 
 import java.util.logging.Logger;
 
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * Panel containing the list of restaurants.
  */
 public class ListPanel<T> extends UiPart<Region> {
-    private static final String FXML = "JioListPanel.fxml";
+    private static final String FXML = "ListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ListPanel.class);
 
     @javafx.fxml.FXML
@@ -32,7 +32,7 @@ public class ListPanel<T> extends UiPart<Region> {
 
     private void setConnections(ObservableList<T> list) {
         listView.setItems(list);
-        listView.setCellFactory(listView -> new JioListViewCell());
+        listView.setCellFactory(listView -> new ListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
@@ -41,7 +41,7 @@ public class ListPanel<T> extends UiPart<Region> {
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in restaurant list panel changed to : '" + newValue + "'");
-                        raise(new JioPanelSelectionChangedEvent(newValue));
+                        raise(new PanelSelectionChangedEvent(newValue));
                     }
                 });
     }
@@ -65,16 +65,21 @@ public class ListPanel<T> extends UiPart<Region> {
     /**
      * Custom {@code ListCell} that displays the graphics of a {@code Restaurant} using a {@code RestaurantCard}.
      */
-    class JioListViewCell extends ListCell<Jio> {
+    class ListViewCell<T> extends ListCell<T> {
         @Override
-        protected void updateItem(Jio jio, boolean empty) {
-            super.updateItem(jio, empty);
+        protected void updateItem(T item, boolean empty) {
+            super.updateItem(item, empty);
 
-            if (empty || jio == null) {
+            if (empty || item == null) {
                 setGraphic(null);
                 setText(null);
             } else {
-                setGraphic(new JioCard(jio, getIndex() + 1).getRoot());
+                if (item instanceof Restaurant) {
+                    setGraphic(new RestaurantCard((Restaurant) item, getIndex() + 1).getRoot());
+                }
+                if (item instanceof Jio) {
+                    setGraphic(new JioCard((Jio) item, getIndex() + 1).getRoot());
+                }
             }
         }
     }

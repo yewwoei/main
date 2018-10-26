@@ -6,11 +6,11 @@ import seedu.address.model.jio.Jio;
 /**
  * Represents a selection change in the Restaurant List Panel
  */
-public class JioPanelSelectionChangedEvent extends BaseEvent {
+public class PanelSelectionChangedEvent<T> extends BaseEvent {
     
-    private final Jio newSelection;
+    private final T newSelection;
 
-    public JioPanelSelectionChangedEvent(Jio newSelection) {
+    public PanelSelectionChangedEvent(T newSelection) {
         this.newSelection = newSelection;
     }
 
@@ -19,7 +19,7 @@ public class JioPanelSelectionChangedEvent extends BaseEvent {
         return getClass().getSimpleName();
     }
 
-    public Jio getNewSelection() {
+    public T getNewSelection() {
         return newSelection;
     }
 }
