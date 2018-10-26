@@ -9,6 +9,7 @@ import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
 
@@ -79,6 +80,9 @@ public class ListPanel<T> extends UiPart<Region> {
                 }
                 if (item instanceof Jio) {
                     setGraphic(new JioCard((Jio) item, getIndex() + 1).getRoot());
+                }
+                if (item instanceof Group) {
+                    setGraphic(new GroupCard((Group) item, getIndex() + 1).getRoot());
                 }
             }
         }
