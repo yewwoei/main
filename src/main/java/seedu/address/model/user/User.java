@@ -8,6 +8,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import seedu.address.model.Name;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
@@ -268,10 +269,11 @@ public class User {
     /**
      * Allows a user to just create a group with the group name.
      * User creating will automatically be added into the group.
-     * @param groupName name of the group
+     * @param name name of the group
      * @return group Group created
      */
-    public Group createGroup(String groupName) {
+    public Group createGroup(String name) {
+        Name groupName = new Name(name);
         Group group = new Group(groupName, this);
         this.groups.add(group);
         return group;
@@ -280,16 +282,25 @@ public class User {
     /**
      * Allows a user to create a group and add users simultaneously.
      * User creating will automatically be added into the group.
-     * @param groupName name of the group
+     * @param name name of the group
      * @param users list of users who are to be added to the group
      * @return group Group created
      */
-    public Group createGroup(String groupName, User... users) {
+    public Group createGroup(String name, User... users) {
+        Name groupName = new Name(name);
         Group group = new Group(groupName, this, users);
         this.groups.add(group);
         List<User> listUsers = Arrays.asList(users);
         listUsers.forEach(user -> user.addGroupRequest(group));
         return group;
+    }
+
+    public void addGroup(Group group) {
+        this.groups.add(group);
+    }
+
+    public void addGroupPending(Group group) {
+        this.groupRequests.add(group);
     }
 
     /**
@@ -392,19 +403,48 @@ public class User {
     }
 
     /**
+     * Method for the creditor to create and add debts.
+     * @param group the group of debtor of the adding debt
+     * @param amount the total amount of the adding debt
+     */
+    public void addGroupDebt(User currentUser, Group group, Amount amount) {
+        Amount amt = new Amount(String.valueOf
+                ((Math.round((amount.toDouble()) / (group.getAcceptedUsers().size())) * 100) / 100));
+        for (User u: group.getAcceptedUsers()) {
+            if (!u.equals(currentUser)) {
+                addDebt(u, amt);
+            }
+        }
+    }
+
+    /**
      * Method for the creditor to clear a debt.
      * @param debtor the debtor of the clearing debt.
      * @param amount the amount of the clearing debt.
-     * @param debtId the debtId of the clearing debt.
      */
-    public void clearDebt(User debtor, Amount amount, DebtId debtId) {
-        Debt toFind = new Debt(this, debtor, amount, debtId, DebtStatus.ACCEPTED);
-        Debt changeTo = new Debt(this, debtor, amount, debtId, DebtStatus.CLEARED);
-        int i = this.debts.indexOf(toFind);
-        this.debts.set(i, changeTo);
-        i = debtor.debts.indexOf(toFind);
-        debtor.debts.set(i, changeTo);
-
+    public void clearDebt(User debtor, Amount amount) {
+        double balAmount = (amount.toDouble()) * (-1);
+        int count = 0;
+        for (Debt d: this.debts) {
+            if ((d.getCreditor().equals(this))
+                    && (d.getDebtor().equals(debtor))
+                    && (d.getDebtStatus().equals(DebtStatus.ACCEPTED))) {
+                balAmount += d.getAmount().toDouble();
+                count = this.debts.indexOf(d);
+            }
+        }
+        if (balAmount == 0) {
+            this.debts.get(count).changeDebtStatus(DebtStatus.CLEARED);
+            debtor.debts.get(count).changeDebtStatus(DebtStatus.CLEARED);
+        }
+        if (balAmount > 0) {
+            Amount amt = new Amount(String.valueOf(Math.round(balAmount * 100) / 100));
+            Debt toAdd = new Debt(this, debtor, amount, DebtStatus.CLEARED);
+            this.debts.add(toAdd);
+            this.debts.get(count).changeDebtAmount(amt);
+            debtor.debts.add(toAdd);
+            debtor.debts.get(count).changeDebtAmount(amt);
+        }
     }
 
     /**
@@ -414,12 +454,88 @@ public class User {
      * @param debtId the debtId of the accepting debt.
      */
     public void acceptedDebtRequest(User creditor, Amount amount, DebtId debtId) {
+        double balAmount = amount.toDouble();
+        boolean exist = false;
+        for (Debt d: this.debts) {
+            if ((d.getCreditor().equals(creditor))
+                    && (d.getDebtor().equals(this))
+                    && (d.getDebtStatus().equals(DebtStatus.ACCEPTED))) {
+                balAmount += d.getAmount().toDouble();
+                d.changeDebtStatus(DebtStatus.BALANCED);
+                exist = true;
+            }
+            if ((d.getCreditor().equals(this))
+                    && (d.getDebtor().equals(creditor))
+                    && (d.getDebtStatus().equals(DebtStatus.ACCEPTED))) {
+                balAmount -= d.getAmount().toDouble();
+                d.changeDebtStatus(DebtStatus.BALANCED);
+                exist = true;
+            }
+        }
+        for (Debt d: creditor.debts) {
+            if ((d.getCreditor().equals(creditor))
+                    && (d.getDebtor().equals(this))
+                    && (d.getDebtStatus().equals(DebtStatus.ACCEPTED))) {
+                d.changeDebtStatus(DebtStatus.BALANCED);
+            }
+            if ((d.getCreditor().equals(this))
+                    && (d.getDebtor().equals(creditor))
+                    && (d.getDebtStatus().equals(DebtStatus.ACCEPTED))) {
+                d.changeDebtStatus(DebtStatus.BALANCED);
+            }
+        }
         Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
-        Debt changeTo = new Debt(creditor, this, amount, debtId, DebtStatus.ACCEPTED);
-        int i = this.debts.indexOf(toFind);
-        this.debts.set(i, changeTo);
-        i = creditor.debts.indexOf(toFind);
-        creditor.debts.set(i, changeTo);
+        int pos = this.getDebts().indexOf(toFind);
+        if (!exist) {
+            //this.debts.get(pos).changeDebtStatus(DebtStatus.ACCEPTED);
+            Debt toAdd = new Debt(creditor, this, amount, debtId, DebtStatus.ACCEPTED);
+            this.debts.remove(pos);
+            this.debts.add(toAdd);
+            pos = creditor.getDebts().indexOf(toFind);
+            //creditor.debts.get(pos).changeDebtStatus(DebtStatus.ACCEPTED);
+            creditor.debts.remove(pos);
+            creditor.debts.add(toAdd);
+        } else {
+            if (balAmount == 0) {
+                //this.debts.get(pos).changeDebtStatus(DebtStatus.BALANCED);
+                Debt toAdd = new Debt(creditor, this, amount, debtId, DebtStatus.BALANCED);
+                pos = this.getDebts().indexOf(toFind);
+                this.debts.add(toAdd);
+                this.debts.remove(pos);
+                pos = creditor.getDebts().indexOf(toFind);
+                //creditor.debts.get(pos).changeDebtStatus(DebtStatus.BALANCED);
+                creditor.debts.remove(pos);
+                creditor.debts.add(toAdd);
+            }
+            if (balAmount > 0) {
+                //this.debts.add(new Debt(creditor, this, amount, DebtStatus.BALANCED));
+                Amount amt = new Amount(String.valueOf(Math.round(balAmount * 100) / 100));
+                Debt toAdd = new Debt(creditor, this, amt, DebtStatus.ACCEPTED);
+                Debt record = new Debt(creditor, this, amount, DebtStatus.BALANCED);
+                pos = this.getDebts().indexOf(toFind);
+                this.debts.remove(pos);
+                this.debts.add(record);
+                this.debts.add(toAdd);
+                pos = creditor.getDebts().indexOf(toFind);
+                creditor.debts.remove(pos);
+                creditor.debts.add(record);
+                creditor.debts.add(toAdd);
+            }
+            if (balAmount < 0) {
+                //this.debts.add(new Debt(creditor, this, amount, DebtStatus.BALANCED));
+                Amount amt = new Amount(String.valueOf(Math.round(balAmount * (-100)) / 100));
+                Debt toAdd = new Debt(this, creditor, amt, DebtStatus.ACCEPTED);
+                Debt record = new Debt(creditor, this, amount, DebtStatus.BALANCED);
+                pos = this.getDebts().indexOf(toFind);
+                this.debts.remove(pos);
+                this.debts.add(record);
+                this.debts.add(toAdd);
+                pos = creditor.getDebts().indexOf(toFind);
+                creditor.debts.remove(pos);
+                creditor.debts.add(record);
+                creditor.debts.add(toAdd);
+            }
+        }
     }
 
     /**
@@ -512,7 +628,6 @@ public class User {
      * This current user's UniqueBusySchedule must be empty.
      */
     public void addUniqueBusySchedule(UniqueBusySchedule schedule) {
-        assert(busySchedule.isEmpty());
         busySchedule.addAll(schedule);
     }
 

@@ -21,6 +21,7 @@ import seedu.address.logic.commands.SelectCommand;
 import seedu.address.logic.commands.UndoCommand;
 import seedu.address.logic.commands.accounting.AcceptDebtRequestCommand;
 import seedu.address.logic.commands.accounting.AddDebtCommand;
+import seedu.address.logic.commands.accounting.AddGroupDebtCommand;
 import seedu.address.logic.commands.accounting.ClearDebtCommand;
 import seedu.address.logic.commands.accounting.DeleteDebtRequestCommand;
 import seedu.address.logic.commands.accounting.ListCreditorCommand;
@@ -32,6 +33,11 @@ import seedu.address.logic.commands.friend.AcceptFriendCommand;
 import seedu.address.logic.commands.friend.AddFriendCommand;
 import seedu.address.logic.commands.friend.DeleteFriendCommand;
 import seedu.address.logic.commands.friend.DeleteFriendRequestCommand;
+import seedu.address.logic.commands.group.AcceptGroupCommand;
+import seedu.address.logic.commands.group.AddGroupCommand;
+import seedu.address.logic.commands.group.AddMembersCommand;
+import seedu.address.logic.commands.group.DeleteGroupCommand;
+import seedu.address.logic.commands.group.DeleteGroupRequestCommand;
 import seedu.address.logic.commands.jio.CreateJioCommand;
 import seedu.address.logic.commands.jio.DeleteJioCommand;
 import seedu.address.logic.commands.jio.JoinJioCommand;
@@ -43,6 +49,7 @@ import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.commands.user.SignUpCommand;
 import seedu.address.logic.parser.accounting.AcceptDebtRequestCommandParser;
 import seedu.address.logic.parser.accounting.AddDebtCommandParser;
+import seedu.address.logic.parser.accounting.AddGroupDebtCommandParser;
 import seedu.address.logic.parser.accounting.ClearDebtCommandParser;
 import seedu.address.logic.parser.accounting.DeleteDebtRequestCommandParser;
 import seedu.address.logic.parser.accounting.ListCreditorCommandParser;
@@ -55,6 +62,11 @@ import seedu.address.logic.parser.friend.AcceptFriendCommandParser;
 import seedu.address.logic.parser.friend.AddFriendCommandParser;
 import seedu.address.logic.parser.friend.DeleteFriendCommandParser;
 import seedu.address.logic.parser.friend.DeleteFriendRequestCommandParser;
+import seedu.address.logic.parser.group.AcceptGroupCommandParser;
+import seedu.address.logic.parser.group.AddGroupCommandParser;
+import seedu.address.logic.parser.group.AddMembersCommandParser;
+import seedu.address.logic.parser.group.DeleteGroupCommandParser;
+import seedu.address.logic.parser.group.DeleteGroupRequestCommandParser;
 import seedu.address.logic.parser.jio.CreateJioCommandParser;
 import seedu.address.logic.parser.jio.DeleteJioCommandParser;
 import seedu.address.logic.parser.jio.JoinJioCommandParser;
@@ -150,6 +162,20 @@ public class AddressBookParser {
             return new DeleteFriendRequestCommandParser().parse(arguments);
 
         // Group Commands
+        case AddGroupCommand.COMMAND_WORD:
+            return new AddGroupCommandParser().parse(arguments);
+
+        case AcceptGroupCommand.COMMAND_WORD:
+            return new AcceptGroupCommandParser().parse(arguments);
+
+        case AddMembersCommand.COMMAND_WORD:
+            return new AddMembersCommandParser().parse(arguments);
+
+        case DeleteGroupCommand.COMMAND_WORD:
+            return new DeleteGroupCommandParser().parse(arguments);
+
+        case DeleteGroupRequestCommand.COMMAND_WORD:
+            return new DeleteGroupRequestCommandParser().parse(arguments);
 
         // Jio Commands
         case CreateJioCommand.COMMAND_WORD:
@@ -164,17 +190,19 @@ public class AddressBookParser {
         case ListJioCommand.COMMAND_WORD:
             return new ListJioCommand();
 
-        // Group Commands
-
         // Timetable Commands
         case BlockDateCommand.COMMAND_WORD:
             return new BlockDateCommandParser().parse(arguments);
 
         case FreeDateCommand.COMMAND_WORD:
             return new FreeDateCommandParser().parse(arguments);
+
         // Accounting Commands
         case AddDebtCommand.COMMAND_WORD:
             return new AddDebtCommandParser().parse(arguments);
+
+        case AddGroupDebtCommand.COMMAND_WORD:
+            return new AddGroupDebtCommandParser().parse(arguments);
 
         case ClearDebtCommand.COMMAND_WORD:
             return new ClearDebtCommandParser().parse(arguments);

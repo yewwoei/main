@@ -17,6 +17,7 @@ public class Debt {
     private DebtId debtId;
     private DebtStatus status;
 
+
     public Debt(User creditor, User debtor, Amount amount) {
         requireAllNonNull(debtor, creditor, amount);
         this.creditor = creditor;
@@ -24,6 +25,15 @@ public class Debt {
         this.amount = amount;
         this.debtId = new DebtId();
         this.status = DebtStatus.PENDING;
+    }
+
+    public Debt(User creditor, User debtor, Amount amount, DebtStatus status) {
+        requireAllNonNull(debtor, creditor, amount);
+        this.creditor = creditor;
+        this.debtor = debtor;
+        this.amount = amount;
+        this.debtId = new DebtId();
+        this.status = status;
     }
 
     public Debt(User creditor, User debtor, Amount amount, DebtId debtId, DebtStatus status) {
@@ -35,30 +45,33 @@ public class Debt {
         this.status = status;
     }
     public User getDebtor() {
-        return this.debtor;
+        return debtor;
     }
     public User getCreditor() {
-        return this.creditor;
+        return creditor;
     }
     public Amount getAmount() {
-        return this.amount;
+        return amount;
     }
     public DebtId getDebtId() {
-        return this.debtId;
+        return debtId;
     }
     public DebtStatus getDebtStatus() {
-        return this.status;
+        return status;
     }
     /**
      * Method to change a debt status.
-     * @param changeTo represent the new debt status
+     * @param changeTo represent the new debt status.
      */
     public void changeDebtStatus(DebtStatus changeTo) {
-        if (this.getDebtStatus().toString() == "PENDING" && changeTo == DebtStatus.ACCEPTED) {
-            this.status = changeTo;
-        } else if (this.getDebtStatus().toString() == "ACCEPTED" && changeTo == DebtStatus.CLEARED) {
-            this.status = changeTo;
-        }
+        this.status = changeTo;
+    }
+    /**
+     * Method to change a debt amount.
+     * @param changeTo represent the new debt amount.
+     */
+    public void changeDebtAmount(Amount changeTo) {
+        this.amount = changeTo;
     }
     /**
      * Method to check if two (Debt) objects equals.

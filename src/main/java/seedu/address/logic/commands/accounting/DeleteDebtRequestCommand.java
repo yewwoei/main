@@ -41,6 +41,7 @@ public class DeleteDebtRequestCommand extends Command {
     public static final String MESSAGE_USER_NOT_MATCH = "Input user does not match the debt";
     public static final String MESSAGE_DEBT_NOT_PENDING = "The debt is not under request.";
     public static final String MESSAGE_NOT_LOGGED_IN = "You must login before deleting a debt.";
+    public static final String MESSAGE_NOT_ALLOWED = "You are not allowed to delete this debt.";
 
     private final Username creditor;
     private final Amount amount;
@@ -70,6 +71,9 @@ public class DeleteDebtRequestCommand extends Command {
         }
         if (!model.hasDebtId(debtId)) {
             throw new CommandException(MESSAGE_NO_SUCH_DEBT);
+        }
+        if (model.isSameAsCurrentUser(creditor)) {
+            throw new CommandException(MESSAGE_NOT_ALLOWED);
         }
         if (!model.matchDebtToAmount(debtId, amount)) {
             throw new CommandException(MESSAGE_AMOUNT_NOT_MATCH);

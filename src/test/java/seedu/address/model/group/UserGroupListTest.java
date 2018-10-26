@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import org.junit.Assert;
 import org.junit.Test;
 
+import seedu.address.model.Name;
 import seedu.address.model.user.Email;
-import seedu.address.model.user.Name;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Phone;
 import seedu.address.model.user.User;

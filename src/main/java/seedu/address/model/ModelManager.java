@@ -3,6 +3,7 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -10,11 +11,13 @@ import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
+import javafx.util.Pair;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
@@ -31,10 +34,8 @@ import seedu.address.model.user.Username;
  */
 public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
-
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Restaurant> filteredRestaurants;
-    //private final FilteredList<Jio> filteredJios;
     private UserData userData;
     private boolean isLoggedIn = false;
     private User currentUser = null;
@@ -50,7 +51,6 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
-        //filteredJios = new FilteredList<Jio>(userData.getJios());
     }
 
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs,
@@ -135,7 +135,6 @@ public class ModelManager extends ComponentManager implements Model {
     public ObservableList<Restaurant> getFilteredRestaurantList() {
         return FXCollections.unmodifiableObservableList(filteredRestaurants);
     }
-    
     @Override
     public void updateFilteredRestaurantList(Predicate<Restaurant> predicate) {
         requireNonNull(predicate);
@@ -286,6 +285,31 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean debtExist(Username debtorUsername) {
+        for (Debt d: currentUser.getDebts()) {
+            if (d.getCreditor().getUsername().equals(currentUser.getUsername())
+                    && d.getDebtor().getUsername().equals(debtorUsername)
+                    && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean allowToClear(Username debtorUsername, Amount amount) {
+        for (Debt d: currentUser.getDebts()) {
+            if (d.getCreditor().getUsername().equals(currentUser.getUsername())
+                    && d.getDebtor().getUsername().equals(debtorUsername)
+                    && d.getDebtStatus().equals(DebtStatus.ACCEPTED)
+                    && d.getAmount().toDouble() >= amount.toDouble()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
     public void addDebt(Username debtorUsername, Amount amount) {
         User debtor = userData.getUser(debtorUsername);
         currentUser.addDebt(debtor, amount);
@@ -294,9 +318,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void clearDebt(Username debtorUsername, Amount amount, DebtId debtId) {
+    public void addGroupDebt(Name groupName, Amount amount) {
+        Group toAdd = userData.getGroupHashmap().get(groupName);
+        currentUser.addGroupDebt(currentUser, toAdd, amount);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void clearDebt(Username debtorUsername, Amount amount) {
         User debtor = userData.getUser(debtorUsername);
-        currentUser.clearDebt(debtor, amount, debtId);
+        currentUser.clearDebt(debtor, amount);
         indicateUserDataChanged();
     }
 
@@ -342,6 +373,115 @@ public class ModelManager extends ComponentManager implements Model {
     public void deleteFriend(Username friendUsername) {
         User friendUser = userData.getUser(friendUsername);
         currentUser.deleteFriend(friendUser);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean hasGroup(Name groupName) {
+        requireNonNull(groupName);
+        return userData.hasGroup(groupName);
+    }
+
+    @Override
+    public void addGroup(Name groupName) {
+        Group group = new Group(groupName, currentUser);
+        currentUser.addGroup(group);
+        userData.addGroup(group);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean hasGroupRequest(Name groupName) {
+        List<Group> listGroups = currentUser.getGroupRequests();
+        for (Group g: listGroups) {
+            if (groupName.equals(g.getGroupName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isInGroup(Name groupName) {
+        List<Group> listGroups = currentUser.getGroups();
+        //for (Group g: listGroups) {
+        //    System.out.println(g.getGroupName());
+        //}
+        for (Group g: listGroups) {
+            System.out.println("in group: " + g.getGroupName());
+        }
+        for (Group g: listGroups) {
+            if (groupName.equals(g.getGroupName())) {
+                return true;
+            }
+        }
+        return false;
+    }
+    @Override
+    public void acceptGroupRequest(Name groupName) {
+        Group group = userData.getGroupHashmap().get(groupName);
+        currentUser.acceptGroupRequest(group);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void addPendingUsersGroup(Pair<Name, List<Username>> pair) {
+        List<Username> listUsernames = pair.getValue();
+        Name groupName = pair.getKey();
+        Group toAddto = userData.getGroupHashmap().get(groupName);
+        List<User> listUsers = new ArrayList<>();
+        listUsernames.forEach(username -> listUsers.add(userData.getUser(username)));
+        toAddto.addMembers(listUsers);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean isAllValidUsers(List<Username> listUsernames) {
+        for (Username u: listUsernames) {
+            if (!userData.hasUser(u)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public boolean hasUsersInGroup(Pair<Name, List<Username>> pair) {
+        List<Username> listUsernames = pair.getValue();
+        Name groupName = pair.getKey();
+        Group originalGroup = userData.getGroupHashmap().get(groupName);
+        List<User> acceptedUsers = originalGroup.getAcceptedUsers();
+
+        // checking to see if any Users are already in the list of acceptedUsers
+        return acceptedUsers.stream()
+                .anyMatch(accUser -> listUsernames.stream()
+                        .anyMatch(user -> accUser.getUsername().equals(user)));
+    }
+
+    @Override
+    public boolean hasRequestForUsers(Pair<Name, List<Username>> pair) {
+        List<Username> listUsernames = pair.getValue();
+        Name groupName = pair.getKey();
+        Group originalGroup = userData.getGroupHashmap().get(groupName);
+        List<User> pendingUsers = originalGroup.getPendingUsers();
+
+        // checking to see if any Users are already in the list of pendingUsers
+        return pendingUsers.stream()
+                .anyMatch(accUser -> listUsernames.stream()
+                        .anyMatch(user -> accUser.getUsername().equals(user)));
+    }
+
+    @Override
+    public void deleteGroup(Name groupName) {
+        Group toDelete = userData.getGroupHashmap().get(groupName);
+        currentUser.deleteGroup(toDelete);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public void deleteGroupRequest(Name groupName) {
+        Group toDelete = userData.getGroupHashmap().get(groupName);
+        currentUser.deleteGroupRequest(toDelete);
         indicateUserDataChanged();
     }
 
@@ -407,12 +547,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //=========== Jio methods ===============================================================================
-
-    @Override
-    public ObservableList<Jio> getJioList() {
-        return FXCollections.observableArrayList(userData.getJios());
-    }
-
     @Override
     public boolean hasJio(Jio jio) {
         requireNonNull(jio);
@@ -420,13 +554,13 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasJioName(seedu.address.model.user.Name jioName) {
+    public boolean hasJioName(Name jioName) {
         requireNonNull(jioName);
         return userData.hasJioName(jioName);
     }
 
     @Override
-    public void removeJioOfName(seedu.address.model.user.Name jioName) {
+    public void removeJioOfName(Name jioName) {
         requireNonNull(jioName);
         userData.removeJioOfName(jioName);
         indicateUserDataChanged();
@@ -436,22 +570,36 @@ public class ModelManager extends ComponentManager implements Model {
     public void createJio(Jio jio) {
         requireNonNull(jio);
         jio.addUser(currentUser);
+        jio.setCreator(currentUser);
+
+        //add group to jio if any
+        if (jio.isGroupJio()) {
+            Group group = userData.getGroupHashmap().get(jio.getGroupName());
+            group.getAcceptedUsers().stream().forEach(user -> jio.addUser(user));
+        }
+
         userData.addJio(jio);
         updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
         indicateUserDataChanged();
     }
 
     @Override
-    public boolean isCurrentUserInJioOfName(seedu.address.model.user.Name jioName) {
+    public boolean isCurrentUserInJioOfName(Name jioName) {
         requireNonNull(jioName);
-        return userData.isCurrentUserInJioOfName(jioName, currentUser);
+        return userData.isUserInJioOfName(jioName, currentUser);
     }
 
     @Override
-    public void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName) {
+    public void addCurrentUserToJioOfName(Name jioName) {
         requireNonNull(jioName);
         userData.addUserToJioOfName(jioName, currentUser);
         indicateUserDataChanged();
+    }
+
+    @Override
+    public boolean isCurrentUserCreatorOfJio(Name jioName) {
+        requireNonNull(jioName);
+        return userData.isCreatorOfJio(jioName, currentUser);
     }
 
     //=========== Undo/Redo/Commit ===============================================================================

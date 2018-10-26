@@ -7,6 +7,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.function.Predicate;
 
 import org.junit.Rule;
@@ -14,10 +15,12 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import javafx.collections.ObservableList;
+import javafx.util.Pair;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.Name;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
@@ -180,11 +183,28 @@ public class AddCommandTest {
         public boolean matchDebtToStatus(DebtId debtId, DebtStatus status) {
             return false;
         }
+
+        @Override
+        public boolean debtExist(Username debtorUsername) {
+            return false;
+        }
+
+        @Override
+        public boolean allowToClear(Username debtorUsername, Amount amount) {
+            return false;
+        }
+
         @Override
         public void addDebt(Username debtorUsername, Amount amount) {
         }
+
         @Override
-        public void clearDebt(Username debtorUsername, Amount amount, DebtId debtId) {
+        public void addGroupDebt(Name groupName, Amount amount) {
+
+        }
+
+        @Override
+        public void clearDebt(Username debtorUsername, Amount amount) {
         }
         @Override
         public void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
@@ -223,27 +243,32 @@ public class AddCommandTest {
 
         @Override
         public boolean hasJio(Jio jio) {
-            return true;
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public boolean hasJioName(seedu.address.model.user.Name jioName) {
-            return true;
+        public boolean hasJioName(Name jioName) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void removeJioOfName(seedu.address.model.user.Name jioName) {}
+        public void removeJioOfName(Name jioName) {}
 
         @Override
         public void createJio(Jio jio) {}
 
         @Override
-        public boolean isCurrentUserInJioOfName(seedu.address.model.user.Name jioName) {
-            return true;
+        public boolean isCurrentUserInJioOfName(Name jioName) {
+            throw new AssertionError("This method should not be called.");
         }
 
         @Override
-        public void addCurrentUserToJioOfName(seedu.address.model.user.Name jioName) {}
+        public void addCurrentUserToJioOfName(Name jioName) {}
+
+        @Override
+        public boolean isCurrentUserCreatorOfJio(Name jioName) {
+            return true;
+        }
 
         @Override
         public void addUser(User user) {}
@@ -304,6 +329,51 @@ public class AddCommandTest {
         @Override
         public void deleteFriendRequest(Username friendUsername) {}
 
+        @Override
+        public boolean hasGroup(Name group) {
+            return true;
+        }
+
+        @Override
+        public void addGroup(Name groupName) {}
+
+        @Override
+        public boolean hasGroupRequest(Name groupName) {
+            return true;
+        }
+
+        @Override
+        public void acceptGroupRequest(Name groupName) {}
+
+        @Override
+        public boolean isInGroup(Name groupName) {
+            return true;
+        }
+
+        @Override
+        public void addPendingUsersGroup(Pair<Name, List<Username>> pair) {}
+
+        @Override
+        public boolean isAllValidUsers(List<Username> listUsernames) {
+            return true;
+        }
+
+        @Override
+        public boolean hasUsersInGroup(Pair<Name, List<Username>> pair) {
+            return true;
+        }
+
+        @Override
+        public boolean hasRequestForUsers(Pair<Name, List<Username>> pair) {
+            return true;
+        }
+
+        @Override
+        public void deleteGroup(Name groupName) {}
+
+        @Override
+        public void deleteGroupRequest(Name groupName) {}
+
         // ========= timetable commands =========
 
         @Override
@@ -316,7 +386,6 @@ public class AddCommandTest {
         public boolean hasDateForCurrentUser(Date date) {
             return true;
         }
-
 
     }
 

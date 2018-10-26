@@ -11,6 +11,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.UserData;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.group.Friendship;
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.timetable.UniqueBusySchedule;
 import seedu.address.model.user.User;
@@ -35,7 +36,7 @@ public class XmlSerializableUsers {
     @XmlElement
     private List<XmlAdaptedFriendship> friendship;
     @XmlElement
-    private List<XmlAdaptedFriendship> groups;
+    private List<XmlAdaptedGroup> groups;
     @XmlElement
     private List<XmlAdaptedDebt> debts;
     @XmlElement
@@ -63,6 +64,7 @@ public class XmlSerializableUsers {
         this();
 
         List<User> allUsers = new ArrayList<User>(userData.getUsernameUserHashMap().values());
+        List<Group> allGroups = new ArrayList<Group>(userData.getGroupHashmap().values());
 
         // adds Users into the hashmap
         allUsers.forEach(individualUser -> user
@@ -75,11 +77,13 @@ public class XmlSerializableUsers {
         // updates hashmap with friendRequests of all Users
         allUsers.forEach(individualUser -> individualUser.getFriendRequests()
                 .forEach(f -> friendship.add(new XmlAdaptedFriendship(f))));
+
+        // updates hashmap with debts of all users
         allUsers.forEach(individualUser -> individualUser.getDebts()
                 .forEach(d -> debts.add(new XmlAdaptedDebt(d))));
 
         // updates groups list
-        // userData.getGroups().forEach(group -> groups.add(new XmlAdaptedGroup(group)));
+        allGroups.forEach(group -> groups.add(new XmlAdaptedGroup(group)));
 
         // updates jios list
         userData.getJios().forEach(jio -> jios.add(new XmlAdaptedJio(jio)));
@@ -118,6 +122,21 @@ public class XmlSerializableUsers {
                     userData.getUser(friendship.getMyUsername()).addFriendship(friendship));
         }
 
+        for (XmlAdaptedGroup g: groups) {
+            Group group = g.toModelType(userData.getUsernameUserHashMap());
+            if (userData.hasGroup(group.getGroupName())) {
+                throw new IllegalValueException(MESSAGE_DUPLICATE_GROUP);
+            }
+
+            // adds all the groups into group hashmap
+            userData.addGroup(group);
+
+            // updates Users as to which groups they have
+            group.getAcceptedUsers().forEach(user -> userData.getUser(user.getUsername()).addGroup(group));
+            group.getAcceptedUsers().forEach(user -> user.addGroup(group));
+            group.getPendingUsers().forEach(user -> user.addGroupPending(group));
+        }
+
         /** Converts the UserData's timetable information into the model's {@code UniqueBusySchedule} object
          * and stores it in the respective user object.
          */
@@ -133,22 +152,22 @@ public class XmlSerializableUsers {
             currentUser.addUniqueBusySchedule(currentSchedule);
         }
 
-
         for (XmlAdaptedDebt d: debts) {
-            Debt debts = d.toModelType(userData.getUsernameUserHashMap());
-            if (!userData.getUsernameUserHashMap().containsKey(debts.getCreditor().getUsername())) {
+            Debt debt = d.toModelType(userData.getUsernameUserHashMap());
+            if (!userData.getUsernameUserHashMap().containsKey(debt.getCreditor().getUsername())) {
                 throw new IllegalValueException(MESSAGE_NO_USER_DEBTS);
             }
-            if (!userData.getUsernameUserHashMap().containsKey(debts.getDebtor().getUsername())) {
+            if (!userData.getUsernameUserHashMap().containsKey(debt.getDebtor().getUsername())) {
                 throw new IllegalValueException(MESSAGE_NO_USER_DEBTS);
             }
-
-            userData.getUsernameUserHashMap().put(debts.getCreditor().getUsername(),
-                    userData.getUsernameUserHashMap().get(debts.getCreditor().getUsername()).addDebt(debts));
-
-            userData.getUsernameUserHashMap().put(debts.getDebtor().getUsername(),
-                    userData.getUsernameUserHashMap().get(debts.getDebtor().getUsername()).addDebt(debts));
-
+            if (!userData.getUsernameUserHashMap().get(debt.getCreditor().getUsername()).getDebts().contains(debt)) {
+                userData.getUsernameUserHashMap().put(debt.getCreditor().getUsername(),
+                        userData.getUsernameUserHashMap().get(debt.getCreditor().getUsername()).addDebt(debt));
+            }
+            if (!userData.getUsernameUserHashMap().get(debt.getDebtor().getUsername()).getDebts().contains(debt)) {
+                userData.getUsernameUserHashMap().put(debt.getDebtor().getUsername(),
+                        userData.getUsernameUserHashMap().get(debt.getDebtor().getUsername()).addDebt(debt));
+            }
         }
 
         for (XmlAdaptedJio j: jios) {
