@@ -17,27 +17,27 @@ import java.util.logging.Logger;
 /**
  * Panel containing the list of restaurants.
  */
-public class JioListPanel extends UiPart<Region> {
+public class ListPanel<T> extends UiPart<Region> {
     private static final String FXML = "JioListPanel.fxml";
-    private final Logger logger = LogsCenter.getLogger(RestaurantListPanel.class);
+    private final Logger logger = LogsCenter.getLogger(ListPanel.class);
 
     @javafx.fxml.FXML
-    private ListView<Jio> jioListView;
+    private ListView<T> listView;
 
-    public JioListPanel(ObservableList<Jio> jioList) {
+    public ListPanel(ObservableList<T> list) {
         super(FXML);
-        setConnections(jioList);
+        setConnections(list);
         registerAsAnEventHandler(this);
     }
 
-    private void setConnections(ObservableList<Jio> jioList) {
-        jioListView.setItems(jioList);
-        jioListView.setCellFactory(jioListView -> new JioListViewCell());
+    private void setConnections(ObservableList<T> list) {
+        listView.setItems(list);
+        listView.setCellFactory(listView -> new JioListViewCell());
         setEventHandlerForSelectionChangeEvent();
     }
 
     private void setEventHandlerForSelectionChangeEvent() {
-        jioListView.getSelectionModel().selectedItemProperty()
+        listView.getSelectionModel().selectedItemProperty()
                 .addListener((observable, oldValue, newValue) -> {
                     if (newValue != null) {
                         logger.fine("Selection in restaurant list panel changed to : '" + newValue + "'");
@@ -51,8 +51,8 @@ public class JioListPanel extends UiPart<Region> {
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
-            jioListView.scrollTo(index);
-            jioListView.getSelectionModel().clearAndSelect(index);
+            listView.scrollTo(index);
+            listView.getSelectionModel().clearAndSelect(index);
         });
     }
 
