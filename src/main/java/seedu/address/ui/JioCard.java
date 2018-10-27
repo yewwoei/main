@@ -15,7 +15,7 @@ import java.net.URL;
  */
 public class JioCard extends UiPart<Region> {
 
-    private static final String FXML = "RestaurantListCard.fxml";
+    private static final String FXML = "JioListCard.fxml";
 
     /**
      * Note: Certain keywords such as "location" and "resources" are reserved keywords in JavaFX.
@@ -32,9 +32,11 @@ public class JioCard extends UiPart<Region> {
     @FXML
     private Label name;
     @FXML
-    private Label id;
+    private Label week;
     @FXML
-    private Label phone;
+    private Label day;
+    @FXML
+    private Label time;
     @FXML
     private Label address;
     @FXML
@@ -43,8 +45,10 @@ public class JioCard extends UiPart<Region> {
     public JioCard(Jio jio, int displayedIndex) {
         super(FXML);
         this.jio = jio;
-        id.setText(displayedIndex + ". ");
         name.setText(jio.getName().fullName);
+        week.setText("Week " + jio.getDate().getWeek().toString());
+        day.setText(jio.getDate().getDay().toString());
+        time.setText(jio.getDate().getTime().toString());
         address.setText(jio.getLocation().value);
     }
 
@@ -63,8 +67,7 @@ public class JioCard extends UiPart<Region> {
 
         // state check
         JioCard card = (JioCard) other;
-        return id.getText().equals(card.id.getText())
-                && jio.equals(card.jio);
+        return jio.equals(card.jio);
     }
 }
 
