@@ -25,6 +25,7 @@ import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.timetable.Date;
@@ -242,6 +243,11 @@ public class AddCommandTest {
         // To be Done Later, fake tests for now
 
         @Override
+        public ObservableList<Jio> getJioList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasJio(Jio jio) {
             throw new AssertionError("This method should not be called.");
         }
@@ -272,6 +278,11 @@ public class AddCommandTest {
 
         @Override
         public void addUser(User user) {}
+
+        @Override
+        public ObservableList<Group> getGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         @Override
         public boolean hasUser(Username username) {
