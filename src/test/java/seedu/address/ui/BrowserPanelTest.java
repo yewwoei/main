@@ -40,8 +40,7 @@ public class BrowserPanelTest extends GuiUnitTest {
 
         // associated web page of a restaurant
         postNow(selectionChangedEventStub);
-        URL expectedRestaurantUrl = new URL(
-                BrowserPanel.SEARCH_PAGE_URL + RESTAURANT_A.getName().fullName.replaceAll(" ", "%20"));
+        URL expectedRestaurantUrl = MainApp.class.getResource(FXML_FILE_FOLDER + DEFAULT_PAGE);
 
         waitUntilBrowserLoaded(browserPanelHandle);
         assertEquals(expectedRestaurantUrl, browserPanelHandle.getLoadedUrl());

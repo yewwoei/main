@@ -31,8 +31,13 @@ public class Reviews {
      */
     public Reviews(String restaurantRatingValue, List<UserReview> userReviewList) {
         this.userReviewList = userReviewList;
-        this.restaurantRating = Double.parseDouble(restaurantRatingValue);
-        this.restaurantRatingValue = df.format(restaurantRating);
+        if (restaurantRatingValue.equals("0.00")) {
+            this.restaurantRating = 0.00;
+            this.restaurantRatingValue = "0.00";
+        } else {
+            this.restaurantRating = Double.parseDouble(restaurantRatingValue);
+            this.restaurantRatingValue = df.format(restaurantRating);
+        }
     }
 
     
