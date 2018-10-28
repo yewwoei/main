@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class WriteReviewCommand extends Command {
 
-    public static final String COMMAND_WORD = "WriteReview";
+    public static final String COMMAND_WORD = "writeReview";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gives a review of the restaurant identified "
             + "by the index number used in the displayed restaurant list. A review consists of a rating that must "
@@ -34,12 +34,9 @@ public class WriteReviewCommand extends Command {
             + PREFIX_REVIEW + "REVIEW\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_RATING + "3 "
-            + PREFIX_REVIEW + "I tried the cold noodles and pork bulgogi for dinner. They were delicious. "
-            + "The place packed a crowd during dinner time which indicates that the food is good and the queue "
-            + "clears fast. Situated at at a nice location, I would certainly go back for more.";
-
+            + PREFIX_REVIEW + "I tried the cold noodles and pork bulgogi for dinner. They were delicious. ";
     public static final String MESSAGE_SUCCESS = "Successfully Wrote Review";
-    public static final String MESSAGE_NOT_LOGGED_IN = "You must login before adding friends";
+    public static final String MESSAGE_NOT_LOGGED_IN = "You must login before adding a review";
 
     private final Index index;
     private final Rating rating;
