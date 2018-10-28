@@ -36,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Restaurant> filteredRestaurants;
+    private final FilteredList<Jio> filteredJios;
     private UserData userData;
     private boolean isLoggedIn = false;
     private User currentUser = null;
@@ -51,6 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
+        filteredJios = new FilteredList<>(userData.getJios());
     }
 
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs,
@@ -63,6 +65,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
         this.userData = userData;
+        filteredJios = new FilteredList<>(userData.getJios());
     }
 
     public ModelManager() {
@@ -140,6 +143,8 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredRestaurants.setPredicate(predicate);
     }
+
+
 
     //=========== Model Manager User Methods ====================================================================
 
@@ -554,6 +559,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateFilteredJioList(Predicate<Jio> predicate) {
+        requireNonNull(predicate);
+        filteredJios.setPredicate(predicate);
+    }
+
+    @Override
     public boolean hasJio(Jio jio) {
         requireNonNull(jio);
         return userData.hasJio(jio);
@@ -585,7 +596,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         userData.addJio(jio);
-        updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
+        updateFilteredJioList(PREDICATE_SHOW_ALL_JIOS);
         indicateUserDataChanged();
     }
 
@@ -607,6 +618,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(jioName);
         return userData.isCreatorOfJio(jioName, currentUser);
     }
+
 
     //=========== Undo/Redo/Commit ===============================================================================
 

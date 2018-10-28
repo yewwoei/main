@@ -28,6 +28,8 @@ public interface Model {
      */
     Predicate<Restaurant> PREDICATE_SHOW_ALL_RESTAURANTS = unused -> true;
 
+    Predicate<Jio> PREDICATE_SHOW_ALL_JIOS = unused -> true;
+
     /**
      * Clears existing backing model and replaces with the provided new data.
      */
@@ -171,6 +173,8 @@ public interface Model {
     //=========== Jio methods ===============================================================================
 
     ObservableList<Jio> getJioList();
+
+    void updateFilteredJioList(Predicate<Jio> predicate);
 
     boolean hasJio(Jio jio);
 

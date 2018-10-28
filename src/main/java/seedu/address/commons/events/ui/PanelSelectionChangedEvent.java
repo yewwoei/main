@@ -1,7 +1,6 @@
 package seedu.address.commons.events.ui;
 
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.jio.Jio;
 
 /**
  * Represents a selection change in the Restaurant List Panel

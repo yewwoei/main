@@ -7,6 +7,7 @@ import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
 import seedu.address.model.group.Group;
@@ -46,6 +47,14 @@ public class ListPanel<T> extends UiPart<Region> {
                     }
                 });
     }
+
+    @Subscribe
+    private void handleUserDataChangedEvent(UserDataChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        //listView.refresh();
+        listView.setItems((ObservableList<T>) event.data.getJios());
+    }
+
 
     /**
      * Scrolls to the {@code RestaurantCard} at the {@code index} and selects it.

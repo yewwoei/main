@@ -214,6 +214,7 @@ public class MainWindow extends UiPart<Stage> {
     public void handleJio() {
         jioListPanel = new ListPanel<>(logic.getJioList());
         featuresListPanelPlaceholder.getChildren().add(jioListPanel.getRoot());
+
     }
 
     /**
