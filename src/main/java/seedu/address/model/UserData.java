@@ -91,13 +91,13 @@ public class UserData {
     public void removeJioOfName(Name jioName) {
         jios.asUnmodifiableObservableList().removeIf(jio -> jio.getName().equals(jioName));
     }
-    
+
     /**
      * Check if the user is in the jio.
      */
     public boolean isUserInJioOfName(Name jioName, User user) {
         return jios.asUnmodifiableObservableList().stream().anyMatch(jio
-                -> (jio.getName().equals(jioName) && jio.hasUser(user)));
+            -> (jio.getName().equals(jioName) && jio.hasUser(user)));
     }
 
     /**
