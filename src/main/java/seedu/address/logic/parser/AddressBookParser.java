@@ -44,6 +44,7 @@ import seedu.address.logic.commands.jio.JoinJioCommand;
 import seedu.address.logic.commands.jio.ListJioCommand;
 import seedu.address.logic.commands.timetable.BlockDateCommand;
 import seedu.address.logic.commands.timetable.FreeDateCommand;
+import seedu.address.logic.commands.user.DisplayProfileCommand;
 import seedu.address.logic.commands.user.LoginCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.commands.user.SignUpCommand;
@@ -148,9 +149,12 @@ public class AddressBookParser {
             return new LogoutCommand();
 
         case WriteReviewCommand.COMMAND_WORD:
-            return new WriteReviewCommandParser().parse(arguments);    
+            return new WriteReviewCommandParser().parse(arguments);
 
-        // Restaurant Commands
+        case DisplayProfileCommand.COMMAND_WORD:
+            return new DisplayProfileCommand();
+
+            // Restaurant Commands
 
         // Friend Commands
         case AddFriendCommand.COMMAND_WORD:

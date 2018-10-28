@@ -300,6 +300,9 @@ public class AddCommandTest {
         public void logoutUser() {}
 
         @Override
+        public void displayProfile() {}
+
+        @Override
         public void addUserReview(Restaurant restaurant, Rating rating, WrittenReview writtenReview) {}
 
         @Override

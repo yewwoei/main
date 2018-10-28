@@ -15,6 +15,7 @@ import javafx.util.Pair;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.DisplayProfileEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
@@ -127,6 +128,11 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook.updateRestaurant(target, editedRestaurant);
         indicateAddressBookChanged();
+    }
+
+    @Override
+    public void displayProfile() {
+        raise(new DisplayProfileEvent(currentUser));
     }
 
     //=========== Filtered Restaurant List Accessors =============================================================

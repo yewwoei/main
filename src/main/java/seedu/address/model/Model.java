@@ -71,6 +71,11 @@ public interface Model {
      */
     void updateRestaurant(Restaurant target, Restaurant editedRestaurant);
 
+    /**
+     * Displays the Profile of a User.
+     */
+    void displayProfile();
+
     //=========== Filtered Restaurant List Accessors =============================================================
 
     /**
