@@ -248,6 +248,9 @@ public class AddCommandTest {
         }
 
         @Override
+        public void updateFilteredJioList(Predicate<Jio> predicate) {}
+
+        @Override
         public boolean hasJio(Jio jio) {
             throw new AssertionError("This method should not be called.");
         }
