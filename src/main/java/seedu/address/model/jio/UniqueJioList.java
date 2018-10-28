@@ -11,12 +11,18 @@ import javafx.collections.ObservableList;
 import seedu.address.model.restaurant.exceptions.DuplicateRestaurantException;
 import seedu.address.model.restaurant.exceptions.RestaurantNotFoundException;
 
-public class UniqueJioList implements Iterable<Jio>{
+/**
+ * A list of jios that enforces uniqueness between its elements and does not allow nulls.
+ * Supports a minimal set of list operations.
+ *
+ */
+
+public class UniqueJioList implements Iterable<Jio> {
 
     private final ObservableList<Jio> internalList = FXCollections.observableArrayList();
 
     /**
-     * Returns true if the list contains an equivalent restaurant as the given argument.
+     * Returns true if the list contains an equivalent jio as the given argument.
      */
     public boolean contains(Jio toCheck) {
         requireNonNull(toCheck);
@@ -24,29 +30,31 @@ public class UniqueJioList implements Iterable<Jio>{
     }
 
     /**
-     * Adds a restaurant to the list.
-     * The restaurant must not already exist in the list.
+     * Adds a jio to the list.
+     * The jio must not already exist in the list.
      */
     public void add(Jio toAdd) {
         requireNonNull(toAdd);
         if (contains(toAdd)) {
-            throw new DuplicateRestaurantException();//toChange
+            //toChange
+            throw new DuplicateRestaurantException();
         }
         internalList.add(toAdd);
     }
 
     /**
-     * Replaces the restaurant {@code target} in the list with {@code editedRestaurant}.
+     * Replaces the jio {@code target} in the list with {@code editedJio}.
      * {@code target} must exist in the list.
-     * The restaurant identity of {@code editedRestaurant}
-     * must not be the same as another existing restaurant in the list.
+     * The jio identity of {@code editedJio}
+     * must not be the same as another existing jio in the list.
      */
     public void setJio(Jio target, Jio editedJio) {
         requireAllNonNull(target, editedJio);
 
         int index = internalList.indexOf(target);
         if (index == -1) {
-            throw new RestaurantNotFoundException();//toChange
+            //toChange
+            throw new RestaurantNotFoundException();
         }
 
         if (!target.equals(editedJio) && contains(editedJio)) {
@@ -57,8 +65,8 @@ public class UniqueJioList implements Iterable<Jio>{
     }
 
     /**
-     * Removes the equivalent restaurant from the list.
-     * The restaurant must exist in the list.
+     * Removes the equivalent jio from the list.
+     * The jio must exist in the list.
      */
     public void remove(Jio toRemove) {
         requireNonNull(toRemove);
@@ -73,8 +81,8 @@ public class UniqueJioList implements Iterable<Jio>{
     }
 
     /**
-     * Replaces the contents of this list with {@code restaurants}.
-     * {@code restaurants} must not contain duplicate restaurants.
+     * Replaces the contents of this list with {@code jio}.
+     * {@code jios} must not contain duplicate jios.
      */
     public void setJios(List<Jio> jios) {
         requireAllNonNull(jios);
@@ -110,7 +118,7 @@ public class UniqueJioList implements Iterable<Jio>{
     }
 
     /**
-     * Returns true if {@code restaurants} contains only unique restaurants.
+     * Returns true if {@code rjios} contains only unique jios.
      */
     private boolean restaurantsAreUnique(List<Jio> jios) {
         for (int i = 0; i < jios.size() - 1; i++) {

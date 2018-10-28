@@ -1,6 +1,9 @@
 package seedu.address.ui;
 
+import java.util.logging.Logger;
+
 import com.google.common.eventbus.Subscribe;
+
 import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
@@ -13,8 +16,6 @@ import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
-
-import java.util.logging.Logger;
 
 /**
  * Panel containing the list of restaurants.
@@ -52,7 +53,7 @@ public class ListPanel<T> extends UiPart<Region> {
     @Subscribe
     private void handleUserDataChangedEvent(UserDataChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if(type == "Jio"){
+        if (type == "Jio") {
             listView.setItems((ObservableList<T>) event.data.getJios());
         }
     }

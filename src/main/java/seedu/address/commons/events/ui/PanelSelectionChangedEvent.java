@@ -6,7 +6,6 @@ import seedu.address.commons.events.BaseEvent;
  * Represents a selection change in the Restaurant List Panel
  */
 public class PanelSelectionChangedEvent<T> extends BaseEvent {
-    
     private final T newSelection;
 
     public PanelSelectionChangedEvent(T newSelection) {

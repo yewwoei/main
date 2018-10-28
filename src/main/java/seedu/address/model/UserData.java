@@ -1,7 +1,6 @@
 package seedu.address.model;
 
 import java.util.HashMap;
-import java.util.List;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
@@ -94,7 +93,8 @@ public class UserData {
     }
 
     public boolean isUserInJioOfName(Name jioName, User user) {
-        return jios.asUnmodifiableObservableList().stream().anyMatch(jio -> (jio.getName().equals(jioName) && jio.hasUser(user)));
+        return jios.asUnmodifiableObservableList().stream().anyMatch(jio
+                -> (jio.getName().equals(jioName) && jio.hasUser(user)));
     }
 
     /**

@@ -6,10 +6,6 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.jio.Jio;
-import seedu.address.model.restaurant.Restaurant;
-
-import java.net.URL;
-
 /**
  * An UI component that displays information of a {@code Restaurant}.
  */
