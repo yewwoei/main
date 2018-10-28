@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 public class ListPanel<T> extends UiPart<Region> {
     private static final String FXML = "ListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ListPanel.class);
+    private String type;
 
     @javafx.fxml.FXML
     private ListView<T> listView;
@@ -51,8 +52,9 @@ public class ListPanel<T> extends UiPart<Region> {
     @Subscribe
     private void handleUserDataChangedEvent(UserDataChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        //listView.refresh();
-        listView.setItems((ObservableList<T>) event.data.getJios());
+        if(type == "Jio"){
+            listView.setItems((ObservableList<T>) event.data.getJios());
+        }
     }
 
 
@@ -86,12 +88,15 @@ public class ListPanel<T> extends UiPart<Region> {
             } else {
                 if (item instanceof Restaurant) {
                     setGraphic(new RestaurantCard((Restaurant) item, getIndex() + 1).getRoot());
+                    type = "Restaurant";
                 }
                 if (item instanceof Jio) {
                     setGraphic(new JioCard((Jio) item, getIndex() + 1).getRoot());
+                    type = "Jio";
                 }
                 if (item instanceof Group) {
                     setGraphic(new GroupCard((Group) item, getIndex() + 1).getRoot());
+                    type = "Group";
                 }
             }
         }
