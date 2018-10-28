@@ -13,7 +13,7 @@ import seedu.address.model.Model;
  */
 public class DisplayProfileCommand extends Command {
     public static final String COMMAND_WORD = "displayProfile";
-    
+
     public static final String MESSAGE_SUCCESS = "Displaying User Profile";
     public static final String MESSAGE_ALREADY_LOGGEDIN = "User is already logged in";
 

@@ -14,7 +14,6 @@ import seedu.address.model.group.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.timetable.UniqueBusySchedule;
-import seedu.address.model.user.RestaurantReview;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 

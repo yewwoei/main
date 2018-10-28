@@ -13,8 +13,8 @@ import seedu.address.model.user.Username;
  */
 public class XmlAdaptedUserReview {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Restaurant's Reviews's UserReview's " +
-            "%s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Restaurant's Reviews's UserReview's "
+            + "%s field is missing!";
 
     @XmlElement(required = true)
     private String rating;
@@ -63,7 +63,8 @@ public class XmlAdaptedUserReview {
         final Rating modelRating = new Rating(savedRating);
 
         if (username == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Username.class.getSimpleName()));
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Username.class.getSimpleName()));
         }
         if (!Username.isValidUsername(username)) {
             throw new IllegalValueException(Username.MESSAGE_USERNAME_CONSTRAINTS);
@@ -71,7 +72,7 @@ public class XmlAdaptedUserReview {
         final Username modelUsername = new Username(username);
 
         final WrittenReview modelWrittenReview = new WrittenReview(writtenReview);
-        
+
         return new UserReview(modelUsername, modelRating, modelWrittenReview);
     }
 
@@ -85,8 +86,8 @@ public class XmlAdaptedUserReview {
             return false;
         }
 
-        return rating.equals(((XmlAdaptedUserReview) other).rating) &&
-                username.equals(((XmlAdaptedUserReview) other).username) &&
-                writtenReview.equals(((XmlAdaptedUserReview) other).writtenReview);
+        return rating.equals(((XmlAdaptedUserReview) other).rating)
+                && username.equals(((XmlAdaptedUserReview) other).username)
+                && writtenReview.equals(((XmlAdaptedUserReview) other).writtenReview);
     }
 }

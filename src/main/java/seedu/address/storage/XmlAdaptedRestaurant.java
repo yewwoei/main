@@ -30,7 +30,7 @@ public class XmlAdaptedRestaurant {
     private String phone;
     @XmlElement(required = true)
     private String address;
-    
+
     @XmlElement
     private XmlAdaptedReviews reviews;
     @XmlElement
@@ -55,7 +55,7 @@ public class XmlAdaptedRestaurant {
         }
         this.reviews = reviews;
     }
-    
+
     /**
      * Converts a given Restaurant into this class for JAXB use.
      *
@@ -112,7 +112,7 @@ public class XmlAdaptedRestaurant {
         if (reviews == null) {
             checkReviews = new Reviews();
         }
-        checkReviews =  reviews.toModelType();
+        checkReviews = reviews.toModelType();
         final Reviews modelReviews = checkReviews;
 
         return new Restaurant(modelName, modelPhone, modelAddress, modelTags, modelReviews);

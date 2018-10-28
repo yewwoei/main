@@ -21,7 +21,7 @@ public class SampleDataUtil {
         return new Restaurant[] {
             new Restaurant(new Name("Waa Cow"), new Phone("63421111"),
                 new Address("Stephen Riady Centre"),
-                getTagSet("Western"), new Reviews()), 
+                getTagSet("Western"), new Reviews()),
             new Restaurant(new Name("The Royals Bistro"), new Phone("61221218"),
                 new Address("Town Plaza"),
                 getTagSet("Italian", "Halal"), new Reviews()),
@@ -36,7 +36,7 @@ public class SampleDataUtil {
                 getTagSet("Asian"), new Reviews()),
             new Restaurant(new Name("Sapore Italian Restaurant"), new Phone("62620287"),
                 new Address("Town Plaza"),
-                getTagSet("Italian"), new Reviews()), 
+                getTagSet("Italian"), new Reviews()),
             new Restaurant(new Name("Pizza Hut"), new Phone("62353535"),
                 new Address("Stephen Riady Centre"),
                 getTagSet("FastFood", "Halal"), new Reviews())

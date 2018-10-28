@@ -119,7 +119,7 @@ public class UserData {
         }
         UserData otherUserData = (UserData) other;
         final boolean[] equivalent = {true};
-        usernameUserHashMap.forEach((k,v) -> {
+        usernameUserHashMap.forEach((k, v) -> {
             if (!v.equals(otherUserData.getUser(k))) {
                 equivalent[0] = false;
             }

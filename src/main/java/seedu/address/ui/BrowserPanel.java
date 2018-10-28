@@ -49,6 +49,9 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * Loads a browseRestaurant HTML file with a background that matches the general theme.
+     */
     private void loadRestaurantPage(Restaurant restaurant) {
 
         StringBuilder sb = new StringBuilder();
@@ -81,15 +84,13 @@ public class BrowserPanel extends UiPart<Region> {
         String html = MessageFormat.format(sb.toString(), params);
 
         Platform.runLater(() -> {
-                    browser.getEngine().loadContent(html);
-                }
-        );
-
-
-
-        // loadPage(SEARCH_PAGE_URL + restaurant.getName().fullName);
+            browser.getEngine().loadContent(html);
+        });
     }
 
+    /**
+     * Loads a displayProfile HTML file with a background that matches the general theme.
+     */
     private void loadUserProfilePage(User user) {
         StringBuilder sb = new StringBuilder();
         URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + USER_PAGE);
@@ -110,8 +111,8 @@ public class BrowserPanel extends UiPart<Region> {
                 user.getName(),
                 user.getPhone(),
                 user.getEmail(),
-                user.getRestaurantReviews().stream().map(
-                        restaurantReview -> restaurantReview.getRestaurantName() + "<br />"
+                user.getRestaurantReviews().stream()
+                        .map(restaurantReview -> restaurantReview.getRestaurantName() + "<br />"
                         + "Rating Given: " + restaurantReview.getRating() + "<br />"
                         + "Review Given: " + restaurantReview.getWrittenReview() + "<br />")
                         .collect(Collectors.joining("<p></p>"))
@@ -119,13 +120,8 @@ public class BrowserPanel extends UiPart<Region> {
         String html = MessageFormat.format(sb.toString(), params);
 
         Platform.runLater(() -> {
-                    browser.getEngine().loadContent(html);
-                }
-        );
-
-
-
-        // loadPage(SEARCH_PAGE_URL + restaurant.getName().fullName);
+            browser.getEngine().loadContent(html);
+        });
     }
 
     public void loadPage(String url) {

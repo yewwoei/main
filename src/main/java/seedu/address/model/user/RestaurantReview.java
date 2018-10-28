@@ -15,7 +15,7 @@ public class RestaurantReview {
 
     /**
      * Construcrs a {@code RestaurantReview}.
-     * 
+     *
      * @param restaurantName a valid restaurant name.
      * @param rating a valid rating.
      * @param review a written review.
@@ -48,9 +48,9 @@ public class RestaurantReview {
             return false;
         }
 
-        RestaurantReview otherRR = (RestaurantReview) other;
-        return getRestaurantName().equals(otherRR.getRestaurantName())
-                && getRating() == otherRR.getRating()
-                && getWrittenReview().equals(otherRR.getWrittenReview());
+        RestaurantReview otherRr = (RestaurantReview) other;
+        return getRestaurantName().equals(otherRr.getRestaurantName())
+                && getRating() == otherRr.getRating()
+                && getWrittenReview().equals(otherRr.getWrittenReview());
     }
 }

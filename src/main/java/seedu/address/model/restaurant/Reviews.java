@@ -9,10 +9,10 @@ import java.util.List;
  */
 public class Reviews {
 
+    private static DecimalFormat df = new DecimalFormat("#.00");
     private List<UserReview> userReviewList;
     private double restaurantRating;
     private String restaurantRatingValue;
-    private static DecimalFormat df = new DecimalFormat("#.00");
 
     /**
      * Constructs {@code Reviews}.
@@ -25,7 +25,7 @@ public class Reviews {
 
     /**
      * Constructs {@code Reviews}.
-     * 
+     *
      * @param restaurantRatingValue The overall rating of a restaurant.
      * @param userReviewList A list of UserReview.
      */
@@ -40,7 +40,6 @@ public class Reviews {
         }
     }
 
-    
     public String getRestaurantRatingValue() {
         return restaurantRatingValue;
     }
@@ -51,7 +50,7 @@ public class Reviews {
 
     /**
      * Adds a User Review to the Reviews Object of a restaurant.
-     * 
+     *
      * The restaurantRatingValue of a restaurant is the average rating of a restaurant and
      * is updated each time a {@code userReview} is added.
      */

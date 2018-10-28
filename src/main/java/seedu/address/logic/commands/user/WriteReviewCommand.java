@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_REVIEW;
 
+import java.util.List;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.CommandHistory;
@@ -14,8 +16,6 @@ import seedu.address.model.Model;
 import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.restaurant.WrittenReview;
-
-import java.util.List;
 
 /**
  * Adds a review from a user to the restaurant.
@@ -59,7 +59,7 @@ public class WriteReviewCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
         List<Restaurant> lastShownList = model.getFilteredRestaurantList();
-        
+
         if (!model.isCurrentlyLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGGED_IN);
         }

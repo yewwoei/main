@@ -1,14 +1,14 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.restaurant.Reviews;
 import seedu.address.model.restaurant.UserReview;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * JAXB-friendly adapted version of the Reviews.
@@ -20,7 +20,7 @@ public class XmlAdaptedReviews {
 
     @XmlElement(required = true)
     private List<XmlAdaptedUserReview> userReviews = new ArrayList<>();
-    
+
     /**
      * Constructs a XmlAdaptedReviews.
      * This is the no-arg constructor that is required by JAXB.

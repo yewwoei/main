@@ -9,7 +9,7 @@ public class WrittenReview {
 
     /**
      * Constructs a {@code WrittenReview}.
-     * 
+     *
      * @param review a written review.
      */
     public WrittenReview(String review) {

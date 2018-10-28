@@ -13,7 +13,7 @@ public class UserReview {
 
     /**
      * Constructs {@code UserReview}.
-     * 
+     *
      * @param username A valid Username.
      * @param rating A valid Rating.
      * @param review A valid WrittenReview.
@@ -27,7 +27,7 @@ public class UserReview {
     public int getRating() {
         return rating.rating;
     }
-    
+
     public String getUsername() {
         return username.username;
     }

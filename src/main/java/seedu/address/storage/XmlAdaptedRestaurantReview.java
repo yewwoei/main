@@ -13,8 +13,8 @@ import seedu.address.model.user.RestaurantReview;
  */
 public class XmlAdaptedRestaurantReview {
 
-    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Restaurant's Reviews's " +
-            "%s field is missing!";
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Restaurant's Reviews's "
+            + "%s field is missing!";
 
     @XmlElement(required = true)
     private String rating;
@@ -89,8 +89,8 @@ public class XmlAdaptedRestaurantReview {
             return false;
         }
 
-        return rating.equals(((XmlAdaptedRestaurantReview) other).rating) &&
-                restaurantName.equals(((XmlAdaptedRestaurantReview) other).restaurantName) &&
-                writtenReview.equals(((XmlAdaptedRestaurantReview) other).writtenReview);
+        return rating.equals(((XmlAdaptedRestaurantReview) other).rating)
+                && restaurantName.equals(((XmlAdaptedRestaurantReview) other).restaurantName)
+                && writtenReview.equals(((XmlAdaptedRestaurantReview) other).writtenReview);
     }
 }
