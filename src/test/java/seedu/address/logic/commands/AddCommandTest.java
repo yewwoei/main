@@ -242,6 +242,11 @@ public class AddCommandTest {
         // To be Done Later, fake tests for now
 
         @Override
+        public ObservableList<Jio> getJioList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
         public boolean hasJio(Jio jio) {
             throw new AssertionError("This method should not be called.");
         }
