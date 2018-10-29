@@ -45,6 +45,7 @@ public class ModelManager extends ComponentManager implements Model {
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
+
         super();
         requireAllNonNull(addressBook, userPrefs);
 
@@ -194,18 +195,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.isLoggedIn = false;
     }
 
-    @Override
-   public boolean hasUsernameSentRequest(Username friendUsername) {
-        User friend = userData.getUser(friendUsername);
-        Username myUsername = currentUser.getUsername();
-        List<Friendship> friendRequestLists = friend.getFriendRequests();
-        for (Friendship f: friendRequestLists) {
-            if (f.getFriendUsername().equals(myUsername)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    //================ Debt methods =================================
 
     /**
     * Returns whether there is a debtId
@@ -253,17 +243,6 @@ public class ModelManager extends ComponentManager implements Model {
         if (check) {
             if (currentUser.getDebts().get(count).getDebtor().getUsername().equals(user)
                     || currentUser.getDebts().get(count).getCreditor().getUsername().equals(user)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasUsernameFriendRequest(Username friendusername) {
-        List<Friendship> friendRequestsLists = currentUser.getFriendRequests();
-        for (Friendship f: friendRequestsLists) {
-            if (f.getFriendUsername().equals(friendusername)) {
                 return true;
             }
         }
@@ -341,6 +320,62 @@ public class ModelManager extends ComponentManager implements Model {
         User creditor = userData.getUser(creditorUsername);
         currentUser.acceptedDebtRequest(creditor, amount, debtId);
         indicateUserDataChanged();
+    }
+
+    @Override
+    public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
+        User creditor = userData.getUser(creditorUsername);
+        currentUser.deleteDebtRequest(creditor, amount, debtId);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public ObservableList<Debt> getDebtList() { return FXCollections.observableArrayList(currentUser.getDebts());}
+
+    @Override
+    public ObservableList<Debt> getCreditorList() {
+        return FXCollections.observableArrayList(currentUser.getCreditor());
+    }
+    @Override
+    public ObservableList<Debt> getDebtorList() {
+        return FXCollections.observableArrayList(currentUser.getDebtor());
+    }
+
+    @Override
+    public ObservableList<Debt> getDebtRequestReceived() {
+        return FXCollections.observableArrayList(currentUser.getDebtRequestReceived());
+    }
+
+    @Override
+    public ObservableList<Debt> getDebtRequestSent() {
+        return FXCollections.observableArrayList(currentUser.getDebtRequestSent());
+    }
+
+    //=============Friend & Group methods ====================
+
+    @Override
+    public boolean hasUsernameSentRequest(Username friendUsername) {
+        User friend = userData.getUser(friendUsername);
+        Username myUsername = currentUser.getUsername();
+        List<Friendship> friendRequestLists = friend.getFriendRequests();
+        for (Friendship f: friendRequestLists) {
+            if (f.getFriendUsername().equals(myUsername)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    @Override
+    public boolean hasUsernameFriendRequest(Username friendusername) {
+        List<Friendship> friendRequestsLists = currentUser.getFriendRequests();
+        for (Friendship f: friendRequestsLists) {
+            if (f.getFriendUsername().equals(friendusername)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -488,35 +523,6 @@ public class ModelManager extends ComponentManager implements Model {
         Group toDelete = userData.getGroupHashmap().get(groupName);
         currentUser.deleteGroupRequest(toDelete);
         indicateUserDataChanged();
-    }
-
-    @Override
-    public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
-        User creditor = userData.getUser(creditorUsername);
-        currentUser.deleteDebtRequest(creditor, amount, debtId);
-        indicateUserDataChanged();
-    }
-
-    @Override
-    public ObservableList<Debt> getDebtList() { return FXCollections.observableArrayList(currentUser.getDebts());}
-
-    @Override
-    public ObservableList<Debt> getCreditorList() {
-        return FXCollections.observableArrayList(currentUser.getCreditor());
-    }
-    @Override
-    public ObservableList<Debt> getDebtorList() {
-        return FXCollections.observableArrayList(currentUser.getDebtor());
-    }
-
-    @Override
-    public ObservableList<Debt> getDebtRequestReceived() {
-        return FXCollections.observableArrayList(currentUser.getDebtRequestReceived());
-    }
-
-    @Override
-    public ObservableList<Debt> getDebtRequestSent() {
-        return FXCollections.observableArrayList(currentUser.getDebtRequestSent());
     }
 
     @Override

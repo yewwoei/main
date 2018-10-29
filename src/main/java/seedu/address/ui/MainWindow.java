@@ -229,7 +229,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates list panel with debts.
+     * Updates list panel with login user's debts.
      */
     @FXML
     public void handleAllDebt() {
@@ -237,24 +237,36 @@ public class MainWindow extends UiPart<Stage> {
         featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
     }
 
+    /**
+     * Updates list panel with login user's creditors.
+     */
     @FXML
     public void handleCreditor() {
         debtListPanel = new ListPanel<>(logic.getCreditorList());
         featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
     }
 
+    /**
+     * Updates list panel with login user's debtors.
+     */
     @FXML
     public void handleDebtor() {
         debtListPanel = new ListPanel<>(logic.getDebtorList());
         featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
     }
 
+    /**
+     * Updates list panel with login user's received request.
+     */
     @FXML
     public void handleDebtRequestReceived() {
         debtListPanel = new ListPanel<>(logic.getDebtRequestReceived());
         featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
     }
 
+    /**
+     * Updates list panel with login user's received sent.
+     */
     @FXML
     public void handleDebtRequestSent() {
         debtListPanel = new ListPanel<>(logic.getDebtRequestSent());

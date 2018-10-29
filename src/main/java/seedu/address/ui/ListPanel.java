@@ -19,7 +19,7 @@ import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
 
 /**
- * Panel containing the list of restaurants.
+ * Panel containing the list of user data.
  */
 public class ListPanel<T> extends UiPart<Region> {
     private static final String FXML = "ListPanel.fxml";
@@ -64,12 +64,13 @@ public class ListPanel<T> extends UiPart<Region> {
 
 
     /**
-     * Scrolls to the {@code RestaurantCard} at the {@code index} and selects it.
+     * Scrolls to the {@code Card} at the {@code index} and selects it.
      */
     private void scrollTo(int index) {
         Platform.runLater(() -> {
             listView.scrollTo(index);
             listView.getSelectionModel().clearAndSelect(index);
+
         });
     }
 

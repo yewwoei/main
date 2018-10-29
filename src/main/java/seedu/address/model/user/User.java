@@ -92,10 +92,6 @@ public class User {
         return groups;
     }
 
-    public ObservableList<Debt> getDebts() {
-        return debts.asUnmodifiableObservableList();
-    }
-
     public UniqueBusySchedule getBusySchedule() {
         return busySchedule;
     }
@@ -383,6 +379,7 @@ public class User {
         group.addMembers(users);
     }
 
+    //================== Debt ==========================
     /**
      * Method to add a debts to a user.
      * @param debt a debt to add.
@@ -542,6 +539,10 @@ public class User {
         Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
         this.debts.remove(toFind);
         creditor.debts.remove(toFind);
+    }
+
+    public ObservableList<Debt> getDebts() {
+        return debts.asUnmodifiableObservableList();
     }
 
     public ObservableList<Debt> getCreditor() {

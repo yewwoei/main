@@ -31,8 +31,6 @@ public interface Model {
 
     Predicate<Jio> PREDICATE_SHOW_ALL_JIOS = unused -> true;
 
-    Predicate<Jio> PREDICATE_SHOW_ALL_DEBTS = unused -> true;
-
     /**
      * Clears existing backing model and replaces with the provided new data.
      */

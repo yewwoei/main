@@ -33,7 +33,6 @@ public class BrowserPanel extends UiPart<Region> {
 
     @FXML
     private WebView browser;
-    private TextArea text;
 
     public BrowserPanel() {
         super(FXML);
@@ -80,6 +79,5 @@ public class BrowserPanel extends UiPart<Region> {
         if (event.getNewSelection().getClass().equals(Debt.class)){
 
         }
-
     }
 }
