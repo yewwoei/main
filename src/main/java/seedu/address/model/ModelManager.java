@@ -96,7 +96,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateUserDataChanged() {
-        raise(new UserDataChangedEvent(userData));
+        raise(new UserDataChangedEvent(userData, currentUser));
     }
 
     //=========== Model Manager Restaurants Methods =+============================================================
@@ -498,28 +498,25 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public String listDebtHistory() {
-        return currentUser.listDebtHistory();
+    public ObservableList<Debt> getDebtList() { return FXCollections.observableArrayList(currentUser.getDebts());}
+
+    @Override
+    public ObservableList<Debt> getCreditorList() {
+        return FXCollections.observableArrayList(currentUser.getCreditor());
+    }
+    @Override
+    public ObservableList<Debt> getDebtorList() {
+        return FXCollections.observableArrayList(currentUser.getDebtor());
     }
 
     @Override
-    public String listDebtor() {
-        return currentUser.listDebtor();
+    public ObservableList<Debt> getDebtRequestReceived() {
+        return FXCollections.observableArrayList(currentUser.getDebtRequestReceived());
     }
 
     @Override
-    public String listCreditor() {
-        return currentUser.listCreditor();
-    }
-
-    @Override
-    public String listDebtRequestReceived() {
-        return currentUser.listDebtRequestReceived();
-    }
-
-    @Override
-    public String listDebtRequestSent() {
-        return currentUser.listDebtRequestSent();
+    public ObservableList<Debt> getDebtRequestSent() {
+        return FXCollections.observableArrayList(currentUser.getDebtRequestSent());
     }
 
     @Override

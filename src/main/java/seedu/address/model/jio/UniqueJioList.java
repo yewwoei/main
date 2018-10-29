@@ -86,7 +86,7 @@ public class UniqueJioList implements Iterable<Jio> {
      */
     public void setJios(List<Jio> jios) {
         requireAllNonNull(jios);
-        if (!restaurantsAreUnique(jios)) {
+        if (!jiosAreUnique(jios)) {
             throw new DuplicateRestaurantException();
         }
 
@@ -120,7 +120,7 @@ public class UniqueJioList implements Iterable<Jio> {
     /**
      * Returns true if {@code rjios} contains only unique jios.
      */
-    private boolean restaurantsAreUnique(List<Jio> jios) {
+    private boolean jiosAreUnique(List<Jio> jios) {
         for (int i = 0; i < jios.size() - 1; i++) {
             for (int j = i + 1; j < jios.size(); j++) {
                 if (jios.get(i).equals(jios.get(j))) {

@@ -13,6 +13,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
@@ -56,6 +57,9 @@ public class ListPanel<T> extends UiPart<Region> {
         if (type == "Jio") {
             listView.setItems((ObservableList<T>) event.data.getJios());
         }
+        if (type == "Debt") {
+            listView.setItems((ObservableList<T>) event.user.getDebts());
+        }
     }
 
 
@@ -98,6 +102,10 @@ public class ListPanel<T> extends UiPart<Region> {
                 if (item instanceof Group) {
                     setGraphic(new GroupCard((Group) item, getIndex() + 1).getRoot());
                     type = "Group";
+                }
+                if (item instanceof Debt) {
+                    setGraphic(new DebtCard((Debt) item, getIndex() + 1).getRoot());
+                    type = "Debt";
                 }
             }
         }

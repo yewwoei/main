@@ -17,7 +17,6 @@ public class UserData {
 
     private HashMap<Username, User> usernameUserHashMap;
     private HashMap<Name, Group> groupHashMap;
-    //private List<Jio> jios;
     private UniqueJioList jios;
 
     public UserData() {

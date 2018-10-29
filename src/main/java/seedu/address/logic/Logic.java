@@ -4,6 +4,7 @@ import javafx.collections.ObservableList;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
@@ -29,6 +30,13 @@ public interface Logic {
 
     /** Returns an unmodifiable view of the filtered list of jios */
     ObservableList<Jio> getJioList();
+
+    /** Returns an unmodifiable view of the filtered list of debts */
+    ObservableList<Debt> getDebtList();
+    ObservableList<Debt> getCreditorList();
+    ObservableList<Debt> getDebtorList();
+    ObservableList<Debt> getDebtRequestReceived();
+    ObservableList<Debt> getDebtRequestSent();
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();

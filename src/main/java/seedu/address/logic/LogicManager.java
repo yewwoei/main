@@ -11,6 +11,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
@@ -55,6 +56,31 @@ public class LogicManager extends ComponentManager implements Logic {
     @Override
     public ObservableList<Jio> getJioList() {
         return model.getJioList();
+    }
+
+    @Override
+    public ObservableList<Debt> getDebtList() {
+        return model.getDebtList();
+    }
+
+    @Override
+    public ObservableList<Debt> getCreditorList() {
+        return model.getCreditorList();
+    }
+
+    @Override
+    public ObservableList<Debt> getDebtorList() {
+        return model.getDebtorList();
+    }
+
+    @Override
+    public ObservableList<Debt> getDebtRequestReceived() {
+        return model.getDebtRequestReceived();
+    }
+
+    @Override
+    public ObservableList<Debt> getDebtRequestSent() {
+        return model.getDebtRequestSent();
     }
 
     @Override
