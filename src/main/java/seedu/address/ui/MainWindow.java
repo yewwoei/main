@@ -19,6 +19,7 @@ import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 
@@ -39,6 +40,7 @@ public class MainWindow extends UiPart<Stage> {
     private RestaurantListPanel restaurantListPanel;
     private ListPanel<Jio> jioListPanel;
     private ListPanel<Group> groupListPanel;
+    private ListPanel<Debt> debtListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -214,10 +216,11 @@ public class MainWindow extends UiPart<Stage> {
     public void handleJio() {
         jioListPanel = new ListPanel<>(logic.getJioList());
         featuresListPanelPlaceholder.getChildren().add(jioListPanel.getRoot());
+
     }
 
     /**
-     * Updates list panel with jios.
+     * Updates list panel with groups.
      */
     @FXML
     public void handleGroup() {
@@ -225,4 +228,48 @@ public class MainWindow extends UiPart<Stage> {
         featuresListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
     }
 
+    /**
+     * Updates list panel with login user's debts.
+     */
+    @FXML
+    public void handleAllDebt() {
+        debtListPanel = new ListPanel<>(logic.getDebtList());
+        featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+    }
+
+    /**
+     * Updates list panel with login user's creditors.
+     */
+    @FXML
+    public void handleCreditor() {
+        debtListPanel = new ListPanel<>(logic.getCreditorList());
+        featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+    }
+
+    /**
+     * Updates list panel with login user's debtors.
+     */
+    @FXML
+    public void handleDebtor() {
+        debtListPanel = new ListPanel<>(logic.getDebtorList());
+        featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+    }
+
+    /**
+     * Updates list panel with login user's received request.
+     */
+    @FXML
+    public void handleDebtRequestReceived() {
+        debtListPanel = new ListPanel<>(logic.getDebtRequestReceived());
+        featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+    }
+
+    /**
+     * Updates list panel with login user's received sent.
+     */
+    @FXML
+    public void handleDebtRequestSent() {
+        debtListPanel = new ListPanel<>(logic.getDebtRequestSent());
+        featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+    }
 }

@@ -23,6 +23,7 @@ import seedu.address.model.Model;
 import seedu.address.model.Name;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Group;
@@ -215,37 +216,38 @@ public class AddCommandTest {
         }
 
         @Override
-        public String listDebtHistory() {
+        public ObservableList<Debt> getDebtList() {
             return null;
         }
 
         @Override
-        public String listDebtor() {
+        public ObservableList<Debt> getCreditorList() {
             return null;
         }
 
         @Override
-        public String listCreditor() {
+        public ObservableList<Debt> getDebtorList() {
             return null;
         }
 
         @Override
-        public String listDebtRequestReceived() {
+        public ObservableList<Debt> getDebtRequestReceived() {
             return null;
         }
 
         @Override
-        public String listDebtRequestSent() {
+        public ObservableList<Debt> getDebtRequestSent() {
             return null;
         }
-
-
         // To be Done Later, fake tests for now
 
         @Override
         public ObservableList<Jio> getJioList() {
             throw new AssertionError("This method should not be called.");
         }
+
+        @Override
+        public void updateFilteredJioList(Predicate<Jio> predicate) {}
 
         @Override
         public boolean hasJio(Jio jio) {

@@ -36,6 +36,7 @@ public class ModelManager extends ComponentManager implements Model {
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Restaurant> filteredRestaurants;
+    private final FilteredList<Jio> filteredJios;
     private UserData userData;
     private boolean isLoggedIn = false;
     private User currentUser = null;
@@ -51,6 +52,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
+        filteredJios = new FilteredList<>(userData.getJios());
     }
 
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs,
@@ -63,6 +65,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
         this.userData = userData;
+        filteredJios = new FilteredList<>(userData.getJios());
     }
 
     public ModelManager() {
@@ -85,7 +88,6 @@ public class ModelManager extends ComponentManager implements Model {
     public ReadOnlyAddressBook getAddressBook() {
         return versionedAddressBook;
     }
-
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
@@ -93,7 +95,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateUserDataChanged() {
-        raise(new UserDataChangedEvent(userData));
+        raise(new UserDataChangedEvent(userData, currentUser));
     }
 
     //=========== Model Manager Restaurants Methods =+============================================================
@@ -140,6 +142,8 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredRestaurants.setPredicate(predicate);
     }
+
+
 
     //=========== Model Manager User Methods ====================================================================
 
@@ -189,18 +193,7 @@ public class ModelManager extends ComponentManager implements Model {
         this.isLoggedIn = false;
     }
 
-    @Override
-   public boolean hasUsernameSentRequest(Username friendUsername) {
-        User friend = userData.getUser(friendUsername);
-        Username myUsername = currentUser.getUsername();
-        List<Friendship> friendRequestLists = friend.getFriendRequests();
-        for (Friendship f: friendRequestLists) {
-            if (f.getFriendUsername().equals(myUsername)) {
-                return true;
-            }
-        }
-        return false;
-    }
+    //================ Debt methods =================================
 
     /**
     * Returns whether there is a debtId
@@ -248,17 +241,6 @@ public class ModelManager extends ComponentManager implements Model {
         if (check) {
             if (currentUser.getDebts().get(count).getDebtor().getUsername().equals(user)
                     || currentUser.getDebts().get(count).getCreditor().getUsername().equals(user)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
-    public boolean hasUsernameFriendRequest(Username friendusername) {
-        List<Friendship> friendRequestsLists = currentUser.getFriendRequests();
-        for (Friendship f: friendRequestsLists) {
-            if (f.getFriendUsername().equals(friendusername)) {
                 return true;
             }
         }
@@ -336,6 +318,64 @@ public class ModelManager extends ComponentManager implements Model {
         User creditor = userData.getUser(creditorUsername);
         currentUser.acceptedDebtRequest(creditor, amount, debtId);
         indicateUserDataChanged();
+    }
+
+    @Override
+    public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
+        User creditor = userData.getUser(creditorUsername);
+        currentUser.deleteDebtRequest(creditor, amount, debtId);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public ObservableList<Debt> getDebtList() {
+        return FXCollections.observableArrayList(currentUser.getDebts());
+    }
+
+    @Override
+    public ObservableList<Debt> getCreditorList() {
+        return FXCollections.observableArrayList(currentUser.getCreditor());
+    }
+    @Override
+    public ObservableList<Debt> getDebtorList() {
+        return FXCollections.observableArrayList(currentUser.getDebtor());
+    }
+
+    @Override
+    public ObservableList<Debt> getDebtRequestReceived() {
+        return FXCollections.observableArrayList(currentUser.getDebtRequestReceived());
+    }
+
+    @Override
+    public ObservableList<Debt> getDebtRequestSent() {
+        return FXCollections.observableArrayList(currentUser.getDebtRequestSent());
+    }
+
+    //=============Friend & Group methods ====================
+
+    @Override
+    public boolean hasUsernameSentRequest(Username friendUsername) {
+        User friend = userData.getUser(friendUsername);
+        Username myUsername = currentUser.getUsername();
+        List<Friendship> friendRequestLists = friend.getFriendRequests();
+        for (Friendship f: friendRequestLists) {
+            if (f.getFriendUsername().equals(myUsername)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+
+    @Override
+    public boolean hasUsernameFriendRequest(Username friendusername) {
+        List<Friendship> friendRequestsLists = currentUser.getFriendRequests();
+        for (Friendship f: friendRequestsLists) {
+            if (f.getFriendUsername().equals(friendusername)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -486,38 +526,6 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
-        User creditor = userData.getUser(creditorUsername);
-        currentUser.deleteDebtRequest(creditor, amount, debtId);
-        indicateUserDataChanged();
-    }
-
-    @Override
-    public String listDebtHistory() {
-        return currentUser.listDebtHistory();
-    }
-
-    @Override
-    public String listDebtor() {
-        return currentUser.listDebtor();
-    }
-
-    @Override
-    public String listCreditor() {
-        return currentUser.listCreditor();
-    }
-
-    @Override
-    public String listDebtRequestReceived() {
-        return currentUser.listDebtRequestReceived();
-    }
-
-    @Override
-    public String listDebtRequestSent() {
-        return currentUser.listDebtRequestSent();
-    }
-
-    @Override
     public void deleteFriendRequest(Username friendUsername) {
         User friendUser = userData.getUser(friendUsername);
         currentUser.deleteFriendRequest(friendUser);
@@ -554,6 +562,12 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateFilteredJioList(Predicate<Jio> predicate) {
+        requireNonNull(predicate);
+        filteredJios.setPredicate(predicate);
+    }
+
+    @Override
     public boolean hasJio(Jio jio) {
         requireNonNull(jio);
         return userData.hasJio(jio);
@@ -585,7 +599,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         userData.addJio(jio);
-        updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
+        updateFilteredJioList(PREDICATE_SHOW_ALL_JIOS);
         indicateUserDataChanged();
     }
 
@@ -607,6 +621,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(jioName);
         return userData.isCreatorOfJio(jioName, currentUser);
     }
+
 
     //=========== Undo/Redo/Commit ===============================================================================
 

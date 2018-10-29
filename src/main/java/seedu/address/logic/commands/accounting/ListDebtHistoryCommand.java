@@ -27,7 +27,7 @@ public class ListDebtHistoryCommand extends Command {
         if (!model.isCurrentlyLoggedIn()) {
             throw new NotLoggedInCommandException(COMMAND_WORD);
         }
-        model.listDebtHistory();
+        model.getDebtList();
         return null;
     }
 

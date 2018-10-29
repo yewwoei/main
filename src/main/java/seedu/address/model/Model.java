@@ -6,6 +6,7 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
 import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Group;
@@ -27,6 +28,8 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Restaurant> PREDICATE_SHOW_ALL_RESTAURANTS = unused -> true;
+
+    Predicate<Jio> PREDICATE_SHOW_ALL_JIOS = unused -> true;
 
     /**
      * Clears existing backing model and replaces with the provided new data.
@@ -172,6 +175,8 @@ public interface Model {
 
     ObservableList<Jio> getJioList();
 
+    void updateFilteredJioList(Predicate<Jio> predicate);
+
     boolean hasJio(Jio jio);
 
     boolean hasJioName(Name jioName);
@@ -236,15 +241,15 @@ public interface Model {
 
     void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId);
 
-    String listDebtHistory();
+    ObservableList<Debt> getDebtList();
 
-    String listDebtor();
+    ObservableList<Debt> getCreditorList();
 
-    String listCreditor();
+    ObservableList<Debt> getDebtorList();
 
-    String listDebtRequestReceived();
+    ObservableList<Debt> getDebtRequestReceived();
 
-    String listDebtRequestSent();
+    ObservableList<Debt> getDebtRequestSent();
 
 }
 
