@@ -1,6 +1,5 @@
 package seedu.address.ui;
 
-import java.awt.*;
 import java.net.URL;
 import java.util.logging.Logger;
 
@@ -76,7 +75,7 @@ public class BrowserPanel extends UiPart<Region> {
     @Subscribe
     private void handlePanelSelectionChangedEvent(PanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        if (event.getNewSelection().getClass().equals(Debt.class)){
+        if (event.getNewSelection().getClass().equals(Debt.class)) {
 
         }
     }

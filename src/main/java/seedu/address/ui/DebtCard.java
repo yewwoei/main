@@ -6,7 +6,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.accounting.Debt;
 /**
- * An UI component that displays information of a {@code Debt}.
+ * An UI component that displays information of a {@code Debt
+ * }.
  */
 public class DebtCard extends UiPart<Region> {
 
@@ -25,7 +26,7 @@ public class DebtCard extends UiPart<Region> {
     @FXML
     private Label status;
     @FXML
-    private Label Id;
+    private Label id;
 
     public DebtCard(Debt debt, int displayedIndex) {
         super(FXML);
@@ -34,7 +35,7 @@ public class DebtCard extends UiPart<Region> {
         debtor.setText("Debtor: " + debt.getDebtor().getUsername().toString());
         amount.setText("Amount: " + String.valueOf(debt.getAmount().toDouble()));
         status.setText("Status: " + debt.getDebtStatus().toString());
-        Id.setText("ID: " + debt.getDebtId().toString());
+        id.setText("ID: " + debt.getDebtId().toString());
     }
 
     @Override

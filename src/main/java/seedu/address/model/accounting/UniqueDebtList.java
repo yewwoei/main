@@ -102,8 +102,8 @@ public class UniqueDebtList implements Iterable<Debt> {
 
     //@Override
     public Iterator<Debt> iterator() {
-            return internalList.iterator();
-        }
+        return internalList.iterator();
+    }
 
     @Override
     public boolean equals(Object other) {
@@ -114,8 +114,8 @@ public class UniqueDebtList implements Iterable<Debt> {
 
     @Override
     public int hashCode() {
-            return internalList.hashCode();
-        }
+        return internalList.hashCode();
+    }
 
     /**
     * Returns true if {@code debts} contains only unique debts.

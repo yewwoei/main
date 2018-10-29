@@ -88,9 +88,7 @@ public class User {
         return groupRequests;
     }
 
-    public List<Group> getGroups() {
-        return groups;
-    }
+    public List<Group> getGroups() { return groups; }
 
     public UniqueBusySchedule getBusySchedule() {
         return busySchedule;
@@ -548,7 +546,7 @@ public class User {
     public ObservableList<Debt> getCreditor() {
         UniqueDebtList creditor = new UniqueDebtList();
         for (Debt d: this.debts) {
-            if (d.getDebtor().equals(this) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)){
+            if (d.getDebtor().equals(this) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
                 creditor.add(d);
             }
         }
@@ -558,7 +556,7 @@ public class User {
     public ObservableList<Debt> getDebtor() {
         UniqueDebtList debtor = new UniqueDebtList();
         for (Debt d: this.debts) {
-            if (d.getCreditor().equals(this) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)){
+            if (d.getCreditor().equals(this) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
                 debtor.add(d);
             }
         }
