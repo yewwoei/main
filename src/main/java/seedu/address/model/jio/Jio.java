@@ -11,6 +11,8 @@ import seedu.address.model.timetable.Date;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
+import static java.util.Objects.requireNonNull;
+
 
 /**
  * Represents a Jio in the jiobook.
@@ -28,6 +30,8 @@ public class Jio {
         this.name = name;
         this.date = date;
         this.location = location;
+        this.people = new ArrayList<>();
+        this.people.add(creator);
         this.creator = creator;
     }
 
@@ -81,6 +85,7 @@ public class Jio {
     }
 
     public boolean hasUser(User newUser) {
+        requireNonNull(newUser);
         return this.people.stream().anyMatch(user -> newUser.getUsername().equals(user));
     }
 
@@ -89,12 +94,14 @@ public class Jio {
      * @param newUser user to be added
      */
     public void addUser(User newUser) {
+        requireNonNull(newUser);
         if (!this.hasUser(newUser)) {
             this.people.add(newUser.getUsername());
         }
     }
 
     public void setCreator(User user) {
+        requireNonNull(user);
         this.creator = user.getUsername();
     }
 
