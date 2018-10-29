@@ -88,7 +88,6 @@ public class ModelManager extends ComponentManager implements Model {
     public ReadOnlyAddressBook getAddressBook() {
         return versionedAddressBook;
     }
-
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
@@ -329,7 +328,9 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public ObservableList<Debt> getDebtList() { return FXCollections.observableArrayList(currentUser.getDebts());}
+    public ObservableList<Debt> getDebtList() {
+        return FXCollections.observableArrayList(currentUser.getDebts());
+    }
 
     @Override
     public ObservableList<Debt> getCreditorList() {
