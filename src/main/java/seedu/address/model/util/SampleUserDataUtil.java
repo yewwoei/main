@@ -14,6 +14,8 @@ import seedu.address.model.user.Phone;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
+import java.util.ArrayList;
+
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
@@ -48,9 +50,16 @@ public class SampleUserDataUtil {
     }
 
     public static Jio[] getSampleJios() {
+        ArrayList<Username> lunchpeople = new ArrayList<>();
+        lunchpeople.add(new Username("navekom"));
+        lunchpeople.add(new Username("meena567"));
+        lunchpeople.add(new Username("chelchia"));
+        lunchpeople.add(new Username("katespades"));
+        lunchpeople.add(new Username("aideeeen"));
+        
         return new Jio[]{
             new Jio(new Name("lunch"), new Date(new Week("1"), new Day("mon"), new Time("1200")),
-                new Address("finefood"), new Username("navekom")),
+                new Address("finefood"), lunchpeople, new Username("navekom")),
             new Jio(new Name("dinner"), new Date(new Week("2"), new Day("tue"), new Time("1800")),
                     new Address("foodclique"), new Username("navekom")),
             new Jio(new Name("MALA"), new Date(new Week("1"), new Day("mon"), new Time("1200")),
