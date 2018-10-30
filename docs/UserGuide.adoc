@@ -311,8 +311,8 @@ Examples:
 
 ===  See Free Time: `listTime`
 
-Views the list of free time to eat on those dates. +
-Format: `listTime w/WEEKNUMBER`
+Views the list of free time to eat on a NUS week according to your calendar.
+Format: `listScheduleForWeek w/WEEKNUMBER`
 
 Examples:
 
@@ -600,14 +600,16 @@ e.g. `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
 * *Accept Friend Request* : `acceptFriend`
 * *Delete Friend Request* : `deleteFriendRequest`
 * *Delete Friend* : `deleteFriend`
-* *Find Mutual Friends* : `findMutualFriends`
 * *Add Group* : `addGroup`
 * *Accept Group* : `acceptGroup`
 * *Delete Group Request* : `deleteGroupRequest`
 * *Delete Group* : `deleteGroup`
-* *Block Time* : `blockTime`
-* *Free Time* : `freeTime`
-* *List Time* : `listTime`
+* *Block Time* : `blockTime w/WEEKNUMBER d/DAY h/HHHH`
+e.g. `blockTime w/reading d/thu h/1800`
+* *Free Time* : `freeTime w/WEEKNUMBER d/DAY h/HHHH`
+e.g. `freeTime w/11 d/tue h/0600`
+* *List User's Free Timeslots for a Week* : `listScheduleForWeek w/`
+e.g. `listScheduleForWeek w/6`
 * *Find Jio* : `findJio`
 * *Add Debt* : `addDebt`
 * *Clear Debt* : `clearDebt`
