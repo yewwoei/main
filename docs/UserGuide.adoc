@@ -611,7 +611,8 @@ e.g. `freeTime w/11 d/tue h/0600`
 * *List User's Free Timeslots for a Week* : `listScheduleForWeek w/`
 e.g. `listScheduleForWeek w/6`
 * *Find Jio* : `findJio`
-* *Add Debt* : `addDebt`
-* *Clear Debt* : `clearDebt`
-* *Accept Debt Request* : `acceptDebtRequest`
-* *Delete Debt Request* : `deleteDebtRequest`
+* *Add Debt* : `addDebt` e.g. `addDebt u/kate amt/2.3`
+* *Add Group Debt* : `addGroupDebt` e.g. `addGroupDebt g/My Lonely Club amt/27`
+* *Clear Debt* : `clearDebt` e.g. `clearDebt u/kate amt/1.3`
+* *Accept Debt Request* : `acceptDebtRequest` e.g. `acceptDebtRequest u/kate amt/7.9 id/181030224951280`
+* *Delete Debt Request* : `deleteDebtRequest` e.g. `deleteDebtRequest u/kate amt/7.9 id/181030224951280`
