@@ -21,7 +21,6 @@ import seedu.address.model.group.FriendshipStatus;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
-import seedu.address.model.user.User;
 
 /**
  * Panel containing the list of user data.
