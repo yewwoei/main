@@ -139,6 +139,7 @@ public class Group {
     @Override
     public boolean equals(Object other) {
         Group otherGroup = (Group) other;
+        System.out.println(otherGroup.groupName);
         return otherGroup.groupName.equals(groupName);
     }
 }
