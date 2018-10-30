@@ -592,18 +592,37 @@ e.g.`select 2`
 e.g. `writeReview 2 r/5 rvw/I tried the Salmon Mentaiko Chirashi and it was amazing.`
 * *Display User Profile*: `displayProfile`
 * *Create Jio* : `createJio` +
-e.g. `createJio n/MALA!!! w/1 d/mon h/1200 a/FineFood`
+e.g. `createJio n/MALA w/1 d/mon h/1200 a/FineFood`
 e.g. `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
-* *Join Jio* : `joinJio`
-* *Delete Jio* : `deleteJio`
-* *Add Friend* : `addFriend`
-* *Accept Friend Request* : `acceptFriend`
-* *Delete Friend Request* : `deleteFriendRequest`
-* *Delete Friend* : `deleteFriend`
-* *Add Group* : `addGroup`
-* *Accept Group* : `acceptGroup`
-* *Delete Group Request* : `deleteGroupRequest`
-* *Delete Group* : `deleteGroup`
+
+* *Join Jio* : `joinJio` +
+e.g. `joinJio n/MALA`
+* *Delete Jio* : `deleteJio` +
+e.g. `deleteJio n/MALA`
+* *Add Friend* : `addFriend u/USERNAME`
+e.g. `addFriend u/Meena567`
+* *Accept Friend Request* : `acceptFriend u/USERNAME`
+e.g. `acceptFriend u/Meena567`
+* *Delete Friend Request* : `deleteFriendRequest u/USERNAME`
+e.g. `deleteFriendRequest u/Meena567`
+* *Delete Friend* : `deleteFriend u/USERNAME`
+e.g. `deleteFriend u/Meena567`
+* *Add Group* : `addGroup g/GROUP_NAME`
+e.g. addGroup g/2103
+* *Add Members* : `addMembers g/GROUP_NAME [u/USERNAME...]`
+e.g. addMembers g/2103 u/katenhy u/aidenlow u/chelchia u/evanmok2401
+* *Accept Group* : `acceptGroup g/GROUP_NAME`
+e.g. acceptGroup g/2103
+* *Delete Group Request* : `deleteGroupRequest g/GROUP_NAME`
+e.g. deleteGroupRequest g/2103
+* *Delete Group* : `deleteGroup g/GROUP_NAME`
+e.g. deleteGroup g/2103
+* *Block Time* : `blockTime`
+* *Free Time* : `freeTime`
+* *List Time* : `listTime`
+* *Find Time* : `findTime`
+* *Add Calendar* : `addCalendar`
+* *Add NUSMODS* : `addNUSMODS`
 * *Block Time* : `blockTime w/WEEKNUMBER d/DAY h/HHHH`
 e.g. `blockTime w/reading d/thu h/1800`
 * *Free Time* : `freeTime w/WEEKNUMBER d/DAY h/HHHH`
@@ -611,7 +630,13 @@ e.g. `freeTime w/11 d/tue h/0600`
 * *List User's Free Timeslots for a Week* : `listScheduleForWeek w/`
 e.g. `listScheduleForWeek w/6`
 * *Find Jio* : `findJio`
-* *Add Debt* : `addDebt`
-* *Clear Debt* : `clearDebt`
-* *Accept Debt Request* : `acceptDebtRequest`
-* *Delete Debt Request* : `deleteDebtRequest`
+* *Add Debt* : `addDebt` +
+ e.g. `addDebt u/kate amt/2.3`
+* *Add Group Debt* : `addGroupDebt` +
+e.g. `addGroupDebt g/My Lonely Club amt/27`
+* *Clear Debt* : `clearDebt` +
+e.g. `clearDebt u/kate amt/1.3`
+* *Accept Debt Request* : `acceptDebtRequest` +
+e.g. `acceptDebtRequest u/kate amt/7.9 id/181030224951280`
+* *Delete Debt Request* : `deleteDebtRequest` +
+e.g. `deleteDebtRequest u/kate amt/7.9 id/181030224951280`
