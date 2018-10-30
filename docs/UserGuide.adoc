@@ -592,10 +592,13 @@ e.g.`select 2`
 e.g. `writeReview 2 r/5 rvw/I tried the Salmon Mentaiko Chirashi and it was amazing.`
 * *Display User Profile*: `displayProfile`
 * *Create Jio* : `createJio` +
-e.g. `createJio n/MALA!!! w/1 d/mon h/1200 a/FineFood`
+e.g. `createJio n/MALA w/1 d/mon h/1200 a/FineFood`
 e.g. `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
-* *Join Jio* : `joinJio`
-* *Delete Jio* : `deleteJio`
+
+* *Join Jio* : `joinJio` +
+e.g. `joinJio n/MALA`
+* *Delete Jio* : `deleteJio` +
+e.g. `deleteJio n/MALA`
 * *Add Friend* : `addFriend u/USERNAME`
 e.g. `addFriend u/Meena567`
 * *Accept Friend Request* : `acceptFriend u/USERNAME`
@@ -607,7 +610,7 @@ e.g. `deleteFriend u/Meena567`
 * *Add Group* : `addGroup g/GROUP_NAME`
 e.g. addGroup g/2103
 * *Add Members* : `addMembers g/GROUP_NAME [u/USERNAME...]`
-e.g. addGroup g/2103
+e.g. addMembers g/2103 u/katenhy u/aidenlow u/chelchia u/evanmok2401
 * *Accept Group* : `acceptGroup g/GROUP_NAME`
 e.g. acceptGroup g/2103
 * *Delete Group Request* : `deleteGroupRequest g/GROUP_NAME`
@@ -620,15 +623,6 @@ e.g. deleteGroup g/2103
 * *Find Time* : `findTime`
 * *Add Calendar* : `addCalendar`
 * *Add NUSMODS* : `addNUSMODS`
-=======
-* *Add Friend* : `addFriend`
-* *Accept Friend Request* : `acceptFriend`
-* *Delete Friend Request* : `deleteFriendRequest`
-* *Delete Friend* : `deleteFriend`
-* *Add Group* : `addGroup`
-* *Accept Group* : `acceptGroup`
-* *Delete Group Request* : `deleteGroupRequest`
-* *Delete Group* : `deleteGroup`
 * *Block Time* : `blockTime w/WEEKNUMBER d/DAY h/HHHH`
 e.g. `blockTime w/reading d/thu h/1800`
 * *Free Time* : `freeTime w/WEEKNUMBER d/DAY h/HHHH`
