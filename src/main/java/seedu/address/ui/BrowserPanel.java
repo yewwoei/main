@@ -302,7 +302,7 @@ public class BrowserPanel extends UiPart<Region> {
             loadDefaultPage();
             return;
         }
-        if (event.getNewSelection().getClass().equals(Debt.class)) {
+        if (event.getNewSelection() instanceof Debt) {
             loadDebtPage((Debt) event.getNewSelection());
         } else if (event.getNewSelection() instanceof Jio) {
             loadJioPage((Jio)event.getNewSelection());

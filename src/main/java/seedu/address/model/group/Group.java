@@ -138,8 +138,15 @@ public class Group {
      */
     @Override
     public boolean equals(Object other) {
+        // short circuit if same object
+        if (other == this) {
+            return true;
+        }
+        // instanceof handles nulls
+        if (!(other instanceof Group)) {
+            return false;
+        }
         Group otherGroup = (Group) other;
-        System.out.println(otherGroup.groupName);
         return otherGroup.groupName.equals(groupName);
     }
 }
