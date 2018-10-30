@@ -16,6 +16,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
 import seedu.address.commons.events.model.DisplayProfileEvent;
 import seedu.address.commons.events.ui.RestaurantPanelSelectionChangedEvent;
@@ -191,6 +192,11 @@ public class BrowserPanel extends UiPart<Region> {
         Platform.runLater(() -> {
             browser.getEngine().loadContent(html);
         });
+    }
+
+    @Subscribe
+    private void handleUserLoggedOutEvent(UserLoggedOutEvent event) {
+        loadNotLoggedInPage();
     }
 
     /**
