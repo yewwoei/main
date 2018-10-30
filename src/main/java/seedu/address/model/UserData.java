@@ -1,8 +1,10 @@
 package seedu.address.model;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
@@ -32,6 +34,10 @@ public class UserData {
 
     public HashMap<Name, Group> getGroupHashmap() {
         return groupHashMap;
+    }
+
+    public ObservableList<Group> getGroups() {
+        return FXCollections.observableArrayList(new ArrayList<>(groupHashMap.values()));
     }
 
     public ObservableList<Jio> getJios() {
