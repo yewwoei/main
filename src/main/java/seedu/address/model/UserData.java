@@ -1,11 +1,11 @@
 package seedu.address.model;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
+import seedu.address.model.jio.UniqueJioList;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -17,12 +17,12 @@ public class UserData {
 
     private HashMap<Username, User> usernameUserHashMap;
     private HashMap<Name, Group> groupHashMap;
-    private List<Jio> jios;
+    private UniqueJioList jios;
 
     public UserData() {
         usernameUserHashMap = new HashMap<>();
         groupHashMap = new HashMap<>();
-        jios = new ArrayList<>();
+        jios = new UniqueJioList();
     }
 
     public HashMap<Username, User> getUsernameUserHashMap() {
@@ -33,8 +33,8 @@ public class UserData {
         return groupHashMap;
     }
 
-    public List<Jio> getJios() {
-        return jios;
+    public ObservableList<Jio> getJios() {
+        return jios.asUnmodifiableObservableList();
     }
 
     public boolean hasUser(Username username) {
@@ -71,11 +71,11 @@ public class UserData {
 
     //=========== Jio methods ===============================================================================
     public boolean hasJioName(Name jioName) {
-        return jios.stream().anyMatch(jio -> jio.getName().equals(jioName));
+        return jios.asUnmodifiableObservableList().stream().anyMatch(jio -> jio.getName().equals(jioName));
     }
 
     public boolean hasJio(Jio j) {
-        return jios.stream().anyMatch(jio -> jio.equals(j));
+        return jios.asUnmodifiableObservableList().stream().anyMatch(jio -> jio.equals(j));
     }
 
     public void addJio(Jio jio) {
@@ -83,18 +83,22 @@ public class UserData {
     }
 
     public void removeJioOfName(Name jioName) {
-        jios.removeIf(jio -> jio.getName().equals(jioName));
+        jios.asUnmodifiableObservableList().removeIf(jio -> jio.getName().equals(jioName));
     }
 
+    /**
+     * Check if the user is in the jio.
+     */
     public boolean isUserInJioOfName(Name jioName, User user) {
-        return jios.stream().anyMatch(jio -> (jio.getName().equals(jioName) && jio.hasUser(user)));
+        return jios.asUnmodifiableObservableList().stream().anyMatch(jio
+            -> (jio.getName().equals(jioName) && jio.hasUser(user)));
     }
 
     /**
      * Adds user to the specified jio. Assumes check for the existence of jio already done.
      */
     public void addUserToJioOfName(Name jioName, User user) {
-        jios.stream().forEach(jio -> {
+        jios.asUnmodifiableObservableList().stream().forEach(jio -> {
             if (jio.getName().equals(jioName)) {
                 jio.addUser(user);
             }
@@ -108,7 +112,7 @@ public class UserData {
      * @return True if the user is the creator of jio, false otherwise.
      */
     public boolean isCreatorOfJio(Name jioName, User user) {
-        return jios.stream().anyMatch(
+        return jios.asUnmodifiableObservableList().stream().anyMatch(
             jio -> (jio.getName().equals(jioName) && jio.getCreator().equals(user.getUsername())));
     }
 

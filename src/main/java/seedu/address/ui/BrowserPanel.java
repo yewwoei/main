@@ -16,8 +16,10 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
 import seedu.address.commons.events.model.DisplayProfileEvent;
 import seedu.address.commons.events.ui.RestaurantPanelSelectionChangedEvent;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.user.User;
 
@@ -151,6 +153,14 @@ public class BrowserPanel extends UiPart<Region> {
             return;
         }
         loadRestaurantPage(event.getNewSelection());
+    }
+
+    @Subscribe
+    private void handlePanelSelectionChangedEvent(PanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (event.getNewSelection().getClass().equals(Debt.class)) {
+
+        }
     }
 
     @Subscribe

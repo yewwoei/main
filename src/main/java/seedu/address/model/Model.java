@@ -6,8 +6,10 @@ import java.util.function.Predicate;
 import javafx.collections.ObservableList;
 import javafx.util.Pair;
 import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
@@ -28,6 +30,8 @@ public interface Model {
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Restaurant> PREDICATE_SHOW_ALL_RESTAURANTS = unused -> true;
+
+    Predicate<Jio> PREDICATE_SHOW_ALL_JIOS = unused -> true;
 
     /**
      * Clears existing backing model and replaces with the provided new data.
@@ -91,6 +95,11 @@ public interface Model {
     void updateFilteredRestaurantList(Predicate<Restaurant> predicate);
 
     //=========== Model Manager User Methods =+===================================================================
+
+    /**
+     * Returns an unmodifiable view of the group list
+     */
+    ObservableList<Group> getGroupList();
 
     /**
      * Returns true if a user with the {@code username} exists in User Data.
@@ -179,6 +188,10 @@ public interface Model {
 
     //=========== Jio methods ===============================================================================
 
+    ObservableList<Jio> getJioList();
+
+    void updateFilteredJioList(Predicate<Jio> predicate);
+
     boolean hasJio(Jio jio);
 
     boolean hasJioName(Name jioName);
@@ -243,15 +256,15 @@ public interface Model {
 
     void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId);
 
-    String listDebtHistory();
+    ObservableList<Debt> getDebtList();
 
-    String listDebtor();
+    ObservableList<Debt> getCreditorList();
 
-    String listCreditor();
+    ObservableList<Debt> getDebtorList();
 
-    String listDebtRequestReceived();
+    ObservableList<Debt> getDebtRequestReceived();
 
-    String listDebtRequestSent();
+    ObservableList<Debt> getDebtRequestSent();
 
 }
 
