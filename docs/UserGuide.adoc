@@ -298,25 +298,25 @@ Format: `blockTime w/WEEKNUMBER d/DAY h/HHHH`
 
 Examples:
 
-* `blockTime week5 tues 1800 1900`
+* `blockTime w/5 d/tue h/1800`
 
 ===  Free timeslot manually: `freeTime`
 
 Frees up that timeslot in the user’s timetable to signify that he is free and available to eat. +
-Format: `freeTime w/WEEKNUMBER d/DAY h/HHHH`
+Format: `freeTime w/recess d/DAY h/HHHH`
 
 Examples:
 
 * `freeTime week5 tues 1900 2100`
 
-===  See Free Time: `listTime`
+===  See Free Time: `listScheduleForWeek`
 
 Views the list of free time to eat on a NUS week according to your calendar.
 Format: `listScheduleForWeek w/WEEKNUMBER`
 
 Examples:
 
-* `listTime w/5`
+* `listScheduleForWeek w/5`
 
 ===  Find jios that fit a user’s timetable for a given NUS academic week: `findJio`
 
@@ -617,12 +617,6 @@ e.g. acceptGroup g/2103
 e.g. deleteGroupRequest g/2103
 * *Delete Group* : `deleteGroup g/GROUP_NAME`
 e.g. deleteGroup g/2103
-* *Block Time* : `blockTime`
-* *Free Time* : `freeTime`
-* *List Time* : `listTime`
-* *Find Time* : `findTime`
-* *Add Calendar* : `addCalendar`
-* *Add NUSMODS* : `addNUSMODS`
 * *Block Time* : `blockTime w/WEEKNUMBER d/DAY h/HHHH`
 e.g. `blockTime w/reading d/thu h/1800`
 * *Free Time* : `freeTime w/WEEKNUMBER d/DAY h/HHHH`
