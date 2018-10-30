@@ -588,15 +588,24 @@ e.g. `createJio n/MALA!!! w/1 d/mon h/1200 a/FineFood`
 e.g. `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
 * *Join Jio* : `joinJio`
 * *Delete Jio* : `deleteJio`
-* *Add Friend* : `addFriend`
-* *Accept Friend Request* : `acceptFriend`
-* *Delete Friend Request* : `deleteFriendRequest`
-* *Delete Friend* : `deleteFriend`
-* *Find Mutual Friends* : `findMutualFriends`
-* *Add Group* : `addGroup`
-* *Accept Group* : `acceptGroup`
-* *Delete Group Request* : `deleteGroupRequest`
-* *Delete Group* : `deleteGroup`
+* *Add Friend* : `addFriend u/USERNAME`
+e.g. `addFriend u/Meena567`
+* *Accept Friend Request* : `acceptFriend u/USERNAME`
+e.g. `acceptFriend u/Meena567`
+* *Delete Friend Request* : `deleteFriendRequest u/USERNAME`
+e.g. `deleteFriendRequest u/Meena567`
+* *Delete Friend* : `deleteFriend u/USERNAME`
+e.g. `deleteFriend u/Meena567`
+* *Add Group* : `addGroup g/GROUP_NAME`
+e.g. addGroup g/2103
+* *Add Members* : `addMembers g/GROUP_NAME [u/USERNAME...]`
+e.g. addGroup g/2103
+* *Accept Group* : `acceptGroup g/GROUP_NAME`
+e.g. acceptGroup g/2103
+* *Delete Group Request* : `deleteGroupRequest g/GROUP_NAME`
+e.g. deleteGroupRequest g/2103
+* *Delete Group* : `deleteGroup g/GROUP_NAME`
+e.g. deleteGroup g/2103
 * *Block Time* : `blockTime`
 * *Free Time* : `freeTime`
 * *List Time* : `listTime`

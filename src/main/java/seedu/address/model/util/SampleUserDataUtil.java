@@ -99,7 +99,7 @@ public class SampleUserDataUtil {
         sampleUd.addUser(yewwoei);
         sampleUd.addUser(kate);
         sampleUd.addUser(chel);
-        
+
         return new Group[]{
                 new Group(new Name("2103"), acceptedUsers, pendingUsers)
         };
