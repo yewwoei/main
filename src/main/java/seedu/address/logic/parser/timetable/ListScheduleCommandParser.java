@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.timetable.BlockDateCommand;
 import seedu.address.logic.commands.timetable.ListScheduleCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
@@ -32,7 +31,7 @@ public class ListScheduleCommandParser implements Parser<ListScheduleCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_WEEK)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, BlockDateCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListScheduleCommand.MESSAGE_USAGE));
         }
 
         Week week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());

@@ -53,6 +53,13 @@ public class ModelManager extends ComponentManager implements Model {
     private User currentUser = null;
 
     /**
+     *
+     */
+
+    public List<Date> getDisplayedDates() {
+        return this.displayedDates;
+    }
+    /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {

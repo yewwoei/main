@@ -28,6 +28,7 @@ public interface Model {
 
     //=========== Model Manager Miscellaneous Methods =+==========================================================
 
+    List<Date> getDisplayedDates();
     /**
      * {@code Predicate} that always evaluate to true
      */
@@ -194,7 +195,7 @@ public interface Model {
 
     boolean hasDateForCurrentUser(Date date);
 
-    public void updateDisplayedDateList(Week weekNumber);
+    void updateDisplayedDateList(Week weekNumber);
 
     //=========== Jio methods ===============================================================================
 

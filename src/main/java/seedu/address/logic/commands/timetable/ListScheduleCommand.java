@@ -3,12 +3,15 @@ package seedu.address.logic.commands.timetable;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
+import java.util.List;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
+import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Week;
 
 /**
@@ -45,8 +48,12 @@ public class ListScheduleCommand extends Command {
         }
 
         model.updateDisplayedDateList(weekNumber);
-
-        return new CommandResult(String.format(MESSAGE_SUCCESS, weekNumber));
+        String alldates = "";
+        List<Date> allDates = model.getDisplayedDates();
+        for(Date d : allDates) {
+            alldates += d.toString();
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, weekNumber) + alldates);
     }
 
     @Override
