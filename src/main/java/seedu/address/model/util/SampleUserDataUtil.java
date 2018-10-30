@@ -4,8 +4,13 @@ import java.util.ArrayList;
 
 import seedu.address.model.Name;
 import seedu.address.model.UserData;
+import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Address;
+import seedu.address.model.timetable.Date;
+import seedu.address.model.timetable.Day;
+import seedu.address.model.timetable.Time;
+import seedu.address.model.timetable.Week;
 import seedu.address.model.accounting.Amount;
-import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.user.Email;
 import seedu.address.model.user.Password;
@@ -46,6 +51,24 @@ public class SampleUserDataUtil {
         };
     }
 
+    public static Jio[] getSampleJios() {
+        ArrayList<Username> lunchpeople = new ArrayList<>();
+        lunchpeople.add(new Username("navekom"));
+        lunchpeople.add(new Username("meena567"));
+        lunchpeople.add(new Username("chelchia"));
+        lunchpeople.add(new Username("katespades"));
+        lunchpeople.add(new Username("aideeeen"));
+        
+        return new Jio[]{
+            new Jio(new Name("lunch"), new Date(new Week("1"), new Day("mon"), new Time("1200")),
+                new Address("finefood"), lunchpeople, new Username("navekom")),
+            new Jio(new Name("dinner"), new Date(new Week("2"), new Day("tue"), new Time("1800")),
+                    new Address("foodclique"), new Username("navekom")),
+            new Jio(new Name("MALA"), new Date(new Week("1"), new Day("mon"), new Time("1200")),
+                    new Address("finefood"), new Username("meena567"))
+        };
+    }
+
     public static UserData getSampleUserData() {
         UserData sampleUd = new UserData();
         ArrayList<User> debtList = new ArrayList<User>();
@@ -53,10 +76,14 @@ public class SampleUserDataUtil {
             sampleUd.addUser(sampleUser);
             debtList.add(sampleUser);
         }
+        for (Jio sampleJio : getSampleJios()) {
+            sampleUd.addJio(sampleJio);
+        }
 
         for (int i = 0; i < debtList.size() - 1; i++){
             debtList.get(i).addDebt(debtList.get(i+1), new Amount(String.valueOf(i+1)));
         }
+
         debtList.get(debtList.size()-1).addDebt(debtList.get(0), new Amount(String.valueOf(3)));
 
         for (int i = debtList.size() - 1 ; i > 0; i--){
