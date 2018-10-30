@@ -15,7 +15,7 @@ public class Time implements Comparable<Time> {
      * Regular expression used to test whether the time falls between 0000 and 2330.
      * Time must be in 30 minute intervals.
      */
-    public static final String TIME_VALIDATION_REGEX = "([01]\\d|2[0-3])([03]0)";
+    public static final String TIME_VALIDATION_REGEX = "(0[6-9]|1\\d|2[0-3])([03]0)";
 
     public final String time;
 
