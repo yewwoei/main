@@ -2,6 +2,12 @@ package seedu.address.model.util;
 
 import seedu.address.model.Name;
 import seedu.address.model.UserData;
+import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Address;
+import seedu.address.model.timetable.Date;
+import seedu.address.model.timetable.Day;
+import seedu.address.model.timetable.Time;
+import seedu.address.model.timetable.Week;
 import seedu.address.model.user.Email;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Phone;
@@ -41,10 +47,24 @@ public class SampleUserDataUtil {
         };
     }
 
+    public static Jio[] getSampleJios() {
+        return new Jio[]{
+            new Jio(new Name("lunch"), new Date(new Week("1"), new Day("mon"), new Time("1200")),
+                new Address("finefood"), new Username("navekom")),
+            new Jio(new Name("dinner"), new Date(new Week("2"), new Day("tue"), new Time("1800")),
+                    new Address("foodclique"), new Username("navekom")),
+            new Jio(new Name("MALA"), new Date(new Week("1"), new Day("mon"), new Time("1200")),
+                    new Address("finefood"), new Username("meena567"))
+        };
+    }
+
     public static UserData getSampleUserData() {
         UserData sampleUd = new UserData();
         for (User sampleUser : getSampleUsers()) {
             sampleUd.addUser(sampleUser);
+        }
+        for (Jio sampleJio : getSampleJios()) {
+            sampleUd.addJio(sampleJio);
         }
         return sampleUd;
     }

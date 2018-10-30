@@ -29,6 +29,8 @@ public class Jio {
         this.date = date;
         this.location = location;
         this.creator = creator;
+        this.people = new ArrayList<>();
+        this.people.add(creator);
     }
 
     public Jio(Name name, Date date, Address location) {
