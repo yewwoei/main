@@ -399,31 +399,6 @@ public class ModelManager extends ComponentManager implements Model {
     //=============Friend & Group methods ====================
 
     @Override
-    public boolean hasUsernameSentRequest(Username friendUsername) {
-        User friend = userData.getUser(friendUsername);
-        Username myUsername = currentUser.getUsername();
-        List<Friendship> friendRequestLists = friend.getFriendRequests();
-        for (Friendship f: friendRequestLists) {
-            if (f.getFriendUsername().equals(myUsername)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-
-    @Override
-    public boolean hasUsernameFriendRequest(Username friendusername) {
-        List<Friendship> friendRequestsLists = currentUser.getFriendRequests();
-        for (Friendship f: friendRequestsLists) {
-            if (f.getFriendUsername().equals(friendusername)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @Override
     public boolean hasUsernameFriend(Username friendUsername) {
         List<Friendship> friendsLists = currentUser.getFriends();
         for (Friendship f: friendsLists) {
