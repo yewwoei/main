@@ -396,8 +396,19 @@ Examples:
 
 ===  Sent add debt request: `addDebt`
 
-User(Creditor) will send a debt request to another user with specific amount. +
+User(Creditor) send a debt request to another user with specific amount.
 Record will be created between two users with a `Pending` status. +
+Format: `addDebt u/USERNAME amt/AMOUNT`
+
+Examples:
+
+* `addDebt u/Kate123 amt/4.30`
+
+=== Sent add debt request to a group `addGroupDebt`
+
+User(Creditor) send a debt request to all other users in the group with specific amount.
+with amount will split equally to everyone in the group.
+Record will be created between with a `Pending` status. +
 Format: `addDebt u/USERNAME amt/AMOUNT`
 
 Examples:
