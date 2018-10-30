@@ -2,6 +2,7 @@ package seedu.address.model.timetable;
 
 import static java.util.Objects.requireNonNull;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -30,7 +31,7 @@ public class UniqueBusySchedule {
         this.username = username;
 
         // initialising the HashMap with the weeks.
-        this.internalSchedule = new HashMap<Week, List<Date>>() {
+        this.internalSchedule = new HashMap<>() {
             {
                 put(new Week("1"), new ArrayList<Date>());
                 put(new Week("2"), new ArrayList<Date>());
@@ -83,7 +84,7 @@ public class UniqueBusySchedule {
      */
     public void addAll(UniqueBusySchedule otherSchedule) {
         // change all the reference pointers to point to otherSchedule's reference.
-        List<Date> allDates = otherSchedule.getAllDatesOnSchedule();
+        List<Date> allDates = otherSchedule.getAllBlockedDatesOnSchedule();
         allDates.stream().forEach(this::add);
     }
 
@@ -119,17 +120,69 @@ public class UniqueBusySchedule {
     }
 
     /**
-     * Returns an immutable sorted date list for the NUS week, which throws {@code UnsupportedOperationException}
-     * if modificaiton is attempted.
+     * Returns an immutable sorted blocked date list for the NUS week, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
      * @return the immutable list of all dates.
      */
-    public List<Date> getAllDatesOnSchedule() {
+    public List<Date> getAllBlockedDatesOnSchedule() {
         List<List<Date>> listOfWeekDates = new ArrayList<>(internalSchedule.values());
         List<Date> allDates = listOfWeekDates.stream()
                 .flatMap(Collection::stream)
                 .collect(Collectors.toList());
         Collections.sort(allDates);
         return Collections.unmodifiableList(allDates);
+    }
+
+    /**
+     * Returns an immutable sorted free date list for the NUS week, which throws {@code UnsupportedOperationException}
+     * if modification is attempted.
+     * @return the immutable list of all dates.
+     */
+    public List<Date> getFreeDatesForWeek(Week week) {
+        List<Date> allUserBlockedDates = getAllBlockedDatesOnSchedule();
+        List<Date> fullScheduleForWeek = generateFullScheduleForWeek(week);
+        // remove all the dates that the user is busy.
+        fullScheduleForWeek.removeAll(allUserBlockedDates);
+        return Collections.unmodifiableList(fullScheduleForWeek);
+
+    }
+
+    /**
+     * Returns a full list of dates for the NUS week. Utility method to help getAllFreeDatesOnSchedule.
+     * @return a full list of dates for the NUS week.
+     */
+    private static List<Date> generateFullScheduleForWeek(Week week) {
+        List<Date> allWeekDates = new ArrayList<>();
+        allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Mon")));
+        allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Tues")));
+        allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Wed")));
+        allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Thu")));
+        allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Fri")));
+        allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Sat")));
+        allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Sun")));
+
+        return allWeekDates;
+    }
+
+    /**
+     * Returns a full list of dates for the day. The week that the day exists in must also be given. Utility method to help getAllFreeDatesOnSchedule.
+     * @return a full list of dates for the day.
+     */
+    private static List<Date> generateFullScheduleForDay(Week week, Day day) {
+        // loop through the day.
+        List<Date> dayDateList = new ArrayList<>();
+        for (int hour = 0; hour <= 23; hour++) {
+            for (int minute = 0; minute <= 59; minute += 30) {
+                DecimalFormat formatter = new DecimalFormat("00");
+                String hourFormatted = formatter.format(hour);
+                String minuteFormatted = formatter.format(minute);
+                Time time = new Time(hourFormatted + minuteFormatted);
+                Date toAdd = new Date(week, day, time);
+                dayDateList.add(toAdd);
+            }
+        }
+
+        return dayDateList;
     }
 
     /**

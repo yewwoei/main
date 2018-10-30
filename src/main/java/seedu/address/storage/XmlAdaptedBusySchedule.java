@@ -56,7 +56,7 @@ public class XmlAdaptedBusySchedule {
      */
     private List<XmlAdaptedDate> retrieveDateList(UniqueBusySchedule source) {
 
-        List<Date> retrievedDates = new ArrayList<>(source.getAllDatesOnSchedule());
+        List<Date> retrievedDates = new ArrayList<>(source.getAllBlockedDatesOnSchedule());
 
         List<XmlAdaptedDate> xmlDateList = retrievedDates.stream()
                 .map(XmlAdaptedDate::new)
