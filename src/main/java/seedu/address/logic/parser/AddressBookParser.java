@@ -44,6 +44,7 @@ import seedu.address.logic.commands.jio.JoinJioCommand;
 import seedu.address.logic.commands.jio.ListJioCommand;
 import seedu.address.logic.commands.timetable.BlockDateCommand;
 import seedu.address.logic.commands.timetable.FreeDateCommand;
+import seedu.address.logic.commands.timetable.ListScheduleCommand;
 import seedu.address.logic.commands.user.LoginCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
 import seedu.address.logic.commands.user.SignUpCommand;
@@ -72,6 +73,7 @@ import seedu.address.logic.parser.jio.DeleteJioCommandParser;
 import seedu.address.logic.parser.jio.JoinJioCommandParser;
 import seedu.address.logic.parser.timetable.BlockDateCommandParser;
 import seedu.address.logic.parser.timetable.FreeDateCommandParser;
+import seedu.address.logic.parser.timetable.ListScheduleCommandParser;
 
 
 /**
@@ -196,6 +198,9 @@ public class AddressBookParser {
 
         case FreeDateCommand.COMMAND_WORD:
             return new FreeDateCommandParser().parse(arguments);
+
+        case ListScheduleCommand.COMMAND_WORD:
+            return new ListScheduleCommandParser().parse(arguments);
 
         // Accounting Commands
         case AddDebtCommand.COMMAND_WORD:
