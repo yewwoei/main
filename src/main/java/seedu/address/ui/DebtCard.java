@@ -25,8 +25,6 @@ public class DebtCard extends UiPart<Region> {
     private Label amount;
     @FXML
     private Label status;
-    @FXML
-    private Label id;
 
     public DebtCard(Debt debt, int displayedIndex) {
         super(FXML);
@@ -35,7 +33,6 @@ public class DebtCard extends UiPart<Region> {
         debtor.setText("Debtor: " + debt.getDebtor().getUsername().toString());
         amount.setText("Amount: " + String.valueOf(debt.getAmount().toDouble()));
         status.setText("Status: " + debt.getDebtStatus().toString());
-        id.setText("ID: " + debt.getDebtId().toString());
     }
 
     @Override
