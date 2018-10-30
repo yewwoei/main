@@ -605,9 +605,9 @@ e.g. `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
 * *Accept Group* : `acceptGroup`
 * *Delete Group Request* : `deleteGroupRequest`
 * *Delete Group* : `deleteGroup`
-* *Block Time* : `blockTime`
-* *Free Time* : `freeTime`
-* *List Time* : `listTime`
+* *Block Time* : `blockTime w/WEEKNUMBER d/DAY h/HHHH`
+* *Free Time* : `freeTime w/WEEKNUMBER d/DAY h/HHHH`
+* *List User's Free Timeslots for a Week* : `listScheduleForWeek w/`
 * *Find Jio* : `findJio`
 * *Add Debt* : `addDebt`
 * *Clear Debt* : `clearDebt`
