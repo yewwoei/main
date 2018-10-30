@@ -584,10 +584,12 @@ e.g.`select 2`
 e.g. `writeReview 2 r/5 rvw/I tried the Salmon Mentaiko Chirashi and it was amazing.`
 * *Display User Profile*: `displayProfile`
 * *Create Jio* : `createJio` +
-e.g. `createJio n/MALA!!! w/1 d/mon h/1200 a/FineFood`
+e.g. `createJio n/MALA w/1 d/mon h/1200 a/FineFood`
 e.g. `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
-* *Join Jio* : `joinJio`
-* *Delete Jio* : `deleteJio`
+* *Join Jio* : `joinJio` +
+e.g. `joinJio n/MALA`
+* *Delete Jio* : `deleteJio` +
+e.g. `deleteJio n/MALA`
 * *Add Friend* : `addFriend`
 * *Accept Friend Request* : `acceptFriend`
 * *Delete Friend Request* : `deleteFriendRequest`
