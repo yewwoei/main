@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.text.MessageFormat;
+import java.util.List;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -24,6 +25,7 @@ import seedu.address.model.accounting.Debt;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.timetable.Date;
 import seedu.address.model.user.User;
 
 /**
@@ -39,6 +41,7 @@ public class BrowserPanel extends UiPart<Region> {
     public static final String DEFAULT_PAGE = "default.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
+    public static final String SCHEDULE_PAGE = "displayWeekSchedule.html";
 
     private static final String FXML = "BrowserPanel.fxml";
 
@@ -162,6 +165,14 @@ public class BrowserPanel extends UiPart<Region> {
         Platform.runLater(() -> {
             browser.getEngine().loadContent(html);
         });
+    }
+
+    /**
+     * Loads a displayWeekSchedule HTML file with a background that matches the general theme.
+     */
+    private void loadWeekSchedulePage(List<Date> dates) {
+        StringBuilder sb = new StringBuilder();
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + SCHEDULE_PAGE);
     }
 
     /**
