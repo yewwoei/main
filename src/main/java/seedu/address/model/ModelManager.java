@@ -80,6 +80,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Model Manager Miscellaneous Methods =+==========================================================
 
+    @Override
     public boolean isCurrentlyLoggedIn() {
         return this.isLoggedIn;
     }
