@@ -376,6 +376,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public ObservableList<Friendship> getFriendsList() {
+        return FXCollections.observableArrayList(currentUser.getFriends());
+    }
+
+    @Override
+    public ObservableList<Friendship> getFriendRequestsList() {
+        return FXCollections.observableArrayList(currentUser.getFriendRequests());
+    }
+
+    @Override
     public ObservableList<Debt> getDebtList() {
         return FXCollections.observableArrayList(currentUser.getDebts());
     }
