@@ -16,6 +16,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.DisplayProfileEvent;
+import seedu.address.commons.events.model.DisplayWeekScheduleEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.model.accounting.Amount;
@@ -30,6 +31,8 @@ import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.restaurant.UserReview;
 import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.timetable.Date;
+import seedu.address.model.timetable.UniqueSchedule;
+import seedu.address.model.timetable.Week;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.RestaurantReview;
 import seedu.address.model.user.User;
@@ -39,11 +42,13 @@ import seedu.address.model.user.Username;
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager extends ComponentManager implements Model {
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Restaurant> filteredRestaurants;
     private final FilteredList<Jio> filteredJios;
     private final FilteredList<Group> filteredGroups;
+    private List<Date> displayedDates;
     private UserData userData;
     private boolean isLoggedIn = false;
     private User currentUser = null;
@@ -61,6 +66,7 @@ public class ModelManager extends ComponentManager implements Model {
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
         filteredJios = new FilteredList<>(userData.getJios());
         filteredGroups = new FilteredList<>(FXCollections.observableArrayList(currentUser.getGroups()));
+        displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
     }
 
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs,
@@ -79,6 +85,7 @@ public class ModelManager extends ComponentManager implements Model {
         } else {
             filteredGroups = new FilteredList<>(FXCollections.observableArrayList(userData.getGroups()));
         }
+        displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
     }
 
     public ModelManager() {
@@ -190,6 +197,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(user);
         this.currentUser = user;
         this.isLoggedIn = true;
+        resetDisplayedDates();
     }
 
     @Override
@@ -205,6 +213,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void logoutUser() {
         this.currentUser = null;
         this.isLoggedIn = false;
+        resetDisplayedDates();
         raise(new UserLoggedOutEvent());
     }
 
@@ -601,10 +610,31 @@ public class ModelManager extends ComponentManager implements Model {
         indicateUserDataChanged();
     }
 
+
     @Override
     public boolean hasDateForCurrentUser(Date date) {
         requireNonNull(date);
         return currentUser.hasDateOnSchedule(date);
+    }
+
+    @Override
+    public void displayUserWeekSchedule(Week weekNumber) {
+        updateDisplayedDatesUserWeek(weekNumber);
+        displayWeekSchedule(displayedDates);
+    }
+
+    private void updateDisplayedDatesUserWeek(Week weekNumber) {
+        requireNonNull(weekNumber);
+        this.displayedDates = currentUser.getFreeDatesForWeek(weekNumber);
+
+    }
+
+    private void displayWeekSchedule(List<Date> dates) {
+        raise(new DisplayWeekScheduleEvent(dates));
+    }
+
+    private void resetDisplayedDates() {
+        this.displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
     }
 
     //=========== Jio methods ===============================================================================
