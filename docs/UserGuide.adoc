@@ -351,8 +351,8 @@ Examples:
 
 ===  See Free Time: `listTime`
 
-Views the list of free time to eat on those dates. +
-Format: `listTime w/WEEKNUMBER`
+Views the list of free time to eat on a NUS week according to your calendar.
+Format: `listScheduleForWeek w/WEEKNUMBER`
 
 Examples:
 
