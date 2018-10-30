@@ -275,12 +275,12 @@ Examples:
 
 === Delete friend: `deleteFriend`
 
-A User can delete friend of another User whom they might not know. +
+A User can delete friend whom they may no longer want to be friends with. +
 Format: `deleteFriend u/USERNAME`
 
 Examples:
 
-* `deleteFriendRequest u/Meena567`
+* `deleteFriend u/Meena567`
 
 === Adding groups: `addGroup`
 
