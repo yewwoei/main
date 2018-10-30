@@ -181,7 +181,7 @@ public class UniqueSchedule {
     private static List<Date> generateFullScheduleForDay(Week week, Day day) {
         // loop through the day.
         List<Date> dayDateList = new ArrayList<>();
-        for (int hour = 0; hour <= 23; hour++) {
+        for (int hour = 6; hour <= 23; hour++) {
             for (int minute = 0; minute <= 59; minute += 30) {
                 DecimalFormat formatter = new DecimalFormat("00");
                 String hourFormatted = formatter.format(hour);
