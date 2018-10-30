@@ -37,6 +37,7 @@ public class CreateJioCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New jio added: %1$s";
     public static final String MESSAGE_DUPLICATE_JIO = "A jio with the same name already exists";
+    public static final String MESSAGE_NO_GROUP = "The group does not exist";
 
     private Jio toAdd;
 
@@ -58,8 +59,14 @@ public class CreateJioCommand extends Command {
             throw new NotLoggedInCommandException(COMMAND_WORD);
         }
 
+        // Check if there is a jio of the same name
         if (model.hasJio(toAdd)) {
-            throw new CommandException(MESSAGE_DUPLICATE_JIO); //Jio has already been created
+            throw new CommandException(MESSAGE_DUPLICATE_JIO);
+        }
+
+        // Check if the group for a groupjio exists
+        if (toAdd.isGroupJio() && !model.hasGroup(toAdd.getGroupName())) {
+            throw new CommandException(MESSAGE_NO_GROUP);
         }
 
         model.createJio(toAdd);
