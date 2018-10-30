@@ -91,7 +91,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     /**
-     * Loads a displayProfile HTML file with a background that matches the general theme.
+     * Loads a displayProfile HTML file with a background that matches the general me.
      */
     private void loadUserProfilePage(User user) {
         StringBuilder sb = new StringBuilder();

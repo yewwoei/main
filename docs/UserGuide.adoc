@@ -273,10 +273,19 @@ Examples:
 
 * `deleteFriendRequest Meena567`
 
+=== Delete friend: `deleteFriend`
+
+A User can delete friend of another User whom they might not know. +
+Format: `deleteFriend USERNAME`
+
+Examples:
+
+* `deleteFriendRequest Meena567`
+
 === Adding groups: `addGroup`
 
-A User will create a group and send out invitations to all the other users, which they will then have to accept to join the group.  +
-Format: `addGroup GROUPNAME [Users… USERNAMES]`
+A User will create a group by specifying the group name.  +
+Format: `addGroup GROUPNAME`
 
 ****
 * Every group will automatically add the user creating the group.
@@ -284,8 +293,16 @@ Format: `addGroup GROUPNAME [Users… USERNAMES]`
 
 Examples:
 
-* `addGroup onlyMe`
-* `addGroup CS2103, chelchia, evanmok2401, katenhy, yewwoei`
+* `addGroup CS2103`
+
+=== Adding members: `addMembers`
+
+A User will create a group and send out invitations to all the other users, which they will then have to accept to join the group.  +
+Format: `addGroup GROUPNAME [Users… USERNAMES]`
+
+Examples:
+
+* `addMembers CS2103, chelchia, evanmok2401, katenhy, yewwoei`
 
 === Accepting group requests: `acceptGroup`
 

@@ -14,6 +14,7 @@ import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
 import seedu.address.model.accounting.Debt;
+import seedu.address.model.group.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
@@ -104,6 +105,12 @@ public class ListPanel<T> extends UiPart<Region> {
                     setGraphic(new GroupCard((Group) item, getIndex() + 1).getRoot());
                     type = "Group";
                 }
+
+                if (item instanceof Friendship) {
+                    setGraphic(new GroupCard((Group) item, getIndex() + 1).getRoot());
+                    type = "Group";
+                }
+
                 if (item instanceof Debt) {
                     setGraphic(new DebtCard((Debt) item, getIndex() + 1).getRoot());
                     type = "Debt";
