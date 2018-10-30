@@ -32,7 +32,10 @@
             <MenuItem fx:id="helpMenuItem" mnemonicParsing="false" onAction="#handleHelp" text="Help" />
           </Menu>
           <Menu mnemonicParsing="false" text="Features">
-            <MenuItem fx:id="groups" mnemonicParsing="false" onAction="#handleGroup" text="Groups" />
+            <Menu mnemonicParsing="false" text="Groups">
+              <MenuItem fx:id="groupRequests" mnemonicParsing="false" onAction="#handleGroupRequest" text="Group requests" />
+              <MenuItem fx:id="groups" mnemonicParsing="false" onAction="#handleGroup" text="Groups" />
+            </Menu>
             <MenuItem fx:id="jios" mnemonicParsing="false" onAction="#handleJio" text="Jios" />
             <Menu mnemonicParsing="false" text="Debts">
               <MenuItem fx:id="debtrequestreceived" mnemonicParsing="false" onAction="#handleDebtRequestReceived" text="Request Received" />

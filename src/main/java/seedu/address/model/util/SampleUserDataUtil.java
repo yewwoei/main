@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import seedu.address.model.Name;
 import seedu.address.model.UserData;
+import seedu.address.model.group.Group;
 import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.jio.Jio;
@@ -123,27 +124,73 @@ public class SampleUserDataUtil {
         };
     }
 
+    public static Group[] getSampleGroups(UserData sampleUd) {
+        ArrayList<User> acceptedUsers = new ArrayList<> ();
+        ArrayList<User> pendingUsers = new ArrayList<> ();
+        User evan = new User(new Username("navekom"), new Password("pwwd123"),
+                new Name("Evan Mok"), new Phone("91234567"),
+                new Email("evanm@gmail.com"));
+        User meena = new User(new Username("meena567"), new Password("meenapwd123"),
+                new Name("Meena"), new Phone("98834568"),
+                new Email("meena567@gmail.com"));
+        User yewwoei = new User(new Username("aideeeen"), new Password("yewwoei123"),
+                new Name("Low Yew Woei"), new Phone("91765567"),
+                new Email("yewwoei@gmail.com"));
+        User kate = new User(new Username("katespades"), new Password("katepwd123"),
+                new Name("Kate Ng"), new Phone("91434567"),
+                new Email("kateSpades@gmail.com"));
+        User chel = new User(new Username("chelchia"), new Password("chelpwd123"),
+                new Name("Chelsea Chia"), new Phone("90134569"),
+                new Email("chelchia@gmail.com"));
+        acceptedUsers.add(evan);
+        acceptedUsers.add(meena);
+        acceptedUsers.add(yewwoei);
+        acceptedUsers.add(kate);
+        pendingUsers.add(chel);
+
+        sampleUd.addUser(evan);
+        sampleUd.addUser(meena);
+        sampleUd.addUser(yewwoei);
+        sampleUd.addUser(kate);
+        sampleUd.addUser(chel);
+        
+        return new Group[]{
+                new Group(new Name("2103"), acceptedUsers, pendingUsers)
+        };
+    }
+
     public static UserData getSampleUserData() {
         UserData sampleUd = new UserData();
-        ArrayList<User> debtList = new ArrayList<User>();
+        ArrayList<User> userList = new ArrayList<User>();
         for (User sampleUser : getSampleUsers()) {
             sampleUd.addUser(sampleUser);
-            debtList.add(sampleUser);
+            userList.add(sampleUser);
         }
         for (Jio sampleJio : getSampleJios()) {
             sampleUd.addJio(sampleJio);
         }
 
-        for (int i = 0; i < debtList.size() - 1; i++){
-            debtList.get(i).addDebt(debtList.get(i+1), new Amount(String.valueOf(i+1)));
+        for (Group sampleGroup : getSampleGroups(sampleUd)) {
+            sampleGroup.getAcceptedUsers().forEach(user -> user.addGroup(sampleGroup));
+            sampleGroup.getPendingUsers().forEach(user -> user.addGroupRequest(sampleGroup));
+            sampleUd.addGroup(sampleGroup);
         }
 
-        debtList.get(debtList.size()-1).addDebt(debtList.get(0), new Amount(String.valueOf(3)));
-
-        for (int i = debtList.size() - 1 ; i > 0; i--){
-            debtList.get(i).addDebt(debtList.get(i-1), new Amount(String.valueOf(i)), DebtStatus.ACCEPTED);
+        for (int i = 0; i < userList.size() - 1; i++){
+            userList.get(i).addDebt(userList.get(i+1), new Amount(String.valueOf(i+1)));
+            userList.get(i).addFriend(userList.get(i+1));
         }
-        debtList.get(0).addDebt(debtList.get(debtList.size()-1), new Amount(String.valueOf(3)), DebtStatus.ACCEPTED);
+
+        for (int i = 1; i < (userList.size() - 1) / 2; i++) {
+            userList.get(i).acceptFriendRequest(userList.get(i - 1));
+        }
+
+        userList.get(userList.size()-1).addDebt(userList.get(0), new Amount(String.valueOf(3)));
+
+        for (int i = userList.size() - 1 ; i > 0; i--){
+            userList.get(i).addDebt(userList.get(i-1), new Amount(String.valueOf(i)), DebtStatus.ACCEPTED);
+        }
+        userList.get(0).addDebt(userList.get(userList.size()-1), new Amount(String.valueOf(3)), DebtStatus.ACCEPTED);
 
         return sampleUd;
     }
