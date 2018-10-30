@@ -180,6 +180,7 @@ public class SampleUserDataUtil {
             userList.get(i).addDebt(userList.get(i+1), new Amount(String.valueOf(i+1)));
             userList.get(i).addFriend(userList.get(i+1));
         }
+        
 
         for (int i = 1; i < (userList.size() - 1) / 2; i++) {
             userList.get(i).acceptFriendRequest(userList.get(i - 1));
