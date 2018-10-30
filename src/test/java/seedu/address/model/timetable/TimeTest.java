@@ -34,9 +34,10 @@ public class TimeTest {
         assertFalse(Time.isValidTime(" ")); // spaces only
         assertFalse(Time.isValidTime("^")); // only numbers are allowed.
         assertFalse(Time.isValidTime("hello")); // cannot have non-numerical characters
+        assertFalse(Time.isValidTime("0000"));
+        assertFalse(Time.isValidTime("0430"));
 
         // valid time
-        assertTrue(Time.isValidTime("0000"));
         assertTrue(Time.isValidTime("1000"));
         assertTrue(Time.isValidTime("1800"));
         assertTrue(Time.isValidTime("2000"));
