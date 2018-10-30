@@ -19,7 +19,6 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.DisplayProfileEvent;
 import seedu.address.commons.events.model.DisplayWeekScheduleEvent;
-import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.RestaurantPanelSelectionChangedEvent;
 import seedu.address.model.accounting.Debt;
@@ -122,13 +121,14 @@ public class BrowserPanel extends UiPart<Region> {
 
         StringBuilder sb2 = new StringBuilder();
         // Creating the string of dates.
+
         dates.stream()
                 .map(date -> "<li>" + date.toString() + "</li>")
                 .forEach(sb2::append);
 
         // replace the template with dates.
         Object[] params = new Object[] {
-                sb2 };
+                sb2.toString() };
 
         String html = MessageFormat.format(sb.toString(), params);
 
