@@ -1,45 +1,59 @@
 package seedu.address.logic.commands.timetable;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
+
+import java.util.List;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
+import seedu.address.model.timetable.Date;
+import seedu.address.model.timetable.Week;
 
 /**
  * Lists the available times to eat for the logged in user during a specified week number.
  */
 public class ListScheduleCommand extends Command {
-    public static final String COMMAND_WORD = "listTime";
+    public static final String COMMAND_WORD = "listWeekSchedule";
 
-    // TODO
-    public static final String MESSAGE_USAGE = null;
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Lists your schedule for the week."
+            + "Parameters: "
+            + PREFIX_WEEK + "NUS WEEK \n"
+            + "Example: " + COMMAND_WORD + " "
+            + PREFIX_WEEK + "recess";
 
-    // TODO
-    public static final String MESSAGE_SUCCESS = null;
+    public static final String MESSAGE_SUCCESS = "Listed your week: %1$s schedule below.";
 
-    // TODO
-    public static final String MESSAGE_DUPLICATE_REVIEW = null;
-
-    // TODO
-    private final Integer weekNumber;
+    private final Week weekNumber;
 
     /**
      * Creates a ListScheduleCommand view the free time on the logged in user's timetable.
      */
-    public ListScheduleCommand(Integer weekNumber) {
+    public ListScheduleCommand(Week weekNumber) {
         requireNonNull(weekNumber);
         this.weekNumber = weekNumber;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        // TODO
         requireNonNull(model);
 
-        return null;
+        if (!model.isCurrentlyLoggedIn()) {
+            throw new NotLoggedInCommandException(COMMAND_WORD);
+        }
+
+        model.updateDisplayedDateList(weekNumber);
+        String alldates = "";
+        List<Date> allDates = model.getDisplayedDates();
+        for(Date d : allDates) {
+            alldates += d.toString();
+        }
+        return new CommandResult(String.format(MESSAGE_SUCCESS, weekNumber) + alldates);
     }
 
     @Override

@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -16,6 +17,7 @@ import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.timetable.Date;
+import seedu.address.model.timetable.Week;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -27,6 +29,7 @@ public interface Model {
 
     //=========== Model Manager Miscellaneous Methods =+==========================================================
 
+    List<Date> getDisplayedDates();
     /**
      * {@code Predicate} that always evaluate to true
      */
@@ -196,6 +199,8 @@ public interface Model {
     void freeDateForCurrentUser(Date date);
 
     boolean hasDateForCurrentUser(Date date);
+
+    void updateDisplayedDateList(Week weekNumber);
 
     //=========== Jio methods ===============================================================================
 
