@@ -285,11 +285,6 @@ public class AddCommandTest {
         public void addUser(User user) {}
 
         @Override
-        public ObservableList<Group> getGroupList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasUser(Username username) {
             return true;
         }
@@ -405,6 +400,16 @@ public class AddCommandTest {
 
         @Override
         public void deleteGroupRequest(Name groupName) {}
+
+        @Override
+        public ObservableList<Group> getGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Group> getGroupRequestList() {
+            throw new AssertionError("This method should not be called.");
+        }
 
         // ========= timetable commands =========
 
