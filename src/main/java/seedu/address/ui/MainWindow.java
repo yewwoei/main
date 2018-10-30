@@ -224,8 +224,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleGroup() {
-        groupListPanel = new ListPanel<>(logic.getGroupList());
-        featuresListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            groupListPanel = new ListPanel<>(logic.getGroupList());
+            featuresListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        }
     }
 
     /**

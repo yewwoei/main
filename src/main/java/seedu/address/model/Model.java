@@ -33,6 +33,8 @@ public interface Model {
 
     Predicate<Jio> PREDICATE_SHOW_ALL_JIOS = unused -> true;
 
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
+
     /**
      * Clears existing backing model and replaces with the provided new data.
      */
@@ -179,6 +181,8 @@ public interface Model {
     ObservableList<Group> getGroupList();
 
     ObservableList<Group> getGroupRequestList();
+
+    void updateFilteredGroupList(Predicate<Group> predicate);
 
     //============ Timetable commands ==========================
 
