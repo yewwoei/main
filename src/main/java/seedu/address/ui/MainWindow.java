@@ -20,6 +20,7 @@ import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.accounting.Debt;
+import seedu.address.model.group.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 
@@ -41,6 +42,8 @@ public class MainWindow extends UiPart<Stage> {
     private ListPanel<Jio> jioListPanel;
     private ListPanel<Group> groupListPanel;
     private ListPanel<Debt> debtListPanel;
+    private ListPanel<Friendship> friendRequestListPanel;
+    private ListPanel<Friendship> friendListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -224,8 +227,25 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleGroup() {
-        groupListPanel = new ListPanel<>(logic.getGroupList());
-        featuresListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            groupListPanel = new ListPanel<>(logic.getGroupList());
+            featuresListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        }
+    }
+
+    /**
+     * Updates list panel with group requests.
+     */
+    @FXML
+    public void handleGroupRequest() {
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            groupListPanel = new ListPanel<>(logic.getGroupRequestList());
+            featuresListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        }
     }
 
     /**
@@ -233,8 +253,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleAllDebt() {
-        debtListPanel = new ListPanel<>(logic.getDebtList());
-        featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            debtListPanel = new ListPanel<>(logic.getDebtList());
+            featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+        }
     }
 
     /**
@@ -242,8 +266,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleCreditor() {
-        debtListPanel = new ListPanel<>(logic.getCreditorList());
-        featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            debtListPanel = new ListPanel<>(logic.getCreditorList());
+            featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+        }
     }
 
     /**
@@ -251,8 +279,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleDebtor() {
-        debtListPanel = new ListPanel<>(logic.getDebtorList());
-        featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            debtListPanel = new ListPanel<>(logic.getDebtorList());
+            featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+        }
     }
 
     /**
@@ -260,8 +292,12 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleDebtRequestReceived() {
-        debtListPanel = new ListPanel<>(logic.getDebtRequestReceived());
-        featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            debtListPanel = new ListPanel<>(logic.getDebtRequestReceived());
+            featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+        }
     }
 
     /**
@@ -269,7 +305,37 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleDebtRequestSent() {
-        debtListPanel = new ListPanel<>(logic.getDebtRequestSent());
-        featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            debtListPanel = new ListPanel<>(logic.getDebtRequestSent());
+            featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+        }
+    }
+
+    /**
+     * Updates list panel with login user's received request.
+     */
+    @FXML
+    public void handleFriendRequests() {
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            friendRequestListPanel = new ListPanel<>(logic.getFriendRequestsList());
+            featuresListPanelPlaceholder.getChildren().add(friendRequestListPanel.getRoot());
+        }
+    }
+
+    /**
+     * Updates list panel with login user's received request.
+     */
+    @FXML
+    public void handleFriends() {
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            friendListPanel = new ListPanel<>(logic.getFriendsList());
+            featuresListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
+        }
     }
 }

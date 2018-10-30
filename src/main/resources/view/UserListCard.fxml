@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-
 <?import javafx.geometry.Insets?>
 
 <HBox id="cardPane" fx:id="cardPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
@@ -20,12 +19,11 @@
                         <Region fx:constant="USE_PREF_SIZE" />
                     </minWidth>
                 </Label>
-                <Label fx:id="creditor" styleClass="cell_big_label" text="\$Creditor" />
-                <Label fx:id="debtor" styleClass="cell_big_label" text="\$Debtor" />
+                <Label fx:id="username" styleClass="cell_big_label" text="\$Username" />
             </HBox>
-            <Label fx:id="amount" styleClass="cell_small_label" text="\$Amount" />
-            <Label fx:id="status" styleClass="cell_small_label" text="\$status" />
+            <Label fx:id="name" styleClass="cell_small_label" text="\$Name" />
+            <Label fx:id="email" styleClass="cell_small_label" text="\$Email" />
+            <Label fx:id="phone" styleClass="cell_small_label" text="\$Phone" />
         </VBox>
     </GridPane>
 </HBox>
-

@@ -1,53 +1,30 @@
 {
-  "ignoreGlobList": ["about-us/**", "**index.html"],
-  "formats": ["html", "css"],
-  "ignoreCommitList": ["90018e49f129ce7e0abdc8b18e91c9813588c601", "67890def"],
   "authors":
   [
     {
-      "githubId": "Yew Woei",
-      "displayName": "Aiden Low (Yew Woei)",
-      "authorNames": ["Aiden Low (Yew Woei)"],
-      "ignoreGlobList": ["**.css"]
-    },
-    {
-      "githubId": "yewwoei"
-    },
-    {
-      "githubId": "Meena567",
-      "displayName": "Solayappan Meenakshi",
-      "authorNames": ["Meena567"],
-      "ignoreGlobList": ["**.css"]
-    },
-    {
       "githubId": "chelchia",
-      "displayName": "Chelsea Chia Jia Hwa",
-      "authorNames": ["chelchia"],
-      "ignoreGlobList": ["**.css"]
+      "displayName": "CHELS...A HWA",
+      "authorNames": ["chelchia"]
+    },
+    {
+      "githubId": "yewwoei",
+      "displayName": "LOW Y... WOEI",
+      "authorNames": ["yewwoei"]
+    },
+    {
+      "githubId": "Evanmok2401",
+      "displayName": "MOK K... EVAN",
+      "authorNames": ["Evanmok2401"]
     },
     {
       "githubId": "katenhy",
-      "displayName": "Ng Hoi Ying",
-      "authorNames": ["Ng Hoi Ying, Kate"],
-      "ignoreGlobList": ["**.css"]
+      "displayName": "NG HO... YING",
+      "authorNames": ["katenhy"]
     },
     {
-      "githubId": "katenhy",
-      "displayName": "Ng Hoi Ying",
-      "authorNames": ["katenhy"],
-      "ignoreGlobList": ["**.css"]
-    },
-    {
-      "githubId": "evanmok2401",
-      "displayName": "Evan Mok",
-      "authorNames": ["Evan Mok"],
-      "ignoreGlobList": ["**.css"]
-    },
-    {
-      "githubId": "Navekom",
-      "displayName": "Evan Mok",
-      "authorNames": ["Navekom"],
-      "ignoreGlobList": ["**.css"]
+      "githubId": "meena567",
+      "displayName": "SOLAY...AKSHI",
+      "authorNames": ["meena567"]
     }
   ]
 }

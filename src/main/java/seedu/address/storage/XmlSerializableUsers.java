@@ -13,7 +13,7 @@ import seedu.address.model.accounting.Debt;
 import seedu.address.model.group.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
-import seedu.address.model.timetable.UniqueBusySchedule;
+import seedu.address.model.timetable.UniqueSchedule;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
@@ -135,18 +135,17 @@ public class XmlSerializableUsers {
             userData.addGroup(group);
 
             // updates Users as to which groups they have
-            group.getAcceptedUsers().forEach(user -> userData.getUser(user.getUsername()).addGroup(group));
             group.getAcceptedUsers().forEach(user -> user.addGroup(group));
             group.getPendingUsers().forEach(user -> user.addGroupPending(group));
         }
 
-        /** Converts the UserData's timetable information into the model's {@code UniqueBusySchedule} object
+        /** Converts the UserData's timetable information into the model's {@code UniqueSchedule} object
          * and stores it in the respective user object.
          */
         for (XmlAdaptedBusySchedule busySchedule : busySchedules) {
 
             // Obtain the Models.
-            UniqueBusySchedule currentSchedule = busySchedule.toModelType();
+            UniqueSchedule currentSchedule = busySchedule.toModelType();
             Username currentUsername = currentSchedule.getUsername();
             // Get the user.
             User currentUser = userData.getUser(currentUsername);

@@ -26,12 +26,13 @@ public class AddDebtCommand extends Command {
             + PREFIX_USERNAME + "DEBTOR\n"
             + PREFIX_AMOUNT + "AMOUNT\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_USERNAME + "Kate Ng"
+            + PREFIX_USERNAME + "Kate Ng "
             + PREFIX_AMOUNT + "6.5";
 
     public static final String MESSAGE_SUCCESS = "A debt request of %2$f SGD to %1$s is sent";
     public static final String MESSAGE_NO_SUCH_USER = "Input user not exist.";
-    public static final String MESSAGE_INVALID_AMOUNT = "Input amount must be larger than zero.";
+    public static final String MESSAGE_INVALID_AMOUNT = "Input amount must be larger than zero "
+            + "and less than a hundred million.";
     public static final String MESSAGE_NOT_LOGGED_IN = "You must login before adding a debt.";
     public static final String MESSAGE_CANNOT_ADD_DEBT_TO_ONESELF = "You cannot create debt to yourself.";
 
@@ -57,7 +58,7 @@ public class AddDebtCommand extends Command {
         if (model.isSameAsCurrentUser(debtor)) {
             throw new CommandException(MESSAGE_CANNOT_ADD_DEBT_TO_ONESELF);
         }
-        if (!(amount.toDouble() > 0)) {
+        if (!(100000000 > amount.toDouble() && amount.toDouble() > 0)) {
             throw new CommandException(MESSAGE_INVALID_AMOUNT);
         }
         model.addDebt(debtor, amount);
