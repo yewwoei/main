@@ -2,6 +2,7 @@ package seedu.address.model;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -88,8 +89,22 @@ public class UserData {
         jios.add(jio);
     }
 
+    /**
+     * Removes jio with the specified name.
+     * @param jioName name of jio
+     */
     public void removeJioOfName(Name jioName) {
-        jios.asUnmodifiableObservableList().removeIf(jio -> jio.getName().equals(jioName));
+        //jios.removeIf(jio -> jio.getName().equals(jioName));
+        Jio toRemove = new Jio();
+        Iterator<Jio> iterator = jios.iterator();
+        while (iterator.hasNext()) {
+            Jio jio = iterator.next();
+            if (jio.getName().equals(jioName)) {
+                toRemove = jio;
+                break;
+            }
+        }
+        jios.remove(toRemove);
     }
 
     /**

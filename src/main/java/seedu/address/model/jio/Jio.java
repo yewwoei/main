@@ -24,6 +24,8 @@ public class Jio {
     private Username creator;
     private Optional<Name> groupName = Optional.empty();
 
+    public Jio() {}
+
     public Jio(Name name, Date date, Address location, Username creator) {
         this.name = name;
         this.date = date;

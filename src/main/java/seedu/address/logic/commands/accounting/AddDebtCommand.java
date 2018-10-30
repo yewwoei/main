@@ -26,7 +26,7 @@ public class AddDebtCommand extends Command {
             + PREFIX_USERNAME + "DEBTOR\n"
             + PREFIX_AMOUNT + "AMOUNT\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_USERNAME + "Kate Ng"
+            + PREFIX_USERNAME + "Kate Ng "
             + PREFIX_AMOUNT + "6.5";
 
     public static final String MESSAGE_SUCCESS = "A debt request of %2$f SGD to %1$s is sent";

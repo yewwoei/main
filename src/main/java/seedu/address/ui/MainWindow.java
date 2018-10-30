@@ -20,6 +20,7 @@ import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.accounting.Debt;
+import seedu.address.model.group.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 
@@ -41,6 +42,8 @@ public class MainWindow extends UiPart<Stage> {
     private ListPanel<Jio> jioListPanel;
     private ListPanel<Group> groupListPanel;
     private ListPanel<Debt> debtListPanel;
+    private ListPanel<Friendship> friendRequestListPanel;
+    private ListPanel<Friendship> friendListPanel;
     private Config config;
     private UserPrefs prefs;
     private HelpWindow helpWindow;
@@ -307,6 +310,32 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             debtListPanel = new ListPanel<>(logic.getDebtRequestSent());
             featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+        }
+    }
+
+    /**
+     * Updates list panel with login user's received request.
+     */
+    @FXML
+    public void handleFriendRequests() {
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            friendRequestListPanel = new ListPanel<>(logic.getFriendRequestsList());
+            featuresListPanelPlaceholder.getChildren().add(friendRequestListPanel.getRoot());
+        }
+    }
+
+    /**
+     * Updates list panel with login user's received request.
+     */
+    @FXML
+    public void handleFriends() {
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            friendListPanel = new ListPanel<>(logic.getFriendsList());
+            featuresListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
         }
     }
 }

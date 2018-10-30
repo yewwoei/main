@@ -21,6 +21,7 @@ import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.RestaurantPanelSelectionChangedEvent;
 import seedu.address.model.accounting.Debt;
+import seedu.address.model.group.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
@@ -120,6 +121,39 @@ public class BrowserPanel extends UiPart<Region> {
                 debt.getAmount().toDouble(),
                 debt.getDebtStatus(),
                 debt.getDebtId()
+        };
+        String html = MessageFormat.format(sb.toString(), params);
+
+        Platform.runLater(() -> {
+            browser.getEngine().loadContent(html);
+        });
+    }
+
+    /**
+     * Loads a browseDebt HTML file with a background that matches the general theme.
+     */
+    private void loadFriendPage(Friendship friendship) {
+        StringBuilder sb = new StringBuilder();
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEBT_PAGE);
+        try {
+            BufferedInputStream bin = ((BufferedInputStream) defaultPage.getContent());
+            byte[] contents = new byte[1024];
+            int bytesRead = 0;
+            while ((bytesRead = bin.read(contents)) != -1) {
+                sb.append(new String(contents, 0, bytesRead));
+            }
+            bin.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        User friendUser = friendship.getFriendUser();
+        // replace the template with person stuff
+        Object[] params = new Object[] {
+                friendUser.getUsername(),
+                friendUser.getName(),
+                friendUser.getPhone(),
+                friendUser.getEmail()
         };
         String html = MessageFormat.format(sb.toString(), params);
 
@@ -307,7 +341,9 @@ public class BrowserPanel extends UiPart<Region> {
         } else if (event.getNewSelection() instanceof Jio) {
             loadJioPage((Jio) event.getNewSelection());
         } else if (event.getNewSelection() instanceof Group) {
-            loadGroupPage((Group) event.getNewSelection());
+            loadGroupPage((Group)event.getNewSelection());
+        } else if (event.getNewSelection() instanceof Friendship) {
+            loadFriendPage((Friendship)event.getNewSelection());
         }
     }
 

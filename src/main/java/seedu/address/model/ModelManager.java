@@ -87,6 +87,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Model Manager Miscellaneous Methods =+==========================================================
 
+    @Override
     public boolean isCurrentlyLoggedIn() {
         return this.isLoggedIn;
     }
@@ -377,6 +378,16 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public ObservableList<Friendship> getFriendsList() {
+        return FXCollections.observableArrayList(currentUser.getFriends());
+    }
+
+    @Override
+    public ObservableList<Friendship> getFriendRequestsList() {
+        return FXCollections.observableArrayList(currentUser.getFriendRequests());
+    }
+
+    @Override
     public ObservableList<Debt> getDebtList() {
         return FXCollections.observableArrayList(currentUser.getDebts());
     }
@@ -625,6 +636,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void removeJioOfName(Name jioName) {
         requireNonNull(jioName);
         userData.removeJioOfName(jioName);
+        //updateFilteredJioList(PREDICATE_SHOW_ALL_JIOS);
         indicateUserDataChanged();
     }
 
