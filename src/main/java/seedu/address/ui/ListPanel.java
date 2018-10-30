@@ -121,6 +121,7 @@ public class ListPanel<T> extends UiPart<Region> {
                     setGraphic(new DebtCard((Debt) item, getIndex() + 1).getRoot());
                     type = "Debt";
                 }
+
             }
         }
     }

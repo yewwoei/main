@@ -219,7 +219,7 @@ public class BrowserPanel extends UiPart<Region> {
         // replace the template with person stuff
         Object[] params = new Object[] {
                 group.getGroupName(),
-                group.getAcceptedUsers().stream().map(u -> u.getName().toString() + " [" 
+                group.getAcceptedUsers().stream().map(u -> u.getName().toString() + " ["
                         + u.getUsername().toString() + "]")
                         .collect(Collectors.joining("<p></p>")),
                 group.getPendingUsers().stream().map(u -> u.getName().toString() + " ["
@@ -305,9 +305,9 @@ public class BrowserPanel extends UiPart<Region> {
         if (event.getNewSelection() instanceof Debt) {
             loadDebtPage((Debt) event.getNewSelection());
         } else if (event.getNewSelection() instanceof Jio) {
-            loadJioPage((Jio)event.getNewSelection());
+            loadJioPage((Jio) event.getNewSelection());
         } else if (event.getNewSelection() instanceof Group) {
-            loadGroupPage((Group)event.getNewSelection());
+            loadGroupPage((Group) event.getNewSelection());
         }
     }
 

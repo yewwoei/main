@@ -80,6 +80,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Model Manager Miscellaneous Methods =+==========================================================
 
+    @Override
     public boolean isCurrentlyLoggedIn() {
         return this.isLoggedIn;
     }
@@ -606,6 +607,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void removeJioOfName(Name jioName) {
         requireNonNull(jioName);
         userData.removeJioOfName(jioName);
+        //updateFilteredJioList(PREDICATE_SHOW_ALL_JIOS);
         indicateUserDataChanged();
     }
 
