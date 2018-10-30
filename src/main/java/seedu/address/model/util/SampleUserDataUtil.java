@@ -1,5 +1,7 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
+
 import seedu.address.model.Name;
 import seedu.address.model.UserData;
 import seedu.address.model.jio.Jio;
@@ -8,13 +10,13 @@ import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Day;
 import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
+import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.user.Email;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Phone;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
-
-import java.util.ArrayList;
 
 /**
  * Contains utility methods for populating {@code AddressBook} with sample data.
@@ -69,12 +71,26 @@ public class SampleUserDataUtil {
 
     public static UserData getSampleUserData() {
         UserData sampleUd = new UserData();
+        ArrayList<User> debtList = new ArrayList<User>();
         for (User sampleUser : getSampleUsers()) {
             sampleUd.addUser(sampleUser);
+            debtList.add(sampleUser);
         }
         for (Jio sampleJio : getSampleJios()) {
             sampleUd.addJio(sampleJio);
         }
+
+        for (int i = 0; i < debtList.size() - 1; i++){
+            debtList.get(i).addDebt(debtList.get(i+1), new Amount(String.valueOf(i+1)));
+        }
+
+        debtList.get(debtList.size()-1).addDebt(debtList.get(0), new Amount(String.valueOf(3)));
+
+        for (int i = debtList.size() - 1 ; i > 0; i--){
+            debtList.get(i).addDebt(debtList.get(i-1), new Amount(String.valueOf(i)), DebtStatus.ACCEPTED);
+        }
+        debtList.get(0).addDebt(debtList.get(debtList.size()-1), new Amount(String.valueOf(3)), DebtStatus.ACCEPTED);
+
         return sampleUd;
     }
 }
