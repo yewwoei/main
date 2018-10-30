@@ -11,6 +11,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.UserDataChangedEvent;
+import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
 import seedu.address.model.accounting.Debt;
@@ -61,6 +62,11 @@ public class ListPanel<T> extends UiPart<Region> {
         if (type == "Debt") {
             listView.setItems((ObservableList<T>) event.user.getDebts());
         }
+    }
+
+    @Subscribe
+    private void handleUserLoggedOutEvent(UserLoggedOutEvent event) {
+        listView.setItems(null);
     }
 
 
