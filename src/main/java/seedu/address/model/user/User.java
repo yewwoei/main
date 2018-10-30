@@ -674,8 +674,9 @@ public class User {
     /**
      * Adds a restaurantReview to the user's list of restaurantReviews.
      */
-    public void addRestaurantReviewToUser(RestaurantReview newRestaurantReview) {
+    public User addRestaurantReviewToUser(RestaurantReview newRestaurantReview) {
         requireNonNull(newRestaurantReview);
         restaurantReviews.add(newRestaurantReview);
+        return this;
     }
 }

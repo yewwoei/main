@@ -3,22 +3,19 @@ package seedu.address.logic.commands.timetable;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
-import java.util.List;
-
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
-import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Week;
 
 /**
  * Lists the available times to eat for the logged in user during a specified week number.
  */
 public class ListScheduleCommand extends Command {
-    public static final String COMMAND_WORD = "listWeekSchedule";
+    public static final String COMMAND_WORD = "listScheduleForWeek";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists your schedule for the week."
@@ -47,13 +44,9 @@ public class ListScheduleCommand extends Command {
             throw new NotLoggedInCommandException(COMMAND_WORD);
         }
 
-        model.updateDisplayedDateList(weekNumber);
-        String alldates = "";
-        List<Date> allDates = model.getDisplayedDates();
-        for(Date d : allDates) {
-            alldates += d.toString();
-        }
-        return new CommandResult(String.format(MESSAGE_SUCCESS, weekNumber) + alldates);
+        model.displayUserWeekSchedule(weekNumber);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, weekNumber));
     }
 
     @Override

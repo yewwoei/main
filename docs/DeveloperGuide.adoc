@@ -547,13 +547,15 @@ The entire user's `UniqueBusySchedule` is stored in the users.xml file with each
 ==== Timetable Commands
 * `BlockDateCommand` is specific to the logged in user, allowing the current `User` to save a date on his schedule where he is not free. A `BlockDateCommandParser` is used to parse the arguments necessary.
 * `FreeDateCommand` is specific to the logged in user, allowing him to free up dates on his schedule. A `FreeDateCommandParser` is used to parse the arguments necessary.
-* (NOT IMPLEMENTED) `ListScheduleCommand` is specific to the logged in user. The command lists the user's schedule for a given NUS week. A parser is necessary.
+* `ListScheduleForWeek` is specific to the logged in user. The command lists the user's schedule for a given NUS week. A parser is necessary.
 * (NOT IMPLEMENTED) `FindDateCommand` finds common dates to eat between the current user and a list of users he inputs. A parser is necessary.
 
 ==== Restrictions on usage of Timetable commands
 
 Timetable Commands can only be used when the `User` is logged into the MakanBook.
 Exceptions are handled with the `NotLoggedInCommandException` class in the `Logic` component.
+
+The algorithm for finding all the free dates for a user is found inside the UniqueSchedule class.
 
 ==== Low priority extensions
 * (NOT IMPLEMENTED) `AddCalendarCommand` allows block date functionality but just using only a simple google calendar login.
