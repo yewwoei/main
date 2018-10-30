@@ -164,7 +164,7 @@ public class UniqueSchedule {
     public static List<Date> generateFullScheduleForWeek(Week week) {
         List<Date> allWeekDates = new ArrayList<>();
         allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Mon")));
-        allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Tues")));
+        allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Tue")));
         allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Wed")));
         allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Thu")));
         allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Fri")));
