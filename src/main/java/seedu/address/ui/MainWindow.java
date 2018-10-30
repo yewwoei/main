@@ -229,6 +229,19 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
+     * Updates list panel with group requests.
+     */
+    @FXML
+    public void handleGroupRequest() {
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            groupListPanel = new ListPanel<>(logic.getGroupRequestList());
+            featuresListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        }
+    }
+
+    /**
      * Updates list panel with login user's debts.
      */
     @FXML

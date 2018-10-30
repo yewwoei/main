@@ -159,12 +159,6 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Model Manager User Methods ====================================================================
 
     @Override
-    public ObservableList<Group> getGroupList() {
-        ArrayList<Group> grouplist = new ArrayList<>(userData.getGroupHashmap().values());
-        return FXCollections.observableArrayList(grouplist);
-    }
-
-    @Override
     public boolean hasUser(Username username) {
         requireNonNull(username);
         return userData.hasUser(username);
@@ -553,6 +547,17 @@ public class ModelManager extends ComponentManager implements Model {
         User friendUser = userData.getUser(friendUsername);
         currentUser.deleteFriendRequest(friendUser);
         indicateUserDataChanged();
+    }
+
+    @Override
+    public ObservableList<Group> getGroupList() {
+        ArrayList<Group> grouplist = new ArrayList<>(userData.getGroupHashmap().values());
+        return FXCollections.observableArrayList(grouplist);
+    }
+
+    @Override
+    public ObservableList<Group> getGroupRequestList() {
+        return FXCollections.observableArrayList(currentUser.getGroupRequests());
     }
 
     // =================== Timetable methods ===============================

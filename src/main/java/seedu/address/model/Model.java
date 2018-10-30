@@ -97,11 +97,6 @@ public interface Model {
     //=========== Model Manager User Methods =+===================================================================
 
     /**
-     * Returns an unmodifiable view of the group list
-     */
-    ObservableList<Group> getGroupList();
-
-    /**
      * Returns true if a user with the {@code username} exists in User Data.
      */
     boolean hasUser(Username username);
@@ -177,6 +172,13 @@ public interface Model {
     void deleteGroup(Name groupName);
 
     void deleteGroupRequest(Name groupName);
+
+    /**
+     * Returns an unmodifiable view of the group list
+     */
+    ObservableList<Group> getGroupList();
+
+    ObservableList<Group> getGroupRequestList();
 
     //============ Timetable commands ==========================
 

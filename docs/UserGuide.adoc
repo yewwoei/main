@@ -221,13 +221,13 @@ Format: `createJio n/NAME w/WEEK d/DAY h/TIME a/PLACE [g/GROUP NAME]`
 
 Examples:
 
-* `createJio n/MALA!!! w/1 d/mon h/1200 a/FineFood`
+* `createJio n/MALA w/1 d/mon h/1200 a/FineFood`
 * `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
 
 === Joining an existing jio: `joinJio`
 
 Users can join an existing jio to find people to eat with, without having to create one of their own. +
-Format: `joinJio NAME`
+Format: `joinJio n/NAME`
 
 ****
 * User has to indicate the name of the jio.
@@ -235,16 +235,16 @@ Format: `joinJio NAME`
 
 Examples:
 
-* `joinJio MALA!!`
+* `joinJio n/MALA`
 
 === Deleting old jios: `deleteJio`
 
 Users can specify a jio to delete. +
-Format: `deleteJio NAME`
+Format: `deleteJio n/NAME`
 
 Examples:
 
-* `deleteJio MALA!!`
+* `deleteJio n/MALA`
 
 === Adding friends: `addFriend`
 

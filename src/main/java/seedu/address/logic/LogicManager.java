@@ -59,6 +59,11 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
+    public ObservableList<Group> getGroupRequestList() {
+        return model.getGroupRequestList();
+    }
+
+    @Override
     public ObservableList<Jio> getJioList() {
         return model.getJioList();
     }
