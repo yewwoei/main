@@ -26,7 +26,6 @@ public class ListScheduleCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed your week: %1$s schedule below.";
 
-    // TODO
     private final Week weekNumber;
 
     /**
