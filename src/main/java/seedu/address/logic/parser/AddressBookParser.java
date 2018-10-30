@@ -44,6 +44,7 @@ import seedu.address.logic.commands.jio.JoinJioCommand;
 import seedu.address.logic.commands.jio.ListJioCommand;
 import seedu.address.logic.commands.timetable.BlockDateCommand;
 import seedu.address.logic.commands.timetable.FreeDateCommand;
+import seedu.address.logic.commands.timetable.ListScheduleCommand;
 import seedu.address.logic.commands.user.DisplayProfileCommand;
 import seedu.address.logic.commands.user.LoginCommand;
 import seedu.address.logic.commands.user.LogoutCommand;
