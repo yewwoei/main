@@ -10,6 +10,7 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Rating;
@@ -154,6 +155,10 @@ public interface Model {
     void deleteFriend(Username friendUsername);
 
     void deleteFriendRequest(Username friendUsername);
+
+    ObservableList<Friendship> getFriendsList();
+
+    ObservableList<Friendship> getFriendRequestsList();
 
     boolean hasGroup(Name group);
 
