@@ -15,7 +15,7 @@ import seedu.address.model.timetable.Week;
  * Lists the available times to eat for the logged in user during a specified week number.
  */
 public class ListScheduleCommand extends Command {
-    public static final String COMMAND_WORD = "listWeekSchedule";
+    public static final String COMMAND_WORD = "listScheduleForWeek";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists your schedule for the week."
