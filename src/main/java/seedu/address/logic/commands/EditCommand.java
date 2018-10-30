@@ -23,6 +23,7 @@ import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.restaurant.Reviews;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -96,8 +97,8 @@ public class EditCommand extends Command {
         Phone updatedPhone = editRestaurantDescriptor.getPhone().orElse(restaurantToEdit.getPhone());
         Address updatedAddress = editRestaurantDescriptor.getAddress().orElse(restaurantToEdit.getAddress());
         Set<Tag> updatedTags = editRestaurantDescriptor.getTags().orElse(restaurantToEdit.getTags());
-
-        return new Restaurant(updatedName, updatedPhone, updatedAddress, updatedTags);
+        Reviews reviews = restaurantToEdit.getReviews();
+        return new Restaurant(updatedName, updatedPhone, updatedAddress, updatedTags, reviews);
     }
 
     @Override

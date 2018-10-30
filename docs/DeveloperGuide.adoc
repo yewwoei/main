@@ -217,10 +217,6 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Restaurant>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-[NOTE]
-As a more OOP model, we can store a `Tag` list in `Address Book`, which `Restaurant` can reference. This would allow `Address Book` to only require one `Tag` object per unique `Tag`, instead of each `Restaurant` needing their own `Tag` object. An example of how such a model may look like is given below. +
- +
-image:ModelClassBetterOopDiagram.png[width="800"]
 
 [[Design-Storage]]
 === Storage component
@@ -266,12 +262,39 @@ Should there be a reset of Users, the restaurant data would remain unaffected.
 ** Pros: Easier to implement.
 ** Cons: Difficult to maintain and scale. All sorts of data relating to users will be stored together with restaurants.
 
+=== Write Review Feature
+==== Current Implementation
+The write review feature allows a user to write a review about a restaurant. This review
+is available for all users in the Makan Book to view. This review is then stored internally into
+the restaurant addressbook and the current user. When the command write review is called and executed,
+the model manager creates an UserReview (to be stored in restaurant addressbook) and a RestaurantReview
+(to be stored into User) as seen in the sequence diagram below.
+
+image::WriteReviewSequenceDiagram.png[width="800"]
+
+Additionally, a restaurant contains an overall rating, the average rating of all the reviews it has.
+The activity diagram below describes the process of updating the restaurant's overall rating.
+
+image::AddingUserReviewToRestaurantActivityDiagram.png[width="800"]
+
 ==== Design Considerations
-===== Aspect: The Possibility for abuse
-The current implementation makes it possible any users to abuse the restaurant addressbook.
-Users can add, edit and delete restaurants for all users. In the upcoming implementation, we are lookng to restrict it
-to only users who log in. Additionally, an administrator account can be created to approve of such additions by users.
-These will be in the future versions of the Makan Book.
+===== Aspect: Where to store User Review
+
+* **Alternative 1 (current choice):** Saves the review in both User and restaurant addressbook.
+** Pros: Greater abstraction and encapsulation of Data
+** Pros: Ease of displaying the list of reviews that a specific User has written
+** Pros: Ease of displaying the list of reviews of a specific Restaurant
+** Pros: Ease of updating the Overall Rating of a Restaurant
+** Cons: Contains a number of repeated code. +
+*** E.g. UserReview and RestaurantReview are identical except that UserReview stores the Restaurant Name 
+while RestaurantReview stores the Username of the User. 
+
+* **Alternative 2:** Saves the review in restaurant adddressbook.
+** Pros: Ease of Implementation (Significantly fewer classes)
+** Cons: Cluttered Storage of Data making it difficult to maintain and scale
+
+=== Display Profile Feature
+
 
 // tag::undoredo[]
 === Undo/Redo feature

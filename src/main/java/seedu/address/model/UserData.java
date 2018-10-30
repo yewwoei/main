@@ -60,11 +60,6 @@ public class UserData {
     public User getUser(Username username) {
         return usernameUserHashMap.get(username);
     }
-
-    public void removeUser(User user) {
-        usernameUserHashMap.remove(user.getUsername());
-    }
-
     //=========== Friend methods ============================================================================
     public boolean hasGroup(Name groupName) {
         return groupHashMap.containsKey(groupName);
@@ -127,8 +122,14 @@ public class UserData {
             return false;
         }
         UserData otherUserData = (UserData) other;
+        final boolean[] equivalent = {true};
+        usernameUserHashMap.forEach((k, v) -> {
+            if (!v.equals(otherUserData.getUser(k))) {
+                equivalent[0] = false;
+            }
+        });
         return other == this // short circuit if same object
-                || usernameUserHashMap.equals(otherUserData.getUsernameUserHashMap());
+                || equivalent[0];
     }
 
     @Override

@@ -3,9 +3,9 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.commons.core.Messages.MESSAGE_RESTAURANTS_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
-import static seedu.address.testutil.TypicalRestaurants.BENSON;
-import static seedu.address.testutil.TypicalRestaurants.CARL;
-import static seedu.address.testutil.TypicalRestaurants.DANIEL;
+import static seedu.address.testutil.TypicalRestaurants.RESTAURANT_B;
+import static seedu.address.testutil.TypicalRestaurants.RESTAURANT_C;
+import static seedu.address.testutil.TypicalRestaurants.RESTAURANT_D;
 import static seedu.address.testutil.TypicalRestaurants.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
          */
         String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
         Model expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, BENSON, DANIEL); // first names of Benson and Daniel are "Meier"
+        ModelHelper.setFilteredList(expectedModel, RESTAURANT_B, RESTAURANT_D); // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -44,13 +44,13 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         /* Case: find restaurant where restaurant list is not displaying the restaurant we are finding
         -> 1 restaurant found */
         command = FindCommand.COMMAND_WORD + " Carl";
-        ModelHelper.setFilteredList(expectedModel, CARL);
+        ModelHelper.setFilteredList(expectedModel, RESTAURANT_C);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find multiple restaurants in address book, 2 keywords -> 2 restaurants found */
         command = FindCommand.COMMAND_WORD + " Benson Daniel";
-        ModelHelper.setFilteredList(expectedModel, BENSON, DANIEL);
+        ModelHelper.setFilteredList(expectedModel, RESTAURANT_B, RESTAURANT_D);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -83,10 +83,10 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: find same restaurants in address book after deleting 1 of them -> 1 restaurant found */
         executeCommand(DeleteCommand.COMMAND_WORD + " 1");
-        assertFalse(getModel().getAddressBook().getRestaurantList().contains(BENSON));
+        assertFalse(getModel().getAddressBook().getRestaurantList().contains(RESTAURANT_B));
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, DANIEL);
+        ModelHelper.setFilteredList(expectedModel, RESTAURANT_D);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -113,17 +113,17 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         assertSelectedCardUnchanged();
 
         /* Case: find phone number of restaurant in address book -> 0 restaurants found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getPhone().value;
+        command = FindCommand.COMMAND_WORD + " " + RESTAURANT_D.getPhone().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find address of restaurant in address book -> 0 restaurants found */
-        command = FindCommand.COMMAND_WORD + " " + DANIEL.getAddress().value;
+        command = FindCommand.COMMAND_WORD + " " + RESTAURANT_D.getAddress().value;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
         /* Case: find tags of restaurant in address book -> 0 restaurants found */
-        List<Tag> tags = new ArrayList<>(DANIEL.getTags());
+        List<Tag> tags = new ArrayList<>(RESTAURANT_D.getTags());
         command = FindCommand.COMMAND_WORD + " " + tags.get(0).tagName;
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
@@ -131,9 +131,9 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         /* Case: find while a restaurant is selected -> selected card deselected */
         showAllRestaurants();
         selectRestaurant(Index.fromOneBased(1));
-        assertFalse(getRestaurantListPanel().getHandleToSelectedCard().getName().equals(DANIEL.getName().fullName));
+        assertFalse(getRestaurantListPanel().getHandleToSelectedCard().getName().equals(RESTAURANT_D.getName().fullName));
         command = FindCommand.COMMAND_WORD + " Daniel";
-        ModelHelper.setFilteredList(expectedModel, DANIEL);
+        ModelHelper.setFilteredList(expectedModel, RESTAURANT_D);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardDeselected();
 
@@ -141,7 +141,7 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         deleteAllRestaurants();
         command = FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER;
         expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, DANIEL);
+        ModelHelper.setFilteredList(expectedModel, RESTAURANT_D);
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 

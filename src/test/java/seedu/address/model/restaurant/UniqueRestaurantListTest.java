@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalRestaurants.ALICE;
+import static seedu.address.testutil.TypicalRestaurants.RESTAURANT_A;
 import static seedu.address.testutil.TypicalRestaurants.BOB;
 
 import java.util.Arrays;
@@ -34,19 +34,19 @@ public class UniqueRestaurantListTest {
 
     @Test
     public void contains_restaurantNotInList_returnsFalse() {
-        assertFalse(uniqueRestaurantList.contains(ALICE));
+        assertFalse(uniqueRestaurantList.contains(RESTAURANT_A));
     }
 
     @Test
     public void contains_restaurantInList_returnsTrue() {
-        uniqueRestaurantList.add(ALICE);
-        assertTrue(uniqueRestaurantList.contains(ALICE));
+        uniqueRestaurantList.add(RESTAURANT_A);
+        assertTrue(uniqueRestaurantList.contains(RESTAURANT_A));
     }
 
     @Test
     public void contains_restaurantWithSameIdentityFieldsInList_returnsTrue() {
-        uniqueRestaurantList.add(ALICE);
-        Restaurant editedAlice = new RestaurantBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        uniqueRestaurantList.add(RESTAURANT_A);
+        Restaurant editedAlice = new RestaurantBuilder(RESTAURANT_A).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueRestaurantList.contains(editedAlice));
     }
@@ -59,44 +59,44 @@ public class UniqueRestaurantListTest {
 
     @Test
     public void add_duplicateRestaurant_throwsDuplicateRestaurantException() {
-        uniqueRestaurantList.add(ALICE);
+        uniqueRestaurantList.add(RESTAURANT_A);
         thrown.expect(DuplicateRestaurantException.class);
-        uniqueRestaurantList.add(ALICE);
+        uniqueRestaurantList.add(RESTAURANT_A);
     }
 
     @Test
     public void setRestaurant_nullTargetRestaurant_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        uniqueRestaurantList.setRestaurant(null, ALICE);
+        uniqueRestaurantList.setRestaurant(null, RESTAURANT_A);
     }
 
     @Test
     public void setRestaurant_nullEditedRestaurant_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        uniqueRestaurantList.setRestaurant(ALICE, null);
+        uniqueRestaurantList.setRestaurant(RESTAURANT_A, null);
     }
 
     @Test
     public void setRestaurant_targetRestaurantNotInList_throwsRestaurantNotFoundException() {
         thrown.expect(RestaurantNotFoundException.class);
-        uniqueRestaurantList.setRestaurant(ALICE, ALICE);
+        uniqueRestaurantList.setRestaurant(RESTAURANT_A, RESTAURANT_A);
     }
 
     @Test
     public void setRestaurant_editedRestaurantIsSameRestaurant_success() {
-        uniqueRestaurantList.add(ALICE);
-        uniqueRestaurantList.setRestaurant(ALICE, ALICE);
+        uniqueRestaurantList.add(RESTAURANT_A);
+        uniqueRestaurantList.setRestaurant(RESTAURANT_A, RESTAURANT_A);
         UniqueRestaurantList expectedUniqueRestaurantList = new UniqueRestaurantList();
-        expectedUniqueRestaurantList.add(ALICE);
+        expectedUniqueRestaurantList.add(RESTAURANT_A);
         assertEquals(expectedUniqueRestaurantList, uniqueRestaurantList);
     }
 
     @Test
     public void setRestaurant_editedRestaurantHasSameIdentity_success() {
-        uniqueRestaurantList.add(ALICE);
-        Restaurant editedAlice = new RestaurantBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        uniqueRestaurantList.add(RESTAURANT_A);
+        Restaurant editedAlice = new RestaurantBuilder(RESTAURANT_A).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
                 .build();
-        uniqueRestaurantList.setRestaurant(ALICE, editedAlice);
+        uniqueRestaurantList.setRestaurant(RESTAURANT_A, editedAlice);
         UniqueRestaurantList expectedUniqueRestaurantList = new UniqueRestaurantList();
         expectedUniqueRestaurantList.add(editedAlice);
         assertEquals(expectedUniqueRestaurantList, uniqueRestaurantList);
@@ -104,8 +104,8 @@ public class UniqueRestaurantListTest {
 
     @Test
     public void setRestaurant_editedRestaurantHasDifferentIdentity_success() {
-        uniqueRestaurantList.add(ALICE);
-        uniqueRestaurantList.setRestaurant(ALICE, BOB);
+        uniqueRestaurantList.add(RESTAURANT_A);
+        uniqueRestaurantList.setRestaurant(RESTAURANT_A, BOB);
         UniqueRestaurantList expectedUniqueRestaurantList = new UniqueRestaurantList();
         expectedUniqueRestaurantList.add(BOB);
         assertEquals(expectedUniqueRestaurantList, uniqueRestaurantList);
@@ -113,10 +113,10 @@ public class UniqueRestaurantListTest {
 
     @Test
     public void setRestaurant_editedRestaurantHasNonUniqueIdentity_throwsDuplicateRestaurantException() {
-        uniqueRestaurantList.add(ALICE);
+        uniqueRestaurantList.add(RESTAURANT_A);
         uniqueRestaurantList.add(BOB);
         thrown.expect(DuplicateRestaurantException.class);
-        uniqueRestaurantList.setRestaurant(ALICE, BOB);
+        uniqueRestaurantList.setRestaurant(RESTAURANT_A, BOB);
     }
 
     @Test
@@ -128,13 +128,13 @@ public class UniqueRestaurantListTest {
     @Test
     public void remove_restaurantDoesNotExist_throwsRestaurantNotFoundException() {
         thrown.expect(RestaurantNotFoundException.class);
-        uniqueRestaurantList.remove(ALICE);
+        uniqueRestaurantList.remove(RESTAURANT_A);
     }
 
     @Test
     public void remove_existingRestaurant_removesRestaurant() {
-        uniqueRestaurantList.add(ALICE);
-        uniqueRestaurantList.remove(ALICE);
+        uniqueRestaurantList.add(RESTAURANT_A);
+        uniqueRestaurantList.remove(RESTAURANT_A);
         UniqueRestaurantList expectedUniqueRestaurantList = new UniqueRestaurantList();
         assertEquals(expectedUniqueRestaurantList, uniqueRestaurantList);
     }
@@ -147,7 +147,7 @@ public class UniqueRestaurantListTest {
 
     @Test
     public void setRestaurants_uniqueRestaurantList_replacesOwnListWithProvidedUniqueRestaurantList() {
-        uniqueRestaurantList.add(ALICE);
+        uniqueRestaurantList.add(RESTAURANT_A);
         UniqueRestaurantList expectedUniqueRestaurantList = new UniqueRestaurantList();
         expectedUniqueRestaurantList.add(BOB);
         uniqueRestaurantList.setRestaurants(expectedUniqueRestaurantList);
@@ -162,7 +162,7 @@ public class UniqueRestaurantListTest {
 
     @Test
     public void setRestaurants_list_replacesOwnListWithProvidedList() {
-        uniqueRestaurantList.add(ALICE);
+        uniqueRestaurantList.add(RESTAURANT_A);
         List<Restaurant> restaurantList = Collections.singletonList(BOB);
         uniqueRestaurantList.setRestaurants(restaurantList);
         UniqueRestaurantList expectedUniqueRestaurantList = new UniqueRestaurantList();
@@ -172,7 +172,7 @@ public class UniqueRestaurantListTest {
 
     @Test
     public void setRestaurants_listWithDuplicateRestaurants_throwsDuplicateRestaurantException() {
-        List<Restaurant> listWithDuplicateRestaurants = Arrays.asList(ALICE, ALICE);
+        List<Restaurant> listWithDuplicateRestaurants = Arrays.asList(RESTAURANT_A, RESTAURANT_A);
         thrown.expect(DuplicateRestaurantException.class);
         uniqueRestaurantList.setRestaurants(listWithDuplicateRestaurants);
     }

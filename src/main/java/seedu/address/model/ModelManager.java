@@ -15,6 +15,7 @@ import javafx.util.Pair;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.DisplayProfileEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
@@ -23,9 +24,13 @@ import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.restaurant.UserReview;
+import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.user.Password;
+import seedu.address.model.user.RestaurantReview;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
@@ -127,6 +132,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void displayProfile() {
+        raise(new DisplayProfileEvent(currentUser));
+    }
+
     //=========== Filtered Restaurant List Accessors =============================================================
 
     /**
@@ -194,6 +204,31 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     //================ Debt methods =================================
+    @Override
+    public void addUserReview(Restaurant restaurant, Rating rating, WrittenReview writtenReview) {
+        UserReview newUserReview = new UserReview(currentUser.getUsername(), rating, writtenReview);
+        // Add to AddressBook
+        versionedAddressBook.addUserReviewToRestaurant(restaurant, newUserReview);
+        indicateAddressBookChanged();
+        // Add to UserData
+        RestaurantReview newRestauratnReview = new RestaurantReview(restaurant.getName(), rating, writtenReview);
+        currentUser.addRestaurantReviewToUser(newRestauratnReview);
+        indicateUserDataChanged();
+    }
+
+    //=========== Friendship methods =============================================================================
+    @Override
+    public boolean hasUsernameSentRequest(Username friendUsername) {
+        User friend = userData.getUser(friendUsername);
+        Username myUsername = currentUser.getUsername();
+        List<Friendship> friendRequestLists = friend.getFriendRequests();
+        for (Friendship f: friendRequestLists) {
+            if (f.getFriendUsername().equals(myUsername)) {
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
     * Returns whether there is a debtId
@@ -241,6 +276,17 @@ public class ModelManager extends ComponentManager implements Model {
         if (check) {
             if (currentUser.getDebts().get(count).getDebtor().getUsername().equals(user)
                     || currentUser.getDebts().get(count).getCreditor().getUsername().equals(user)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean hasUsernameFriendRequest(Username friendUsername) {
+        List<Friendship> friendRequestsLists = currentUser.getFriendRequests();
+        for (Friendship f: friendRequestsLists) {
+            if (f.getFriendUsername().equals(friendUsername)) {
                 return true;
             }
         }
@@ -296,7 +342,6 @@ public class ModelManager extends ComponentManager implements Model {
         User debtor = userData.getUser(debtorUsername);
         currentUser.addDebt(debtor, amount);
         indicateUserDataChanged();
-
     }
 
     @Override

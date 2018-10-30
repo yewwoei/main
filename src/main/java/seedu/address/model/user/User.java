@@ -42,6 +42,7 @@ public class User {
     private final List<Group> groups = new ArrayList<>();
     private final UniqueDebtList debts = new UniqueDebtList();
     private final UniqueBusySchedule busySchedule;
+    private final List<RestaurantReview> restaurantReviews = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -94,6 +95,10 @@ public class User {
         return busySchedule;
     }
 
+    public List<RestaurantReview> getRestaurantReviews() {
+        return restaurantReviews;
+    }
+
     /**
      * Returns true if both users of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two users.
@@ -123,13 +128,14 @@ public class User {
         }
 
         User otherUser = (User) other;
-        return otherUser.getUsername().equals(getUsername());
+        return otherUser.getUsername().equals(getUsername())
+                && getRestaurantReviews().equals(otherUser.getRestaurantReviews());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(username, password, name, phone, email);
+        return Objects.hash(username, password, name, phone, email, restaurantReviews);
     }
 
     @Override
@@ -621,5 +627,13 @@ public class User {
     public boolean hasDateOnSchedule(Date date) {
         requireNonNull(date);
         return busySchedule.contains(date);
+    }
+
+    /**
+     * Adds a restaurantReview to the user's list of restaurantReviews.
+     */
+    public void addRestaurantReviewToUser(RestaurantReview newRestaurantReview) {
+        requireNonNull(newRestaurantReview);
+        restaurantReviews.add(newRestaurantReview);
     }
 }

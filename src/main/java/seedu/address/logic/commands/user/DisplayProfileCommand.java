@@ -11,23 +11,21 @@ import seedu.address.model.Model;
 /**
  * Lists the user's visited restaurants.
  */
-public class ListVisitedCommand extends Command {
-    public static final String COMMAND_WORD = "listVisited";
+public class DisplayProfileCommand extends Command {
+    public static final String COMMAND_WORD = "displayProfile";
 
-    // TODO
-    public static final String MESSAGE_USAGE = null;
-
-    // TODO
-    public static final String MESSAGE_SUCCESS = null;
-
+    public static final String MESSAGE_SUCCESS = "Displaying User Profile";
+    public static final String MESSAGE_ALREADY_LOGGEDIN = "User is already logged in";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        // TODO
         requireNonNull(model);
 
-        return null;
+        if (!model.isCurrentlyLoggedIn()) {
+            throw new CommandException(MESSAGE_ALREADY_LOGGEDIN);
+        }
+
+        model.displayProfile();
+        return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
-
 }
-

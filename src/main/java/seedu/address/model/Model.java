@@ -11,7 +11,9 @@ import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -73,6 +75,11 @@ public interface Model {
      */
     void updateRestaurant(Restaurant target, Restaurant editedRestaurant);
 
+    /**
+     * Displays the Profile of a User.
+     */
+    void displayProfile();
+
     //=========== Filtered Restaurant List Accessors =============================================================
 
     /**
@@ -95,19 +102,17 @@ public interface Model {
     ObservableList<Group> getGroupList();
 
     /**
-     * Returns true if a user with the same identity as {@code user} exists in the User Data.
+     * Returns true if a user with the {@code username} exists in User Data.
      */
     boolean hasUser(Username username);
 
     /**
-     * Checks that the {@code password} matches that
-     * must not be the same as another existing user in the UserData.
+     * Returns true if the {@code password} matches the password of the user with {@code username}.
      */
     boolean verifyLogin(Username username, Password password);
 
     /**
-     * Adds the given user.
-     * {@code user} must not already exist in the User Data.
+     * Adds the given {@code user}. The user must not already exist in the User Data.
      */
     void addUser(User user);
 
@@ -123,13 +128,23 @@ public interface Model {
      */
     void loginUser(Username username);
 
+    /**
+     * Allows a current User to logout of their account.
+     */
     void logoutUser();
+
+    /**
+     * Creates a UserReview and a RestaurantReview for storage into both RestaurantAddressBook and UserData.
+     */
+    void addUserReview(Restaurant restaurant, Rating rating, WrittenReview writtenReview);
+
+    //=========== Model Manager User Methods =+===================================================================
 
     boolean hasUsernameSentRequest(Username friendUsername);
 
     boolean hasUsernameFriend(Username friendUsername);
 
-    boolean hasUsernameFriendRequest(Username friendusername);
+    boolean hasUsernameFriendRequest(Username friendUsername);
 
     void addFriend(Username friendUsername);
 

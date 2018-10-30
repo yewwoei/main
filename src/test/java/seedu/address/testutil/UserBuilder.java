@@ -4,8 +4,13 @@ import seedu.address.model.Name;
 import seedu.address.model.user.Email;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Phone;
+import seedu.address.model.user.RestaurantReview;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * A utility class to help with building User objects.
@@ -23,6 +28,7 @@ public class UserBuilder {
     private Name name;
     private Phone phone;
     private Email email;
+    private List<RestaurantReview> restaurantReviewList;
 
     public UserBuilder() {
         username = new Username(DEFAULT_USERNAME);
@@ -30,6 +36,7 @@ public class UserBuilder {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         email = new Email(DEFAULT_EMAIL);
+        restaurantReviewList = new ArrayList<>();
     }
 
     /**
@@ -83,8 +90,20 @@ public class UserBuilder {
         return this;
     }
 
+    /**
+     * Adds the {@code Reviews} to the {@code User} that we are building.
+     */
+    public UserBuilder withReviews(RestaurantReview...restaurantReviews) {
+        this.restaurantReviewList.addAll(Arrays.asList(restaurantReviews));
+        return this;
+    }
+
     public User build() {
-        return new User(username, password, name, phone, email);
+        User toReturn = new User(username, password, name, phone, email);
+        for (RestaurantReview restaurantReview: restaurantReviewList) {
+            toReturn.addRestaurantReviewToUser(restaurantReview);
+        }
+        return toReturn;
     }
 
 }
