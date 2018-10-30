@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -17,6 +16,7 @@ import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.DisplayProfileEvent;
+import seedu.address.commons.events.model.DisplayWeekScheduleEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.model.accounting.Amount;
@@ -42,6 +42,7 @@ import seedu.address.model.user.Username;
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager extends ComponentManager implements Model {
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Restaurant> filteredRestaurants;
@@ -52,13 +53,6 @@ public class ModelManager extends ComponentManager implements Model {
     private boolean isLoggedIn = false;
     private User currentUser = null;
 
-    /**
-     *
-     */
-
-    public List<Date> getDisplayedDates() {
-        return this.displayedDates;
-    }
     /**
      * Initializes a ModelManager with the given addressBook and userPrefs.
      */
@@ -606,17 +600,27 @@ public class ModelManager extends ComponentManager implements Model {
         indicateUserDataChanged();
     }
 
-    @Override
-    public void updateDisplayedDateList(Week weekNumber) {
-        requireNonNull(weekNumber);
-        this.displayedDates = currentUser.getFreeDatesForWeek(weekNumber);
-
-    }
 
     @Override
     public boolean hasDateForCurrentUser(Date date) {
         requireNonNull(date);
         return currentUser.hasDateOnSchedule(date);
+    }
+
+    @Override
+    public void displayUserWeekSchedule(Week weekNumber) {
+        updateDisplayedDatesUserWeek(weekNumber);
+        displayWeekSchedule(displayedDates);
+    }
+
+    private void updateDisplayedDatesUserWeek(Week weekNumber) {
+        requireNonNull(weekNumber);
+        this.displayedDates = currentUser.getFreeDatesForWeek(weekNumber);
+
+    }
+
+    private void displayWeekSchedule(List<Date> dates) {
+        raise(new DisplayWeekScheduleEvent(dates));
     }
 
     private void resetDisplayedDates() {
