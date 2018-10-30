@@ -83,11 +83,15 @@ public class UserData {
         jios.add(jio);
     }
 
+    /**
+     * Removes jio with the specified name.
+     * @param jioName name of jio
+     */
     public void removeJioOfName(Name jioName) {
         //jios.removeIf(jio -> jio.getName().equals(jioName));
         Jio toRemove = new Jio();
         Iterator<Jio> iterator = jios.iterator();
-        while(iterator.hasNext()) {
+        while (iterator.hasNext()) {
             Jio jio = iterator.next();
             if (jio.getName().equals(jioName)) {
                 toRemove = jio;

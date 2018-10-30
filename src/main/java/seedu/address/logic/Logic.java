@@ -8,7 +8,6 @@ import seedu.address.model.accounting.Debt;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
-import seedu.address.model.user.User;
 
 /**
  * API of the Logic component
