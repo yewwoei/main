@@ -1,6 +1,7 @@
 package seedu.address.model;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.group.Group;
@@ -83,7 +84,17 @@ public class UserData {
     }
 
     public void removeJioOfName(Name jioName) {
-        jios.asUnmodifiableObservableList().removeIf(jio -> jio.getName().equals(jioName));
+        //jios.removeIf(jio -> jio.getName().equals(jioName));
+        Jio toRemove = new Jio();
+        Iterator<Jio> iterator = jios.iterator();
+        while(iterator.hasNext()) {
+            Jio jio = iterator.next();
+            if (jio.getName().equals(jioName)) {
+                toRemove = jio;
+                break;
+            }
+        }
+        jios.remove(toRemove);
     }
 
     /**

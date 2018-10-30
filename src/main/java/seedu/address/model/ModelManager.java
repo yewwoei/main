@@ -607,6 +607,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void removeJioOfName(Name jioName) {
         requireNonNull(jioName);
         userData.removeJioOfName(jioName);
+        //updateFilteredJioList(PREDICATE_SHOW_ALL_JIOS);
         indicateUserDataChanged();
     }
 
