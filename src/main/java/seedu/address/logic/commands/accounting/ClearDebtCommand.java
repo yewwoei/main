@@ -34,6 +34,7 @@ public class ClearDebtCommand extends Command {
     public static final String MESSAGE_NO_DEBT_BETWEEN = "There are no debt between you and input user";
     public static final String MESSAGE_INVALID_AMOUNT = "Input amount must be less than or equal to the debt amount";
     public static final String MESSAGE_NOT_ALLOWED = "You are not allowed to clear this debt.";
+    public static final String MESSAGE_LESS_THAN_ZERO = "Input amount should be larger than zero.";
     private final Username debtor;
     private final Amount amount;
 
@@ -62,6 +63,9 @@ public class ClearDebtCommand extends Command {
         }
         if (model.isSameAsCurrentUser(debtor)) {
             throw new CommandException(MESSAGE_NOT_ALLOWED);
+        }
+        if (!(amount.toDouble() > 0)) {
+            throw new CommandException(MESSAGE_LESS_THAN_ZERO);
         }
         model.clearDebt(debtor, amount);
         return new CommandResult(String.format(MESSAGE_SUCCESS, debtor, amount.toDouble()));

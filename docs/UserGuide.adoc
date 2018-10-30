@@ -221,13 +221,13 @@ Format: `createJio n/NAME w/WEEK d/DAY h/TIME a/PLACE [g/GROUP NAME]`
 
 Examples:
 
-* `createJio n/MALA!!! w/1 d/mon h/1200 a/FineFood`
+* `createJio n/MALA w/1 d/mon h/1200 a/FineFood`
 * `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
 
 === Joining an existing jio: `joinJio`
 
 Users can join an existing jio to find people to eat with, without having to create one of their own. +
-Format: `joinJio NAME`
+Format: `joinJio n/NAME`
 
 ****
 * User has to indicate the name of the jio.
@@ -235,48 +235,57 @@ Format: `joinJio NAME`
 
 Examples:
 
-* `joinJio MALA!!`
+* `joinJio n/MALA`
 
 === Deleting old jios: `deleteJio`
 
 Users can specify a jio to delete. +
-Format: `deleteJio NAME`
+Format: `deleteJio n/NAME`
 
 Examples:
 
-* `deleteJio MALA!!`
+* `deleteJio n/MALA`
 
 === Adding friends: `addFriend`
 
 A User will send a friend request to another User who will then have to accept the friend request. +
-Format: `addFriend USERNAME`
+Format: `addFriend u/USERNAME`
 
 Examples:
 
-* `addFriend Meena567`
+* `addFriend u/Meena567`
 
 === Accept friend request: `acceptFriend`
 
 A User can accept a friend request of another User so that the pair of them can become friends. +
-Format: `acceptFriend NAME`
+Format: `acceptFriend u/NAME`
 
 Examples:
 
-* `acceptFriend Meena567`
+* `acceptFriend u/Meena567`
 
 === Delete friend request: `deleteFriendRequest`
 
 A User can delete friend request of another User whom they might not know. +
-Format: `deleteFriendRequest USERNAME`
+Format: `deleteFriendRequest u/USERNAME`
 
 Examples:
 
-* `deleteFriendRequest Meena567`
+* `deleteFriendRequest u/Meena567`
+
+=== Delete friend: `deleteFriend`
+
+A User can delete friend whom they may no longer want to be friends with. +
+Format: `deleteFriend u/USERNAME`
+
+Examples:
+
+* `deleteFriend u/Meena567`
 
 === Adding groups: `addGroup`
 
-A User will create a group and send out invitations to all the other users, which they will then have to accept to join the group.  +
-Format: `addGroup GROUPNAME [Users… USERNAMES]`
+A User will create a group by specifying the group name.  +
+Format: `addGroup g/GROUPNAME`
 
 ****
 * Every group will automatically add the user creating the group.
@@ -284,40 +293,43 @@ Format: `addGroup GROUPNAME [Users… USERNAMES]`
 
 Examples:
 
-* `addGroup onlyMe`
-* `addGroup CS2103, chelchia, evanmok2401, katenhy, yewwoei`
+* `addGroup g/CS2103`
+
+=== Adding members: `addMembers`
+
+A User will create a group and send out invitations to all the other users, which they will then have to accept to join the group.  +
+Format: `addGroup u/GROUPNAME [Users… u/USERNAMES]`
+
+Examples:
+
+* `addMembers CS2103 u/chelchia u/evanmok2401 u/katenhy u/yewwoei`
 
 === Accepting group requests: `acceptGroup`
 
 A User can accept the invitation to join a group. +
-Format: `acceptGroup GROUPNAME`
+Format: `acceptGroup g/GROUPNAME`
 
 Examples:
 
-* `acceptGroup CS2103`
+* `acceptGroup g/CS2103`
 
 === Deleting group requests: `deleteGroupRequest`
 
 A User can choose to delete the group request should they not want to join the group. +
-Format: `deleteGroupRequest GROUPNAME`
+Format: `deleteGroupRequest g/GROUPNAME`
 
 Examples:
 
-* `deleteGroupRequest CS2103`
+* `deleteGroupRequest g/CS2103`
 
 === Deleting groups: `deleteGroup`
 
 A User can leave a group and they will be removed from the group. +
-Format: `deleteGroup GROUPNAME`
+Format: `deleteGroup g/GROUPNAME`
 
 Examples:
 
-* `deleteGroup CS2103`
-
-=== Recommend mutual friends: `findMutualFriends`
-
-A User can find other users based on their mutual friends. +
-Format: `findMutualFriends`
+* `deleteGroup g/CS2103`
 
 ===  Block unavailable timeslot manually: `blockTime`
 
@@ -384,39 +396,54 @@ Examples:
 
 ===  Sent add debt request: `addDebt`
 
-A user will send a debt request to another user with specific amount. +
-Format: `addDebt USERNAME AMOUNT`
+User(Creditor) send a debt request to another user with specific amount.
+Record will be created between two users with a `Pending` status. +
+Format: `addDebt u/USERNAME amt/AMOUNT`
 
 Examples:
 
-* `addDebt Kate123 4.30`
+* `addDebt u/Kate123 amt/4.30`
+
+=== Sent add debt request to a group `addGroupDebt`
+
+User(Creditor) send a debt request to all other users in the group with specific amount.
+with amount will split equally to everyone in the group.
+Record will be created between with a `Pending` status. +
+Format: `addDebt u/USERNAME amt/AMOUNT`
+
+Examples:
+
+* `addDebt u/Kate123 amt/4.30`
 
 ===  Sent clear debt request: `clearDebt`
 
-A user can send a clear request to another user to clear the debt and the amount will be balanced off. +
-Format: `clearDebt NAME AMOUNT`
+User(Creditor) clear amount between users. If the amount is equal to the debt,
+the status will change to `Cleared`. Otherwise, the amount will be balanced off from the debt. +
+Format: `clearDebt u/NAME amt/AMOUNT`
 
 Examples:
 
-* `clearDebt Kate123 4.30`
+* `clearDebt u/Kate123 amt/4.30`
 
 ===  Accept debt request: `acceptDebtRequest`
 
-A user can accept (add or clear) request from another user, then a record will be created to both of their account with the each other name, amount, and request ID. +
-Format: `acceptDebtRequest NAME REQUESTID`
+User(Debtor) accept request from another user(Creditor). The debt status will change
+ from `Pending` to `Accepted`. If there are any other accepted debt between this two
+ users, the debt will balanced off as one debt record. +
+Format: `acceptDebtRequest u/NAME amt/AMOUNT id/ID`
 
 Examples:
 
-* `acceptDebtRequest Kate123 hxas78`
+* `acceptDebtRequest u/Kate123 amt/4.30 id/18103013460314`
 
 ===  Delete debt request: `deleteDebtRequest`
 
-A user can delete request send by other user if it is a wrong request. +
-Format: `deleteDebtRequest USERNAME REQUESTID`
+User(Debtor) delete/reject request send by other user if it is a wrong request. +
+Format: `deleteDebtRequest u/USERNAME amt/AMOUNT id/ID`
 
 Examples:
 
-* `deleteDebtRequest Kate123 hxas78`
+* `deleteDebtRequest u/Kate123 amt/4.30 id/18103013460314`
 
 // tag::undoredo[]
 === Undoing previous command : `undo` [DEPRECIATED, DO NOT USE]

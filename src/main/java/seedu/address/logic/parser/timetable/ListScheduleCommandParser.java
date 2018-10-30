@@ -1,51 +1,42 @@
 package seedu.address.logic.parser.timetable;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
 import java.util.stream.Stream;
 
-import seedu.address.logic.commands.timetable.FreeDateCommand;
+import seedu.address.logic.commands.timetable.ListScheduleCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserUtil;
 import seedu.address.logic.parser.Prefix;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.timetable.Date;
-import seedu.address.model.timetable.Day;
-import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
 
 
 /**
- * Parses input arguments and creates a new FreeDateCommandParser object.
+ * Parses input arguments and creates a new ListScheduleCommand object.
  */
-public class FreeDateCommandParser implements Parser<FreeDateCommand> {
+public class ListScheduleCommandParser implements Parser<ListScheduleCommand> {
 
     /**
-     * Parses the given {@code String} of arguments in the context of the FreeDateCommand
-     * and returns a FreeDateCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the ListScheduleCommand
+     * and returns a ListScheduleCommand object for execution.
      * @throws ParseException if the user input does not conform to the expected format.
      */
-    public FreeDateCommand parse(String args) throws ParseException {
+    public ListScheduleCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_WEEK, PREFIX_DAY, PREFIX_TIME);
+                ArgumentTokenizer.tokenize(args, PREFIX_WEEK);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_WEEK, PREFIX_DAY, PREFIX_TIME)
+        if (!arePrefixesPresent(argMultimap, PREFIX_WEEK)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FreeDateCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListScheduleCommand.MESSAGE_USAGE));
         }
 
         Week week = ParserUtil.parseWeek(argMultimap.getValue(PREFIX_WEEK).get());
-        Day day = ParserUtil.parseDay(argMultimap.getValue(PREFIX_DAY).get());
-        Time time = ParserUtil.parseTime(argMultimap.getValue(PREFIX_TIME).get());
 
-        Date date = new Date(week, day, time);
-
-        return new FreeDateCommand(date);
+        return new ListScheduleCommand(week);
     }
 
     /**

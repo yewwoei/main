@@ -5,6 +5,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounting.Debt;
+import seedu.address.model.group.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
@@ -25,8 +26,15 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of restaurants */
     ObservableList<Restaurant> getFilteredRestaurantList();
 
+    /** Returns an unmodifiable view of the filtered list of friends */
+    ObservableList<Friendship> getFriendRequestsList();
+    ObservableList<Friendship> getFriendsList();
+
     /** Returns an unmodifiable view of the filtered list of groups */
     ObservableList<Group> getGroupList();
+
+    /** Returns an unmodifiable view of the filtered list of groups */
+    ObservableList<Group> getGroupRequestList();
 
     /** Returns an unmodifiable view of the filtered list of jios */
     ObservableList<Jio> getJioList();
@@ -40,4 +48,6 @@ public interface Logic {
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();
+
+    boolean isCurrentlyLoggedIn();
 }

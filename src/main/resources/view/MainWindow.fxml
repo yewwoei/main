@@ -33,7 +33,6 @@
           </Menu>
           <Menu mnemonicParsing="false" text="Features">
             <MenuItem fx:id="groups" mnemonicParsing="false" onAction="#handleGroup" text="Groups" />
-            <MenuItem fx:id="friends" mnemonicParsing="false" onAction="#handleJio" text="Friends" />
             <MenuItem fx:id="jios" mnemonicParsing="false" onAction="#handleJio" text="Jios" />
             <Menu mnemonicParsing="false" text="Debts">
               <MenuItem fx:id="debtrequestreceived" mnemonicParsing="false" onAction="#handleDebtRequestReceived" text="Request Received" />
@@ -41,6 +40,10 @@
               <MenuItem fx:id="debtrequestsent" mnemonicParsing="false" onAction="#handleDebtRequestSent" text="Request Sent" />
               <MenuItem fx:id="debtor" mnemonicParsing="false" onAction="#handleDebtor" text="Debtors" />
               <MenuItem fx:id="debts" mnemonicParsing="false" onAction="#handleAllDebt" text="Debts History" />
+            </Menu>
+            <Menu mnemonicParsing="false" text="Friends">
+              <MenuItem fx:id="friendRequests" mnemonicParsing="false" onAction="#handleFriendRequests" text="Friend requests received" />
+              <MenuItem fx:id="friends" mnemonicParsing="false" onAction="#handleFriends" text="Friends" />
             </Menu>
           </Menu>
         </MenuBar>

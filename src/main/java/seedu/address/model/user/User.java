@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,8 +19,10 @@ import seedu.address.model.accounting.UniqueDebtList;
 import seedu.address.model.group.Friendship;
 import seedu.address.model.group.FriendshipStatus;
 import seedu.address.model.group.Group;
+import seedu.address.model.group.UniqueFriendList;
 import seedu.address.model.timetable.Date;
-import seedu.address.model.timetable.UniqueBusySchedule;
+import seedu.address.model.timetable.UniqueSchedule;
+import seedu.address.model.timetable.Week;
 import seedu.address.model.timetable.exceptions.DateNotFoundException;
 import seedu.address.model.timetable.exceptions.DuplicateDateException;
 
@@ -36,12 +39,14 @@ public class User {
     private final Email email;
 
     // Data fields
-    private final List<Friendship> friendRequests = new ArrayList<>();
-    private final List<Friendship> friends = new ArrayList<>();
+    //private final List<Friendship> friendRequests = new ArrayList<>();
+    //private final List<Friendship> friends = new ArrayList<>();
     private final List<Group> groupRequests = new ArrayList<>();
     private final List<Group> groups = new ArrayList<>();
+    private final UniqueFriendList friendRequests = new UniqueFriendList();
+    private final UniqueFriendList friends = new UniqueFriendList();
     private final UniqueDebtList debts = new UniqueDebtList();
-    private final UniqueBusySchedule busySchedule;
+    private final UniqueSchedule busySchedule;
     private final List<RestaurantReview> restaurantReviews = new ArrayList<>();
 
     /**
@@ -54,7 +59,7 @@ public class User {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.busySchedule = new UniqueBusySchedule(this.username);
+        this.busySchedule = new UniqueSchedule(this.username);
     }
 
     public Username getUsername() {
@@ -77,21 +82,23 @@ public class User {
         return email;
     }
 
-    public List<Friendship> getFriendRequests() {
-        return friendRequests;
-    }
+    //public List<Friendship> getFriendRequests() {
+        //return friendRequests;
+    //}
 
-    public List<Friendship> getFriends() {
-        return friends;
-    }
+//    public List<Friendship> getFriends() {
+//        return friends;
+//    }
 
     public List<Group> getGroupRequests() {
         return groupRequests;
     }
 
-    public List<Group> getGroups() { return groups; }
+    public List<Group> getGroups() {
+        return groups;
+    }
 
-    public UniqueBusySchedule getBusySchedule() {
+    public UniqueSchedule getBusySchedule() {
         return busySchedule;
     }
 
@@ -185,15 +192,31 @@ public class User {
     /**
      * @return String of all the user's friends separated by newline character.
      */
-    public String listFriends() {
-        return listHelperFriend(friends);
+    //public String getFriends() {
+        //return listHelperFriend(friends.asUnmodifiableObservableList());
+    //}
+
+    public ObservableList<Friendship> getFriends() {
+        UniqueFriendList toReturn = new UniqueFriendList();
+        for (Friendship f: this.friends) {
+            toReturn.add(f);
+        }
+        return toReturn.asUnmodifiableObservableList();
+    }
+
+    public ObservableList<Friendship> getFriendRequests() {
+        UniqueFriendList toReturn = new UniqueFriendList();
+        for (Friendship f: this.friendRequests) {
+            toReturn.add(f);
+        }
+        return toReturn.asUnmodifiableObservableList();
     }
 
     /**
      * @return String that contains all the friendRequests received of this user separated by newline character.
      */
     public String listFriendRequests() {
-        return listHelperFriend(friendRequests);
+        return listHelperFriend(friendRequests.asUnmodifiableObservableList());
     }
 
     /**
@@ -259,7 +282,7 @@ public class User {
      * @param user Username of the friend that you would like to find.
      * @return Friendship between this user and user with Name username.
      */
-    public Friendship findFriendshipInList(List<Friendship> list, User user) {
+    public Friendship findFriendshipInList(UniqueFriendList list, User user) {
         for (Friendship friendship: list) {
             if (friendship.getFriendUser().equals(user)) {
                 return friendship;
@@ -401,6 +424,18 @@ public class User {
      */
     public void addDebt(User debtor, Amount amount) {
         Debt d = new Debt(this, debtor, amount);
+        this.debts.add(d);
+        debtor.debts.add(d);
+    }
+
+    /**
+     * Method for the creditor to create and add a debt.
+     * @param debtor the debtor of the adding debt
+     * @param amount the amount of the adding debt
+     * @param status the status of the adding debt
+     */
+    public void addDebt(User debtor, Amount amount, DebtStatus status) {
+        Debt d = new Debt(this, debtor, amount, status);
         this.debts.add(d);
         debtor.debts.add(d);
     }
@@ -591,10 +626,10 @@ public class User {
 
     // ==================== TIMETABLE COMMANDS ======================= //
     /**
-     * Adds the constructed model UniqueBusySchedule to the user.
-     * This current user's UniqueBusySchedule must be empty.
+     * Adds the constructed model UniqueSchedule to the user.
+     * This current user's UniqueSchedule must be empty.
      */
-    public void addUniqueBusySchedule(UniqueBusySchedule schedule) {
+    public void addUniqueBusySchedule(UniqueSchedule schedule) {
         busySchedule.addAll(schedule);
     }
 
@@ -619,6 +654,13 @@ public class User {
         }
         busySchedule.remove(date);
 
+    }
+
+    /**
+     * Gets the user's blocked dates schedule for a week.
+     */
+    public List<Date> getFreeDatesForWeek(Week week) {
+        return Collections.unmodifiableList(this.busySchedule.getFreeDatesForWeek(week));
     }
 
     /**

@@ -1,5 +1,6 @@
 package seedu.address.model;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 
@@ -9,12 +10,14 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.timetable.Date;
+import seedu.address.model.timetable.Week;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -26,12 +29,15 @@ public interface Model {
 
     //=========== Model Manager Miscellaneous Methods =+==========================================================
 
+    List<Date> getDisplayedDates();
     /**
      * {@code Predicate} that always evaluate to true
      */
     Predicate<Restaurant> PREDICATE_SHOW_ALL_RESTAURANTS = unused -> true;
 
     Predicate<Jio> PREDICATE_SHOW_ALL_JIOS = unused -> true;
+
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
     /**
      * Clears existing backing model and replaces with the provided new data.
@@ -97,11 +103,6 @@ public interface Model {
     //=========== Model Manager User Methods =+===================================================================
 
     /**
-     * Returns an unmodifiable view of the group list
-     */
-    ObservableList<Group> getGroupList();
-
-    /**
      * Returns true if a user with the {@code username} exists in User Data.
      */
     boolean hasUser(Username username);
@@ -156,6 +157,10 @@ public interface Model {
 
     void deleteFriendRequest(Username friendUsername);
 
+    ObservableList<Friendship> getFriendsList();
+
+    ObservableList<Friendship> getFriendRequestsList();
+
     boolean hasGroup(Name group);
 
     boolean hasGroupRequest(Name groupName);
@@ -178,6 +183,15 @@ public interface Model {
 
     void deleteGroupRequest(Name groupName);
 
+    /**
+     * Returns an unmodifiable view of the group list
+     */
+    ObservableList<Group> getGroupList();
+
+    ObservableList<Group> getGroupRequestList();
+
+    void updateFilteredGroupList(Predicate<Group> predicate);
+
     //============ Timetable commands ==========================
 
     void blockDateForCurrentUser(Date date);
@@ -185,6 +199,8 @@ public interface Model {
     void freeDateForCurrentUser(Date date);
 
     boolean hasDateForCurrentUser(Date date);
+
+    void updateDisplayedDateList(Week weekNumber);
 
     //=========== Jio methods ===============================================================================
 

@@ -26,6 +26,7 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Rating;
@@ -284,11 +285,6 @@ public class AddCommandTest {
         public void addUser(User user) {}
 
         @Override
-        public ObservableList<Group> getGroupList() {
-            throw new AssertionError("This method should not be called.");
-        }
-
-        @Override
         public boolean hasUser(Username username) {
             return true;
         }
@@ -351,6 +347,16 @@ public class AddCommandTest {
         public void deleteFriendRequest(Username friendUsername) {}
 
         @Override
+        public ObservableList<Friendship> getFriendRequestsList() {
+            return null;
+        }
+
+        @Override
+        public ObservableList<Friendship> getFriendsList() {
+            return null;
+        }
+
+        @Override
         public boolean hasGroup(Name group) {
             return true;
         }
@@ -394,6 +400,20 @@ public class AddCommandTest {
 
         @Override
         public void deleteGroupRequest(Name groupName) {}
+
+        @Override
+        public ObservableList<Group> getGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Group> getGroupRequestList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<Group> predicate) {
+        }
 
         // ========= timetable commands =========
 

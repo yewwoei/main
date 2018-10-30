@@ -5,18 +5,23 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Region;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.UserDataChangedEvent;
+import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
 import seedu.address.model.accounting.Debt;
+import seedu.address.model.group.Friendship;
+import seedu.address.model.group.FriendshipStatus;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.user.User;
 
 /**
  * Panel containing the list of user data.
@@ -54,12 +59,28 @@ public class ListPanel<T> extends UiPart<Region> {
     @Subscribe
     private void handleUserDataChangedEvent(UserDataChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if(type == "Friends") {
+            listView.setItems((ObservableList<T>) event.user.getFriends());
+        }
+
+        if(type == "FriendRequests") {
+            listView.setItems((ObservableList<T>) event.user.getFriendRequests());
+        }
+
         if (type == "Jio") {
             listView.setItems((ObservableList<T>) event.data.getJios());
         }
         if (type == "Debt") {
             listView.setItems((ObservableList<T>) event.user.getDebts());
         }
+        if (type == "Group") {
+            listView.setItems((ObservableList<T>) FXCollections.observableArrayList(event.user.getGroups()));
+        }
+    }
+
+    @Subscribe
+    private void handleUserLoggedOutEvent(UserLoggedOutEvent event) {
+        listView.setItems(null);
     }
 
 
@@ -104,10 +125,22 @@ public class ListPanel<T> extends UiPart<Region> {
                     setGraphic(new GroupCard((Group) item, getIndex() + 1).getRoot());
                     type = "Group";
                 }
+
+                if (item instanceof Friendship && ((Friendship) item).getFrienshipStatus().equals(FriendshipStatus.ACCEPTED)) {
+                    setGraphic(new UserCard(((Friendship) item).getFriendUser(), getIndex() + 1).getRoot());
+                    type = "Friends";
+                }
+
+                if (item instanceof Friendship && ((Friendship) item).getFrienshipStatus().equals(FriendshipStatus.PENDING)) {
+                    setGraphic(new UserCard(((Friendship) item).getFriendUser(), getIndex() + 1).getRoot());
+                    type = "FriendRequests";
+                }
+
                 if (item instanceof Debt) {
                     setGraphic(new DebtCard((Debt) item, getIndex() + 1).getRoot());
                     type = "Debt";
                 }
+
             }
         }
     }
