@@ -161,6 +161,7 @@ public class BrowserPanel extends UiPart<Region> {
         if (event.getNewSelection().getClass().equals(Debt.class)) {
 
         }
+    }
 
     @Subscribe
     private void handleDisplayProfileEvent(DisplayProfileEvent event) {
