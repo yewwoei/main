@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import seedu.address.model.timetable.exceptions.DateNotFoundException;
 import seedu.address.model.timetable.exceptions.DuplicateDateException;
 import seedu.address.model.user.Username;
@@ -18,7 +20,7 @@ import seedu.address.model.user.Username;
  * Represents a user's busy schedule in the MakanBook.
  * Guarantees: data values are validated and immutable.
  */
-public class UniqueBusySchedule {
+public class UniqueSchedule {
 
     // Identity fields
     private final Username username;
@@ -26,7 +28,7 @@ public class UniqueBusySchedule {
     // Data fields
     private final HashMap<Week, List<Date>> internalSchedule;
 
-    public UniqueBusySchedule(Username username) {
+    public UniqueSchedule(Username username) {
         requireNonNull(username);
         this.username = username;
 
@@ -82,7 +84,7 @@ public class UniqueBusySchedule {
     /** Adds all the uniqueBusySchedule dates from another schedule into the current schedule.
      * The current schedule must not have any dates stored.
      */
-    public void addAll(UniqueBusySchedule otherSchedule) {
+    public void addAll(UniqueSchedule otherSchedule) {
         // change all the reference pointers to point to otherSchedule's reference.
         List<Date> allDates = otherSchedule.getAllBlockedDatesOnSchedule();
         allDates.stream().forEach(this::add);
@@ -143,15 +145,23 @@ public class UniqueBusySchedule {
         List<Date> fullScheduleForWeek = generateFullScheduleForWeek(week);
         // remove all the dates that the user is busy.
         fullScheduleForWeek.removeAll(allUserBlockedDates);
+        Collections.sort(fullScheduleForWeek);
         return Collections.unmodifiableList(fullScheduleForWeek);
 
     }
 
     /**
+     * Generates an immutable completely free schedule. The default is taken to be reading week.
+     * @return the immutable list of all free dates for reading week.
+     */
+    public static List<Date> generateDefaultWeekSchedule() {
+        return generateFullScheduleForWeek(new Week("11"));
+    }
+    /**
      * Returns a full list of dates for the NUS week. Utility method to help getAllFreeDatesOnSchedule.
      * @return a full list of dates for the NUS week.
      */
-    private static List<Date> generateFullScheduleForWeek(Week week) {
+    public static List<Date> generateFullScheduleForWeek(Week week) {
         List<Date> allWeekDates = new ArrayList<>();
         allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Mon")));
         allWeekDates.addAll(generateFullScheduleForDay(week, new Day("Tues")));
@@ -214,4 +224,5 @@ public class UniqueBusySchedule {
 
         return builder.toString();
     }
+
 }

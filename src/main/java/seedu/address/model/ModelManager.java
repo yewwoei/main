@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Predicate;
 import java.util.logging.Logger;
@@ -30,6 +31,8 @@ import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.restaurant.UserReview;
 import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.timetable.Date;
+import seedu.address.model.timetable.UniqueSchedule;
+import seedu.address.model.timetable.Week;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.RestaurantReview;
 import seedu.address.model.user.User;
@@ -43,6 +46,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Restaurant> filteredRestaurants;
     private final FilteredList<Jio> filteredJios;
+    private List<Date> displayedDates;
     private UserData userData;
     private boolean isLoggedIn = false;
     private User currentUser = null;
@@ -59,6 +63,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
         filteredJios = new FilteredList<>(userData.getJios());
+        displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
     }
 
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs,
@@ -72,6 +77,8 @@ public class ModelManager extends ComponentManager implements Model {
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
         this.userData = userData;
         filteredJios = new FilteredList<>(userData.getJios());
+        displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
+
     }
 
     public ModelManager() {
@@ -188,6 +195,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(user);
         this.currentUser = user;
         this.isLoggedIn = true;
+        resetDisplayedDates();
     }
 
     @Override
@@ -203,6 +211,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void logoutUser() {
         this.currentUser = null;
         this.isLoggedIn = false;
+        resetDisplayedDates();
         raise(new UserLoggedOutEvent());
     }
 
@@ -572,9 +581,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public void updateDisplayedDateList(Week weekNumber) {
+        requireNonNull(weekNumber);
+        this.displayedDates = currentUser.getFreeDatesForWeek(weekNumber);
+
+    }
+
+    @Override
     public boolean hasDateForCurrentUser(Date date) {
         requireNonNull(date);
         return currentUser.hasDateOnSchedule(date);
+    }
+
+    private void resetDisplayedDates() {
+        this.displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
     }
 
     //=========== Jio methods ===============================================================================

@@ -44,6 +44,7 @@ public class ListScheduleCommand extends Command {
             throw new NotLoggedInCommandException(COMMAND_WORD);
         }
 
+        model.updateDisplayedDateList(weekNumber);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, weekNumber));
     }

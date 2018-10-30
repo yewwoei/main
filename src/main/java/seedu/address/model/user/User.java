@@ -5,6 +5,7 @@ import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,7 +20,8 @@ import seedu.address.model.group.Friendship;
 import seedu.address.model.group.FriendshipStatus;
 import seedu.address.model.group.Group;
 import seedu.address.model.timetable.Date;
-import seedu.address.model.timetable.UniqueBusySchedule;
+import seedu.address.model.timetable.UniqueSchedule;
+import seedu.address.model.timetable.Week;
 import seedu.address.model.timetable.exceptions.DateNotFoundException;
 import seedu.address.model.timetable.exceptions.DuplicateDateException;
 
@@ -41,7 +43,7 @@ public class User {
     private final List<Group> groupRequests = new ArrayList<>();
     private final List<Group> groups = new ArrayList<>();
     private final UniqueDebtList debts = new UniqueDebtList();
-    private final UniqueBusySchedule busySchedule;
+    private final UniqueSchedule busySchedule;
     private final List<RestaurantReview> restaurantReviews = new ArrayList<>();
 
     /**
@@ -54,7 +56,7 @@ public class User {
         this.name = name;
         this.phone = phone;
         this.email = email;
-        this.busySchedule = new UniqueBusySchedule(this.username);
+        this.busySchedule = new UniqueSchedule(this.username);
     }
 
     public Username getUsername() {
@@ -93,7 +95,7 @@ public class User {
         return groups;
     }
 
-    public UniqueBusySchedule getBusySchedule() {
+    public UniqueSchedule getBusySchedule() {
         return busySchedule;
     }
 
@@ -593,10 +595,10 @@ public class User {
 
     // ==================== TIMETABLE COMMANDS ======================= //
     /**
-     * Adds the constructed model UniqueBusySchedule to the user.
-     * This current user's UniqueBusySchedule must be empty.
+     * Adds the constructed model UniqueSchedule to the user.
+     * This current user's UniqueSchedule must be empty.
      */
-    public void addUniqueBusySchedule(UniqueBusySchedule schedule) {
+    public void addUniqueBusySchedule(UniqueSchedule schedule) {
         busySchedule.addAll(schedule);
     }
 
@@ -621,6 +623,13 @@ public class User {
         }
         busySchedule.remove(date);
 
+    }
+
+    /**
+     * Gets the user's blocked dates schedule for a week.
+     */
+    public List<Date> getFreeDatesForWeek(Week week) {
+        return Collections.unmodifiableList(this.busySchedule.getFreeDatesForWeek(week));
     }
 
     /**
