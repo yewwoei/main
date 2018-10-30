@@ -427,6 +427,18 @@ public class User {
     }
 
     /**
+     * Method for the creditor to create and add a debt.
+     * @param debtor the debtor of the adding debt
+     * @param amount the amount of the adding debt
+     * @param status the status of the adding debt
+     */
+    public void addDebt(User debtor, Amount amount, DebtStatus status) {
+        Debt d = new Debt(this, debtor, amount, status);
+        this.debts.add(d);
+        debtor.debts.add(d);
+    }
+
+    /**
      * Method for the creditor to create and add debts.
      * @param group the group of debtor of the adding debt
      * @param amount the total amount of the adding debt

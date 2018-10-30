@@ -1,7 +1,12 @@
 package seedu.address.model.util;
 
+import java.util.ArrayList;
+
 import seedu.address.model.Name;
 import seedu.address.model.UserData;
+import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.Debt;
+import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.user.Email;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Phone;
@@ -43,9 +48,22 @@ public class SampleUserDataUtil {
 
     public static UserData getSampleUserData() {
         UserData sampleUd = new UserData();
+        ArrayList<User> debtList = new ArrayList<User>();
         for (User sampleUser : getSampleUsers()) {
             sampleUd.addUser(sampleUser);
+            debtList.add(sampleUser);
         }
+
+        for (int i = 0; i < debtList.size() - 1; i++){
+            debtList.get(i).addDebt(debtList.get(i+1), new Amount(String.valueOf(i+1)));
+        }
+        debtList.get(debtList.size()-1).addDebt(debtList.get(0), new Amount(String.valueOf(3)));
+
+        for (int i = debtList.size() - 1 ; i > 0; i--){
+            debtList.get(i).addDebt(debtList.get(i-1), new Amount(String.valueOf(i)), DebtStatus.ACCEPTED);
+        }
+        debtList.get(0).addDebt(debtList.get(debtList.size()-1), new Amount(String.valueOf(3)), DebtStatus.ACCEPTED);
+
         return sampleUd;
     }
 }
