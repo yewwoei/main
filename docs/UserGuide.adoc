@@ -79,26 +79,6 @@ Examples:
 Shows a list of all restaurants in the address book. +
 Format: `list`
 
-=== Editing a restaurant : `edit`
-
-Edits an existing restaurant in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-
-****
-* Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed restaurant list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the restaurant will be removed i.e adding of tags is not cumulative.
-* You can remove all the restaurant's tags by typing `t/` without specifying any tags after it.
-****
-
-Examples:
-
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st restaurant to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd restaurant to be `Betsy Crower` and clears all existing tags.
-
 === Locating restaurants by name: `find`
 
 Finds restaurants whose names contain any of the given keywords. +
@@ -118,26 +98,6 @@ Examples:
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any restaurant having names `Betsy`, `Tim`, or `John`
-
-=== Deleting a restaurant : `delete`
-
-Deletes the specified restaurant from the address book. +
-Format: `delete INDEX`
-
-****
-* Deletes the restaurant at the specified `INDEX`.
-* The index refers to the index number shown in the displayed restaurant list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list` +
-`delete 2` +
-Deletes the 2nd restaurant in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st restaurant in the results of the `find` command.
 
 === Selecting a restaurant : `select`
 
@@ -444,6 +404,47 @@ Format: `deleteDebtRequest u/USERNAME amt/AMOUNT id/ID`
 Examples:
 
 * `deleteDebtRequest u/Kate123 amt/4.30 id/18103013460314`
+
+=== Deleting a restaurant : `delete` [DEPRECIATED, DO NOT USE]
+
+Deletes the specified restaurant from the address book. +
+Format: `delete INDEX`
+
+****
+* Deletes the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list` +
+`delete 2` +
+Deletes the 2nd restaurant in the address book.
+* `find Betsy` +
+`delete 1` +
+Deletes the 1st restaurant in the results of the `find` command.
+
+
+=== Editing a restaurant : `edit` [DEPRECIATED, DO NOT USE]
+
+Edits an existing restaurant in the address book. +
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+
+****
+* Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed restaurant list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the restaurant will be removed i.e adding of tags is not cumulative.
+* You can remove all the restaurant's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit 1 p/91234567 e/johndoe@example.com` +
+Edits the phone number and email address of the 1st restaurant to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` +
+Edits the name of the 2nd restaurant to be `Betsy Crower` and clears all existing tags.
 
 // tag::undoredo[]
 === Undoing previous command : `undo` [DEPRECIATED, DO NOT USE]
