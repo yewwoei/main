@@ -169,56 +169,6 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-// tag::undoredo[]
-=== Undoing previous command : `undo`
-
-Restores the address book to the state before the previous _undoable_ command was executed. +
-Format: `undo`
-
-[NOTE]
-====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
-====
-
-Examples:
-
-* `delete 1` +
-`list` +
-`undo` (reverses the `delete 1` command) +
-
-* `select 1` +
-`list` +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-
-=== Redoing the previously undone command : `redo`
-
-Reverses the most recent `undo` command. +
-Format: `redo`
-
-Examples:
-
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-
-* `delete 1` +
-`redo` +
-The `redo` command fails as there are no `undo` commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
-// end::undoredo[]
-
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
@@ -261,18 +211,18 @@ Examples:
 === Finding people to eat with: `createJio`
 
 Users can find other users to eat with through inviting users. “createJio” creates a jio that is added to the global list of jios. +
-Format: `createJio n/NAME d/DATE t/TIME p/PLACE [n/NUMBER OF PEOPLE] [--private]`
+Format: `createJio n/NAME w/WEEK d/DAY h/TIME a/PLACE [g/GROUP NAME]`
 
 ****
 * Jio -- an invitation to hang out.
 * Name, date, time, place must be provided. The other parameters are optional.
-* All users will be able to view the list of jios, unless the user specifies that it is a private jio. If --private tag is added, the jio is only visible to friends.
+* All users will be able to view the list of jios, unless the user specifies that it is a group jio. If group name is present, all group members are added to jio.
 ****
 
 Examples:
 
-* `createJio n/MALA!!! d/270918 t/1200 p/FineFood n/4`
-* `createJio n/saporeFriends d/010118 t/1800 p/Sapore --friends`
+* `createJio n/MALA!!! w/1 d/mon h/1200 a/FineFood`
+* `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
 
 === Joining an existing jio: `joinJio`
 
@@ -289,17 +239,12 @@ Examples:
 
 === Deleting old jios: `deleteJio`
 
-Users can specify a jio to delete. All old jios are automatically deleted. +
+Users can specify a jio to delete. +
 Format: `deleteJio NAME`
 
 Examples:
 
 * `deleteJio MALA!!`
-
-=== View public and private jios: `listJio`
-
-Users can view all jios available. “listJio” will display all public jios and all private jios. +
-Format: `listJio`
 
 === Adding friends: `addFriend`
 
@@ -328,10 +273,19 @@ Examples:
 
 * `deleteFriendRequest Meena567`
 
+=== Delete friend: `deleteFriend`
+
+A User can delete friend of another User whom they might not know. +
+Format: `deleteFriend USERNAME`
+
+Examples:
+
+* `deleteFriendRequest Meena567`
+
 === Adding groups: `addGroup`
 
-A User will create a group and send out invitations to all the other users, which they will then have to accept to join the group.  +
-Format: `addGroup GROUPNAME [Users… USERNAMES]`
+A User will create a group by specifying the group name.  +
+Format: `addGroup GROUPNAME`
 
 ****
 * Every group will automatically add the user creating the group.
@@ -339,8 +293,16 @@ Format: `addGroup GROUPNAME [Users… USERNAMES]`
 
 Examples:
 
-* `addGroup onlyMe`
-* `addGroup CS2103, chelchia, evanmok2401, katenhy, yewwoei`
+* `addGroup CS2103`
+
+=== Adding members: `addMembers`
+
+A User will create a group and send out invitations to all the other users, which they will then have to accept to join the group.  +
+Format: `addGroup GROUPNAME [Users… USERNAMES]`
+
+Examples:
+
+* `addMembers CS2103, chelchia, evanmok2401, katenhy, yewwoei`
 
 === Accepting group requests: `acceptGroup`
 
@@ -373,26 +335,6 @@ Examples:
 
 A User can find other users based on their mutual friends. +
 Format: `findMutualFriends`
-
-=== List all friends: `listFriends `
-
-A User can list all his friends. This method will internally call upon a list (Arraylist <Object>) method. +
-Format: `listFriends`
-
-=== List all groups: `listGroups`
-
-A User can list all his groups. This method will internally call upon a list (Arraylist <Object>) method. +
-Format: `listGroups`
-
-=== List all friend requests: `listFriendRequests`
-
-A User can list all his friend requests. This method will internally call upon a list (Arraylist <Object>) method. +
-Format: `listFriendRequests`
-
-=== List all group requests: `listGroupRequests`
-
-A User can list all his group requests. This method will internally call upon a list (Arraylist <Object>) method. +
-Format: `listGroupRequest`
 
 ===  Block unavailable timeslot manually: `blockTime`
 
@@ -493,25 +435,55 @@ Examples:
 
 * `deleteDebtRequest Kate123 hxas78`
 
-===  List debt history: `listDebtHistory`
+// tag::undoredo[]
+=== Undoing previous command : `undo` [DEPRECIATED, DO NOT USE]
 
-A user can list all his transaction, including the Transcation ID, user, amount and type and status. +
-Format: `listDebtHistory`
+Restores the address book to the state before the previous _undoable_ command was executed. +
+Format: `undo`
 
-===  List debtor: `listDebtor`
+[NOTE]
+====
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+====
 
-A User can list all his debtor, including the user and amount. +
-Format: `listDebtor`
+Examples:
 
-===  List creditor: `listCreditor`
+* `delete 1` +
+`list` +
+`undo` (reverses the `delete 1` command) +
 
-A User can list all his creditors, including the user and amount. +
-Format: `listCreditor`
+* `select 1` +
+`list` +
+`undo` +
+The `undo` command fails as there are no undoable commands executed previously.
 
-===  List Debt Request: `listDebtRequest`
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
 
-A User can list all received request, including the type, request ID, user and amount. +
-Format: `listDebtRequest`
+=== Redoing the previously undone command : `redo` [DEPRECIATED, DO NOT USE]
+
+Reverses the most recent `undo` command. +
+Format: `redo`
+
+Examples:
+
+* `delete 1` +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
+
+* `delete 1` +
+`redo` +
+The `redo` command fails as there are no `undo` commands executed previously.
+
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
+`redo` (reapplies the `clear` command) +
+// end::undoredo[]
 
 === Exiting the program : `exit`
 
@@ -594,52 +566,35 @@ e.g.`select 2`
 * *History* : `history`
 * *Sign Up* : `signup`
 * *Login* : `login`
-* *Logout* : `logout`
 
 === Commands that require log in of User
+
+* *Logout* : `logout`
 * *Write a Review* : `writeReview INDEX r/RATING rvw/WRITTEN_REVIEW` +
 e.g. `writeReview 2 r/5 rvw/I tried the Salmon Mentaiko Chirashi and it was amazing.`
 * *Display User Profile*: `displayProfile`
-
-*JIO COMMANDS*
-* createJio
-* joinJio
-* deleteJio
-* listJio
-
-*FRIEND COMMANDS*
-* addFriend
-* acceptFriend
-* deleteFriendRequest
-* deleteFriend
-* findMutualFriends
-* listFriends
-* listFriendRequests
-
-*GROUP COMMANDS*
-* addGroup
-* acceptGroup
-* deleteGroupRequest
-* deleteGroup
-* listGroups
-* listGroupRequests
-
-*TIMETABLE COMMANDS*
-* blockTime
-* freeTime
-* listTime
-* findTime
-* addCalendar
-* addNUSMODS
-* findJio
-
-*ACCOUNTING COMMANDS*
-* addDebt
-* clearDebt
-* acceptDebtRequest
-* deleteDebtRequest
-* listDebtHistory
-* listDebtor
-* listCreditor
-* listDebtRequests
-
+* *Create Jio* : `createJio` +
+e.g. `createJio n/MALA!!! w/1 d/mon h/1200 a/FineFood`
+e.g. `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
+* *Join Jio* : `joinJio`
+* *Delete Jio* : `deleteJio`
+* *Add Friend* : `addFriend`
+* *Accept Friend Request* : `acceptFriend`
+* *Delete Friend Request* : `deleteFriendRequest`
+* *Delete Friend* : `deleteFriend`
+* *Find Mutual Friends* : `findMutualFriends`
+* *Add Group* : `addGroup`
+* *Accept Group* : `acceptGroup`
+* *Delete Group Request* : `deleteGroupRequest`
+* *Delete Group* : `deleteGroup`
+* *Block Time* : `blockTime`
+* *Free Time* : `freeTime`
+* *List Time* : `listTime`
+* *Find Time* : `findTime`
+* *Add Calendar* : `addCalendar`
+* *Add NUSMODS* : `addNUSMODS`
+* *Find Jio* : `findJio`
+* *Add Debt* : `addDebt`
+* *Clear Debt* : `clearDebt`
+* *Accept Debt Request* : `acceptDebtRequest`
+* *Delete Debt Request* : `deleteDebtRequest`

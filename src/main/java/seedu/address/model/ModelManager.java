@@ -17,6 +17,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.DisplayProfileEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
+import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
@@ -201,6 +202,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void logoutUser() {
         this.currentUser = null;
         this.isLoggedIn = false;
+        raise(new UserLoggedOutEvent());
     }
 
     //================ Debt methods =================================
