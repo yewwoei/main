@@ -233,9 +233,9 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleAllDebt() {
-        if(!logic.isCurrentlyLoggedIn()) {
+        if (!logic.isCurrentlyLoggedIn()) {
             browserPanel.loadNotLoggedInPage();
-        } else{
+        } else {
             debtListPanel = new ListPanel<>(logic.getDebtList());
             featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
         }
@@ -246,7 +246,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleCreditor() {
-        if(!logic.isCurrentlyLoggedIn()) {
+        if (!logic.isCurrentlyLoggedIn()) {
             browserPanel.loadNotLoggedInPage();
         } else {
             debtListPanel = new ListPanel<>(logic.getCreditorList());
@@ -259,7 +259,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleDebtor() {
-        if(!logic.isCurrentlyLoggedIn()) {
+        if (!logic.isCurrentlyLoggedIn()) {
             browserPanel.loadNotLoggedInPage();
         } else {
             debtListPanel = new ListPanel<>(logic.getDebtorList());
@@ -272,7 +272,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleDebtRequestReceived() {
-        if(!logic.isCurrentlyLoggedIn()) {
+        if (!logic.isCurrentlyLoggedIn()) {
             browserPanel.loadNotLoggedInPage();
         } else {
             debtListPanel = new ListPanel<>(logic.getDebtRequestReceived());
@@ -285,7 +285,7 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleDebtRequestSent() {
-        if(!logic.isCurrentlyLoggedIn()) {
+        if (!logic.isCurrentlyLoggedIn()) {
             browserPanel.loadNotLoggedInPage();
         } else {
             debtListPanel = new ListPanel<>(logic.getDebtRequestSent());

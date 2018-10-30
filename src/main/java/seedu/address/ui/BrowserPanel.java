@@ -16,9 +16,9 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.DisplayProfileEvent;
 import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
-import seedu.address.commons.events.model.DisplayProfileEvent;
 import seedu.address.commons.events.ui.RestaurantPanelSelectionChangedEvent;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.restaurant.Restaurant;
@@ -92,6 +92,9 @@ public class BrowserPanel extends UiPart<Region> {
         });
     }
 
+    /**
+     * Loads a browseDebt HTML file with a background that matches the general theme.
+     */
     private void loadDebtPage(Debt debt) {
         StringBuilder sb = new StringBuilder();
         URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + DEBT_PAGE);
@@ -169,6 +172,9 @@ public class BrowserPanel extends UiPart<Region> {
         loadPage(defaultPage.toExternalForm());
     }
 
+    /**
+     * Loads a Not logged in HTML file with a background that matches the general theme.
+     */
     public void loadNotLoggedInPage() {
 
         StringBuilder sb = new StringBuilder();
@@ -224,7 +230,7 @@ public class BrowserPanel extends UiPart<Region> {
             return;
         }
         if (event.getNewSelection().getClass().equals(Debt.class)) {
-            loadDebtPage((Debt)event.getNewSelection());
+            loadDebtPage((Debt) event.getNewSelection());
         }
     }
 

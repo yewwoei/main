@@ -89,7 +89,9 @@ public class User {
         return groupRequests;
     }
 
-    public List<Group> getGroups() { return groups; }
+    public List<Group> getGroups() {
+        return groups;
+    }
 
     public UniqueBusySchedule getBusySchedule() {
         return busySchedule;
