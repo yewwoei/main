@@ -5,6 +5,7 @@ import java.util.logging.Logger;
 import com.google.common.eventbus.Subscribe;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -72,6 +73,9 @@ public class ListPanel<T> extends UiPart<Region> {
         if (type == "Debt") {
             listView.setItems((ObservableList<T>) event.user.getDebts());
         }
+        if (type == "Group") {
+            listView.setItems((ObservableList<T>) FXCollections.observableArrayList(event.user.getGroups()));
+        }
     }
 
     @Subscribe
@@ -136,6 +140,7 @@ public class ListPanel<T> extends UiPart<Region> {
                     setGraphic(new DebtCard((Debt) item, getIndex() + 1).getRoot());
                     type = "Debt";
                 }
+
             }
         }
     }

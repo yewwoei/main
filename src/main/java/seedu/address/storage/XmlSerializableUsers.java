@@ -135,7 +135,6 @@ public class XmlSerializableUsers {
             userData.addGroup(group);
 
             // updates Users as to which groups they have
-            group.getAcceptedUsers().forEach(user -> userData.getUser(user.getUsername()).addGroup(group));
             group.getAcceptedUsers().forEach(user -> user.addGroup(group));
             group.getPendingUsers().forEach(user -> user.addGroupPending(group));
         }
