@@ -608,7 +608,8 @@ e.g. `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
 * *Free Time* : `freeTime`
 * *List Time* : `listTime`
 * *Find Jio* : `findJio`
-* *Add Debt* : `addDebt`
-* *Clear Debt* : `clearDebt`
-* *Accept Debt Request* : `acceptDebtRequest`
-* *Delete Debt Request* : `deleteDebtRequest`
+* *Add Debt* : `addDebt` e.g. `addDebt u/kate amt/2.3`
+* *Add Group Debt* : `addGroupDebt` e.g. `addGroupDebt g/My Lonely Club amt/27`
+* *Clear Debt* : `clearDebt` e.g. `clearDebt u/kate amt/1.3`
+* *Accept Debt Request* : `acceptDebtRequest` e.g. `acceptDebtRequest u/kate amt/7.9 id/181030224951280`
+* *Delete Debt Request* : `deleteDebtRequest` e.g. `deleteDebtRequest u/kate amt/7.9 id/181030224951280`
