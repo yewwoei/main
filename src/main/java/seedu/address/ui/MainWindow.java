@@ -224,8 +224,25 @@ public class MainWindow extends UiPart<Stage> {
      */
     @FXML
     public void handleGroup() {
-        groupListPanel = new ListPanel<>(logic.getGroupList());
-        featuresListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            groupListPanel = new ListPanel<>(logic.getGroupList());
+            featuresListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        }
+    }
+
+    /**
+     * Updates list panel with group requests.
+     */
+    @FXML
+    public void handleGroupRequest() {
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            groupListPanel = new ListPanel<>(logic.getGroupRequestList());
+            featuresListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
+        }
     }
 
     /**

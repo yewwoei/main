@@ -28,6 +28,9 @@ public interface Logic {
     /** Returns an unmodifiable view of the filtered list of groups */
     ObservableList<Group> getGroupList();
 
+    /** Returns an unmodifiable view of the filtered list of groups */
+    ObservableList<Group> getGroupRequestList();
+
     /** Returns an unmodifiable view of the filtered list of jios */
     ObservableList<Jio> getJioList();
 

@@ -46,6 +46,7 @@ public class ModelManager extends ComponentManager implements Model {
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Restaurant> filteredRestaurants;
     private final FilteredList<Jio> filteredJios;
+    private final FilteredList<Group> filteredGroups;
     private List<Date> displayedDates;
     private UserData userData;
     private boolean isLoggedIn = false;
@@ -63,6 +64,7 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
         filteredJios = new FilteredList<>(userData.getJios());
+        filteredGroups = new FilteredList<>(FXCollections.observableArrayList(currentUser.getGroups()));
         displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
     }
 
@@ -77,8 +79,12 @@ public class ModelManager extends ComponentManager implements Model {
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
         this.userData = userData;
         filteredJios = new FilteredList<>(userData.getJios());
+        if (currentUser != null) {
+            filteredGroups = new FilteredList<>(FXCollections.observableArrayList(currentUser.getGroups()));
+        } else {
+            filteredGroups = new FilteredList<>(FXCollections.observableArrayList(userData.getGroups()));
+        }
         displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
-
     }
 
     public ModelManager() {
@@ -87,6 +93,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Model Manager Miscellaneous Methods =+==========================================================
 
+    @Override
     public boolean isCurrentlyLoggedIn() {
         return this.isLoggedIn;
     }
@@ -164,12 +171,6 @@ public class ModelManager extends ComponentManager implements Model {
 
 
     //=========== Model Manager User Methods ====================================================================
-
-    @Override
-    public ObservableList<Group> getGroupList() {
-        ArrayList<Group> grouplist = new ArrayList<>(userData.getGroupHashmap().values());
-        return FXCollections.observableArrayList(grouplist);
-    }
 
     @Override
     public boolean hasUser(Username username) {
@@ -459,6 +460,7 @@ public class ModelManager extends ComponentManager implements Model {
         Group group = new Group(groupName, currentUser);
         currentUser.addGroup(group);
         userData.addGroup(group);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         indicateUserDataChanged();
     }
 
@@ -548,6 +550,7 @@ public class ModelManager extends ComponentManager implements Model {
         Group toDelete = userData.getGroupHashmap().get(groupName);
         currentUser.deleteGroup(toDelete);
         indicateUserDataChanged();
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override
@@ -562,6 +565,22 @@ public class ModelManager extends ComponentManager implements Model {
         User friendUser = userData.getUser(friendUsername);
         currentUser.deleteFriendRequest(friendUser);
         indicateUserDataChanged();
+    }
+
+    @Override
+    public ObservableList<Group> getGroupRequestList() {
+        return FXCollections.observableArrayList(currentUser.getGroupRequests());
+    }
+
+    @Override
+    public ObservableList<Group> getGroupList() {
+        return FXCollections.observableArrayList(currentUser.getGroups());
+    }
+
+    @Override
+    public void updateFilteredGroupList(Predicate<Group> predicate) {
+        requireNonNull(predicate);
+        filteredGroups.setPredicate(predicate);
     }
 
     // =================== Timetable methods ===============================
@@ -626,6 +645,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void removeJioOfName(Name jioName) {
         requireNonNull(jioName);
         userData.removeJioOfName(jioName);
+        //updateFilteredJioList(PREDICATE_SHOW_ALL_JIOS);
         indicateUserDataChanged();
     }
 

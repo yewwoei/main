@@ -35,6 +35,8 @@ public interface Model {
 
     Predicate<Jio> PREDICATE_SHOW_ALL_JIOS = unused -> true;
 
+    Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
+
     /**
      * Clears existing backing model and replaces with the provided new data.
      */
@@ -97,11 +99,6 @@ public interface Model {
     void updateFilteredRestaurantList(Predicate<Restaurant> predicate);
 
     //=========== Model Manager User Methods =+===================================================================
-
-    /**
-     * Returns an unmodifiable view of the group list
-     */
-    ObservableList<Group> getGroupList();
 
     /**
      * Returns true if a user with the {@code username} exists in User Data.
@@ -179,6 +176,15 @@ public interface Model {
     void deleteGroup(Name groupName);
 
     void deleteGroupRequest(Name groupName);
+
+    /**
+     * Returns an unmodifiable view of the group list
+     */
+    ObservableList<Group> getGroupList();
+
+    ObservableList<Group> getGroupRequestList();
+
+    void updateFilteredGroupList(Predicate<Group> predicate);
 
     //============ Timetable commands ==========================
 
