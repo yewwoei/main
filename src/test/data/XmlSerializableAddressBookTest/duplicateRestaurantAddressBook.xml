@@ -2,17 +2,34 @@
 <addressbook>
 
     <restaurants>
-        <name>Alice Pauline</name>
-        <phone>94351253</phone>
-        <address>123, Jurong West Ave 6, #08-111</address>
-        <tagged>friends</tagged>
+        <name>Waa Cow</name>
+        <phone>63421111</phone>
+        <address>Stephen Riady Centre</address>
+        <reviews>
+            <rating>3.00</rating>
+            <userReviews>
+                <rating>3</rating>
+                <username>navekom</username>
+                <writtenReview>I tried the Ultimate Beef Sushi Experience and they were delicious.</writtenReview>
+            </userReviews>
+        </reviews>
+        <tagged>Western</tagged>
     </restaurants>
 
-    <!-- Restaurant with same identity as Alice Pauline -->
+    <!-- Restaurant with same as Waa Cow -->
     <restaurants>
-        <name>Alice Pauline</name>
-        <phone>94351253</phone>
-        <address>4th street</address>
+        <name>Waa Cow</name>
+        <phone>63421111</phone>
+        <address>Stephen Riady Centre</address>
+        <reviews>
+            <rating>3.00</rating>
+            <userReviews>
+                <rating>3</rating>
+                <username>navekom</username>
+                <writtenReview>I tried the Ultimate Beef Sushi Experience and they were delicious.</writtenReview>
+            </userReviews>
+        </reviews>
+        <tagged>Western</tagged>
     </restaurants>
 
 </addressbook>

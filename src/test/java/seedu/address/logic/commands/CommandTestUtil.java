@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -16,8 +17,8 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
-import seedu.address.model.restaurant.NameContainsKeywordsPredicate;
-import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.restaurant.*;
+import seedu.address.model.user.Username;
 import seedu.address.testutil.EditRestaurantDescriptorBuilder;
 
 /**
@@ -25,6 +26,16 @@ import seedu.address.testutil.EditRestaurantDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    private static final String VALID_USERNAME = "navekom";
+    private static final String VALID_WRITTEN_REVIEW = "I tried the Ultimate Beef Sushi" +
+            " Experience and they were delicious.";
+    private static final int VALID_USER_RATING = 3;
+    private static final String VALID_OVERALL_RATING = "3.00";
+    private static final UserReview VALID_USER_REVIEW = new UserReview(new Username(VALID_USERNAME),
+            new Rating(VALID_USER_RATING), new WrittenReview(VALID_WRITTEN_REVIEW));
+    public static final Reviews VALID_WAA_COW_REVIEWS = new Reviews(VALID_OVERALL_RATING,
+            Collections.singletonList(VALID_USER_REVIEW));
+    
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";
     public static final String VALID_PHONE_AMY = "11111111";

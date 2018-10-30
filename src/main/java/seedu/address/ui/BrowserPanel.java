@@ -1,7 +1,11 @@
 package seedu.address.ui;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.net.URL;
+import java.text.MessageFormat;
 import java.util.logging.Logger;
+import java.util.stream.Collectors;
 
 import com.google.common.eventbus.Subscribe;
 
@@ -12,14 +16,20 @@ import javafx.scene.layout.Region;
 import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
+import seedu.address.commons.events.model.DisplayProfileEvent;
 import seedu.address.commons.events.ui.RestaurantPanelSelectionChangedEvent;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.user.User;
 
 /**
  * The Browser Panel of the App.
  */
 public class BrowserPanel extends UiPart<Region> {
 
+    public static final String RESTAURANT_PAGE = "browseRestaurant.html";
+    public static final String USER_PAGE = "displayProfile.html";
     public static final String DEFAULT_PAGE = "default.html";
     public static final String SEARCH_PAGE_URL =
             "https://se-edu.github.io/addressbook-level4/DummySearchPage.html?name=";
@@ -41,8 +51,79 @@ public class BrowserPanel extends UiPart<Region> {
         registerAsAnEventHandler(this);
     }
 
+    /**
+     * Loads a browseRestaurant HTML file with a background that matches the general theme.
+     */
     private void loadRestaurantPage(Restaurant restaurant) {
-        loadPage(SEARCH_PAGE_URL + restaurant.getName().fullName);
+
+        StringBuilder sb = new StringBuilder();
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + RESTAURANT_PAGE);
+        try {
+            BufferedInputStream bin = ((BufferedInputStream) defaultPage.getContent());
+            byte[] contents = new byte[1024];
+            int bytesRead = 0;
+            while ((bytesRead = bin.read(contents)) != -1) {
+                sb.append(new String(contents, 0, bytesRead));
+            }
+            bin.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // replace the template with person stuff
+        Object[] params = new Object[] {
+                restaurant.getName(),
+                restaurant.getPhone(),
+                restaurant.getTags().stream().map(u -> u.tagName).collect(Collectors.joining(", ")),
+                restaurant.getAddress(),
+                restaurant.getReviews().getRestaurantRatingValue(),
+                restaurant.getReviews().getUserReviewList().stream()
+                        .map(userReview -> userReview.getUsername()
+                                + "'s Rating: " + userReview.getRating() + "<br />"
+                                + "Review: " + userReview.getWrittenReview() + "<br />")
+                        .collect(Collectors.joining("<p></p>"))
+        };
+        String html = MessageFormat.format(sb.toString(), params);
+
+        Platform.runLater(() -> {
+            browser.getEngine().loadContent(html);
+        });
+    }
+
+    /**
+     * Loads a displayProfile HTML file with a background that matches the general me.
+     */
+    private void loadUserProfilePage(User user) {
+        StringBuilder sb = new StringBuilder();
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + USER_PAGE);
+        try {
+            BufferedInputStream bin = ((BufferedInputStream) defaultPage.getContent());
+            byte[] contents = new byte[1024];
+            int bytesRead = 0;
+            while ((bytesRead = bin.read(contents)) != -1) {
+                sb.append(new String(contents, 0, bytesRead));
+            }
+            bin.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        Object[] params = new Object[] {
+                user.getUsername(),
+                user.getName(),
+                user.getPhone(),
+                user.getEmail(),
+                user.getRestaurantReviews().stream()
+                        .map(restaurantReview -> restaurantReview.getRestaurantName() + "<br />"
+                        + "Rating Given: " + restaurantReview.getRating() + "<br />"
+                        + "Review Given: " + restaurantReview.getWrittenReview() + "<br />")
+                        .collect(Collectors.joining("<p></p>"))
+        };
+        String html = MessageFormat.format(sb.toString(), params);
+
+        Platform.runLater(() -> {
+            browser.getEngine().loadContent(html);
+        });
     }
 
     public void loadPage(String url) {
@@ -67,6 +148,24 @@ public class BrowserPanel extends UiPart<Region> {
     @Subscribe
     private void handleRestaurantPanelSelectionChangedEvent(RestaurantPanelSelectionChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (event.getNewSelection() == null) {
+            loadDefaultPage();
+            return;
+        }
         loadRestaurantPage(event.getNewSelection());
+    }
+
+    @Subscribe
+    private void handlePanelSelectionChangedEvent(PanelSelectionChangedEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        if (event.getNewSelection().getClass().equals(Debt.class)) {
+
+        }
+    }
+
+    @Subscribe
+    private void handleDisplayProfileEvent(DisplayProfileEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        loadUserProfilePage(event.getCurrentUser());
     }
 }

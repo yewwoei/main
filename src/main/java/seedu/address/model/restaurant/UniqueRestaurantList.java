@@ -100,6 +100,23 @@ public class UniqueRestaurantList implements Iterable<Restaurant> {
     }
 
     /**
+     * Updates the given restaurant {@code target} with a {@code userReview}.
+     */
+    public void addUserReviewToRestaurant(Restaurant target, UserReview userReview) {
+        requireNonNull(target);
+        requireNonNull(userReview);
+
+        int index = internalList.indexOf(target);
+        if (index == -1) {
+            throw new RestaurantNotFoundException();
+        }
+
+        target.addUserReview(userReview);
+        Restaurant targetWithReview = target;
+        internalList.set(index, targetWithReview);
+    }
+
+    /**
      * Returns the backing list as an unmodifiable {@code ObservableList}.
      */
     public ObservableList<Restaurant> asUnmodifiableObservableList() {

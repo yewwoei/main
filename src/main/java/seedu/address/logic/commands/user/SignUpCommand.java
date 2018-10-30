@@ -19,7 +19,7 @@ import seedu.address.model.user.User;
  */
 public class SignUpCommand extends Command {
 
-    public static final String COMMAND_WORD = "SignUp";
+    public static final String COMMAND_WORD = "signup";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Signs a user up to use Makan Book features. "
             + "Parameters: "

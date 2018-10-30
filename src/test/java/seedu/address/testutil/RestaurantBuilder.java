@@ -7,6 +7,7 @@ import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.restaurant.Reviews;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -15,20 +16,22 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class RestaurantBuilder {
 
-    public static final String DEFAULT_NAME = "Alice Pauline";
-    public static final String DEFAULT_PHONE = "85355255";
-    public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
+    public static final String DEFAULT_NAME = "Hwangs Korean Restaurant";
+    public static final String DEFAULT_PHONE = "68888282";
+    public static final String DEFAULT_ADDRESS = "Town Plaza";
 
     private Name name;
     private Phone phone;
     private Address address;
     private Set<Tag> tags;
+    private Reviews reviews;
 
     public RestaurantBuilder() {
         name = new Name(DEFAULT_NAME);
         phone = new Phone(DEFAULT_PHONE);
         address = new Address(DEFAULT_ADDRESS);
         tags = new HashSet<>();
+        reviews = new Reviews();
     }
 
     /**
@@ -39,6 +42,7 @@ public class RestaurantBuilder {
         phone = restaurantToCopy.getPhone();
         address = restaurantToCopy.getAddress();
         tags = new HashSet<>(restaurantToCopy.getTags());
+        reviews = restaurantToCopy.getReviews();
     }
 
     /**
@@ -73,8 +77,16 @@ public class RestaurantBuilder {
         return this;
     }
 
+    /**
+     * Sets the {@code Reviews} of the {@code Restaurant} that we are building.
+     */
+    public RestaurantBuilder withReviews(Reviews reviews) {
+        this.reviews = reviews;
+        return this;
+    }
+
     public Restaurant build() {
-        return new Restaurant(name, phone, address, tags);
+        return new Restaurant(name, phone, address, tags, reviews);
     }
 
 }

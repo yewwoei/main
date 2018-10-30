@@ -8,11 +8,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
+import javafx.collections.ObservableList;
 import seedu.address.model.Name;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.accounting.UniqueDebtList;
 import seedu.address.model.group.Friendship;
 import seedu.address.model.group.FriendshipStatus;
 import seedu.address.model.group.Group;
@@ -38,8 +40,9 @@ public class User {
     private final List<Friendship> friends = new ArrayList<>();
     private final List<Group> groupRequests = new ArrayList<>();
     private final List<Group> groups = new ArrayList<>();
-    private final List<Debt> debts = new ArrayList<>();
+    private final UniqueDebtList debts = new UniqueDebtList();
     private final UniqueBusySchedule busySchedule;
+    private final List<RestaurantReview> restaurantReviews = new ArrayList<>();
 
     /**
      * Every field must be present and not null.
@@ -86,16 +89,14 @@ public class User {
         return groupRequests;
     }
 
-    public List<Group> getGroups() {
-        return groups;
-    }
-
-    public List<Debt> getDebts() {
-        return debts;
-    }
+    public List<Group> getGroups() { return groups; }
 
     public UniqueBusySchedule getBusySchedule() {
         return busySchedule;
+    }
+
+    public List<RestaurantReview> getRestaurantReviews() {
+        return restaurantReviews;
     }
 
     /**
@@ -127,13 +128,14 @@ public class User {
         }
 
         User otherUser = (User) other;
-        return otherUser.getUsername().equals(getUsername());
+        return otherUser.getUsername().equals(getUsername())
+                && getRestaurantReviews().equals(otherUser.getRestaurantReviews());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(username, password, name, phone, email);
+        return Objects.hash(username, password, name, phone, email, restaurantReviews);
     }
 
     @Override
@@ -381,6 +383,7 @@ public class User {
         group.addMembers(users);
     }
 
+    //================== Debt ==========================
     /**
      * Method to add a debts to a user.
      * @param debt a debt to add.
@@ -430,20 +433,20 @@ public class User {
                     && (d.getDebtor().equals(debtor))
                     && (d.getDebtStatus().equals(DebtStatus.ACCEPTED))) {
                 balAmount += d.getAmount().toDouble();
-                count = this.debts.indexOf(d);
+                count = this.debts.asUnmodifiableObservableList().indexOf(d);
             }
         }
         if (balAmount == 0) {
-            this.debts.get(count).changeDebtStatus(DebtStatus.CLEARED);
-            debtor.debts.get(count).changeDebtStatus(DebtStatus.CLEARED);
+            this.debts.asUnmodifiableObservableList().get(count).changeDebtStatus(DebtStatus.CLEARED);
+            debtor.debts.asUnmodifiableObservableList().get(count).changeDebtStatus(DebtStatus.CLEARED);
         }
         if (balAmount > 0) {
             Amount amt = new Amount(String.valueOf(Math.round(balAmount * 100) / 100));
             Debt toAdd = new Debt(this, debtor, amount, DebtStatus.CLEARED);
             this.debts.add(toAdd);
-            this.debts.get(count).changeDebtAmount(amt);
+            this.debts.asUnmodifiableObservableList().get(count).changeDebtAmount(amt);
             debtor.debts.add(toAdd);
-            debtor.debts.get(count).changeDebtAmount(amt);
+            debtor.debts.asUnmodifiableObservableList().get(count).changeDebtAmount(amt);
         }
     }
 
@@ -485,26 +488,22 @@ public class User {
             }
         }
         Debt toFind = new Debt(creditor, this, amount, debtId, DebtStatus.PENDING);
-        int pos = this.getDebts().indexOf(toFind);
         if (!exist) {
             //this.debts.get(pos).changeDebtStatus(DebtStatus.ACCEPTED);
             Debt toAdd = new Debt(creditor, this, amount, debtId, DebtStatus.ACCEPTED);
-            this.debts.remove(pos);
+            this.debts.remove(toFind);
             this.debts.add(toAdd);
-            pos = creditor.getDebts().indexOf(toFind);
             //creditor.debts.get(pos).changeDebtStatus(DebtStatus.ACCEPTED);
-            creditor.debts.remove(pos);
+            creditor.debts.remove(toFind);
             creditor.debts.add(toAdd);
         } else {
             if (balAmount == 0) {
                 //this.debts.get(pos).changeDebtStatus(DebtStatus.BALANCED);
                 Debt toAdd = new Debt(creditor, this, amount, debtId, DebtStatus.BALANCED);
-                pos = this.getDebts().indexOf(toFind);
                 this.debts.add(toAdd);
-                this.debts.remove(pos);
-                pos = creditor.getDebts().indexOf(toFind);
+                this.debts.remove(toFind);
                 //creditor.debts.get(pos).changeDebtStatus(DebtStatus.BALANCED);
-                creditor.debts.remove(pos);
+                creditor.debts.remove(toFind);
                 creditor.debts.add(toAdd);
             }
             if (balAmount > 0) {
@@ -512,12 +511,10 @@ public class User {
                 Amount amt = new Amount(String.valueOf(Math.round(balAmount * 100) / 100));
                 Debt toAdd = new Debt(creditor, this, amt, DebtStatus.ACCEPTED);
                 Debt record = new Debt(creditor, this, amount, DebtStatus.BALANCED);
-                pos = this.getDebts().indexOf(toFind);
-                this.debts.remove(pos);
+                this.debts.remove(toFind);
                 this.debts.add(record);
                 this.debts.add(toAdd);
-                pos = creditor.getDebts().indexOf(toFind);
-                creditor.debts.remove(pos);
+                creditor.debts.remove(toFind);
                 creditor.debts.add(record);
                 creditor.debts.add(toAdd);
             }
@@ -526,12 +523,10 @@ public class User {
                 Amount amt = new Amount(String.valueOf(Math.round(balAmount * (-100)) / 100));
                 Debt toAdd = new Debt(this, creditor, amt, DebtStatus.ACCEPTED);
                 Debt record = new Debt(creditor, this, amount, DebtStatus.BALANCED);
-                pos = this.getDebts().indexOf(toFind);
-                this.debts.remove(pos);
+                this.debts.remove(toFind);
                 this.debts.add(record);
                 this.debts.add(toAdd);
-                pos = creditor.getDebts().indexOf(toFind);
-                creditor.debts.remove(pos);
+                creditor.debts.remove(toFind);
                 creditor.debts.add(record);
                 creditor.debts.add(toAdd);
             }
@@ -550,76 +545,48 @@ public class User {
         creditor.debts.remove(toFind);
     }
 
-    /**
-     * Method to list all the debt record.
-     * @return a String contain all the debt history of this user, include creditor, debtor, amount, debt ID and status.
-     */
-    public String listDebtHistory() {
-        String toReturn = "";
-        for (Debt d: this.debts) {
-            toReturn += d.toString() + "\n";
-        }
-        return toReturn;
+    public ObservableList<Debt> getDebts() {
+        return debts.asUnmodifiableObservableList();
     }
 
-    /**
-     * Method to list all the debtor.
-     * @return a String of all debt which creditor is the user and have a accepted status,
-     * include creditor, debtor, amount, debt ID and status.
-     */
-    public String listDebtor() {
-        String toReturn = "";
+    public ObservableList<Debt> getCreditor() {
+        UniqueDebtList creditor = new UniqueDebtList();
         for (Debt d: this.debts) {
-            if (d.getCreditor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
-                toReturn += d.toString() + "\n";
+            if (d.getDebtor().equals(this) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
+                creditor.add(d);
             }
         }
-        return toReturn;
+        return creditor.asUnmodifiableObservableList();
     }
 
-    /**
-     * Method to list all the creditor.
-     * @return a String of all debt which debtor is the user and have a accepted status,
-     * include creditor, debtor, amount, debt ID and status.
-     */
-    public String listCreditor() {
-        String toReturn = "";
+    public ObservableList<Debt> getDebtor() {
+        UniqueDebtList debtor = new UniqueDebtList();
         for (Debt d: this.debts) {
-            if (d.getDebtor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
-                toReturn += d.toString() + "\n";
+            if (d.getCreditor().equals(this) && d.getDebtStatus().equals(DebtStatus.ACCEPTED)) {
+                debtor.add(d);
             }
         }
-        return toReturn;
+        return debtor.asUnmodifiableObservableList();
     }
 
-    /**
-     * Method to list all received request.
-     * @return a String of all debt which debtor is the user and have a pending status,
-     * include creditor, debtor, amount, debt ID and status.
-     */
-    public String listDebtRequestReceived() {
-        String toReturn = "";
+    public ObservableList<Debt> getDebtRequestReceived() {
+        UniqueDebtList toReturn = new UniqueDebtList();
         for (Debt d: this.debts) {
-            if (d.getDebtor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
-                toReturn += d.toString() + "\n";
+            if (d.getDebtor().equals(this) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
+                toReturn.add(d);
             }
         }
-        return toReturn;
+        return toReturn.asUnmodifiableObservableList();
     }
 
-    /**
-     * Method to list all sent request.
-     * @return a String of all debt which creditor is the user and have a pending status,
-     * include creditor, debtor, amount, debt ID and status.
-     */
-    public String listDebtRequestSent() {
-        String toReturn = "";
+    public ObservableList<Debt> getDebtRequestSent() {
+        UniqueDebtList toReturn = new UniqueDebtList();
         for (Debt d: this.debts) {
-            if (d.getCreditor().equals(this.getUsername()) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
-                toReturn += d.toString() + "\n";
+            if (d.getCreditor().equals(this) && d.getDebtStatus().equals(DebtStatus.PENDING)) {
+                toReturn.add(d);
             }
         }
-        return toReturn;
+        return toReturn.asUnmodifiableObservableList();
     }
 
     // ==================== TIMETABLE COMMANDS ======================= //
@@ -660,5 +627,13 @@ public class User {
     public boolean hasDateOnSchedule(Date date) {
         requireNonNull(date);
         return busySchedule.contains(date);
+    }
+
+    /**
+     * Adds a restaurantReview to the user's list of restaurantReviews.
+     */
+    public void addRestaurantReviewToUser(RestaurantReview newRestaurantReview) {
+        requireNonNull(newRestaurantReview);
+        restaurantReviews.add(newRestaurantReview);
     }
 }

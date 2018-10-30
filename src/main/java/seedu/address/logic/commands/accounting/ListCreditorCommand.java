@@ -27,7 +27,7 @@ public class ListCreditorCommand extends Command {
         if (!model.isCurrentlyLoggedIn()) {
             throw new NotLoggedInCommandException(COMMAND_WORD);
         }
-        model.listCreditor();
+        model.getCreditorList();
         return null;
     }
 }

@@ -43,6 +43,8 @@ public class XmlSerializableUsers {
     private List<XmlAdaptedJio> jios;
     @XmlElement
     private List<XmlAdaptedBusySchedule> busySchedules;
+    @XmlElement
+    private List<XmlAdaptedRestaurantReview> restaurantReviews;
 
     /**
      * Creates an empty XmlSerializableUsers.
@@ -55,6 +57,7 @@ public class XmlSerializableUsers {
         debts = new ArrayList<>();
         jios = new ArrayList<>();
         busySchedules = new ArrayList<>();
+        restaurantReviews = new ArrayList<>();
     }
 
     /**

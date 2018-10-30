@@ -169,103 +169,33 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-// tag::undoredo[]
-=== Undoing previous command : `undo`
-
-Restores the address book to the state before the previous _undoable_ command was executed. +
-Format: `undo`
-
-[NOTE]
-====
-Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
-====
-
-Examples:
-
-* `delete 1` +
-`list` +
-`undo` (reverses the `delete 1` command) +
-
-* `select 1` +
-`list` +
-`undo` +
-The `undo` command fails as there are no undoable commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-
-=== Redoing the previously undone command : `redo`
-
-Reverses the most recent `undo` command. +
-Format: `redo`
-
-Examples:
-
-* `delete 1` +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-
-* `delete 1` +
-`redo` +
-The `redo` command fails as there are no `undo` commands executed previously.
-
-* `delete 1` +
-`clear` +
-`undo` (reverses the `clear` command) +
-`undo` (reverses the `delete 1` command) +
-`redo` (reapplies the `delete 1` command) +
-`redo` (reapplies the `clear` command) +
-// end::undoredo[]
-
 === Clearing all entries : `clear`
 
 Clears all entries from the address book. +
 Format: `clear`
 
-=== Signing Up for a Makan Book Account: `SignUp`
+=== Signing Up for a Makan Book Account: `signup`
 
 Allows a User to create an account for use in the Makan Book. Automatic Log In upon Sign Up. +
 Format: `SignUp u/USERNAME pwd/PASSWORD n/NAME p/PHONE_NUMBER e/EMAIL`
 
 Example:
 
-* `SignUp u/davemyth pwd/pwd123123 n/Dave Batik p/92225822 e/davebaumb@gmail.com`
+* `signup u/davemyth pwd/pwd123123 n/Dave Batik p/92225822 e/davebaumb@gmail.com`
 
-=== Log In into an existing Makan Book Account: `Login`
+=== Log In into an existing Makan Book Account: `login`
 
 Allows a User to log into an existing account in the Makan Book. +
 Format: `Login u/USERNAME pwd/PASSWORD`
 
 Example:
 
-* `Login u/davemyth pwd/pwd123123`
+* `login u/davemyth pwd/pwd123123`
 
-=== Log Out of an existing Session: `Logout`
+=== Log Out of an existing Session: `logout`
 
 Allows a User to log out of an existing session.
-Format: `Logout`
-
-=== Exiting the program : `exit`
-
-Exits the program. +
-Format: `exit`
-
-=== Saving the data
-
-Address book data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
-
-// tag::dataencryption[]
-=== Encrypting data files `[coming in v2.0]`
-
-_{explain how the user can enable/disable data encryption}_
-// end::dataencryption[]
-
-
-*TODO*
-*NEW COMMANDS ADDED FROM HERE*
+Format: `logout`
 
 === Write Review For Restaurant: `writeReview`
 
@@ -274,51 +204,25 @@ Format: `writeReview INDEX r/RATING rvw/REVIEW`
 
 Examples:
 
-* `writeReview 3 s/3 r/Disgusting, I’ve seen better food in prisons`
+* `writeReview 3 r/3 rvw/The food is not the best, but definitely value for money!`
 
-=== List Visited Restaurant: `listVisitedRestaurants`
-
-Returns a list of all the restaurants the User has been to before. +
-Format: `listVisitedRestaurants`
-
-=== Add Visited Restaurant: `addVisitedRestaurants`
-
-Allows user to add a restaurant into his visited restaurant list with date, price, rating/score and meal consumed. +
-Format: `addVisitedRestaurants r/RESTAURANT_ID t/DATE p/PRICE s/SCORE m/MEAL_CONSUMED`
-
-Examples:
-
-* `addVisitedRestaurants r/COM1231 t/2011-11-11 p/3 s/4 m/Lemon Chicken Rice`
-
-=== Add Favourites: `addFavourite`
-
-Allows User to add a restaurant into his account’s favourites. +
-Format: `addFavourite r/RESTAURANT ID s/Score`
-
-Examples:
-
-* `addFavourite r/COM1231 s/4`
-
-=== List Favourites: `listFavourites`
-
-Allows User to list the restaurants he has entered into his favourites. +
-Format: `listFavourites`
+=== Display User Profile: `displayProfile`
 
 === Finding people to eat with: `createJio`
 
 Users can find other users to eat with through inviting users. “createJio” creates a jio that is added to the global list of jios. +
-Format: `createJio n/NAME d/DATE t/TIME p/PLACE [n/NUMBER OF PEOPLE] [--private]`
+Format: `createJio n/NAME w/WEEK d/DAY h/TIME a/PLACE [g/GROUP NAME]`
 
 ****
 * Jio -- an invitation to hang out.
 * Name, date, time, place must be provided. The other parameters are optional.
-* All users will be able to view the list of jios, unless the user specifies that it is a private jio. If --private tag is added, the jio is only visible to friends.
+* All users will be able to view the list of jios, unless the user specifies that it is a group jio. If group name is present, all group members are added to jio.
 ****
 
 Examples:
 
-* `createJio n/MALA!!! d/270918 t/1200 p/FineFood n/4`
-* `createJio n/saporeFriends d/010118 t/1800 p/Sapore --friends`
+* `createJio n/MALA!!! w/1 d/mon h/1200 a/FineFood`
+* `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
 
 === Joining an existing jio: `joinJio`
 
@@ -335,17 +239,12 @@ Examples:
 
 === Deleting old jios: `deleteJio`
 
-Users can specify a jio to delete. All old jios are automatically deleted. +
+Users can specify a jio to delete. +
 Format: `deleteJio NAME`
 
 Examples:
 
 * `deleteJio MALA!!`
-
-=== View public and private jios: `listJio`
-
-Users can view all jios available. “listJio” will display all public jios and all private jios. +
-Format: `listJio`
 
 === Adding friends: `addFriend`
 
@@ -374,10 +273,19 @@ Examples:
 
 * `deleteFriendRequest Meena567`
 
+=== Delete friend: `deleteFriend`
+
+A User can delete friend of another User whom they might not know. +
+Format: `deleteFriend USERNAME`
+
+Examples:
+
+* `deleteFriendRequest Meena567`
+
 === Adding groups: `addGroup`
 
-A User will create a group and send out invitations to all the other users, which they will then have to accept to join the group.  +
-Format: `addGroup GROUPNAME [Users… USERNAMES]`
+A User will create a group by specifying the group name.  +
+Format: `addGroup GROUPNAME`
 
 ****
 * Every group will automatically add the user creating the group.
@@ -385,8 +293,16 @@ Format: `addGroup GROUPNAME [Users… USERNAMES]`
 
 Examples:
 
-* `addGroup onlyMe`
-* `addGroup CS2103, chelchia, evanmok2401, katenhy, yewwoei`
+* `addGroup CS2103`
+
+=== Adding members: `addMembers`
+
+A User will create a group and send out invitations to all the other users, which they will then have to accept to join the group.  +
+Format: `addGroup GROUPNAME [Users… USERNAMES]`
+
+Examples:
+
+* `addMembers CS2103, chelchia, evanmok2401, katenhy, yewwoei`
 
 === Accepting group requests: `acceptGroup`
 
@@ -419,26 +335,6 @@ Examples:
 
 A User can find other users based on their mutual friends. +
 Format: `findMutualFriends`
-
-=== List all friends: `listFriends `
-
-A User can list all his friends. This method will internally call upon a list (Arraylist <Object>) method. +
-Format: `listFriends`
-
-=== List all groups: `listGroups`
-
-A User can list all his groups. This method will internally call upon a list (Arraylist <Object>) method. +
-Format: `listGroups`
-
-=== List all friend requests: `listFriendRequests`
-
-A User can list all his friend requests. This method will internally call upon a list (Arraylist <Object>) method. +
-Format: `listFriendRequests`
-
-=== List all group requests: `listGroupRequests`
-
-A User can list all his group requests. This method will internally call upon a list (Arraylist <Object>) method. +
-Format: `listGroupRequest`
 
 ===  Block unavailable timeslot manually: `blockTime`
 
@@ -539,25 +435,112 @@ Examples:
 
 * `deleteDebtRequest Kate123 hxas78`
 
-===  List debt history: `listDebtHistory`
+// tag::undoredo[]
+=== Undoing previous command : `undo` [DEPRECIATED, DO NOT USE]
 
-A user can list all his transaction, including the Transcation ID, user, amount and type and status. +
-Format: `listDebtHistory`
+Restores the address book to the state before the previous _undoable_ command was executed. +
+Format: `undo`
 
-===  List debtor: `listDebtor`
+[NOTE]
+====
+Undoable commands: those commands that modify the address book's content (`add`, `delete`, `edit` and `clear`).
+====
 
-A User can list all his debtor, including the user and amount. +
-Format: `listDebtor`
+Examples:
 
-===  List creditor: `listCreditor`
+* `delete 1` +
+`list` +
+`undo` (reverses the `delete 1` command) +
 
-A User can list all his creditors, including the user and amount. +
-Format: `listCreditor`
+* `select 1` +
+`list` +
+`undo` +
+The `undo` command fails as there are no undoable commands executed previously.
 
-===  List Debt Request: `listDebtRequest`
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
 
-A User can list all received request, including the type, request ID, user and amount. +
-Format: `listDebtRequest`
+=== Redoing the previously undone command : `redo` [DEPRECIATED, DO NOT USE]
+
+Reverses the most recent `undo` command. +
+Format: `redo`
+
+Examples:
+
+* `delete 1` +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
+
+* `delete 1` +
+`redo` +
+The `redo` command fails as there are no `undo` commands executed previously.
+
+* `delete 1` +
+`clear` +
+`undo` (reverses the `clear` command) +
+`undo` (reverses the `delete 1` command) +
+`redo` (reapplies the `delete 1` command) +
+`redo` (reapplies the `clear` command) +
+// end::undoredo[]
+
+=== Exiting the program : `exit`
+
+Exits the program. +
+Format: `exit`
+
+=== Saving the data
+
+Address book data are saved in the hard disk automatically after any command that changes the data. +
+There is no need to save manually.
+
+
+== Changes coming in v2.0
+
+=== Restriction of Privileges to Makan Book
+Currently, all users can add, delete, edit and make changes to restaurants in the makan book
+which can affect all other users.
+
+==== Creation of Administrator Account
+To prevent this, administrator accounts will be created. Only administrators will have the ability to
+call commands that modify the restaurants in Makan book.
+
+==== Allowing Users to suggest restaurants to be added into Makan Book
+To allow users to suggest restaurants outside of NUS to be included to the Makan Book. This would
+be sent to the administrators for review. Administrators can choose to add these restaurants for
+all users in the Makan Book.
+
+// tag::dataencryption[]
+=== Encrypting data files
+
+_{explain how the user can enable/disable data encryption}_
+// end::dataencryption[]
+
+=== New Features
+
+==== List Visited Restaurant: `listVisitedRestaurants`
+Format: `listVisitedRestaurants`
+
+==== Add Visited Restaurant: `addVisitedRestaurants`
+Allows user to add a restaurant into his visited restaurant list with date, price, rating/score and meal consumed. +
+Format: `addVisitedRestaurants INDEX t/DATE p/PRICE r/SCORE rvw/WRITTEN_REVIEW m/MEAL_CONSUMED`
+
+Examples:
+
+* `addVisitedRestaurants 3 t/2011-11-11 p/3.70 r/4 rvw/Value for money indeed m/Lemon Chicken Rice`
+
+==== Add Favourites: `addFavourite`
+Allows User to add a restaurant into his account’s favourites. +
+Format: `addFavourite INDEX`
+
+Examples:
+
+* `addFavourite 3`
+
+==== List Favourites: `listFavourites`
+Allows User to list the restaurants he has entered into his favourites. +
+Format: `listFavourites`
 
 == FAQ
 
@@ -566,6 +549,7 @@ Format: `listDebtRequest`
 
 == Command Summary
 
+=== Commands that do not require log in of User
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
 e.g. `add n/James Ho p/22224444 e/jamesho@example.com a/123, Clementi Rd, 1234665 t/friend t/colleague`
 * *Clear* : `clear`
@@ -580,55 +564,37 @@ e.g. `find James Jake`
 * *Select* : `select INDEX` +
 e.g.`select 2`
 * *History* : `history`
-* *Undo* : `undo`
-* *Redo* : `redo`
+* *Sign Up* : `signup`
+* *Login* : `login`
 
-*RESTAURANT COMMANDS*
-* writeReview
-* listVisitedRestaurants
-* addVisitedRestaurants
-* addFavourite
-* listFavourites
+=== Commands that require log in of User
 
-*JIO COMMANDS*
-* createJio
-* joinJio
-* deleteJio
-* listJio
-
-*FRIEND COMMANDS*
-* addFriend
-* acceptFriend
-* deleteFriendRequest
-* deleteFriend
-* findMutualFriends
-* listFriends
-* listFriendRequests
-
-*GROUP COMMANDS*
-* addGroup
-* acceptGroup
-* deleteGroupRequest
-* deleteGroup
-* listGroups
-* listGroupRequests
-
-*TIMETABLE COMMANDS*
-* blockTime
-* freeTime
-* listTime
-* findTime
-* addCalendar
-* addNUSMODS
-* findJio
-
-*ACCOUNTING COMMANDS*
-* addDebt
-* clearDebt
-* acceptDebtRequest
-* deleteDebtRequest
-* listDebtHistory
-* listDebtor
-* listCreditor
-* listDebtRequests
-
+* *Logout* : `logout`
+* *Write a Review* : `writeReview INDEX r/RATING rvw/WRITTEN_REVIEW` +
+e.g. `writeReview 2 r/5 rvw/I tried the Salmon Mentaiko Chirashi and it was amazing.`
+* *Display User Profile*: `displayProfile`
+* *Create Jio* : `createJio` +
+e.g. `createJio n/MALA!!! w/1 d/mon h/1200 a/FineFood`
+e.g. `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
+* *Join Jio* : `joinJio`
+* *Delete Jio* : `deleteJio`
+* *Add Friend* : `addFriend`
+* *Accept Friend Request* : `acceptFriend`
+* *Delete Friend Request* : `deleteFriendRequest`
+* *Delete Friend* : `deleteFriend`
+* *Find Mutual Friends* : `findMutualFriends`
+* *Add Group* : `addGroup`
+* *Accept Group* : `acceptGroup`
+* *Delete Group Request* : `deleteGroupRequest`
+* *Delete Group* : `deleteGroup`
+* *Block Time* : `blockTime`
+* *Free Time* : `freeTime`
+* *List Time* : `listTime`
+* *Find Time* : `findTime`
+* *Add Calendar* : `addCalendar`
+* *Add NUSMODS* : `addNUSMODS`
+* *Find Jio* : `findJio`
+* *Add Debt* : `addDebt`
+* *Clear Debt* : `clearDebt`
+* *Accept Debt Request* : `acceptDebtRequest`
+* *Delete Debt Request* : `deleteDebtRequest`
