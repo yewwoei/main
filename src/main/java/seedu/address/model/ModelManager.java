@@ -160,7 +160,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     @Override
     public ObservableList<Group> getGroupList() {
-        return FXCollections.observableArrayList(new ArrayList<>(userData.getGroupHashmap().values()));
+        ArrayList<Group> grouplist = new ArrayList<>(userData.getGroupHashmap().values());
+        return FXCollections.observableArrayList(grouplist);
     }
 
     @Override
