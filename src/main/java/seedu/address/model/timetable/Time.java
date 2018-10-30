@@ -9,7 +9,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Time implements Comparable<Time> {
     public static final String MESSAGE_TIME_CONSTRAINTS = "Time should only be in the 24-hour format in 30 minute"
-            + "intervals, without any colons. For example: 2330, 0000, 0130";
+            + "intervals, without any colons. For example: 2330, 0600, 0130";
 
     /**
      * Regular expression used to test whether the time falls between 0000 and 2330.

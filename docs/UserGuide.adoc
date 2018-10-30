@@ -79,26 +79,6 @@ Examples:
 Shows a list of all restaurants in the address book. +
 Format: `list`
 
-=== Editing a restaurant : `edit`
-
-Edits an existing restaurant in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
-
-****
-* Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed restaurant list. The index *must be a positive integer* 1, 2, 3, ...
-* At least one of the optional fields must be provided.
-* Existing values will be updated to the input values.
-* When editing tags, the existing tags of the restaurant will be removed i.e adding of tags is not cumulative.
-* You can remove all the restaurant's tags by typing `t/` without specifying any tags after it.
-****
-
-Examples:
-
-* `edit 1 p/91234567 e/johndoe@example.com` +
-Edits the phone number and email address of the 1st restaurant to be `91234567` and `johndoe@example.com` respectively.
-* `edit 2 n/Betsy Crower t/` +
-Edits the name of the 2nd restaurant to be `Betsy Crower` and clears all existing tags.
-
 === Locating restaurants by name: `find`
 
 Finds restaurants whose names contain any of the given keywords. +
@@ -118,26 +98,6 @@ Examples:
 Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any restaurant having names `Betsy`, `Tim`, or `John`
-
-=== Deleting a restaurant : `delete`
-
-Deletes the specified restaurant from the address book. +
-Format: `delete INDEX`
-
-****
-* Deletes the restaurant at the specified `INDEX`.
-* The index refers to the index number shown in the displayed restaurant list.
-* The index *must be a positive integer* 1, 2, 3, ...
-****
-
-Examples:
-
-* `list` +
-`delete 2` +
-Deletes the 2nd restaurant in the address book.
-* `find Betsy` +
-`delete 1` +
-Deletes the 1st restaurant in the results of the `find` command.
 
 === Selecting a restaurant : `select`
 
@@ -334,7 +294,7 @@ Examples:
 ===  Block unavailable timeslot manually: `blockTime`
 
 Blocks out that timeslot in the user’s timetable to signify that he is busy and not available to eat. +
-Format: `blockTime WEEKNUMBER DAY HHHH HHHH`
+Format: `blockTime w/WEEKNUMBER d/DAY h/HHHH`
 
 Examples:
 
@@ -343,7 +303,7 @@ Examples:
 ===  Free timeslot manually: `freeTime`
 
 Frees up that timeslot in the user’s timetable to signify that he is free and available to eat. +
-Format: `freeTime WEEKNUMBER DAY HHHH HHHH`
+Format: `freeTime w/WEEKNUMBER d/DAY h/HHHH`
 
 Examples:
 
@@ -351,12 +311,12 @@ Examples:
 
 ===  See Free Time: `listTime`
 
-Views the list of free time to eat on those dates. +
-Format: `listTime WEEKNUMBER`
+Views the list of free time to eat on a NUS week according to your calendar.
+Format: `listScheduleForWeek w/WEEKNUMBER`
 
 Examples:
 
-* `listTime week5`
+* `listTime w/5`
 
 ===  Find jios that fit a user’s timetable for a given NUS academic week: `findJio`
 
@@ -445,6 +405,47 @@ Examples:
 
 * `deleteDebtRequest u/Kate123 amt/4.30 id/18103013460314`
 
+=== Deleting a restaurant : `delete` [DEPRECIATED, DO NOT USE]
+
+Deletes the specified restaurant from the address book. +
+Format: `delete INDEX`
+
+****
+* Deletes the restaurant at the specified `INDEX`.
+* The index refers to the index number shown in the displayed restaurant list.
+* The index *must be a positive integer* 1, 2, 3, ...
+****
+
+Examples:
+
+* `list` +
+`delete 2` +
+Deletes the 2nd restaurant in the address book.
+* `find Betsy` +
+`delete 1` +
+Deletes the 1st restaurant in the results of the `find` command.
+
+
+=== Editing a restaurant : `edit` [DEPRECIATED, DO NOT USE]
+
+Edits an existing restaurant in the address book. +
+Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+
+****
+* Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed restaurant list. The index *must be a positive integer* 1, 2, 3, ...
+* At least one of the optional fields must be provided.
+* Existing values will be updated to the input values.
+* When editing tags, the existing tags of the restaurant will be removed i.e adding of tags is not cumulative.
+* You can remove all the restaurant's tags by typing `t/` without specifying any tags after it.
+****
+
+Examples:
+
+* `edit 1 p/91234567 e/johndoe@example.com` +
+Edits the phone number and email address of the 1st restaurant to be `91234567` and `johndoe@example.com` respectively.
+* `edit 2 n/Betsy Crower t/` +
+Edits the name of the 2nd restaurant to be `Betsy Crower` and clears all existing tags.
+
 // tag::undoredo[]
 === Undoing previous command : `undo` [DEPRECIATED, DO NOT USE]
 
@@ -521,6 +522,13 @@ To allow users to suggest restaurants outside of NUS to be included to the Makan
 be sent to the administrators for review. Administrators can choose to add these restaurants for
 all users in the Makan Book.
 
+==== Allowing users to find a common time to eat among certain groups of users.
+* *Find Time* : `findTime`
+
+==== Adding networking functionality.
+* *Add Calendar* : `addCalendar`
+* *Add NUSMODS* : `addNUSMODS`
+
 // tag::dataencryption[]
 === Encrypting data files
 
@@ -592,17 +600,16 @@ e.g. `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
 * *Accept Friend Request* : `acceptFriend`
 * *Delete Friend Request* : `deleteFriendRequest`
 * *Delete Friend* : `deleteFriend`
-* *Find Mutual Friends* : `findMutualFriends`
 * *Add Group* : `addGroup`
 * *Accept Group* : `acceptGroup`
 * *Delete Group Request* : `deleteGroupRequest`
 * *Delete Group* : `deleteGroup`
-* *Block Time* : `blockTime`
-* *Free Time* : `freeTime`
-* *List Time* : `listTime`
-* *Find Time* : `findTime`
-* *Add Calendar* : `addCalendar`
-* *Add NUSMODS* : `addNUSMODS`
+* *Block Time* : `blockTime w/WEEKNUMBER d/DAY h/HHHH`
+e.g. `blockTime w/reading d/thu h/1800`
+* *Free Time* : `freeTime w/WEEKNUMBER d/DAY h/HHHH`
+e.g. `freeTime w/11 d/tue h/0600`
+* *List User's Free Timeslots for a Week* : `listScheduleForWeek w/`
+e.g. `listScheduleForWeek w/6`
 * *Find Jio* : `findJio`
 * *Add Debt* : `addDebt`
 * *Clear Debt* : `clearDebt`

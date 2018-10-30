@@ -18,6 +18,7 @@ import javafx.scene.web.WebView;
 import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.DisplayProfileEvent;
+import seedu.address.commons.events.model.DisplayWeekScheduleEvent;
 import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.RestaurantPanelSelectionChangedEvent;
@@ -100,6 +101,42 @@ public class BrowserPanel extends UiPart<Region> {
         });
     }
 
+    /**
+     * Loads a displayWeekSchedule HTML file with a background that matches the general theme.
+     */
+    private void loadDisplayWeekSchedulePage(List<Date> dates) {
+        StringBuilder sb = new StringBuilder();
+        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + SCHEDULE_PAGE);
+        try {
+            BufferedInputStream bin = ((BufferedInputStream) defaultPage.getContent());
+            byte[] contents = new byte[1024];
+            int bytesRead = 0;
+            while ((bytesRead = bin.read(contents)) != -1) {
+                sb.append(new String(contents, 0, bytesRead));
+            }
+            bin.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        StringBuilder sb2 = new StringBuilder();
+        // Creating the string of dates.
+        dates.stream()
+                .map(date -> "<li>" + date.toString() + "</li>")
+                .forEach(sb2::append);
+
+        // replace the template with dates.
+        Object[] params = new Object[] {
+                sb2 };
+
+        String html = MessageFormat.format(sb.toString(), params);
+
+        Platform.runLater(() -> {
+            browser.getEngine().loadContent(html);
+        });
+
+    }
     /**
      * Loads a browseDebt HTML file with a background that matches the general theme.
      */
@@ -201,13 +238,7 @@ public class BrowserPanel extends UiPart<Region> {
         });
     }
 
-    /**
-     * Loads a displayWeekSchedule HTML file with a background that matches the general theme.
-     */
-    private void loadWeekSchedulePage(List<Date> dates) {
-        StringBuilder sb = new StringBuilder();
-        URL defaultPage = MainApp.class.getResource(FXML_FILE_FOLDER + SCHEDULE_PAGE);
-    }
+
 
     /**
      * Loads a browseJio HTML file with a background that matches the general theme.
@@ -318,6 +349,7 @@ public class BrowserPanel extends UiPart<Region> {
         });
     }
 
+    /**
     @Subscribe
     private void handleUserLoggedOutEvent(UserLoggedOutEvent event) {
         loadNotLoggedInPage();
@@ -363,4 +395,12 @@ public class BrowserPanel extends UiPart<Region> {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
         loadUserProfilePage(event.getCurrentUser());
     }
+
+    @Subscribe
+    private void handleDisplayWeekScheduleEvent(DisplayWeekScheduleEvent event) {
+        logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        loadDisplayWeekSchedulePage(event.getDisplayedWeekSchedule());
+    }
+
+
 }
