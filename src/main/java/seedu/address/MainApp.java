@@ -101,7 +101,7 @@ public class MainApp extends Application {
             initialAddressBook = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
 
             if (!userDataOptional.isPresent()) {
-                logger.info("Data file not found. Will be starting with no Users");
+                logger.info("Data file not found. Will be starting with sample Users");
             }
             initalUserData = userDataOptional.orElseGet(SampleUserDataUtil::getSampleUserData);
         } catch (DataConversionException e) {
