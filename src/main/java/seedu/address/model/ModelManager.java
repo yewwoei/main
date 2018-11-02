@@ -197,6 +197,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(user);
         this.currentUser = user;
         this.isLoggedIn = true;
+        // reset the schedule.
         resetDisplayedDates();
     }
 
