@@ -33,6 +33,7 @@ import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.timetable.Date;
+import seedu.address.model.timetable.Week;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
@@ -427,6 +428,9 @@ public class AddCommandTest {
         public boolean hasDateForCurrentUser(Date date) {
             return true;
         }
+
+        @Override
+        public void displayUserWeekSchedule(Week weekNumber) {}
 
     }
 

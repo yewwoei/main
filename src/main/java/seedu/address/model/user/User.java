@@ -98,6 +98,10 @@ public class User {
         return restaurantReviews;
     }
 
+    public String listFriends() {
+        return friends.toString();
+    }
+
     /**
      * Returns true if both users of the same name have at least one other identity field that is the same.
      * This defines a weaker notion of equality between two users.
