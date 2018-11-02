@@ -46,7 +46,8 @@ public class UniqueRestaurantListTest {
     @Test
     public void contains_restaurantWithSameIdentityFieldsInList_returnsTrue() {
         uniqueRestaurantList.add(RESTAURANT_A);
-        Restaurant editedAlice = new RestaurantBuilder(RESTAURANT_A).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Restaurant editedAlice = new RestaurantBuilder(RESTAURANT_A).withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(uniqueRestaurantList.contains(editedAlice));
     }
@@ -94,7 +95,8 @@ public class UniqueRestaurantListTest {
     @Test
     public void setRestaurant_editedRestaurantHasSameIdentity_success() {
         uniqueRestaurantList.add(RESTAURANT_A);
-        Restaurant editedAlice = new RestaurantBuilder(RESTAURANT_A).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Restaurant editedAlice = new RestaurantBuilder(RESTAURANT_A).withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
         uniqueRestaurantList.setRestaurant(RESTAURANT_A, editedAlice);
         UniqueRestaurantList expectedUniqueRestaurantList = new UniqueRestaurantList();
