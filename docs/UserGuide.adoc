@@ -182,7 +182,7 @@ Format: `createJio n/NAME w/WEEK d/DAY h/TIME a/PLACE [g/GROUP NAME]`
 Examples:
 
 * `createJio n/MALA w/1 d/mon h/1200 a/FineFood`
-* `createJio n/saporeFriends w/1 d/mon t/1800 a/Sapore g/mygroup`
+* `createJio n/saporeFriends w/1 d/mon h/1800 a/Sapore g/mygroup`
 
 === Joining an existing jio: `joinJio`
 

@@ -18,7 +18,7 @@ public class TypicalUsers {
 
     private static RestaurantReview TYPICAL_RESTAURANT_REVIEWS = new RestaurantReview(new Name("Waa Cow"), new Rating(4),
             new WrittenReview("I tried the Beef Sushi Bowl and it was amazing."));
-    
+
     public static final User ASA = new UserBuilder()
             .withUsername("Cockburn123")
             .withPassword("pAssw0rd")
