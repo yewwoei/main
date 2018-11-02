@@ -109,7 +109,6 @@ public class UniqueSchedule {
     /**
      * Provides an immutable sorted date list for the NUS week, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
-     * 
      * @param week THE NUS Week.
      * @return an immutable date list.
      */
@@ -123,7 +122,6 @@ public class UniqueSchedule {
     /**
      * Returns an immutable sorted blocked date list for the NUS week, which throws
      * {@code UnsupportedOperationException} if modification is attempted.
-     * 
      * @return the immutable list of all dates.
      */
     public List<Date> getAllBlockedDatesOnSchedule() {
@@ -138,7 +136,6 @@ public class UniqueSchedule {
     /**
      * Returns an immutable sorted free date list for the NUS week, which throws {@code UnsupportedOperationException}
      * if modification is attempted.
-     * 
      * @return the immutable list of all dates.
      */
     public List<Date> getFreeDatesForWeek(Week week) {
@@ -179,7 +176,6 @@ public class UniqueSchedule {
     /**
      * Returns a full list of dates for the day. The week that the day exists in must also be given.
      * Utility method to help getAllFreeDatesOnSchedule.
-     * 
      * @return a full list of dates for the day.
      */
     private static List<Date> generateFullScheduleForDay(Week week, Day day) {

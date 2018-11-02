@@ -125,14 +125,14 @@ public class ListPanel<T> extends UiPart<Region> {
                     type = "Group";
                 }
 
-                if (item instanceof Friendship &&
-                        ((Friendship) item).getFrienshipStatus().equals(FriendshipStatus.ACCEPTED)) {
+                if (item instanceof Friendship
+                        && ((Friendship) item).getFrienshipStatus().equals(FriendshipStatus.ACCEPTED)) {
                     setGraphic(new UserCard(((Friendship) item).getFriendUser(), getIndex() + 1).getRoot());
                     type = "Friends";
                 }
 
-                if (item instanceof Friendship &&
-                        ((Friendship) item).getFrienshipStatus().equals(FriendshipStatus.PENDING)) {
+                if (item instanceof Friendship
+                        && ((Friendship) item).getFrienshipStatus().equals(FriendshipStatus.PENDING)) {
                     setGraphic(new UserCard(((Friendship) item).getFriendUser(), getIndex() + 1).getRoot());
                     type = "FriendRequests";
                 }

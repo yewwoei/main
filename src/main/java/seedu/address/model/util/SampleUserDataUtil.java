@@ -69,40 +69,40 @@ public class SampleUserDataUtil {
 
     public static User[] getSampleUsers() {
         return new User[] {
-                new User(new Username("navekom"), new Password("pwwd123"),
-                        new Name("Evan Mok"), new Phone("91234567"),
-                        new Email("evanm@gmail.com"))
-                        .addRestaurantReviewToUser(navekom_reviews01),
-                new User(new Username("meena567"), new Password("meenapwd123"),
-                        new Name("Meena"), new Phone("98834568"),
-                        new Email("meena567@gmail.com"))
-                        .addRestaurantReviewToUser(meena567_reviews01)
-                        .addRestaurantReviewToUser(meena567_reviews02),
-                new User(new Username("chelchia"), new Password("chelpwd123"),
-                        new Name("Chelsea Chia"), new Phone("90134569"),
-                        new Email("chelchia@gmail.com"))
-                        .addRestaurantReviewToUser(chelchia_reviews01)
-                        .addRestaurantReviewToUser(chelchia_reviews02),
-                new User(new Username("katespades"), new Password("katepwd123"),
-                        new Name("Kate Ng"), new Phone("91434567"),
-                        new Email("kateSpades@gmail.com"))
-                        .addRestaurantReviewToUser(katespades_reviews01)
-                        .addRestaurantReviewToUser(katespades_reviews02),
-                new User(new Username("aideeeen"), new Password("yewwoei123"),
-                        new Name("Low Yew Woei"), new Phone("91765567"),
-                        new Email("yewwoei@gmail.com")),
-                new User(new Username("themyth"), new Password("themyth2k18"),
-                        new Name("AP Damith"), new Phone("91134567"),
-                        new Email("damith@nus.edu.com"))
-                        .addRestaurantReviewToUser(themyth_reviews01)
-                        .addRestaurantReviewToUser(themyth_reviews02),
-                new User(new Username("brotherLoong"), new Password("LHL2k18"),
-                        new Name("Hsien Loong"), new Phone("80232567"),
-                        new Email("leehl@pmo.com"))
-                        .addRestaurantReviewToUser(brotherLoong_reviews01),
-                new User(new Username("thejrlinguist"), new Password("kengji123"),
-                        new Name("KengJi"), new Phone("95534567"),
-                        new Email("kengji@gmail.com"))
+            new User(new Username("navekom"), new Password("pwwd123"),
+                    new Name("Evan Mok"), new Phone("91234567"),
+                    new Email("evanm@gmail.com"))
+                    .addRestaurantReviewToUser(navekom_reviews01),
+            new User(new Username("meena567"), new Password("meenapwd123"),
+                    new Name("Meena"), new Phone("98834568"),
+                    new Email("meena567@gmail.com"))
+                    .addRestaurantReviewToUser(meena567_reviews01)
+                    .addRestaurantReviewToUser(meena567_reviews02),
+            new User(new Username("chelchia"), new Password("chelpwd123"),
+                    new Name("Chelsea Chia"), new Phone("90134569"),
+                    new Email("chelchia@gmail.com"))
+                    .addRestaurantReviewToUser(chelchia_reviews01)
+                    .addRestaurantReviewToUser(chelchia_reviews02),
+            new User(new Username("katespades"), new Password("katepwd123"),
+                    new Name("Kate Ng"), new Phone("91434567"),
+                    new Email("kateSpades@gmail.com"))
+                    .addRestaurantReviewToUser(katespades_reviews01)
+                    .addRestaurantReviewToUser(katespades_reviews02),
+            new User(new Username("aideeeen"), new Password("yewwoei123"),
+                    new Name("Low Yew Woei"), new Phone("91765567"),
+                    new Email("yewwoei@gmail.com")),
+            new User(new Username("themyth"), new Password("themyth2k18"),
+                    new Name("AP Damith"), new Phone("91134567"),
+                    new Email("damith@nus.edu.com"))
+                    .addRestaurantReviewToUser(themyth_reviews01)
+                    .addRestaurantReviewToUser(themyth_reviews02),
+            new User(new Username("brotherLoong"), new Password("LHL2k18"),
+                    new Name("Hsien Loong"), new Phone("80232567"),
+                    new Email("leehl@pmo.com"))
+                    .addRestaurantReviewToUser(brotherLoong_reviews01),
+            new User(new Username("thejrlinguist"), new Password("kengji123"),
+                    new Name("KengJi"), new Phone("95534567"),
+                    new Email("kengji@gmail.com"))
         };
     }
 
@@ -116,7 +116,7 @@ public class SampleUserDataUtil {
 
         return new Jio[]{
             new Jio(new Name("lunch"), new Date(new Week("1"), new Day("mon"), new Time("1200")),
-                new Address("finefood"), lunchpeople, new Username("navekom")),
+                    new Address("finefood"), lunchpeople, new Username("navekom")),
             new Jio(new Name("dinner"), new Date(new Week("2"), new Day("tue"), new Time("1800")),
                     new Address("foodclique"), new Username("navekom")),
             new Jio(new Name("MALA"), new Date(new Week("1"), new Day("mon"), new Time("1200")),
@@ -180,7 +180,6 @@ public class SampleUserDataUtil {
             userList.get(i).addDebt(userList.get(i + 1), new Amount(String.valueOf(i + 1)));
             userList.get(i).addFriend(userList.get(i + 1));
         }
-        
 
         for (int i = 1; i < (userList.size() - 1) / 2; i++) {
             userList.get(i).acceptFriendRequest(userList.get(i - 1));
