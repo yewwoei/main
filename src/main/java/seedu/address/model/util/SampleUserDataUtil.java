@@ -4,17 +4,17 @@ import java.util.ArrayList;
 
 import seedu.address.model.Name;
 import seedu.address.model.UserData;
+import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Group;
-import seedu.address.model.restaurant.Rating;
-import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Address;
+import seedu.address.model.restaurant.Rating;
+import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Day;
 import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
-import seedu.address.model.accounting.Amount;
-import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.user.Email;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Phone;
@@ -27,43 +27,43 @@ import seedu.address.model.user.Username;
  */
 public class SampleUserDataUtil {
 
-    public static final RestaurantReview navekom_reviews01 = new RestaurantReview(
+    private static final RestaurantReview navekom_reviews01 = new RestaurantReview(
             new seedu.address.model.restaurant.Name("Waa Cow"), new Rating(3),
             new WrittenReview("I tried the Ultimate Beef Sushi and they were delicious."));
 
-    public static final RestaurantReview chelchia_reviews01 = new RestaurantReview(
+    private static final RestaurantReview chelchia_reviews01 = new RestaurantReview(
             new seedu.address.model.restaurant.Name("Waa Cow"), new Rating(2),
             new WrittenReview("I tried the Udon Cirashi and they were so-so."));
 
-    public static final RestaurantReview chelchia_reviews02 = new RestaurantReview(
+    private static final RestaurantReview chelchia_reviews02 = new RestaurantReview(
             new seedu.address.model.restaurant.Name("Subway"), new Rating(5),
             new WrittenReview("Namaste. Subway nice nice. Good food."));
 
-    public static final RestaurantReview meena567_reviews01 = new RestaurantReview(
+    private static final RestaurantReview meena567_reviews01 = new RestaurantReview(
             new seedu.address.model.restaurant.Name("Waa Cow"), new Rating(2),
             new WrittenReview("Definitely coming back."));
 
-    public static final RestaurantReview meena567_reviews02 = new RestaurantReview(
+    private static final RestaurantReview meena567_reviews02 = new RestaurantReview(
             new seedu.address.model.restaurant.Name("Subway"), new Rating(4),
             new WrittenReview("Subway give fresh food."));
 
-    public static final RestaurantReview katespades_reviews01 = new RestaurantReview(
+    private static final RestaurantReview katespades_reviews01 = new RestaurantReview(
             new seedu.address.model.restaurant.Name("Waa Cow"), new Rating(2),
             new WrittenReview("The maki was fantastic."));
 
-    public static final RestaurantReview katespades_reviews02 = new RestaurantReview(
+    private static final RestaurantReview katespades_reviews02 = new RestaurantReview(
             new seedu.address.model.restaurant.Name("Subway"), new Rating(5),
             new WrittenReview("5 stars sub."));
 
-    public static final RestaurantReview themyth_reviews01 = new RestaurantReview(
+    private static final RestaurantReview themyth_reviews01 = new RestaurantReview(
             new seedu.address.model.restaurant.Name("Subway"), new Rating(5),
             new WrittenReview("Subway eat fresh."));
 
-    public static final RestaurantReview themyth_reviews02 = new RestaurantReview(
+    private static final RestaurantReview themyth_reviews02 = new RestaurantReview(
             new seedu.address.model.restaurant.Name("The Royals Bistro"), new Rating(5),
             new WrittenReview("I stalked LHL here."));
 
-    public static final RestaurantReview brotherLoong_reviews01 = new RestaurantReview(
+    private static final RestaurantReview brotherLoong_reviews01 = new RestaurantReview(
             new seedu.address.model.restaurant.Name("The Royals Bistro"), new Rating(5),
             new WrittenReview("The food here is 5 stars. Just like the Singapore flag."));
 
@@ -113,7 +113,7 @@ public class SampleUserDataUtil {
         lunchpeople.add(new Username("chelchia"));
         lunchpeople.add(new Username("katespades"));
         lunchpeople.add(new Username("aideeeen"));
-        
+
         return new Jio[]{
             new Jio(new Name("lunch"), new Date(new Week("1"), new Day("mon"), new Time("1200")),
                 new Address("finefood"), lunchpeople, new Username("navekom")),
@@ -155,7 +155,7 @@ public class SampleUserDataUtil {
         sampleUd.addUser(chel);
 
         return new Group[]{
-                new Group(new Name("2103"), acceptedUsers, pendingUsers)
+            new Group(new Name("2103"), acceptedUsers, pendingUsers)
         };
     }
 
@@ -176,9 +176,9 @@ public class SampleUserDataUtil {
             sampleUd.addGroup(sampleGroup);
         }
 
-        for (int i = 0; i < userList.size() - 1; i++){
-            userList.get(i).addDebt(userList.get(i+1), new Amount(String.valueOf(i+1)));
-            userList.get(i).addFriend(userList.get(i+1));
+        for (int i = 0; i < userList.size() - 1; i++) {
+            userList.get(i).addDebt(userList.get(i + 1), new Amount(String.valueOf(i + 1)));
+            userList.get(i).addFriend(userList.get(i + 1));
         }
         
 
@@ -186,12 +186,12 @@ public class SampleUserDataUtil {
             userList.get(i).acceptFriendRequest(userList.get(i - 1));
         }
 
-        userList.get(userList.size()-1).addDebt(userList.get(0), new Amount(String.valueOf(3)));
+        userList.get(userList.size() - 1).addDebt(userList.get(0), new Amount(String.valueOf(3)));
 
-        for (int i = userList.size() - 1 ; i > 0; i--){
-            userList.get(i).addDebt(userList.get(i-1), new Amount(String.valueOf(i)), DebtStatus.ACCEPTED);
+        for (int i = userList.size() - 1; i > 0; i--) {
+            userList.get(i).addDebt(userList.get(i - 1), new Amount(String.valueOf(i)), DebtStatus.ACCEPTED);
         }
-        userList.get(0).addDebt(userList.get(userList.size()-1), new Amount(String.valueOf(3)), DebtStatus.ACCEPTED);
+        userList.get(0).addDebt(userList.get(userList.size() - 1), new Amount(String.valueOf(3)), DebtStatus.ACCEPTED);
 
         return sampleUd;
     }
