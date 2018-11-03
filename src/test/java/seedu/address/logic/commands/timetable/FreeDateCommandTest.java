@@ -1,11 +1,9 @@
 package seedu.address.logic.commands.timetable;
 
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 
 import org.junit.Test;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -46,7 +44,7 @@ public class FreeDateCommandTest {
     }
 
     @Test
-    public void execute_undoRedo_invalidDate_failure() {
+    public void executeUndoRedo_invalidDate_failure() {
 
     }
 

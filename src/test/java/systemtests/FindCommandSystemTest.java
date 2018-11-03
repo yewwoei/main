@@ -3,10 +3,10 @@ package systemtests;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.commons.core.Messages.MESSAGE_RESTAURANTS_LISTED_OVERVIEW;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.testutil.TypicalRestaurants.KEYWORD_MATCHING_MEIER;
 import static seedu.address.testutil.TypicalRestaurants.RESTAURANT_B;
 import static seedu.address.testutil.TypicalRestaurants.RESTAURANT_C;
 import static seedu.address.testutil.TypicalRestaurants.RESTAURANT_D;
-import static seedu.address.testutil.TypicalRestaurants.KEYWORD_MATCHING_MEIER;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,8 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
          */
         String command = "   " + FindCommand.COMMAND_WORD + " " + KEYWORD_MATCHING_MEIER + "   ";
         Model expectedModel = getModel();
-        ModelHelper.setFilteredList(expectedModel, RESTAURANT_B, RESTAURANT_D); // first names of Benson and Daniel are "Meier"
+        ModelHelper.setFilteredList(expectedModel, RESTAURANT_B, RESTAURANT_D);
+        // first names of Benson and Daniel are "Meier"
         assertCommandSuccess(command, expectedModel);
         assertSelectedCardUnchanged();
 
@@ -131,7 +132,8 @@ public class FindCommandSystemTest extends AddressBookSystemTest {
         /* Case: find while a restaurant is selected -> selected card deselected */
         showAllRestaurants();
         selectRestaurant(Index.fromOneBased(1));
-        assertFalse(getRestaurantListPanel().getHandleToSelectedCard().getName().equals(RESTAURANT_D.getName().fullName));
+        assertFalse(getRestaurantListPanel().getHandleToSelectedCard().getName()
+                .equals(RESTAURANT_D.getName().fullName));
         command = FindCommand.COMMAND_WORD + " Daniel";
         ModelHelper.setFilteredList(expectedModel, RESTAURANT_D);
         assertCommandSuccess(command, expectedModel);
