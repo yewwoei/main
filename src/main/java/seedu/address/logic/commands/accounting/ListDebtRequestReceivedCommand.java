@@ -27,7 +27,7 @@ public class ListDebtRequestReceivedCommand extends Command {
         if (!model.isCurrentlyLoggedIn()) {
             throw new NotLoggedInCommandException(COMMAND_WORD);
         }
-        model.listDebtRequestReceived();
+        model.getDebtRequestReceived();
         return null;
     }
 

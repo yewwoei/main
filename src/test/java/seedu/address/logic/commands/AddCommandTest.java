@@ -23,10 +23,15 @@ import seedu.address.model.Model;
 import seedu.address.model.Name;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.accounting.Amount;
+import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
+import seedu.address.model.group.Friendship;
+import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.User;
@@ -214,32 +219,38 @@ public class AddCommandTest {
         }
 
         @Override
-        public String listDebtHistory() {
+        public ObservableList<Debt> getDebtList() {
             return null;
         }
 
         @Override
-        public String listDebtor() {
+        public ObservableList<Debt> getCreditorList() {
             return null;
         }
 
         @Override
-        public String listCreditor() {
+        public ObservableList<Debt> getDebtorList() {
             return null;
         }
 
         @Override
-        public String listDebtRequestReceived() {
+        public ObservableList<Debt> getDebtRequestReceived() {
             return null;
         }
 
         @Override
-        public String listDebtRequestSent() {
+        public ObservableList<Debt> getDebtRequestSent() {
             return null;
         }
-
-
         // To be Done Later, fake tests for now
+
+        @Override
+        public ObservableList<Jio> getJioList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredJioList(Predicate<Jio> predicate) {}
 
         @Override
         public ObservableList<Jio> getJioList() {
@@ -303,6 +314,12 @@ public class AddCommandTest {
         public void logoutUser() {}
 
         @Override
+        public void displayProfile() {}
+
+        @Override
+        public void addUserReview(Restaurant restaurant, Rating rating, WrittenReview writtenReview) {}
+
+        @Override
         public boolean hasUsernameSentRequest(Username friendUsername) {
             return true;
         }
@@ -333,6 +350,16 @@ public class AddCommandTest {
 
         @Override
         public void deleteFriendRequest(Username friendUsername) {}
+
+        @Override
+        public ObservableList<Friendship> getFriendRequestsList() {
+            return null;
+        }
+
+        @Override
+        public ObservableList<Friendship> getFriendsList() {
+            return null;
+        }
 
         @Override
         public boolean hasGroup(Name group) {
@@ -378,6 +405,20 @@ public class AddCommandTest {
 
         @Override
         public void deleteGroupRequest(Name groupName) {}
+
+        @Override
+        public ObservableList<Group> getGroupList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public ObservableList<Group> getGroupRequestList() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void updateFilteredGroupList(Predicate<Group> predicate) {
+        }
 
         // ========= timetable commands =========
 

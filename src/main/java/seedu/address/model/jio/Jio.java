@@ -26,6 +26,8 @@ public class Jio {
     private Username creator;
     private Optional<Name> groupName = Optional.empty();
 
+    public Jio() {}
+
     public Jio(Name name, Date date, Address location, Username creator) {
         this.name = name;
         this.date = date;
@@ -33,6 +35,8 @@ public class Jio {
         this.people = new ArrayList<>();
         this.people.add(creator);
         this.creator = creator;
+        this.people = new ArrayList<>();
+        this.people.add(creator);
     }
 
     public Jio(Name name, Date date, Address location) {

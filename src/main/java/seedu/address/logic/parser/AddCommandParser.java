@@ -15,6 +15,7 @@ import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.restaurant.Reviews;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -40,8 +41,9 @@ public class AddCommandParser implements Parser<AddCommand> {
         Phone phone = ParserRestaurantUtil.parsePhone(argMultimap.getValue(PREFIX_PHONE).get());
         Address address = ParserRestaurantUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
         Set<Tag> tagList = ParserRestaurantUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
+        Reviews reviews = new Reviews();
 
-        Restaurant restaurant = new Restaurant(name, phone, address, tagList);
+        Restaurant restaurant = new Restaurant(name, phone, address, tagList, reviews);
 
         return new AddCommand(restaurant);
     }

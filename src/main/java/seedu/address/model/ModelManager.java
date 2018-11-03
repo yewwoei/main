@@ -15,7 +15,10 @@ import javafx.util.Pair;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
+import seedu.address.commons.events.model.DisplayProfileEvent;
+import seedu.address.commons.events.model.DisplayWeekScheduleEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
+import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
@@ -23,9 +26,15 @@ import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.group.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.restaurant.UserReview;
+import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.timetable.Date;
+import seedu.address.model.timetable.UniqueSchedule;
+import seedu.address.model.timetable.Week;
 import seedu.address.model.user.Password;
+import seedu.address.model.user.RestaurantReview;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
@@ -33,9 +42,13 @@ import seedu.address.model.user.Username;
  * Represents the in-memory model of the address book data.
  */
 public class ModelManager extends ComponentManager implements Model {
+
     private static final Logger logger = LogsCenter.getLogger(ModelManager.class);
     private final VersionedAddressBook versionedAddressBook;
     private final FilteredList<Restaurant> filteredRestaurants;
+    private final FilteredList<Jio> filteredJios;
+    private final FilteredList<Group> filteredGroups;
+    private List<Date> displayedDates;
     private UserData userData;
     private boolean isLoggedIn = false;
     private User currentUser = null;
@@ -51,6 +64,9 @@ public class ModelManager extends ComponentManager implements Model {
 
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
+        filteredJios = new FilteredList<>(userData.getJios());
+        filteredGroups = new FilteredList<>(FXCollections.observableArrayList(currentUser.getGroups()));
+        displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
     }
 
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs,
@@ -63,6 +79,13 @@ public class ModelManager extends ComponentManager implements Model {
         versionedAddressBook = new VersionedAddressBook(addressBook);
         filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
         this.userData = userData;
+        filteredJios = new FilteredList<>(userData.getJios());
+        if (currentUser != null) {
+            filteredGroups = new FilteredList<>(FXCollections.observableArrayList(currentUser.getGroups()));
+        } else {
+            filteredGroups = new FilteredList<>(FXCollections.observableArrayList(userData.getGroups()));
+        }
+        displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
     }
 
     public ModelManager() {
@@ -71,6 +94,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     //=========== Model Manager Miscellaneous Methods =+==========================================================
 
+    @Override
     public boolean isCurrentlyLoggedIn() {
         return this.isLoggedIn;
     }
@@ -85,7 +109,6 @@ public class ModelManager extends ComponentManager implements Model {
     public ReadOnlyAddressBook getAddressBook() {
         return versionedAddressBook;
     }
-
     /** Raises an event to indicate the model has changed */
     private void indicateAddressBookChanged() {
         raise(new AddressBookChangedEvent(versionedAddressBook));
@@ -93,7 +116,7 @@ public class ModelManager extends ComponentManager implements Model {
 
     /** Raises an event to indicate the model has changed */
     private void indicateUserDataChanged() {
-        raise(new UserDataChangedEvent(userData));
+        raise(new UserDataChangedEvent(userData, currentUser));
     }
 
     //=========== Model Manager Restaurants Methods =+============================================================
@@ -125,6 +148,11 @@ public class ModelManager extends ComponentManager implements Model {
         indicateAddressBookChanged();
     }
 
+    @Override
+    public void displayProfile() {
+        raise(new DisplayProfileEvent(currentUser));
+    }
+
     //=========== Filtered Restaurant List Accessors =============================================================
 
     /**
@@ -140,6 +168,8 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(predicate);
         filteredRestaurants.setPredicate(predicate);
     }
+
+
 
     //=========== Model Manager User Methods ====================================================================
 
@@ -167,6 +197,8 @@ public class ModelManager extends ComponentManager implements Model {
         requireAllNonNull(user);
         this.currentUser = user;
         this.isLoggedIn = true;
+        // reset the schedule.
+        resetDisplayedDates();
     }
 
     @Override
@@ -182,10 +214,26 @@ public class ModelManager extends ComponentManager implements Model {
     public void logoutUser() {
         this.currentUser = null;
         this.isLoggedIn = false;
+        resetDisplayedDates();
+        raise(new UserLoggedOutEvent());
     }
 
+    //================ Debt methods =================================
     @Override
-   public boolean hasUsernameSentRequest(Username friendUsername) {
+    public void addUserReview(Restaurant restaurant, Rating rating, WrittenReview writtenReview) {
+        UserReview newUserReview = new UserReview(currentUser.getUsername(), rating, writtenReview);
+        // Add to AddressBook
+        versionedAddressBook.addUserReviewToRestaurant(restaurant, newUserReview);
+        indicateAddressBookChanged();
+        // Add to UserData
+        RestaurantReview newRestauratnReview = new RestaurantReview(restaurant.getName(), rating, writtenReview);
+        currentUser.addRestaurantReviewToUser(newRestauratnReview);
+        indicateUserDataChanged();
+    }
+
+    //=========== Friendship methods =============================================================================
+    @Override
+    public boolean hasUsernameSentRequest(Username friendUsername) {
         User friend = userData.getUser(friendUsername);
         Username myUsername = currentUser.getUsername();
         List<Friendship> friendRequestLists = friend.getFriendRequests();
@@ -250,10 +298,10 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public boolean hasUsernameFriendRequest(Username friendusername) {
+    public boolean hasUsernameFriendRequest(Username friendUsername) {
         List<Friendship> friendRequestsLists = currentUser.getFriendRequests();
         for (Friendship f: friendRequestsLists) {
-            if (f.getFriendUsername().equals(friendusername)) {
+            if (f.getFriendUsername().equals(friendUsername)) {
                 return true;
             }
         }
@@ -309,7 +357,6 @@ public class ModelManager extends ComponentManager implements Model {
         User debtor = userData.getUser(debtorUsername);
         currentUser.addDebt(debtor, amount);
         indicateUserDataChanged();
-
     }
 
     @Override
@@ -332,6 +379,49 @@ public class ModelManager extends ComponentManager implements Model {
         currentUser.acceptedDebtRequest(creditor, amount, debtId);
         indicateUserDataChanged();
     }
+
+    @Override
+    public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
+        User creditor = userData.getUser(creditorUsername);
+        currentUser.deleteDebtRequest(creditor, amount, debtId);
+        indicateUserDataChanged();
+    }
+
+    @Override
+    public ObservableList<Friendship> getFriendsList() {
+        return FXCollections.observableArrayList(currentUser.getFriends());
+    }
+
+    @Override
+    public ObservableList<Friendship> getFriendRequestsList() {
+        return FXCollections.observableArrayList(currentUser.getFriendRequests());
+    }
+
+    @Override
+    public ObservableList<Debt> getDebtList() {
+        return FXCollections.observableArrayList(currentUser.getDebts());
+    }
+
+    @Override
+    public ObservableList<Debt> getCreditorList() {
+        return FXCollections.observableArrayList(currentUser.getCreditor());
+    }
+    @Override
+    public ObservableList<Debt> getDebtorList() {
+        return FXCollections.observableArrayList(currentUser.getDebtor());
+    }
+
+    @Override
+    public ObservableList<Debt> getDebtRequestReceived() {
+        return FXCollections.observableArrayList(currentUser.getDebtRequestReceived());
+    }
+
+    @Override
+    public ObservableList<Debt> getDebtRequestSent() {
+        return FXCollections.observableArrayList(currentUser.getDebtRequestSent());
+    }
+
+    //=============Friend & Group methods ====================
 
     @Override
     public boolean hasUsernameFriend(Username friendUsername) {
@@ -382,6 +472,7 @@ public class ModelManager extends ComponentManager implements Model {
         Group group = new Group(groupName, currentUser);
         currentUser.addGroup(group);
         userData.addGroup(group);
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
         indicateUserDataChanged();
     }
 
@@ -471,6 +562,7 @@ public class ModelManager extends ComponentManager implements Model {
         Group toDelete = userData.getGroupHashmap().get(groupName);
         currentUser.deleteGroup(toDelete);
         indicateUserDataChanged();
+        updateFilteredGroupList(PREDICATE_SHOW_ALL_GROUPS);
     }
 
     @Override
@@ -481,42 +573,26 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId) {
-        User creditor = userData.getUser(creditorUsername);
-        currentUser.deleteDebtRequest(creditor, amount, debtId);
-        indicateUserDataChanged();
-    }
-
-    @Override
-    public String listDebtHistory() {
-        return currentUser.listDebtHistory();
-    }
-
-    @Override
-    public String listDebtor() {
-        return currentUser.listDebtor();
-    }
-
-    @Override
-    public String listCreditor() {
-        return currentUser.listCreditor();
-    }
-
-    @Override
-    public String listDebtRequestReceived() {
-        return currentUser.listDebtRequestReceived();
-    }
-
-    @Override
-    public String listDebtRequestSent() {
-        return currentUser.listDebtRequestSent();
-    }
-
-    @Override
     public void deleteFriendRequest(Username friendUsername) {
         User friendUser = userData.getUser(friendUsername);
         currentUser.deleteFriendRequest(friendUser);
         indicateUserDataChanged();
+    }
+
+    @Override
+    public ObservableList<Group> getGroupRequestList() {
+        return FXCollections.observableArrayList(currentUser.getGroupRequests());
+    }
+
+    @Override
+    public ObservableList<Group> getGroupList() {
+        return FXCollections.observableArrayList(currentUser.getGroups());
+    }
+
+    @Override
+    public void updateFilteredGroupList(Predicate<Group> predicate) {
+        requireNonNull(predicate);
+        filteredGroups.setPredicate(predicate);
     }
 
     // =================== Timetable methods ===============================
@@ -535,16 +611,44 @@ public class ModelManager extends ComponentManager implements Model {
         indicateUserDataChanged();
     }
 
+
     @Override
     public boolean hasDateForCurrentUser(Date date) {
         requireNonNull(date);
         return currentUser.hasDateOnSchedule(date);
     }
 
+    @Override
+    public void displayUserWeekSchedule(Week weekNumber) {
+        updateDisplayedDatesUserWeek(weekNumber);
+        displayWeekSchedule(displayedDates);
+    }
+
+    private void updateDisplayedDatesUserWeek(Week weekNumber) {
+        requireNonNull(weekNumber);
+        this.displayedDates = currentUser.getFreeDatesForWeek(weekNumber);
+
+    }
+
+    private void displayWeekSchedule(List<Date> dates) {
+        raise(new DisplayWeekScheduleEvent(dates));
+    }
+
+    private void resetDisplayedDates() {
+        this.displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
+    }
+
     //=========== Jio methods ===============================================================================
+
     @Override
     public ObservableList<Jio> getJioList() {
         return FXCollections.observableArrayList(userData.getJios());
+    }
+
+    @Override
+    public void updateFilteredJioList(Predicate<Jio> predicate) {
+        requireNonNull(predicate);
+        filteredJios.setPredicate(predicate);
     }
 
     @Override
@@ -563,6 +667,7 @@ public class ModelManager extends ComponentManager implements Model {
     public void removeJioOfName(Name jioName) {
         requireNonNull(jioName);
         userData.removeJioOfName(jioName);
+        //updateFilteredJioList(PREDICATE_SHOW_ALL_JIOS);
         indicateUserDataChanged();
     }
 
@@ -579,7 +684,7 @@ public class ModelManager extends ComponentManager implements Model {
         }
 
         userData.addJio(jio);
-        updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
+        updateFilteredJioList(PREDICATE_SHOW_ALL_JIOS);
         indicateUserDataChanged();
     }
 
@@ -601,6 +706,7 @@ public class ModelManager extends ComponentManager implements Model {
         requireNonNull(jioName);
         return userData.isCreatorOfJio(jioName, currentUser);
     }
+
 
     //=========== Undo/Redo/Commit ===============================================================================
 
