@@ -54,7 +54,8 @@ public class RestaurantTest {
         assertFalse(RESTAURANT_A.isSameRestaurant(editedAlice));
 
         // same name, same phone, same email, different attributes -> returns true
-        editedAlice = new RestaurantBuilder(RESTAURANT_A).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND).build();
+        editedAlice = new RestaurantBuilder(RESTAURANT_A).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+                .build();
         assertTrue(RESTAURANT_A.isSameRestaurant(editedAlice));
     }
 
