@@ -9,6 +9,7 @@ import static seedu.address.testutil.TypicalRestaurants.RESTAURANT_B;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import org.junit.Assert;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
@@ -22,6 +23,10 @@ public class ModelManagerTest {
 
     private ModelManager modelManager = new ModelManager();
 
+    @Test
+    public void modelManagerIsNotNull() {
+        Assert.assertNotNull(new ModelManager());
+    }
     @Test
     public void hasRestaurant_nullRestaurant_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
@@ -51,10 +56,11 @@ public class ModelManagerTest {
                 .withRestaurant(RESTAURANT_B).build();
         AddressBook differentAddressBook = new AddressBook();
         UserPrefs userPrefs = new UserPrefs();
+        UserData userData = new UserData();
 
         // same values -> returns true
-        modelManager = new ModelManager(addressBook, userPrefs);
-        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs);
+        modelManager = new ModelManager(addressBook, userPrefs, userData);
+        ModelManager modelManagerCopy = new ModelManager(addressBook, userPrefs, userData);
         assertTrue(modelManager.equals(modelManagerCopy));
 
         // same object -> returns true
@@ -67,12 +73,12 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(5));
 
         // different addressBook -> returns false
-        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(differentAddressBook, userPrefs, userData)));
 
         // different filteredList -> returns false
         String[] keywords = RESTAURANT_A.getName().fullName.split("\\s+");
         modelManager.updateFilteredRestaurantList(new NameContainsKeywordsPredicate(Arrays.asList(keywords)));
-        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs)));
+        assertFalse(modelManager.equals(new ModelManager(addressBook, userPrefs, userData)));
 
         // resets modelManager to initial state for upcoming tests
         modelManager.updateFilteredRestaurantList(PREDICATE_SHOW_ALL_RESTAURANTS);
@@ -80,6 +86,6 @@ public class ModelManagerTest {
         // different userPrefs -> returns true
         UserPrefs differentUserPrefs = new UserPrefs();
         differentUserPrefs.setAddressBookFilePath(Paths.get("differentFilePath"));
-        assertTrue(modelManager.equals(new ModelManager(addressBook, differentUserPrefs)));
+        assertTrue(modelManager.equals(new ModelManager(addressBook, differentUserPrefs, userData)));
     }
 }

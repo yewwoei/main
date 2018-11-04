@@ -54,21 +54,8 @@ public class ModelManager extends ComponentManager implements Model {
     private User currentUser = null;
 
     /**
-     * Initializes a ModelManager with the given addressBook and userPrefs.
+     * Initializes a ModelManager with the given addressBook and userPrefs and userData.
      */
-    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs) {
-        super();
-        requireAllNonNull(addressBook, userPrefs);
-
-        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
-
-        versionedAddressBook = new VersionedAddressBook(addressBook);
-        filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
-        filteredJios = new FilteredList<>(userData.getJios());
-        filteredGroups = new FilteredList<>(FXCollections.observableArrayList(currentUser.getGroups()));
-        displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
-    }
-
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs,
                         UserData userData) {
         super();
@@ -89,7 +76,7 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     public ModelManager() {
-        this(new AddressBook(), new UserPrefs());
+        this(new AddressBook(), new UserPrefs(), new UserData());
     }
 
     //=========== Model Manager Miscellaneous Methods =+==========================================================
