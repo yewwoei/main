@@ -190,7 +190,6 @@ public class User {
         for (Friendship f: this.friends) {
             toReturn.add(f);
         }
-        //return listHelperFriend(friends.asUnmodifiableObservableList());
         return toReturn.asUnmodifiableObservableList();
     }
 
