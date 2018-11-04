@@ -111,7 +111,6 @@ public class EditCommandSystemTest extends AddressBookSystemTest {
         /* Case: filtered restaurant list, edit index within bounds of address book and restaurant list -> edited */
         showRestaurantsWithName(KEYWORD_MATCHING_STARBUCKS);
         index = INDEX_FIRST_RESTAURANT;
-//        System.out.println(getModel().getFilteredRestaurantList().size());
         assertTrue(index.getZeroBased() < getModel().getFilteredRestaurantList().size());
         command = EditCommand.COMMAND_WORD + " " + index.getOneBased() + " " + NAME_DESC_BOB;
         restaurantToEdit = getModel().getFilteredRestaurantList().get(index.getZeroBased());
