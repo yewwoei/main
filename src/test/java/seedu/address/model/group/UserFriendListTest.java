@@ -3,7 +3,6 @@ package seedu.address.model.group;
 import org.junit.Assert;
 import org.junit.Test;
 
-import javafx.collections.ObservableList;
 import seedu.address.model.Name;
 import seedu.address.model.user.Email;
 import seedu.address.model.user.Password;
