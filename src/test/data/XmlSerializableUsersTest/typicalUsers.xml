@@ -6,6 +6,11 @@
         <name>Asa Cockburn</name>
         <phone>99919001</phone>
         <email>cockburn123@example.com</email>
+        <restaurantReviews>
+            <rating>4</rating>
+            <restaurantName>Waa Cow</restaurantName>
+            <writtenReview>I tried the Beef Sushi Bowl and it was amazing.</writtenReview>
+        </restaurantReviews>
     </user>
     <user>
         <username>benny123</username>
@@ -15,7 +20,7 @@
         <email>benny123@example.com</email>
     </user>
     <user>
-        <username>carlymaximus</username>
+        <username>carrlymaximus</username>
         <password>pAssw0rd</password>
         <name>Carly Maximus</name>
         <phone>99209001</phone>

@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
@@ -8,6 +10,7 @@ import seedu.address.model.Name;
 import seedu.address.model.user.Email;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Phone;
+import seedu.address.model.user.RestaurantReview;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
@@ -29,6 +32,9 @@ public class XmlAdaptedUser {
     @XmlElement(required = true)
     private String email;
 
+    @XmlElement(required = true)
+    private List<XmlAdaptedRestaurantReview> restaurantReviews;
+
     /**
      * Constructs an XmlAdaptedRestaurant.
      * This is the no-arg constructor that is required by JAXB.
@@ -48,8 +54,6 @@ public class XmlAdaptedUser {
 
     /**
      * Converts a given User into this class for JAXB use.
-     *
-     * @param source future changes to this will not affect the created XmlAdadptedUser
      */
     public XmlAdaptedUser(User source) {
         username = source.getUsername().username;
@@ -57,6 +61,10 @@ public class XmlAdaptedUser {
         name = source.getName().fullName;
         phone = source.getPhone().value;
         email = source.getEmail().value;
+        restaurantReviews = new ArrayList<>();
+        for (RestaurantReview rr: source.getRestaurantReviews()) {
+            restaurantReviews.add(new XmlAdaptedRestaurantReview(rr));
+        }
     }
 
     /**
@@ -107,7 +115,19 @@ public class XmlAdaptedUser {
         }
         final Email modelEmail = new Email(email);
 
-        return new User(modelUsername, modelPassword, modelName, modelPhone, modelEmail);
+        User modelUser = new User(modelUsername, modelPassword, modelName, modelPhone, modelEmail);
+        if (restaurantReviews == null) {
+            return modelUser;
+            // Break
+        }
+
+        // Otherwise, if there are reviews, add them
+        for (XmlAdaptedRestaurantReview restaurantReview: restaurantReviews) {
+            RestaurantReview rr = restaurantReview.toModelType();
+            modelUser.addRestaurantReviewToUser(rr);
+        }
+
+        return modelUser;
     }
 
     @Override

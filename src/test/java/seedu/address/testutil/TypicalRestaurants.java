@@ -8,6 +8,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_AMY;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_PHONE_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_FRIEND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_WAA_COW_REVIEWS;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,24 +22,28 @@ import seedu.address.model.restaurant.Restaurant;
  */
 public class TypicalRestaurants {
 
-    public static final Restaurant ALICE = new RestaurantBuilder().withName("Alice Pauline")
-            .withAddress("123, Jurong West Ave 6, #08-111")
-            .withPhone("94351253")
-            .withTags("friends").build();
-    public static final Restaurant BENSON = new RestaurantBuilder().withName("Benson Meier")
-            .withAddress("311, Clementi Ave 2, #02-25")
-            .withPhone("98765432")
-            .withTags("owesMoney", "friends").build();
-    public static final Restaurant CARL = new RestaurantBuilder().withName("Carl Kurz").withPhone("95352563")
-            .withAddress("wall street").build();
-    public static final Restaurant DANIEL = new RestaurantBuilder().withName("Daniel Meier").withPhone("87652533")
-            .withAddress("10th street").withTags("friends").build();
-    public static final Restaurant ELLE = new RestaurantBuilder().withName("Elle Meyer").withPhone("9482224")
-            .withAddress("michegan ave").build();
-    public static final Restaurant FIONA = new RestaurantBuilder().withName("Fiona Kunz").withPhone("9482427")
-            .withAddress("little tokyo").build();
-    public static final Restaurant GEORGE = new RestaurantBuilder().withName("George Best").withPhone("9482442")
-            .withAddress("4th street").build();
+    public static final Restaurant RESTAURANT_A = new RestaurantBuilder().withName("Waa Cow")
+            .withAddress("Stephen Riady Centre")
+            .withPhone("63421111")
+            .withTags("Western")
+            .withReviews(VALID_WAA_COW_REVIEWS)
+            .build();
+    public static final Restaurant RESTAURANT_B = new RestaurantBuilder().withName("The Royals Bistro")
+            .withAddress("Town Plaza")
+            .withPhone("61221218")
+            .withTags("Italian", "Halal").build();
+    public static final Restaurant RESTAURANT_C = new RestaurantBuilder().withName("Subway").withPhone("66596109")
+            .withAddress("Town Plaza").build();
+    public static final Restaurant RESTAURANT_D = new RestaurantBuilder().withName("Starbucks").withPhone("66596081")
+            .withAddress("Education Resource Centre").withTags("Cafe").build();
+    public static final Restaurant RESTAURANT_E = new RestaurantBuilder().withName("Spice Table by Pines")
+            .withPhone("63399912")
+            .withAddress("Town Plaza").build();
+    public static final Restaurant RESTAURANT_F = new RestaurantBuilder().withName("Sapore Italian Restaurant")
+            .withPhone("62620287")
+            .withAddress("Town Plaza").build();
+    public static final Restaurant RESTAURANT_G = new RestaurantBuilder().withName("Pizza Hut").withPhone("62353535")
+            .withAddress("Stephen Riady Centre").build();
 
     // Manually added
     public static final Restaurant HOON = new RestaurantBuilder().withName("Hoon Meier").withPhone("8482424")
@@ -53,7 +58,7 @@ public class TypicalRestaurants {
             .withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND, VALID_TAG_FRIEND)
             .build();
 
-    public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
+    public static final String KEYWORD_MATCHING_STARBUCKS = "starbucks"; // A keyword that matches MEIER
 
     private TypicalRestaurants() {} // prevents instantiation
 
@@ -69,6 +74,7 @@ public class TypicalRestaurants {
     }
 
     public static List<Restaurant> getTypicalRestaurants() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(RESTAURANT_A, RESTAURANT_B,
+                RESTAURANT_C, RESTAURANT_D, RESTAURANT_E, RESTAURANT_F, RESTAURANT_G));
     }
 }

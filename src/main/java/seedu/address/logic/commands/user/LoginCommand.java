@@ -17,7 +17,7 @@ import seedu.address.model.user.Username;
  */
 public class LoginCommand extends Command {
 
-    public static final String COMMAND_WORD = "Login";
+    public static final String COMMAND_WORD = "login";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Allows a to login to use Makan Book features. "
             + "Parameters: "

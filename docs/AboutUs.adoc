@@ -17,7 +17,7 @@ image::evanmok2401.png[width="150", align="left"]
 {empty}[https://github.com/evanmok2401[github]]
 
 Role: Team Lead +
-Responsibilities: Testing, In charge of Storage Component
+Responsibilities: Integration, In charge of Storage Component
 
 '''
 
@@ -26,7 +26,7 @@ image::yewwoei.png[width="150", align="left"]
 {empty} [https://github.com/yewwoei[github]]
 
 Role: Developer +
-Responsibilities: Integration, In charge of Logic Component
+Responsibilities: Testing, In charge of Logic Component
 
 '''
 

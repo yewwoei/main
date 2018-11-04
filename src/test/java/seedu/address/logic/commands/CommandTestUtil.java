@@ -9,6 +9,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import seedu.address.commons.core.index.Index;
@@ -17,13 +18,24 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.restaurant.NameContainsKeywordsPredicate;
+import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.restaurant.Reviews;
+import seedu.address.model.restaurant.UserReview;
+import seedu.address.model.restaurant.WrittenReview;
+import seedu.address.model.user.Username;
 import seedu.address.testutil.EditRestaurantDescriptorBuilder;
 
 /**
  * Contains helper methods for testing commands.
  */
 public class CommandTestUtil {
+
+    public static final UserReview VALID_USER_REVIEW = new UserReview(new Username("navekom"),
+            new Rating(3), new WrittenReview("I tried the Ultimate Beef Sushi"
+            + " Experience and they were delicious."));
+    public static final Reviews VALID_WAA_COW_REVIEWS = new Reviews("3.00",
+            Collections.singletonList(VALID_USER_REVIEW));
 
     public static final String VALID_NAME_AMY = "Amy Bee";
     public static final String VALID_NAME_BOB = "Bob Choo";

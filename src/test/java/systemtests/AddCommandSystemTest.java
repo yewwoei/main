@@ -16,13 +16,13 @@ import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_HUSBAND;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_NAME_BOB;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
-import static seedu.address.testutil.TypicalRestaurants.ALICE;
 import static seedu.address.testutil.TypicalRestaurants.AMY;
 import static seedu.address.testutil.TypicalRestaurants.BOB;
-import static seedu.address.testutil.TypicalRestaurants.CARL;
 import static seedu.address.testutil.TypicalRestaurants.HOON;
 import static seedu.address.testutil.TypicalRestaurants.IDA;
-import static seedu.address.testutil.TypicalRestaurants.KEYWORD_MATCHING_MEIER;
+import static seedu.address.testutil.TypicalRestaurants.KEYWORD_MATCHING_STARBUCKS;
+import static seedu.address.testutil.TypicalRestaurants.RESTAURANT_A;
+import static seedu.address.testutil.TypicalRestaurants.RESTAURANT_C;
 
 import org.junit.Test;
 
@@ -77,7 +77,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: add to empty address book -> added */
         deleteAllRestaurants();
-        assertCommandSuccess(ALICE);
+        assertCommandSuccess(RESTAURANT_A);
 
         /* Case: add a restaurant with tags, command with parameters in random order -> added */
         toAdd = BOB;
@@ -91,7 +91,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* -------------------------- Perform add operation on the shown filtered list ------------------------------ */
 
         /* Case: filters the restaurant list before adding -> added */
-        showRestaurantsWithName(KEYWORD_MATCHING_MEIER);
+        showRestaurantsWithName(KEYWORD_MATCHING_STARBUCKS);
         assertCommandSuccess(IDA);
 
         /* ------------ Perform add operation while a restaurant card is selected --------------- */
@@ -99,7 +99,7 @@ public class AddCommandSystemTest extends AddressBookSystemTest {
         /* Case: selects first card in the restaurant list, add a restaurant
         -> added, card selection remains unchanged */
         selectRestaurant(Index.fromOneBased(1));
-        assertCommandSuccess(CARL);
+        assertCommandSuccess(RESTAURANT_C);
 
         /* ------------------- Perform invalid add operations ----------------------- */
 

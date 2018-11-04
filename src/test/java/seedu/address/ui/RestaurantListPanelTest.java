@@ -101,8 +101,15 @@ public class RestaurantListPanelTest extends GuiUnitTest {
             builder.append("<restaurants>\n");
             builder.append("<name>").append(i).append("a</name>\n");
             builder.append("<phone>000</phone>\n");
-            builder.append("<email>a@aa</email>\n");
             builder.append("<address>a</address>\n");
+            builder.append("<reviews>\n");
+            builder.append("<rating>3.00</rating>");
+            builder.append("<userReviews>\n");
+            builder.append("<rating>3</rating>\n");
+            builder.append("<username>").append(i).append("u</username>\n");
+            builder.append("<writtenReview>rvw</writtenReview>\n");
+            builder.append("</userReviews>\n");
+            builder.append("</reviews>\n");
             builder.append("</restaurants>\n");
         }
         builder.append("</addressbook>\n");

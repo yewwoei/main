@@ -5,7 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_ADDRESS_BOB;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_HUSBAND;
-import static seedu.address.testutil.TypicalRestaurants.ALICE;
+import static seedu.address.testutil.TypicalRestaurants.RESTAURANT_A;
 import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 
 import java.util.Arrays;
@@ -51,9 +51,10 @@ public class AddressBookTest {
     @Test
     public void resetData_withDuplicateRestaurants_throwsDuplicateRestaurantException() {
         // Two restaurants with the same identity fields
-        Restaurant editedAlice = new RestaurantBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        Restaurant editedAlice = new RestaurantBuilder(RESTAURANT_A).withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
-        List<Restaurant> newRestaurants = Arrays.asList(ALICE, editedAlice);
+        List<Restaurant> newRestaurants = Arrays.asList(RESTAURANT_A, editedAlice);
         AddressBookStub newData = new AddressBookStub(newRestaurants);
 
         thrown.expect(DuplicateRestaurantException.class);
@@ -68,19 +69,20 @@ public class AddressBookTest {
 
     @Test
     public void hasRestaurant_restaurantNotInAddressBook_returnsFalse() {
-        assertFalse(addressBook.hasRestaurant(ALICE));
+        assertFalse(addressBook.hasRestaurant(RESTAURANT_A));
     }
 
     @Test
     public void hasRestaurant_restaurantInAddressBook_returnsTrue() {
-        addressBook.addRestaurant(ALICE);
-        assertTrue(addressBook.hasRestaurant(ALICE));
+        addressBook.addRestaurant(RESTAURANT_A);
+        assertTrue(addressBook.hasRestaurant(RESTAURANT_A));
     }
 
     @Test
     public void hasRestaurant_restaurantWithSameIdentityFieldsInAddressBook_returnsTrue() {
-        addressBook.addRestaurant(ALICE);
-        Restaurant editedAlice = new RestaurantBuilder(ALICE).withAddress(VALID_ADDRESS_BOB).withTags(VALID_TAG_HUSBAND)
+        addressBook.addRestaurant(RESTAURANT_A);
+        Restaurant editedAlice = new RestaurantBuilder(RESTAURANT_A).withAddress(VALID_ADDRESS_BOB)
+                .withTags(VALID_TAG_HUSBAND)
                 .build();
         assertTrue(addressBook.hasRestaurant(editedAlice));
     }
