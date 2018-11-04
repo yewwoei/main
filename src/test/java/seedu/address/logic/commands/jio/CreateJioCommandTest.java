@@ -10,6 +10,8 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserData;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.user.User;
+import seedu.address.testutil.UserBuilder;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -21,7 +23,8 @@ import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 class CreateJioCommandTest {
 
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData(),
+            new UserBuilder().build());
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
