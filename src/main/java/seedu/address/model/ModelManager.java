@@ -14,11 +14,7 @@ import javafx.collections.transformation.FilteredList;
 import javafx.util.Pair;
 import seedu.address.commons.core.ComponentManager;
 import seedu.address.commons.core.LogsCenter;
-import seedu.address.commons.events.model.AddressBookChangedEvent;
-import seedu.address.commons.events.model.DisplayProfileEvent;
-import seedu.address.commons.events.model.DisplayWeekScheduleEvent;
-import seedu.address.commons.events.model.UserDataChangedEvent;
-import seedu.address.commons.events.model.UserLoggedOutEvent;
+import seedu.address.commons.events.model.*;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
@@ -694,6 +690,10 @@ public class ModelManager extends ComponentManager implements Model {
         return userData.isCreatorOfJio(jioName, currentUser);
     }
 
+    @Override
+    public void listJio(ObservableList<Jio> list) {
+        raise(new ListJioCommandEvent(list));
+    }
 
     //=========== Undo/Redo/Commit ===============================================================================
 

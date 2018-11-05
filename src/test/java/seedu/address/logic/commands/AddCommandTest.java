@@ -283,6 +283,9 @@ public class AddCommandTest {
         }
 
         @Override
+        public void listJio(ObservableList<Jio> list) {}
+
+        @Override
         public void addUser(User user) {}
 
         @Override
