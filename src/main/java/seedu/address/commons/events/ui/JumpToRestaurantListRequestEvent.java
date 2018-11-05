@@ -6,14 +6,12 @@ import seedu.address.commons.events.BaseEvent;
 /**
  * Indicates a request to jump to the list of restaurants
  */
-public class JumpToListRequestEvent extends BaseEvent {
+public class JumpToRestaurantListRequestEvent extends BaseEvent {
 
     public final int targetIndex;
-    public final String type;
 
-    public JumpToListRequestEvent(String type, Index targetIndex) {
+    public JumpToRestaurantListRequestEvent(Index targetIndex) {
         this.targetIndex = targetIndex.getZeroBased();
-        this.type = type;
     }
 
     @Override

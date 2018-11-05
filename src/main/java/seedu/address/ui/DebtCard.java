@@ -18,6 +18,8 @@ public class DebtCard extends UiPart<Region> {
     @FXML
     private HBox cardPane;
     @FXML
+    private Label id;
+    @FXML
     private Label creditor;
     @FXML
     private Label debtor;
@@ -29,6 +31,7 @@ public class DebtCard extends UiPart<Region> {
     public DebtCard(Debt debt, int displayedIndex) {
         super(FXML);
         this.debt = debt;
+        id.setText(displayedIndex + ". ");
         creditor.setText("Creditor: " + debt.getCreditor().getUsername().toString());
         debtor.setText("Debtor: " + debt.getDebtor().getUsername().toString());
         amount.setText("Amount: " + String.valueOf(debt.getAmount().toDouble()));
