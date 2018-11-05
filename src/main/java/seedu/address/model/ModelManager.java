@@ -17,6 +17,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.AddressBookChangedEvent;
 import seedu.address.commons.events.model.DisplayProfileEvent;
 import seedu.address.commons.events.model.DisplayWeekScheduleEvent;
+import seedu.address.commons.events.model.ListJioCommandEvent;
 import seedu.address.commons.events.model.ListingDebtCommandEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.commons.events.model.UserLoggedOutEvent;
@@ -695,6 +696,10 @@ public class ModelManager extends ComponentManager implements Model {
         return userData.isCreatorOfJio(jioName, currentUser);
     }
 
+    @Override
+    public void listJio(ObservableList<Jio> list) {
+        raise(new ListJioCommandEvent(list));
+    }
 
     //=========== Undo/Redo/Commit ===============================================================================
 

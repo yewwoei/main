@@ -220,6 +220,8 @@ public interface Model {
 
     boolean isCurrentUserCreatorOfJio(Name jioName);
 
+    void listJio(ObservableList<Jio> list);
+
     //=========== Undo/Redo/Commit ===============================================================================
 
     /**

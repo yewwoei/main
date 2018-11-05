@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 import seedu.address.commons.core.Config;
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
+import seedu.address.commons.events.model.ListJioCommandEvent;
 import seedu.address.commons.events.model.ListingDebtCommandEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
@@ -352,5 +353,15 @@ public class MainWindow extends UiPart<Stage> {
             friendListPanel = new ListPanel<>(logic.getFriendsList());
             featuresListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
         }
+    }
+
+    /**
+     * Updates list panel with listing command.
+     */
+    @Subscribe
+    @FXML
+    void handleListJioCommandEvent(ListJioCommandEvent event) {
+        jioListPanel = new ListPanel<>(event.listingItem);
+        featuresListPanelPlaceholder.getChildren().add(jioListPanel.getRoot());
     }
 }
