@@ -13,6 +13,7 @@ import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 
 import org.junit.Rule;
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.events.ui.JumpToRestaurantListRequestEvent;
@@ -104,7 +105,8 @@ public class SelectRestaurantCommandTest {
 
         assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
 
-        JumpToRestaurantListRequestEvent lastEvent = (JumpToRestaurantListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
+        JumpToRestaurantListRequestEvent lastEvent =
+                (JumpToRestaurantListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
         assertEquals(index, Index.fromZeroBased(lastEvent.targetIndex));
     }
 
