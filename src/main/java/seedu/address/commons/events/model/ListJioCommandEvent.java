@@ -4,6 +4,9 @@ import javafx.collections.ObservableList;
 import seedu.address.commons.events.BaseEvent;
 import seedu.address.model.jio.Jio;
 
+/**
+ * Event when listJio command.
+ */
 public class ListJioCommandEvent extends BaseEvent {
     public final ObservableList<Jio> listingItem;
     public ListJioCommandEvent(ObservableList<Jio> listingItem) {
