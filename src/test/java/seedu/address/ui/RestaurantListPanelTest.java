@@ -12,13 +12,12 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import org.junit.Test;
-
 import guitests.guihandles.RestaurantCardHandle;
 import guitests.guihandles.RestaurantListPanelHandle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import org.junit.Test;
+import seedu.address.commons.events.ui.JumpToRestaurantListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
 import seedu.address.model.restaurant.Restaurant;
@@ -28,8 +27,8 @@ public class RestaurantListPanelTest extends GuiUnitTest {
     private static final ObservableList<Restaurant> TYPICAL_RESTAURANTS =
             FXCollections.observableList(getTypicalRestaurants());
 
-    private static final JumpToListRequestEvent JUMP_TO_SECOND_EVENT =
-            new JumpToListRequestEvent(INDEX_SECOND_RESTAURANT);
+    private static final JumpToRestaurantListRequestEvent JUMP_TO_SECOND_EVENT =
+            new JumpToRestaurantListRequestEvent(INDEX_SECOND_RESTAURANT);
 
     private static final Path TEST_DATA_FOLDER = Paths.get("src", "test", "data", "sandbox");
 
