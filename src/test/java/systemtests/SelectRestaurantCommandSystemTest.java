@@ -26,7 +26,8 @@ public class SelectRestaurantCommandSystemTest extends AddressBookSystemTest {
         /* Case: select the first card in the restaurant list, command with leading spaces and trailing spaces
          * -> selected
          */
-        String command = "   " + SelectRestaurantCommand.COMMAND_WORD + " " + INDEX_FIRST_RESTAURANT.getOneBased() + "   ";
+        String command = "   " + SelectRestaurantCommand.COMMAND_WORD
+                + " " + INDEX_FIRST_RESTAURANT.getOneBased() + "   ";
         assertCommandSuccess(command, INDEX_FIRST_RESTAURANT);
 
         /* Case: select the last card in the restaurant list -> selected */

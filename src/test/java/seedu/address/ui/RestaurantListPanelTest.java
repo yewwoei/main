@@ -12,16 +12,18 @@ import static seedu.address.ui.testutil.GuiTestAssert.assertCardEquals;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
-import guitests.guihandles.RestaurantCardHandle;
-import guitests.guihandles.RestaurantListPanelHandle;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import org.junit.Test;
 import seedu.address.commons.events.ui.JumpToRestaurantListRequestEvent;
 import seedu.address.commons.util.FileUtil;
 import seedu.address.commons.util.XmlUtil;
+
 import seedu.address.model.restaurant.Restaurant;
 import seedu.address.storage.XmlSerializableAddressBook;
+
+import guitests.guihandles.RestaurantCardHandle;
+import guitests.guihandles.RestaurantListPanelHandle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 public class RestaurantListPanelTest extends GuiUnitTest {
     private static final ObservableList<Restaurant> TYPICAL_RESTAURANTS =

@@ -94,12 +94,14 @@ public class SelectRestaurantCommandTest {
     }
 
     /**
-     * Executes a {@code SelectRestaurantCommand} with the given {@code index}, and checks that {@code JumpToListRequestEvent}
+     * Executes a {@code SelectRestaurantCommand} with the given {@code index},
+     * and checks that {@code JumpToListRequestEvent}
      * is raised with the correct index.
      */
     private void assertExecutionSuccess(Index index) {
         SelectRestaurantCommand selectCommand = new SelectRestaurantCommand(index);
-        String expectedMessage = String.format(SelectRestaurantCommand.MESSAGE_SELECT_RESTAURANT_SUCCESS, index.getOneBased());
+        String expectedMessage =
+                String.format(SelectRestaurantCommand.MESSAGE_SELECT_RESTAURANT_SUCCESS, index.getOneBased());
 
         assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
 
@@ -108,8 +110,8 @@ public class SelectRestaurantCommandTest {
     }
 
     /**
-     * Executes a {@code SelectRestaurantCommand} with the given {@code index}, and checks that a {@code CommandException}
-     * is thrown with the {@code expectedMessage}.
+     * Executes a {@code SelectRestaurantCommand} with the given {@code index},
+     * and checks that a {@code CommandException} is thrown with the {@code expectedMessage}.
      */
     private void assertExecutionFailure(Index index, String expectedMessage) {
         SelectRestaurantCommand selectCommand = new SelectRestaurantCommand(index);
