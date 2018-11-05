@@ -36,31 +36,30 @@ public class SelectOtherCommand extends Command {
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
-
-        if(ListPanel.getType() == null) {
+        if (ListPanel.getType() == null) {
             throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
 
         int size;
 
         switch (ListPanel.getType()) {
-            case "Friends":
-                size = model.getFriendsList().size();
-                break;
-            case "FriendRequests":
-                size = model.getFriendRequestsList().size();
-                break;
-            case "Jio":
-                size = model.getJioList().size();
-                break;
-            case "Debt":
-                size = model.getDebtList().size();
-                break;
-            case "Group":
-                size = model.getGroupList().size();
-                break;
-            default:
-                throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
+        case "Friends":
+            size = model.getFriendsList().size();
+            break;
+        case "FriendRequests":
+            size = model.getFriendRequestsList().size();
+            break;
+        case "Jio":
+            size = model.getJioList().size();
+            break;
+        case "Debt":
+            size = model.getDebtList().size();
+            break;
+        case "Group":
+            size = model.getGroupList().size();
+            break;
+        default:
+            throw new CommandException(Messages.MESSAGE_INVALID_ITEM_DISPLAYED_INDEX);
         }
 
         if (targetIndex.getZeroBased() >= size) {
