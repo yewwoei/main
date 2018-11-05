@@ -280,5 +280,7 @@ public interface Model {
 
     ObservableList<Debt> getDebtRequestSent();
 
+    void debtListing(ObservableList<Debt> list);
+
 }
 
