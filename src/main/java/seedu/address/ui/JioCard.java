@@ -26,6 +26,8 @@ public class JioCard extends UiPart<Region> {
     @javafx.fxml.FXML
     private HBox cardPane;
     @FXML
+    private Label id;
+    @FXML
     private Label name;
     @FXML
     private Label week;
@@ -41,6 +43,7 @@ public class JioCard extends UiPart<Region> {
     public JioCard(Jio jio, int displayedIndex) {
         super(FXML);
         this.jio = jio;
+        id.setText(displayedIndex + ". ");
         name.setText(jio.getName().fullName);
         week.setText("Week " + jio.getDate().getWeek().toString());
         day.setText(jio.getDate().getDay().toString());

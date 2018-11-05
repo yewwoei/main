@@ -25,11 +25,14 @@ public class GroupCard extends UiPart<Region> {
     @javafx.fxml.FXML
     private HBox cardPane;
     @javafx.fxml.FXML
+    private Label id;
+    @javafx.fxml.FXML
     private Label name;
 
     public GroupCard(Group group, int displayedIndex) {
         super(FXML);
         this.group = group;
+        id.setText(displayedIndex + ". ");
         name.setText(group.getGroupName().toString());
     }
 

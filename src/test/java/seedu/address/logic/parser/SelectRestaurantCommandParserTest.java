@@ -7,23 +7,24 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SelectRestaurantCommand;
 
 /**
  * Test scope: similar to {@code DeleteCommandParserTest}.
  * @see DeleteCommandParserTest
  */
-public class SelectCommandParserTest {
+public class SelectRestaurantCommandParserTest {
 
-    private SelectCommandParser parser = new SelectCommandParser();
+    private SelectRestaurantCommandParser parser = new SelectRestaurantCommandParser();
 
     @Test
-    public void parse_validArgs_returnsSelectCommand() {
-        assertParseSuccess(parser, "1", new SelectCommand(INDEX_FIRST_RESTAURANT));
+    public void parse_validArgs_returnsSelectRestaurantCommand() {
+        assertParseSuccess(parser, "1", new SelectRestaurantCommand(INDEX_FIRST_RESTAURANT));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectCommand.MESSAGE_USAGE));
+        assertParseFailure(parser, "a",
+                String.format(MESSAGE_INVALID_COMMAND_FORMAT, SelectRestaurantCommand.MESSAGE_USAGE));
     }
 }
