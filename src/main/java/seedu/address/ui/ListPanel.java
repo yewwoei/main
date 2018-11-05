@@ -28,7 +28,7 @@ import seedu.address.model.restaurant.Restaurant;
 public class ListPanel<T> extends UiPart<Region> {
     private static final String FXML = "ListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ListPanel.class);
-    private String type;
+    private static String type;
 
     @javafx.fxml.FXML
     private ListView<T> listView;
@@ -53,6 +53,10 @@ public class ListPanel<T> extends UiPart<Region> {
                         raise(new PanelSelectionChangedEvent(newValue));
                     }
                 });
+    }
+
+    public static String getType() {
+        return type;
     }
 
     @Subscribe
