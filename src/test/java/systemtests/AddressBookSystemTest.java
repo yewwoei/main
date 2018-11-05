@@ -32,7 +32,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SelectCommand;
+import seedu.address.logic.commands.SelectRestaurantCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.testutil.TypicalRestaurants;
@@ -154,7 +154,7 @@ public abstract class AddressBookSystemTest {
      * Selects the restaurant at {@code index} of the displayed list.
      */
     protected void selectRestaurant(Index index) {
-        executeCommand(SelectCommand.COMMAND_WORD + " " + index.getOneBased());
+        executeCommand(SelectRestaurantCommand.COMMAND_WORD + " " + index.getOneBased());
         assertEquals(index.getZeroBased(), getRestaurantListPanel().getSelectedCardIndex());
     }
 

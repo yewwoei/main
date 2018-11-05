@@ -7,7 +7,7 @@ import java.util.List;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.JumpToRestaurantListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -16,9 +16,9 @@ import seedu.address.model.restaurant.Restaurant;
 /**
  * Selects a restaurant identified using it's displayed index from the address book.
  */
-public class SelectCommand extends Command {
+public class SelectRestaurantCommand extends Command {
 
-    public static final String COMMAND_WORD = "select";
+    public static final String COMMAND_WORD = "selectRestaurant";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Selects the restaurant identified by the index number used in the displayed restaurant list.\n"
@@ -29,7 +29,7 @@ public class SelectCommand extends Command {
 
     private final Index targetIndex;
 
-    public SelectCommand(Index targetIndex) {
+    public SelectRestaurantCommand(Index targetIndex) {
         this.targetIndex = targetIndex;
     }
 
@@ -43,7 +43,7 @@ public class SelectCommand extends Command {
             throw new CommandException(Messages.MESSAGE_INVALID_RESTAURANT_DISPLAYED_INDEX);
         }
 
-        EventsCenter.getInstance().post(new JumpToListRequestEvent(targetIndex));
+        EventsCenter.getInstance().post(new JumpToRestaurantListRequestEvent(targetIndex));
         return new CommandResult(String.format(MESSAGE_SELECT_RESTAURANT_SUCCESS, targetIndex.getOneBased()));
 
     }
@@ -51,7 +51,7 @@ public class SelectCommand extends Command {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof SelectCommand // instanceof handles nulls
-                && targetIndex.equals(((SelectCommand) other).targetIndex)); // state check
+                || (other instanceof SelectRestaurantCommand // instanceof handles nulls
+                && targetIndex.equals(((SelectRestaurantCommand) other).targetIndex)); // state check
     }
 }
