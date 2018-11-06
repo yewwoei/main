@@ -19,4 +19,5 @@ public class AddDebtCommandTest {
         thrown.expect(NullPointerException.class);
         new AddDebtCommand(null, null);
     }
+
 }
