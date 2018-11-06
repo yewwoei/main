@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<users>
+    <!-- Friendship with invalid initiatedBy field -->
+    <friendship>
+        <friendUser>themyth</friendUser>
+        <me>brotherLoong</me>
+        <initiatedBy>google</initiatedBy>
+        <friendshipStatus>ACCEPTED</friendshipStatus>
+    </friendship>
+</users>
