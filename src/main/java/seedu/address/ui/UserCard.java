@@ -24,6 +24,8 @@ public class UserCard extends UiPart<Region> {
     @javafx.fxml.FXML
     private HBox cardPane;
     @javafx.fxml.FXML
+    private Label id;
+    @javafx.fxml.FXML
     private Label username;
     @javafx.fxml.FXML
     private Label name;
@@ -35,6 +37,7 @@ public class UserCard extends UiPart<Region> {
     public UserCard(User user, int displayedIndex) {
         super(FXML);
         this.user = user;
+        id.setText(displayedIndex + ". ");
         username.setText(user.getUsername().toString());
         name.setText(user.getName().toString());
         email.setText(user.getEmail().toString());

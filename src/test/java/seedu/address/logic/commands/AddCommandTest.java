@@ -246,6 +246,11 @@ public class AddCommandTest {
         // To be Done Later, fake tests for now
 
         @Override
+        public void debtListing(ObservableList<Debt> list) {
+
+        }
+
+        @Override
         public ObservableList<Jio> getJioList() {
             throw new AssertionError("This method should not be called.");
         }
@@ -281,6 +286,9 @@ public class AddCommandTest {
         public boolean isCurrentUserCreatorOfJio(Name jioName) {
             return true;
         }
+
+        @Override
+        public void listJio(ObservableList<Jio> list) {}
 
         @Override
         public void addUser(User user) {}

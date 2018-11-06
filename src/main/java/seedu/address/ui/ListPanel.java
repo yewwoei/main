@@ -26,9 +26,9 @@ import seedu.address.model.restaurant.Restaurant;
  * Panel containing the list of user data.
  */
 public class ListPanel<T> extends UiPart<Region> {
+    private static String type;
     private static final String FXML = "ListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ListPanel.class);
-    private String type;
 
     @javafx.fxml.FXML
     private ListView<T> listView;
@@ -53,6 +53,10 @@ public class ListPanel<T> extends UiPart<Region> {
                         raise(new PanelSelectionChangedEvent(newValue));
                     }
                 });
+    }
+
+    public static String getType() {
+        return type;
     }
 
     @Subscribe

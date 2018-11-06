@@ -16,22 +16,23 @@ import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
-import seedu.address.commons.events.ui.JumpToListRequestEvent;
+import seedu.address.commons.events.ui.JumpToRestaurantListRequestEvent;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.UserData;
 import seedu.address.model.UserPrefs;
 import seedu.address.ui.testutil.EventsCollectorRule;
 
 /**
- * Contains integration tests (interaction with the Model) for {@code SelectCommand}.
+ * Contains integration tests (interaction with the Model) for {@code SelectRestaurantCommand}.
  */
-public class SelectCommandTest {
+public class SelectRestaurantCommandTest {
     @Rule
     public final EventsCollectorRule eventsCollectorRule = new EventsCollectorRule();
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
-    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData());
+    private Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -72,14 +73,14 @@ public class SelectCommandTest {
 
     @Test
     public void equals() {
-        SelectCommand selectFirstCommand = new SelectCommand(INDEX_FIRST_RESTAURANT);
-        SelectCommand selectSecondCommand = new SelectCommand(INDEX_SECOND_RESTAURANT);
+        SelectRestaurantCommand selectFirstCommand = new SelectRestaurantCommand(INDEX_FIRST_RESTAURANT);
+        SelectRestaurantCommand selectSecondCommand = new SelectRestaurantCommand(INDEX_SECOND_RESTAURANT);
 
         // same object -> returns true
         assertTrue(selectFirstCommand.equals(selectFirstCommand));
 
         // same values -> returns true
-        SelectCommand selectFirstCommandCopy = new SelectCommand(INDEX_FIRST_RESTAURANT);
+        SelectRestaurantCommand selectFirstCommandCopy = new SelectRestaurantCommand(INDEX_FIRST_RESTAURANT);
         assertTrue(selectFirstCommand.equals(selectFirstCommandCopy));
 
         // different types -> returns false
@@ -93,25 +94,28 @@ public class SelectCommandTest {
     }
 
     /**
-     * Executes a {@code SelectCommand} with the given {@code index}, and checks that {@code JumpToListRequestEvent}
+     * Executes a {@code SelectRestaurantCommand} with the given {@code index},
+     * and checks that {@code JumpToListRequestEvent}
      * is raised with the correct index.
      */
     private void assertExecutionSuccess(Index index) {
-        SelectCommand selectCommand = new SelectCommand(index);
-        String expectedMessage = String.format(SelectCommand.MESSAGE_SELECT_RESTAURANT_SUCCESS, index.getOneBased());
+        SelectRestaurantCommand selectCommand = new SelectRestaurantCommand(index);
+        String expectedMessage =
+                String.format(SelectRestaurantCommand.MESSAGE_SELECT_RESTAURANT_SUCCESS, index.getOneBased());
 
         assertCommandSuccess(selectCommand, model, commandHistory, expectedMessage, expectedModel);
 
-        JumpToListRequestEvent lastEvent = (JumpToListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
+        JumpToRestaurantListRequestEvent lastEvent =
+                (JumpToRestaurantListRequestEvent) eventsCollectorRule.eventsCollector.getMostRecent();
         assertEquals(index, Index.fromZeroBased(lastEvent.targetIndex));
     }
 
     /**
-     * Executes a {@code SelectCommand} with the given {@code index}, and checks that a {@code CommandException}
-     * is thrown with the {@code expectedMessage}.
+     * Executes a {@code SelectRestaurantCommand} with the given {@code index},
+     * and checks that a {@code CommandException} is thrown with the {@code expectedMessage}.
      */
     private void assertExecutionFailure(Index index, String expectedMessage) {
-        SelectCommand selectCommand = new SelectCommand(index);
+        SelectRestaurantCommand selectCommand = new SelectRestaurantCommand(index);
         assertCommandFailure(selectCommand, model, commandHistory, expectedMessage);
         assertTrue(eventsCollectorRule.eventsCollector.isEmpty());
     }
