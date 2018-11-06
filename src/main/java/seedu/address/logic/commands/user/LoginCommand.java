@@ -19,13 +19,13 @@ public class LoginCommand extends Command {
 
     public static final String COMMAND_WORD = "login";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Allows a to login to use Makan Book features. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Allows a to login to use Makan Book features.\n"
             + "Parameters: "
             + PREFIX_USERNAME + "USERNAME "
-            + PREFIX_PASSWORD + "PASSWORD "
+            + PREFIX_PASSWORD + "PASSWORD\n"
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USERNAME + "johnnydoe "
-            + PREFIX_PASSWORD + "passw0rd";
+            + PREFIX_PASSWORD + "pAssw0rd";
 
     public static final String MESSAGE_SUCCESS = "Successfully Logged In";
     public static final String MESSAGE_ALREADY_LOGGEDIN = "User is already logged in";
