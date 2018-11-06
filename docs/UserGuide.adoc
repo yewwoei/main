@@ -415,15 +415,15 @@ Format: `listDebtor`
 === Adding a restaurant: `add` [DEPRECIATED, DO NOT USE]
 
 Adds a restaurant to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+Format: `add n/NAME p/PHONE_NUMBER a/ADDRESS [t/TAG]...`
 
 [TIP]
 A restaurant can have any number of tags (including 0)
 
 Examples:
 
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+* `add n/Macdonalds p/6231 8837 a/Engineering Block Eg 4`
+* `add n/Japanese Delights t/Halal a/Engineering Canteen EG5 #02-01 t/Japanese`
 
 === Deleting a restaurant : `delete` [DEPRECIATED, DO NOT USE]
 
