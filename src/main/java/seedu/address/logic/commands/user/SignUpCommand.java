@@ -30,7 +30,7 @@ public class SignUpCommand extends Command {
             + PREFIX_EMAIL + "EMAIL "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USERNAME + "johnnydoe "
-            + PREFIX_PASSWORD + "p@ssw0rd "
+            + PREFIX_PASSWORD + "pAssw0rd "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com";
