@@ -1,5 +1,7 @@
 package seedu.address.model.jio;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,8 +12,6 @@ import seedu.address.model.restaurant.Address;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
-
-import static java.util.Objects.requireNonNull;
 
 
 /**
@@ -88,6 +88,9 @@ public class Jio {
         return groupName.get();
     }
 
+    /**
+    * Checks whether there is such as user and returns true if there is
+    */
     public boolean hasUser(User newUser) {
         requireNonNull(newUser);
         return this.people.stream().anyMatch(user -> newUser.getUsername().equals(user));
