@@ -31,7 +31,7 @@ public class LoginCommand extends Command {
     public static final String MESSAGE_ALREADY_LOGGEDIN = "User is already logged in";
     public static final String MESSAGE_NO_SUCH_USER = "No such user found. Please sign up to ues the"
             + " features of Makan Book";
-    public static final String MESSAGE_INCORRECT_PASSWORD = "This password you entered is Incorrect";
+    public static final String MESSAGE_INCORRECT_PASSWORD = "Either Username or Password is Incorrect";
 
     private final Username toLogin;
     private final Password password;
