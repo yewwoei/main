@@ -1,5 +1,7 @@
 package seedu.address.model.jio;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -30,6 +32,8 @@ public class Jio {
         this.name = name;
         this.date = date;
         this.location = location;
+        this.people = new ArrayList<>();
+        this.people.add(creator);
         this.creator = creator;
         this.people = new ArrayList<>();
         this.people.add(creator);
@@ -84,7 +88,11 @@ public class Jio {
         return groupName.get();
     }
 
+    /**
+    * Checks whether there is such as user and returns true if there is
+    */
     public boolean hasUser(User newUser) {
+        requireNonNull(newUser);
         return this.people.stream().anyMatch(user -> newUser.getUsername().equals(user));
     }
 
@@ -93,12 +101,14 @@ public class Jio {
      * @param newUser user to be added
      */
     public void addUser(User newUser) {
+        requireNonNull(newUser);
         if (!this.hasUser(newUser)) {
             this.people.add(newUser.getUsername());
         }
     }
 
     public void setCreator(User user) {
+        requireNonNull(user);
         this.creator = user.getUsername();
     }
 
