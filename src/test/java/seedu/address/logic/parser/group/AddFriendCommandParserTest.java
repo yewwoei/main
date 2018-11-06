@@ -15,7 +15,7 @@ import seedu.address.model.user.Username;
 
 import static seedu.address.testutil.TypicalFriendships.FRIENDSHIP_1;
 
-public class addFriendCommandParserTest {
+public class AddFriendCommandParserTest {
     private AddFriendCommandParser parser = new AddFriendCommandParser();
 
     @Test
