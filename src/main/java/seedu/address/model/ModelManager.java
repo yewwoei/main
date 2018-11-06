@@ -97,7 +97,6 @@ public class ModelManager extends ComponentManager implements Model {
             filteredGroups = new FilteredList<>(FXCollections.observableArrayList(userData.getGroups()));
         }
         displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
-        
         this.currentUser = user;
         this.isLoggedIn = true;
     }
