@@ -61,19 +61,6 @@ e.g. typing *`help`* and pressing kbd:[Enter] will open the help window.
 
 Format: `help`
 
-=== Adding a restaurant: `add`
-
-Adds a restaurant to the address book +
-Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
-
-[TIP]
-A restaurant can have any number of tags (including 0)
-
-Examples:
-
-* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
-* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
-
 === Listing all restaurants : `list`
 
 Shows a list of all restaurants in the address book. +
@@ -129,15 +116,10 @@ Format: `history`
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
 
-=== Clearing all entries : `clear`
-
-Clears all entries from the address book. +
-Format: `clear`
-
 === Signing Up for a Makan Book Account: `signup`
 
 Allows a User to create an account for use in the Makan Book. Automatic Log In upon Sign Up. +
-Format: `SignUp u/USERNAME pwd/PASSWORD n/NAME p/PHONE_NUMBER e/EMAIL`
+Format: `signup u/USERNAME pwd/PASSWORD n/NAME p/PHONE_NUMBER e/EMAIL`
 
 Example:
 
@@ -146,7 +128,7 @@ Example:
 === Log In into an existing Makan Book Account: `login`
 
 Allows a User to log into an existing account in the Makan Book. +
-Format: `Login u/USERNAME pwd/PASSWORD`
+Format: `login u/USERNAME pwd/PASSWORD`
 
 Example:
 
@@ -160,11 +142,11 @@ Format: `logout`
 === Write Review For Restaurant: `writeReview`
 
 Allows user to write reviews for a specific restaurant. +
-Format: `writeReview INDEX r/RATING rvw/REVIEW`
+Format: `writeReview INDEX rate/RATING rvw/REVIEW`
 
 Examples:
 
-* `writeReview 3 r/3 rvw/The food is not the best, but definitely value for money!`
+* `writeReview 3 rate/3 rvw/The food is not the best, but definitely value for money!`
 
 === Display User Profile: `displayProfile`
 
@@ -405,6 +387,19 @@ Examples:
 
 * `deleteDebtRequest u/Kate123 amt/4.30 id/18103013460314`
 
+=== Adding a restaurant: `add` [DEPRECIATED, DO NOT USE]
+
+Adds a restaurant to the address book +
+Format: `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...`
+
+[TIP]
+A restaurant can have any number of tags (including 0)
+
+Examples:
+
+* `add n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01`
+* `add n/Betsy Crowe t/friend e/betsycrowe@example.com a/Newgate Prison p/1234567 t/criminal`
+
 === Deleting a restaurant : `delete` [DEPRECIATED, DO NOT USE]
 
 Deletes the specified restaurant from the address book. +
@@ -425,11 +420,10 @@ Deletes the 2nd restaurant in the address book.
 `delete 1` +
 Deletes the 1st restaurant in the results of the `find` command.
 
-
-=== Editing a restaurant : `edit` [DEPRECIATED, DO NOT USE]
+=== Editing a restaurant : `edit` [DEPRECIATED, DO NOT USE, ONLY FOR ADMINISTRATORS]
 
 Edits an existing restaurant in the address book. +
-Format: `edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [t/TAG]...`
+Format: `edit INDEX [n/NAME] [p/PHONE] [a/ADDRESS] [t/TAG]...`
 
 ****
 * Edits the restaurant at the specified `INDEX`. The index refers to the index number shown in the displayed restaurant list. The index *must be a positive integer* 1, 2, 3, ...
@@ -447,7 +441,13 @@ Edits the phone number and email address of the 1st restaurant to be `91234567` 
 Edits the name of the 2nd restaurant to be `Betsy Crower` and clears all existing tags.
 
 // tag::undoredo[]
-=== Undoing previous command : `undo` [DEPRECIATED, DO NOT USE]
+
+=== Clearing all entries : `clear`
+
+Clears all entries from the address book. +
+Format: `clear`
+
+=== Undoing previous command : `undo` [DEPRECIATED, DO NOT USE, ONLY FOR ADMINISTRATORS]
 
 Restores the address book to the state before the previous _undoable_ command was executed. +
 Format: `undo`
@@ -473,7 +473,7 @@ The `undo` command fails as there are no undoable commands executed previously.
 `undo` (reverses the `clear` command) +
 `undo` (reverses the `delete 1` command) +
 
-=== Redoing the previously undone command : `redo` [DEPRECIATED, DO NOT USE]
+=== Redoing the previously undone command : `redo` [DEPRECIATED, DO NOT USE, ONLY FOR ADMINISTRATORS]
 
 Reverses the most recent `undo` command. +
 Format: `redo`
