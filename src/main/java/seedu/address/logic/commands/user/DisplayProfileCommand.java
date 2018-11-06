@@ -15,14 +15,14 @@ public class DisplayProfileCommand extends Command {
     public static final String COMMAND_WORD = "displayProfile";
 
     public static final String MESSAGE_SUCCESS = "Displaying User Profile";
-    public static final String MESSAGE_ALREADY_LOGGEDIN = "User is already logged in";
+    public static final String MESSAGE_NOT_CURRENTLY_LOGGEDIN = "User is not currently logged in";
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
         if (!model.isCurrentlyLoggedIn()) {
-            throw new CommandException(MESSAGE_ALREADY_LOGGEDIN);
+            throw new CommandException(MESSAGE_NOT_CURRENTLY_LOGGEDIN);
         }
 
         model.displayProfile();

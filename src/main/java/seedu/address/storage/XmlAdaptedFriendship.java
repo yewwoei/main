@@ -49,11 +49,9 @@ public class XmlAdaptedFriendship {
      * @param source future changes to this will not affect the created XmlAdadptedFriendship
      */
     public XmlAdaptedFriendship(Friendship source) {
-        System.out.println("xml adapted friendship from friendship source");
         friendUser = source.getFriendUser().getUsername().toString();
         initiatedBy = source.getInitiatedBy().getUsername().toString();
         me = source.getMe().getUsername().toString();
-        System.out.println("for me user " + me);
         friendshipStatus = source.getFrienshipStatus().toString();
     }
 
