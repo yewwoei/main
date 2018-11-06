@@ -35,7 +35,7 @@ public class Friendship {
         this.friendshipStatus = FriendshipStatus.ACCEPTED;
     }
 
-    public FriendshipStatus getFrienshipStatus() {
+    public FriendshipStatus getFriendshipStatus() {
         return this.friendshipStatus;
     }
 
@@ -63,6 +63,10 @@ public class Friendship {
     public boolean equals(Object otherFriendship) {
         if (otherFriendship == this) {
             return true;
+        }
+
+        if (!(otherFriendship instanceof Friendship)) {
+            return false;
         }
 
         Friendship other = (Friendship) otherFriendship;

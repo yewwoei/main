@@ -29,7 +29,7 @@ public class FriendshipBuilder {
      * Initializes the FriendshipBuilder with the data of {@code friendshipToCopy}.
      */
     public FriendshipBuilder(Friendship friendshipToCopy) {
-        friendshipStatus = friendshipToCopy.getFrienshipStatus();
+        friendshipStatus = friendshipToCopy.getFriendshipStatus();
         me = friendshipToCopy.getMe();
         friendUser = friendshipToCopy.getFriendUser();
         initiatedBy = friendshipToCopy.getInitiatedBy();

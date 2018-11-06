@@ -31,7 +31,7 @@ public class XmlAdaptedFriendshipTest {
             .getUsername().toString();
     private static final String VALID_INITIATED_BY = FRIENDSHIP_1.getInitiatedBy()
             .getUsername().toString();
-    private static final String VALID_FRIENDSHIP_STATUS = FRIENDSHIP_1.getFrienshipStatus()
+    private static final String VALID_FRIENDSHIP_STATUS = FRIENDSHIP_1.getFriendshipStatus()
             .toString();
     private static final String THIRD_PARTY_INITIATED_BY = FRIENDSHIP_2.getInitiatedBy()
             .getUsername().toString();

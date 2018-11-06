@@ -56,7 +56,7 @@ public class XmlAdaptedFriendship {
         initiatedBy = source.getInitiatedBy().getUsername().toString();
         me = source.getMe().getUsername().toString();
         System.out.println("for me user " + me);
-        friendshipStatus = source.getFrienshipStatus().toString();
+        friendshipStatus = source.getFriendshipStatus().toString();
     }
 
     @Override
