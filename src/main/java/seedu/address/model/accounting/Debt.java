@@ -64,6 +64,7 @@ public class Debt {
      * @param changeTo represent the new debt status.
      */
     public void changeDebtStatus(DebtStatus changeTo) {
+        requireAllNonNull(changeTo);
         this.status = changeTo;
     }
     /**
@@ -71,6 +72,7 @@ public class Debt {
      * @param changeTo represent the new debt amount.
      */
     public void changeDebtAmount(Amount changeTo) {
+        requireAllNonNull(changeTo);
         this.amount = changeTo;
     }
     /**
