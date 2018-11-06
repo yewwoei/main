@@ -1,6 +1,8 @@
 package seedu.address.logic.commands.jio;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -18,11 +20,19 @@ import static seedu.address.model.jio.JioTestUtil.LUNCH;
 import static seedu.address.model.jio.JioTestUtil.LUNCH_COPY;
 import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 
-class DeleteJioCommandTest {
 
+public class DeleteJioCommandTest {
+    @Rule
+    public final ExpectedException thrown = ExpectedException.none();
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData(),
             new UserBuilder().build());
     private CommandHistory commandHistory = new CommandHistory();
+
+    @Test
+    public void constructor_nullJio_throwsNullPointerException() {
+        thrown.expect(NullPointerException.class);
+        new DeleteJioCommand(null);
+    }
 
     @Test
     public void execute_validJio_success() {
@@ -65,4 +75,5 @@ class DeleteJioCommandTest {
         // different restaurant -> returns false
         assertFalse(deleteLunchCommand.equals(deleteDinnerCommand));
     }
+
 }

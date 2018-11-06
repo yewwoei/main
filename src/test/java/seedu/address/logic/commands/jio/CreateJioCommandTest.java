@@ -1,7 +1,7 @@
 package seedu.address.logic.commands.jio;
 
 import org.junit.Rule;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
@@ -10,7 +10,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserData;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.user.User;
 import seedu.address.testutil.UserBuilder;
 
 import static org.junit.Assert.assertEquals;
@@ -20,15 +19,15 @@ import static seedu.address.model.jio.JioTestUtil.DINNER;
 import static seedu.address.model.jio.JioTestUtil.LUNCH;
 import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 
-class CreateJioCommandTest {
 
+public class CreateJioCommandTest {
     private static final CommandHistory EMPTY_COMMAND_HISTORY = new CommandHistory();
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData(),
-            new UserBuilder().build());
 
     @Rule
-    public ExpectedException thrown = ExpectedException.none();
+    public final ExpectedException thrown = ExpectedException.none();
 
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData(),
+            new UserBuilder().build());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -49,6 +48,7 @@ class CreateJioCommandTest {
     @Test
     public void execute_duplicateJio_throwsCommandException() throws Exception {
         CreateJioCommand createJioCommand = new CreateJioCommand(LUNCH);
+        createJioCommand.execute(model, commandHistory);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(CreateJioCommand.MESSAGE_DUPLICATE_JIO);
@@ -76,6 +76,5 @@ class CreateJioCommandTest {
         // different restaurant -> returns false
         assertFalse(addLunchCommand.equals(addDinnerCommand));
     }
-
 
 }
