@@ -16,7 +16,7 @@ reviews for restaurants within NUS. Additionally, Users are able to interact wit
 
 * *Major Enhancement*: The Storage of User Data in a *separate file*
 ** What it does: Any data relating to User such as friends, jios, timetable and schedule are all stored in a separate file called Users.xml
-** Justification: The separation of data allows the ease of maintenance and extraction of data. 
+** Justification: The separation of data allows the ease of maintenance and extraction of data.
 
 * *Major Enhancement*: added *the ability to leave a review for a restaurant*
 ** What it does: It allows a user leave a rating and review for a restaurant. The user's review will adjust the overall rating of the particular restaurant given that it is an averaged score.
@@ -26,7 +26,7 @@ reviews for restaurants within NUS. Additionally, Users are able to interact wit
 * *Minor Enhancement*: added *the ability for a User to create an account*
 ** What it does: Allows a User to create an account to interact with the application.
 ** Justification: This feature improves the product significantly because a user can now create an account to join the network of users. The ability to have accounts allows for various functionality such as adding friends, creating Jios and more.
-** Highlights: This enhancement affects existing commands and commands to be added in future. For instance, only users who are logged in should be able to interact with one another. 
+** Highlights: This enhancement affects existing commands and commands to be added in future. For instance, only users who are logged in should be able to interact with one another.
 
 * *Minor enhancement*: added a displayProfile command that allows the user to view all the data that is related to him. This includes his own personal information, the reviews he has made, friends and more.
 
