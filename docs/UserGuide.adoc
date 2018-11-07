@@ -86,9 +86,21 @@ Returns `john` and `John Doe`
 * `find Betsy Tim John` +
 Returns any restaurant having names `Betsy`, `Tim`, or `John`
 
+=== Listing entered commands : `history`
+
+Lists all the commands that you have entered in reverse chronological order. +
+Format: `history`
+
+[NOTE]
+====
+Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
+====
+
+// tag::evan[]
 === Selecting a restaurant : `selectRestaurant`
 
-Selects the restaurant identified by the index number used in the displayed restaurant list. +
+Selects the restaurant identified by the index number used in the displayed restaurant list. It will display the webpage of the restaurant
+which contains it's details, overall rating and reviews written by users +
 Format: `selectRestaurant INDEX`
 
 ****
@@ -105,16 +117,6 @@ Selects the 2nd restaurant in the address book.
 * `find Betsy` +
 `select 1` +
 Selects the 1st restaurant in the results of the `find` command.
-
-=== Listing entered commands : `history`
-
-Lists all the commands that you have entered in reverse chronological order. +
-Format: `history`
-
-[NOTE]
-====
-Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
-====
 
 === Signing Up for a Makan Book Account: `signup`
 
@@ -149,6 +151,11 @@ Examples:
 * `writeReview 3 rate/3 rvw/The food is not the best, but definitely value for money!`
 
 === Display User Profile: `displayProfile`
+
+Allows a user to view his own profile in the Makan Book. The browser panel will then contains the user's details,
+the reviews he's written and the list of friends he has.
+Format: `displayProfile`
+// end::evan[]
 
 === Finding people to eat with: `createJio`
 
