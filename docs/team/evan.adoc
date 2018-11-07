@@ -46,7 +46,6 @@ reviews for restaurants within NUS. Additionally, Users are able to interact wit
 
 == Contributions to the User Guide
 
-
 |===
 |_Given below are sections I contributed to the User Guide._
 |===
