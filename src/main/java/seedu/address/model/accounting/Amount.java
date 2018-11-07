@@ -14,17 +14,19 @@ public class Amount {
 
     private final double amount;
 
-    public Amount(String Amount) {
-        requireNonNull(Amount);
-        checkArgument(isValidAmount(Amount), MESSAGE_AMOUNT_CONSTRAINTS);
-        amount = Double.valueOf(Amount).doubleValue();
+    public Amount(String amt) {
+        requireNonNull(amt);
+        checkArgument(isValidAmount(amt), MESSAGE_AMOUNT_CONSTRAINTS);
+        amount = Double.valueOf(amt).doubleValue();
     }
 
     public double toDouble() {
         return amount;
     }
 
-    public String toString() { return String.valueOf(amount); }
+    public String toString() {
+        return String.valueOf(amount);
+    }
 
     public static boolean isValidAmount(String test) {
         return test.matches(AMOUNT_VALIDATION_REGEX);
@@ -34,7 +36,7 @@ public class Amount {
     public boolean equals(Object other) {
         return other == this
                 || (other instanceof Amount
-                && amount==((Amount) other).amount);
+                && amount == ((Amount) other).amount);
 
     }
 
