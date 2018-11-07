@@ -3,6 +3,7 @@ package seedu.address.logic.commands.accounting;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
+
 import seedu.address.logic.CommandHistory;
 
 public class AddDebtCommandTest {

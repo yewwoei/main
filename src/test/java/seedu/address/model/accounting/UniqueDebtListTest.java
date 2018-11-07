@@ -12,7 +12,9 @@ import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
+
 import org.junit.rules.ExpectedException;
+
 import seedu.address.model.accounting.exception.DebtNotFoundException;
 import seedu.address.model.accounting.exception.DuplicateDebtException;
 

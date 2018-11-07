@@ -4,12 +4,13 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.junit.Test;
+
 import seedu.address.testutil.Assert;
 
 public class DebtIdTest {
 
     @Test
-    public void id_constructor_null_throwsNullPointerException() {
+    public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new DebtId(null));
     }
 

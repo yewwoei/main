@@ -8,7 +8,9 @@ import static seedu.address.testutil.TypicalUsers.getTypicalUserData;
 
 import org.junit.Rule;
 import org.junit.Test;
+
 import org.junit.rules.ExpectedException;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.accounting.Debt;
 import seedu.address.testutil.Assert;

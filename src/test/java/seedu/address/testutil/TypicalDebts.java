@@ -2,12 +2,12 @@ package seedu.address.testutil;
 
 import static seedu.address.testutil.TypicalUsers.getTypicalUsers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
+
+/**
+ * A utility class containing a list of {@code Debt} objects to be used in tests.
+ */
 
 public class TypicalDebts {
 
@@ -22,8 +22,4 @@ public class TypicalDebts {
 
 
     public TypicalDebts() {}
-
-    public static List<Debt> getTypicalDebts() {
-        return new ArrayList<>(Arrays.asList(DEBT_A, DEBT_B, DEBT_C));
-    }
 }
