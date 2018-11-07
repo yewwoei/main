@@ -12,13 +12,13 @@ import seedu.address.model.accounting.Debt;
 public class TypicalDebts {
 
     public static final Debt DEBT_A =
-            new Debt(getTypicalUsers().get(0), getTypicalUsers().get(1), new Amount("13"));
+            new Debt(getTypicalUsers().get(0), getTypicalUsers().get(1), new Amount("18"));
 
     public static final Debt DEBT_B =
             new Debt(getTypicalUsers().get(1), getTypicalUsers().get(0), new Amount("7"));
 
     public static final Debt DEBT_C =
-            new Debt(getTypicalUsers().get(0), getTypicalUsers().get(1), new Amount("3"));
+            new Debt(getTypicalUsers().get(1), getTypicalUsers().get(2), new Amount("9"));
 
 
     public TypicalDebts() {}

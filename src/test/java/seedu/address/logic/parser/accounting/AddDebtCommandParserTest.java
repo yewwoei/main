@@ -7,9 +7,7 @@ import static seedu.address.testutil.TypicalUsers.getTypicalUsers;
 
 import org.junit.Test;
 import seedu.address.logic.commands.accounting.AddDebtCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.accounting.Amount;
-import seedu.address.model.user.Username;
 
 public class AddDebtCommandParserTest {
 
@@ -20,10 +18,8 @@ public class AddDebtCommandParserTest {
 
 
     @Test
-    public void parse_allFieldsPresent_success() throws ParseException {
+    public void parse_allFieldsPresent_success() {
         assertParseSuccess(parser, DEBTOR + AMOUNT,
-                new AddDebtCommand(new Username("benny123"), new Amount("13")));
+                new AddDebtCommand(getTypicalUsers().get(1).getUsername(), new Amount("13")));
     }
-
-
 }

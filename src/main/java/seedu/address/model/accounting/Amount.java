@@ -11,17 +11,20 @@ public class Amount {
     public static final String MESSAGE_AMOUNT_CONSTRAINTS =
             "Amount should only contain numbers up to 2 decimal places.";
     public static final String AMOUNT_VALIDATION_REGEX = "\\d+(\\.\\d{1,2})?";
-    private static double amount;
 
-    public Amount(String amount) {
-        requireNonNull(amount);
-        checkArgument(isValidAmount(amount), MESSAGE_AMOUNT_CONSTRAINTS);
-        this.amount = Double.valueOf(amount);
+    private final double amount;
+
+    public Amount(String Amount) {
+        requireNonNull(Amount);
+        checkArgument(isValidAmount(Amount), MESSAGE_AMOUNT_CONSTRAINTS);
+        amount = Double.valueOf(Amount).doubleValue();
     }
 
     public double toDouble() {
-        return this.amount;
+        return amount;
     }
+
+    public String toString() { return String.valueOf(amount); }
 
     public static boolean isValidAmount(String test) {
         return test.matches(AMOUNT_VALIDATION_REGEX);
@@ -30,6 +33,9 @@ public class Amount {
     @Override
     public boolean equals(Object other) {
         return other == this
-                || (other instanceof Amount && amount == ((Amount) other).toDouble());
+                || (other instanceof Amount
+                && amount==((Amount) other).amount);
+
     }
+
 }

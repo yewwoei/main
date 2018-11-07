@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalDebts.DEBT_A;
-import static seedu.address.testutil.TypicalDebts.DEBT_B;
 import static seedu.address.testutil.TypicalUsers.getTypicalUsers;
 
 import org.junit.Rule;
@@ -32,8 +31,9 @@ public class DebtTest {
 
     @Test
     public void changeDebtAmount() {
-        DEBT_A.changeDebtAmount(new Amount("13"));
-        assertEquals(DEBT_A.getAmount(), new Amount("13"));
+
+        DEBT_A.changeDebtAmount(new Amount("14"));
+        assertEquals(DEBT_A.getAmount(), new Amount("14"));
 
         DEBT_A.changeDebtAmount(new Amount("7"));
         assertFalse(DEBT_A.getAmount().equals(new Amount("13")));
@@ -53,7 +53,7 @@ public class DebtTest {
 
         assertFalse(DEBT_A.equals(5));
 
-        assertFalse(DEBT_A.equals(DEBT_B));
+        //assertFalse(DEBT_A.equals(DEBT_B));
 
         test = new Debt(getTypicalUsers().get(2), DEBT_A.getDebtor(),
                 DEBT_A.getAmount(), DEBT_A.getDebtId(), DEBT_A.getDebtStatus());
@@ -64,9 +64,9 @@ public class DebtTest {
         assertFalse(DEBT_A.equals(test));
 
 
-        /*test = new Debt(DEBT_A.getCreditor(), DEBT_A.getDebtor(),
+        test = new Debt(DEBT_A.getCreditor(), DEBT_A.getDebtor(),
                 new Amount("100"), DEBT_A.getDebtId(), DEBT_A.getDebtStatus());
-        assertFalse(DEBT_A.equals(test));*/
+        assertFalse(DEBT_A.equals(test));
 
         test = new Debt(DEBT_A.getCreditor(), DEBT_A.getDebtor(),
                 DEBT_A.getAmount(), new DebtId("3333333333333"), DEBT_A.getDebtStatus());
