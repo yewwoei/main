@@ -1,5 +1,6 @@
 package seedu.address.model.jio;
 
+import seedu.address.model.Model;
 import seedu.address.model.Name;
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.timetable.Date;
@@ -7,6 +8,9 @@ import seedu.address.model.timetable.Day;
 import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
 import seedu.address.model.user.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Contains helper final Strings for testing Jio.
@@ -31,5 +35,13 @@ public class JioTestUtil {
     private static Address dinnerAddress = new Address("foodclique");
 
     public static final Jio DINNER = new Jio(dinnerName, dinnerDate, dinnerAddress, creator);
+
+    /**
+     * Updates {@code model}'s filtered list to show only the restaurant at the given {@code targetIndex} in the
+     * {@code model}'s address book.
+     */
+    public static void showAllJio(Model model) {
+        model.updateFilteredJioList(jio -> true);
+    }
 
 }

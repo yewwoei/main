@@ -8,10 +8,12 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserData;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.UserBuilder;
 
 import static org.junit.Assert.*;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.showRestaurantAtIndex;
+import static seedu.address.model.jio.JioTestUtil.showAllJio;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
 import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 
@@ -23,8 +25,8 @@ public class ListJioCommandTest {
 
     @Before
     public void setUp() {
-        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData());
-        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserData());
+        model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData(), new UserBuilder().build());
+        expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserData(), new UserBuilder().build());
     }
 
     @Test
@@ -34,7 +36,7 @@ public class ListJioCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showRestaurantAtIndex(model, INDEX_FIRST_RESTAURANT);
+        expectedModel.updateFilteredJioList(jio -> true);
         assertCommandSuccess(new ListJioCommand(), model, commandHistory, ListJioCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
