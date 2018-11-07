@@ -26,9 +26,8 @@ public class WriteReviewCommand extends Command {
     public static final String COMMAND_WORD = "writeReview";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Gives a review of the restaurant identified "
-            + "by the index number used in the displayed restaurant list. A review consists of a rating that must "
-            + "be a positive integer from 1 to 5 where 1 is the lowest rating and 5, the highest rating, and a written "
-            + "review of experience at the restaurant."
+            + "by the index number used in the displayed restaurant list.\n"
+            + "A review consists of a rating from 1 to 5 and a written review of the experience at the restaurant.\n"
             + "Parameters: INDEX (must be a positive integer) "
             + PREFIX_RATING + "RATING "
             + PREFIX_REVIEW + "REVIEW\n"
