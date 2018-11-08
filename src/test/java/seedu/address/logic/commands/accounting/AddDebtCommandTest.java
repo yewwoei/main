@@ -99,8 +99,8 @@ public class AddDebtCommandTest {
     public void execute_notLoggedIn_throwsCommandException() throws Exception {
 
         AddDebtCommand addDebtCommand = new AddDebtCommand(validUserA, validAmountA);
-        ModelStub modelStub = new ModelStubforDebt();
-        ((ModelStubforDebt) modelStub).loggedIn = false;
+        ModelStubforDebt modelStub = new ModelStubforDebt();
+        modelStub.loggedIn = false;
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(String.format(
@@ -180,7 +180,7 @@ public class AddDebtCommandTest {
         }
 
         @Override
-        public boolean hasUser(Username username){
+        public boolean hasUser(Username username) {
             return TypicalUsers.getTypicalUserData().hasUser(username);
         }
 

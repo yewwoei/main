@@ -17,7 +17,7 @@ import seedu.address.model.user.Username;
 public class AddDebtCommandParserTest {
 
     public static final String VALID_USER = " " + PREFIX_USERNAME + getTypicalUsers().get(0).getUsername().toString();
-    public static final String invalidUser = " " + PREFIX_USERNAME + "  ";
+    public static final String INVALID_USER = " " + PREFIX_USERNAME + "  ";
     public static final String VALID_AMOUNT = " " + PREFIX_AMOUNT + "13";
     public static final String INVALID_AMOUNT_A = " " + PREFIX_AMOUNT + "12.22222";
     public static final String INVALID_AMOUNT_B = " " + PREFIX_AMOUNT + "-17";
@@ -46,7 +46,7 @@ public class AddDebtCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
 
-        assertParseFailure(parser, invalidUser + VALID_AMOUNT, Username.MESSAGE_USERNAME_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_USER + VALID_AMOUNT, Username.MESSAGE_USERNAME_CONSTRAINTS);
 
         assertParseFailure(parser, VALID_USER + INVALID_AMOUNT_A, Amount.MESSAGE_AMOUNT_CONSTRAINTS);
 
