@@ -1,13 +1,14 @@
 package seedu.address.model.restaurant;
 
-import org.junit.Test;
-import seedu.address.model.user.Username;
-import seedu.address.testutil.Assert;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
+
+import seedu.address.model.user.Username;
+import seedu.address.testutil.Assert;
 
 public class ReviewsTest {
 
@@ -21,8 +22,8 @@ public class ReviewsTest {
     @Test
     public void addUserReview_withValidInputs() {
         Reviews reviews = new Reviews();
-        assertTrue(reviews.getRestaurantRatingValue().equals("0.00")); 
-        
+        assertTrue(reviews.getRestaurantRatingValue().equals("0.00"));
+
         UserReview userReview1 = new UserReview(new Username("Test"), new Rating(4), new WrittenReview("Test"));
         reviews.addUserReview(userReview1);
         assertTrue(reviews.getRestaurantRatingValue().equals("4.00")); // Restaurant Rating after first review

@@ -1,15 +1,16 @@
 package seedu.address.storage;
 
+import static org.junit.Assert.assertEquals;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_USER_REVIEW;
+import static seedu.address.storage.XmlAdaptedUserReview.MISSING_FIELD_MESSAGE_FORMAT;
+
 import org.junit.Test;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.user.Username;
 import seedu.address.testutil.Assert;
-
-import static org.junit.Assert.assertEquals;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_USER_REVIEW;
-import static seedu.address.storage.XmlAdaptedUserReview.MISSING_FIELD_MESSAGE_FORMAT;
 
 public class XmlAdaptedUserReviewTest {
     private static final String INVALID_RATING = "50";
