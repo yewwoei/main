@@ -27,7 +27,7 @@ import seedu.address.model.user.Username;
 /**
  * A default model stub that have all of the methods failing.
  */
-public class ModelStub implements Model{
+public class ModelStub implements Model {
 
     @Override
     public void addRestaurant(Restaurant restaurant) {
@@ -234,7 +234,7 @@ public class ModelStub implements Model{
     }
 
     @Override
-    public boolean hasUser(Username username){
+    public boolean hasUser(Username username) {
         throw new AssertionError("This method should not be called.");
     }
 
@@ -254,7 +254,7 @@ public class ModelStub implements Model{
     }
 
     @Override
-    public void loginUser(Username username){
+    public void loginUser(Username username) {
         throw new AssertionError("This method should not be called.");
     }
 

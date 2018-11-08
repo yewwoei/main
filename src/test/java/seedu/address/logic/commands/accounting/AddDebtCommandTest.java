@@ -10,7 +10,9 @@ import java.util.ArrayList;
 
 import org.junit.Rule;
 import org.junit.Test;
+
 import org.junit.rules.ExpectedException;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
@@ -39,25 +41,23 @@ public class AddDebtCommandTest {
 
     private CommandHistory commandHistory = new CommandHistory();
 
-    private Username VALID_USER_A = TypicalUsers.getTypicalUsers().get(0).getUsername();
+    private Username validUserA = TypicalUsers.getTypicalUsers().get(0).getUsername();
 
-    private Username VALID_USER_B = TypicalUsers.getTypicalUsers().get(2).getUsername();
+    private Username validUserB = TypicalUsers.getTypicalUsers().get(2).getUsername();
 
-    private Username INVALID_USER = new Username("NOTAUSER");
+    private Username invalidUser = new Username("NOTAUSER");
 
-    private Username CURRENT_USER = TypicalUsers.getTypicalUsers().get(1).getUsername();
+    private Username currentUserName = TypicalUsers.getTypicalUsers().get(1).getUsername();
 
     private User currentUser = TypicalUsers.getTypicalUsers().get(1);
 
-    private Amount VALID_AMOUNT_A = new Amount("13");
+    private Amount validAmountA = new Amount("13");
 
-    private Amount VALID_AMOUNT_B = new Amount("101");
+    private Amount validAmountB = new Amount("101");
 
-    private Amount INVALID_AMOUNT_A = new Amount("0");
+    private Amount invalidAmountA = new Amount("0");
 
-    private Amount INVALID_AMOUNT_B = new Amount("999999999");
-
-    final ArrayList<Debt> debtsAdded = new ArrayList<>();
+    private Amount invalidAmountB = new Amount("999999999");
 
     @Test
     public void constructor_nullDebt_throwsNullPointerException() {
@@ -68,27 +68,27 @@ public class AddDebtCommandTest {
     @Test
     public void constructor_nullUser_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddDebtCommand(null, VALID_AMOUNT_A);
+        new AddDebtCommand(null, validAmountA);
     }
 
     @Test
     public void constructor_nullAmount_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
-        new AddDebtCommand(VALID_USER_A, null);
+        new AddDebtCommand(validUserA, null);
     }
 
     @Test
     public void execute_debtAcceptedByModel_addSuccessful() throws Exception {
         ModelStubforDebt modelStub = new ModelStubforDebt();
 
-        CommandResult commandResult = new AddDebtCommand(VALID_USER_A, VALID_AMOUNT_A).execute(modelStub, commandHistory);
+        CommandResult commandResult = new AddDebtCommand(validUserA, validAmountA).execute(modelStub, commandHistory);
 
-        assertEquals(String.format(AddDebtCommand.MESSAGE_SUCCESS, VALID_USER_A, VALID_AMOUNT_A.toDouble()),
+        assertEquals(String.format(AddDebtCommand.MESSAGE_SUCCESS, validUserA, validAmountA.toDouble()),
                 commandResult.feedbackToUser);
 
         assertEquals(1, modelStub.debtsAdded.size());
-        assertEquals(VALID_USER_A, modelStub.debtsAdded.get(0).getDebtor().getUsername());
-        assertEquals(VALID_AMOUNT_A, modelStub.debtsAdded.get(0).getAmount());
+        assertEquals(validUserA, modelStub.debtsAdded.get(0).getDebtor().getUsername());
+        assertEquals(validAmountA, modelStub.debtsAdded.get(0).getAmount());
         assertEquals(currentUser, modelStub.debtsAdded.get(0).getCreditor());
         assertEquals(DebtStatus.PENDING, modelStub.debtsAdded.get(0).getDebtStatus());
 
@@ -98,19 +98,19 @@ public class AddDebtCommandTest {
     @Test
     public void execute_notLoggedIn_throwsCommandException() throws Exception {
 
-        AddDebtCommand addDebtCommand = new AddDebtCommand(VALID_USER_A, VALID_AMOUNT_A);
+        AddDebtCommand addDebtCommand = new AddDebtCommand(validUserA, validAmountA);
         ModelStub modelStub = new ModelStubforDebt();
         ((ModelStubforDebt) modelStub).loggedIn = false;
 
         thrown.expect(CommandException.class);
-        thrown.expectMessage(String.format
-                (Messages.MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND, AddDebtCommand.COMMAND_WORD));
+        thrown.expectMessage(String.format(
+                Messages.MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND, AddDebtCommand.COMMAND_WORD));
         addDebtCommand.execute(modelStub, commandHistory);
     }
 
     @Test
     public void execute_userNotInModel_throwsCommandException() throws Exception {
-        AddDebtCommand addDebtCommand = new AddDebtCommand(INVALID_USER, VALID_AMOUNT_A);
+        AddDebtCommand addDebtCommand = new AddDebtCommand(invalidUser, validAmountA);
         ModelStub modelStub = new ModelStubforDebt();
 
         thrown.expect(CommandException.class);
@@ -120,7 +120,7 @@ public class AddDebtCommandTest {
 
     @Test
     public void execute_isSameUser_throwsCommandException() throws Exception {
-        AddDebtCommand addDebtCommand = new AddDebtCommand(CURRENT_USER, VALID_AMOUNT_A);
+        AddDebtCommand addDebtCommand = new AddDebtCommand(currentUserName, validAmountA);
         ModelStub modelStub = new ModelStubforDebt();
 
         thrown.expect(CommandException.class);
@@ -130,7 +130,7 @@ public class AddDebtCommandTest {
 
     @Test
     public void execute_amountZero_throwsCommandException() throws Exception {
-        AddDebtCommand addDebtCommand = new AddDebtCommand(VALID_USER_A, INVALID_AMOUNT_A);
+        AddDebtCommand addDebtCommand = new AddDebtCommand(validUserA, invalidAmountA);
         ModelStub modelStub = new ModelStubforDebt();
 
         thrown.expect(CommandException.class);
@@ -140,7 +140,7 @@ public class AddDebtCommandTest {
 
     @Test
     public void execute_amountTooLarge_throwsCommandException() throws Exception {
-        AddDebtCommand addDebtCommand = new AddDebtCommand(VALID_USER_A, INVALID_AMOUNT_B);
+        AddDebtCommand addDebtCommand = new AddDebtCommand(validUserA, invalidAmountB);
         ModelStub modelStub = new ModelStubforDebt();
 
         thrown.expect(CommandException.class);
@@ -150,13 +150,13 @@ public class AddDebtCommandTest {
 
     @Test
     public void equals() {
-        AddDebtCommand test1 = new AddDebtCommand(VALID_USER_A, VALID_AMOUNT_A);
-        AddDebtCommand test2 = new AddDebtCommand(VALID_USER_B, VALID_AMOUNT_B);
+        AddDebtCommand test1 = new AddDebtCommand(validUserA, validAmountA);
+        AddDebtCommand test2 = new AddDebtCommand(validUserB, validAmountB);
 
         assertTrue(test1.equals(test1));
 
-        AddDebtCommand test1_1 = new AddDebtCommand(VALID_USER_A, VALID_AMOUNT_A);
-        assertTrue(test1.equals(test1_1));
+        AddDebtCommand test1copy = new AddDebtCommand(validUserA, validAmountA);
+        assertTrue(test1.equals(test1copy));
 
         assertFalse(test1.equals("test1"));
 
@@ -171,8 +171,8 @@ public class AddDebtCommandTest {
      */
     private class ModelStubforDebt extends ModelStub {
 
-        final ArrayList<Debt> debtsAdded = new ArrayList<>();
-        boolean loggedIn = true;
+        private final ArrayList<Debt> debtsAdded = new ArrayList<>();
+        private boolean loggedIn = true;
 
         @Override
         public boolean isCurrentlyLoggedIn() {
