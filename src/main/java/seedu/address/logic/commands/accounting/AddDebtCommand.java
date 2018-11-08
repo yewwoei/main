@@ -65,4 +65,12 @@ public class AddDebtCommand extends Command {
         return new CommandResult(String.format(MESSAGE_SUCCESS, debtor, amount.toDouble()));
     }
 
+    @Override
+    public boolean equals(Object other) {
+        return other == this
+                || (other instanceof AddDebtCommand // instanceof handles nulls
+                && debtor.equals(((AddDebtCommand) other).debtor)
+                && amount.equals(((AddDebtCommand) other).amount));
+    }
+
 }

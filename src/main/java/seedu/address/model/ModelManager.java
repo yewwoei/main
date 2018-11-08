@@ -77,9 +77,6 @@ public class ModelManager extends ComponentManager implements Model {
         displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
     }
 
-    /**
-     * Initializes a ModelManager with the given addressBook, userPrefs, userData, and a current user.
-     */
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs,
                         UserData userData, User user) {
         super();
@@ -97,6 +94,7 @@ public class ModelManager extends ComponentManager implements Model {
             filteredGroups = new FilteredList<>(FXCollections.observableArrayList(userData.getGroups()));
         }
         displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
+
         this.currentUser = user;
         this.isLoggedIn = true;
     }
@@ -259,8 +257,8 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     /**
-    * Returns whether there is a debtId
-    */
+     * Returns whether there is a debtId
+     */
     public boolean hasDebtId(DebtId debtId) {
         boolean result = false;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {

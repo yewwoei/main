@@ -86,11 +86,12 @@ public class XmlAdaptedDebt {
                     Debt.class.getSimpleName()));
         }
 
-        if (amount == null || !(Double.valueOf(amount) > 0)) {
-            throw new IllegalValueException("Not a valid input amount");
+        if (amount == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Debt.class.getSimpleName()));
         }
 
-        if (amount == null || !(Double.valueOf(amount) > 0)) {
+        if (!(Double.valueOf(amount) > 0 && 100000000 > Double.valueOf(amount))) {
             throw new IllegalValueException(String.format(INVALID_INPUT_MESSAGE_FORMAT));
         }
 
@@ -117,4 +118,5 @@ public class XmlAdaptedDebt {
                 && Objects.equals(status, otherDebt.status)
                 && Objects.equals(debtId, otherDebt.debtId);
     }
+
 }

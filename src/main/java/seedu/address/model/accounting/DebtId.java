@@ -1,5 +1,8 @@
 package seedu.address.model.accounting;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 /**
@@ -16,10 +19,13 @@ public class DebtId {
         Date now = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyMMddHHmmssSS");
         String strNow = ft.format(now);
+        checkArgument(isValidDebtId(strNow), MESSAGE_DEBTID_CONSTRAINTS);
         this.id = strNow;
     }
 
     public DebtId(String debtId) {
+        requireNonNull(debtId);
+        checkArgument(isValidDebtId(debtId), MESSAGE_DEBTID_CONSTRAINTS);
         this.id = debtId;
     }
 

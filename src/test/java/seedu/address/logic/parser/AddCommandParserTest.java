@@ -28,6 +28,7 @@ import static seedu.address.testutil.TypicalRestaurants.BOB;
 import org.junit.Test;
 
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Phone;
@@ -39,7 +40,7 @@ public class AddCommandParserTest {
     private AddCommandParser parser = new AddCommandParser();
 
     @Test
-    public void parse_allFieldsPresent_success() {
+    public void parse_allFieldsPresent_success() throws ParseException {
         Restaurant expectedRestaurant = new RestaurantBuilder(BOB).withTags(VALID_TAG_FRIEND).build();
 
         // whitespace only preamble
