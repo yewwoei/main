@@ -4,10 +4,10 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.storage.XmlAdaptedJio.MISSING_FIELD_MESSAGE_FORMAT;
 
-import org.junit.Test;
-
 import java.util.List;
 import java.util.stream.Collectors;
+
+import org.junit.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Name;
