@@ -8,11 +8,16 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class WrittenReview {
 
-    public final String writtenReview;
-
     public static final String MESSAGE_REVIEW_CONSTRAINTS =
-            "Written Reviews can take any values, and it should not be blank. Otherwise,"
-                    + " there would be a lot of blank reviews";
+            "Written Reviews can take any values, and it should not be blank.";
+
+    /*
+     * The first character of the review must not be a whitespace,
+     * otherwise " " (a blank string) becomes a valid input.
+     */
+    public static final String WRITTEN_REVIEW_VALIDATION_REGEX = "[^\\s].*";
+
+    public final String writtenReview;
 
     /**
      * Constructs a {@code WrittenReview}.
@@ -24,12 +29,6 @@ public class WrittenReview {
         checkArgument(isValidWrittenReview(review), MESSAGE_REVIEW_CONSTRAINTS);
         this.writtenReview = review;
     }
-
-    /*
-     * The first character of the review must not be a whitespace,
-     * otherwise " " (a blank string) becomes a valid input.
-     */
-    public static final String WRITTEN_REVIEW_VALIDATION_REGEX = "[^\\s].*";
 
     /**
      * Returns true if a given string is a valid review.
