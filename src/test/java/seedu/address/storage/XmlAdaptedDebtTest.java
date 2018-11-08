@@ -18,7 +18,7 @@ import seedu.address.testutil.Assert;
 public class XmlAdaptedDebtTest {
 
 
-    private static final String INVALID_USER = "lolol";
+    private static final String invalidUser = "lolol";
     private static final String INVALID_AMOUNT_1 = "9999999999999999999999999999";
     private static final String INVALID_AMOUNT_2 = "-3";
 
@@ -42,7 +42,7 @@ public class XmlAdaptedDebtTest {
     @Test
     public void toModelType_invalidCreditor_throwsIllegalValueException() throws Exception {
         XmlAdaptedDebt debt =
-                new XmlAdaptedDebt(INVALID_USER, VALID_USER_1, VALID_AMOUNT, VALID_ID, VALID_STATUS);
+                new XmlAdaptedDebt(invalidUser, VALID_USER_1, VALID_AMOUNT, VALID_ID, VALID_STATUS);
         String expectedMessage = String.format(NOT_EXIST_FIELD_MESSAGE_FORMAT, Debt.class.getSimpleName());
         thrown.expect(IllegalValueException.class);
         Assert.assertThrows(IllegalValueException.class, expectedMessage,
@@ -62,7 +62,7 @@ public class XmlAdaptedDebtTest {
     @Test
     public void toModelType_invalidDebtor_throwsIllegalValueException() throws Exception {
         XmlAdaptedDebt debt =
-                new XmlAdaptedDebt(VALID_USER_1, INVALID_USER, VALID_AMOUNT, VALID_ID, VALID_STATUS);
+                new XmlAdaptedDebt(VALID_USER_1, invalidUser, VALID_AMOUNT, VALID_ID, VALID_STATUS);
         String expectedMessage = String.format(NOT_EXIST_FIELD_MESSAGE_FORMAT, Debt.class.getSimpleName());
         thrown.expect(IllegalValueException.class);
         Assert.assertThrows(IllegalValueException.class, expectedMessage,
