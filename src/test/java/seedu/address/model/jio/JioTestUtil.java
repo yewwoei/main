@@ -31,24 +31,24 @@ public class JioTestUtil {
     public static final User JANE = new User(new Username("jane"), new Password("password"),
             new seedu.address.model.Name("jane"), new Phone("12345678"), new Email("jane@gmail.com"));
 
-    public static final seedu.address.model.Name lunchName = new seedu.address.model.Name("lunch");
-    public static final Date lunchDate = new Date(new Week("1"), new Day("mon"), new Time("1200"));
-    public static final Address lunchAddress = new Address("finefood");
-    public static final Username creator = TypicalUsers.getTypicalUsers().get(0).getUsername();
-    public static final List<Username> people = new ArrayList<>(Arrays.asList(
+    public static final seedu.address.model.Name LUNCH_NAME = new seedu.address.model.Name("lunch");
+    public static final Date LUNCH_DATE = new Date(new Week("1"), new Day("mon"), new Time("1200"));
+    public static final Address LUNCH_ADDRESS = new Address("finefood");
+    public static final Username CREATOR = TypicalUsers.getTypicalUsers().get(0).getUsername();
+    public static final List<Username> PEOPLE = new ArrayList<>(Arrays.asList(
             TypicalUsers.getTypicalUsers().get(0).getUsername(),
             TypicalUsers.getTypicalUsers().get(1).getUsername(),
             TypicalUsers.getTypicalUsers().get(2).getUsername()
     ));
 
-    public static final Jio LUNCH = new Jio(lunchName, lunchDate, lunchAddress, people, creator);
-    public static final Jio LUNCH_COPY = new Jio(lunchName, lunchDate, lunchAddress, people, creator);
+    public static final Jio LUNCH = new Jio(LUNCH_NAME, LUNCH_DATE, LUNCH_ADDRESS, PEOPLE, CREATOR);
+    public static final Jio LUNCH_COPY = new Jio(LUNCH_NAME, LUNCH_DATE, LUNCH_ADDRESS, PEOPLE, CREATOR);
 
-    public static final seedu.address.model.Name dinnerName = new seedu.address.model.Name("dinner");
-    public static final Date dinnerDate = new Date(new Week("2"), new Day("tue"), new Time("1800"));
-    public static final Address dinnerAddress = new Address("foodclique");
+    public static final seedu.address.model.Name DINNER_NAME = new seedu.address.model.Name("dinner");
+    public static final Date DINNER_DATE = new Date(new Week("2"), new Day("tue"), new Time("1800"));
+    public static final Address DINNER_ADDRESS = new Address("foodclique");
 
-    public static final Jio DINNER = new Jio(dinnerName, dinnerDate, dinnerAddress, creator);
+    public static final Jio DINNER = new Jio(DINNER_NAME, DINNER_DATE, DINNER_ADDRESS, CREATOR);
 
     public static final String VALID_NAME_MALA = "mala";
     public static final String VALID_WEEK_MALA = "reading";
