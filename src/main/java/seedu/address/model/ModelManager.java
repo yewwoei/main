@@ -77,6 +77,28 @@ public class ModelManager extends ComponentManager implements Model {
         displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
     }
 
+    public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs,
+                        UserData userData, User user) {
+        super();
+        requireAllNonNull(addressBook, userPrefs, userData);
+
+        logger.fine("Initializing with address book: " + addressBook + " and user prefs " + userPrefs);
+
+        versionedAddressBook = new VersionedAddressBook(addressBook);
+        filteredRestaurants = new FilteredList<>(versionedAddressBook.getRestaurantList());
+        this.userData = userData;
+        filteredJios = new FilteredList<>(userData.getJios());
+        if (currentUser != null) {
+            filteredGroups = new FilteredList<>(FXCollections.observableArrayList(currentUser.getGroups()));
+        } else {
+            filteredGroups = new FilteredList<>(FXCollections.observableArrayList(userData.getGroups()));
+        }
+        displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
+
+        this.currentUser = user;
+        this.isLoggedIn = true;
+    }
+
     public ModelManager() {
         this(new AddressBook(), new UserPrefs(), new UserData());
     }
