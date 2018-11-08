@@ -1,16 +1,5 @@
 package seedu.address.logic.parser.jio;
 
-import org.junit.Test;
-
-import seedu.address.logic.commands.jio.CreateJioCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.Name;
-import seedu.address.model.jio.Jio;
-import seedu.address.model.restaurant.Address;
-import seedu.address.model.timetable.Day;
-import seedu.address.model.timetable.Time;
-import seedu.address.model.timetable.Week;
-
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
@@ -27,6 +16,17 @@ import static seedu.address.model.jio.JioTestUtil.MALA;
 import static seedu.address.model.jio.JioTestUtil.NAME_DESC_MALA;
 import static seedu.address.model.jio.JioTestUtil.TIME_DESC_MALA;
 import static seedu.address.model.jio.JioTestUtil.WEEK_DESC_MALA;
+
+import org.junit.Test;
+
+import seedu.address.logic.commands.jio.CreateJioCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.Name;
+import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Address;
+import seedu.address.model.timetable.Day;
+import seedu.address.model.timetable.Time;
+import seedu.address.model.timetable.Week;
 
 public class CreateJioCommandParserTest {
     private CreateJioCommandParser parser = new CreateJioCommandParser();
