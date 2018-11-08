@@ -16,6 +16,9 @@ import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 import seedu.address.testutil.TypicalUsers;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+
 /**
  * Sample jios for testing.
  */
@@ -41,4 +44,20 @@ public class JioTestUtil {
     private static Address dinnerAddress = new Address("foodclique");
 
     public static final Jio DINNER = new Jio(dinnerName, dinnerDate, dinnerAddress, creator);
+
+//    public static final String VALID_NAME_LUNCH = "lunch";
+//    public static final String VALID_WEEK_LUNCH = "reading";
+//    public static final String VALID_DAY_LUNCH = "mon";
+//    public static final String VALID_TIME_LUNCH = "1200";
+//    public static final String VALID_ADDRESS_LUNCH = "Waa Cow";
+//
+//    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
+//    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
+//    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
+//    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
+//    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
+//    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
+//    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
+//    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+
 }

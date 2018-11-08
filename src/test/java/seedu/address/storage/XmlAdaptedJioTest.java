@@ -1,7 +1,6 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static seedu.address.storage.XmlAdaptedJio.MISSING_FIELD_MESSAGE_FORMAT;
 
 import java.util.List;
@@ -79,7 +78,7 @@ public class XmlAdaptedJioTest {
     public void toModelType_invalidDay_throwsIllegalValueException() {
         XmlAdaptedJio jio = new XmlAdaptedJio(VALID_NAME, VALID_WEEK, INVALID_DAY, VALID_TIME, VALID_ADDRESS,
                 VALID_PEOPLE, VALID_CREATOR);
-        String expectedMessage = Week.MESSAGE_WEEK_CONSTRAINTS;
+        String expectedMessage = Day.MESSAGE_DAY_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, jio::toModelType);
     }
 
@@ -95,7 +94,7 @@ public class XmlAdaptedJioTest {
     public void toModelType_invalidTime_throwsIllegalValueException() {
         XmlAdaptedJio jio = new XmlAdaptedJio(VALID_NAME, VALID_WEEK, VALID_DAY, INVALID_TIME, VALID_ADDRESS,
                 VALID_PEOPLE, VALID_CREATOR);
-        String expectedMessage = Week.MESSAGE_WEEK_CONSTRAINTS;
+        String expectedMessage = Time.MESSAGE_TIME_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, jio::toModelType);
     }
 
@@ -109,7 +108,7 @@ public class XmlAdaptedJioTest {
 
     @Test
     public void toModelType_invalidAddress_throwsIllegalValueException() {
-        XmlAdaptedJio jio = new XmlAdaptedJio(VALID_NAME, null, VALID_DAY, VALID_TIME, INVALID_ADDRESS,
+        XmlAdaptedJio jio = new XmlAdaptedJio(VALID_NAME, VALID_WEEK, VALID_DAY, VALID_TIME, INVALID_ADDRESS,
                 VALID_PEOPLE, VALID_CREATOR);
         String expectedMessage = Address.MESSAGE_ADDRESS_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, jio::toModelType);
@@ -117,19 +116,10 @@ public class XmlAdaptedJioTest {
 
     @Test
     public void toModelType_nullAddress_throwsIllegalValueException() {
-        XmlAdaptedJio jio = new XmlAdaptedJio(VALID_NAME, null, VALID_DAY, VALID_TIME, null,
+        XmlAdaptedJio jio = new XmlAdaptedJio(VALID_NAME, VALID_WEEK, VALID_DAY, VALID_TIME, null,
                 VALID_PEOPLE, VALID_CREATOR);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Address.class.getSimpleName());
         Assert.assertThrows(IllegalValueException.class, expectedMessage, jio::toModelType);
     }
 
-    @Test
-    public void equals() {
-        XmlAdaptedJio jio = new XmlAdaptedJio(VALID_NAME, VALID_WEEK, VALID_DAY, VALID_TIME, VALID_ADDRESS,
-                VALID_PEOPLE, VALID_CREATOR);
-        XmlAdaptedJio jiocopy = new XmlAdaptedJio(VALID_NAME, VALID_WEEK, VALID_DAY, VALID_TIME, VALID_ADDRESS,
-                VALID_PEOPLE, VALID_CREATOR);
-        assertEquals(jio, jiocopy);
-        assertTrue(jio.equals(jiocopy));
-    }
 }

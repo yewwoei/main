@@ -9,12 +9,13 @@ import static seedu.address.model.jio.JioTestUtil.LUNCH;
 import static seedu.address.model.jio.JioTestUtil.LUNCH_COPY;
 
 import org.junit.Test;
+import seedu.address.testutil.TypicalUsers;
 
 public class JioTest {
 
     @Test
     public void hasUser_userNotJoinedJio_returnsFalse() {
-        assertFalse(LUNCH.hasUser(JANE));
+        assertFalse(LUNCH.hasUser(TypicalUsers.getTypicalUsers().get(5)));
     }
 
     @Test
