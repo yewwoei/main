@@ -219,6 +219,7 @@ The `Model`,
 
 
 [[Design-Storage]]
+// tag::evan[]
 === Storage component
 
 .Structure of the Storage Component
@@ -294,7 +295,7 @@ while RestaurantReview stores the Username of the User.
 ** Cons: Cluttered Storage of Data making it difficult to maintain and scale
 
 === Display Profile Feature
-
+// tag::evan[]
 
 // tag::undoredo[]
 === Undo/Redo feature

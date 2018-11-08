@@ -14,7 +14,7 @@ We are a team based in the http://www.comp.nus.edu.sg[School of Computing, Natio
 
 === Mok Ken Han Evan
 image::evanmok2401.png[width="150", align="left"]
-{empty}[https://github.com/evanmok2401[github]]
+{empty}[https://github.com/evanmok2401[github]][<<evan#, portfolio>>]
 
 Role: Team Lead +
 Responsibilities: Integration, In charge of Storage Component
