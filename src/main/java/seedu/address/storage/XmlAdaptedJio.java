@@ -70,7 +70,7 @@ public class XmlAdaptedJio {
         week = source.getDate().getWeek().toString();
         day = source.getDate().getDay().toString();
         time = source.getDate().getTime().toString();
-        address = source.getLocation().toString();
+        address = source.getAddress().toString();
         people = source.getPeople().stream()
                 .map(XmlAdaptedUsername::new)
                 .collect(Collectors.toList());

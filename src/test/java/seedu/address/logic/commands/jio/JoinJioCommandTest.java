@@ -1,14 +1,5 @@
 package seedu.address.logic.commands.jio;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
-import seedu.address.logic.CommandHistory;
-import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.*;
-import seedu.address.model.user.*;
-import seedu.address.testutil.UserBuilder;
-
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.jio.JioTestUtil.DINNER;
@@ -16,13 +7,25 @@ import static seedu.address.model.jio.JioTestUtil.JANE;
 import static seedu.address.model.jio.JioTestUtil.LUNCH;
 import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 
+import org.junit.Rule;
+import org.junit.Test;
+import org.junit.rules.ExpectedException;
+
+import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
+import seedu.address.model.UserData;
+import seedu.address.model.UserPrefs;
+import seedu.address.testutil.UserBuilder;
+
 public class JoinJioCommandTest {
+    @Rule
+    public final ExpectedException thrown = ExpectedException.none();
+
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData(),
             new UserBuilder().build());
     private CommandHistory commandHistory = new CommandHistory();
-
-    @Rule
-    public final ExpectedException thrown = ExpectedException.none();
 
     @Test
     public void constructor_nullJioName_throwsNullPointerException() {

@@ -48,7 +48,7 @@ public class JioCard extends UiPart<Region> {
         week.setText("Week " + jio.getDate().getWeek().toString());
         day.setText(jio.getDate().getDay().toString());
         time.setText(jio.getDate().getTime().toString());
-        address.setText(jio.getLocation().value);
+        address.setText(jio.getAddress().value);
     }
 
 

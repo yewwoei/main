@@ -7,19 +7,20 @@ import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Day;
 import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
-import seedu.address.model.user.*;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import seedu.address.model.user.Email;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.Phone;
+import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 
 /**
  * Contains helper final Strings for testing Jio.
  */
 public class JioTestUtil {
 
-    public static User JOHN = new User(new Username("john"), new Password("password"), new Name("john"),
+    public static final User JOHN = new User(new Username("john"), new Password("password"), new Name("john"),
             new Phone("12345678"), new Email("john@gmail.com"));
-    public static User JANE = new User(new Username("jane"), new Password("password"), new Name("jane"),
+    public static final User JANE = new User(new Username("jane"), new Password("password"), new Name("jane"),
             new Phone("12345678"), new Email("jane@gmail.com"));
 
     private static Name lunchName = new Name("lunch");
