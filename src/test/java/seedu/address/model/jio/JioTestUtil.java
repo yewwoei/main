@@ -1,20 +1,27 @@
 package seedu.address.model.jio;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Day;
 import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
-import seedu.address.model.user.*;
+import seedu.address.model.user.Email;
+import seedu.address.model.user.Password;
+import seedu.address.model.user.Phone;
+import seedu.address.model.user.User;
+import seedu.address.model.user.Username;
 import seedu.address.testutil.TypicalUsers;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
+/**
+ * Sample jios for testing.
+ */
 public class JioTestUtil {
-    public static final User JANE = new User(new Username("jane"), new Password("password"), new seedu.address.model.Name("jane"),
-            new Phone("12345678"), new Email("jane@gmail.com"));
+    public static final User JANE = new User(new Username("jane"), new Password("password"),
+            new seedu.address.model.Name("jane"), new Phone("12345678"), new Email("jane@gmail.com"));
 
     private static seedu.address.model.Name lunchName = new seedu.address.model.Name("lunch");
     private static Date lunchDate = new Date(new Week("1"), new Day("mon"), new Time("1200"));

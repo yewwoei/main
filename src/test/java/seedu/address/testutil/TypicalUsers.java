@@ -6,15 +6,11 @@ import java.util.List;
 
 import seedu.address.model.UserData;
 import seedu.address.model.jio.Jio;
-import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.WrittenReview;
-import seedu.address.model.timetable.Date;
-import seedu.address.model.timetable.Day;
-import seedu.address.model.timetable.Time;
-import seedu.address.model.timetable.Week;
-import seedu.address.model.user.*;
+import seedu.address.model.user.RestaurantReview;
+import seedu.address.model.user.User;
 
 /**
  * A utility class containing a list of {@code User} objects to be used in tests.
