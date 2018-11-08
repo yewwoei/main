@@ -1,6 +1,14 @@
 package seedu.address.storage;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static seedu.address.storage.XmlAdaptedJio.MISSING_FIELD_MESSAGE_FORMAT;
+
 import org.junit.Test;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Name;
 import seedu.address.model.jio.Jio;
@@ -10,12 +18,6 @@ import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
 import seedu.address.testutil.Assert;
 import seedu.address.testutil.TypicalJios;
-
-import java.util.List;
-import java.util.stream.Collectors;
-
-import static org.junit.Assert.*;
-import static seedu.address.storage.XmlAdaptedJio.MISSING_FIELD_MESSAGE_FORMAT;
 
 public class XmlAdaptedJioTest {
     private static final String INVALID_NAME = "Hw@ngs";
