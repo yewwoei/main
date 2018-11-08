@@ -1,9 +1,17 @@
 package seedu.address.model.jio;
 
+import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_GROUP;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import seedu.address.model.Name;
 import seedu.address.model.restaurant.Address;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Day;
@@ -15,9 +23,6 @@ import seedu.address.model.user.Phone;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 import seedu.address.testutil.TypicalUsers;
-
-import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 
 /**
  * Sample jios for testing.
@@ -45,19 +50,28 @@ public class JioTestUtil {
 
     public static final Jio DINNER = new Jio(dinnerName, dinnerDate, dinnerAddress, creator);
 
-//    public static final String VALID_NAME_LUNCH = "lunch";
-//    public static final String VALID_WEEK_LUNCH = "reading";
-//    public static final String VALID_DAY_LUNCH = "mon";
-//    public static final String VALID_TIME_LUNCH = "1200";
-//    public static final String VALID_ADDRESS_LUNCH = "Waa Cow";
-//
-//    public static final String NAME_DESC_AMY = " " + PREFIX_NAME + VALID_NAME_AMY;
-//    public static final String NAME_DESC_BOB = " " + PREFIX_NAME + VALID_NAME_BOB;
-//    public static final String PHONE_DESC_AMY = " " + PREFIX_PHONE + VALID_PHONE_AMY;
-//    public static final String PHONE_DESC_BOB = " " + PREFIX_PHONE + VALID_PHONE_BOB;
-//    public static final String ADDRESS_DESC_AMY = " " + PREFIX_ADDRESS + VALID_ADDRESS_AMY;
-//    public static final String ADDRESS_DESC_BOB = " " + PREFIX_ADDRESS + VALID_ADDRESS_BOB;
-//    public static final String TAG_DESC_FRIEND = " " + PREFIX_TAG + VALID_TAG_FRIEND;
-//    public static final String TAG_DESC_HUSBAND = " " + PREFIX_TAG + VALID_TAG_HUSBAND;
+    public static final String VALID_NAME_MALA = "mala";
+    public static final String VALID_WEEK_MALA = "reading";
+    public static final String VALID_DAY_MALA = "mon";
+    public static final String VALID_TIME_MALA = "1200";
+    public static final String VALID_ADDRESS_MALA = "Waa Cow";
+    public static final String VALID_GROUP_MALA = "2103";
+
+    private static final Date MALA_DATE = new Date(new Week(VALID_WEEK_MALA),
+            new Day(VALID_DAY_MALA), new Time(VALID_TIME_MALA));
+    public static final Jio MALA = new Jio(new Name(VALID_NAME_MALA), MALA_DATE, new Address(VALID_ADDRESS_MALA));
+
+    public static final String NAME_DESC_MALA = " " + PREFIX_NAME + VALID_NAME_MALA;
+    public static final String WEEK_DESC_MALA = " " + PREFIX_WEEK + VALID_WEEK_MALA;
+    public static final String DAY_DESC_MALA = " " + PREFIX_DAY + VALID_DAY_MALA;
+    public static final String TIME_DESC_MALA = " " + PREFIX_TIME + VALID_TIME_MALA;
+    public static final String ADDRESS_DESC_MALA = " " + PREFIX_ADDRESS + VALID_ADDRESS_MALA;
+    public static final String GROUP_DESC_MALA = " " + PREFIX_GROUP + VALID_GROUP_MALA;
+
+    public static final String INVALID_NAME_DESC = " " + PREFIX_NAME + "lunch&"; // '&' not allowed in names
+    public static final String INVALID_WEEK_DESC = " " + PREFIX_WEEK + "exam"; // not a week
+    public static final String INVALID_DAY_DESC = " " + PREFIX_DAY + "lolday"; // not a day
+    public static final String INVALID_TIME_DESC = " " + PREFIX_TIME + "2567"; // not a time
+    public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
 
 }
