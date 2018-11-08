@@ -53,15 +53,23 @@ public class XmlAdaptedUserReview {
      * @throws IllegalValueException if there were any data constraints violated in the adapted UserReview
      */
     public UserReview toModelType() throws IllegalValueException {
-        int savedRating = Integer.parseInt(rating);
+        // For Rating
         if (rating == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Rating.class.getSimpleName()));
         }
-        if (!Rating.isValidRating(savedRating)) {
+        int savedRating;
+        try {
+            savedRating = Integer.parseInt(rating);
+            if (!Rating.isValidRating(savedRating)) {
+                throw new IllegalValueException(Rating.MESSAGE_RATING_CONSTRAINTS);
+            }
+        } catch (NumberFormatException e) {
             throw new IllegalValueException(Rating.MESSAGE_RATING_CONSTRAINTS);
         }
+
         final Rating modelRating = new Rating(savedRating);
 
+        // For Username
         if (username == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     Username.class.getSimpleName()));
@@ -71,6 +79,14 @@ public class XmlAdaptedUserReview {
         }
         final Username modelUsername = new Username(username);
 
+        // For WrittenReview
+        if (writtenReview == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    WrittenReview.class.getSimpleName()));
+        }
+        if (!WrittenReview.isValidWrittenReview(writtenReview)) {
+            throw new IllegalValueException(WrittenReview.MESSAGE_REVIEW_CONSTRAINTS);
+        }
         final WrittenReview modelWrittenReview = new WrittenReview(writtenReview);
 
         return new UserReview(modelUsername, modelRating, modelWrittenReview);

@@ -131,10 +131,15 @@ public class ParserRestaurantUtil {
     /**
      * Parses a {@code String review} into an {@code WrittenReview}.
      * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code WrittenReview} is invalid.
      */
-    public static WrittenReview parseWrittenReview(String review) {
+    public static WrittenReview parseWrittenReview(String review) throws ParseException {
         requireNonNull(review);
         String trimmedReview = review.trim();
+        if (!WrittenReview.isValidWrittenReview(trimmedReview)) {
+            throw new ParseException(WrittenReview.MESSAGE_REVIEW_CONSTRAINTS);
+        }
         return new WrittenReview(trimmedReview);
     }
 
