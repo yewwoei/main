@@ -13,7 +13,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 public class Reviews {
 
     public static final String MESSAGE_OVERALL_RATING_CONSTRAINTS =
-            "Rating must be a positive integer from 1 to 5 where 1 is the lowest rating and 5, the highest rating.";
+            "Overall Rating must be a Double in two Decimal Places from 1.00 to 5.00 with the exception of 0.00.";
 
     private static DecimalFormat df = new DecimalFormat("#.00");
     private List<UserReview> userReviewList;
@@ -52,7 +52,7 @@ public class Reviews {
     public static boolean isValidReviewsRating(String test) {
         try {
             double testRating = Double.parseDouble(test);
-            if (testRating < 1.0 || testRating > 5.0) {
+            if (testRating < 0.0 || testRating > 5.0 || (testRating < 1.0) && (testRating > 0.0)) {
                 return false;
             }
             return true;
