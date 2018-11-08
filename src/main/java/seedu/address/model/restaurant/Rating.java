@@ -33,4 +33,17 @@ public class Rating {
         }
         return true;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Rating)) {
+            return false;
+        }
+
+        return rating == ((Rating) other).rating;
+    }
 }

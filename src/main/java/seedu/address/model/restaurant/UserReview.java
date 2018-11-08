@@ -35,4 +35,19 @@ public class UserReview {
     public String getWrittenReview() {
         return review.writtenReview;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof UserReview)) {
+            return false;
+        }
+
+        return rating.equals(((UserReview) other).rating)
+                && username.equals(((UserReview) other).username)
+                && review.equals(((UserReview) other).review);
+    }
 }
