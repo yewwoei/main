@@ -5,11 +5,16 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.UserData;
+import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.WrittenReview;
-import seedu.address.model.user.RestaurantReview;
-import seedu.address.model.user.User;
+import seedu.address.model.timetable.Date;
+import seedu.address.model.timetable.Day;
+import seedu.address.model.timetable.Time;
+import seedu.address.model.timetable.Week;
+import seedu.address.model.user.*;
 
 /**
  * A utility class containing a list of {@code User} objects to be used in tests.
@@ -89,6 +94,10 @@ public class TypicalUsers {
         for (User user : getTypicalUsers()) {
             userData.addUser(user);
         }
+
+        // Add jios to userData
+        List<Jio> jios = TypicalJios.getTypicalJios();
+        jios.forEach(jio -> userData.addJio(jio));
         return userData;
     }
 
