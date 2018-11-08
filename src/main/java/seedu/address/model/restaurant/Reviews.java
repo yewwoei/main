@@ -4,10 +4,16 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 /**
  * Represents a Restaurant's reviews in the address book.
  */
 public class Reviews {
+
+    public static final String MESSAGE_OVERALL_RATING_CONSTRAINTS =
+            "Rating must be a positive integer from 1 to 5 where 1 is the lowest rating and 5, the highest rating.";
 
     private static DecimalFormat df = new DecimalFormat("#.00");
     private List<UserReview> userReviewList;
@@ -30,6 +36,9 @@ public class Reviews {
      * @param userReviewList A list of UserReview.
      */
     public Reviews(String restaurantRatingValue, List<UserReview> userReviewList) {
+        requireNonNull(restaurantRatingValue);
+        requireNonNull(userReviewList);
+        checkArgument(isValidReviewsRating(restaurantRatingValue), MESSAGE_OVERALL_RATING_CONSTRAINTS);
         this.userReviewList = userReviewList;
         if (restaurantRatingValue.equals("0.00")) {
             this.restaurantRating = 0.00;
@@ -37,6 +46,18 @@ public class Reviews {
         } else {
             this.restaurantRating = Double.parseDouble(restaurantRatingValue);
             this.restaurantRatingValue = df.format(restaurantRating);
+        }
+    }
+
+    public static boolean isValidReviewsRating(String test) {
+        try {
+            double testRating = Double.parseDouble(test);
+            if (testRating < 1.0 || testRating > 5.0) {
+                return false;
+            }
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
         }
     }
 
@@ -67,4 +88,17 @@ public class Reviews {
         return this;
     }
 
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof Reviews)) {
+            return false;
+        }
+
+        return restaurantRatingValue.equals(((Reviews) other).restaurantRatingValue)
+                && userReviewList.equals(((Reviews) other).userReviewList);
+    }
 }
