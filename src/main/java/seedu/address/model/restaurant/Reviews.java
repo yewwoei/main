@@ -1,11 +1,11 @@
 package seedu.address.model.restaurant;
 
+import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.util.AppUtil.checkArgument;
+
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-
-import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Restaurant's reviews in the address book.
@@ -49,6 +49,11 @@ public class Reviews {
         }
     }
 
+    /**
+     * Used for Tests, Checks if the restaurantRating in Reviews is valid.
+     *
+     * @param test The overall rating of a restaurant to be checked.
+     */
     public static boolean isValidReviewsRating(String test) {
         try {
             double testRating = Double.parseDouble(test);
