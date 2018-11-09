@@ -124,7 +124,12 @@ public class TestApp extends MainApp {
         model.loginUser(user);
     }
 
+    public void logout() {
+        model.logoutUser();
+    }
+
     public void addUser(User user) {
         model.addUser(user);
     }
+
 }

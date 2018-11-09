@@ -14,11 +14,6 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.ClassRule;
-
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
 import guitests.guihandles.MainMenuHandle;
@@ -26,13 +21,19 @@ import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.RestaurantListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.BeforeClass;
+import org.junit.ClassRule;
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SelectOtherCommand;
 import seedu.address.logic.commands.SelectRestaurantCommand;
+import seedu.address.logic.commands.jio.ListJioCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.user.User;
@@ -160,6 +161,22 @@ public abstract class AddressBookSystemTest {
         executeCommand(SelectRestaurantCommand.COMMAND_WORD + " " + index.getOneBased());
         assertEquals(index.getZeroBased(), getRestaurantListPanel().getSelectedCardIndex());
     }
+
+    /**
+     * Selects the item at {@code index} of the displayed list.
+     */
+    protected void selectitem(Index index) {
+        executeCommand(SelectOtherCommand.COMMAND_WORD + " " + index.getOneBased());
+        assertEquals(index.getZeroBased(), getRestaurantListPanel().getSelectedCardIndex());
+    }
+
+    /**
+     *
+     */
+     protected void listJio() {
+         executeCommand(ListJioCommand.COMMAND_WORD);
+         assertEquals(getModel().getJioList().size(), getModel().getUserData().getJios().size());
+     }
 
     /**
      * Deletes all restaurants in the address book.
@@ -294,6 +311,10 @@ public abstract class AddressBookSystemTest {
 
     public void login(User user) {
         testApp.login(user);
+    }
+
+    public void logout() {
+        testApp.logout();
     }
 
     public void addUser(User user) {

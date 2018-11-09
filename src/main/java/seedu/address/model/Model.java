@@ -37,6 +37,8 @@ public interface Model {
 
     Predicate<Group> PREDICATE_SHOW_ALL_GROUPS = unused -> true;
 
+    UserData getUserData();
+
     /**
      * Clears existing backing model and replaces with the provided new data.
      */
