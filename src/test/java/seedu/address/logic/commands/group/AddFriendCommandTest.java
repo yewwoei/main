@@ -29,5 +29,5 @@ public class AddFriendCommandTest {
         thrown.expect(NullPointerException.class);
         new AddFriendCommand(null);
     }
-    
+
 }
