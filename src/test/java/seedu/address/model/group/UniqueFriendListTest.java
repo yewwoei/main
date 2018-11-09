@@ -40,6 +40,7 @@ public class UniqueFriendListTest {
     }
 
     @Test
+
     public void containsFriendshipWithSameIdentityFieldsInListReturnsTrue() {
         uniqueFriendList.add(FRIENDSHIP_1);
         Friendship friendship = new FriendshipBuilder(FRIENDSHIP_1)
