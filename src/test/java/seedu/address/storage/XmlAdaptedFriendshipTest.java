@@ -1,6 +1,5 @@
 package seedu.address.storage;
 
-
 import static org.junit.Assert.assertEquals;
 import static seedu.address.storage.XmlAdaptedFriendship.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.storage.XmlAdaptedFriendship.USER_NOT_EXIST_FRIENDSHIP_FORMAT;
@@ -9,7 +8,6 @@ import static seedu.address.storage.XmlAdaptedFriendship.WRONG_STATUS_FORMAT;
 import static seedu.address.testutil.TypicalFriendships.FRIENDSHIP_1;
 import static seedu.address.testutil.TypicalFriendships.FRIENDSHIP_2;
 import static seedu.address.testutil.TypicalUsers.getTypicalUserData;
-
 
 import org.junit.Rule;
 import org.junit.Test;

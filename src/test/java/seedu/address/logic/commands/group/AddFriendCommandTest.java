@@ -29,15 +29,5 @@ public class AddFriendCommandTest {
         thrown.expect(NullPointerException.class);
         new AddFriendCommand(null);
     }
-
-//    @Test
-//    public void execute_addFriendAcceptedByModel_addSuccessful() throws Exception {
-//        model.addUser(FRIENDSHIP_1.getMe());
-//        model.addUser(FRIENDSHIP_1.getFriendUser());
-//        CommandResult commandResult = new AddFriendCommand(FRIENDSHIP_1.getMyUsername())
-//                .execute(model, commandHistory);
-//
-//        assertEquals(String.format(AddFriendCommand.MESSAGE_SUCCESS), commandResult.feedbackToUser);
-//        assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
-//    }
+    
 }
