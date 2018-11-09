@@ -21,16 +21,16 @@ public class SignUpCommand extends Command {
 
     public static final String COMMAND_WORD = "signup";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Signs a user up to use Makan Book features.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Signs a user up to use Makan Book features. "
             + "Parameters: "
             + PREFIX_USERNAME + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL\n"
+            + PREFIX_EMAIL + "EMAIL "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USERNAME + "johnnydoe "
-            + PREFIX_PASSWORD + "pAssw0rd "
+            + PREFIX_PASSWORD + "p@ssw0rd "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com";

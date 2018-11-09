@@ -177,7 +177,7 @@ public class User {
      * @return the updated User
      */
     public User addFriendship(Friendship friendship) {
-        FriendshipStatus friendshipStatus = friendship.getFrienshipStatus();
+        FriendshipStatus friendshipStatus = friendship.getFriendshipStatus();
         if (friendshipStatus.equals(FriendshipStatus.ACCEPTED)) {
             friends.add(friendship);
         } else {

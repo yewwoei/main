@@ -17,6 +17,8 @@ import seedu.address.model.user.Username;
 public class XmlAdaptedFriendship {
     public static final String WRONG_INITIATION_MESSAGE_FORMAT = "Friendship initiated by third party!";
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "friendship's %s field is missing!";
+    public static final String USER_NOT_EXIST_FRIENDSHIP_FORMAT = "Sorry, %s is not a valid username";
+    public static final String WRONG_STATUS_FORMAT = "Wrong friendship status format";
 
     @XmlElement(required = true)
     private String friendUser;
@@ -49,10 +51,12 @@ public class XmlAdaptedFriendship {
      * @param source future changes to this will not affect the created XmlAdadptedFriendship
      */
     public XmlAdaptedFriendship(Friendship source) {
+        System.out.println("xml adapted friendship from friendship source");
         friendUser = source.getFriendUser().getUsername().toString();
         initiatedBy = source.getInitiatedBy().getUsername().toString();
         me = source.getMe().getUsername().toString();
-        friendshipStatus = source.getFrienshipStatus().toString();
+        System.out.println("for me user " + me);
+        friendshipStatus = source.getFriendshipStatus().toString();
     }
 
     @Override
@@ -95,6 +99,22 @@ public class XmlAdaptedFriendship {
 
         if (friendshipStatus == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    Friendship.class.getSimpleName()));
+        }
+
+        if (!(friendshipStatus.equals(FriendshipStatus.ACCEPTED.toString()))
+                && !(friendshipStatus.equals(FriendshipStatus.PENDING.toString()))) {
+            System.out.println(friendshipStatus);
+            throw new IllegalValueException((String.format(WRONG_STATUS_FORMAT, Friendship.class.getSimpleName())));
+        }
+
+        if (!usernameUserHashmap.containsKey(new Username(friendUser))) {
+            throw new IllegalValueException(String.format(USER_NOT_EXIST_FRIENDSHIP_FORMAT,
+                    Friendship.class.getSimpleName()));
+        }
+
+        if (!usernameUserHashmap.containsKey(new Username(me))) {
+            throw new IllegalValueException(String.format(USER_NOT_EXIST_FRIENDSHIP_FORMAT,
                     Friendship.class.getSimpleName()));
         }
 
