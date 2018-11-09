@@ -6,6 +6,7 @@ import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
