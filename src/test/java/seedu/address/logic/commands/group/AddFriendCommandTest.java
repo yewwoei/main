@@ -119,11 +119,9 @@ public class AddFriendCommandTest {
         Friendship alreadyFriends2 = new Friendship(validUserA, currentUser, currentUser,
                 FriendshipStatus.ACCEPTED);
         AddFriendCommand addFriendCommand = new AddFriendCommand(validUsernameA);
-        ModelStub modelStub = new AddFriendCommandTest.ModelStubforAddFriend();
-        ((ModelStubforAddFriend) modelStub)
-                .addFriendtoFriendsAlready(alreadyFriends1);
-        ((ModelStubforAddFriend) modelStub)
-                .addFriendtoFriendsAlready(alreadyFriends2);
+        ModelStubforAddFriend modelStub = new AddFriendCommandTest.ModelStubforAddFriend();
+        modelStub.addFriendtoFriendsAlready(alreadyFriends1);
+        modelStub.addFriendtoFriendsAlready(alreadyFriends2);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddFriendCommand.MESSAGE_FRIEND_ALREADY);
@@ -134,8 +132,8 @@ public class AddFriendCommandTest {
     public void execute_acceptExistingRequest_throwsCommandException() throws Exception {
         Friendship acceptFriendRequest = new Friendship(currentUser, currentUser, validUserA);
         AddFriendCommand addFriendCommand = new AddFriendCommand(validUsernameA);
-        ModelStub modelStub = new AddFriendCommandTest.ModelStubforAddFriend();
-        ((ModelStubforAddFriend) modelStub).addFriendtoFriendRequests(acceptFriendRequest);
+        ModelStubforAddFriend modelStub = new AddFriendCommandTest.ModelStubforAddFriend();
+        modelStub.addFriendtoFriendRequests(acceptFriendRequest);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddFriendCommand.MESSAGE_ACCEPT_EXISTING_REQUEST);
