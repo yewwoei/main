@@ -34,6 +34,7 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
+
     @Override
     public void resetData(ReadOnlyAddressBook newData) {
         throw new AssertionError("This method should not be called.");

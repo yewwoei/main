@@ -35,6 +35,7 @@ import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.SelectRestaurantCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.user.User;
 import seedu.address.testutil.TypicalRestaurants;
 import seedu.address.ui.CommandBox;
 
@@ -126,6 +127,8 @@ public abstract class AddressBookSystemTest {
         // Injects a fixed clock before executing a command so that the time stamp shown in the status bar
         // after each command is predictable and also different from the previous command.
         clockRule.setInjectedClockToCurrentTime();
+
+        testApp.readStorageAddressBook();
 
         mainWindowHandle.getCommandBox().run(command);
 
@@ -287,5 +290,13 @@ public abstract class AddressBookSystemTest {
      */
     protected Model getModel() {
         return testApp.getModel();
+    }
+
+    public void login(User user) {
+        testApp.login(user);
+    }
+
+    public void addUser(User user){
+        testApp.addUser(user);
     }
 }
