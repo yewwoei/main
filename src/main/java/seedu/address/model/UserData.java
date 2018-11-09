@@ -28,6 +28,11 @@ public class UserData {
         jios = new UniqueJioList();
     }
 
+    public UserData(UserData data) {
+        this.usernameUserHashMap = data.usernameUserHashMap;
+        this.groupHashMap = data.groupHashMap;
+        this.jios = data.jios;
+    }
     public HashMap<Username, User> getUsernameUserHashMap() {
         return usernameUserHashMap;
     }
@@ -143,7 +148,7 @@ public class UserData {
             return false;
         }
         UserData otherUserData = (UserData) other;
-        final boolean[] equivalent = {true};
+        boolean[] equivalent = {true};
         usernameUserHashMap.forEach((k, v) -> {
             if (!v.equals(otherUserData.getUser(k))) {
                 equivalent[0] = false;

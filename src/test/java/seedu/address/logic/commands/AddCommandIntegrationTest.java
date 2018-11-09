@@ -6,8 +6,8 @@ import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import seedu.address.logic.CommandHistory;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserData;
@@ -29,16 +29,16 @@ public class AddCommandIntegrationTest {
     }
 
     @Test
-    public void execute_newRestaurant_success() {
+    public void execute_newRestaurant_success() throws CommandException {
         Restaurant validRestaurant = new RestaurantBuilder().build();
 
         Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserData());
         expectedModel.addRestaurant(validRestaurant);
         expectedModel.commitAddressBook();
-
         assertCommandSuccess(new AddCommand(validRestaurant), model, commandHistory,
-                String.format(AddCommand.MESSAGE_SUCCESS, validRestaurant), expectedModel);
+               String.format(AddCommand.MESSAGE_SUCCESS, validRestaurant), expectedModel);
     }
+
 
     @Test
     public void execute_duplicateRestaurant_throwsCommandException() {

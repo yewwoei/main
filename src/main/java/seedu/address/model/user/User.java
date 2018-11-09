@@ -118,7 +118,7 @@ public class User {
 
     /**
      * Returns true if both users have the same identity and data fields.
-     * This defines a stronger notion of equality between two users.
+     * This defines a stronger notion of equality between two users.F
      */
     @Override
     public boolean equals(Object other) {
@@ -132,7 +132,8 @@ public class User {
 
         User otherUser = (User) other;
         return otherUser.getUsername().equals(getUsername())
-                && getRestaurantReviews().equals(otherUser.getRestaurantReviews());
+                && getRestaurantReviews().equals(otherUser.getRestaurantReviews())
+                && getDebts().equals(otherUser.getDebts());
     }
 
     @Override

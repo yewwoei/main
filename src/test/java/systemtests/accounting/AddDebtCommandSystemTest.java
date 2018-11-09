@@ -1,4 +1,12 @@
 package systemtests.accounting;
 
-public class AddDebtCommandSystemTest {
+import org.junit.Test;
+import systemtests.AddressBookSystemTest;
+
+public class AddDebtCommandSystemTest extends AddressBookSystemTest {
+
+    @Test
+    public void add() {
+
+    }
 }

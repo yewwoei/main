@@ -10,9 +10,7 @@ import java.util.ArrayList;
 
 import org.junit.Rule;
 import org.junit.Test;
-
 import org.junit.rules.ExpectedException;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
@@ -27,7 +25,6 @@ import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 import seedu.address.testutil.TypicalUsers;
-import seedu.address.testutil.UserBuilder;
 
 public class AddDebtCommandTest {
 
@@ -37,7 +34,7 @@ public class AddDebtCommandTest {
     public ExpectedException thrown = ExpectedException.none();
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-            TypicalUsers.getTypicalUserData(), new UserBuilder().build());
+            TypicalUsers.getTypicalUserData(), TypicalUsers.getTypicalUsers().get(1));
 
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -187,6 +184,7 @@ public class AddDebtCommandTest {
         @Override
         public boolean isSameAsCurrentUser(Username username) {
             return currentUser.equals(TypicalUsers.getTypicalUserData().getUser(username));
+
         }
 
         @Override
