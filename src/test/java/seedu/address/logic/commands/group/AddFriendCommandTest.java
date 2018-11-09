@@ -120,8 +120,10 @@ public class AddFriendCommandTest {
                 FriendshipStatus.ACCEPTED);
         AddFriendCommand addFriendCommand = new AddFriendCommand(validUsernameA);
         ModelStub modelStub = new AddFriendCommandTest.ModelStubforAddFriend();
-        ((ModelStubforAddFriend) modelStub).addFriendtoFriendsAlready(alreadyFriends1);
-        ((ModelStubforAddFriend) modelStub).addFriendtoFriendsAlready(alreadyFriends2);
+        ((ModelStubforAddFriend) modelStub)
+                .addFriendtoFriendsAlready(alreadyFriends1);
+        ((ModelStubforAddFriend) modelStub)
+                .addFriendtoFriendsAlready(alreadyFriends2);
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(AddFriendCommand.MESSAGE_FRIEND_ALREADY);
