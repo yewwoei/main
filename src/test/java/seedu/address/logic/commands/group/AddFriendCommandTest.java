@@ -35,19 +35,12 @@ public class AddFriendCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
             TypicalUsers.getTypicalUserData(), new UserBuilder().build());
-
     private CommandHistory commandHistory = new CommandHistory();
-
     private Username validUsernameA = TypicalUsers.getTypicalUsers().get(0).getUsername();
-    
     private User validUserA = TypicalUsers.getTypicalUsers().get(0);
-
     private Username validUsernameB = TypicalUsers.getTypicalUsers().get(2).getUsername();
-
     private Username invalidUser = new Username("NOTAUSER");
-
     private Username currentUsername = TypicalUsers.getTypicalUsers().get(1).getUsername();
-
     private User currentUser = TypicalUsers.getTypicalUsers().get(1);
 
     @Test
