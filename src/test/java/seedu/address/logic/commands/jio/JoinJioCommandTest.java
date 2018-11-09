@@ -3,7 +3,6 @@ package seedu.address.logic.commands.jio;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.model.jio.JioTestUtil.DINNER;
-import static seedu.address.model.jio.JioTestUtil.JANE;
 import static seedu.address.model.jio.JioTestUtil.LUNCH;
 import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 
@@ -15,15 +14,15 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
-import seedu.address.model.UserData;
 import seedu.address.model.UserPrefs;
+import seedu.address.testutil.TypicalUsers;
 import seedu.address.testutil.UserBuilder;
 
 public class JoinJioCommandTest {
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData(),
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), TypicalUsers.getTypicalUserData(),
             new UserBuilder().build());
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -44,25 +43,24 @@ public class JoinJioCommandTest {
     public void execute_alreadyJoinedJio_failure() throws Exception {
         thrown.expect(CommandException.class);
         thrown.expectMessage("You have already joined this jio");
-        model.createJio(LUNCH);
-        assertTrue(LUNCH.hasUser(new UserBuilder().build()));
 
-        JoinJioCommand joinJioCommand = new JoinJioCommand(LUNCH.getName());
+        model.loginUser(TypicalUsers.getTypicalUsers().get(0));
+        assertTrue(model.getJioList().get(0).hasUser(TypicalUsers.getTypicalUsers().get(0)));
+
+        JoinJioCommand joinJioCommand = new JoinJioCommand(model.getJioList().get(0).getName());
         joinJioCommand.execute(model, commandHistory);
     }
 
     @Test
     public void execute() throws Exception {
-        model.createJio(LUNCH);
-        assertFalse(LUNCH.hasUser(JANE));
-        model.logoutUser();
+        assertFalse(LUNCH.hasUser(TypicalUsers.getTypicalUsers().get(5)));
 
-        model.addUser(JANE);
-        model.loginUser(JANE);
+        model.loginUser(TypicalUsers.getTypicalUsers().get(5));
         JoinJioCommand joinJioCommand = new JoinJioCommand(LUNCH.getName());
         joinJioCommand.execute(model, commandHistory);
 
-        assertTrue(model.getJioList().stream().anyMatch(jio -> (jio.equals(LUNCH) && jio.hasUser(JANE))));
+        assertTrue(model.getJioList().stream().anyMatch(jio -> (jio.equals(LUNCH)
+                && jio.hasUser(TypicalUsers.getTypicalUsers().get(5)))));
     }
 
     @Test
