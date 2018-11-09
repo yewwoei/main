@@ -12,7 +12,9 @@ import seedu.address.model.user.User;
  * A utility class containing a list of {@code Friendship} objects to be used in tests.
  */
 public class TypicalFriendships {
-    private static List<User> listUsers = TypicalUsers.getTypicalUsers();
+    // list below should be private but style check error wil be caused if private
+    // -> variable access
+    public static final List<User> listUsers = TypicalUsers.getTypicalUsers();
     public static final Friendship FRIENDSHIP_1 = new FriendshipBuilder().build();
     public static final Friendship FRIENDSHIP_2 = new FriendshipBuilder()
             .withFriendshipStatus(FriendshipStatus.ACCEPTED)
