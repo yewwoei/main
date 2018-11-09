@@ -9,7 +9,6 @@ import static seedu.address.testutil.TypicalFriendships.FRIENDSHIP_1;
 
 import org.junit.Test;
 
-import seedu.address.logic.commands.friend.DeleteFriendCommand;
 import seedu.address.logic.commands.friend.DeleteFriendRequestCommand;
 import seedu.address.logic.parser.friend.DeleteFriendRequestCommandParser;
 import seedu.address.model.user.Username;
@@ -19,15 +18,16 @@ public class DeleteFriendRequestCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteFriendCommand() {
-        final String Username_String = " " + PREFIX_USERNAME + FRIENDSHIP_1.getFriendUsername().toString();
-        final Username Username_To_Delete = FRIENDSHIP_1.getFriendUser().getUsername();
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + Username_String,
-                new DeleteFriendRequestCommand(Username_To_Delete));
+        final String UsernameString = " " + PREFIX_USERNAME + FRIENDSHIP_1.getFriendUsername().toString();
+        final Username UsernameToDelete = FRIENDSHIP_1.getFriendUser().getUsername();
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + UsernameString,
+                new DeleteFriendRequestCommand(UsernameToDelete));
     }
 
     @Test
     public void parse_invalidArgs_throwsParseException() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, DeleteFriendRequestCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                DeleteFriendRequestCommand.MESSAGE_USAGE);
         assertParseFailure(parser, "hello", expectedMessage);
     }
 }
