@@ -49,13 +49,8 @@ public class AddDebtCommandIntegrationTest {
 
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(),
                 TypicalUsers.getTypicalUserData(), TypicalUsers.getTypicalUsers().get(1));
-        System.out.println(expectedModel.getDebtList().toString());
-        System.out.println(model.getDebtList().toString());
 
         expectedModel.addDebt(validUserA, validAmountA);
-
-        System.out.println(expectedModel.getDebtList().toString());
-        System.out.println(model.getDebtList().toString());
 
         new AddDebtCommand(validUserA, validAmountA).execute(model, commandHistory);
         assertCommandSuccess(new AddDebtCommand(validUserA, validAmountA), model, commandHistory,
