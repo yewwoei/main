@@ -118,7 +118,7 @@ public class User {
 
     /**
      * Returns true if both users have the same identity and data fields.
-     * This defines a stronger notion of equality between two users.F
+     * This defines a stronger notion of equality between two users.
      */
     @Override
     public boolean equals(Object other) {

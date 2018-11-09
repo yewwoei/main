@@ -14,19 +14,19 @@ import seedu.address.model.user.User;
 public class TypicalFriendships {
     // list below should be private but style check error wil be caused if private
     // -> variable access
-    public static final List<User> listUsers = TypicalUsers.getTypicalUsers();
+    public static final List<User> LISTUSERS = TypicalUsers.getTypicalUsers();
     public static final Friendship FRIENDSHIP_1 = new FriendshipBuilder().build();
     public static final Friendship FRIENDSHIP_2 = new FriendshipBuilder()
             .withFriendshipStatus(FriendshipStatus.ACCEPTED)
-            .withFriendUser(listUsers.get(2))
-            .withMe(listUsers.get(3))
-            .withInitiatedBy(listUsers.get(2))
+            .withFriendUser(LISTUSERS.get(2))
+            .withMe(LISTUSERS.get(3))
+            .withInitiatedBy(LISTUSERS.get(2))
             .build();
     public static final Friendship FRIENDSHIP_3 = new FriendshipBuilder()
             .withFriendshipStatus(FriendshipStatus.ACCEPTED)
-            .withFriendUser(listUsers.get(3))
-            .withMe(listUsers.get(2))
-            .withInitiatedBy(listUsers.get(2))
+            .withFriendUser(LISTUSERS.get(3))
+            .withMe(LISTUSERS.get(2))
+            .withInitiatedBy(LISTUSERS.get(2))
             .build();
 
     private TypicalFriendships() {} // prevents instantiation
@@ -36,6 +36,6 @@ public class TypicalFriendships {
     }
 
     public static List<User> getListUsers() {
-        return listUsers;
+        return LISTUSERS;
     }
 }

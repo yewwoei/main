@@ -296,7 +296,7 @@ public abstract class AddressBookSystemTest {
         testApp.login(user);
     }
 
-    public void addUser(User user){
+    public void addUser(User user) {
         testApp.addUser(user);
     }
 }

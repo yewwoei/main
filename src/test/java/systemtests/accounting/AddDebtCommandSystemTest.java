@@ -15,17 +15,17 @@ import systemtests.AddressBookSystemTest;
 
 public class AddDebtCommandSystemTest extends AddressBookSystemTest {
 
-    String VALID_USER_A = TypicalUsers.getTypicalUsers().get(1).getUsername().toString();
+    private static final String VALID_USER_A = TypicalUsers.getTypicalUsers().get(1).getUsername().toString();
 
-    String VALID_AMOUNT = "101";
+    private static final String VALID_AMOUNT = "101";
 
-    User currentUser = TypicalUsers.getTypicalUsers().get(0);
+    private User currentUser = TypicalUsers.getTypicalUsers().get(0);
 
-    User otherUser = TypicalUsers.getTypicalUsers().get(1);
+    private User otherUser = TypicalUsers.getTypicalUsers().get(1);
 
-    Username userA = new Username("benny123");
+    private Username userA = new Username("benny123");
 
-    Amount amount = new Amount("101");
+    private Amount amount = new Amount("101");
 
     @Test
     public void add() {
@@ -39,8 +39,10 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         model.loginUser(currentUser);
 
         String command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_A
-                        + " " + PREFIX_AMOUNT +  VALID_AMOUNT;
+                        + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandSuccess(command, model, userA, amount);
+
+
     }
 
     private void assertCommandSuccess(String command, Model expectedModel, Username debtor, Amount amount) {
@@ -49,6 +51,12 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, expectedModel, expectedResultMessage);
     }
 
+    /**
+     * Performs the same verification as
+     * {@code assertCommandSuccess(String, Model, Username, Amount)} except asserts that the,<br>
+     * 1. Result display box displays {@code expectedResultMessage}.<br>
+     * 2. {@code Storage} equal to the corresponding components in {@code expectedModel}.<br>
+     */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
@@ -56,6 +64,13 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         assertCommandBoxShowsDefaultStyle();
     }
 
+    /**
+     * Executes {@code command} and asserts that the,<br>
+     * 1. Command box displays {@code command}.<br>
+     * 2. Command box has the error style class.<br>
+     * 3. Result display box displays {@code expectedResultMessage}.<br>
+     * 4. {@code Storage} remain unchanged.
+     */
     private void assertCommandFailure(String command, String expectedResultMessage) {
         Model expectedModel = getModel();
 
@@ -63,6 +78,5 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();
-        assertStatusBarUnchanged();
     }
 }
