@@ -1,7 +1,5 @@
 package seedu.address.model.jio;
 
-import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -10,11 +8,15 @@ import static seedu.address.model.jio.JioTestUtil.JANE;
 import static seedu.address.model.jio.JioTestUtil.LUNCH;
 import static seedu.address.model.jio.JioTestUtil.LUNCH_COPY;
 
+import org.junit.Test;
+
+import seedu.address.testutil.TypicalUsers;
+
 public class JioTest {
 
     @Test
     public void hasUser_userNotJoinedJio_returnsFalse() {
-        assertFalse(LUNCH.hasUser(JANE));
+        assertFalse(LUNCH.hasUser(TypicalUsers.getTypicalUsers().get(5)));
     }
 
     @Test
@@ -54,6 +56,5 @@ public class JioTest {
         // different restaurant -> returns false
         assertFalse(LUNCH.equals(DINNER));
     }
-
 
 }

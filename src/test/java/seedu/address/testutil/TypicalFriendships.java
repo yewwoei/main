@@ -8,8 +8,11 @@ import seedu.address.model.group.Friendship;
 import seedu.address.model.group.FriendshipStatus;
 import seedu.address.model.user.User;
 
+/**
+ * A utility class containing a list of {@code Friendship} objects to be used in tests.
+ */
 public class TypicalFriendships {
-    static List<User> listUsers = TypicalUsers.getTypicalUsers();
+    private static List<User> listUsers = TypicalUsers.getTypicalUsers();
     public static final Friendship FRIENDSHIP_1 = new FriendshipBuilder().build();
     public static final Friendship FRIENDSHIP_2 = new FriendshipBuilder()
             .withFriendshipStatus(FriendshipStatus.ACCEPTED)
@@ -28,5 +31,9 @@ public class TypicalFriendships {
 
     public static List<Friendship> getTypicalFriendships() {
         return new ArrayList<>(Arrays.asList(FRIENDSHIP_1, FRIENDSHIP_2, FRIENDSHIP_3));
+    }
+
+    public static List<User> getListUsers() {
+        return listUsers;
     }
 }

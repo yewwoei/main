@@ -265,7 +265,7 @@ public class BrowserPanel extends UiPart<Region> {
         Object[] params = new Object[] {
                 jio.getName(),
                 jio.getDate(),
-                jio.getLocation(),
+                jio.getAddress(),
                 jio.getPeople().stream().map(u -> u.toString()).collect(Collectors.joining("<p></p>"))
         };
         String html = MessageFormat.format(sb.toString(), params);
