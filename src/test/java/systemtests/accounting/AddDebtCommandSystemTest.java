@@ -7,6 +7,6 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
 
     @Test
     public void add() {
-
+        
     }
 }

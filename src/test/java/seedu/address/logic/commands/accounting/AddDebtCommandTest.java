@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 
 import java.util.ArrayList;
 
@@ -16,9 +15,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ModelStub;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
-import seedu.address.model.UserPrefs;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtStatus;
@@ -32,9 +28,6 @@ public class AddDebtCommandTest {
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
-
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
-            TypicalUsers.getTypicalUserData(), TypicalUsers.getTypicalUsers().get(1));
 
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -97,7 +90,7 @@ public class AddDebtCommandTest {
 
         AddDebtCommand addDebtCommand = new AddDebtCommand(validUserA, validAmountA);
         ModelStubforDebt modelStub = new ModelStubforDebt();
-        modelStub.loggedIn = false;
+        modelStub.logoutUser();
 
         thrown.expect(CommandException.class);
         thrown.expectMessage(String.format(
@@ -169,11 +162,16 @@ public class AddDebtCommandTest {
     private class ModelStubforDebt extends ModelStub {
 
         private final ArrayList<Debt> debtsAdded = new ArrayList<>();
-        private boolean loggedIn = true;
+        private boolean isLoggedIn = true;
+
+        @Override
+        public void logoutUser(){
+            isLoggedIn = false;
+        }
 
         @Override
         public boolean isCurrentlyLoggedIn() {
-            return loggedIn;
+            return isLoggedIn;
         }
 
         @Override

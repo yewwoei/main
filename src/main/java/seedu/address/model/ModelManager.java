@@ -77,6 +77,9 @@ public class ModelManager extends ComponentManager implements Model {
         displayedDates = UniqueSchedule.generateDefaultWeekSchedule();
     }
 
+    /**
+     * Initializes a ModelManager with the given addressBook, userPrefs, userData, and a current user.
+     */
     public ModelManager(ReadOnlyAddressBook addressBook, UserPrefs userPrefs,
                         UserData userData, User user) {
         super();
