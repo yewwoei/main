@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import seedu.address.model.UserData;
+import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Name;
 import seedu.address.model.restaurant.Rating;
 import seedu.address.model.restaurant.WrittenReview;
@@ -89,6 +90,10 @@ public class TypicalUsers {
         for (User user : getTypicalUsers()) {
             userData.addUser(user);
         }
+
+        // Add jios to userData
+        List<Jio> jios = TypicalJios.getTypicalJios();
+        jios.forEach(jio -> userData.addJio(jio));
         return userData;
     }
 

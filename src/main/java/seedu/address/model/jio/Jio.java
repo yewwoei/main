@@ -1,5 +1,7 @@
 package seedu.address.model.jio;
 
+import static java.util.Objects.requireNonNull;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,43 +21,45 @@ import seedu.address.model.user.Username;
 public class Jio {
     private Name name;
     private Date date;
-    private Address location;
+    private Address address;
     private List<Username> people;
     private Username creator;
     private Optional<Name> groupName = Optional.empty();
 
     public Jio() {}
 
-    public Jio(Name name, Date date, Address location, Username creator) {
+    public Jio(Name name, Date date, Address address, Username creator) {
         this.name = name;
         this.date = date;
-        this.location = location;
+        this.address = address;
+        this.people = new ArrayList<>();
+        this.people.add(creator);
         this.creator = creator;
         this.people = new ArrayList<>();
         this.people.add(creator);
     }
 
-    public Jio(Name name, Date date, Address location) {
+    public Jio(Name name, Date date, Address address) {
         this.name = name;
         this.date = date;
-        this.location = location;
+        this.address = address;
         this.people = new ArrayList<>();
         this.creator = null;
     }
 
-    public Jio(Name name, Date date, Address location, Name groupName) {
+    public Jio(Name name, Date date, Address address, Name groupName) {
         this.name = name;
         this.date = date;
-        this.location = location;
+        this.address = address;
         this.people = new ArrayList<>();
         this.creator = null;
         this.groupName = Optional.of(groupName);
     }
 
-    public Jio(Name name, Date date, Address location, List<Username> people, Username creator) {
+    public Jio(Name name, Date date, Address address, List<Username> people, Username creator) {
         this.name = name;
         this.date = date;
-        this.location = location;
+        this.address = address;
         this.people = new ArrayList<>(people);
         this.creator = creator;
     }
@@ -68,8 +72,8 @@ public class Jio {
         return date;
     }
 
-    public Address getLocation() {
-        return location;
+    public Address getAddress() {
+        return address;
     }
 
     public List<Username> getPeople() {
@@ -84,7 +88,13 @@ public class Jio {
         return groupName.get();
     }
 
+    /**
+     * Checks if jio has specified user.
+     * @param newUser user to be checked
+     * @return true if user is in the list of people in jio
+     */
     public boolean hasUser(User newUser) {
+        requireNonNull(newUser);
         return this.people.stream().anyMatch(user -> newUser.getUsername().equals(user));
     }
 
@@ -93,12 +103,14 @@ public class Jio {
      * @param newUser user to be added
      */
     public void addUser(User newUser) {
+        requireNonNull(newUser);
         if (!this.hasUser(newUser)) {
             this.people.add(newUser.getUsername());
         }
     }
 
     public void setCreator(User user) {
+        requireNonNull(user);
         this.creator = user.getUsername();
     }
 
@@ -124,7 +136,7 @@ public class Jio {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, date, location);
+        return Objects.hash(name, date, address);
     }
 
     @Override
@@ -133,8 +145,8 @@ public class Jio {
         builder.append(getName())
                 .append(" Date: ")
                 .append(getDate())
-                .append(" Location: ")
-                .append(getLocation())
+                .append(" Address: ")
+                .append(getAddress())
                 .append(" People: ");
         this.getPeople().forEach(x -> builder.append(x));
         return builder.toString();
