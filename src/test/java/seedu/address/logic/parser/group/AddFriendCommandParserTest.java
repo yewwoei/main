@@ -18,12 +18,12 @@ public class AddFriendCommandParserTest {
 
     @Test
     public void parse_allFieldsPresent_success() {
-        final String UsernameString = " " + PREFIX_USERNAME + FRIENDSHIP_1.getMe().getUsername().toString();
-        final Username UsernameToAdd = FRIENDSHIP_1.getMe().getUsername();
+        final String usernameString = " " + PREFIX_USERNAME + FRIENDSHIP_1.getMe().getUsername().toString();
+        final Username usernameToAdd = FRIENDSHIP_1.getMe().getUsername();
 
         // whitespace only preamble
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + UsernameString,
-                new AddFriendCommand(UsernameToAdd));
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + usernameString,
+                new AddFriendCommand(usernameToAdd));
     }
 
     @Test

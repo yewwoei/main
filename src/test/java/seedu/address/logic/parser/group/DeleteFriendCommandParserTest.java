@@ -18,10 +18,10 @@ public class DeleteFriendCommandParserTest {
 
     @Test
     public void parse_validArgs_returnsDeleteFriendCommand() {
-        final String UsernameString = " " + PREFIX_USERNAME + FRIENDSHIP_1.getFriendUsername().toString();
-        final Username UsernameToDelete = FRIENDSHIP_1.getFriendUser().getUsername();
-        assertParseSuccess(parser, PREAMBLE_WHITESPACE + UsernameString,
-                new DeleteFriendCommand(UsernameToDelete));
+        final String usernameString = " " + PREFIX_USERNAME + FRIENDSHIP_1.getFriendUsername().toString();
+        final Username usernameToDelete = FRIENDSHIP_1.getFriendUser().getUsername();
+        assertParseSuccess(parser, PREAMBLE_WHITESPACE + usernameString,
+                new DeleteFriendCommand(usernameToDelete));
     }
 
     @Test

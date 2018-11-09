@@ -13,7 +13,6 @@ import seedu.address.model.user.User;
  */
 public class TypicalFriendships {
     private static List<User> listUsers = TypicalUsers.getTypicalUsers();
-    
     public static final Friendship FRIENDSHIP_1 = new FriendshipBuilder().build();
     public static final Friendship FRIENDSHIP_2 = new FriendshipBuilder()
             .withFriendshipStatus(FriendshipStatus.ACCEPTED)
