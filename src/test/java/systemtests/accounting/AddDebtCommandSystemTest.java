@@ -19,7 +19,7 @@ import systemtests.AddressBookSystemTest;
 
 public class AddDebtCommandSystemTest extends AddressBookSystemTest {
 
-    private  static final String CURRENT_USER = TypicalUsers.getTypicalUsers().get(0).getUsername().toString();
+    private static final String CURRENT_USER = TypicalUsers.getTypicalUsers().get(0).getUsername().toString();
     private static final String VALID_USER_A = TypicalUsers.getTypicalUsers().get(1).getUsername().toString();
     private static final String VALID_USER_B = TypicalUsers.getTypicalUsers().get(2).getUsername().toString();
     private static final String VALID_USER_C = TypicalUsers.getTypicalUsers().get(3).getUsername().toString();
@@ -34,7 +34,7 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
     private User otherUserA = TypicalUsers.getTypicalUsers().get(1);
     private User otherUserB = TypicalUsers.getTypicalUsers().get(2);
 
-    private Username userA =  TypicalUsers.getTypicalUsers().get(1).getUsername();
+    private Username userA = TypicalUsers.getTypicalUsers().get(1).getUsername();
     private Username userB = TypicalUsers.getTypicalUsers().get(2).getUsername();
     private Username userC = TypicalUsers.getTypicalUsers().get(3).getUsername();
 
@@ -81,30 +81,30 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, model, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddDebtCommand.MESSAGE_USAGE));
 
-        command =  AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
+        command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
                 + " " + VALID_AMOUNT;
         assertCommandFailure(command, model, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddDebtCommand.MESSAGE_USAGE));
 
-        command =  AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + INVALID_USER_A
+        command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + INVALID_USER_A
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandFailure(command, model, Username.MESSAGE_USERNAME_CONSTRAINTS);
 
-        command =  AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
+        command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
                 + " " + PREFIX_AMOUNT + INVALID_AMOUNT_FORMAT;
         assertCommandFailure(command, model, Amount.MESSAGE_AMOUNT_CONSTRAINTS);
 
-        command =  AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
+        command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
                 + " " + PREFIX_AMOUNT + INVALID_AMOUNT_FORMAT_NEGATIVE;
         assertCommandFailure(command, model, Amount.MESSAGE_AMOUNT_CONSTRAINTS);
 
-        command =  "AddDebt" + " " + PREFIX_USERNAME + VALID_USER_A
+        command = "AddDebt" + " " + PREFIX_USERNAME + VALID_USER_A
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandFailure(command, model, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         logout();
         model.logoutUser();
-        command =  AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
+        command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandFailure(command, model,
                 String.format(MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND, AddDebtCommand.COMMAND_WORD));
@@ -112,19 +112,19 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         login(currentUser);
         model.loginUser(currentUser);
 
-        command =  AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_C
+        command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_C
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_NO_SUCH_USER);
 
-        command =  AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + CURRENT_USER
+        command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + CURRENT_USER
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_CANNOT_ADD_DEBT_TO_ONESELF);
 
-        command =  AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_A
+        command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_A
                 + " " + PREFIX_AMOUNT + INVALID_AMOUNT_ZERO;
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_INVALID_AMOUNT);
 
-        command =  AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_A
+        command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_A
                 + " " + PREFIX_AMOUNT + INVALID_AMOUNT_TOO_LAREG;
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_INVALID_AMOUNT);
 

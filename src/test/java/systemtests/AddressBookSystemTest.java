@@ -32,7 +32,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.user.User;
 import seedu.address.testutil.TypicalRestaurants;
-import seedu.address.ui.CommandBox;
 
 import guitests.guihandles.BrowserPanelHandle;
 import guitests.guihandles.CommandBoxHandle;
@@ -41,6 +40,8 @@ import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.RestaurantListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
+
+import seedu.address.ui.CommandBox;
 
 /**
  * A system test class for AddressBook, which provides access to handles of GUI components and helper methods
