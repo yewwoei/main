@@ -17,7 +17,6 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.Name;
-import seedu.address.model.UserData;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Address;
