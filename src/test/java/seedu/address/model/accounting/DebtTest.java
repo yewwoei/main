@@ -62,7 +62,6 @@ public class DebtTest {
                 DEBT_A.getAmount(), DEBT_A.getDebtId(), DEBT_A.getDebtStatus());
         assertFalse(DEBT_A.equals(test));
 
-
         test = new Debt(DEBT_A.getCreditor(), DEBT_A.getDebtor(),
                 new Amount("100"), DEBT_A.getDebtId(), DEBT_A.getDebtStatus());
         assertFalse(DEBT_A.equals(test));
@@ -75,10 +74,13 @@ public class DebtTest {
                 DEBT_A.getAmount(), DEBT_A.getDebtId(), DebtStatus.CLEARED);
         assertFalse(DEBT_A.equals(test));
 
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
         test = new Debt(DEBT_A.getCreditor(), DEBT_A.getDebtor(), DEBT_A.getAmount());
         assertFalse(DEBT_A.equals(test));
-
-
     }
 
 }
