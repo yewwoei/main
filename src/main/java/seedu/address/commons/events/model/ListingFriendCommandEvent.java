@@ -8,6 +8,10 @@ import seedu.address.model.group.Friendship;
 public class ListingFriendCommandEvent extends BaseEvent {
     public final ObservableList<Friendship> listingItem;
 
+    /**
+     * Constructor for ListingFriendCommandEvent
+     * @param listingItem
+     */
     public ListingFriendCommandEvent(ObservableList<Friendship> listingItem) {
         this.listingItem = listingItem;
     }

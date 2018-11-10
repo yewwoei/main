@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.Name;
 
 /**
- * Deletes a group the user joined.
+ * Deletes a group the user is a part of.
  */
 public class DeleteGroupCommand extends Command {
     public static final String COMMAND_WORD = "deleteGroup";
@@ -31,8 +31,8 @@ public class DeleteGroupCommand extends Command {
     private final Name toDelete;
 
     /**
-     * Creates a DeleteGroupCommand that will delete a
-     * specified {@code Group} group from the User's list of groups.
+     * Creates a DeleteGroupCommand that will delete the group with name groupName from the
+     * currently logged in user's list of groups.
      */
     public DeleteGroupCommand(Name groupName) {
         requireNonNull(groupName);
@@ -41,9 +41,9 @@ public class DeleteGroupCommand extends Command {
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
-        // TODO
         requireNonNull(model);
 
+        // throw exception if no user is currently logged in
         if (!model.isCurrentlyLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGGED_IN);
         }

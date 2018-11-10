@@ -16,7 +16,7 @@ import seedu.address.model.Name;
 import seedu.address.model.user.Username;
 
 /**
- * Allows Users to add other Users into groups.
+ * Allows Users to add other Users to groups.
  */
 public class AddMembersCommand extends Command {
     public static final String COMMAND_WORD = "addMembers";
@@ -43,7 +43,8 @@ public class AddMembersCommand extends Command {
     private final Pair<Name, List<Username>> toAdd;
 
     /**
-     * Creates an AddMembersCommand to add the specified {@code List<Username>}
+     * Creates an AddMembersCommand to add the users corresponding to the list of usernames in pair.
+     * Adds the users to group with group name specified in pair
      */
     public AddMembersCommand(Pair<Name, List<Username>> pair) {
         requireNonNull(pair);
