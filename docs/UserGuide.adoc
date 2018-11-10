@@ -358,11 +358,11 @@ Examples:
 User(Creditor) send a debt request to all other users in the group with specific amount.
 with amount will split equally to everyone in the group.
 Record will be created between with a `Pending` status. +
-Format: `addDebt u/USERNAME amt/AMOUNT`
+Format: `addDebt g/GROUP amt/AMOUNT`
 
 Examples:
 
-* `addDebt u/Kate123 amt/4.30`
+* `addDebt g/2103 amt/4.30`
 
 ===  Sent clear debt request: `clearDebt`
 
