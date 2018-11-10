@@ -119,7 +119,8 @@ public class AddFriendCommandTest {
     }
 
     /**
-     *
+     * Throws exception if more than one friend request is sent to the same user
+     * by the currently logged in user
      * @throws Exception
      */
     @Test
@@ -134,6 +135,11 @@ public class AddFriendCommandTest {
         addFriendCommand2.execute(modelStub, commandHistory);
     }
 
+    /**
+     * Throws exception if currently logged in user tries to add a user with whom
+     * he or she is already friends with
+     * @throws Exception
+     */
     @Test
     public void execute_addExistingFriend_throwsCommandException() throws Exception {
         Friendship alreadyFriends1 = new Friendship(currentUser, currentUser, validUserA,
@@ -150,6 +156,13 @@ public class AddFriendCommandTest {
         addFriendCommand.execute(modelStub, commandHistory);
     }
 
+    /**
+     * Throws an exception if currently logged in user tries to send another user
+     * a friend request if the other user had previously sent the currently logged in
+     * user a friend request. Should accept the existing friend request instead of sending
+     * a friend request.
+     * @throws Exception
+     */
     @Test
     public void execute_acceptExistingRequest_throwsCommandException() throws Exception {
         Friendship acceptFriendRequest = new Friendship(currentUser, currentUser, validUserA);
