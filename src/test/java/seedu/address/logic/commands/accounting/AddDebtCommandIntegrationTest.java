@@ -47,8 +47,6 @@ public class AddDebtCommandIntegrationTest {
                 TypicalUsers.getTypicalUserData(), TypicalUsers.getTypicalUsers().get(1));
 
         expectedModel.addDebt(validUserA, validAmountA);
-
-        new AddDebtCommand(validUserA, validAmountA).execute(model, commandHistory);
         assertCommandSuccess(new AddDebtCommand(validUserA, validAmountA), model, commandHistory,
                 String.format(AddDebtCommand.MESSAGE_SUCCESS, validUserA, validAmountA.toDouble()), expectedModel);
     }
