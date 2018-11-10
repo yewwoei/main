@@ -284,5 +284,9 @@ public interface Model {
 
     void debtListing(ObservableList<Debt> list);
 
+    void friendListing(ObservableList<Friendship> list);
+
+    void groupListing(ObservableList<Group> list);
+
 }
 

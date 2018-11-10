@@ -19,6 +19,8 @@ import seedu.address.commons.events.model.DisplayProfileEvent;
 import seedu.address.commons.events.model.DisplayWeekScheduleEvent;
 import seedu.address.commons.events.model.ListJioCommandEvent;
 import seedu.address.commons.events.model.ListingDebtCommandEvent;
+import seedu.address.commons.events.model.ListingFriendCommandEvent;
+import seedu.address.commons.events.model.ListingGroupCommandEvent;
 import seedu.address.commons.events.model.UserDataChangedEvent;
 import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.model.accounting.Amount;
@@ -778,6 +780,16 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void debtListing(ObservableList<Debt> list) {
         raise(new ListingDebtCommandEvent(list));
+    }
+
+    @Override
+    public void friendListing(ObservableList<Friendship> list) {
+        raise(new ListingFriendCommandEvent(list));
+    }
+
+    @Override
+    public void groupListing(ObservableList<Group> list) {
+        raise(new ListingGroupCommandEvent(list));
     }
 
 }

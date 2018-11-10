@@ -179,6 +179,17 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void friendListing(ObservableList<Friendship> list) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void groupListing(ObservableList<Group> list) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+
+    @Override
     public ObservableList<Jio> getJioList() {
         throw new AssertionError("This method should not be called.");
     }
