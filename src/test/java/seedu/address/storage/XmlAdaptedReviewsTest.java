@@ -28,7 +28,7 @@ public class XmlAdaptedReviewsTest {
 
     @Test
     public void toModelType_invalidRating() {
-        XmlAdaptedReviews reviews = new XmlAdaptedReviews(INVALID_RATING, VALID_USER_REVIEWS_LIST);
+        XmlAdaptedReviews reviews = new XmlAdaptedReviews(INVALID_RATING, "3.0", VALID_USER_REVIEWS_LIST);
         String expectedMessage = Reviews.MESSAGE_OVERALL_RATING_CONSTRAINTS;
         Assert.assertThrows(IllegalValueException.class, expectedMessage, reviews::toModelType);
     }
