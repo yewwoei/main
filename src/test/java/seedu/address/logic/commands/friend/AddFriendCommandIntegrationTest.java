@@ -44,6 +44,8 @@ public class AddFriendCommandIntegrationTest {
 
     @Test
     public void execute_newAddFriend_success() throws CommandException {
+        // need to create copies of the users to prevent users in model and expectedModel
+        // to have the same reference and thus accidentally carrying out methods on them
         User userACopy = new UserBuilder().withEmail(validUserA.getEmail().toString())
                 .withName(validUserA.getName().toString())
                 .withPassword(validUserA.getPassword().toString())
@@ -65,6 +67,9 @@ public class AddFriendCommandIntegrationTest {
                 String.format(AddFriendCommand.MESSAGE_SUCCESS, validUsernameA), expectedModel);
     }
 
+    /**
+     * Throw exception if no user is currently logged in
+     */
     @Test
     public void execute_notLoggedIn() {
         Model modelNotLoggedIn = new ModelManager(new AddressBook(), new UserPrefs(),
@@ -73,6 +78,9 @@ public class AddFriendCommandIntegrationTest {
                 String.format(AddFriendCommand.MESSAGE_NOT_LOGGED_IN, AddFriendCommand.COMMAND_WORD));
     }
 
+    /**
+     * Throw exception if 
+     */
     @Test
     public void execute_userNotInModel() {
         assertCommandFailure(new AddFriendCommand(invalidUser), model, commandHistory,

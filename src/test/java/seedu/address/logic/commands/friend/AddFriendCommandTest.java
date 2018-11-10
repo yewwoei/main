@@ -193,7 +193,7 @@ public class AddFriendCommandTest {
     }
 
     /**
-     * A Model stub that always accept the debt being added.
+     * A Model stub that always adds friend being added.
      */
     private class ModelStubforAddFriend extends ModelStub {
 
