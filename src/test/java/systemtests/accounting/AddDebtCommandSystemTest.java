@@ -221,7 +221,7 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
     }
 
     /**
-     * Added a millie second sleep.
+     * Added a millie second sleep. 
      * Use to prevent fast execution which generate two debt with same id in a millie second.
      */
     private void addSleep() {
