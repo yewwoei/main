@@ -252,38 +252,97 @@ public interface Model {
     void commitAddressBook();
 
     //========== Model Manager Debt methods ======================================================================
+    /**
+     * Returns true if login user of the model has a debt with input debtId
+     */
     boolean hasDebtId(DebtId debtId);
 
+    /**
+     * Returns true if login user of the model has a debt with input debtId,
+     * and that debt's amount is equal to the input amount
+     */
     boolean matchDebtToAmount(DebtId debtId, Amount amount);
 
-    boolean matchDebtToUser(DebtId debtId, Username user);
+    /**
+     * Returns true if login user of the model has a debt with input debtId,
+     * and that debt's creditor/debtor's username is equal to the input username
+     */
+    boolean matchDebtToUser(DebtId debtId, Username username);
 
+    /**
+     * Returns true if login user of the model has a debt with input debtId,
+     * and that debt's status is equal to the input status
+     */
     boolean matchDebtToStatus(DebtId debtId, DebtStatus status);
 
+    /**
+     * Returns true if login user of the model has a debt with the user
+     * with username equals to input debtorUsername
+     */
     boolean debtExist(Username debtorUsername);
 
+    /**
+     * Returns true if the debt can be clear by login user.
+     * Check if a debt with login user as creditor,
+     * user with input debtorUsername as debtor,
+     * status is Accpted and
+     * the amount is less than or equal to the input amount
+     */
     boolean allowToClear(Username debtorUsername, Amount amount);
 
+    /**
+     * Method to create and add a debt(with Pending status) to other user.
+     */
     void addDebt(Username debtorUsername, Amount amount);
 
+    /**
+     * Method to create and add a debt(with Pending status) to other users in a group.
+     */
     void addGroupDebt(Name groupName, Amount amount);
 
+    /**
+     * Method for the creditor to clear an amount of the debtor.
+     */
     void clearDebt(Username debtorUsername, Amount amount);
 
+    /**
+     * Method for debtor to accepted a debt request received.
+     */
     void acceptedDebtRequest(Username creditorUsername, Amount amount, DebtId debtId);
 
+    /**
+     * Method for debtor to reject and delete a debt request received.
+     */
     void deleteDebtRequest(Username creditorUsername, Amount amount, DebtId debtId);
 
+    /**
+     * Method for getting all the Debts(regardless the status).
+     */
     ObservableList<Debt> getDebtList();
 
+    /**
+     * Method for getting all the Creditor.
+     */
     ObservableList<Debt> getCreditorList();
 
+    /**
+     * Method for getting all the Debtor.
+     */
     ObservableList<Debt> getDebtorList();
 
+    /**
+     * Method for getting all the Debt Request Received.
+     */
     ObservableList<Debt> getDebtRequestReceived();
 
+    /**
+     * Method for getting all the Debt Request Sent.
+     */
     ObservableList<Debt> getDebtRequestSent();
 
+    /**
+     * Method for listing all the debt in the input list on list panel
+     */
     void debtListing(ObservableList<Debt> list);
 
     void friendListing(ObservableList<Friendship> list);

@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
@@ -48,11 +49,15 @@ public class AddDebtCommandIntegrationTest {
                 TypicalUsers.getTypicalUserData(), currentUser);
     }
 
+    /**
+     *Test for successful execution of AddDebtCommand.
+     */
     @Test
     public void execute_newDebt_success() throws CommandException {
+        //Create expected model
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(),
-                new UserData(), TypicalUsers.getTypicalUsers().get(1));
-
+                new UserData());
+        //Create copy of user to prevent referencing
         User userACopy = new UserBuilder().withEmail(userA.getEmail().toString())
                 .withName(userA.getName().toString())
                 .withPassword(userA.getPassword().toString())
@@ -65,41 +70,66 @@ public class AddDebtCommandIntegrationTest {
                 .withPhone(currentUser.getPhone().toString())
                 .withUsername(currentUser.getUsername().toString())
                 .build();
+        //Add to user to the expected model
         expectedModel.addUser(userACopy);
         expectedModel.addUser(currentUserCopy);
+        //Add a current user to expected model(Login)
         expectedModel.loginUser(currentUser);
-
+        //Add the expected debt to expected model
         expectedModel.addDebt(validUserA, validAmountA);
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+
         assertCommandSuccess(new AddDebtCommand(validUserA, validAmountA), model, commandHistory,
                 String.format(AddDebtCommand.MESSAGE_SUCCESS, validUserA, validAmountA.toDouble()), expectedModel);
     }
 
+    /**
+     * Test the failure when there are no login user in the model.
+     */
     @Test
     public void execute_notLoggedIn() {
+        //Remove the current user from model(Logout)
         model.logoutUser();
         assertCommandFailure(new AddDebtCommand(validUserA, validAmountA), model, commandHistory,
                 String.format(Messages.MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND, AddDebtCommand.COMMAND_WORD));
+        //Add the current user back for the following test
         model.loginUser(currentUser);
     }
 
+    /**
+     * Test the failure when the input debtor is not in the model.
+     */
     @Test
     public void execute_userNotInModel() {
         assertCommandFailure(new AddDebtCommand(invalidUser, validAmountA), model, commandHistory,
                 AddDebtCommand.MESSAGE_NO_SUCH_USER);
     }
 
+    /**
+     * Test the failure when there the input debtor is the login user.
+     */
     @Test
     public void execute_isSameUser() {
         assertCommandFailure(new AddDebtCommand(currentUserName, validAmountA), model, commandHistory,
                 AddDebtCommand.MESSAGE_CANNOT_ADD_DEBT_TO_ONESELF);
     }
 
+    /**
+     * Test the failure when input amount is 0.
+     */
     @Test
     public void execute_amountZero_throwsCommandException() {
         assertCommandFailure(new AddDebtCommand(validUserA, invalidAmountA), model, commandHistory,
                 AddDebtCommand.MESSAGE_INVALID_AMOUNT);
     }
 
+    /**
+     * Test the failure when input amount is larger than 100000000.
+     */
     @Test
     public void execute_amountTooLarge_throwsCommandException() {
         assertCommandFailure(new AddDebtCommand(validUserA, invalidAmountB), model, commandHistory,

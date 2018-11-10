@@ -21,6 +21,11 @@ import seedu.address.model.accounting.Amount;
  */
 public class AddGroupDebtCommandParser implements Parser<AddGroupDebtCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the AddGroupDebtCommand
+     * and returns an AddGroupDebtCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     @Override
     public AddGroupDebtCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

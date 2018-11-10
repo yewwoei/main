@@ -22,6 +22,7 @@ public class DebtIdTest {
 
     @Test
     public void isValidId() {
+        //Invalid DebtId
         assertFalse(DebtId.isValidDebtId(""));
         assertFalse(DebtId.isValidDebtId(" "));
 
@@ -31,6 +32,7 @@ public class DebtIdTest {
         assertFalse(DebtId.isValidDebtId("88888888"));
         assertFalse(DebtId.isValidDebtId("43219748327"));
 
+        //Valid DebtId
         assertTrue(DebtId.isValidDebtId("3748392747382"));
         assertTrue(DebtId.isValidDebtId("00000000000000"));
         assertTrue(DebtId.isValidDebtId("684932108493128"));

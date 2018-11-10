@@ -266,9 +266,7 @@ public class ModelManager extends ComponentManager implements Model {
         return false;
     }
 
-    /**
-     * Returns whether there is a debtId
-     */
+    @Override
     public boolean hasDebtId(DebtId debtId) {
         boolean result = false;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
