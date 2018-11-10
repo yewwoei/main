@@ -76,6 +76,11 @@ public class AddDebtCommandIntegrationTest {
         expectedModel.loginUser(currentUser);
         //Add the expected debt to expected model
         expectedModel.addDebt(validUserA, validAmountA);
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
 
         assertCommandSuccess(new AddDebtCommand(validUserA, validAmountA), model, commandHistory,
                 String.format(AddDebtCommand.MESSAGE_SUCCESS, validUserA, validAmountA.toDouble()), expectedModel);
