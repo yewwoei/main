@@ -17,6 +17,8 @@ import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.ListJioCommandEvent;
 import seedu.address.commons.events.model.ListingDebtCommandEvent;
+import seedu.address.commons.events.model.ListingFriendCommandEvent;
+import seedu.address.commons.events.model.ListingGroupCommandEvent;
 import seedu.address.commons.events.ui.ExitAppRequestEvent;
 import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
@@ -326,6 +328,34 @@ public class MainWindow extends UiPart<Stage> {
         } else {
             debtListPanel = new ListPanel<>(event.listingItem);
             featuresListPanelPlaceholder.getChildren().add(debtListPanel.getRoot());
+        }
+    }
+
+    /**
+     * Updates list panel with listing command.
+     */
+    @Subscribe
+    @FXML
+    void handleListingFriendCommandEvent(ListingFriendCommandEvent event) {
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            friendListPanel = new ListPanel<>(event.listingItem);
+            featuresListPanelPlaceholder.getChildren().add(friendListPanel.getRoot());
+        }
+    }
+
+    /**
+     * Updates list panel with listing command.
+     */
+    @Subscribe
+    @FXML
+    void handleListingGroupCommandEvent(ListingGroupCommandEvent event) {
+        if (!logic.isCurrentlyLoggedIn()) {
+            browserPanel.loadNotLoggedInPage();
+        } else {
+            groupListPanel = new ListPanel<>(event.listingItem);
+            featuresListPanelPlaceholder.getChildren().add(groupListPanel.getRoot());
         }
     }
 

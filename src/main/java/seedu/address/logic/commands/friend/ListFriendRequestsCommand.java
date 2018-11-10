@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.group;
+package seedu.address.logic.commands.friend;
 
 import static java.util.Objects.requireNonNull;
 
@@ -10,18 +10,18 @@ import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
 
 /**
- * List the logged in user's own groups.
+ * List the logged in user's own friend requests.
  */
-public class ListGroupsCommand extends Command {
-    public static final String COMMAND_WORD = "listGroups";
+public class ListFriendRequestsCommand extends Command {
+    public static final String COMMAND_WORD = "listFriendRequests";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + " : List all groups";
+            + " : List all friend requests received";
 
-    public static final String MESSAGE_SUCCESS = "Listed all groups.";
+    public static final String MESSAGE_SUCCESS = "Listed all friend requests received.";
 
     public static final String MESSAGE_NOT_LOGGED_IN =
-            "You must login before listing your received groups.";
+            "You must login before listing your received friend requests.";
 
 
     @Override
@@ -32,7 +32,7 @@ public class ListGroupsCommand extends Command {
             throw new NotLoggedInCommandException(COMMAND_WORD);
         }
 
-        model.groupListing(model.getGroupList());
+        model.friendListing(model.getFriendRequestsList());
 
         return new CommandResult(String.format(MESSAGE_SUCCESS));
     }
