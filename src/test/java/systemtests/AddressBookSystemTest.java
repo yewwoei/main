@@ -14,17 +14,11 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
-import guitests.guihandles.BrowserPanelHandle;
-import guitests.guihandles.CommandBoxHandle;
-import guitests.guihandles.MainMenuHandle;
-import guitests.guihandles.MainWindowHandle;
-import guitests.guihandles.RestaurantListPanelHandle;
-import guitests.guihandles.ResultDisplayHandle;
-import guitests.guihandles.StatusBarFooterHandle;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
+
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
@@ -39,6 +33,14 @@ import seedu.address.model.Model;
 import seedu.address.model.user.User;
 import seedu.address.testutil.TypicalRestaurants;
 import seedu.address.ui.CommandBox;
+
+import guitests.guihandles.BrowserPanelHandle;
+import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.MainMenuHandle;
+import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.RestaurantListPanelHandle;
+import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.StatusBarFooterHandle;
 
 /**
  * A system test class for AddressBook, which provides access to handles of GUI components and helper methods

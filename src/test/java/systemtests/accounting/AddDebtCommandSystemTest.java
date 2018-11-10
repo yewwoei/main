@@ -6,6 +6,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.accounting.AddDebtCommand;
@@ -19,43 +20,27 @@ import systemtests.AddressBookSystemTest;
 public class AddDebtCommandSystemTest extends AddressBookSystemTest {
 
     private  static final String CURRENT_USER = TypicalUsers.getTypicalUsers().get(0).getUsername().toString();
-
     private static final String VALID_USER_A = TypicalUsers.getTypicalUsers().get(1).getUsername().toString();
-
     private static final String VALID_USER_B = TypicalUsers.getTypicalUsers().get(2).getUsername().toString();
-
     private static final String VALID_USER_C = TypicalUsers.getTypicalUsers().get(3).getUsername().toString();
-
     private static final String INVALID_USER_A = "test a";
-
     private static final String VALID_AMOUNT = "101";
-
     private static final String INVALID_AMOUNT_FORMAT = "11.11111111";
-
     private static final String INVALID_AMOUNT_FORMAT_NEGATIVE = "-17";
-
     private static final String INVALID_AMOUNT_ZERO = "0";
-
     private static final String INVALID_AMOUNT_TOO_LAREG = "9999999999999";
 
     private User currentUser = TypicalUsers.getTypicalUsers().get(0);
-
     private User otherUserA = TypicalUsers.getTypicalUsers().get(1);
-
     private User otherUserB = TypicalUsers.getTypicalUsers().get(2);
 
     private Username userA =  TypicalUsers.getTypicalUsers().get(1).getUsername();
-
     private Username userB = TypicalUsers.getTypicalUsers().get(2).getUsername();
-
     private Username userC = TypicalUsers.getTypicalUsers().get(3).getUsername();
 
     private Amount amount = new Amount("101");
-
     private Amount amountZero = new Amount("0");
-
     private Amount amountTooLarge = new Amount("9999999999999");
-
 
     @Test
     public void add() {
