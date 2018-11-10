@@ -36,7 +36,7 @@ public class SignUpCommand extends Command {
             + PREFIX_EMAIL + "johnd@example.com";
 
     public static final String MESSAGE_SUCCESS = "Successfully Registered";
-    public static final String MESSAGE_ALREADY_LOGGEDIN = "Not allowed to Sign Up for another account if User is "
+    public static final String MESSAGE_ALREADY_LOGGEDIN = "Not allowed to sign up for another account if User is "
             + "currently logged in";
     public static final String MESSAGE_DUPLICATE_USERNAME = "This username already exists in the Makan Book";
 
