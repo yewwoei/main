@@ -9,6 +9,8 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.friend.Friendship;
+import seedu.address.model.friend.UniqueFriendList;
 import seedu.address.testutil.FriendshipBuilder;
 
 /* Note to graders:

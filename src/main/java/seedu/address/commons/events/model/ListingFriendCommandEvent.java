@@ -2,7 +2,7 @@ package seedu.address.commons.events.model;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.events.BaseEvent;
-import seedu.address.model.group.Friendship;
+import seedu.address.model.friend.Friendship;
 
 /** Listing all the friends.*/
 public class ListingFriendCommandEvent extends BaseEvent {

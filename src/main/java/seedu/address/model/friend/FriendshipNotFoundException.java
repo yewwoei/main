@@ -1,4 +1,4 @@
-package seedu.address.model.group.exception;
+package seedu.address.model.friend;
 
 /**
  * Signals that the operation is unable to find the specified friendship.

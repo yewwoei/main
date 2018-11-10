@@ -39,6 +39,8 @@ public class AddMembersCommand extends Command {
     public static final String MESSAGE_ALREADY_IN_GROUP = "Sorry, username to be added is in the group. "
             + "No users were added to the group.";
     public static final String MESSAGE_HAS_REQUEST = "Sorry, User already has a request for that group.";
+    public static final String MESSAGE_NOT_ALL_UNIQUE_USERS = "Sorry, not all usernames are unique. "
+            + "No users were added to the group.";
 
     private final Pair<Name, List<Username>> toAdd;
 
@@ -80,6 +82,10 @@ public class AddMembersCommand extends Command {
         // throw exception if User already has group request
         if (model.hasRequestForUsers(toAdd)) {
             throw new CommandException(MESSAGE_HAS_REQUEST);
+        }
+
+        if(!model.isUniqueUsernames(listUsernames)) {
+            throw new CommandException(MESSAGE_NOT_ALL_UNIQUE_USERS);
         }
 
         model.addPendingUsersGroup(toAdd);

@@ -36,7 +36,7 @@ public class AddFriendCommand extends Command {
 
     /**
      * Creates an AddFriendCommand which allows the currently logged in user to send a friend request
-     * to the specified username toAdd.
+     * to user with the specified username toAdd.
      */
     public AddFriendCommand(Username toAdd) {
         requireNonNull(toAdd);

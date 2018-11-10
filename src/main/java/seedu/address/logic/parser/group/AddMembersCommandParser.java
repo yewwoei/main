@@ -23,8 +23,8 @@ import seedu.address.model.user.Username;
  */
 public class AddMembersCommandParser implements Parser<AddMembersCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddMembersCommand
+     * and returns an AddMembersCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddMembersCommand parse(String args) throws ParseException {

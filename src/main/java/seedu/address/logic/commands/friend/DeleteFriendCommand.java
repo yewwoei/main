@@ -31,7 +31,8 @@ public class DeleteFriendCommand extends Command {
     private final Username toDelete;
 
     /**
-     * Deletes the specified username toDelete.
+     * Creates a DeleteFriendCommand which deletes the specified username toDelete from the
+     * currently logged in user's list of friends.
      */
     public DeleteFriendCommand(Username toDelete) {
         requireNonNull(toDelete);

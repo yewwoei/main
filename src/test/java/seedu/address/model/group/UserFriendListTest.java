@@ -4,6 +4,9 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import seedu.address.model.Name;
+import seedu.address.model.friend.Friendship;
+import seedu.address.model.friend.FriendshipStatus;
+import seedu.address.model.friend.UniqueFriendList;
 import seedu.address.model.user.Email;
 import seedu.address.model.user.Password;
 import seedu.address.model.user.Phone;

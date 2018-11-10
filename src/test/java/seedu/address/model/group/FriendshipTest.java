@@ -9,6 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
+import seedu.address.model.friend.Friendship;
 import seedu.address.testutil.FriendshipBuilder;
 
 public class FriendshipTest {

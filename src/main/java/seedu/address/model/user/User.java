@@ -16,10 +16,10 @@ import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.accounting.UniqueDebtList;
-import seedu.address.model.group.Friendship;
-import seedu.address.model.group.FriendshipStatus;
+import seedu.address.model.friend.Friendship;
+import seedu.address.model.friend.FriendshipStatus;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.UniqueFriendList;
+import seedu.address.model.friend.UniqueFriendList;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.UniqueSchedule;
 import seedu.address.model.timetable.Week;
@@ -38,9 +38,6 @@ public class User {
     private final Phone phone;
     private final Email email;
 
-    // Data fields
-    //private final List<Friendship> friendRequests = new ArrayList<>();
-    //private final List<Friendship> friends = new ArrayList<>();
     private final List<Group> groupRequests = new ArrayList<>();
     private final List<Group> groups = new ArrayList<>();
     private final UniqueFriendList friendRequests = new UniqueFriendList();
@@ -98,6 +95,10 @@ public class User {
         return restaurantReviews;
     }
 
+    /**
+     * Returns a string of the list of friends that the User has
+     * @return String of list of friends
+     */
     public String listFriends() {
         return friends.toString();
     }
@@ -152,16 +153,12 @@ public class User {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail());
-        /*.append(" Friends: ");
-        getTags().forEach(builder::append);*/
         return builder.toString();
     }
 
     /**
      * Allows a user to add other users as friends.
-     * Friendship request will not be created if friendship request already exists.
-     * Friendship request will not be created if friendship already exists.
-     * @param user User is not able to add oneself as a friend.
+     * Exception handling is done in addFriendCommand.
      */
     public void addFriend(User user) {
         Friendship friendship = new Friendship(this, this, user);
@@ -169,7 +166,6 @@ public class User {
     }
 
     /**
-     * Used for storage purposes.
      * Allows user to add a friend or friendRequest by taking in
      * @param friendship
      * @return the updated User
@@ -184,6 +180,9 @@ public class User {
         return this;
     }
 
+    /**
+     * Returns an unmodifiable list of friends
+     */
     public ObservableList<Friendship> getFriends() {
         UniqueFriendList toReturn = new UniqueFriendList();
         for (Friendship f: this.friends) {
@@ -192,32 +191,15 @@ public class User {
         return toReturn.asUnmodifiableObservableList();
     }
 
+    /**
+     * Returns an unmodifiable list of friend requests
+     */
     public ObservableList<Friendship> getFriendRequests() {
         UniqueFriendList toReturn = new UniqueFriendList();
         for (Friendship f: this.friendRequests) {
             toReturn.add(f);
         }
         return toReturn.asUnmodifiableObservableList();
-    }
-
-    /**
-     * @return String that contains all the friendRequests received of this user separated by newline character.
-     */
-    public String listFriendRequests() {
-        return listHelperFriend(friendRequests.asUnmodifiableObservableList());
-    }
-
-    /**
-     * Helper method.
-     * @param list List that you want to print out.
-     * @return String that contains all elements in list.
-     */
-    public String listHelperFriend(List<Friendship> list) {
-        String toReturn = "";
-        for (Friendship friendship: list) {
-            toReturn += friendship.getFriendUser().getName() + "\n";
-        }
-        return toReturn;
     }
 
     /**
@@ -293,25 +275,17 @@ public class User {
     }
 
     /**
-     * Allows a user to create a group and add users simultaneously.
-     * User creating will automatically be added into the group.
-     * @param name name of the group
-     * @param users list of users who are to be added to the group
-     * @return group Group created
+     * Adds group to list of groups
+     * @param group
      */
-    public Group createGroup(String name, User... users) {
-        Name groupName = new Name(name);
-        Group group = new Group(groupName, this, users);
-        this.groups.add(group);
-        List<User> listUsers = Arrays.asList(users);
-        listUsers.forEach(user -> user.addGroupRequest(group));
-        return group;
-    }
-
     public void addGroup(Group group) {
         this.groups.add(group);
     }
 
+    /**
+     * Adds group to list of groupRequests
+     * @param group
+     */
     public void addGroupPending(Group group) {
         this.groupRequests.add(group);
     }
