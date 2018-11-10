@@ -32,7 +32,9 @@ public class UserData {
         this.usernameUserHashMap = data.usernameUserHashMap;
         this.groupHashMap = data.groupHashMap;
         this.jios = data.jios;
+
     }
+
     public HashMap<Username, User> getUsernameUserHashMap() {
         return usernameUserHashMap;
     }
