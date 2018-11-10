@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import org.junit.Test;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.accounting.AddDebtCommand;
@@ -15,6 +14,7 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 import seedu.address.testutil.TypicalUsers;
+import seedu.address.testutil.UserBuilder;
 import systemtests.AddressBookSystemTest;
 
 public class AddDebtCommandSystemTest extends AddressBookSystemTest {
@@ -41,64 +41,101 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
 
     @Test
     public void add() {
-
+        //Add and login user to test model
         addUser(otherUserA);
         addUser(otherUserB);
         addUser(currentUser);
         login(currentUser);
+        //Create model(expected model)
         Model model = getModel();
-        model.addUser(otherUserA);
-        model.addUser(otherUserB);
-        model.addUser(currentUser);
-        model.loginUser(currentUser);
+        //Create users copy to prevent referencing
+        User userACopy = new UserBuilder().withUsername(otherUserA.getUsername().toString())
+                .withPhone(otherUserA.getPhone().toString())
+                .withPassword(otherUserA.getPassword().toString())
+                .withName(otherUserA.getName().toString())
+                .withEmail(otherUserA.getEmail().toString())
+                .build();
+        User userBCopy = new UserBuilder().withUsername(otherUserB.getUsername().toString())
+                .withPhone(otherUserB.getPhone().toString())
+                .withPassword(otherUserB.getPassword().toString())
+                .withName(otherUserB.getName().toString())
+                .withEmail(otherUserB.getEmail().toString())
+                .build();
+        User currentUserCopy = new UserBuilder().withUsername(currentUser.getUsername().toString())
+                .withPhone(currentUser.getPhone().toString())
+                .withPassword(currentUser.getPassword().toString())
+                .withName(currentUser.getName().toString())
+                .withEmail(currentUser.getEmail().toString())
+                .build();
+        //Add and login user to expected model
+        model.addUser(userACopy);
+        model.addUser(userBCopy);
+        model.addUser(currentUserCopy);
+        model.loginUser(currentUserCopy);
 
+        //Test success for AddDebtCommand with standard command format, valid input and model
         String command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_A
                         + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandSuccess(command, model, userA, amount);
+
+        // Test success for AddDebtCommand if execute the same command as Debt Id is generate automatically and
+        // should not be repeated, so not a duplicated Debt.
+        // This allow user create debt with amount and debtor.
         assertCommandSuccess(command, model, userA, amount);
 
+        //Test success for AddDebtCommand with standard command format, valid input and model with different user
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandSuccess(command, model, userB, amount);
-        listJio();
 
+        //Test success for AddDebtCommand when listing other type of item
+        listJio();
         assertCommandSuccess(command, model, userB, amount);
 
+        //Test success for AddDebtCommand when selecting other type of item
         selectRestaurant(Index.fromOneBased(3));
         assertCommandSuccess(command, model, userB, amount);
 
+        //Test success for AddDebtCommand with other login user(creditor)
         logout();
         model.logoutUser();
         login(otherUserA);
         model.loginUser(userA);
         assertCommandSuccess(command, model, userB, amount);
 
+        //Test failure for AddDebtCommand with missing username prefix
         command = AddDebtCommand.COMMAND_WORD + " " + VALID_USER_B
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandFailure(command, model, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddDebtCommand.MESSAGE_USAGE));
 
+        //Test failure for AddDebtCommand with missing amount prefix
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
                 + " " + VALID_AMOUNT;
         assertCommandFailure(command, model, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddDebtCommand.MESSAGE_USAGE));
 
+        //Test failure for AddDebtCommand with invalid username
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + INVALID_USER_A
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandFailure(command, model, Username.MESSAGE_USERNAME_CONSTRAINTS);
 
+        //Test failure for AddDebtCommand with invalid amount(more than 2 decimal places)
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
                 + " " + PREFIX_AMOUNT + INVALID_AMOUNT_FORMAT;
         assertCommandFailure(command, model, Amount.MESSAGE_AMOUNT_CONSTRAINTS);
 
+        //Test failure for AddDebtCommand with invalid amount(negative)
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
                 + " " + PREFIX_AMOUNT + INVALID_AMOUNT_FORMAT_NEGATIVE;
         assertCommandFailure(command, model, Amount.MESSAGE_AMOUNT_CONSTRAINTS);
 
+        //Test failure for AddDebtCommand with invalid command word
         command = "AddDebt" + " " + PREFIX_USERNAME + VALID_USER_A
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandFailure(command, model, Messages.MESSAGE_UNKNOWN_COMMAND);
 
+        //Test failure for AddDebtCommand with no login user in the model
         logout();
         model.logoutUser();
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
@@ -106,21 +143,26 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, model,
                 String.format(MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND, AddDebtCommand.COMMAND_WORD));
 
+        //Login current user for following test
         login(currentUser);
         model.loginUser(currentUser);
 
+        //Test failure for AddDebtCommand with input debtor not in the model
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_C
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_NO_SUCH_USER);
 
+        //Test failure for AddDebtCommand with input debtor same as login user
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + CURRENT_USER
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_CANNOT_ADD_DEBT_TO_ONESELF);
 
+        //Test failure for AddDebtCommand with invalid amount(0).
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_A
                 + " " + PREFIX_AMOUNT + INVALID_AMOUNT_ZERO;
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_INVALID_AMOUNT);
 
+        //Test failure for AddDebtCommand with invalid amount(larger than 100000000).
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_A
                 + " " + PREFIX_AMOUNT + INVALID_AMOUNT_TOO_LAREG;
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_INVALID_AMOUNT);

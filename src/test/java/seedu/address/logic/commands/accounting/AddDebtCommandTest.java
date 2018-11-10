@@ -10,7 +10,6 @@ import java.util.ArrayList;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
@@ -50,24 +49,36 @@ public class AddDebtCommandTest {
 
     private Amount invalidAmountB = new Amount("999999999");
 
+    /**
+     * Test for NullPointerException throwing when both input are null.
+     */
     @Test
     public void constructor_nullDebt_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new AddDebtCommand(null, null);
     }
 
+    /**
+     * Test for NullPointerException throwing when debtor is null.
+     */
     @Test
     public void constructor_nullUser_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new AddDebtCommand(null, validAmountA);
     }
 
+    /**
+     * Test for NullPointerException throwing when amount is null.
+     */
     @Test
     public void constructor_nullAmount_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         new AddDebtCommand(validUserA, null);
     }
 
+    /**
+     * Test for successful execution for AddDebtCommand.
+     */
     @Test
     public void execute_debtAcceptedByModel_addSuccessful() throws Exception {
         ModelStubforDebt modelStub = new ModelStubforDebt();
@@ -86,6 +97,9 @@ public class AddDebtCommandTest {
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
+    /**
+     * Test Exception throwing when model has no login user.
+     */
     @Test
     public void execute_notLoggedIn_throwsCommandException() throws Exception {
 
@@ -99,6 +113,9 @@ public class AddDebtCommandTest {
         addDebtCommand.execute(modelStub, commandHistory);
     }
 
+    /**
+     * Test Exception throwing when the input debtor is not in the model's user data.
+     */
     @Test
     public void execute_userNotInModel_throwsCommandException() throws Exception {
         AddDebtCommand addDebtCommand = new AddDebtCommand(invalidUser, validAmountA);
@@ -109,6 +126,9 @@ public class AddDebtCommandTest {
         addDebtCommand.execute(modelStub, commandHistory);
     }
 
+    /**
+     * Test Exception throwing when login user in the model is the same as input debtor to himself/herself.
+     */
     @Test
     public void execute_isSameUser_throwsCommandException() throws Exception {
         AddDebtCommand addDebtCommand = new AddDebtCommand(currentUserName, validAmountA);
@@ -119,6 +139,9 @@ public class AddDebtCommandTest {
         addDebtCommand.execute(modelStub, commandHistory);
     }
 
+    /**
+     * Test Exception throwing when the input amount is 0.
+     */
     @Test
     public void execute_amountZero_throwsCommandException() throws Exception {
         AddDebtCommand addDebtCommand = new AddDebtCommand(validUserA, invalidAmountA);
@@ -129,6 +152,9 @@ public class AddDebtCommandTest {
         addDebtCommand.execute(modelStub, commandHistory);
     }
 
+    /**
+     * Test Exception throwing when the input amount is larger than 100000000.
+     */
     @Test
     public void execute_amountTooLarge_throwsCommandException() throws Exception {
         AddDebtCommand addDebtCommand = new AddDebtCommand(validUserA, invalidAmountB);
@@ -144,21 +170,26 @@ public class AddDebtCommandTest {
         AddDebtCommand test1 = new AddDebtCommand(validUserA, validAmountA);
         AddDebtCommand test2 = new AddDebtCommand(validUserB, validAmountB);
 
+        //Returns true as they are the same object.
         assertTrue(test1.equals(test1));
 
+        //Returns true as they have same debtor and amount.
         AddDebtCommand test1copy = new AddDebtCommand(validUserA, validAmountA);
         assertTrue(test1.equals(test1copy));
 
+        //Return false as they are different type(String).
         assertFalse(test1.equals("test1"));
 
+        //Return false as they are different type(null).
         assertFalse(test1.equals(null));
 
+        //Return false as they are have different debtor and amount.
         assertFalse(test1.equals(test2));
     }
 
 
     /**
-     * A Model stub that always accept the debt being added.
+     * A Model stub for AddDebtCommand Test.
      */
     private class ModelStubforDebt extends ModelStub {
 

@@ -9,7 +9,6 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.google.common.eventbus.Subscribe;
-
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -19,6 +18,7 @@ import seedu.address.MainApp;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.events.model.DisplayProfileEvent;
 import seedu.address.commons.events.model.DisplayWeekScheduleEvent;
+import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.RestaurantPanelSelectionChangedEvent;
 import seedu.address.model.accounting.Debt;
@@ -141,6 +141,8 @@ public class BrowserPanel extends UiPart<Region> {
     }
     /**
      * Loads a browseDebt HTML file with a background that matches the general theme.
+     * All the data field will display on the browser panel,
+     * including the creditor, debtor, amount, status and id.
      */
     private void loadDebtPage(Debt debt) {
         StringBuilder sb = new StringBuilder();
@@ -351,7 +353,7 @@ public class BrowserPanel extends UiPart<Region> {
         });
     }
 
-    /**
+    
     @Subscribe
     private void handleUserLoggedOutEvent(UserLoggedOutEvent event) {
         loadNotLoggedInPage();
