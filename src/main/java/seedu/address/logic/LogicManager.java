@@ -110,6 +110,11 @@ public class LogicManager extends ComponentManager implements Logic {
     }
 
     @Override
+    public void friendListing(ObservableList<Friendship> friendList) {
+        model.friendListing(friendList);
+    }
+
+    @Override
     public ListElementPointer getHistorySnapshot() {
         return new ListElementPointer(history.getHistory());
     }
