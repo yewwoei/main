@@ -228,7 +228,7 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         try {
             Thread.sleep(1);
         } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
+            e.printStackTrace();
         }
 
     }
