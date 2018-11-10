@@ -23,9 +23,6 @@ import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
 
 public class WriteReviewCommandTest {
 
-    @Rule
-    public ExpectedException thrown = ExpectedException.none();
-
     private Model model = new ModelManager(SampleDataUtil.getSampleAddressBook(), new UserPrefs(),
             SampleUserDataUtil.getSampleUserData());
     private Model expectedModel = new ModelManager(SampleDataUtil.getSampleAddressBook(), new UserPrefs(),
