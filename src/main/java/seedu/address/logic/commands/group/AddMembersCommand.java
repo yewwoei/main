@@ -84,7 +84,7 @@ public class AddMembersCommand extends Command {
             throw new CommandException(MESSAGE_HAS_REQUEST);
         }
 
-        if(!model.isUniqueUsernames(listUsernames)) {
+        if (!model.isUniqueUsernames(listUsernames)) {
             throw new CommandException(MESSAGE_NOT_ALL_UNIQUE_USERS);
         }
 

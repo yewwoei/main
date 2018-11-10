@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.group;
+package seedu.address.logic.commands.friend;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;

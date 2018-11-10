@@ -332,7 +332,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates list panel with listing command.
+     * Updates list panel with friend listing command.
      */
     @Subscribe
     @FXML
@@ -346,7 +346,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates list panel with listing command.
+     * Updates list panel with group listing command.
      */
     @Subscribe
     @FXML
@@ -373,7 +373,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates list panel with login user's received request.
+     * Updates list panel with login user's friends.
      */
     @FXML
     public void handleFriends() {

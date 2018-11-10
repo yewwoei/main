@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -18,8 +17,8 @@ import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.accounting.UniqueDebtList;
 import seedu.address.model.friend.Friendship;
 import seedu.address.model.friend.FriendshipStatus;
-import seedu.address.model.group.Group;
 import seedu.address.model.friend.UniqueFriendList;
+import seedu.address.model.group.Group;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.UniqueSchedule;
 import seedu.address.model.timetable.Week;

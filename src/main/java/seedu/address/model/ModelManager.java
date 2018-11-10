@@ -509,9 +509,9 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean isUniqueUsernames(List<Username> listUsernames) {
         int size = listUsernames.size();
-        for(int i = 0; i < size; i++) {
-            for(int j = i + 1; j < size; j++) {
-                if(listUsernames.get(i).equals(listUsernames.get(j))) {
+        for (int i = 0; i < size; i++) {
+            for (int j = i + 1; j < size; j++) {
+                if (listUsernames.get(i).equals(listUsernames.get(j))) {
                     return false;
                 }
             }
