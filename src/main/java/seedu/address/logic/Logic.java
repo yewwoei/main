@@ -47,6 +47,7 @@ public interface Logic {
     ObservableList<Debt> getDebtRequestSent();
     void debtListing(ObservableList<Debt> debt);
     void friendListing(ObservableList<Friendship> list);
+    void groupListing(ObservableList<Group> list);
 
     /** Returns the list of input entered by the user, encapsulated in a {@code ListElementPointer} object */
     ListElementPointer getHistorySnapshot();

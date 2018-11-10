@@ -183,6 +183,11 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
+    @Override
+    public void groupListing(ObservableList<Group> list) {
+        throw new AssertionError("This method should not be called.");
+    }
+
 
     @Override
     public ObservableList<Jio> getJioList() {
