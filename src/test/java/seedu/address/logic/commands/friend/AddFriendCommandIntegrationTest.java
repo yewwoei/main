@@ -79,7 +79,7 @@ public class AddFriendCommandIntegrationTest {
     }
 
     /**
-     * Throw exception if 
+     * Throw exception if the user to send friend request to is not a valid user (in model)
      */
     @Test
     public void execute_userNotInModel() {
@@ -87,12 +87,18 @@ public class AddFriendCommandIntegrationTest {
                 AddFriendCommand.MESSAGE_NO_SUCH_USER);
     }
 
+    /**
+     * Throw exception if user tries to add oneself as a friend
+     */
     @Test
     public void execute_isSameUser() {
         assertCommandFailure(new AddFriendCommand(currentUserName), model, commandHistory,
                 AddFriendCommand.MESSAGE_CANNOT_ADD_ONESELF);
     }
 
+    /**
+     * Throw exception if current user tries to send multiple friend requests to the same user
+     */
     @Test
     public void execute_sameAddFriend_success() {
         model.addFriend(validUsernameA);

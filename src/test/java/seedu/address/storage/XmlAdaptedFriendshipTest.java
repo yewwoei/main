@@ -36,7 +36,7 @@ public class XmlAdaptedFriendshipTest {
 
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
-
+    
     @Test
     public void toModelType_validFriendshipDetails_returnsFriendship() throws Exception {
         XmlAdaptedFriendship friendship = new XmlAdaptedFriendship(FRIENDSHIP_1);
