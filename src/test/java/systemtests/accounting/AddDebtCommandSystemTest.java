@@ -82,6 +82,11 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         // Test success for AddDebtCommand if execute the same command as Debt Id is generate automatically and
         // should not be repeated, so not a duplicated Debt.
         // This allow user create debt with amount and debtor.
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
         assertCommandSuccess(command, model, userA, amount);
 
         //Test success for AddDebtCommand with standard command format, valid input and model with different user
@@ -91,9 +96,24 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
 
         //Test success for AddDebtCommand when listing other type of item
         listJio();
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
         assertCommandSuccess(command, model, userB, amount);
 
         //Test success for AddDebtCommand when selecting other type of item
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
         selectRestaurant(Index.fromOneBased(3));
         assertCommandSuccess(command, model, userB, amount);
 
@@ -102,6 +122,11 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         model.logoutUser();
         login(otherUserA);
         model.loginUser(userA);
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
         assertCommandSuccess(command, model, userB, amount);
 
         //Test failure for AddDebtCommand with missing username prefix
