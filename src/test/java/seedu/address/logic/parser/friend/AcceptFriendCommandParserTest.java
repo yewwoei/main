@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalFriendships.FRIENDSHIP_1;
 import org.junit.Test;
 
 import seedu.address.logic.commands.friend.AcceptFriendCommand;
-import seedu.address.logic.parser.friend.AcceptFriendCommandParser;
 import seedu.address.model.user.Username;
 
 public class AcceptFriendCommandParserTest {

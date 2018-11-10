@@ -10,7 +10,6 @@ import static seedu.address.testutil.TypicalFriendships.FRIENDSHIP_1;
 import org.junit.Test;
 
 import seedu.address.logic.commands.friend.DeleteFriendCommand;
-import seedu.address.logic.parser.friend.DeleteFriendCommandParser;
 import seedu.address.model.user.Username;
 
 public class DeleteFriendCommandParserTest {
