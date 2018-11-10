@@ -111,6 +111,11 @@ public class ModelManager extends ComponentManager implements Model {
     //=========== Model Manager Miscellaneous Methods =+==========================================================
 
     @Override
+    public UserData getUserData() {
+        return this.userData;
+    }
+
+    @Override
     public boolean isCurrentlyLoggedIn() {
         return this.isLoggedIn;
     }
@@ -371,7 +376,7 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public void addDebt(Username debtorUsername, Amount amount) {
         User debtor = userData.getUser(debtorUsername);
-        currentUser.addDebt(debtor, amount);
+        this.currentUser.addDebt(debtor, amount);
         indicateUserDataChanged();
     }
 
@@ -771,6 +776,7 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
+
         return userData.equals(other.userData)
                 && ((currentUser == null && other.currentUser == null) || currentUser.equals(other.currentUser))
                 && versionedAddressBook.equals(other.versionedAddressBook)

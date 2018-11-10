@@ -17,6 +17,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyAddressBook;
 import seedu.address.model.UserData;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.user.User;
 import seedu.address.storage.UserPrefsStorage;
 import seedu.address.storage.XmlSerializableAddressBook;
 import seedu.address.testutil.TestUtil;
@@ -118,4 +119,17 @@ public class TestApp extends MainApp {
             throw new RuntimeException(e);
         }
     }
+
+    public void login(User user) {
+        model.loginUser(user);
+    }
+
+    public void logout() {
+        model.logoutUser();
+    }
+
+    public void addUser(User user) {
+        model.addUser(user);
+    }
+
 }

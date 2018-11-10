@@ -8,6 +8,7 @@ import javafx.util.Pair;
 import seedu.address.model.Model;
 import seedu.address.model.Name;
 import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.UserData;
 import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
@@ -31,6 +32,12 @@ public class ModelStub implements Model {
 
     @Override
     public void addRestaurant(Restaurant restaurant) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+
+    @Override
+    public UserData getUserData() {
         throw new AssertionError("This method should not be called.");
     }
 
