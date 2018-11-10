@@ -132,6 +132,9 @@ public class Group {
         acceptedUsers.remove(user);
     }
 
+    public String toString() {
+        return this.groupName.toString();
+    }
     /**
      * Overrides the equals method
      * @param other Object
