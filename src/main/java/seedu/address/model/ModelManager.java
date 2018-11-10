@@ -774,9 +774,11 @@ public class ModelManager extends ComponentManager implements Model {
 
         // state check
         ModelManager other = (ModelManager) obj;
-        return versionedAddressBook.equals(other.versionedAddressBook)
-                && filteredRestaurants.equals(other.filteredRestaurants)
-                && userData.equals(other.userData);
+
+        return userData.equals(other.userData)
+                && ((currentUser == null && other.currentUser == null) || currentUser.equals(other.currentUser))
+                && versionedAddressBook.equals(other.versionedAddressBook)
+                && filteredRestaurants.equals(other.filteredRestaurants);
     }
 
     @Override

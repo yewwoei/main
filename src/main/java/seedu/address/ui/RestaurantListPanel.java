@@ -60,6 +60,7 @@ public class RestaurantListPanel extends UiPart<Region> {
     @Subscribe
     private void handleJumpToRestaurantListRequestEvent(JumpToRestaurantListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        scrollTo(0);
         scrollTo(event.targetIndex);
     }
 
