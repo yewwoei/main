@@ -131,9 +131,7 @@ public class User {
         }
 
         User otherUser = (User) other;
-        return otherUser.getUsername().equals(getUsername())
-                && getRestaurantReviews().equals(otherUser.getRestaurantReviews())
-                && getDebts().equals(otherUser.getDebts());
+        return otherUser.getUsername().equals(getUsername());
     }
 
     @Override
