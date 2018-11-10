@@ -9,6 +9,7 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 import com.google.common.eventbus.Subscribe;
+
 import javafx.application.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -353,7 +354,6 @@ public class BrowserPanel extends UiPart<Region> {
         });
     }
 
-    
     @Subscribe
     private void handleUserLoggedOutEvent(UserLoggedOutEvent event) {
         loadNotLoggedInPage();
