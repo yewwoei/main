@@ -391,7 +391,7 @@ public class User {
     }
 
     /**
-     * Method for the creditor to create and add a debt.
+     * Method for the creditor to create and add a debt(with Pending status) to other user.
      * @param debtor the debtor of the adding debt
      * @param amount the amount of the adding debt
      * @param status the status of the adding debt
@@ -403,7 +403,7 @@ public class User {
     }
 
     /**
-     * Method for the creditor to create and add debts.
+     * Method for the creditor to create and add debts(with Pending status) to other users in a group.
      * @param group the group of debtor of the adding debt
      * @param amount the total amount of the adding debt
      */
@@ -418,7 +418,10 @@ public class User {
     }
 
     /**
-     * Method for the creditor to clear a debt.
+     * Method for the creditor to clear an amount of the debtor.
+     * The amount will be deducted from the original debt amount,
+     * and create a debt with balanced amount between two user.
+     * Old debt will change to a Cleared status.
      * @param debtor the debtor of the clearing debt.
      * @param amount the amount of the clearing debt.
      */
@@ -448,7 +451,11 @@ public class User {
     }
 
     /**
-     * Method for debtor to accepted a received debt.
+     * Method for debtor to accepted a debt request received.
+     * It auto balanced the debt between user.
+     * The original debt amount will be balanced or added to the new
+     * accepted debt amount and create a new debt with total amount between two users.
+     * Old debt will change to a Balanced status.
      * @param creditor the creditor of the accepting debt.
      * @param amount the amount of the accepting debt.
      * @param debtId the debtId of the accepting debt.
@@ -531,7 +538,7 @@ public class User {
     }
 
     /**
-     * Method for debtor to reject and delete a received debt.
+     * Method for debtor to reject and delete a debt request received.
      * @param creditor the creditor of the deleting debt.
      * @param amount the amount of the deleting debt.
      * @param debtId the debtId of the deleting debt.
@@ -542,10 +549,16 @@ public class User {
         creditor.debts.remove(toFind);
     }
 
+    /**
+     * Method for getting all the Debts(regardless the status) of the login user
+     */
     public ObservableList<Debt> getDebts() {
         return debts.asUnmodifiableObservableList();
     }
 
+    /**
+     * Method for getting all the Debts which login user is the debtor and the status is Accepted.
+     */
     public ObservableList<Debt> getCreditor() {
         UniqueDebtList creditor = new UniqueDebtList();
         for (Debt d: this.debts) {
@@ -556,6 +569,9 @@ public class User {
         return creditor.asUnmodifiableObservableList();
     }
 
+    /**
+     * Method for getting all the Debts which login user is the creditor and the status is Accepted.
+     */
     public ObservableList<Debt> getDebtor() {
         UniqueDebtList debtor = new UniqueDebtList();
         for (Debt d: this.debts) {
@@ -566,6 +582,9 @@ public class User {
         return debtor.asUnmodifiableObservableList();
     }
 
+    /**
+     * Method for getting all the Debts which login user is the debtor and the status is Pending.
+     */
     public ObservableList<Debt> getDebtRequestReceived() {
         UniqueDebtList toReturn = new UniqueDebtList();
         for (Debt d: this.debts) {
@@ -576,6 +595,9 @@ public class User {
         return toReturn.asUnmodifiableObservableList();
     }
 
+    /**
+     * Method for getting all the Debts which login user is the creditor and the status is Pending.
+     */
     public ObservableList<Debt> getDebtRequestSent() {
         UniqueDebtList toReturn = new UniqueDebtList();
         for (Debt d: this.debts) {

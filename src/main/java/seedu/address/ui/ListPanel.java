@@ -59,6 +59,9 @@ public class ListPanel<T> extends UiPart<Region> {
         return type;
     }
 
+    /**
+     * Handle the UserDataChangedEvent and refresh the list by setting the item again.
+     */
     @Subscribe
     private void handleUserDataChangedEvent(UserDataChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
@@ -81,6 +84,9 @@ public class ListPanel<T> extends UiPart<Region> {
         }
     }
 
+    /**
+     * Handle the UserLoggedOutEvent and empty list.
+     */
     @Subscribe
     private void handleUserLoggedOutEvent(UserLoggedOutEvent event) {
         listView.setItems(null);
@@ -105,7 +111,7 @@ public class ListPanel<T> extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Restaurant} using a {@code RestaurantCard}.
+     * Custom {@code ListCell} that displays the graphics of an item using that item's card.
      */
     class ListViewCell<T> extends ListCell<T> {
         @Override

@@ -6,8 +6,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Region;
 import seedu.address.model.accounting.Debt;
 /**
- * An UI component that displays information of a {@code Debt
- * }.
+ * An UI component that displays information of a {@code Debt}.
  */
 public class DebtCard extends UiPart<Region> {
 

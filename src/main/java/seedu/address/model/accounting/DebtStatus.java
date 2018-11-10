@@ -1,7 +1,7 @@
 package seedu.address.model.accounting;
 
 /**
- * DebtStatus can either be ACCEPTED or PENDING or CLEARED.
+ * DebtStatus can either be ACCEPTED, PENDING, CLEARED or BALANCE.
  */
 public enum DebtStatus {
     ACCEPTED,

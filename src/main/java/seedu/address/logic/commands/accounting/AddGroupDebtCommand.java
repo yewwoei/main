@@ -13,7 +13,8 @@ import seedu.address.model.Name;
 import seedu.address.model.accounting.Amount;
 
 /**
- * Add debt to a group.
+ * Login user(creditor) add a pending debt(send a debt request) to every other user(debtor) in the group.
+ * The amount will split equally to every user in the group.
  */
 public class AddGroupDebtCommand extends Command {
     public static final String COMMAND_WORD = "addGroupDebt";

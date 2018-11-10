@@ -23,6 +23,11 @@ import seedu.address.model.user.Username;
  */
 public class AcceptDebtRequestCommandParser implements Parser<AcceptDebtRequestCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the AcceptDebtRequestCommand
+     * and returns an AcceptDebtRequestCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     @Override
     public AcceptDebtRequestCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

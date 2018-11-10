@@ -145,6 +145,10 @@ public class XmlSerializableUsers {
             currentUser.addUniqueBusySchedule(currentSchedule);
         }
 
+        /** Converts the UserData's debt information into the Debt object
+         * , if it is not exist in that user data debt list,
+         *  add the data to the respective user debt list.
+         */
         for (XmlAdaptedDebt d: debts) {
             Debt debt = d.toModelType(userData.getUsernameUserHashMap());
 

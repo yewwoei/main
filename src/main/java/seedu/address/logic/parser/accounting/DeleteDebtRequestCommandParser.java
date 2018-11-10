@@ -23,6 +23,11 @@ import seedu.address.model.user.Username;
  */
 public class DeleteDebtRequestCommandParser implements Parser<DeleteDebtRequestCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the DeleteDebtRequestCommand
+     * and returns a DeleteDebtRequestCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     @Override
     public DeleteDebtRequestCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
