@@ -1,6 +1,10 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalUsers.BENNY;
+
 import org.junit.Test;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.user.SignUpCommand;
@@ -11,19 +15,16 @@ import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.util.SampleUserDataUtil;
 import seedu.address.testutil.Assert;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalUsers.BENNY;
-
 public class SignUpCommandTest {
     private Model model = new ModelManager(SampleDataUtil.getSampleAddressBook(), new UserPrefs(),
             SampleUserDataUtil.getSampleUserData());
     private Model expectedModel = new ModelManager(SampleDataUtil.getSampleAddressBook(), new UserPrefs(),
             SampleUserDataUtil.getSampleUserData());
     private CommandHistory commandHistory = new CommandHistory();
-    String expectedMessage = SignUpCommand.MESSAGE_SUCCESS;
+    private String expectedMessage = SignUpCommand.MESSAGE_SUCCESS;
 
     @Test
-    public void execute_SignUpAgainAfterSignUp() {
+    public void execute_signUpAgainAfterSignUp() {
         model.addUser(BENNY);
         model.loginUser(BENNY.getUsername());
         SignUpCommand signUpCommand = new SignUpCommand(BENNY);
@@ -38,7 +39,7 @@ public class SignUpCommandTest {
     }
 
     @Test
-    public void execute_SignUpWithExistingUser() {
+    public void execute_signUpWithExistingUser() {
         model.addUser(BENNY);
         model.loginUser(BENNY.getUsername());
         model.logoutUser();

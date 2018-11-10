@@ -25,7 +25,7 @@ public class DisplayProfileCommandTest {
     private Model expectedModel = new ModelManager(SampleDataUtil.getSampleAddressBook(), new UserPrefs(),
             SampleUserDataUtil.getSampleUserData());
     private CommandHistory commandHistory = new CommandHistory();
-    String expectedMessage = DisplayProfileCommand.MESSAGE_SUCCESS;
+    private String expectedMessage = DisplayProfileCommand.MESSAGE_SUCCESS;
 
     @Test
     public void execute_withoutLogin() {

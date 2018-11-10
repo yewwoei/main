@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+
 import org.junit.Test;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.user.LogoutCommand;
@@ -12,8 +15,6 @@ import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.util.SampleUserDataUtil;
 import seedu.address.testutil.Assert;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-
 /**
  * Contains tests for Logout Command
  */
@@ -24,11 +25,11 @@ public class LogoutCommandTest {
     private Model expectedModel = new ModelManager(SampleDataUtil.getSampleAddressBook(), new UserPrefs(),
             SampleUserDataUtil.getSampleUserData());
     private CommandHistory commandHistory = new CommandHistory();
-    String expectedMessage = LogoutCommand.MESSAGE_SUCCESS;
-    Username existingUsername = new Username("navekom");
+    private String expectedMessage = LogoutCommand.MESSAGE_SUCCESS;
+    private Username existingUsername = new Username("navekom");
 
     @Test
-    public void execute_LogoutWithNoCurrentUser() {
+    public void execute_logoutWithNoCurrentUser() {
         LogoutCommand logoutCommand = new LogoutCommand();
         Assert.assertThrows(CommandException.class, () -> logoutCommand.execute(model, commandHistory));
     }

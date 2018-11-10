@@ -26,16 +26,17 @@ public class LoginCommandTest {
     private Model expectedModel = new ModelManager(SampleDataUtil.getSampleAddressBook(), new UserPrefs(),
             SampleUserDataUtil.getSampleUserData());
     private CommandHistory commandHistory = new CommandHistory();
-    String expectedMessage = LoginCommand.MESSAGE_SUCCESS;
-    Username validUsername = new Username("navekom");
-    Password validPassword = new Password("pwwd123");
-    Username invalidUsername = new Username("TheMyth");
-    Password invalidPassword = new Password("TheRock");
+
+    private Password invalidPassword = new Password("theRock");
+    private Password validPassword = new Password("pwwd123");
+    private String expectedMessage = LoginCommand.MESSAGE_SUCCESS;
+    private Username invalidUsername = new Username("theMyth");
+    private Username validUsername = new Username("navekom");
 
     @Test
-    public void execute_LoginAgainAfterLogin() {
+    public void execute_loginAgainAfterLogin() {
         model.loginUser(validUsername);
-        LoginCommand loginCommand = new LoginCommand(validUsername,validPassword);
+        LoginCommand loginCommand = new LoginCommand(validUsername, validPassword);
         Assert.assertThrows(CommandException.class, () -> loginCommand.execute(model, commandHistory));
     }
 
@@ -48,14 +49,14 @@ public class LoginCommandTest {
 
     @Test
     public void execute_loginWithNonExistingUser() {
-        LoginCommand loginCommand = new LoginCommand(invalidUsername,validPassword);
+        LoginCommand loginCommand = new LoginCommand(invalidUsername, validPassword);
         Assert.assertThrows(CommandException.class, () -> loginCommand.execute(model, commandHistory));
     }
 
     @Test
     public void execute_loginValidUserInvalidPassword() {
         model.loginUser(validUsername);
-        LoginCommand loginCommand = new LoginCommand(validUsername,invalidPassword);
+        LoginCommand loginCommand = new LoginCommand(validUsername, invalidPassword);
         Assert.assertThrows(CommandException.class, () -> loginCommand.execute(model, commandHistory));
     }
 }

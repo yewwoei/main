@@ -1,9 +1,10 @@
 package seedu.address.logic.commands;
 
-import org.junit.Rule;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
+
 import org.junit.Test;
 
-import org.junit.rules.ExpectedException;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.user.WriteReviewCommand;
@@ -18,9 +19,6 @@ import seedu.address.model.util.SampleDataUtil;
 import seedu.address.model.util.SampleUserDataUtil;
 import seedu.address.testutil.Assert;
 
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
-
 public class WriteReviewCommandTest {
 
     private Model model = new ModelManager(SampleDataUtil.getSampleAddressBook(), new UserPrefs(),
@@ -29,10 +27,10 @@ public class WriteReviewCommandTest {
             SampleUserDataUtil.getSampleUserData());
     private CommandHistory commandHistory = new CommandHistory();
 
-    private WrittenReview firstRestaurantReview =  new WrittenReview("I tried the Ultimate Beef Sushi"
+    private WrittenReview firstRestaurantReview = new WrittenReview("I tried the Ultimate Beef Sushi"
             + " Experience and they were delicious.");
     private Rating firstRestaurantRating = new Rating(3);
-    String expectedMessage = WriteReviewCommand.MESSAGE_SUCCESS;
+    private String expectedMessage = WriteReviewCommand.MESSAGE_SUCCESS;
 
     @Test
     public void execute_withoutLogin() {
