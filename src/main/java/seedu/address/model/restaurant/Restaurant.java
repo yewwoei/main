@@ -99,7 +99,6 @@ public class Restaurant {
         return otherRestaurant.getName().equals(getName())
                 && otherRestaurant.getPhone().equals(getPhone())
                 && otherRestaurant.getAddress().equals(getAddress())
-                && otherRestaurant.getReviews().equals(getReviews())
                 && otherRestaurant.getTags().equals(getTags());
     }
 
