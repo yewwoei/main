@@ -195,6 +195,11 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
+    @Override
+    public boolean isUniqueUsernames(List<Username> listUsernames) {
+        throw new AssertionError("This method should not be called");
+    }
+
 
     @Override
     public ObservableList<Jio> getJioList() {

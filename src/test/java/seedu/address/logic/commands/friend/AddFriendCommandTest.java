@@ -42,6 +42,9 @@ public class AddFriendCommandTest {
     private Username currentUsername = TypicalUsers.getTypicalUsers().get(1).getUsername();
     private User currentUser = TypicalUsers.getTypicalUsers().get(1);
 
+    /**
+     * If null username is passed, throws a null pointer exception
+     */
     @Test
     public void constructor_nullAddFriend_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
@@ -54,10 +57,14 @@ public class AddFriendCommandTest {
 
         CommandResult commandResult = new AddFriendCommand(validUsernameA).execute(modelStub, commandHistory);
 
+        // assert that the feedback message is the same
         assertEquals(String.format(AddFriendCommand.MESSAGE_SUCCESS, validUsernameA),
                 commandResult.feedbackToUser);
 
+        // asser that the size of friendsAdd is 1 as only one friendship is created
         assertEquals(1, modelStub.friendsAdded.size());
+
+        // assert that every field in the friendship is the same
         assertEquals(validUsernameA, modelStub.friendsAdded.get(0).getFriendUsername());
         assertEquals(validUsernameA, modelStub.friendsAdded.get(0).getInitiatedBy().getUsername());
         assertEquals(currentUsername, modelStub.friendsAdded.get(0).getMyUsername());
@@ -66,6 +73,10 @@ public class AddFriendCommandTest {
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
+    /**
+     * Throws exception if no user is currently logged in
+     * @throws Exception
+     */
     @Test
     public void execute_notLoggedIn_throwsCommandException() throws Exception {
 
@@ -79,6 +90,10 @@ public class AddFriendCommandTest {
         addFriendCommand.execute(modelStub, commandHistory);
     }
 
+    /**
+     * Throws exception if the username specified to add is not a valid username in the model
+     * @throws Exception
+     */
     @Test
     public void execute_userNotInModel_throwsCommandException() throws Exception {
         AddFriendCommand addFriendCommand = new AddFriendCommand(invalidUser);
@@ -89,6 +104,10 @@ public class AddFriendCommandTest {
         addFriendCommand.execute(modelStub, commandHistory);
     }
 
+    /**
+     * Throws exception if the user tries to add oneself as a friend
+     * @throws Exception
+     */
     @Test
     public void execute_isSameUser_throwsCommandException() throws Exception {
         AddFriendCommand addFriendCommand = new AddFriendCommand(currentUsername);
@@ -99,6 +118,10 @@ public class AddFriendCommandTest {
         addFriendCommand.execute(modelStub, commandHistory);
     }
 
+    /**
+     *
+     * @throws Exception
+     */
     @Test
     public void execute_addSameUserAgain_throwsCommandException() throws Exception {
         AddFriendCommand addFriendCommand1 = new AddFriendCommand(validUsernameA);
