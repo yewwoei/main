@@ -5,6 +5,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -31,7 +32,7 @@ public class AddDebtCommandIntegrationTest {
 
     private Username currentUserName = TypicalUsers.getTypicalUsers().get(1).getUsername();
 
-    private User userA =  TypicalUsers.getTypicalUsers().get(0);
+    private User userA = TypicalUsers.getTypicalUsers().get(0);
 
     private User currentUser = TypicalUsers.getTypicalUsers().get(1);
 
