@@ -36,7 +36,6 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
 
     private Username userA = TypicalUsers.getTypicalUsers().get(1).getUsername();
     private Username userB = TypicalUsers.getTypicalUsers().get(2).getUsername();
-    private Username userC = TypicalUsers.getTypicalUsers().get(3).getUsername();
 
     private Amount amount = new Amount("101");
 

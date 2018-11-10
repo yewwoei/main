@@ -5,17 +5,19 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
+import seedu.address.model.UserData;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.accounting.Amount;
+import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 import seedu.address.testutil.TypicalUsers;
+import seedu.address.testutil.UserBuilder;
 
 public class AddDebtCommandIntegrationTest {
 
@@ -29,6 +31,10 @@ public class AddDebtCommandIntegrationTest {
 
     private Username currentUserName = TypicalUsers.getTypicalUsers().get(1).getUsername();
 
+    private User userA =  TypicalUsers.getTypicalUsers().get(0);
+
+    private User currentUser = TypicalUsers.getTypicalUsers().get(1);
+
     private Amount validAmountA = new Amount("17");
 
     private Amount invalidAmountA = new Amount("0");
@@ -38,13 +44,29 @@ public class AddDebtCommandIntegrationTest {
     @Before
     public void setUp() {
         model = new ModelManager(new AddressBook(), new UserPrefs(),
-                TypicalUsers.getTypicalUserData(), TypicalUsers.getTypicalUsers().get(1));
+                TypicalUsers.getTypicalUserData(), currentUser);
     }
 
     @Test
     public void execute_newDebt_success() throws CommandException {
         Model expectedModel = new ModelManager(new AddressBook(), new UserPrefs(),
-                TypicalUsers.getTypicalUserData(), TypicalUsers.getTypicalUsers().get(1));
+                new UserData(), TypicalUsers.getTypicalUsers().get(1));
+
+        User userACopy = new UserBuilder().withEmail(userA.getEmail().toString())
+                .withName(userA.getName().toString())
+                .withPassword(userA.getPassword().toString())
+                .withPhone(userA.getPhone().toString())
+                .withUsername(userA.getUsername().toString())
+                .build();
+        User currentUserCopy = new UserBuilder().withEmail(currentUser.getEmail().toString())
+                .withName(currentUser.getName().toString())
+                .withPassword(currentUser.getPassword().toString())
+                .withPhone(currentUser.getPhone().toString())
+                .withUsername(currentUser.getUsername().toString())
+                .build();
+        expectedModel.addUser(userACopy);
+        expectedModel.addUser(currentUserCopy);
+        expectedModel.loginUser(currentUser);
 
         expectedModel.addDebt(validUserA, validAmountA);
         assertCommandSuccess(new AddDebtCommand(validUserA, validAmountA), model, commandHistory,
@@ -53,10 +75,10 @@ public class AddDebtCommandIntegrationTest {
 
     @Test
     public void execute_notLoggedIn() {
-        Model modelNotLoggedIn = new ModelManager(new AddressBook(), new UserPrefs(),
-                TypicalUsers.getTypicalUserData());
-        assertCommandFailure(new AddDebtCommand(validUserA, validAmountA), modelNotLoggedIn, commandHistory,
+        model.logoutUser();
+        assertCommandFailure(new AddDebtCommand(validUserA, validAmountA), model, commandHistory,
                 String.format(Messages.MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND, AddDebtCommand.COMMAND_WORD));
+        model.loginUser(currentUser);
     }
 
     @Test
