@@ -24,7 +24,7 @@ public class AddGroupDebtCommand extends Command {
             + PREFIX_GROUP + "DEBTOR\n"
             + PREFIX_AMOUNT + "AMOUNT\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_GROUP + "My Lonely Club"
+            + PREFIX_GROUP + "My Lonely Club "
             + PREFIX_AMOUNT + "50";
 
     public static final String MESSAGE_SUCCESS = "A debt request of %2$f SGD to other member in %1$s is sent";

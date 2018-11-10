@@ -14,6 +14,7 @@ import seedu.address.model.restaurant.Restaurant;
 public class ModelHelper {
     private static final Predicate<Restaurant> PREDICATE_MATCHING_NO_RESTAURANTS = unused -> false;
 
+
     /**
      * Updates {@code model}'s filtered list to display only {@code toDisplay}.
      */
@@ -36,4 +37,5 @@ public class ModelHelper {
     private static Predicate<Restaurant> getPredicateMatching(Restaurant other) {
         return restaurant -> restaurant.equals(other);
     }
+
 }

@@ -26,15 +26,19 @@ import guitests.guihandles.MainWindowHandle;
 import guitests.guihandles.RestaurantListPanelHandle;
 import guitests.guihandles.ResultDisplayHandle;
 import guitests.guihandles.StatusBarFooterHandle;
+
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.SelectOtherCommand;
 import seedu.address.logic.commands.SelectRestaurantCommand;
+import seedu.address.logic.commands.jio.ListJioCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
+import seedu.address.model.user.User;
 import seedu.address.testutil.TypicalRestaurants;
 import seedu.address.ui.CommandBox;
 
@@ -127,6 +131,8 @@ public abstract class AddressBookSystemTest {
         // after each command is predictable and also different from the previous command.
         clockRule.setInjectedClockToCurrentTime();
 
+        testApp.readStorageAddressBook();
+
         mainWindowHandle.getCommandBox().run(command);
 
         waitUntilBrowserLoaded(getBrowserPanel());
@@ -156,6 +162,22 @@ public abstract class AddressBookSystemTest {
     protected void selectRestaurant(Index index) {
         executeCommand(SelectRestaurantCommand.COMMAND_WORD + " " + index.getOneBased());
         assertEquals(index.getZeroBased(), getRestaurantListPanel().getSelectedCardIndex());
+    }
+
+    /**
+     * Selects the item at {@code index} of the displayed list.
+     */
+    protected void selectitem(Index index) {
+        executeCommand(SelectOtherCommand.COMMAND_WORD + " " + index.getOneBased());
+        assertEquals(index.getZeroBased(), getRestaurantListPanel().getSelectedCardIndex());
+    }
+
+    /**
+     *
+     */
+    protected void listJio() {
+        executeCommand(ListJioCommand.COMMAND_WORD);
+        assertEquals(getModel().getJioList().size(), getModel().getUserData().getJios().size());
     }
 
     /**
@@ -287,5 +309,17 @@ public abstract class AddressBookSystemTest {
      */
     protected Model getModel() {
         return testApp.getModel();
+    }
+
+    public void login(User user) {
+        testApp.login(user);
+    }
+
+    public void logout() {
+        testApp.logout();
+    }
+
+    public void addUser(User user) {
+        testApp.addUser(user);
     }
 }
