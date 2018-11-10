@@ -443,6 +443,7 @@ Initially, I considered asking the initiating User to enter all the information 
 This is so that I would be able to construct the User from the the information provided. However, this would be too
 inconvenient for the User and thus the hashmap mentioned before was used.
 
+// tag::kate[]
 === Payment Splitting Feature
 
 ==== Current Implementation
@@ -483,6 +484,8 @@ it for self benefit.
 * Cons:
 ** Cannot achieve confirmation by user
 ** It is cumbersome to user
+
+// end::kate[]
 
 === Jio Feature
 ==== Current Implementation

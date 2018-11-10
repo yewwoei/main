@@ -10,39 +10,55 @@
 == Overview
 
 Makan Book is a restaurant guide and application for diners in National University of Singapore (NUS).
-It allows users to write and view reviews for restaurants within NUS. Additionally, Users are able to interact with one
-another to create a more enjoyable experience.
+It allows users to write and view reviews for restaurants within NUS.
+Additionally, Users are able to interact with one another to create a more enjoyable experience.
 
 == Summary of contributions
 
-* *Major enhancement*: added *the ability to undo/redo previous commands*
-** What it does: allows the user to undo all previous commands one at a time. Preceding undo commands can be reversed by using the redo command.
-** Justification: This feature improves the product significantly because a user can make mistakes in commands and the app should provide a convenient way to rectify them.
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+* *Major enhancement*: added *the ability to add/accept/delete/clear a debt between user*
+** What it does: allows user to keep debt record. A debt need to be confirm by both user to ensure the
+accuracy. Also, auto-balancing is implemented as to simplified the record. The record store in both user is
+the same.
+** Justification: This feature improves the product significantly because it allows users to keep track on who and how much they
+owns people and who and how much owns them, it effectively solve a common problem between diner on payment splitting.
+Beside, the auto-balancing improve the usability as user can prevent the troublesome for keeping track on multiple debt
+with other user. Also, the storage to both user keep the same recording which greatly reduce the confusion.
+** Highlights: This enhancement required an in-depth knowledge of the whole design, and good communication with other
+ group member as it highly depends on other member's feature (e.g.login/logout and group).
 
+* *Minor enhancement*: added 5 *listing command* that allows the user to list different type of debts
+(credit debts, debit debts, debt requests received, debt requests sent, all debts)
 
+* *Minor enhancement*: added *selectRestaurant and selectOther command* that allows the user to select item on list panel
+by command.
 
-* *Minor enhancement*: added a history command that allows the user to navigate to previous commands using up/down keys.
+* *Minor enhancement*: *Modify the GUI* to match the needs of the Makan Book.
+** What it does: allows ist panel auto refresh when user data changed, added sub menu bar to allow user choosing different
+ type of item to show on list panel, added auto update after user logout(empty the list panel and replace browser panel
+ with notLoggedInPage).
+** Justification: The feature improve the product usability the GUI change with user's need, and simplified the listing
+ process as the user can list everything with a simple click instead of finding/memorising and typing all different
+ listing command. This enhancement also prevent the user privacy leakage and improve the security of the product as it
+ no longer showing the user's information after logout.
+** Highlights: This enhancement required understanding on the GUI and knowledge of JavaFx.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=katenhy[here]]
 
 * *Other contributions*:
 
 ** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
-** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
+*** Wrote additional tests for debt feature to increase coverage by more than 6%
+(Pull requests https://github.com/CS2103-AY1819S1-W10-2/main/pull/305[#305], https://github.com/CS2103-AY1819S1-W10-2/main/pull/308[#308],
+https://github.com/CS2103-AY1819S1-W10-2/main/pull/312[#312], https://github.com/CS2103-AY1819S1-W10-2/main/pull/326[#326])
+***
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Update Readme.adoc, add mockup UI to match the project: https://github.com/CS2103-AY1819S1-W10-2/main/pull/38[#38]
+*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com/CS2103-AY1819S1-W10-2/main/pull/218[#218]
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
-** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
+*** Helped other members on implementation and debugging.
+*** PRs reviewed (with non-trivial review comments) for other member.
+*** Reported bugs and suggestions for other teams in the class.
 
 _{you can add/remove categories in the list above}_
 
@@ -53,9 +69,7 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=kate]
 
 == Contributions to the Developer Guide
 
@@ -63,13 +77,5 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
+include::../DeveloperGuide.adoc[tag=kate]
 
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
