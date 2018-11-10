@@ -32,11 +32,6 @@ public class XmlSerializableAddressBookTest {
                 XmlSerializableAddressBook.class);
         AddressBook addressBookFromFile = dataFromFile.toModelType();
         AddressBook typicalRestaurantsAddressBook = TypicalRestaurants.getTypicalAddressBook();
-        System.out.println(addressBookFromFile.getRestaurantList());
-        System.out.println(typicalRestaurantsAddressBook.getRestaurantList());
-        System.out.println(typicalRestaurantsAddressBook.equals(addressBookFromFile));
-        System.out.println(typicalRestaurantsAddressBook.getRestaurantList()
-                .equals(addressBookFromFile.getRestaurantList()));
         assertEquals(addressBookFromFile, typicalRestaurantsAddressBook);
     }
 
