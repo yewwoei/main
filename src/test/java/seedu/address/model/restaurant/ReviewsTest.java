@@ -16,7 +16,6 @@ public class ReviewsTest {
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Reviews(null, 5.0, null));
         Assert.assertThrows(NullPointerException.class, () -> new Reviews(null, 5.0, new ArrayList<>()));
-        Assert.assertThrows(NullPointerException.class, () -> new Reviews("5.00", 5.0, null));
     }
 
     @Test

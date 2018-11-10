@@ -38,7 +38,6 @@ public class Reviews {
      */
     public Reviews(String restaurantRatingValue, double totalRatings, List<UserReview> userReviewList) {
         requireNonNull(restaurantRatingValue);
-        requireNonNull(totalRatings);
         checkArgument(isValidReviewsRating(restaurantRatingValue), MESSAGE_OVERALL_RATING_CONSTRAINTS);
         this.userReviewList = userReviewList;
         this.totalRatings = totalRatings;

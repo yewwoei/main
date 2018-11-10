@@ -50,7 +50,8 @@ public class DeleteJioCommandTest {
 
         String expectedMessage = String.format(DeleteJioCommand.MESSAGE_SUCCESS, jioToDelete.getName());
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserData());
+        ModelManager expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs(),
+                TypicalUsers.getTypicalUserData(), new UserBuilder().build());
 
         assertCommandSuccess(deleteJioCommand, model, commandHistory, expectedMessage, expectedModel);
     }
