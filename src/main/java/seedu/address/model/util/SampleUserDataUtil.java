@@ -161,6 +161,7 @@ public class SampleUserDataUtil {
 
     public static UserData getSampleUserData() {
         UserData sampleUd = new UserData();
+
         ArrayList<User> userList = new ArrayList<User>();
         for (User sampleUser : getSampleUsers()) {
             sampleUd.addUser(sampleUser);
@@ -191,7 +192,6 @@ public class SampleUserDataUtil {
             userList.get(i).addDebt(userList.get(i - 1), new Amount(String.valueOf(i)), DebtStatus.ACCEPTED);
         }
         userList.get(0).addDebt(userList.get(userList.size() - 1), new Amount(String.valueOf(3)), DebtStatus.ACCEPTED);
-
         return sampleUd;
     }
 }
