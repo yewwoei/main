@@ -7,6 +7,7 @@
         <address>Stephen Riady Centre</address>
         <reviews>
             <rating>3.00</rating>
+            <totalRatings>3.0</totalRatings>
             <userReviews>
                 <rating>3</rating>
                 <username>navekom</username>
@@ -22,6 +23,7 @@
         <address>Stephen Riady Centre</address>
         <reviews>
             <rating>3.00</rating>
+            <totalRatings>3.0</totalRatings>
             <userReviews>
                 <rating>3</rating>
                 <username>navekom</username>

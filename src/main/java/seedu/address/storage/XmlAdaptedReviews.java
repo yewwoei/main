@@ -19,6 +19,9 @@ public class XmlAdaptedReviews {
     private String rating;
 
     @XmlElement(required = true)
+    private String totalRatings;
+
+    @XmlElement(required = true)
     private List<XmlAdaptedUserReview> userReviews = new ArrayList<>();
 
     /**
@@ -30,8 +33,9 @@ public class XmlAdaptedReviews {
     /**
      * Constructs a {@code XmlAdaptedReviews} with the given review details.
      */
-    public XmlAdaptedReviews(String rating, List<XmlAdaptedUserReview> userReviews) {
+    public XmlAdaptedReviews(String rating, String totalRatings, List<XmlAdaptedUserReview> userReviews) {
         this.rating = rating;
+        this.totalRatings = totalRatings;
         if (userReviews != null) {
             this.userReviews = new ArrayList<>(userReviews);
         }
@@ -42,6 +46,7 @@ public class XmlAdaptedReviews {
      */
     public XmlAdaptedReviews(Reviews reviews) {
         rating = reviews.getRestaurantRatingValue();
+        totalRatings = reviews.getRestaurantTotalRatings();
         userReviews = reviews.getUserReviewList().stream()
                 .map(XmlAdaptedUserReview::new)
                 .collect(Collectors.toList());
@@ -55,7 +60,8 @@ public class XmlAdaptedReviews {
         for (XmlAdaptedUserReview userReview : userReviews) {
             restaurantUserReviews.add(userReview.toModelType());
         }
-        return new Reviews(rating, restaurantUserReviews);
+        Double totalRating = Double.parseDouble(totalRatings);
+        return new Reviews(rating, totalRating, restaurantUserReviews);
     }
 
     @Override

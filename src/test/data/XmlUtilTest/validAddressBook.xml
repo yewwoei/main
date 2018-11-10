@@ -6,6 +6,7 @@
         <address>Stephen Riady Centre</address>
         <reviews>
             <rating>3.00</rating>
+            <totalRatings>3.0</totalRatings>
             <userReviews>
                 <rating>3</rating>
                 <username>navekom</username>
@@ -20,6 +21,7 @@
         <address>Town Plaza</address>
         <reviews>
             <rating>0.00</rating>
+            <totalRatings>0.0</totalRatings>
         </reviews>
         <tagged>Italian</tagged>
         <tagged>Halal</tagged>
@@ -30,6 +32,7 @@
         <address>Town Plaza</address>
         <reviews>
             <rating>0.00</rating>
+            <totalRatings>0.0</totalRatings>
         </reviews>
     </restaurants>
     <restaurants>
@@ -38,6 +41,7 @@
         <address>Education Resource Centre</address>
         <reviews>
             <rating>0.00</rating>
+            <totalRatings>0.0</totalRatings>
         </reviews>
         <tagged>Cafe</tagged>
     </restaurants>
@@ -47,6 +51,7 @@
         <address>Town Plaza</address>
         <reviews>
             <rating>0.00</rating>
+            <totalRatings>0.0</totalRatings>
         </reviews>
     </restaurants>
     <restaurants>
@@ -55,6 +60,7 @@
         <address>Town Plaza</address>
         <reviews>
             <rating>0.00</rating>
+            <totalRatings>0.0</totalRatings>
         </reviews>
     </restaurants>
     <restaurants>
@@ -63,6 +69,7 @@
         <address>Stephen Riady Centre</address>
         <reviews>
             <rating>0.00</rating>
+            <totalRatings>0.0</totalRatings>
         </reviews>
     </restaurants>
 </addressbook>

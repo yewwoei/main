@@ -11,7 +11,7 @@ public class Reviews {
 
     private static DecimalFormat df = new DecimalFormat("#.00");
     private List<UserReview> userReviewList;
-    private double restaurantRating;
+    private double totalRatings;
     private String restaurantRatingValue;
 
     /**
@@ -19,7 +19,7 @@ public class Reviews {
      */
     public Reviews() {
         userReviewList = new ArrayList<>();
-        restaurantRating = 0.00;
+        totalRatings = 0.00;
         this.restaurantRatingValue = "0.00";
     }
 
@@ -29,19 +29,24 @@ public class Reviews {
      * @param restaurantRatingValue The overall rating of a restaurant.
      * @param userReviewList A list of UserReview.
      */
-    public Reviews(String restaurantRatingValue, List<UserReview> userReviewList) {
+    public Reviews(String restaurantRatingValue, double totalRatings, List<UserReview> userReviewList) {
         this.userReviewList = userReviewList;
+        this.totalRatings = totalRatings;
         if (restaurantRatingValue.equals("0.00")) {
-            this.restaurantRating = 0.00;
+            this.totalRatings = 0.00;
             this.restaurantRatingValue = "0.00";
         } else {
-            this.restaurantRating = Double.parseDouble(restaurantRatingValue);
-            this.restaurantRatingValue = df.format(restaurantRating);
+            this.totalRatings = Double.parseDouble(restaurantRatingValue);
+            this.restaurantRatingValue = df.format(totalRatings);
         }
     }
 
     public String getRestaurantRatingValue() {
         return restaurantRatingValue;
+    }
+
+    public String getRestaurantTotalRatings() {
+        return Double.toString(totalRatings);
     }
 
     public List<UserReview> getUserReviewList() {
@@ -57,14 +62,13 @@ public class Reviews {
     public Reviews addUserReview(UserReview userReview) {
         userReviewList.add(userReview);
         if (userReviewList.size() == 1) {
-            restaurantRating = (double) userReview.getRating();
-            this.restaurantRatingValue = df.format(restaurantRating);
+            totalRatings = (double) userReview.getRating();
+            this.restaurantRatingValue = df.format(totalRatings);
             return this;
         }
-        restaurantRating = restaurantRating + (double) userReview.getRating();
-        Double tempCalculation = restaurantRating / userReviewList.size();
+        totalRatings = totalRatings + (double) userReview.getRating();
+        Double tempCalculation = totalRatings / userReviewList.size();
         this.restaurantRatingValue = df.format(tempCalculation);
         return this;
     }
-
 }
