@@ -18,9 +18,9 @@ public class DateBuilder {
     private Time time;
 
     public DateBuilder() {
-         week = new Week(DEFAULT_WEEK);
-         day = new Day(DEFAULT_DAY);
-         time = new Time(DEFAULT_TIME);
+        week = new Week(DEFAULT_WEEK);
+        day = new Day(DEFAULT_DAY);
+        time = new Time(DEFAULT_TIME);
     }
 
     /**

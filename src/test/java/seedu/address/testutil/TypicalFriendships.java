@@ -14,19 +14,19 @@ import seedu.address.model.user.User;
 public class TypicalFriendships {
     // list below should be private but style check error wil be caused if private
     // -> variable access
-    public static final List<User> listUsers = TypicalUsers.getTypicalUsers();
+    public static final List<User> LIST_USERS = TypicalUsers.getTypicalUsers();
     public static final Friendship FRIENDSHIP_1 = new FriendshipBuilder().build();
     public static final Friendship FRIENDSHIP_2 = new FriendshipBuilder()
             .withFriendshipStatus(FriendshipStatus.ACCEPTED)
-            .withFriendUser(listUsers.get(2))
-            .withMe(listUsers.get(3))
-            .withInitiatedBy(listUsers.get(2))
+            .withFriendUser(LIST_USERS.get(2))
+            .withMe(LIST_USERS.get(3))
+            .withInitiatedBy(LIST_USERS.get(2))
             .build();
     public static final Friendship FRIENDSHIP_3 = new FriendshipBuilder()
             .withFriendshipStatus(FriendshipStatus.ACCEPTED)
-            .withFriendUser(listUsers.get(3))
-            .withMe(listUsers.get(2))
-            .withInitiatedBy(listUsers.get(2))
+            .withFriendUser(LIST_USERS.get(3))
+            .withMe(LIST_USERS.get(2))
+            .withInitiatedBy(LIST_USERS.get(2))
             .build();
 
     private TypicalFriendships() {} // prevents instantiation
@@ -35,7 +35,7 @@ public class TypicalFriendships {
         return new ArrayList<>(Arrays.asList(FRIENDSHIP_1, FRIENDSHIP_2, FRIENDSHIP_3));
     }
 
-    public static List<User> getListUsers() {
-        return listUsers;
+    public static List<User> getLIST_USERS() {
+        return LIST_USERS;
     }
 }

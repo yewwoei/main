@@ -1,11 +1,10 @@
 package seedu.address.logic.commands.timetable;
 
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalDates.DATE_A;
+import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 
 import org.junit.Test;
 
@@ -26,7 +25,8 @@ import seedu.address.testutil.UserBuilder;
  */
 public class BlockDateCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData(), new UserBuilder().build());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData(),
+            new UserBuilder().build());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
@@ -72,8 +72,26 @@ public class BlockDateCommandTest {
 
     @Test
     public void executeUndoRedo_validDate_sameDateDeleted() throws Exception {
+        Date dateToBlock = seedu.address.testutil.TypicalDates.DATE_B;
+        BlockDateCommand blockDateCommand = new BlockDateCommand(dateToBlock);
+        Model expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserData(),
+                new UserBuilder().build());
+        expectedModel.blockDateForCurrentUser(dateToBlock);
+        expectedModel.commitAddressBook();
 
+        // blocks the date from the current logged in user.
+        blockDateCommand.execute(model, commandHistory);
 
+        // undo -> reverts addressbook back to previous state and frees up the blocked user date.
+        expectedModel.undoAddressBook();
+        assertCommandSuccess(new UndoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
+
+        System.out.println(model.hasDateForCurrentUser(dateToBlock));
+        assertFalse(model.hasDateForCurrentUser(dateToBlock));
+
+        // redo --> blocks the date again.
+        expectedModel.redoAddressBook();
+        assertCommandSuccess(new RedoCommand(), model, commandHistory, UndoCommand.MESSAGE_SUCCESS, expectedModel);
     }
 
     @Test

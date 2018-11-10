@@ -2,6 +2,9 @@ package seedu.address.testutil;
 
 import seedu.address.model.timetable.Date;
 
+/**
+ * A utility class containing a list of {@code Date} objects to be used in tests.
+ */
 public class TypicalDates {
 
     public static final Date DATE_A = new DateBuilder().build();
