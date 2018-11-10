@@ -19,7 +19,7 @@ public class XmlSerializableUsersTest {
     private static final Path TEST_DATA_FOLDER =
             Paths.get("src", "test", "data", "XmlSerializableUsersTest");
     private static final Path TYPICAL_USERS_FILE = TEST_DATA_FOLDER.resolve("typicalUsers.xml");
-    private static final Path INVALID_USERS_FILE = TEST_DATA_FOLDER.resolve("invalidUsers.xml");
+    private static final Path invalidUserS_FILE = TEST_DATA_FOLDER.resolve("invalidUsers.xml");
     private static final Path DUPLICATE_USERS_FILE = TEST_DATA_FOLDER
             .resolve("duplicateUsers.xml");
 
@@ -37,7 +37,7 @@ public class XmlSerializableUsersTest {
 
     @Test
     public void toModelType_invalidUsersFile_throwsIllegalValueException() throws Exception {
-        XmlSerializableUsers dataFromFile = XmlUtil.getDataFromFile(INVALID_USERS_FILE,
+        XmlSerializableUsers dataFromFile = XmlUtil.getDataFromFile(invalidUserS_FILE,
                 XmlSerializableUsers.class);
         thrown.expect(IllegalValueException.class);
         dataFromFile.toModelType();

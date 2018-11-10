@@ -21,22 +21,22 @@ public class SignUpCommand extends Command {
 
     public static final String COMMAND_WORD = "signup";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Signs a user up to use Makan Book features.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Signs a user up to use Makan Book features. "
             + "Parameters: "
             + PREFIX_USERNAME + "USERNAME "
             + PREFIX_PASSWORD + "PASSWORD "
             + PREFIX_NAME + "NAME "
             + PREFIX_PHONE + "PHONE "
-            + PREFIX_EMAIL + "EMAIL\n"
+            + PREFIX_EMAIL + "EMAIL "
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_USERNAME + "johnnydoe "
-            + PREFIX_PASSWORD + "pAssw0rd "
+            + PREFIX_PASSWORD + "p@ssw0rd "
             + PREFIX_NAME + "John Doe "
             + PREFIX_PHONE + "98765432 "
             + PREFIX_EMAIL + "johnd@example.com";
 
     public static final String MESSAGE_SUCCESS = "Successfully Registered";
-    public static final String MESSAGE_ALREADY_LOGGEDIN = "Not allowed to Sign Up for another account if User is "
+    public static final String MESSAGE_ALREADY_LOGGEDIN = "Not allowed to sign up for another account if user is "
             + "currently logged in";
     public static final String MESSAGE_DUPLICATE_USERNAME = "This username already exists in the Makan Book";
 

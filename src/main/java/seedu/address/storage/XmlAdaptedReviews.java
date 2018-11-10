@@ -15,6 +15,8 @@ import seedu.address.model.restaurant.UserReview;
  */
 public class XmlAdaptedReviews {
 
+    public static final String MISSING_FIELD_MESSAGE_FORMAT = "Reviews's %s field is missing!";
+
     @XmlElement(required = true)
     private String rating;
 
@@ -61,6 +63,12 @@ public class XmlAdaptedReviews {
             restaurantUserReviews.add(userReview.toModelType());
         }
         Double totalRating = Double.parseDouble(totalRatings);
+        if (rating == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Reviews.class.getSimpleName()));
+        }
+        if (!Reviews.isValidReviewsRating(rating)) {
+            throw new IllegalValueException(Reviews.MESSAGE_OVERALL_RATING_CONSTRAINTS);
+        }
         return new Reviews(rating, totalRating, restaurantUserReviews);
     }
 

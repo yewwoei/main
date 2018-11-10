@@ -13,6 +13,7 @@ import java.util.stream.Stream;
 import seedu.address.logic.commands.jio.CreateJioCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
+import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.ParserRestaurantUtil;
 import seedu.address.logic.parser.ParserUserUtil;
 import seedu.address.logic.parser.ParserUtil;
@@ -29,7 +30,7 @@ import seedu.address.model.timetable.Week;
 /**
  * Parses input arguments and creates a new CreateJioCommand object
  */
-public class CreateJioCommandParser {
+public class CreateJioCommandParser implements Parser<CreateJioCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the AddJioCommand
      * and returns an AddJioCommand object for execution.
