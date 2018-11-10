@@ -19,8 +19,8 @@ import seedu.address.model.user.Username;
  */
 public class DeleteFriendRequestCommandParser implements Parser<DeleteFriendRequestCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the DeleteFriendCommand
-     * and returns a DeleteFriendCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the DeleteFriendRequestCommand
+     * and returns a DeleteFriendRequestCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public DeleteFriendRequestCommand parse(String args) throws ParseException {

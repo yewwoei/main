@@ -23,7 +23,7 @@ import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
 import seedu.address.commons.events.ui.RestaurantPanelSelectionChangedEvent;
 import seedu.address.model.accounting.Debt;
-import seedu.address.model.group.Friendship;
+import seedu.address.model.friend.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
@@ -175,7 +175,7 @@ public class BrowserPanel extends UiPart<Region> {
     }
 
     /**
-     * Loads a browseDebt HTML file with a background that matches the general theme.
+     * Loads a browseFriend HTML file with a background that matches the general theme.
      */
     private void loadFriendPage(Friendship friendship) {
         StringBuilder sb = new StringBuilder();

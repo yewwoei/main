@@ -24,7 +24,7 @@ import seedu.address.commons.events.ui.ShowHelpRequestEvent;
 import seedu.address.logic.Logic;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.accounting.Debt;
-import seedu.address.model.group.Friendship;
+import seedu.address.model.friend.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 
@@ -332,7 +332,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates list panel with listing command.
+     * Updates list panel with friend listing command.
      */
     @Subscribe
     @FXML
@@ -346,7 +346,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates list panel with listing command.
+     * Updates list panel with group listing command.
      */
     @Subscribe
     @FXML
@@ -373,7 +373,7 @@ public class MainWindow extends UiPart<Stage> {
     }
 
     /**
-     * Updates list panel with login user's received request.
+     * Updates list panel with login user's friends.
      */
     @FXML
     public void handleFriends() {

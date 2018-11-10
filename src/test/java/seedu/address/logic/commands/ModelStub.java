@@ -13,7 +13,7 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
-import seedu.address.model.group.Friendship;
+import seedu.address.model.friend.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Rating;
@@ -193,6 +193,11 @@ public class ModelStub implements Model {
     @Override
     public void groupListing(ObservableList<Group> list) {
         throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public boolean isUniqueUsernames(List<Username> listUsernames) {
+        throw new AssertionError("This method should not be called");
     }
 
 

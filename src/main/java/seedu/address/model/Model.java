@@ -9,7 +9,7 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
-import seedu.address.model.group.Friendship;
+import seedu.address.model.friend.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Rating;
@@ -141,39 +141,137 @@ public interface Model {
 
     //=========== Model Manager User Methods =+===================================================================
 
+    /**
+     * Checks whether currently logged in user has sent a friend request to User with
+     * username friendUsername
+     * Returns true if such a friend request is found
+     * @param friendUsername
+     */
     boolean hasUsernameSentRequest(Username friendUsername);
 
+    /**
+     * Checks whether the currently logged in user is friends with the User with
+     * username friendUsername
+     * Returns true if such a friendship exists and they are already friends
+     * @param friendUsername
+     */
     boolean hasUsernameFriend(Username friendUsername);
 
+    /**
+     * Checks whether user with username friendUsername has previously sent a friend
+     * request to the currently logged in user.
+     * Returns true if such a pending friendship exists
+     * @param friendUsername
+     */
     boolean hasUsernameFriendRequest(Username friendUsername);
 
+    /**
+     * adds the currently logged in user to the list of pending friends under the User
+     * with username friendUsername
+     * @param friendUsername
+     */
     void addFriend(Username friendUsername);
 
+    /**
+     * accepts the pending friendship from the user with username friendUsername
+     * deletes the pending friendship under the currently logged in user
+     * adds an accepted friendship under both the currently logged in user and user with
+     * username friendUsername
+     * @param friendUsername
+     */
     void acceptFriend(Username friendUsername);
 
+    /**
+     * returns true if the user with Username username is the same as the currently
+     * logged in user.
+     * @param username
+     */
     boolean isSameAsCurrentUser(Username username);
 
+    /**
+     * deletes friendship between user with username friendUsername and currently logged
+     * in user.
+     * friendship is deleted under both users.
+     * @param friendUsername
+     */
     void deleteFriend(Username friendUsername);
 
+    /**
+     * deletes the pending friendship between user with username friendUsername and
+     * currently logged in user.
+     * @param friendUsername
+     */
     void deleteFriendRequest(Username friendUsername);
 
+    /**
+     * Returns an ObservableList of friends of the currently logged in user.
+     */
     ObservableList<Friendship> getFriendsList();
 
+    /**
+     * Returns an ObservableList of friend requests received by the currently
+     * logged in user.
+     */
     ObservableList<Friendship> getFriendRequestsList();
 
+    /**
+     * Checks whether there is another group in Makan Book has the same name
+     * Returns true if there is another group with the same name
+     * @param group
+     * @return
+     */
     boolean hasGroup(Name group);
 
+    /**
+     * Checks whether the currently logged in user has a group request from the
+     * group with name groupName.
+     * @param groupName
+     */
     boolean hasGroupRequest(Name groupName);
 
+    /**
+     * Adds group with groupName to list of all groups in Makan Book.
+     * @param groupName
+     */
     void addGroup(Name groupName);
 
+    /**
+     * Allows currently logged in user to accept groupRequest of the group with name
+     * groupName.
+     * Adds the group to the list of groups for the currently logged in user
+     * Deletes the group from list of group requests for the currently logged in user
+     * @param groupName
+     */
     void acceptGroupRequest(Name groupName);
 
+    /**
+     * Checks whether the currently logged in user is part of the group with name
+     * groupName
+     * @param groupName
+     */
     boolean isInGroup(Name groupName);
 
+    /**
+     * Adds the users corresponding to the usernames in the list of usernames in pair
+     * to the group with name as specified in pair.
+     * @param pair
+     */
     void addPendingUsersGroup(Pair<Name, List<Username>> pair);
 
+    /**
+     * Checks whether all usernames in listUsernames correspond to actual users
+     * Returns true if all usernames correspond to some user
+     * @param listUsernames
+     */
     boolean isAllValidUsers(List<Username> listUsernames);
+
+    /**
+     * Checks whether all usernames in listUsernames are unique
+     * Returns true if all usernames are unique
+     * @param listUsernames
+     * @return
+     */
+    boolean isUniqueUsernames(List<Username> listUsernames);
 
     boolean hasUsersInGroup(Pair<Name, List<Username>> pair);
 

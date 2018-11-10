@@ -10,7 +10,7 @@ import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
 
 /**
- * List the logged in user's own friends.
+ * List the friends of the logged in user.
  */
 public class ListFriendsCommand extends Command {
     public static final String COMMAND_WORD = "listFriends";
@@ -28,14 +28,13 @@ public class ListFriendsCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        // throw exception if no user is logged in
         if (!model.isCurrentlyLoggedIn()) {
             throw new NotLoggedInCommandException(COMMAND_WORD);
         }
 
         model.friendListing(model.getFriendsList());
-
         return new CommandResult(String.format(MESSAGE_SUCCESS));
-
 
     }
 
