@@ -26,7 +26,6 @@ public class DebtTest {
 
         thrown.expect(NullPointerException.class);
         DEBT_A.changeDebtStatus(null);
-
     }
 
     @Test

@@ -52,7 +52,7 @@ public class XmlUtilTest {
     private static final XmlAdaptedUserReview VALID_USER_REVIEW = new XmlAdaptedUserReview(VALID_USER_RATING,
             VALID_USERNAME, VALID_WRITTEN_REVIEW);
     private static final XmlAdaptedReviews VALID_REVIEWS = new XmlAdaptedReviews(VALID_OVERALL_RATING,
-            Collections.singletonList(VALID_USER_REVIEW));
+            VALID_OVERALL_RATING, Collections.singletonList(VALID_USER_REVIEW));
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
