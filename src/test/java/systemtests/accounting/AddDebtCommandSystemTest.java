@@ -76,7 +76,7 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
 
         //Test success for AddDebtCommand with standard command format, valid input and model
         String command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_A
-                        + " " + PREFIX_AMOUNT + VALID_AMOUNT;
+                + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandSuccess(command, model, userA, amount);
 
         // Test success for AddDebtCommand if execute the same command as Debt Id is generate automatically and

@@ -19,8 +19,8 @@ import seedu.address.model.Name;
  */
 public class AddGroupCommandParser implements Parser<AddGroupCommand> {
     /**
-     * Parses the given {@code String} of arguments in the context of the AddCommand
-     * and returns an AddCommand object for execution.
+     * Parses the given {@code String} of arguments in the context of the AddGroupCommand
+     * and returns an AddGroupCommand object for execution.
      * @throws ParseException if the user input does not conform the expected format
      */
     public AddGroupCommand parse(String args) throws ParseException {

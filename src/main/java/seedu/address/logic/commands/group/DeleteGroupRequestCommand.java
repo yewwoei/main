@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.Name;
 
 /**
- * Deletes a group request the user received.
+ * Deletes a group request the user has received.
  */
 public class DeleteGroupRequestCommand extends Command {
     public static final String COMMAND_WORD = "deleteGroupRequest";
@@ -27,13 +27,11 @@ public class DeleteGroupRequestCommand extends Command {
     public static final String MESSAGE_NO_SUCH_REQUEST = "Sorry, you do not have that group request";
     public static final String MESSAGE_NOT_LOGGED_IN = "You must login before deleting group requests.";
 
-
-    // TODO
     private final Name toDelete;
 
     /**
-     * Creates a DeleteGroupRequestCommand that will delete an
-     * invitation to join the specified {@code Integer} group.
+     * Creates a DeleteGroupRequestCommand that will delete the group with name toDelete
+     * from the currently logged in user's list of group requests received.
      */
     public DeleteGroupRequestCommand(Name toDelete) {
         requireNonNull(toDelete);
@@ -44,6 +42,7 @@ public class DeleteGroupRequestCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        // throw exception if no user is currently logged in
         if (!model.isCurrentlyLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGGED_IN);
         }

@@ -5,7 +5,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new ListGroupsCommand object
+ * Creates a new ListGroupsCommand object
  */
 public class ListGroupsCommandParser implements Parser<ListGroupsCommand> {
     @Override

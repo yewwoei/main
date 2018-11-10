@@ -80,31 +80,6 @@ public class UserGroupListTest {
     }
 
     @Test
-    public void createAndAddMembers() {
-        User alice = new User(new Username("Alice"), new Password("password"), new Name("Alice"),
-                new Phone("8942"), new Email("alice@g.com"));
-        User bob = new User(new Username("Bob"), new Password("password"), new Name("Bob"),
-                new Phone("2433"), new Email("bob@g.com"));
-        User carol = new User(new Username("Carol"), new Password("password"), new Name("Carol"),
-                new Phone("2433"), new Email("carol@g.com"));
-        Group group = alice.createGroup("My Lonely Club", bob, carol);
-        bob.acceptGroupRequest(group);
-        Assert.assertEquals(alice.listGroups() , "My Lonely Club\n");
-        Assert.assertEquals(alice.listGroupRequests() , "");
-        Assert.assertEquals(bob.listGroups() , "My Lonely Club\n");
-        Assert.assertEquals(bob.listGroupRequests() , "");
-        Assert.assertEquals(carol.listGroups() , "");
-        Assert.assertEquals(carol.listGroupRequests() , "My Lonely Club\n");
-        ArrayList<User> listAcceptedUsers = new ArrayList<>();
-        listAcceptedUsers.add(alice);
-        listAcceptedUsers.add(bob);
-        ArrayList<User> listPendingUsers = new ArrayList<>();
-        listPendingUsers.add(carol);
-        Assert.assertEquals(group.getAcceptedUsers(), listAcceptedUsers);
-        Assert.assertEquals(group.getPendingUsers(), listPendingUsers);
-    }
-
-    @Test
     public void deleteGroupRequest() {
         User alice = new User(new Username("Alice"), new Password("password"), new Name("Alice"),
                 new Phone("8942"), new Email("alice@g.com"));
