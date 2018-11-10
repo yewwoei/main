@@ -76,7 +76,7 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         model.loginUser(userA);
         assertCommandSuccess(command, model, userB, amount);
 
-        command =  AddDebtCommand.COMMAND_WORD + " " + VALID_USER_B
+        command = AddDebtCommand.COMMAND_WORD + " " + VALID_USER_B
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandFailure(command, model, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddDebtCommand.MESSAGE_USAGE));

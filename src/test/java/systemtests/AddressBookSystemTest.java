@@ -19,6 +19,14 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
 
+import guitests.guihandles.BrowserPanelHandle;
+import guitests.guihandles.CommandBoxHandle;
+import guitests.guihandles.MainMenuHandle;
+import guitests.guihandles.MainWindowHandle;
+import guitests.guihandles.RestaurantListPanelHandle;
+import guitests.guihandles.ResultDisplayHandle;
+import guitests.guihandles.StatusBarFooterHandle;
+
 import seedu.address.TestApp;
 import seedu.address.commons.core.EventsCenter;
 import seedu.address.commons.core.index.Index;
@@ -32,15 +40,6 @@ import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.user.User;
 import seedu.address.testutil.TypicalRestaurants;
-
-import guitests.guihandles.BrowserPanelHandle;
-import guitests.guihandles.CommandBoxHandle;
-import guitests.guihandles.MainMenuHandle;
-import guitests.guihandles.MainWindowHandle;
-import guitests.guihandles.RestaurantListPanelHandle;
-import guitests.guihandles.ResultDisplayHandle;
-import guitests.guihandles.StatusBarFooterHandle;
-
 import seedu.address.ui.CommandBox;
 
 /**
@@ -176,10 +175,10 @@ public abstract class AddressBookSystemTest {
     /**
      *
      */
-     protected void listJio() {
-         executeCommand(ListJioCommand.COMMAND_WORD);
-         assertEquals(getModel().getJioList().size(), getModel().getUserData().getJios().size());
-     }
+    protected void listJio() {
+        executeCommand(ListJioCommand.COMMAND_WORD);
+        assertEquals(getModel().getJioList().size(), getModel().getUserData().getJios().size());
+    }
 
     /**
      * Deletes all restaurants in the address book.
