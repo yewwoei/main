@@ -84,6 +84,9 @@ public class UniqueSchedule {
      */
     public void addAll(UniqueSchedule otherSchedule) {
         // change all the reference pointers to point to otherSchedule's reference.
+        if (!internalSchedule.isEmpty()) {
+            throw new DuplicateDateException();
+        }
         List<Date> allDates = otherSchedule.getAllBlockedDatesOnSchedule();
         allDates.stream().forEach(this::add);
     }

@@ -21,7 +21,6 @@ public class BlockDateCommandTest {
 
     @Test
     public void execute_validDate_success() {
-
     }
 
     @Test
