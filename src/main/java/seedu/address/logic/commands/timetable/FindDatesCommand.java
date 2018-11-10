@@ -29,8 +29,8 @@ public class FindDatesCommand extends Command {
             + PREFIX_WEEK + "5"
             + PREFIX_GROUP + "MALA";
 
-    public static final String MESSAGE_SUCCESS = "Listed the common free dates for" +
-            "week %1$s below for group %2$s.";
+    public static final String MESSAGE_SUCCESS = "Listed the common free dates for"
+            + " week %1$s below for group %2$s.";
 
     private final Week weekNumber;
     private final Group group;
