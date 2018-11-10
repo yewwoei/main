@@ -80,13 +80,9 @@ public class UniqueSchedule {
     }
 
     /** Adds all the uniqueBusySchedule dates from another schedule into the current schedule.
-     * The current schedule must not have any dates stored.
      */
     public void addAll(UniqueSchedule otherSchedule) {
         // change all the reference pointers to point to otherSchedule's reference.
-        if (!isEmpty()) {
-            throw new DuplicateDateException();
-        }
         List<Date> allDates = otherSchedule.getAllBlockedDatesOnSchedule();
         allDates.stream().forEach(this::add);
     }
