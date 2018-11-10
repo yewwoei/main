@@ -247,7 +247,7 @@ Examples:
 === Adding members: `addMembers`
 
 A User will create a group and send out invitations to all the other users, which they will then have to accept to join the group.  +
-Format: `addGroup g/GROUPNAME [Users… u/USERNAMES]`
+Format: `addMembers g/GROUPNAME [Users… u/USERNAMES]`
 
 Examples:
 
