@@ -133,7 +133,7 @@ public class SampleUserDataUtil {
         User meena = new User(new Username("meena567"), new Password("meenapwd123"),
                 new Name("Meena"), new Phone("98834568"),
                 new Email("meena567@gmail.com"));
-        User yewwoei = new User(new Username("aideeeen"), new Password("yewwoei123"),
+        User yewwoei = new User(new Username("aiden"), new Password("aidenpwd123"),
                 new Name("Low Yew Woei"), new Phone("91765567"),
                 new Email("yewwoei@gmail.com"));
         User kate = new User(new Username("katespades"), new Password("katepwd123"),
