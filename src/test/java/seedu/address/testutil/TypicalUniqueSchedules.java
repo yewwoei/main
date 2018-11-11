@@ -22,11 +22,16 @@ public class TypicalUniqueSchedules {
     /**
      * Returns a list of UniqueSchedules for testing purposes. The two schedules are randomly generated and linked to
      * typical users.
+     * @return the list of unique schedules.
      */
     public static List<UniqueSchedule> getTypicalUniqueSchedules() {
         return new ArrayList<>(Arrays.asList(SCHEDULE_1, SCHEDULE_2));
     }
 
+    /**
+     * Creates a randomly generated unique schedule.
+     * @return the unique schedule.
+     */
     private static UniqueSchedule createUniqueSchedule(User user) {
         UniqueSchedule uniqueSchedule = new UniqueSchedule(user.getUsername());
         List<Date> dates = Date.generateRandomUniqueDates(2500);
