@@ -1,8 +1,8 @@
 package seedu.address.storage;
 
 import static org.junit.Assert.assertEquals;
-import static seedu.address.testutil.TypicalDates.DATE_RECESS;
 import static seedu.address.storage.XmlAdaptedDate.MISSING_FIELD_MESSAGE_FORMAT;
+import static seedu.address.testutil.TypicalDates.DATE_RECESS;
 
 import org.junit.Test;
 

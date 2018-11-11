@@ -19,6 +19,10 @@ public class TypicalUniqueSchedules {
 
     private TypicalUniqueSchedules() {} // prevents instantiation.
 
+    /**
+     * Returns a list of UniqueSchedules for testing purposes. The two schedules are randomly generated and linked to
+     * typical users.
+     */
     public static List<UniqueSchedule> getTypicalUniqueSchedules() {
         return new ArrayList<>(Arrays.asList(SCHEDULE_1, SCHEDULE_2));
     }
