@@ -219,5 +219,4 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();
     }
-    
 }
