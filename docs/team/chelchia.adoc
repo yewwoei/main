@@ -28,11 +28,13 @@ reviews for restaurants within NUS. Additionally, Users are able to interact wit
 * *Other contributions*:
 
 ** Project management:
-*** 
+*** Deliverables and Deadline
 ** Enhancements to existing features:
 *** Updated the GUI for listing all items other than restaurant
+*** Worked on browser panel displays
 ** Documentation:
-*** Adapted the developer's guide to describe Makanbook (user stories, use cases)
+*** Adapted the developer's guide to describe Makanbook
+*** Bug fixes in user guide
 ** Community:
 *** Reported bugs and suggestions for other teams in the class (Examples:  https://github.com/CS2103-AY1819S1-F11-4/main/issues/177[1], https://github.com/CS2103-AY1819S1-F11-4/main/issues/189[2], https://github.com/CS2103-AY1819S1-F11-4/main/issues/193[3])
 
