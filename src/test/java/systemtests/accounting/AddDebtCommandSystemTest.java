@@ -164,8 +164,8 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_INVALID_AMOUNT);
 
         //Test failure for AddDebtCommand with input debtor not in model
-        command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + INVALID_USER_C +
-                " " + PREFIX_AMOUNT + VALID_AMOUNT;
+        command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + INVALID_USER_C
+                + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_NO_SUCH_USER);
 
     }
