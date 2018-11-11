@@ -67,7 +67,7 @@ public class CommandTestUtil {
     public static final String VALID_REVIEW = "The Ban Mian was absolutely delicious.";
     public static final String REVIEW_A = PREFIX_REVIEW + VALID_REVIEW;
 
-    public static final String INVALID_RATING= "100";
+    public static final String INVALID_RATING = "100";
     public static final String INVALID_RATING_A = PREFIX_RATING + INVALID_RATING;
     public static final String INVALID_REVIEW = " ";
     public static final String INVALID_REVIEW_A = PREFIX_REVIEW + INVALID_REVIEW;

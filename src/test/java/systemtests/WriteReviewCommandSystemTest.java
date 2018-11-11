@@ -1,7 +1,12 @@
 package systemtests;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.*;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_RATING_A;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_REVIEW_A;
+import static seedu.address.logic.commands.CommandTestUtil.RATING_A;
+import static seedu.address.logic.commands.CommandTestUtil.REVIEW_A;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_RATING;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_REVIEW;
 import static seedu.address.testutil.TestUtil.getRestaurant;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_RESTAURANT;
 import static seedu.address.testutil.TypicalUsers.BENNY;
