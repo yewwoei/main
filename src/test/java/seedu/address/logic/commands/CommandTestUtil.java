@@ -71,7 +71,7 @@ public class CommandTestUtil {
     public static final String INVALID_RATING_A = PREFIX_RATING + INVALID_RATING;
     public static final String INVALID_REVIEW = " ";
     public static final String INVALID_REVIEW_A = PREFIX_REVIEW + INVALID_REVIEW;
-    
+
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 

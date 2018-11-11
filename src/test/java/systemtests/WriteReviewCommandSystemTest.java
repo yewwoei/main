@@ -32,7 +32,7 @@ public class WriteReviewCommandSystemTest extends AddressBookSystemTest {
                 + INDEX_FIRST_RESTAURANT.getOneBased() + " "
                 + RATING_A + " " + REVIEW_A;
         Restaurant targetRestaurant = getRestaurant(model, INDEX_FIRST_RESTAURANT);
-        assertCommandSuccess(command, model, targetRestaurant, new Rating(Integer.parseInt(VALID_RATING)), 
+        assertCommandSuccess(command, model, targetRestaurant, new Rating(Integer.parseInt(VALID_RATING)),
                 new WrittenReview(VALID_REVIEW));
 
         // Invalid Rating
