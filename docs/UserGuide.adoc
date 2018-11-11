@@ -202,7 +202,7 @@ Format: `addFriend u/USERNAME`
 
 Examples:
 
-* `addFriend u/Meena567`
+* `addFriend u/meena567`
 
 === Accept friend request: `acceptFriend`
 
@@ -211,7 +211,7 @@ Format: `acceptFriend u/NAME`
 
 Examples:
 
-* `acceptFriend u/Meena567`
+* `acceptFriend u/meena567`
 
 === Delete friend request: `deleteFriendRequest`
 
@@ -220,7 +220,7 @@ Format: `deleteFriendRequest u/USERNAME`
 
 Examples:
 
-* `deleteFriendRequest u/Meena567`
+* `deleteFriendRequest u/meena567`
 
 === Delete friend: `deleteFriend`
 
@@ -229,7 +229,7 @@ Format: `deleteFriend u/USERNAME`
 
 Examples:
 
-* `deleteFriend u/Meena567`
+* `deleteFriend u/meena567`
 
 === List friend requests: `listFriendRequests`
 
