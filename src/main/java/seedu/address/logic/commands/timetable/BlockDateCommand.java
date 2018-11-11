@@ -60,8 +60,6 @@ public class BlockDateCommand extends Command {
         }
 
         model.blockDateForCurrentUser(this.toBlock);
-        // saves the makanbook for undo and redo.
-        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toBlock));
 
     }
