@@ -185,6 +185,10 @@ public class UniqueSchedule {
         return allWeekDates;
     }
 
+    /**
+     * Returns a list of free dates to meet among all the schedules provided, for a certain NUS week.
+     * @return an immutable list of free dates to meet for the NUS week.
+     */
     public static List<Date> findFreeDatesAmongSchedulesForWeek(List<UniqueSchedule> schedules, Week week) {
         Set<Date> uniqueBlockedDates = new HashSet<>();
         List<Date> allBlockedDates = new ArrayList<>();
