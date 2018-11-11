@@ -51,7 +51,7 @@ public class Week implements Comparable<Week> {
      */
     public static Week generateRandomWeek() {
         String[] weekNames = new String[]{"1", "2", "3", "4", "5", "6", "recess",
-                "7", "8", "9", "10", "11", "12", "13", "reading", "14", "15"};
+            "7", "8", "9", "10", "11", "12", "13", "reading", "14", "15"};
 
         String randomWeek = weekNames[(int) Math.floor(Math.random() * weekNames.length)];
 

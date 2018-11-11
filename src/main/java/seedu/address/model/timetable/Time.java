@@ -14,8 +14,6 @@ import java.util.List;
  */
 public class Time implements Comparable<Time> {
 
-    private static final List<Time> ALL_POSSIBLE_TIMES = Time.generateAllPossibleTimes();
-
     public static final String MESSAGE_TIME_CONSTRAINTS = "Time should only be in the 24-hour format in 30 minute"
             + "intervals, without any colons. THe time should fall between 0600 and 2330."
             + "For example: 2330, 0600, 0130";
@@ -25,6 +23,8 @@ public class Time implements Comparable<Time> {
      * Time must be in 30 minute intervals.
      */
     public static final String TIME_VALIDATION_REGEX = "(0[6-9]|1\\d|2[0-3])([03]0)";
+
+    private static final List<Time> ALL_POSSIBLE_TIMES = Time.generateAllPossibleTimes();
 
     public final String time;
 
