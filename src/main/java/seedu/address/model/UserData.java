@@ -149,6 +149,13 @@ public class UserData {
             jio -> (jio.getName().equals(jioName) && jio.getCreator().equals(user.getUsername())));
     }
 
+    /**
+     * Clears all jios in userdata.
+     */
+    public void clearJio() {
+        jios = new UniqueJioList();
+    }
+
     @Override
     public boolean equals(Object other) {
         if (!(other instanceof UserData)) {

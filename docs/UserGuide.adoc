@@ -152,6 +152,7 @@ the reviews he's written. +
 Format: `displayProfile`
 // end::evan[]
 
+// tag::chelchia[]
 === Finding people to eat with: `createJio`
 
 Users can find other users to eat with through inviting users. “createJio” creates a jio that is added to the global list of jios. +
@@ -160,7 +161,8 @@ Format: `createJio n/NAME w/WEEK d/DAY h/TIME a/PLACE [g/GROUP NAME]`
 ****
 * Jio -- an invitation to hang out.
 * Name, date, time, place must be provided. The other parameters are optional.
-* All users will be able to view the list of jios, unless the user specifies that it is a group jio. If group name is present, all group members are added to jio.
+* All users will be able to view the list of jios.
+* User can specify a group name for a group jio. All group members are automatically added to jio. Jio can still be viewed by others.
 ****
 
 Examples:
@@ -189,6 +191,7 @@ Format: `deleteJio n/NAME`
 Examples:
 
 * `deleteJio n/MALA`
+// end::chelchia[]
 
 === Adding friends: `addFriend`
 
