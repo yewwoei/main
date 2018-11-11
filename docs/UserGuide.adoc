@@ -231,6 +231,16 @@ Examples:
 
 * `deleteFriend u/Meena567`
 
+=== List friend requests: `listFriendRequests`
+
+A User can list friend requests that they have received. Only the party that did not initiate the friend request will receive the friend request +
+Format: `listFriendRequests`
+
+=== List friends: `listFriends`
+
+A User can list their friends. +
+Format: `listFriends`
+
 === Adding groups: `addGroup`
 
 A User will create a group by specifying the group name.  +
@@ -279,6 +289,16 @@ Format: `deleteGroup g/GROUPNAME`
 Examples:
 
 * `deleteGroup g/CS2103`
+
+=== List group requests: `listGroupRequests`
+
+A User can list group requests that they have received. +
+Format: `listGroupRequests`
+
+=== List groups: `listGroups`
+
+A User can list groups that they are a part of. +
+Format: `listGroups`
 
 ===  Block unavailable timeslot manually: `blockDate`
 
