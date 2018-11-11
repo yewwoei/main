@@ -34,7 +34,7 @@ public class FreeDateCommand extends Command {
 
     public static final String MESSAGE_ALREADY_FREE = "This time block is already free on your schedule.";
 
-    private final Date toFree;w
+    private final Date toFree;
 
     /**
      * Creates a WriteReview to add the specified {@code Integer} review, that ranges from 1 - 5.
