@@ -100,6 +100,10 @@ public class XmlAdaptedDebt {
                 new Amount(amount), new DebtId(debtId), DebtStatus.valueOf(status));
     }
 
+    /**
+     * Returns true if other is the same object as this,
+     * or all the data field are the same as this.
+     */
     @Override
     public boolean equals(Object other) {
         if (other == this) {

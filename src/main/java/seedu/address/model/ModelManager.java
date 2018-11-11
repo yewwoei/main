@@ -27,7 +27,7 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
-import seedu.address.model.group.Friendship;
+import seedu.address.model.friend.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Rating;
@@ -266,9 +266,7 @@ public class ModelManager extends ComponentManager implements Model {
         return false;
     }
 
-    /**
-     * Returns whether there is a debtId
-     */
+    @Override
     public boolean hasDebtId(DebtId debtId) {
         boolean result = false;
         for (int i = 0; i < currentUser.getDebts().size(); i++) {
@@ -509,14 +507,21 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
+    public boolean isUniqueUsernames(List<Username> listUsernames) {
+        int size = listUsernames.size();
+        for (int i = 0; i < size; i++) {
+            for (int j = i + 1; j < size; j++) {
+                if (listUsernames.get(i).equals(listUsernames.get(j))) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    @Override
     public boolean isInGroup(Name groupName) {
         List<Group> listGroups = currentUser.getGroups();
-        //for (Group g: listGroups) {
-        //    System.out.println(g.getGroupName());
-        //}
-        for (Group g: listGroups) {
-            System.out.println("in group: " + g.getGroupName());
-        }
         for (Group g: listGroups) {
             if (groupName.equals(g.getGroupName())) {
                 return true;

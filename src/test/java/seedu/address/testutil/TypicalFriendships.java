@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.group.Friendship;
-import seedu.address.model.group.FriendshipStatus;
+import seedu.address.model.friend.Friendship;
+import seedu.address.model.friend.FriendshipStatus;
 import seedu.address.model.user.User;
 
 /**

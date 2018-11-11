@@ -14,7 +14,7 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.user.Username;
 
 /**
- * Add debt to a user.
+ * Login user(creditor) add a pending debt(send a debt request) to other user(debtor).
  */
 public class AddDebtCommand extends Command {
     public static final String COMMAND_WORD = "addDebt";

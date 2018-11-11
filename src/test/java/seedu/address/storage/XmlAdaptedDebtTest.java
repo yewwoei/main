@@ -22,7 +22,6 @@ public class XmlAdaptedDebtTest {
     private static final String INVALID_AMOUNT_1 = "9999999999999999999999999999";
     private static final String INVALID_AMOUNT_2 = "-3";
 
-
     private static final String VALID_USER_1 = "benny123";
     private static final String VALID_USER_2 = "carrlymaximus";
     private static final String VALID_AMOUNT = "13";
@@ -33,12 +32,18 @@ public class XmlAdaptedDebtTest {
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
 
+    /**
+     * Test the success for toModelType method
+     */
     @Test
     public void toModelType_validDebtDetails_returnsDebt() throws Exception {
         XmlAdaptedDebt debt = new XmlAdaptedDebt(DEBT_A);
         assertEquals(DEBT_A, debt.toModelType(getTypicalUserData().getUsernameUserHashMap()));
     }
 
+    /**
+     * Test the IllegalValueException throwing with invalid creditor
+     */
     @Test
     public void toModelType_invalidCreditor_throwsIllegalValueException() throws Exception {
         XmlAdaptedDebt debt =
@@ -49,6 +54,9 @@ public class XmlAdaptedDebtTest {
                 (Assert.VoidCallable) debt.toModelType(getTypicalUserData().getUsernameUserHashMap()));
     }
 
+    /**
+     * Test the IllegalValueException throwing with null creditor
+     */
     @Test
     public void toModelType_nullCreditor_throwsIllegalValueException() throws Exception {
         XmlAdaptedDebt debt =
@@ -59,6 +67,9 @@ public class XmlAdaptedDebtTest {
                 (Assert.VoidCallable) debt.toModelType(getTypicalUserData().getUsernameUserHashMap()));
     }
 
+    /**
+     * Test the IllegalValueException throwing with invalid debtor
+     */
     @Test
     public void toModelType_invalidDebtor_throwsIllegalValueException() throws Exception {
         XmlAdaptedDebt debt =
@@ -69,6 +80,9 @@ public class XmlAdaptedDebtTest {
                 (Assert.VoidCallable) debt.toModelType(getTypicalUserData().getUsernameUserHashMap()));
     }
 
+    /**
+     * Test the IllegalValueException throwing with null debtor
+     */
     @Test
     public void toModelType_nullDebtor_throwsIllegalValueException() throws Exception {
         XmlAdaptedDebt debt =
@@ -79,6 +93,9 @@ public class XmlAdaptedDebtTest {
                 (Assert.VoidCallable) debt.toModelType(getTypicalUserData().getUsernameUserHashMap()));
     }
 
+    /**
+     * Test the IllegalValueException throwing with invalid amount (larger than 100000000)
+     */
     @Test
     public void toModelType_invalidAmount1_throwsIllegalValueException() throws Exception {
         XmlAdaptedDebt debt =
@@ -89,6 +106,9 @@ public class XmlAdaptedDebtTest {
                 (Assert.VoidCallable) debt.toModelType(getTypicalUserData().getUsernameUserHashMap()));
     }
 
+    /**
+     * Test the IllegalValueException throwing with invalid amount (negative)
+     */
     @Test
     public void toModelType_invalidAmount2_throwsIllegalValueException() throws Exception {
         XmlAdaptedDebt debt =
@@ -99,6 +119,9 @@ public class XmlAdaptedDebtTest {
                 (Assert.VoidCallable) debt.toModelType(getTypicalUserData().getUsernameUserHashMap()));
     }
 
+    /**
+     * Test the IllegalValueException throwing with null amount
+     */
     @Test
     public void toModelType_nullAmount_throwsIllegalValueException() throws Exception {
         XmlAdaptedDebt debt =

@@ -10,7 +10,7 @@ import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
 
 /**
- * List the logged in user's debt history.
+ * List the logged in user's debt history(all debt).
  */
 public class ListDebtHistoryCommand extends Command {
     public static final String COMMAND_WORD = "listDebtHistory";

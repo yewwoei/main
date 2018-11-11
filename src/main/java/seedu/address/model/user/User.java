@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
@@ -16,10 +15,10 @@ import seedu.address.model.accounting.Debt;
 import seedu.address.model.accounting.DebtId;
 import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.accounting.UniqueDebtList;
-import seedu.address.model.group.Friendship;
-import seedu.address.model.group.FriendshipStatus;
+import seedu.address.model.friend.Friendship;
+import seedu.address.model.friend.FriendshipStatus;
+import seedu.address.model.friend.UniqueFriendList;
 import seedu.address.model.group.Group;
-import seedu.address.model.group.UniqueFriendList;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.UniqueSchedule;
 import seedu.address.model.timetable.Week;
@@ -38,9 +37,6 @@ public class User {
     private final Phone phone;
     private final Email email;
 
-    // Data fields
-    //private final List<Friendship> friendRequests = new ArrayList<>();
-    //private final List<Friendship> friends = new ArrayList<>();
     private final List<Group> groupRequests = new ArrayList<>();
     private final List<Group> groups = new ArrayList<>();
     private final UniqueFriendList friendRequests = new UniqueFriendList();
@@ -98,6 +94,10 @@ public class User {
         return restaurantReviews;
     }
 
+    /**
+     * Returns a string of the list of friends that the User has
+     * @return String of list of friends
+     */
     public String listFriends() {
         return friends.toString();
     }
@@ -152,16 +152,12 @@ public class User {
                 .append(getPhone())
                 .append(" Email: ")
                 .append(getEmail());
-        /*.append(" Friends: ");
-        getTags().forEach(builder::append);*/
         return builder.toString();
     }
 
     /**
      * Allows a user to add other users as friends.
-     * Friendship request will not be created if friendship request already exists.
-     * Friendship request will not be created if friendship already exists.
-     * @param user User is not able to add oneself as a friend.
+     * Exception handling is done in addFriendCommand.
      */
     public void addFriend(User user) {
         Friendship friendship = new Friendship(this, this, user);
@@ -169,7 +165,6 @@ public class User {
     }
 
     /**
-     * Used for storage purposes.
      * Allows user to add a friend or friendRequest by taking in
      * @param friendship
      * @return the updated User
@@ -184,6 +179,9 @@ public class User {
         return this;
     }
 
+    /**
+     * Returns an unmodifiable list of friends
+     */
     public ObservableList<Friendship> getFriends() {
         UniqueFriendList toReturn = new UniqueFriendList();
         for (Friendship f: this.friends) {
@@ -192,32 +190,15 @@ public class User {
         return toReturn.asUnmodifiableObservableList();
     }
 
+    /**
+     * Returns an unmodifiable list of friend requests
+     */
     public ObservableList<Friendship> getFriendRequests() {
         UniqueFriendList toReturn = new UniqueFriendList();
         for (Friendship f: this.friendRequests) {
             toReturn.add(f);
         }
         return toReturn.asUnmodifiableObservableList();
-    }
-
-    /**
-     * @return String that contains all the friendRequests received of this user separated by newline character.
-     */
-    public String listFriendRequests() {
-        return listHelperFriend(friendRequests.asUnmodifiableObservableList());
-    }
-
-    /**
-     * Helper method.
-     * @param list List that you want to print out.
-     * @return String that contains all elements in list.
-     */
-    public String listHelperFriend(List<Friendship> list) {
-        String toReturn = "";
-        for (Friendship friendship: list) {
-            toReturn += friendship.getFriendUser().getName() + "\n";
-        }
-        return toReturn;
     }
 
     /**
@@ -293,25 +274,17 @@ public class User {
     }
 
     /**
-     * Allows a user to create a group and add users simultaneously.
-     * User creating will automatically be added into the group.
-     * @param name name of the group
-     * @param users list of users who are to be added to the group
-     * @return group Group created
+     * Adds group to list of groups
+     * @param group
      */
-    public Group createGroup(String name, User... users) {
-        Name groupName = new Name(name);
-        Group group = new Group(groupName, this, users);
-        this.groups.add(group);
-        List<User> listUsers = Arrays.asList(users);
-        listUsers.forEach(user -> user.addGroupRequest(group));
-        return group;
-    }
-
     public void addGroup(Group group) {
         this.groups.add(group);
     }
 
+    /**
+     * Adds group to list of groupRequests
+     * @param group
+     */
     public void addGroupPending(Group group) {
         this.groupRequests.add(group);
     }
@@ -417,7 +390,7 @@ public class User {
     }
 
     /**
-     * Method for the creditor to create and add a debt.
+     * Method for the creditor to create and add a debt(with Pending status) to other user.
      * @param debtor the debtor of the adding debt
      * @param amount the amount of the adding debt
      * @param status the status of the adding debt
@@ -429,7 +402,7 @@ public class User {
     }
 
     /**
-     * Method for the creditor to create and add debts.
+     * Method for the creditor to create and add debts(with Pending status) to other users in a group.
      * @param group the group of debtor of the adding debt
      * @param amount the total amount of the adding debt
      */
@@ -444,7 +417,10 @@ public class User {
     }
 
     /**
-     * Method for the creditor to clear a debt.
+     * Method for the creditor to clear an amount of the debtor.
+     * The amount will be deducted from the original debt amount,
+     * and create a debt with balanced amount between two user.
+     * Old debt will change to a Cleared status.
      * @param debtor the debtor of the clearing debt.
      * @param amount the amount of the clearing debt.
      */
@@ -474,7 +450,11 @@ public class User {
     }
 
     /**
-     * Method for debtor to accepted a received debt.
+     * Method for debtor to accepted a debt request received.
+     * It auto balanced the debt between user.
+     * The original debt amount will be balanced or added to the new
+     * accepted debt amount and create a new debt with total amount between two users.
+     * Old debt will change to a Balanced status.
      * @param creditor the creditor of the accepting debt.
      * @param amount the amount of the accepting debt.
      * @param debtId the debtId of the accepting debt.
@@ -557,7 +537,7 @@ public class User {
     }
 
     /**
-     * Method for debtor to reject and delete a received debt.
+     * Method for debtor to reject and delete a debt request received.
      * @param creditor the creditor of the deleting debt.
      * @param amount the amount of the deleting debt.
      * @param debtId the debtId of the deleting debt.
@@ -568,10 +548,16 @@ public class User {
         creditor.debts.remove(toFind);
     }
 
+    /**
+     * Method for getting all the Debts(regardless the status) of the login user
+     */
     public ObservableList<Debt> getDebts() {
         return debts.asUnmodifiableObservableList();
     }
 
+    /**
+     * Method for getting all the Debts which login user is the debtor and the status is Accepted.
+     */
     public ObservableList<Debt> getCreditor() {
         UniqueDebtList creditor = new UniqueDebtList();
         for (Debt d: this.debts) {
@@ -582,6 +568,9 @@ public class User {
         return creditor.asUnmodifiableObservableList();
     }
 
+    /**
+     * Method for getting all the Debts which login user is the creditor and the status is Accepted.
+     */
     public ObservableList<Debt> getDebtor() {
         UniqueDebtList debtor = new UniqueDebtList();
         for (Debt d: this.debts) {
@@ -592,6 +581,9 @@ public class User {
         return debtor.asUnmodifiableObservableList();
     }
 
+    /**
+     * Method for getting all the Debts which login user is the debtor and the status is Pending.
+     */
     public ObservableList<Debt> getDebtRequestReceived() {
         UniqueDebtList toReturn = new UniqueDebtList();
         for (Debt d: this.debts) {
@@ -602,6 +594,9 @@ public class User {
         return toReturn.asUnmodifiableObservableList();
     }
 
+    /**
+     * Method for getting all the Debts which login user is the creditor and the status is Pending.
+     */
     public ObservableList<Debt> getDebtRequestSent() {
         UniqueDebtList toReturn = new UniqueDebtList();
         for (Debt d: this.debts) {

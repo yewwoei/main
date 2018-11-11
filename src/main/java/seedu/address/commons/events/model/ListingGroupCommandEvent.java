@@ -8,6 +8,10 @@ import seedu.address.model.group.Group;
 public class ListingGroupCommandEvent extends BaseEvent {
     public final ObservableList<Group> listingItem;
 
+    /**
+     * Constructor method for ListingGroupCommandEvent
+     * @param listingItem
+     */
     public ListingGroupCommandEvent(ObservableList<Group> listingItem) {
         this.listingItem = listingItem;
     }

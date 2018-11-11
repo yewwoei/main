@@ -35,7 +35,8 @@ public class AddFriendCommand extends Command {
     private final Username toAdd;
 
     /**
-     * Creates a friend request to add the specified {@code Integer} friend.
+     * Creates an AddFriendCommand which allows the currently logged in user to send a friend request
+     * to user with the specified username toAdd.
      */
     public AddFriendCommand(Username toAdd) {
         requireNonNull(toAdd);
@@ -46,10 +47,12 @@ public class AddFriendCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        // throws exception if no user is currently logged in
         if (!model.isCurrentlyLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGGED_IN);
         }
 
+        // throws exception if there exists no such username toAdd
         if (!model.hasUser(toAdd)) {
             throw new CommandException(MESSAGE_NO_SUCH_USER);
         }

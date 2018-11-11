@@ -5,7 +5,7 @@ import seedu.address.model.user.User;
 
 /**
  * Represents a Debt in the address book.
- * Guarantees: Information are not null.
+ * Guarantees: Some information not null, field values are validated.
  *
  */
 
@@ -18,6 +18,11 @@ public class Debt {
     private DebtStatus status;
 
 
+    /**
+     * Construct a Debt with creditor(User), debtor(User), amount(Amount).
+     * debtId is auto generated.
+     * status is default PENDING.
+     */
     public Debt(User creditor, User debtor, Amount amount) {
         requireAllNonNull(debtor, creditor, amount);
         this.creditor = creditor;
@@ -27,6 +32,10 @@ public class Debt {
         this.status = DebtStatus.PENDING;
     }
 
+    /**
+     * Construct a Debt with creditor(User), debtor(User), amount(Amount), status(DebtStatus).
+     * debtId is auto generated.
+     */
     public Debt(User creditor, User debtor, Amount amount, DebtStatus status) {
         requireAllNonNull(debtor, creditor, amount);
         this.creditor = creditor;
@@ -36,6 +45,10 @@ public class Debt {
         this.status = status;
     }
 
+    /**
+     * Construct a Debt with all data provided.
+     * creditor(User), debtor(User), amount(Amount), status(DebtStatus), debtId(DebtId).
+     */
     public Debt(User creditor, User debtor, Amount amount, DebtId debtId, DebtStatus status) {
         requireAllNonNull(debtor, creditor, amount);
         this.creditor = creditor;
@@ -44,6 +57,7 @@ public class Debt {
         this.debtId = debtId;
         this.status = status;
     }
+
     public User getDebtor() {
         return debtor;
     }
@@ -59,6 +73,7 @@ public class Debt {
     public DebtStatus getDebtStatus() {
         return status;
     }
+
     /**
      * Method to change a debt status.
      * @param changeTo represent the new debt status.
@@ -76,9 +91,10 @@ public class Debt {
         this.amount = changeTo;
     }
     /**
-     * Method to check if two (Debt) objects equals.
-     * @param other
-     * @return a boolean of the result.
+     * Method to check if two (Debt) objects equals,
+     * returns true if all data are the same.
+     * @param other Object to compare with
+     * @return a boolean of the result
      */
     @Override
     public boolean equals(Object other) {
@@ -97,6 +113,7 @@ public class Debt {
                 && test.getDebtId().equals(this.getDebtId())
                 && test.getDebtStatus().equals(this.getDebtStatus());
     }
+
     /**
      * Method to convert a debt to String.
      * @return a String representing the debt
