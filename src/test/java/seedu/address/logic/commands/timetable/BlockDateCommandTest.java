@@ -40,10 +40,8 @@ public class BlockDateCommandTest {
                 new UserBuilder().build());
 
         expectedModel.blockDateForCurrentUser(dateToBlock);
-        expectedModel.commitAddressBook();
 
         assertCommandSuccess(blockDateCommand, model, commandHistory, expectedMessage, expectedModel);
-        model.undoAddressBook();
 
     }
 
