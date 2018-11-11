@@ -187,6 +187,9 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
 
     }
 
+    /**
+     * For convenience
+     */
     private void assertCommandSuccess(String command, Model expectedModel, Username debtor, Amount amount) {
         expectedModel.addDebt(debtor, amount);
         addSleep();
