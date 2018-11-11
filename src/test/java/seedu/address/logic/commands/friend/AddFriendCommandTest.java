@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.group;
+package seedu.address.logic.commands.friend;
 
 import static java.util.Objects.requireNonNull;
 import static org.junit.Assert.assertEquals;
@@ -16,12 +16,11 @@ import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.ModelStub;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.friend.AddFriendCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
-import seedu.address.model.group.Friendship;
-import seedu.address.model.group.FriendshipStatus;
+import seedu.address.model.friend.Friendship;
+import seedu.address.model.friend.FriendshipStatus;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 import seedu.address.testutil.TypicalUsers;
@@ -43,6 +42,9 @@ public class AddFriendCommandTest {
     private Username currentUsername = TypicalUsers.getTypicalUsers().get(1).getUsername();
     private User currentUser = TypicalUsers.getTypicalUsers().get(1);
 
+    /**
+     * If null username is passed, throws a null pointer exception
+     */
     @Test
     public void constructor_nullAddFriend_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
@@ -55,10 +57,14 @@ public class AddFriendCommandTest {
 
         CommandResult commandResult = new AddFriendCommand(validUsernameA).execute(modelStub, commandHistory);
 
+        // assert that the feedback message is the same
         assertEquals(String.format(AddFriendCommand.MESSAGE_SUCCESS, validUsernameA),
                 commandResult.feedbackToUser);
 
+        // asser that the size of friendsAdd is 1 as only one friendship is created
         assertEquals(1, modelStub.friendsAdded.size());
+
+        // assert that every field in the friendship is the same
         assertEquals(validUsernameA, modelStub.friendsAdded.get(0).getFriendUsername());
         assertEquals(validUsernameA, modelStub.friendsAdded.get(0).getInitiatedBy().getUsername());
         assertEquals(currentUsername, modelStub.friendsAdded.get(0).getMyUsername());
@@ -67,6 +73,10 @@ public class AddFriendCommandTest {
         assertEquals(EMPTY_COMMAND_HISTORY, commandHistory);
     }
 
+    /**
+     * Throws exception if no user is currently logged in
+     * @throws Exception
+     */
     @Test
     public void execute_notLoggedIn_throwsCommandException() throws Exception {
 
@@ -80,6 +90,10 @@ public class AddFriendCommandTest {
         addFriendCommand.execute(modelStub, commandHistory);
     }
 
+    /**
+     * Throws exception if the username specified to add is not a valid username in the model
+     * @throws Exception
+     */
     @Test
     public void execute_userNotInModel_throwsCommandException() throws Exception {
         AddFriendCommand addFriendCommand = new AddFriendCommand(invalidUser);
@@ -90,6 +104,10 @@ public class AddFriendCommandTest {
         addFriendCommand.execute(modelStub, commandHistory);
     }
 
+    /**
+     * Throws exception if the user tries to add oneself as a friend
+     * @throws Exception
+     */
     @Test
     public void execute_isSameUser_throwsCommandException() throws Exception {
         AddFriendCommand addFriendCommand = new AddFriendCommand(currentUsername);
@@ -100,6 +118,11 @@ public class AddFriendCommandTest {
         addFriendCommand.execute(modelStub, commandHistory);
     }
 
+    /**
+     * Throws exception if more than one friend request is sent to the same user
+     * by the currently logged in user
+     * @throws Exception
+     */
     @Test
     public void execute_addSameUserAgain_throwsCommandException() throws Exception {
         AddFriendCommand addFriendCommand1 = new AddFriendCommand(validUsernameA);
@@ -112,6 +135,11 @@ public class AddFriendCommandTest {
         addFriendCommand2.execute(modelStub, commandHistory);
     }
 
+    /**
+     * Throws exception if currently logged in user tries to add a user with whom
+     * he or she is already friends with
+     * @throws Exception
+     */
     @Test
     public void execute_addExistingFriend_throwsCommandException() throws Exception {
         Friendship alreadyFriends1 = new Friendship(currentUser, currentUser, validUserA,
@@ -128,6 +156,13 @@ public class AddFriendCommandTest {
         addFriendCommand.execute(modelStub, commandHistory);
     }
 
+    /**
+     * Throws an exception if currently logged in user tries to send another user
+     * a friend request if the other user had previously sent the currently logged in
+     * user a friend request. Should accept the existing friend request instead of sending
+     * a friend request.
+     * @throws Exception
+     */
     @Test
     public void execute_acceptExistingRequest_throwsCommandException() throws Exception {
         Friendship acceptFriendRequest = new Friendship(currentUser, currentUser, validUserA);
@@ -158,7 +193,7 @@ public class AddFriendCommandTest {
     }
 
     /**
-     * A Model stub that always accept the debt being added.
+     * A Model stub that always adds friend being added.
      */
     private class ModelStubforAddFriend extends ModelStub {
 

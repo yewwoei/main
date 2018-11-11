@@ -311,6 +311,7 @@ Examples:
 
 * `findJio week8`
 
+// tag::kate[]
 ===  Sent add debt request: `addDebt`
 
 User(Creditor) send a debt request to another user with specific amount.
@@ -326,11 +327,11 @@ Examples:
 User(Creditor) send a debt request to all other users in the group with specific amount.
 with amount will split equally to everyone in the group.
 Record will be created between with a `Pending` status. +
-Format: `addDebt u/USERNAME amt/AMOUNT`
+Format: `addDebt g/GROUP amt/AMOUNT`
 
 Examples:
 
-* `addDebt u/Kate123 amt/4.30`
+* `addGroupDebt g/2103 amt/4.30`
 
 ===  Sent clear debt request: `clearDebt`
 
@@ -386,6 +387,8 @@ Format: `listDebtRequestSent`
 
 List all debt history(regardless of status) of the login user in list panel.
 Format: `listDebtor`
+
+// end::kate[]
 
 === Exiting the program : `exit`
 

@@ -16,7 +16,7 @@ import seedu.address.model.Name;
 import seedu.address.model.user.Username;
 
 /**
- * Allows Users to add other Users into groups.
+ * Allows Users to add other Users to groups.
  */
 public class AddMembersCommand extends Command {
     public static final String COMMAND_WORD = "addMembers";
@@ -39,11 +39,14 @@ public class AddMembersCommand extends Command {
     public static final String MESSAGE_ALREADY_IN_GROUP = "Sorry, username to be added is in the group. "
             + "No users were added to the group.";
     public static final String MESSAGE_HAS_REQUEST = "Sorry, User already has a request for that group.";
+    public static final String MESSAGE_NOT_ALL_UNIQUE_USERS = "Sorry, not all usernames are unique. "
+            + "No users were added to the group.";
 
     private final Pair<Name, List<Username>> toAdd;
 
     /**
-     * Creates an AddMembersCommand to add the specified {@code List<Username>}
+     * Creates an AddMembersCommand to add the users corresponding to the list of usernames in pair.
+     * Adds the users to group with group name specified in pair
      */
     public AddMembersCommand(Pair<Name, List<Username>> pair) {
         requireNonNull(pair);
@@ -79,6 +82,10 @@ public class AddMembersCommand extends Command {
         // throw exception if User already has group request
         if (model.hasRequestForUsers(toAdd)) {
             throw new CommandException(MESSAGE_HAS_REQUEST);
+        }
+
+        if (!model.isUniqueUsernames(listUsernames)) {
+            throw new CommandException(MESSAGE_NOT_ALL_UNIQUE_USERS);
         }
 
         model.addPendingUsersGroup(toAdd);

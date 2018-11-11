@@ -33,7 +33,6 @@ public class AcceptFriendCommandParser implements Parser<AcceptFriendCommand> {
         }
 
         Username friendUsername = ParserUserUtil.parseUsername(argMultimap.getValue(PREFIX_USERNAME).get());
-
         return new AcceptFriendCommand(friendUsername);
     }
 

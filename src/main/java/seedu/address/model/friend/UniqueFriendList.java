@@ -1,4 +1,4 @@
-package seedu.address.model.group;
+package seedu.address.model.friend;
 
 import static java.util.Objects.requireNonNull;
 
@@ -9,9 +9,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 /**
- * A list of debts that enforces uniqueness between its elements and does not allow nulls.
+ * A list of friends that enforces uniqueness between its elements and does not allow nulls.
  * Supports a minimal set of list operations.
- *
  */
 public class UniqueFriendList implements Iterable<Friendship> {
     private final ObservableList<Friendship> internalList = FXCollections.observableArrayList();
@@ -25,8 +24,9 @@ public class UniqueFriendList implements Iterable<Friendship> {
     }
 
     /**
-     * Adds a debt to the list.
-     * The debt must not already exist in the list.
+     * Adds a friendship to the list.
+     * Don't need to check whether the friendship exists in the list as it is checked
+     * when addFriendCommand or acceptFriendCommand is executed (methods which call add in UniqueFriendList).
      */
     public void add(Friendship toAdd) {
         requireNonNull(toAdd);
@@ -35,7 +35,8 @@ public class UniqueFriendList implements Iterable<Friendship> {
 
     /**
      * Removes the equivalent friendship from the list.
-     * The friendship must exist in the list.
+     * Don't need to check whether the friendship exists in the list as it is checked when deleteFriendCommand
+     * or deleteFriendRequestCommand is executed (methods which call remove in UniqueFriendList).
      */
     public void remove(Friendship toRemove) {
         requireNonNull(toRemove);
@@ -49,6 +50,9 @@ public class UniqueFriendList implements Iterable<Friendship> {
         return FXCollections.unmodifiableObservableList(internalList);
     }
 
+    /**
+     * Iterated list of friendships
+     */
     public Iterator<Friendship> iterator() {
         return internalList.iterator();
     }
@@ -66,7 +70,7 @@ public class UniqueFriendList implements Iterable<Friendship> {
     }
 
     /**
-     * Returns true if {@code debts} contains only unique friends.
+     * Returns true if {@code friends} contains only unique friends.
      */
     private boolean friendsAreUnique(List<Friendship> friends) {
         for (int i = 0; i < friends.size() - 1; i++) {

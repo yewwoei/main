@@ -23,33 +23,48 @@ public class AddDebtCommandParserTest {
     public static final String INVALID_AMOUNT_B = " " + PREFIX_AMOUNT + "-17";
     private AddDebtCommandParser parser = new AddDebtCommandParser();
 
-
+    /**
+     * Test for successful execution
+     */
     @Test
     public void parse_allFieldsPresent_success() {
 
+        //Test successful execution with standard command
         assertParseSuccess(parser, VALID_USER + VALID_AMOUNT,
                 new AddDebtCommand(getTypicalUsers().get(0).getUsername(), new Amount("13")));
 
+        //Test successful execution with preamble whitespace
         assertParseSuccess(parser, PREAMBLE_WHITESPACE + VALID_USER + VALID_AMOUNT,
                 new AddDebtCommand(getTypicalUsers().get(0).getUsername(), new Amount("13")));
     }
 
+    /**
+     * Test failure with missing field
+     */
     @Test
     public void parse_compulsoryFieldMissing_failure() {
         String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddDebtCommand.MESSAGE_USAGE);
 
+        //Test failure with missing amount field
         assertParseFailure(parser, VALID_USER, expectedMessage);
 
+        //Test failure with missing debtor field
         assertParseFailure(parser, VALID_AMOUNT, expectedMessage);
     }
 
+    /**
+     * Test failure with invalid field value
+     */
     @Test
     public void parse_invalidValue_failure() {
 
+        //Test failure with invalid debtor field
         assertParseFailure(parser, INVALID_USER + VALID_AMOUNT, Username.MESSAGE_USERNAME_CONSTRAINTS);
 
+        //Test failure with invalid amount field (negative)
         assertParseFailure(parser, VALID_USER + INVALID_AMOUNT_A, Amount.MESSAGE_AMOUNT_CONSTRAINTS);
 
+        //Test failure with invalid amount field (more than 2 decimal places)
         assertParseFailure(parser, VALID_USER + INVALID_AMOUNT_B, Amount.MESSAGE_AMOUNT_CONSTRAINTS);
     }
 
