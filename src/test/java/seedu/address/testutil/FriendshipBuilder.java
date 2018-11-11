@@ -1,7 +1,7 @@
 package seedu.address.testutil;
 
-import seedu.address.model.group.Friendship;
-import seedu.address.model.group.FriendshipStatus;
+import seedu.address.model.friend.Friendship;
+import seedu.address.model.friend.FriendshipStatus;
 import seedu.address.model.user.User;
 
 /**

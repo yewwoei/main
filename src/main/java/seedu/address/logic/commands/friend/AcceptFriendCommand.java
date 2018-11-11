@@ -31,7 +31,8 @@ public class AcceptFriendCommand extends Command {
     private final Username toAdd;
 
     /**
-     * Accepts friend request from the specified {@code Friendship} friend.
+     * Creates an AcceptFriendCommand that allows currently logged in user to accept friend request from
+     * the specified user with username toAdd.
      */
     public AcceptFriendCommand(Username toAdd) {
         requireNonNull(toAdd);
@@ -42,6 +43,7 @@ public class AcceptFriendCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        // throw exception if no user is logged in
         if (!model.isCurrentlyLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGGED_IN);
         }

@@ -19,12 +19,12 @@ public class Group {
     private List<User> pendingUsers;
     private List<Username> pendingUsernames;
 
-    public Group(Name groupName) {
-        this.groupName = groupName;
-        this.acceptedUsers = new ArrayList<>();
-        this.pendingUsers = new ArrayList<>();
-    }
-
+    /**
+     * Creates a group with name groupName
+     * Creator of the group is automatically in the list of accepted users.
+     * @param groupName
+     * @param creator
+     */
     public Group(Name groupName, User creator) {
         this.groupName = groupName;
         this.acceptedUsers = new ArrayList<>();
@@ -32,35 +32,48 @@ public class Group {
         this.pendingUsers = new ArrayList<>();
     }
 
-    public Group(Name groupName, User creator, User... users) {
-        this.groupName = groupName;
-        this.acceptedUsers = new ArrayList<>();
-        acceptedUsers.add(creator);
-        List<User> toAdd = Arrays.asList(users);
-        this.pendingUsers = new ArrayList<>(toAdd);
-    }
-
+    /**
+     * Creates a group with name groupName
+     * Initialises list of pendingUsers and acceptedUsers respectively
+     * @param groupName
+     * @param acceptedUsers
+     * @param pendingUsers
+     */
     public Group(Name groupName, List<User> acceptedUsers, List<User> pendingUsers) {
         this.groupName = groupName;
         this.acceptedUsers = acceptedUsers;
         this.pendingUsers = pendingUsers;
     }
 
+    /**
+     * Creates a group with groupName
+     * Initialises pendingUsernames to the list of pending usernames.
+     * @param groupName
+     * @param pendingUsers
+     */
     public Group(Name groupName, List<Username> pendingUsers) {
         this.groupName = groupName;
         this.pendingUsernames = pendingUsers;
     }
 
+    /**
+     * Adds creator to the list of accepted users.
+     * @param user
+     */
     public void addCreator(User user) {
         this.acceptedUsers.add(user);
     }
 
+    /**
+     * Returns list of usernames of all the pending users.
+     * @return
+     */
     public List<Username> getPendingUsernames() {
         return pendingUsernames;
     }
 
     /**
-     * Allows any user to add members into the group after creation of group
+     * Allows users to add members into the group after creation of group
      * @param users
      */
     public void addMembers(User... users) {
@@ -72,7 +85,7 @@ public class Group {
     }
 
     /**
-     * Allows any user to add members into the group after creation of group
+     * Allows users to add members into the group after creation of group
      * @param listUsers
      */
     public void addMembers(List<User> listUsers) {
@@ -125,7 +138,7 @@ public class Group {
     }
 
     /**
-     * Adds the User to the acceptedUsers list.
+     * Removes the user from list of accepted users.
      * @param user User
      */
     public void removeAcceptedUser(User user) {

@@ -31,7 +31,8 @@ public class DeleteFriendCommand extends Command {
     private final Username toDelete;
 
     /**
-     * Deletes the specified {@code Integer} friend.
+     * Creates a DeleteFriendCommand which deletes the specified username toDelete from the
+     * currently logged in user's list of friends.
      */
     public DeleteFriendCommand(Username toDelete) {
         requireNonNull(toDelete);
@@ -42,6 +43,7 @@ public class DeleteFriendCommand extends Command {
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        // throw exception if user no user is logged in
         if (!model.isCurrentlyLoggedIn()) {
             throw new CommandException(MESSAGE_NOT_LOGGED_IN);
         }

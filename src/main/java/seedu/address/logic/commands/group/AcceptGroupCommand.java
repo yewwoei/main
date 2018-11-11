@@ -31,7 +31,7 @@ public class AcceptGroupCommand extends Command {
     private final Name groupName;
 
     /**
-     * Creates a AcceptGroupCommand to add the specified {@code Name} group into the logged in user's group
+     * Creates a AcceptGroupCommand that allows logged in user to accept the group request
      */
     public AcceptGroupCommand(Name groupName) {
         requireNonNull(groupName);

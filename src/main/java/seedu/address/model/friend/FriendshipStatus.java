@@ -1,4 +1,4 @@
-package seedu.address.model.group;
+package seedu.address.model.friend;
 
 /**
  * FriendshipStatus can either be ACCEPTED or PENDING.

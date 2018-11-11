@@ -4,11 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static seedu.address.testutil.TypicalDebts.DEBT_A;
-import static seedu.address.testutil.TypicalDebts.DEBT_B;
-
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -25,29 +20,44 @@ public class UniqueDebtListTest {
 
     private final UniqueDebtList debts = new UniqueDebtList();
 
+    /**
+     * Test the NullPointerException throwing with null input for contains
+     */
     @Test
     public void contains_nullDebt_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         debts.contains(null);
     }
 
+    /**
+     * Test the failure of contains if debt is not in the UniqueDebtListTest
+     */
     @Test
     public void contains_debtNotInList_returnsFalse() {
         assertFalse(debts.contains(DEBT_A));
     }
 
+    /**
+     * Test the success of contains if debt is in the UniqueDebtListTest
+     */
     @Test
     public void contains_debtInList_returnsTrue() {
         debts.add(DEBT_A);
         assertTrue(debts.contains(DEBT_A));
     }
 
+    /**
+     * Test the NullPointerException throwing with null input for add
+     */
     @Test
     public void add_nullDebt_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         debts.add(null);
     }
 
+    /**
+     * Test the DuplicateDebtException throwing if adding the same debt twice
+     */
     @Test
     public void add_duplicateDebt_throwsDuplicateDebtException() {
         debts.add(DEBT_A);
@@ -55,62 +65,28 @@ public class UniqueDebtListTest {
         debts.add(DEBT_A);
     }
 
-    @Test
-    public void setDebt_nullTargetDebt_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        debts.setDebt(null, DEBT_A);
-    }
-
-    @Test
-    public void setDebt_nullEditedDebt_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        debts.setDebt(DEBT_A, null);
-    }
-
-    @Test
-    public void setDebt_targetDebtNotInList_throwsDebtNotFoundException() {
-        thrown.expect(DebtNotFoundException.class);
-        debts.setDebt(DEBT_A, DEBT_A);
-    }
-
-    @Test
-    public void setDebt_editedDebtIsSameDebt_success() {
-        debts.add(DEBT_A);
-        debts.setDebt(DEBT_A, DEBT_A);
-        UniqueDebtList expectedUniqueDebtList = new UniqueDebtList();
-        expectedUniqueDebtList.add(DEBT_A);
-        assertEquals(expectedUniqueDebtList, debts);
-    }
-
-    @Test
-    public void setRestaurant_editedDebtHasDifferentIdentity_success() {
-        debts.add(DEBT_A);
-        debts.setDebt(DEBT_A, DEBT_B);
-        UniqueDebtList expectedUniqueDebtList = new UniqueDebtList();
-        expectedUniqueDebtList.add(DEBT_B);
-        assertEquals(expectedUniqueDebtList, debts);
-    }
-
-    @Test
-    public void setDebt_editedDebtHasNonUniqueIdentity_throwsDuplicateDebtException() {
-        debts.add(DEBT_A);
-        debts.add(DEBT_B);
-        thrown.expect(DuplicateDebtException.class);
-        debts.setDebt(DEBT_A, DEBT_B);
-    }
-
+    /**
+     * Test the NullPointerException throwing with null input for remove
+     */
     @Test
     public void remove_nullDebt_throwsNullPointerException() {
         thrown.expect(NullPointerException.class);
         debts.remove(null);
     }
 
+    /**
+     * Test the DebtNotFoundException throwing with not exist debt input for remove.
+     */
     @Test
     public void remove_debtDoesNotExist_throwsDebtNotFoundException() {
         thrown.expect(DebtNotFoundException.class);
         debts.remove(DEBT_A);
     }
 
+    /**
+     * Test the success of remove by remove all the Debt in a UniqueDebtList and
+     * comparing with another empty UniqueDebtList.
+     */
     @Test
     public void remove_existingDebt_removesDebt() {
         debts.add(DEBT_A);
@@ -119,44 +95,9 @@ public class UniqueDebtListTest {
         assertEquals(expectedUniqueDebtList, debts);
     }
 
-    @Test
-    public void setDebts_nullUniqueDebtList_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        debts.setDebts((UniqueDebtList) null);
-    }
-
-    @Test
-    public void setDebts_uniqueDebtList_replacesOwnListWithProvidedUniqueDebtList() {
-        debts.add(DEBT_A);
-        UniqueDebtList expectedUniqueDebtList = new UniqueDebtList();
-        debts.add(DEBT_B);
-        debts.setDebts(expectedUniqueDebtList);
-        assertEquals(expectedUniqueDebtList, debts);
-    }
-
-    @Test
-    public void setDebts_nullList_throwsNullPointerException() {
-        thrown.expect(NullPointerException.class);
-        debts.setDebts((List<Debt>) null);
-    }
-
-    @Test
-    public void setDebts_list_replacesOwnListWithProvidedList() {
-        debts.add(DEBT_A);
-        List<Debt> debtList = Collections.singletonList(DEBT_B);
-        debts.setDebts(debtList);
-        UniqueDebtList expectedUniqueDebtList = new UniqueDebtList();
-        expectedUniqueDebtList.add(DEBT_B);
-        assertEquals(expectedUniqueDebtList, debts);
-    }
-
-    @Test
-    public void setDebts_listWithDuplicateDebts_throwsDuplicateDebtException() {
-        List<Debt> listWithDuplicateDebts = Arrays.asList(DEBT_A, DEBT_A);
-        thrown.expect(DuplicateDebtException.class);
-        debts.setDebts(listWithDuplicateDebts);
-    }
-
+    /**
+     * Test UnsupportedOperationException throwing by modify an unmodifiable UniqueDebtList.
+     */
     @Test
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         thrown.expect(UnsupportedOperationException.class);

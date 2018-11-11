@@ -17,7 +17,7 @@ import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.user.Username;
 
 /**
- * Deletes a debt request the user received.
+ * Login user(debtor) delete(reject) a request received from other user.
  */
 public class DeleteDebtRequestCommand extends Command {
 

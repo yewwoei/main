@@ -6,8 +6,8 @@ import java.util.Objects;
 import javax.xml.bind.annotation.XmlElement;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.group.Friendship;
-import seedu.address.model.group.FriendshipStatus;
+import seedu.address.model.friend.Friendship;
+import seedu.address.model.friend.FriendshipStatus;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 
@@ -51,11 +51,9 @@ public class XmlAdaptedFriendship {
      * @param source future changes to this will not affect the created XmlAdadptedFriendship
      */
     public XmlAdaptedFriendship(Friendship source) {
-        System.out.println("xml adapted friendship from friendship source");
         friendUser = source.getFriendUser().getUsername().toString();
         initiatedBy = source.getInitiatedBy().getUsername().toString();
         me = source.getMe().getUsername().toString();
-        System.out.println("for me user " + me);
         friendshipStatus = source.getFriendshipStatus().toString();
     }
 
@@ -104,7 +102,6 @@ public class XmlAdaptedFriendship {
 
         if (!(friendshipStatus.equals(FriendshipStatus.ACCEPTED.toString()))
                 && !(friendshipStatus.equals(FriendshipStatus.PENDING.toString()))) {
-            System.out.println(friendshipStatus);
             throw new IllegalValueException((String.format(WRONG_STATUS_FORMAT, Friendship.class.getSimpleName())));
         }
 
@@ -119,8 +116,6 @@ public class XmlAdaptedFriendship {
         }
 
         if (!initiatedBy.equals(me) && !initiatedBy.equals(friendUser)) {
-            System.out.println("me is :" + me);
-            System.out.println("friendUser is:" + friendUser);
             throw new IllegalValueException(WRONG_INITIATION_MESSAGE_FORMAT);
         }
 

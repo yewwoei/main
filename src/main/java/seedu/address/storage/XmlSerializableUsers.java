@@ -10,7 +10,7 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.UserData;
 import seedu.address.model.accounting.Debt;
-import seedu.address.model.group.Friendship;
+import seedu.address.model.friend.Friendship;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.timetable.UniqueSchedule;
@@ -145,6 +145,10 @@ public class XmlSerializableUsers {
             currentUser.addUniqueBusySchedule(currentSchedule);
         }
 
+        /** Converts the UserData's debt information into the Debt object
+         * , if it is not exist in that user data debt list,
+         *  add the data to the respective user debt list.
+         */
         for (XmlAdaptedDebt d: debts) {
             Debt debt = d.toModelType(userData.getUsernameUserHashMap());
 

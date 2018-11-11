@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.Name;
 
 /**
- * adds a user into a group the logged in user is in.
+ * Creates a group with the creator automatically in the group
  */
 public class AddGroupCommand extends Command {
     public static final String COMMAND_WORD = "addGroup";
@@ -28,11 +28,11 @@ public class AddGroupCommand extends Command {
     public static final String MESSAGE_DUPLICATE_GROUP = "Sorry, a group with that name exists."
             + " Please choose a different group name.";
 
-    // TODO
     private final Name toAdd;
 
     /**
-     * Creates a group request to add the specified {@code Integer} friend.
+     * Creates an AddGroupCommand that allows user to create a group with Name toAdd.
+     * User who is the creator of the group is automatically added to the group.
      */
     public AddGroupCommand(Name toAdd) {
         requireNonNull(toAdd);

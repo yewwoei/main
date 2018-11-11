@@ -21,6 +21,11 @@ import seedu.address.model.user.Username;
  */
 public class ClearDebtCommandParser implements Parser<ClearDebtCommand> {
 
+    /**
+     * Parses the given {@code String} of arguments in the context of the ClearDebtCommand
+     * and returns a ClearDebtCommand object for execution.
+     * @throws ParseException if the user input does not conform the expected format
+     */
     @Override
     public ClearDebtCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =

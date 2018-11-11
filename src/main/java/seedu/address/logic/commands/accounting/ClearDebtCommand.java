@@ -14,7 +14,7 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.user.Username;
 
 /**
- * Deletes a debt from the logged in user's list of debts.
+ * Login user(creditor) clear an amount of debt for a user(debtor).
  */
 public class ClearDebtCommand extends Command {
     public static final String COMMAND_WORD = "clearDebt";
