@@ -1,6 +1,20 @@
 package systemtests.jio;
 
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.model.jio.JioTestUtil.ADDRESS_DESC_MALA;
+import static seedu.address.model.jio.JioTestUtil.DAY_DESC_MALA;
+import static seedu.address.model.jio.JioTestUtil.INVALID_ADDRESS_DESC;
+import static seedu.address.model.jio.JioTestUtil.INVALID_DAY_DESC;
+import static seedu.address.model.jio.JioTestUtil.INVALID_NAME_DESC;
+import static seedu.address.model.jio.JioTestUtil.INVALID_TIME_DESC;
+import static seedu.address.model.jio.JioTestUtil.INVALID_WEEK_DESC;
+import static seedu.address.model.jio.JioTestUtil.MALA;
+import static seedu.address.model.jio.JioTestUtil.NAME_DESC_MALA;
+import static seedu.address.model.jio.JioTestUtil.TIME_DESC_MALA;
+import static seedu.address.model.jio.JioTestUtil.WEEK_DESC_MALA;
+
 import org.junit.Test;
+
 import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.jio.CreateJioCommand;
 import seedu.address.model.Model;
@@ -15,19 +29,6 @@ import seedu.address.model.user.User;
 import seedu.address.testutil.TypicalUsers;
 import systemtests.AddCommandSystemTest;
 import systemtests.AddressBookSystemTest;
-
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.model.jio.JioTestUtil.ADDRESS_DESC_MALA;
-import static seedu.address.model.jio.JioTestUtil.MALA;
-import static seedu.address.model.jio.JioTestUtil.DAY_DESC_MALA;
-import static seedu.address.model.jio.JioTestUtil.INVALID_ADDRESS_DESC;
-import static seedu.address.model.jio.JioTestUtil.INVALID_DAY_DESC;
-import static seedu.address.model.jio.JioTestUtil.INVALID_NAME_DESC;
-import static seedu.address.model.jio.JioTestUtil.INVALID_TIME_DESC;
-import static seedu.address.model.jio.JioTestUtil.INVALID_WEEK_DESC;
-import static seedu.address.model.jio.JioTestUtil.NAME_DESC_MALA;
-import static seedu.address.model.jio.JioTestUtil.TIME_DESC_MALA;
-import static seedu.address.model.jio.JioTestUtil.WEEK_DESC_MALA;
 
 public class CreateJioCommandSystemTest extends AddressBookSystemTest {
 

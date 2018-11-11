@@ -1,7 +1,13 @@
 package seedu.address.logic.commands.jio;
 
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
+import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.model.jio.JioTestUtil.MALA;
+import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
+
 import org.junit.Before;
 import org.junit.Test;
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -10,11 +16,6 @@ import seedu.address.model.jio.Jio;
 
 import seedu.address.testutil.TypicalUsers;
 import seedu.address.testutil.UserBuilder;
-
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
-import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.model.jio.JioTestUtil.MALA;
-import static seedu.address.testutil.TypicalRestaurants.getTypicalAddressBook;
 
 public class CreateJioCommandIntegrationTest {
     private Model model;
