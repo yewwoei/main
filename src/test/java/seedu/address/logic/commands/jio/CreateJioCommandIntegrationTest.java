@@ -40,7 +40,7 @@ public class CreateJioCommandIntegrationTest {
     }
 
     @Test
-    public void execute_duplicateRestaurant_throwsCommandException() {
+    public void execute_duplicateJio_throwsCommandException() {
         Jio jioInList = model.getJioList().get(0);
         assertCommandFailure(new CreateJioCommand(jioInList), model, commandHistory,
                 CreateJioCommand.MESSAGE_DUPLICATE_JIO);
