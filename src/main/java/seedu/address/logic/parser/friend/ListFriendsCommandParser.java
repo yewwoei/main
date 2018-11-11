@@ -5,7 +5,7 @@ import seedu.address.logic.parser.Parser;
 import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
- * Parses input arguments and creates a new ListFriendsCommand object
+ * Creates a new ListFriendsCommand object
  */
 public class ListFriendsCommandParser implements Parser<ListFriendsCommand> {
     @Override

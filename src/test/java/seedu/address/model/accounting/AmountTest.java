@@ -9,6 +9,7 @@ import seedu.address.testutil.Assert;
 
 public class AmountTest {
 
+
     @Test
     public void constructor_null_throwsNullPointerException() {
         Assert.assertThrows(NullPointerException.class, () -> new Amount(null));
@@ -22,9 +23,10 @@ public class AmountTest {
 
     @Test
     public void isValidAmount() {
-
+        //null amount
         Assert.assertThrows(NullPointerException.class, () -> Amount.isValidAmount(null));
 
+        //Invalid amount
         assertFalse(Amount.isValidAmount(""));
         assertFalse(Amount.isValidAmount(" "));
 
@@ -32,6 +34,7 @@ public class AmountTest {
         assertFalse(Amount.isValidAmount("1 a"));
         assertFalse(Amount.isValidAmount("-1"));
 
+        //Valid amount
         assertTrue(Amount.isValidAmount("1"));
         assertTrue(Amount.isValidAmount("20"));
         assertTrue(Amount.isValidAmount("6000"));

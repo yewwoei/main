@@ -1,4 +1,4 @@
-package seedu.address.logic.commands.group;
+package seedu.address.logic.commands.friend;
 
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -8,7 +8,6 @@ import org.junit.Test;
 
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.logic.commands.friend.AddFriendCommand;
 import seedu.address.model.AddressBook;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -45,6 +44,8 @@ public class AddFriendCommandIntegrationTest {
 
     @Test
     public void execute_newAddFriend_success() throws CommandException {
+        // need to create copies of the users to prevent users in model and expectedModel
+        // to have the same reference and thus accidentally carrying out methods on them
         User userACopy = new UserBuilder().withEmail(validUserA.getEmail().toString())
                 .withName(validUserA.getName().toString())
                 .withPassword(validUserA.getPassword().toString())
@@ -66,6 +67,9 @@ public class AddFriendCommandIntegrationTest {
                 String.format(AddFriendCommand.MESSAGE_SUCCESS, validUsernameA), expectedModel);
     }
 
+    /**
+     * Throw exception if no user is currently logged in
+     */
     @Test
     public void execute_notLoggedIn() {
         Model modelNotLoggedIn = new ModelManager(new AddressBook(), new UserPrefs(),
@@ -74,18 +78,27 @@ public class AddFriendCommandIntegrationTest {
                 String.format(AddFriendCommand.MESSAGE_NOT_LOGGED_IN, AddFriendCommand.COMMAND_WORD));
     }
 
+    /**
+     * Throw exception if the user to send friend request to is not a valid user (in model)
+     */
     @Test
     public void execute_userNotInModel() {
         assertCommandFailure(new AddFriendCommand(invalidUser), model, commandHistory,
                 AddFriendCommand.MESSAGE_NO_SUCH_USER);
     }
 
+    /**
+     * Throw exception if user tries to add oneself as a friend
+     */
     @Test
     public void execute_isSameUser() {
         assertCommandFailure(new AddFriendCommand(currentUserName), model, commandHistory,
                 AddFriendCommand.MESSAGE_CANNOT_ADD_ONESELF);
     }
 
+    /**
+     * Throw exception if current user tries to send multiple friend requests to the same user
+     */
     @Test
     public void execute_sameAddFriend_success() {
         model.addFriend(validUsernameA);

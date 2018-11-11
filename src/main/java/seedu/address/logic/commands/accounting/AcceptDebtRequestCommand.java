@@ -17,7 +17,7 @@ import seedu.address.model.accounting.DebtStatus;
 import seedu.address.model.user.Username;
 
 /**
- * Accepts a debt request the user received.
+ * Login user(debtor) accepts a debt request received from other user.
  */
 public class AcceptDebtRequestCommand extends Command {
 

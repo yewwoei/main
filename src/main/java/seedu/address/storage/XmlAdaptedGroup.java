@@ -77,7 +77,7 @@ public class XmlAdaptedGroup {
     }
 
     /**
-     * Converts this jaxb-friendly adapted restaurant object into the model's Group object.
+     * Converts this jaxb-friendly adapted group object into the model's Group object.
      *
      * @throws IllegalValueException if there were any data constraints violated in the adapted group
      */

@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.group.Friendship;
+import seedu.address.model.friend.Friendship;
 import seedu.address.testutil.Assert;
 
 public class XmlAdaptedFriendshipTest {
@@ -36,7 +36,6 @@ public class XmlAdaptedFriendshipTest {
 
     @Rule
     public final ExpectedException thrown = ExpectedException.none();
-
     @Test
     public void toModelType_validFriendshipDetails_returnsFriendship() throws Exception {
         XmlAdaptedFriendship friendship = new XmlAdaptedFriendship(FRIENDSHIP_1);

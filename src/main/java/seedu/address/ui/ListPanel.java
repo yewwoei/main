@@ -16,8 +16,8 @@ import seedu.address.commons.events.model.UserLoggedOutEvent;
 import seedu.address.commons.events.ui.JumpToListRequestEvent;
 import seedu.address.commons.events.ui.PanelSelectionChangedEvent;
 import seedu.address.model.accounting.Debt;
-import seedu.address.model.group.Friendship;
-import seedu.address.model.group.FriendshipStatus;
+import seedu.address.model.friend.Friendship;
+import seedu.address.model.friend.FriendshipStatus;
 import seedu.address.model.group.Group;
 import seedu.address.model.jio.Jio;
 import seedu.address.model.restaurant.Restaurant;
@@ -59,6 +59,9 @@ public class ListPanel<T> extends UiPart<Region> {
         return type;
     }
 
+    /**
+     * Handle the UserDataChangedEvent and refresh the list by setting the item again.
+     */
     @Subscribe
     private void handleUserDataChangedEvent(UserDataChangedEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
@@ -81,6 +84,9 @@ public class ListPanel<T> extends UiPart<Region> {
         }
     }
 
+    /**
+     * Handle the UserLoggedOutEvent and empty list.
+     */
     @Subscribe
     private void handleUserLoggedOutEvent(UserLoggedOutEvent event) {
         listView.setItems(null);
@@ -105,7 +111,7 @@ public class ListPanel<T> extends UiPart<Region> {
     }
 
     /**
-     * Custom {@code ListCell} that displays the graphics of a {@code Restaurant} using a {@code RestaurantCard}.
+     * Custom {@code ListCell} that displays the graphics of an item using that item's card.
      */
     class ListViewCell<T> extends ListCell<T> {
         @Override
