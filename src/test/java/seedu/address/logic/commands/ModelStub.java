@@ -443,4 +443,9 @@ public class ModelStub implements Model {
         throw new AssertionError("This method should not be called.");
     }
 
+    @Override
+    public void displayFreeDatesForGroupAndWeek(Name groupName, Week week) {
+        throw new AssertionError("This method should not be called.");
+    }
+
 }

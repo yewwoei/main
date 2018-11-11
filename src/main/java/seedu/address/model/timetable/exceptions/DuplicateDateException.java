@@ -7,7 +7,7 @@ package seedu.address.model.timetable.exceptions;
  */
 public class DuplicateDateException extends RuntimeException {
     public DuplicateDateException() {
-        super("Operation would result in duplicate restaurants");
+        super("Operation would result in duplicate dates.");
     }
 }
 
