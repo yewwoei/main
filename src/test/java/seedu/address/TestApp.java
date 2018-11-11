@@ -132,6 +132,10 @@ public class TestApp extends MainApp {
         model.addUser(user);
     }
 
+    public void clearJio() {
+        model.clearJio();
+    }
+
     /**
      * Added a millie second sleep.
      * Use to prevent fast execution which generate two debt with same id in a millie second.

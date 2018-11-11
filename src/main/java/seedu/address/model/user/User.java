@@ -610,7 +610,6 @@ public class User {
     // ==================== TIMETABLE COMMANDS ======================= //
     /**
      * Adds the constructed model UniqueSchedule to the user.
-     * This current user's UniqueSchedule must be empty.
      */
     public void addUniqueBusySchedule(UniqueSchedule schedule) {
         busySchedule.addAll(schedule);

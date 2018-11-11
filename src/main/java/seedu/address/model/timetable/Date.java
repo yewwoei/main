@@ -2,6 +2,8 @@ package seedu.address.model.timetable;
 
 import static seedu.address.commons.util.CollectionUtil.requireAllNonNull;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -55,6 +57,36 @@ public class Date implements Comparable<Date> {
         return otherDate.getWeek().equals(this.week)
                 && otherDate.getDay().equals(this.day)
                 && otherDate.getTime().equals(this.time);
+    }
+
+    /**
+     * Generates a random valid Date.
+     * @return the valid date.
+     */
+    public static Date generateRandomDate() {
+        return new Date(Week.generateRandomWeek(), Day.generateRandomDay(), Time.generateRandomTime());
+    }
+
+    /**
+     * Generates a random list of valid dates, all unique.
+     * @param number of dates to generate.
+     * @return the list of unique valid dates.
+     */
+    public static List<Date> generateRandomUniqueDates(int number) {
+
+        List<Date> uniqueDateList = new ArrayList<>();
+
+        while (number > 0) {
+            Date generatedDate = generateRandomDate();
+            if (uniqueDateList.contains(generatedDate)) {
+                continue;
+            }
+
+            uniqueDateList.add(generatedDate);
+            number--;
+        }
+
+        return uniqueDateList;
     }
 
     @Override
