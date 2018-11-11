@@ -6,7 +6,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import org.junit.Test;
-
 import seedu.address.commons.core.Messages;
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.accounting.AddDebtCommand;
@@ -164,11 +163,10 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         addSleep();
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_NO_SUCH_USER);
-
     }
 
     /**
-     * For convenience
+     * Performs verification.
      */
     private void assertCommandSuccess(String command, Model expectedModel, Username debtor, Amount amount) {
         expectedModel.addDebt(debtor, amount);
