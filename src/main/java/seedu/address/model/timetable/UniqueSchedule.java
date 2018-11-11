@@ -235,14 +235,6 @@ public class UniqueSchedule {
                 .map(lst -> lst.isEmpty())
                 .anyMatch(test -> test == false);
     }
-    /**
-     * Adds a date into the schedule of busyDates if it has not already been added.
-     *
-     * @param date the date to be added.
-     */
-    public void addDate(Date date) {
-        Week weekNum = date.getWeek();
-    }
 
     @Override
     public String toString() {
