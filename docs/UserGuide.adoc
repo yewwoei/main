@@ -547,7 +547,7 @@ Examples:
 Allows User to list the restaurants he has entered into his favourites. +
 Format: `listFavourites`
 
-===  Find common timeslots with friends: `findTime`
+====  Find common timeslots with friends: `findTime`
 Find common eating timeslots with a list of friends. +
 Format: `findTime [w/week number] [u/USERNAME]…`
 
@@ -555,7 +555,7 @@ Examples:
 
 * `findTime w/week6 u/Aiden u/Chelsea u/EvanMok u/Meena u/Kate`
 
-===  Add NUSMODS schedule to block out calendar: `addNUSMODS`
+==== Add NUSMODS schedule to block out calendar: `addNUSMODS`
 
 Block out schedules on the timetable using a NUSMODS link. +
 Format: `addNUSMODS NUSMODSLINK`
@@ -564,7 +564,7 @@ Examples:
 
 * `addCalendar nusmods.com/g91j3g08sdgl13`
 
-===  Add Google Calendar schedule to block out calendar: `addCalendar`
+==== Add Google Calendar schedule to block out calendar: `addCalendar`
 
 Block out schedules on the timetable using a google account. +
 Format: `addCalendar USERNAME PASSWORD`
