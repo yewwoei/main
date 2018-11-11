@@ -58,6 +58,7 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         String command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_A
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         addSleep();
+        addSleepThis();
         assertCommandSuccess(command, model, userA, amount);
 
         // Test success for AddDebtCommand if execute the same command as Debt Id is generate automatically and
@@ -70,16 +71,19 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         addSleep();
+        addSleepThis();
         assertCommandSuccess(command, model, userB, amount);
 
         //Test success for AddDebtCommand when listing other type of item
         listJio();
         addSleep();
+        addSleepThis();
         assertCommandSuccess(command, model, userB, amount);
 
         //Test success for AddDebtCommand when selecting other type of item
         selectRestaurant(Index.fromOneBased(3));
         addSleep();
+        addSleepThis();
         assertCommandSuccess(command, model, userB, amount);
 
         //Test success for AddDebtCommand with other login user(creditor)
@@ -88,12 +92,14 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         login(otherUserA);
         model.loginUser(userA);
         addSleep();
+        addSleepThis();
         assertCommandSuccess(command, model, userB, amount);
 
         //Test failure for AddDebtCommand with missing username prefix
         command = AddDebtCommand.COMMAND_WORD + " " + VALID_USER_B
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         addSleep();
+        addSleepThis();
         assertCommandFailure(command, model, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddDebtCommand.MESSAGE_USAGE));
 
@@ -101,6 +107,7 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
                 + " " + VALID_AMOUNT;
         addSleep();
+        addSleepThis();
         assertCommandFailure(command, model, String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                 AddDebtCommand.MESSAGE_USAGE));
 
@@ -108,24 +115,28 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + INVALID_USER_A
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         addSleep();
+        addSleepThis();
         assertCommandFailure(command, model, Username.MESSAGE_USERNAME_CONSTRAINTS);
 
         //Test failure for AddDebtCommand with invalid amount(more than 2 decimal places)
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
                 + " " + PREFIX_AMOUNT + INVALID_AMOUNT_FORMAT;
         addSleep();
+        addSleepThis();
         assertCommandFailure(command, model, Amount.MESSAGE_AMOUNT_CONSTRAINTS);
 
         //Test failure for AddDebtCommand with invalid amount(negative)
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
                 + " " + PREFIX_AMOUNT + INVALID_AMOUNT_FORMAT_NEGATIVE;
         addSleep();
+        addSleepThis();
         assertCommandFailure(command, model, Amount.MESSAGE_AMOUNT_CONSTRAINTS);
 
         //Test failure for AddDebtCommand with invalid command word
         command = "AddDebt" + " " + PREFIX_USERNAME + VALID_USER_A
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         addSleep();
+        addSleepThis();
         assertCommandFailure(command, model, Messages.MESSAGE_UNKNOWN_COMMAND);
 
         //Test failure for AddDebtCommand with no login user in the model
@@ -134,6 +145,7 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         addSleep();
+        addSleepThis();
         assertCommandFailure(command, model,
                 String.format(MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND, AddDebtCommand.COMMAND_WORD));
 
@@ -145,24 +157,28 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + CURRENT_USER
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         addSleep();
+        addSleepThis();
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_CANNOT_ADD_DEBT_TO_ONESELF);
 
         //Test failure for AddDebtCommand with invalid amount(0).
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_A
                 + " " + PREFIX_AMOUNT + INVALID_AMOUNT_ZERO;
         addSleep();
+        addSleepThis();
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_INVALID_AMOUNT);
 
         //Test failure for AddDebtCommand with invalid amount(larger than 100000000).
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_A
                 + " " + PREFIX_AMOUNT + INVALID_AMOUNT_TOO_LAREG;
         addSleep();
+        addSleepThis();
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_INVALID_AMOUNT);
 
         //Test failure for AddDebtCommand with input debtor not in model
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + INVALID_USER_C
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
         addSleep();
+        addSleepThis();
         assertCommandFailure(command, model, AddDebtCommand.MESSAGE_NO_SUCH_USER);
     }
 
@@ -182,7 +198,8 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
      * 2. {@code Storage} equal to the corresponding components in {@code expectedModel}.<br>
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
-        executeCommand(command);
+        executeCommand(command);addSleepThis();
+
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();
@@ -197,8 +214,21 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
      */
     private void assertCommandFailure(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
+        addSleepThis();
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();
+    }
+
+    /**
+     * Added a millie second sleep.
+     * Use to prevent fast execution which generate two debt with same id in a millie second.
+     */
+    private void addSleepThis() {
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
