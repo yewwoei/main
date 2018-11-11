@@ -44,6 +44,18 @@ public class Day implements Comparable<Day> {
         return testHelper.asPredicate().test(test);
     }
 
+    /**
+     * Generates a random valid day.
+     * @return the valid day.
+     */
+    public static Day generateRandomDay() {
+        String[] days = new String[]{"mon", "tue", "wed", "thu", "fri", "sat", "sun"};
+
+        String randomDay = days[(int) Math.floor(Math.random() * days.length)];
+
+        return new Day(randomDay);
+    }
+
     @Override
     public String toString() {
         return value;
