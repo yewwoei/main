@@ -1,6 +1,7 @@
 package seedu.address.model.util;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import seedu.address.model.Name;
 import seedu.address.model.UserData;
@@ -14,6 +15,7 @@ import seedu.address.model.restaurant.WrittenReview;
 import seedu.address.model.timetable.Date;
 import seedu.address.model.timetable.Day;
 import seedu.address.model.timetable.Time;
+import seedu.address.model.timetable.UniqueSchedule;
 import seedu.address.model.timetable.Week;
 import seedu.address.model.user.Email;
 import seedu.address.model.user.Password;
@@ -26,6 +28,8 @@ import seedu.address.model.user.Username;
  * Contains utility methods for populating {@code AddressBook} with sample data.
  */
 public class SampleUserDataUtil {
+
+    public static final String SAMPLE_GROUP_NAME = "2103";
 
     private static final RestaurantReview navekom_reviews01 = new RestaurantReview(
             new seedu.address.model.restaurant.Name("Waa Cow"), new Rating(3),
@@ -42,7 +46,6 @@ public class SampleUserDataUtil {
     private static final RestaurantReview meena567_reviews01 = new RestaurantReview(
             new seedu.address.model.restaurant.Name("Waa Cow"), new Rating(2),
             new WrittenReview("Definitely coming back."));
-
     private static final RestaurantReview meena567_reviews02 = new RestaurantReview(
             new seedu.address.model.restaurant.Name("Subway"), new Rating(4),
             new WrittenReview("Subway give fresh food."));
@@ -124,6 +127,11 @@ public class SampleUserDataUtil {
         };
     }
 
+    public static List<Date> getSampleDates() {
+        List<Date> sampleDates = Date.generateRandomUniqueDates(2000);
+        return sampleDates;
+    }
+
     public static Group[] getSampleGroups(UserData sampleUd) {
         ArrayList<User> acceptedUsers = new ArrayList<> ();
         ArrayList<User> pendingUsers = new ArrayList<> ();
@@ -155,7 +163,7 @@ public class SampleUserDataUtil {
         sampleUd.addUser(chel);
 
         return new Group[]{
-            new Group(new Name("2103"), acceptedUsers, pendingUsers)
+            new Group(new Name(SAMPLE_GROUP_NAME), acceptedUsers, pendingUsers)
         };
     }
 
@@ -166,6 +174,8 @@ public class SampleUserDataUtil {
         for (User sampleUser : getSampleUsers()) {
             sampleUd.addUser(sampleUser);
             userList.add(sampleUser);
+
+
         }
         for (Jio sampleJio : getSampleJios()) {
             sampleUd.addJio(sampleJio);
@@ -175,6 +185,17 @@ public class SampleUserDataUtil {
             sampleGroup.getAcceptedUsers().forEach(user -> user.addGroup(sampleGroup));
             sampleGroup.getPendingUsers().forEach(user -> user.addGroupRequest(sampleGroup));
             sampleUd.addGroup(sampleGroup);
+        }
+
+        // adding schedule for each user.
+        List<User> allUsers = sampleUd.getUsers();
+        for (User sampleUser : allUsers) {
+            // creating a schedule for each user.
+            UniqueSchedule sampleSchedule = new UniqueSchedule(sampleUser.getUsername());
+            List<Date> sampleDates = getSampleDates();
+            sampleDates.stream().forEach(sampleSchedule::add);
+            // adding schedule for each user.
+            sampleUser.addUniqueBusySchedule(sampleSchedule);
         }
 
         for (int i = 0; i < userList.size() - 1; i++) {

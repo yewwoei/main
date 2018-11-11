@@ -324,6 +324,8 @@ public interface Model {
 
     void listJio(ObservableList<Jio> list);
 
+    void clearJio();
+
     //=========== Undo/Redo/Commit ===============================================================================
 
     /**
