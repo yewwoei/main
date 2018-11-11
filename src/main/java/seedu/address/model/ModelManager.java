@@ -750,6 +750,13 @@ public class ModelManager extends ComponentManager implements Model {
         raise(new ListJioCommandEvent(list));
     }
 
+    @Override
+    public void clearJio() {
+        //userData.getJios().forEach(jio -> userData.removeJioOfName(jio.getName()));
+        userData.clearJio();
+        filteredJios.setPredicate(jio -> false);
+    }
+
     //=========== Undo/Redo/Commit ===============================================================================
 
     @Override
