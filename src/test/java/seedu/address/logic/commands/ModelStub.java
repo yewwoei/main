@@ -439,8 +439,8 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void displayFreeDatesForGroupAndWeek(Group group, Week week) {
-        throw new AssertionError("This metnod should not be called.");
+    public void displayFreeDatesForGroupAndWeek(Name groupName, Week week) {
+        throw new AssertionError("This method should not be called.");
     }
 
 }
