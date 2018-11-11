@@ -20,7 +20,7 @@ import seedu.address.testutil.UserBuilder;
 import systemtests.AddressBookSystemTest;
 
 
-@Ignore public class AddDebtCommandSystemTest extends AddressBookSystemTest {
+public class AddDebtCommandSystemTest extends AddressBookSystemTest {
 
     private static final String CURRENT_USER = TypicalUsers.getTypicalUsers().get(0).getUsername().toString();
     private static final String VALID_USER_A = TypicalUsers.getTypicalUsers().get(1).getUsername().toString();
