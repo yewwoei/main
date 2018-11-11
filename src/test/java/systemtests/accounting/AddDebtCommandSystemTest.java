@@ -5,7 +5,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_USER_NOT_LOGGED_IN_FOR
 import static seedu.address.logic.parser.CliSyntax.PREFIX_AMOUNT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 import seedu.address.commons.core.Messages;
