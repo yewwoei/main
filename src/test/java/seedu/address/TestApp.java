@@ -132,4 +132,7 @@ public class TestApp extends MainApp {
         model.addUser(user);
     }
 
+    public void clearJio() {
+        model.clearJio();
+    }
 }

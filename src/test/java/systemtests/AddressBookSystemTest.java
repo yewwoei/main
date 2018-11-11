@@ -322,4 +322,8 @@ public abstract class AddressBookSystemTest {
     public void addUser(User user) {
         testApp.addUser(user);
     }
+
+    public void clearJio() {
+        testApp.clearJio();
+    }
 }
