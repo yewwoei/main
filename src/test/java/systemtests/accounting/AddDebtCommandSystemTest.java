@@ -198,8 +198,8 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
      * 2. {@code Storage} equal to the corresponding components in {@code expectedModel}.<br>
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
-        executeCommand(command);addSleepThis();
-
+        executeCommand(command);
+        addSleepThis();
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();
