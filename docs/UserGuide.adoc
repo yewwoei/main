@@ -387,6 +387,7 @@ Format: `listDebtRequestSent`
 List all debt history(regardless of status) of the login user in list panel.
 Format: `listDebtor`
 
+== Administrator Level Features
 === Adding a restaurant: `add` [DEPRECIATED, DO NOT USE, ONLY FOR ADMINISTRATORS]
 
 Adds a restaurant to the address book +
