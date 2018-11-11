@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -73,6 +74,10 @@ public class UserData {
 
     public User getUser(Username username) {
         return usernameUserHashMap.get(username);
+    }
+
+    public List<User> getUsers() {
+        return new ArrayList<User>(usernameUserHashMap.values());
     }
     //=========== Friend methods ============================================================================
     public boolean hasGroup(Name groupName) {

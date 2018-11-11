@@ -3,6 +3,10 @@ package seedu.address.model.timetable;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.google.common.collect.Ordering;
 
 /**
@@ -37,6 +41,7 @@ public class Week implements Comparable<Week> {
         value = week;
     }
 
+
     /**
      * Returns true if a given string is a valid NUS week.
      */
@@ -44,6 +49,18 @@ public class Week implements Comparable<Week> {
         return test.matches(WEEK_VALIDATION_REGEX);
     }
 
+    /**
+     * Generates a random valid week.
+     * @return the valid week.
+     */
+    public static Week generateRandomWeek() {
+        String[] weekNames = new String[]{"1", "2", "3", "4", "5", "6", "recess",
+                "7", "8", "9", "10", "11", "12", "13", "reading", "14", "15"};
+
+        String randomWeek = weekNames[(int) Math.floor(Math.random() * weekNames.length)];
+
+        return new Week(randomWeek);
+    }
     @Override
     public String toString() {
         return value;
