@@ -31,9 +31,9 @@ public class FreeDateCommandTest {
     @Test
     public void execute_validDate_success() {
         Date dateTofree = DATE_A;
-        FreeDateCommand FreeDateCommand = new FreeDateCommand(dateTofree);
+        FreeDateCommand freeDateCommand = new FreeDateCommand(dateTofree);
 
-        String expectedMessage = String.format(FreeDateCommand.MESSAGE_SUCCESS, dateTofree);
+        String expectedMessage = String.format(freeDateCommand.MESSAGE_SUCCESS, dateTofree);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserData(),
                 new UserBuilder().build());
@@ -41,7 +41,7 @@ public class FreeDateCommandTest {
         expectedModel.freeDateForCurrentUser(dateTofree);
         expectedModel.commitAddressBook();
 
-        assertCommandSuccess(FreeDateCommand, model, commandHistory, expectedMessage, expectedModel);
+        assertCommandSuccess(freeDateCommand, model, commandHistory, expectedMessage, expectedModel);
         model.undoAddressBook();
     }
 
@@ -50,9 +50,9 @@ public class FreeDateCommandTest {
         Date dateTofree = DATE_A;
         ModelManager notLoggedInModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserData());
 
-        FreeDateCommand FreeDateCommand = new FreeDateCommand(dateTofree);
-        assertCommandFailure(FreeDateCommand, notLoggedInModel, commandHistory,
-                String.format(Messages.MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND, FreeDateCommand.COMMAND_WORD));
+        FreeDateCommand freeDateCommand = new FreeDateCommand(dateTofree);
+        assertCommandFailure(freeDateCommand, notLoggedInModel, commandHistory,
+                String.format(Messages.MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND, freeDateCommand.COMMAND_WORD));
     }
 
     @Test
@@ -60,10 +60,10 @@ public class FreeDateCommandTest {
         Date dateTofree = DATE_A;
         model.freeDateForCurrentUser(dateTofree);
 
-        FreeDateCommand FreeDateCommand = new FreeDateCommand(dateTofree);
+        FreeDateCommand freeDateCommand = new FreeDateCommand(dateTofree);
 
-        assertCommandFailure(FreeDateCommand, model, commandHistory,
-                FreeDateCommand.MESSAGE_ALREADY_FREE);
+        assertCommandFailure(freeDateCommand, model, commandHistory,
+                freeDateCommand.MESSAGE_ALREADY_FREE);
     }
 
     @Test
