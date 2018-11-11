@@ -38,8 +38,8 @@ public class FreeDateCommandTest {
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserData(),
                 new UserBuilder().build());
 
-        expectedModel.freeDateForCurrentUser(dateToFree);
-        expectedModel.commitAddressBook();
+        // blocking the date before freeing.
+        model.blockDateForCurrentUser(dateToFree);
 
         assertCommandSuccess(freeDateCommand, model, commandHistory, expectedMessage, expectedModel);
         model.undoAddressBook();
