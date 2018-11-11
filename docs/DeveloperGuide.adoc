@@ -203,6 +203,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 image::DeleteRestaurantSdForLogic.png[width="800"]
 
 [[Design-Model]]
+// tag::yewwoei[]
 === Model component
 
 .Structure of the Model Component
@@ -531,6 +532,7 @@ do not touch current user at all, but pass `Jio` objects on to `ModelManager`.
 ** Cons: May be storing unnecessary information.
 >>>>>>> bc00f9fe52fee994a6a1c17b326858f148ea5dcc
 
+// tag::yewwoei[]
 === Timetable Feature
 
 ==== Benefits for the user
@@ -543,14 +545,13 @@ eat at.
 ==== Current Implementation
 In MakanBook, we implemented a schedule feature according to the NUS Calendar: 17 weeks in a semester, with each day
 split into 30 minute timeslots. Each timeslot is encapsulated by a `Date` object which contains the NUS `Week`, the `Day` of the week, and the `Time` that the 30 minute segment starts at.
-+
-+
+
+
 A `UniqueBusySchedule` class is then used to encapsulate the list of busy timeslots for any individual user and `UniqueBusySchedule` contains two key pieces of information:
 the `Username` to identify which user the schedule belongs to, and a `HashMap` that stores the list of busy `Dates` for
 each corresponding NUS week.
-+
-+
-** Storage of Timetable related Data **
+
+**Storage of Timetable related Data** +
 The entire user's `UniqueBusySchedule` is stored in the users.xml file with each object as an XML element containing the username and all busy dates.
 
 ==== Timetable Commands

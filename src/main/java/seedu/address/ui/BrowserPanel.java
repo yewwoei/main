@@ -103,10 +103,11 @@ public class BrowserPanel extends UiPart<Region> {
         });
     }
 
+
     /**
      * Loads a displayWeekSchedule HTML file with a background that matches the general theme.
      */
-    private void loadDisplayWeekSchedulePage(List<Date> dates) {
+    private void loadDisplayWeekSchedulePage(String header, List<Date> dates) {
         StringBuilder sb = new StringBuilder();
         try {
             BufferedInputStream bin = new BufferedInputStream(MainApp.class
@@ -130,7 +131,7 @@ public class BrowserPanel extends UiPart<Region> {
                 .forEach(sb2::append);
 
         // replace the template with dates.
-        Object[] params = new Object[] {
+        Object[] params = new Object[] {header,
                 sb2.toString() };
 
         String html = MessageFormat.format(sb.toString(), params);
@@ -403,7 +404,7 @@ public class BrowserPanel extends UiPart<Region> {
     @Subscribe
     private void handleDisplayWeekScheduleEvent(DisplayWeekScheduleEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
-        loadDisplayWeekSchedulePage(event.getDisplayedWeekSchedule());
+        loadDisplayWeekSchedulePage(event.getHeader(), event.getDisplayedWeekSchedule());
     }
 
 
