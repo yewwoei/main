@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import seedu.address.model.timetable.exceptions.DateNotFoundException;
@@ -138,13 +140,24 @@ public class UniqueSchedule {
      * @return the immutable list of all dates.
      */
     public List<Date> getFreeDatesForWeek(Week week) {
-        List<Date> allUserBlockedDates = getAllBlockedDatesOnSchedule();
+        List<Date> allBlockedDatesForWeek = getBusyDatesForWeek(week);
+        List<Date> freeDatesForWeek = UniqueSchedule.getFreeDatesFromBusyWeekDates(allBlockedDatesForWeek, week);
+
+        return Collections.unmodifiableList(freeDatesForWeek);
+
+    }
+
+    /**
+     * Returns an immutable sorted free date list for the NUS week, given a list of dates that are blocked.
+     * @return the immutable list of all dates.
+     */
+    private static List<Date> getFreeDatesFromBusyWeekDates(List<Date> blockedDates, Week week) {
         List<Date> fullScheduleForWeek = generateFullScheduleForWeek(week);
+
         // remove all the dates that the user is busy.
-        fullScheduleForWeek.removeAll(allUserBlockedDates);
+        fullScheduleForWeek.removeAll(blockedDates);
         Collections.sort(fullScheduleForWeek);
         return Collections.unmodifiableList(fullScheduleForWeek);
-
     }
 
     /**
@@ -171,6 +184,25 @@ public class UniqueSchedule {
 
         return allWeekDates;
     }
+
+    /**
+     * Returns a list of free dates to meet among all the schedules provided, for a certain NUS week.
+     * @return an immutable list of free dates to meet for the NUS week.
+     */
+    public static List<Date> findFreeDatesAmongSchedulesForWeek(List<UniqueSchedule> schedules, Week week) {
+        Set<Date> uniqueBlockedDates = new HashSet<>();
+        List<Date> allBlockedDates = new ArrayList<>();
+
+        // retrieving the dates for each week.
+        schedules.stream().forEach(schedule ->
+                allBlockedDates.addAll(schedule.getBusyDatesForWeek(week)));
+
+        uniqueBlockedDates.addAll(allBlockedDates);
+        List<Date> freeDatesForWeek = getFreeDatesFromBusyWeekDates(new ArrayList<>(allBlockedDates), week);
+
+        return Collections.unmodifiableList(freeDatesForWeek);
+    }
+
 
     /**
      * Returns a full list of dates for the day. The week that the day exists in must also be given.
@@ -202,14 +234,6 @@ public class UniqueSchedule {
                 .stream()
                 .map(lst -> lst.isEmpty())
                 .anyMatch(test -> test == false);
-    }
-    /**
-     * Adds a date into the schedule of busyDates if it has not already been added.
-     *
-     * @param date the date to be added.
-     */
-    public void addDate(Date date) {
-        Week weekNum = date.getWeek();
     }
 
     @Override

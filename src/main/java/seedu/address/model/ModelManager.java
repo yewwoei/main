@@ -650,6 +650,18 @@ public class ModelManager extends ComponentManager implements Model {
         displayWeekSchedule(displayedDates);
     }
 
+    @Override
+    public void displayFreeDatesForGroupAndWeek(Name groupName, Week week) {
+        Group group = userData.getGroupHashmap().get(groupName);
+        List<User> groupMembers = group.getAcceptedUsers();
+        List<UniqueSchedule> allSchedules = new ArrayList<>();
+        // getting all the schedules.
+        groupMembers.stream().forEach(user -> allSchedules.add(user.getBusySchedule()));
+        List<Date> datesForDisplay = UniqueSchedule.findFreeDatesAmongSchedulesForWeek(allSchedules, week);
+        displayWeekSchedule(datesForDisplay);
+    }
+
+
     private void updateDisplayedDatesUserWeek(Week weekNumber) {
         requireNonNull(weekNumber);
         this.displayedDates = currentUser.getFreeDatesForWeek(weekNumber);

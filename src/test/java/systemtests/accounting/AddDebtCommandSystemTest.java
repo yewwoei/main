@@ -17,7 +17,6 @@ import seedu.address.model.user.Username;
 import seedu.address.testutil.TypicalUsers;
 import systemtests.AddressBookSystemTest;
 
-
 public class AddDebtCommandSystemTest extends AddressBookSystemTest {
 
     private static final String CURRENT_USER = TypicalUsers.getTypicalUsers().get(0).getUsername().toString();
