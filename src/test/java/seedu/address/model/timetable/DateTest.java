@@ -3,9 +3,9 @@ package seedu.address.model.timetable;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 import static seedu.address.testutil.TypicalDates.DATE_A;
-import static seedu.address.testutil.TypicalDates.DATE_B;
 import static seedu.address.testutil.TypicalDates.DATE_AFTER_READING;
 import static seedu.address.testutil.TypicalDates.DATE_AFTER_RECESS;
+import static seedu.address.testutil.TypicalDates.DATE_B;
 import static seedu.address.testutil.TypicalDates.DATE_READING;
 import static seedu.address.testutil.TypicalDates.DATE_RECESS;
 
