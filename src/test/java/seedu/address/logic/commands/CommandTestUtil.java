@@ -5,6 +5,8 @@ import static org.junit.Assert.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_PHONE;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_RATING;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_REVIEW;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.ArrayList;
@@ -60,6 +62,16 @@ public class CommandTestUtil {
     public static final String INVALID_ADDRESS_DESC = " " + PREFIX_ADDRESS; // empty string not allowed for addresses
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "hubby*"; // '*' not allowed in tags
 
+    public static final String VALID_RATING = "5";
+    public static final String RATING_A = PREFIX_RATING + VALID_RATING;
+    public static final String VALID_REVIEW = "The Ban Mian was absolutely delicious.";
+    public static final String REVIEW_A = PREFIX_REVIEW + VALID_REVIEW;
+
+    public static final String INVALID_RATING= "100";
+    public static final String INVALID_RATING_A = PREFIX_RATING + INVALID_RATING;
+    public static final String INVALID_REVIEW = " ";
+    public static final String INVALID_REVIEW_A = PREFIX_REVIEW + INVALID_REVIEW;
+    
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
     public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
