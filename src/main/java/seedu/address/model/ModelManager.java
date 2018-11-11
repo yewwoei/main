@@ -511,12 +511,6 @@ public class ModelManager extends ComponentManager implements Model {
     @Override
     public boolean isInGroup(Name groupName) {
         List<Group> listGroups = currentUser.getGroups();
-        //for (Group g: listGroups) {
-        //    System.out.println(g.getGroupName());
-        //}
-        for (Group g: listGroups) {
-            System.out.println("in group: " + g.getGroupName());
-        }
         for (Group g: listGroups) {
             if (groupName.equals(g.getGroupName())) {
                 return true;
