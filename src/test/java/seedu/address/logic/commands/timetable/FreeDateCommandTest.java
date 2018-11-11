@@ -25,7 +25,8 @@ import seedu.address.testutil.UserBuilder;
  */
 public class FreeDateCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData(), new UserBuilder().build());
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData(),
+            new UserBuilder().build());
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
