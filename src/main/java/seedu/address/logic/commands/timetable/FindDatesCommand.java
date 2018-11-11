@@ -11,7 +11,7 @@ import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.commands.exceptions.NotLoggedInCommandException;
 import seedu.address.model.Model;
-import seedu.address.model.group.Group;
+import seedu.address.model.Name;
 import seedu.address.model.timetable.Week;
 
 /**
@@ -32,27 +32,37 @@ public class FindDatesCommand extends Command {
     public static final String MESSAGE_SUCCESS = "Listed the common free dates for"
             + " week %1$s below for group %2$s.";
 
+    public static final String MESSAGE_NO_SUCH_GROUP = "You are not in that group.";
+
     private final Week weekNumber;
-    private final Group group;
+    private final Name groupName;
 
     /**
      * Creates a FindDatesCommand to find a common eating timeslot among the {@code Integer} friends.
      */
-    public FindDatesCommand(Week weekNumber, Group group) {
-        requireAllNonNull(weekNumber, group);
+    public FindDatesCommand(Name groupName, Week weekNumber) {
+        requireAllNonNull(weekNumber, groupName);
         this.weekNumber = weekNumber;
-        this.group = group;
+        this.groupName = groupName;
     }
 
     @Override
     public CommandResult execute(Model model, CommandHistory history) throws CommandException {
         requireNonNull(model);
 
+        // throw exception if no user is currently logged in.
         if (!model.isCurrentlyLoggedIn()) {
             throw new NotLoggedInCommandException(COMMAND_WORD);
         }
 
-        return new CommandResult(String.format(MESSAGE_SUCCESS, weekNumber, group));
+        // throw exception if finding times for a group that does not exist.
+        if (!model.isInGroup(groupName)) {
+            throw new CommandException(MESSAGE_NO_SUCH_GROUP);
+        }
+
+        model.displayFreeDatesForGroupAndWeek(groupName, weekNumber);
+
+        return new CommandResult(String.format(MESSAGE_SUCCESS, weekNumber, groupName));
     }
 
     @Override
@@ -60,6 +70,6 @@ public class FindDatesCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof FindDatesCommand // instanceof handles nulls
                 && (weekNumber.equals(((FindDatesCommand) other).weekNumber)
-                    && group.equals(((FindDatesCommand) other).group)));
+                    && groupName.equals(((FindDatesCommand) other).groupName)));
     }
 }

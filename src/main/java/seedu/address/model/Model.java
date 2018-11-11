@@ -300,6 +300,8 @@ public interface Model {
 
     void displayUserWeekSchedule(Week weekNumber);
 
+    void displayFreeDatesForGroupAndWeek(Name groupName, Week week);
+
     //=========== Jio methods ===============================================================================
 
     ObservableList<Jio> getJioList();

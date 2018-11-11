@@ -27,6 +27,7 @@ public class FreeDateCommandTest {
 
     private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), TypicalUsers.getTypicalUserData(),
             new UserBuilder().build());
+
     private CommandHistory commandHistory = new CommandHistory();
 
     @Test
