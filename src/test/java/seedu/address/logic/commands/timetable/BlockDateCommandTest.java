@@ -86,6 +86,7 @@ public class BlockDateCommandTest {
         assertFalse(blockFirstCommand.equals("random string"));
 
         // null --> returns false
+        assertFalse(blockFirstCommand.equals(null));
 
         // different dates --> returns false.
         assertFalse(blockFirstCommand.equals(blockSecondCommand));
