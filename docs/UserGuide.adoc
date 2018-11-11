@@ -157,6 +157,7 @@ the reviews he's written and the list of friends he has.
 Format: `displayProfile`
 // end::evan[]
 
+// tag::chelchia[]
 === Finding people to eat with: `createJio`
 
 Users can find other users to eat with through inviting users. “createJio” creates a jio that is added to the global list of jios. +
@@ -195,6 +196,7 @@ Format: `deleteJio n/NAME`
 Examples:
 
 * `deleteJio n/MALA`
+// end::chelchia[]
 
 === Adding friends: `addFriend`
 
@@ -627,7 +629,6 @@ e.g. `writeReview 2 r/5 rvw/I tried the Salmon Mentaiko Chirashi and it was amaz
 * *Create Jio* : `createJio` +
 e.g. `createJio n/MALA w/1 d/mon h/1200 a/FineFood`
 e.g. `createJio n/saporeFriends w/1 d/mon h/1800 a/Sapore g/mygroup`
-
 * *Join Jio* : `joinJio` +
 e.g. `joinJio n/MALA`
 * *Delete Jio* : `deleteJio` +
