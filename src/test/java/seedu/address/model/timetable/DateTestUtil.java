@@ -25,7 +25,7 @@ public class DateTestUtil {
 
     // Week fields
     public static final String INVALID_WEEK_STUDY = "one";
-    public static final String INVALUD_WEEK_RECESS = "Recess";
+    public static final String INVALID_WEEK_RECESS = "Recess";
 
     // Day fields
     public static final String INVALID_DAY_WED = "3";

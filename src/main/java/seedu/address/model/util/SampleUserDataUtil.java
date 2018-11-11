@@ -29,6 +29,8 @@ import seedu.address.model.user.Username;
  */
 public class SampleUserDataUtil {
 
+    public static final String SAMPLE_GROUP_NAME = "2103";
+
     private static final RestaurantReview navekom_reviews01 = new RestaurantReview(
             new seedu.address.model.restaurant.Name("Waa Cow"), new Rating(3),
             new WrittenReview("I tried the Ultimate Beef Sushi and they were delicious."));
@@ -161,7 +163,7 @@ public class SampleUserDataUtil {
         sampleUd.addUser(chel);
 
         return new Group[]{
-            new Group(new Name("2103"), acceptedUsers, pendingUsers)
+            new Group(new Name(SAMPLE_GROUP_NAME), acceptedUsers, pendingUsers)
         };
     }
 
