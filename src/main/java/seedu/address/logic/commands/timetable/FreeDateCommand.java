@@ -58,8 +58,6 @@ public class FreeDateCommand extends Command {
         }
 
         model.freeDateForCurrentUser(this.toFree);
-        // saves the makanbook for undo and redo
-        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toFree));
     }
 

@@ -17,6 +17,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.UserData;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.timetable.Date;
+import seedu.address.testutil.TypicalUsers;
 import seedu.address.testutil.UserBuilder;
 
 /**
@@ -25,7 +26,7 @@ import seedu.address.testutil.UserBuilder;
  */
 public class FreeDateCommandTest {
 
-    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), new UserData(),
+    private Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs(), TypicalUsers.getTypicalUserData(),
             new UserBuilder().build());
     private CommandHistory commandHistory = new CommandHistory();
 
@@ -36,20 +37,20 @@ public class FreeDateCommandTest {
 
         String expectedMessage = String.format(freeDateCommand.MESSAGE_SUCCESS, dateToFree);
 
-        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserData(),
-                new UserBuilder().build());
+        ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+                TypicalUsers.getTypicalUserData(), new UserBuilder().build());
 
         // blocking the date before freeing.
         model.blockDateForCurrentUser(dateToFree);
 
         assertCommandSuccess(freeDateCommand, model, commandHistory, expectedMessage, expectedModel);
-        model.undoAddressBook();
     }
 
     @Test
     public void execute_withoutLogin_throwsNotLoggedInCommandException() {
         Date dateTofree = DATE_A;
-        ModelManager notLoggedInModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserData());
+        ModelManager notLoggedInModel = new ModelManager(model.getAddressBook(), new UserPrefs(),
+                TypicalUsers.getTypicalUserData());
 
         FreeDateCommand freeDateCommand = new FreeDateCommand(dateTofree);
         assertCommandFailure(freeDateCommand, notLoggedInModel, commandHistory,
@@ -58,10 +59,9 @@ public class FreeDateCommandTest {
 
     @Test
     public void execute_alreadyFreeDate_throwsCommandException() {
-        Date dateTofree = DATE_A;
-        model.freeDateForCurrentUser(dateTofree);
+        Date dateToFree = DATE_A;
 
-        FreeDateCommand freeDateCommand = new FreeDateCommand(dateTofree);
+        FreeDateCommand freeDateCommand = new FreeDateCommand(dateToFree);
 
         assertCommandFailure(freeDateCommand, model, commandHistory,
                 freeDateCommand.MESSAGE_ALREADY_FREE);
