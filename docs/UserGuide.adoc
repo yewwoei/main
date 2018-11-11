@@ -207,7 +207,7 @@ Examples:
 === Accept friend request: `acceptFriend`
 
 A User can accept a friend request of another User so that the pair of them can become friends. +
-Format: `acceptFriend u/NAME`
+Format: `acceptFriend u/USERNAME`
 
 Examples:
 
@@ -247,7 +247,7 @@ A User will create a group by specifying the group name.  +
 Format: `addGroup g/GROUPNAME`
 
 ****
-* Every group will automatically add the user creating the group.
+* Every group will automatically add the user creating the group into its list of accepted Users.
 ****
 
 Examples:
@@ -256,7 +256,7 @@ Examples:
 
 === Adding members: `addMembers`
 
-A User will create a group and send out invitations to all the other users, which they will then have to accept to join the group.  +
+A User  +
 Format: `addMembers g/GROUPNAME [Users… u/USERNAMES]`
 
 Examples:
