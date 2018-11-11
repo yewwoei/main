@@ -2,12 +2,15 @@ package systemtests.jio;
 
 import org.junit.Test;
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.jio.CreateJioCommand;
 import seedu.address.model.Model;
 import seedu.address.model.Name;
 import seedu.address.model.jio.Jio;
+import seedu.address.model.restaurant.Address;
 import seedu.address.model.restaurant.Restaurant;
+import seedu.address.model.timetable.Day;
+import seedu.address.model.timetable.Time;
+import seedu.address.model.timetable.Week;
 import seedu.address.model.user.User;
 import seedu.address.testutil.TypicalUsers;
 import systemtests.AddCommandSystemTest;
@@ -17,7 +20,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.model.jio.JioTestUtil.ADDRESS_DESC_MALA;
 import static seedu.address.model.jio.JioTestUtil.MALA;
 import static seedu.address.model.jio.JioTestUtil.DAY_DESC_MALA;
-import static seedu.address.model.jio.JioTestUtil.GROUP_DESC_MALA;
 import static seedu.address.model.jio.JioTestUtil.INVALID_ADDRESS_DESC;
 import static seedu.address.model.jio.JioTestUtil.INVALID_DAY_DESC;
 import static seedu.address.model.jio.JioTestUtil.INVALID_NAME_DESC;
@@ -64,26 +66,6 @@ public class CreateJioCommandSystemTest extends AddressBookSystemTest {
         toAdd = new Jio(new Name("thirdjio"), MALA.getDate(), MALA.getAddress());
         command = CreateJioCommand.COMMAND_WORD + "  " + TIME_DESC_MALA + "   " + WEEK_DESC_MALA + " "
                 + DAY_DESC_MALA + "   " + "n/thirdjio" + "  " + ADDRESS_DESC_MALA + " ";
-        assertCommandSuccess(command, toAdd);
-
-        /* Case: add a jio, specified as group jio -> added */
-        /*
-        toAdd = new Jio(new Name("fourthjio"), MALA.getDate(), MALA.getAddress());
-        command = "   " + CreateJioCommand.COMMAND_WORD + "  " + "n/fourthjio" + "  " + WEEK_DESC_MALA + " "
-                + DAY_DESC_MALA + "   " + TIME_DESC_MALA + "   " + ADDRESS_DESC_MALA + " " + GROUP_DESC_MALA + " ";
-        assertCommandSuccess(command, toAdd);
-        */
-
-
-        /* ------------ Perform add operation while a jio card is selected --------------- */
-
-        /* Case: selects first card in the jio list, add a jio
-        -> added, card selection remains unchanged */
-        listJio();
-        selectitem(Index.fromOneBased(1));
-        toAdd = new Jio(new Name("fifthjio"), MALA.getDate(), MALA.getAddress());
-        command = "   " + CreateJioCommand.COMMAND_WORD + "  " + "n/fifthjio" + "  " + WEEK_DESC_MALA + " "
-                + DAY_DESC_MALA + "   " + TIME_DESC_MALA + "   " + ADDRESS_DESC_MALA + " ";
         assertCommandSuccess(command, toAdd);
 
 
@@ -137,22 +119,22 @@ public class CreateJioCommandSystemTest extends AddressBookSystemTest {
         /* Case: invalid week -> rejected */
         command = "   " + CreateJioCommand.COMMAND_WORD + "  " + NAME_DESC_MALA + "  " + INVALID_WEEK_DESC + " "
                 + DAY_DESC_MALA + "   " + TIME_DESC_MALA + "   " + ADDRESS_DESC_MALA + " ";
-        assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure(command, Week.MESSAGE_WEEK_CONSTRAINTS);
 
         /* Case: invalid day -> rejected */
         command = "   " + CreateJioCommand.COMMAND_WORD + "  " + NAME_DESC_MALA + "  " + WEEK_DESC_MALA + " "
                 + INVALID_DAY_DESC + "   " + TIME_DESC_MALA + "   " + ADDRESS_DESC_MALA + " ";
-        assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure(command, Day.MESSAGE_DAY_CONSTRAINTS);
 
         /* Case: invalid time -> rejected */
         command = "   " + CreateJioCommand.COMMAND_WORD + "  " + NAME_DESC_MALA + "  " + WEEK_DESC_MALA + " "
                 + DAY_DESC_MALA + "   " + INVALID_TIME_DESC + "   " + ADDRESS_DESC_MALA + " ";
-        assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure(command, Time.MESSAGE_TIME_CONSTRAINTS);
 
         /* Case: invalid address -> rejected */
         command = "   " + CreateJioCommand.COMMAND_WORD + "  " + NAME_DESC_MALA + "  " + WEEK_DESC_MALA + " "
                 + DAY_DESC_MALA + "   " + TIME_DESC_MALA + "   " + INVALID_ADDRESS_DESC + " ";
-        assertCommandFailure(command, Name.MESSAGE_NAME_CONSTRAINTS);
+        assertCommandFailure(command, Address.MESSAGE_ADDRESS_CONSTRAINTS);
 
     }
 
