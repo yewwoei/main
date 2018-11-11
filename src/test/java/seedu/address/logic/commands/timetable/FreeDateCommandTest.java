@@ -30,15 +30,15 @@ public class FreeDateCommandTest {
 
     @Test
     public void execute_validDate_success() {
-        Date dateTofree = DATE_A;
-        FreeDateCommand freeDateCommand = new FreeDateCommand(dateTofree);
+        Date dateToFree = DATE_A;
+        FreeDateCommand freeDateCommand = new FreeDateCommand(dateToFree);
 
-        String expectedMessage = String.format(freeDateCommand.MESSAGE_SUCCESS, dateTofree);
+        String expectedMessage = String.format(freeDateCommand.MESSAGE_SUCCESS, dateToFree);
 
         ModelManager expectedModel = new ModelManager(model.getAddressBook(), new UserPrefs(), new UserData(),
                 new UserBuilder().build());
 
-        expectedModel.freeDateForCurrentUser(dateTofree);
+        expectedModel.freeDateForCurrentUser(dateToFree);
         expectedModel.commitAddressBook();
 
         assertCommandSuccess(freeDateCommand, model, commandHistory, expectedMessage, expectedModel);
