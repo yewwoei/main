@@ -147,7 +147,7 @@ Examples:
 
 === Display User Profile: `displayProfile`
 
-Allows a user to view his own profile in the Makan Book. The browser panel will then contains the user's details and 
+Allows a user to view his own profile in the Makan Book. The browser panel will then contains the user's details and
 the reviews he's written. +
 Format: `displayProfile`
 // end::evan[]
@@ -369,7 +369,7 @@ Format: `listCreditor`
 
 === List all login user's debtor
 
-List all debtor of the login user in list panel. + 
+List all debtor of the login user in list panel. +
 Format: `listDebtor`
 
 === List all login user's debt request received
@@ -524,7 +524,7 @@ all users in the Makan Book.
 === New Features in v2.0
 
 ==== List Visited Restaurant: `listVisitedRestaurants`
-Lists the restaurants a user has visited. + 
+Lists the restaurants a user has visited. +
 Format: `listVisitedRestaurants`
 
 ==== Add Visited Restaurant: `addVisitedRestaurants`
@@ -588,7 +588,7 @@ e.g. `find Waa Lao`
 * *selectRestaurant* : `selectRestaurant INDEX` +
 e.g.`selectRestaurant 2`
 * *History* : `history`
-* *Sign Up* : `signup u/USERNAME pwd/PASSWORD n/NAME p/PHONE_NUMBER e/EMAIL` + 
+* *Sign Up* : `signup u/USERNAME pwd/PASSWORD n/NAME p/PHONE_NUMBER e/EMAIL` +
 e.g. `signup u/johnnydoe pwd/pAssw0rd n/John Doe p/98765432 e/johnd@example.com`
 * *Login* : `login u/USERNAME pwd/PASSWORD` +
 e.g. `login u/navekom pwd/pwwd123`
