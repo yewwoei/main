@@ -15,7 +15,7 @@ ifdef::env-github[]
 endif::[]
 :repoURL: https://github.com/CS2103-AY1819S1-W10-2/main
 
-By: `Team W10-2`      Since: `Jun 2016`      Licence: `MIT`
+By: `Team W10-2`      Since: `AUG 2018`      Licence: `MIT`
 
 == Setting up
 
@@ -276,7 +276,7 @@ image::WriteReviewSequenceDiagram.png[width="800"]
 Additionally, a restaurant contains an overall rating, the average rating of all the reviews it has.
 The activity diagram below describes the process of updating the restaurant's overall rating.
 
-image::AddingUserReviewToRestaurantActivityDiagram.png[width="800"]
+image::AddUserReviewToRestaurantActivityDiagram.png[width="800"]
 
 ==== Design Considerations
 ===== Aspect: Where to store User Review
