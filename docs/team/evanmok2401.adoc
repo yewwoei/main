@@ -28,7 +28,7 @@ reviews for restaurants within NUS. Additionally, Users are able to interact wit
 ** Justification: This feature improves the product significantly because a user can now create an account to join the network of users. The ability to have accounts allows for various functionality such as adding friends, creating Jios and more.
 ** Highlights: This enhancement affects existing commands and commands to be added in future. For instance, only users who are logged in should be able to interact with one another.
 
-* *Minor enhancement*: added a displayProfile command that allows the user to view all the data that is related to him. This includes his own personal information, the reviews he has made, friends and more.
+* *Minor enhancement*: added a displayProfile command that allows the user to view all the data that is related to him. This includes his own personal information and the reviews he has made.
 
 * *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=evanmok2401[here]]
 
@@ -36,12 +36,18 @@ reviews for restaurants within NUS. Additionally, Users are able to interact wit
 
 ** Project management:
 *** Team Lead - Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
+*** Updated AboutUs.doc: https://github.com/CS2103-AY1819S1-W10-2/main/pull/37[#37]
+*** Updated ReadMe.doc: https://github.com/CS2103-AY1819S1-W10-2/main/pull/335[#335]
+*** Updated Sample Data: https://github.com/CS2103-AY1819S1-W10-2/main/pull/227
+
 ** Enhancements to existing features:
 *** Updated the GUI web pages for display in the browser panel
+
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide
+*** Contributed to the overall flow of User Guide and Developer Guide, on top of my own features.
+
 ** Community:
-*** Reported bugs and suggestions for other teams in the class (Examples:  https://github.com[1], https://github.com[2], https://github.com[3])
+*** Reported bugs and suggestions for other teams in the class (Examples: https://github.com/CS2103-AY1819S1-W17-3/main/issues/173[1], https://github.com/CS2103-AY1819S1-W17-3/main/issues/176[2], https://github.com/CS2103-AY1819S1-W17-3/main/issues/180[3])
 
 
 == Contributions to the User Guide
@@ -50,7 +56,9 @@ reviews for restaurants within NUS. Additionally, Users are able to interact wit
 |_Given below are sections I contributed to the User Guide._
 |===
 
-include::../UserGuide.adoc[tag=evan]
+include::../UserGuide.adoc[tag=evanmok2401(1)]
+
+include::../UserGuide.adoc[tag=evanmok2401(2)]
 
 == Contributions to the Developer Guide
 
@@ -58,4 +66,6 @@ include::../UserGuide.adoc[tag=evan]
 |_Given below are sections I contributed to the Developer Guide._
 |===
 
-include::../DeveloperGuide.adoc[tag=evan]
+include::../DeveloperGuide.adoc[tag=evanmok2401(1)]
+
+include::../DeveloperGuide.adoc[tag=evanmok2401(2)]

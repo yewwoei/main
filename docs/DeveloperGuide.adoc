@@ -13,7 +13,7 @@ ifdef::env-github[]
 :warning-caption: :warning:
 :experimental:
 endif::[]
-:repoURL: https://github.com/CS2103-AY1819S1-W10-2/main
+:repoURL: https://github.com/CS2103-AY1819S1-W10-2/main/blob/master
 
 By: `Team W10-2`      Since: `AUG 2018`      Licence: `MIT`
 
@@ -32,7 +32,6 @@ Windows developers are highly recommended to use JDK `9`.
 [NOTE]
 IntelliJ by default has Gradle and JavaFx plugins installed. +
 Do not disable them. If you have disabled them, go to `File` > `Settings` > `Plugins` to re-enable them.
-
 
 === Setting up the project in your computer
 
@@ -220,7 +219,7 @@ The `Model`,
 
 
 [[Design-Storage]]
-// tag::evan[]
+// tag::evanmok2401(1)[]
 === Storage component
 
 .Structure of the Storage Component
@@ -246,9 +245,7 @@ This section describes some noteworthy details on how certain components and fea
 === Storage Component Design
 ==== Current Implementation
 The storage of Makan book is split into two different xml files namely `users.xml` and `addressbook.xml` where data
-relating to users are stored in the formal and data relating to restaurants are stored in the latter. As of the current
-version of Makan Book, all users are sharing the same restaurant addressbook. Should one user add a restaurant into the
-restaurant addressbook, all users using the Makan Book will be able to see the addition, likewise for deletion.
+relating to users are stored in the formal and data relating to restaurants are stored in the latter.
 
 ===== Aspect: Ease of Maintenance
 * **Alternative 1 (current choice):** Split Storage into into two different components.
@@ -268,7 +265,7 @@ Should there be a reset of Users, the restaurant data would remain unaffected.
 ==== Current Implementation
 The write review feature allows a user to write a review about a restaurant. This review
 is available for all users in the Makan Book to view. This review is then stored internally into
-the restaurant addressbook and the current user. When the command write review is called and executed,
+the restaurant addressbook and the current user. When the command writeReview is called and executed,
 the model manager creates an UserReview (to be stored in restaurant addressbook) and a RestaurantReview
 (to be stored into User) as seen in the sequence diagram below.
 
@@ -295,89 +292,6 @@ while RestaurantReview stores the Username of the User.
 ** Pros: Ease of Implementation (Significantly fewer classes)
 ** Cons: Cluttered Storage of Data making it difficult to maintain and scale
 
-=== Display Profile Feature
-// tag::evan[]
-
-// tag::undoredo[]
-=== Undo/Redo feature
-==== Current Implementation
-
-The undo/redo mechanism is facilitated by `VersionedAddressBook`.
-It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`.
-Additionally, it implements the following operations:
-
-* `VersionedAddressBook#commit()` -- Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` -- Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` -- Restores a previously undone address book state from its history.
-
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
-
-Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
-
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
-
-image::UndoRedoStartingStateListDiagram.png[width="800"]
-
-Step 2. The user executes `delete 5` command to delete the 5th restaurant in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
-
-image::UndoRedoNewCommand1StateListDiagram.png[width="800"]
-
-Step 3. The user executes `add n/David ...` to add a new restaurant. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
-
-image::UndoRedoNewCommand2StateListDiagram.png[width="800"]
-
-[NOTE]
-If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
-
-Step 4. The user now decides that adding the restaurant was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
-
-image::UndoRedoExecuteUndoStateListDiagram.png[width="800"]
-
-[NOTE]
-If the `currentStatePointer` is at index 0, pointing to the initial address book state, then there are no previous address book states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the undo.
-
-The following sequence diagram shows how the undo operation works:
-
-image::UndoRedoSequenceDiagram.png[width="800"]
-
-The `redo` command does the opposite -- it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
-
-[NOTE]
-If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone address book states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
-
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
-
-image::UndoRedoNewCommand3StateListDiagram.png[width="800"]
-
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. We designed it this way because it no longer makes sense to redo the `add n/David ...` command. This is the behavior that most modern desktop applications follow.
-
-image::UndoRedoNewCommand4StateListDiagram.png[width="800"]
-
-The following activity diagram summarizes what happens when a user executes a new command:
-
-image::UndoRedoActivityDiagram.png[width="650"]
-
-==== Design Considerations
-
-===== Aspect: How undo & redo executes
-
-* **Alternative 1 (current choice):** Saves the entire address book.
-** Pros: Easy to implement.
-** Cons: May have performance issues in terms of memory usage.
-* **Alternative 2:** Individual command knows how to undo/redo by itself.
-** Pros: Will use less memory (e.g. for `delete`, just save the restaurant being deleted).
-** Cons: We must ensure that the implementation of each individual command are correct.
-
-===== Aspect: Data structure to support the undo/redo commands
-
-* **Alternative 1 (current choice):** Use a list to store the history of address book states.
-** Pros: Easy for new Computer Science student undergraduates to understand, who are likely to be the new incoming developers of our project.
-** Cons: Logic is duplicated twice. For example, when a new command is executed, we must remember to update both `HistoryManager` and `VersionedAddressBook`.
-* **Alternative 2:** Use `HistoryManager` for undo/redo
-** Pros: We do not need to maintain a separate list, and just reuse what is already in the codebase.
-** Cons: Requires dealing with commands that have already been undone: We must remember to skip these commands. Violates Single Responsibility Principle and Separation of Concerns as `HistoryManager` now needs to do two different things.
-// end::undoredo[]
-
 === Sign Up, Login and Logout Feature
 ==== Current Implementation
 The current implementation of Makan Book does not allow the usage of all the features. Certain features require registration
@@ -385,6 +299,7 @@ or login of an account. For instance, the adding of friends can only be done upo
 can be entered through the Command Line Interface. The implementation is aided by the current `modelManager` which keeps track
 of whether a user is currently signed in and which user it is. In doing so, data relating to this particular user during his session
 can be saved.
+// end::evanmok2401(1)[]
 
 // tag::meena567[]
 === Adding, accepting and deleting friends and friend requests
@@ -555,7 +470,6 @@ eat at.
 In MakanBook, we implemented a schedule feature according to the NUS Calendar: 17 weeks in a semester, with each day
 split into 30 minute timeslots. Each timeslot is encapsulated by a `Date` object which contains the NUS `Week`, the `Day` of the week, and the `Time` that the 30 minute segment starts at.
 
-
 A `UniqueBusySchedule` class is then used to encapsulate the list of busy timeslots for any individual user and `UniqueBusySchedule` contains two key pieces of information:
 the `Username` to identify which user the schedule belongs to, and a `HashMap` that stores the list of busy `Dates` for
 each corresponding NUS week.
@@ -575,17 +489,6 @@ Timetable Commands can only be used when the `User` is logged into the MakanBook
 Exceptions are handled with the `NotLoggedInCommandException` class in the `Logic` component.
 
 The algorithm for finding all the free dates for a user is found inside the UniqueSchedule class.
-
-==== Low priority extensions
-* (NOT IMPLEMENTED) `AddCalendarCommand` allows block date functionality but just using only a simple google calendar login.
-* (NOT IMPLEMENTED) `AddNUSMODSCommand` allows block date functionality using just a simple NUSMODS link.
-
-// tag::dataencryption[]
-=== [Proposed] Data Encryption
-
-_{Explain here how the data encryption feature will be implemented}_
-
-// end::dataencryption[]
 
 === Logging
 
@@ -1076,13 +979,41 @@ See this https://github.com/se-edu/addressbook-level4/pull/599[PR] for the step-
 
 *Target user profile*:
 
-* Student diners aiming to find eating places around the National University of Singapore
+* Diners aiming to find eating places around the National University of Singapore
 
 *Value proposition*:
 
-With the Restaurant Book, users can find restaurants based on their preferences such as cuisine or budget. This makes the process of deciding what to eat easier. At the same time, users can give reviews of the restaurants and can view reviews of other users as well.
+With the Makan Book, users can find restaurants based on their preferences such as cuisine or budget. This makes the process of deciding what to eat easier. At the same time, users can give reviews of the restaurants and can view reviews of other users as well.
 Additionally, Users can add other users as friends and form groups so that they can have private food “Jios”/ sessions. Public food “Jios”, which is open to the whole of NUS, is available as well for the User. Additionally, the User can get recommendations for friends based on mutual friends or others who eat at the same restaurants. Users of the addressbook can also include their own timetable to help them organise jios and eating sessions with friends. Lastly, a user can add restaurants apart from the existing NUS restaurants in their own private Restaurant book. Through the features of the Restaurant Book, we hope the dining experience in NUS can be enhanced.
 
+[Discrete]
+=== Feature
+Work Division
+
+==== Evan : Add User Related Features
+- [x] V1.1: Setting up of Storage relating to Users
+- [x] V1.2: Users able to Sign Up, Login and Logout.
+- [x] V1.3: Users able to write reviews for restaurants and view the reviews they've written.
+
+==== Meena :
+- [x] V1.1:
+- [x] V1.2:
+- [x] V1.3:
+
+==== Chelsea :
+- [x] V1.1:
+- [x] V1.2:
+- [x] V1.3:
+
+==== Aiden :
+- [x] V1.1:
+- [x] V1.2:
+- [x] V1.3:
+
+==== Kate :
+- [x] V1.1:
+- [x] V1.2:
+- [x] V1.3:
 
 [appendix]
 == User Stories
@@ -1160,12 +1091,11 @@ Priorities: High (must have) - `* * \*`, Medium (nice to have) - `* \*`, Low (un
 
 |=======================================================================
 
-_{More to be added}_
 
 [appendix]
 == Use Cases
 
-(For all use cases below, the *System* is the `AddressBook` and the *Actor* is the `user`, unless specified otherwise)
+(For all use cases below, the *System* is the `Makan Book` and the *Actor* is the `user`, unless specified otherwise)
 
 [discrete]
 === Use case #1: Meeting with friends to eat together at a place in NUS
@@ -1310,9 +1240,6 @@ Use case ends.
 +
 Use case ends.
 
-
-_{More to be added}_
-
 [appendix]
 == Non Functional Requirements
 
@@ -1338,23 +1265,6 @@ A contact detail that is not meant to be shared with others
 An event for users to meet up with friends (over food)
 
 [appendix]
-== Product Survey
-
-*Product Name*
-
-Author: ...
-
-Pros:
-
-* ...
-* ...
-
-Cons:
-
-* ...
-* ...
-
-[appendix]
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
@@ -1375,27 +1285,85 @@ These instructions only provide a starting point for testers to work on; testers
 .. Resize the window to an optimum size. Move the window to a different location. Close the window.
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
+// tag::evanmok2401(2)[]
+=== Sign Up for Makan Book
 
-_{ more test cases ... }_
+. Signing Up for an Account in the Makan Book.
+.. Prerequisites: User does not have an existing account in the Makan Book.
+... Test case: `signup u/johnnydoe pwd/pAssw0rd n/John Doe p/98765432 e/johnd@example.com` +
+   Expected: Successfully Registered
 
-=== Deleting a restaurant
+. `logout` and Sign Up with the same username as before
+.. Prerequisites: Username is already taken in Makan Book.
+... Test case: `signup u/johnnydoe pwd/pAssw0rd n/John Doe p/98765432 e/johnd@example.com` +
+   Expected: This username already exists in the Makan Book
 
-. Deleting a restaurant while all restaurants are listed
+=== Login a User
 
-.. Prerequisites: List all restaurants using the `list` command. Multiple restaurants in the list.
-.. Test case: `delete 1` +
-   Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
-.. Test case: `delete 0` +
-   Expected: No restaurant is deleted. Error details shown in the status message. Status bar remains the same.
-.. Other incorrect delete commands to try: `delete`, `delete x` (where x is larger than the list size) _{give more}_ +
-   Expected: Similar to previous.
+. Log in into an non-existing Makan Book Account.
+.. Prerequisites: User does not have an account in the Makan Book.
+... Test case: `login u/naveko pwd/asd` +
+   Expected: Either Username or Password is Incorrect
 
-_{ more test cases ... }_
+. Log in into an existing Makan Book Account, but with incorrect password.
+.. Prerequisites: User has an existing account, log in with incorrect password.
+... Test case: `login u/johnnydoe pwd/password` +
+   Expected: Either Username or Password is Incorrect
+
+. Log in into an existing Makan Book Account, with correct password.
+.. Prerequisites: User has an existing account and is currently not logged in.
+... Test case: `login u/johnnydoe pwd/pAssw0rd` +
+   Expected: Successfully Logged In
+
+. Log in again while in an existing session.
+.. Prerequisites: User is currently logged in and tries to log in again.
+... Test case: `login u/johnnydoe pwd/pAssw0rd` +
+   Expected: User is already logged in
+
+=== Log Out a User
+
+. Log Out from an existing session.
+.. Prerequisites: User is currently logged in.
+... Test case: `logout` +
+   Expected: Successfully Logged Out
+
+. Log Out again despite no active session.
+.. Prerequisites: Log out even though no user is currently logged in.
+... Test case: `logout` +
+   Expected: There is no user currently logged in
+
+=== Display Current User Profile
+
+. Login into an account and enter `displayProfile`.
+.. Prerequisites: User is currently logged in.
+... Test case: `displayProfile` +
+   Expected: Displaying User Profile
+
+. Logout and enter `displayProfile`.
+.. Prerequisites: Display Profile Command used despite having no current User logged in.
+... Test case: `displayProfile` +
+   Expected: User is not currently logged in
+
+=== Write a Review
+
+. Login into an account and Write a proper review
+.. Prerequisites: User is currently logged in and review is in the proper format.
+... Test case: `writeReview 1 rate/3 rvw/The cold noodles and pork bulgogi were delicious. ` +
+   Expected: Successfully Wrote Review
+
+. Login into an account and Write an incorrect review with incorrect rating
+.. Prerequisites: User is currently logged in and rating given is not from 1 to 5.
+... Test case: `writeReview 1 rate/6 rvw/The cold noodles and pork bulgogi were delicious. ` +
+   Expected: Rating must be a positive integer from 1 to 5 where 1 is the lowest rating and 5, the highest rating.
+
+. Login into an account and Write an incorrect review with blank review
+.. Prerequisites: User is currently logged in and written review is a space " ".
+... Test case: `writeReview 1 rate/5 rvw/ ` +
+   Expected: Written Reviews can take any values, and it should not be blank.
 
 === Saving data
 
 . Dealing with missing/corrupted data files
-
-.. _{explain how to simulate a missing/corrupted file and the expected behavior}_
-
-_{ more test cases ... }_
+.. Corrupted Xml: The application will start with an empty addressbook.xml and users.xml.
+.. Missing Xml: The application would generate sample addressbook.xml and users.xml and store it in the data folder
+// end::evanmok2401(2)[]
