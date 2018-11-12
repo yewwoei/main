@@ -45,10 +45,9 @@ reviews for restaurants within NUS. Additionally, Users are able to interact wit
 
 ** Documentation:
 *** Contributed to the overall flow of User Guide and Developer Guide, on top of my own features.
-*** Restructuring of the .
 
 ** Community:
-*** Reported bugs and suggestions for other teams in the class (Examples:  https://github.com/CS2103-AY1819S1-W17-3/main/issues/173[1], https://github.com/CS2103-AY1819S1-W17-3/main/issues/176[2], https://github.com/CS2103-AY1819S1-W17-3/main/issues/180[3])
+*** Reported bugs and suggestions for other teams in the class (Examples: https://github.com/CS2103-AY1819S1-W17-3/main/issues/173[1], https://github.com/CS2103-AY1819S1-W17-3/main/issues/176[2], https://github.com/CS2103-AY1819S1-W17-3/main/issues/180[3])
 
 
 == Contributions to the User Guide
