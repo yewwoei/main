@@ -1373,6 +1373,68 @@ These instructions only provide a starting point for testers to work on; testers
 .. Missing Xml: The application would generate sample addressbook.xml and users.xml and store it in the data folder
 // end::evanmok2401(2)[]
 
+// tag::meena567[]
+
+=== Adding friends
+
+. Add a valid user as a friend
+.. Prerequisites: User is logged in as meena567. meena567 is not already friends and has not sent a friend request to katespades
+... Test case: `addFriend u/katespades` +
+   Expected: Friend request sent to: katespades
+
+. Send a friend request to a user multiple times
+.. Prerequisites: User is logged in as meena567. Have already sent a friend request previously to katespades which has not been accepted or deleted by katespades
+... Test case: `addFriend u/katespades` +
+   Expected: You have already sent friend request to this User
+
+. Send a friend request to a user who has sent a friend request to you previously
+.. Prerequisites: User is logged in as meena567. meena567 has a friend request from katespades which has not been accepted yet by meena567.
+... Test case: `addFriend u/katespades` +
+   Expected: You have that user's friend request. Please accept that request instead of adding them as a friend.
+
+. Send a friend request to a user who is already a friend
+.. Prerequisites: User is logged in as meena567. meena567 is already friends with katespades.
+... Test case: `addFriend u/katespades` +
+   Expected: You are already friends with this user.
+
+=== Accepting friends
+
+. Accepting a valid friend request
+.. Prerequisites: User is logged in as meena567. meena567 has a friend request from katespades
+... Test case: `acceptFriend u/katespades` +
+   Expected: Successfully accepted friend request of: katespades
+
+. Accepting an invalid friend request
+.. Prerequisites: User is logged in as meena567. meena567 does not have a friend request from katespades
+... Test case: `acceptFriend u/katespades` +
+   Expected: Sorry, that user is not in your friend requests' list.
+
+=== Deleting friend requests
+
+. Deleting a valid friend request
+.. Prerequisites: User is logged in as meena567. meena567 has a friend request from katespades
+... Test case: `deleteFriendRequest u/katespades` +
+   Expected: Successfully deleted friend request of user : katespades
+
+. Deleting an invalid friend request
+.. Prerequisites: User is logged in as meena567. meena567 does not have a friend request from katespades
+... Test case: `deleteFriendRequest u/katespades` +
+   Expected: Sorry, that User did not send you a friend request.
+
+=== Deleting friends
+
+. Deleting a valid friend
+.. Prerequisites: User is logged in as meena567. meena567 is friends with katespades
+... Test case: `deleteFriend u/katespades` +
+   Expected: Successfully deleted friend with username: katespades
+
+. Deleting an invalid friend request
+.. Prerequisites: User is logged in as meena567. meena567 is not friends with katespades
+... Test case: `deleteFriend u/katespades` +
+   Expected: Sorry, the friend that you want to delete does not exist in your list of friends
+
+// end::meena567[]
+
 // tag::chelchia[]
 === Create a jio
 

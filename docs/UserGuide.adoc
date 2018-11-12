@@ -46,7 +46,7 @@ Allows you to use Makan Book's many features
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Waa Cow`.
 * Items in square brackets are optional e.g `n/NAME [u/USERNAME]` can be used as `n/Waa Cow u/navekom` or as `n/Waa Cow`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[u/USERNAME]...` can be used as `{nbsp}` (i.e. 0 times), `u/navekom`, `u/katespade u/themyth` etc.
 * Parameters can be in any order e.g. if the command specifies `u/USERNAME pwd/PASSWORD`, `pwd/PASSWORD u/USERNAME` is also acceptable.
@@ -227,7 +227,7 @@ Examples:
 === Adding members: `addMembers`
 
 A User already in the group can add members to a particular group by specifying the group name and the usernames of the users they wish to add to that group. +
-Format: `addMembers g/GROUPNAME [Users… u/USERNAMES]`
+Format: `addMembers g/GROUPNAME [Users u/USERNAMES]...`
 
 Examples:
 
