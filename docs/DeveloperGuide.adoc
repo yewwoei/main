@@ -368,8 +368,13 @@ inconvenient for the User and thus the hashmap mentioned before was used.
 
 ==== Current Implementation
 The payment splitting feature allow user to keep record for their debts, especially for gathering. Creditor can use
-the `addDebt` to create a request to debtor. A record of this debt will be made with a "pending" status and store to
-both user. Debtor can then use the `acceptDebtRequest` to accept the request from creditor, which the status will be
+the `addDebt` to create a request to debtor, or `addGroupDebt` to create a request to all other members in a group.
+A record of this debt will be made with a "pending" status and store to
+both user.
+
+image::AddDebtCommandSequenceDiagram.png[width="800"]
+
+Debtor can then use the `acceptDebtRequest` to accept the request from creditor, which the status will be
 changed to "accepted", or reject and delete the request by `deleteDebtRequest`, which the the debt record will be
 deleted and removed from the storage. If the debt has been repaid, the creditor can use the `clearDebt` to mark the
 debt as "cleared". Only the user who initialized the debt(creditor) can clear the debt, and only the other user(debtor)
