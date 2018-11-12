@@ -4,8 +4,6 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import org.junit.Test;
-
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.friend.AddFriendCommand;
 import seedu.address.model.Model;
 import seedu.address.model.user.User;
@@ -63,9 +61,6 @@ public class AddFriendCommandSystemTest extends AddressBookSystemTest {
 
         command = AddFriendCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USERNAME_B;
         assertCommandSuccess(command, model, userB);
-
-        listJio();
-        selectRestaurant(Index.fromOneBased(3));
 
         logout();
         model.logoutUser();
