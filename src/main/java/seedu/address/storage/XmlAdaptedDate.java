@@ -69,7 +69,7 @@ public class XmlAdaptedDate {
         }
 
         if (day == null) {
-            throw new IllegalValueException(Day.MESSAGE_DAY_CONSTRAINTS);
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Day.class.getSimpleName()));
         }
 
         if (!Day.isValidDay(day)) {
@@ -77,7 +77,7 @@ public class XmlAdaptedDate {
         }
 
         if (time == null) {
-            throw new IllegalValueException(Time.MESSAGE_TIME_CONSTRAINTS);
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Time.class.getSimpleName()));
         }
 
         if (!Time.isValidTime(time)) {

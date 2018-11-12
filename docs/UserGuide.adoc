@@ -152,6 +152,7 @@ the reviews he's written. +
 Format: `displayProfile`
 // end::evan[]
 
+// tag::chelchia[]
 === Finding people to eat with: `createJio`
 
 Users can find other users to eat with through inviting users. “createJio” creates a jio that is added to the global list of jios. +
@@ -160,7 +161,8 @@ Format: `createJio n/NAME w/WEEK d/DAY h/TIME a/PLACE [g/GROUP NAME]`
 ****
 * Jio -- an invitation to hang out.
 * Name, date, time, place must be provided. The other parameters are optional.
-* All users will be able to view the list of jios, unless the user specifies that it is a group jio. If group name is present, all group members are added to jio.
+* All users will be able to view the list of jios.
+* User can specify a group name for a group jio. All group members are automatically added to jio. Jio can still be viewed by others.
 ****
 
 Examples:
@@ -189,6 +191,7 @@ Format: `deleteJio n/NAME`
 Examples:
 
 * `deleteJio n/MALA`
+// end::chelchia[]
 
 === Adding friends: `addFriend`
 
@@ -197,7 +200,7 @@ Format: `addFriend u/USERNAME`
 
 Examples:
 
-* `addFriend u/Meena567`
+* `addFriend u/meena567`
 
 === Accept friend request: `acceptFriend`
 
@@ -206,7 +209,7 @@ Format: `acceptFriend u/NAME`
 
 Examples:
 
-* `acceptFriend u/Meena567`
+* `acceptFriend u/meena567`
 
 === Delete friend request: `deleteFriendRequest`
 
@@ -215,7 +218,7 @@ Format: `deleteFriendRequest u/USERNAME`
 
 Examples:
 
-* `deleteFriendRequest u/Meena567`
+* `deleteFriendRequest u/meena567`
 
 === Delete friend: `deleteFriend`
 
@@ -224,7 +227,17 @@ Format: `deleteFriend u/USERNAME`
 
 Examples:
 
-* `deleteFriend u/Meena567`
+* `deleteFriend u/meena567`
+
+=== List friend requests: `listFriendRequests`
+
+A User can list friend requests that they have received. Only the party that did not initiate the friend request will receive the friend request +
+Format: `listFriendRequests`
+
+=== List friends: `listFriends`
+
+A User can list their friends. +
+Format: `listFriends`
 
 === Adding groups: `addGroup`
 
@@ -274,6 +287,16 @@ Format: `deleteGroup g/GROUPNAME`
 Examples:
 
 * `deleteGroup g/CS2103`
+
+=== List group requests: `listGroupRequests`
+
+A User can list group requests that they have received. +
+Format: `listGroupRequests`
+
+=== List groups: `listGroups`
+
+A User can list groups that they are a part of. +
+Format: `listGroups`
 
 ===  Block unavailable timeslot manually: `blockDate`
 

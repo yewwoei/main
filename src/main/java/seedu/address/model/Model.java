@@ -300,6 +300,8 @@ public interface Model {
 
     void displayUserWeekSchedule(Week weekNumber);
 
+    void displayFreeDatesForGroupAndWeek(Name groupName, Week week);
+
     //=========== Jio methods ===============================================================================
 
     ObservableList<Jio> getJioList();
@@ -321,6 +323,8 @@ public interface Model {
     boolean isCurrentUserCreatorOfJio(Name jioName);
 
     void listJio(ObservableList<Jio> list);
+
+    void clearJio();
 
     //=========== Undo/Redo/Commit ===============================================================================
 

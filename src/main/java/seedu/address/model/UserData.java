@@ -3,6 +3,7 @@ package seedu.address.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -74,6 +75,10 @@ public class UserData {
     public User getUser(Username username) {
         return usernameUserHashMap.get(username);
     }
+
+    public List<User> getUsers() {
+        return new ArrayList<User>(usernameUserHashMap.values());
+    }
     //=========== Friend methods ============================================================================
     public boolean hasGroup(Name groupName) {
         return groupHashMap.containsKey(groupName);
@@ -142,6 +147,13 @@ public class UserData {
     public boolean isCreatorOfJio(Name jioName, User user) {
         return jios.asUnmodifiableObservableList().stream().anyMatch(
             jio -> (jio.getName().equals(jioName) && jio.getCreator().equals(user.getUsername())));
+    }
+
+    /**
+     * Clears all jios in userdata.
+     */
+    public void clearJio() {
+        jios = new UniqueJioList();
     }
 
     @Override

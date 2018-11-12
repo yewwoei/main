@@ -32,7 +32,7 @@ public class FreeDateCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Time has been unblocked on your schedule: %1$s";
 
-    public static final String MESSAGE_DATE_NOT_FOUND = "This time block is already free on your schedule.";
+    public static final String MESSAGE_ALREADY_FREE = "This time block is already free on your schedule.";
 
     private final Date toFree;
 
@@ -54,12 +54,10 @@ public class FreeDateCommand extends Command {
         }
 
         if (!model.hasDateForCurrentUser(toFree)) {
-            throw new CommandException(MESSAGE_DATE_NOT_FOUND);
+            throw new CommandException(MESSAGE_ALREADY_FREE);
         }
 
         model.freeDateForCurrentUser(this.toFree);
-        // saves the makanbook for undo and redo
-        model.commitAddressBook();
         return new CommandResult(String.format(MESSAGE_SUCCESS, toFree));
     }
 

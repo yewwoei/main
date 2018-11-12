@@ -252,6 +252,11 @@ public class ModelStub implements Model {
     }
 
     @Override
+    public void clearJio() {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
     public void addUser(User user) {
         throw new AssertionError("This method should not be called.");
     }
@@ -435,6 +440,12 @@ public class ModelStub implements Model {
 
     @Override
     public void displayUserWeekSchedule(Week weekNumber) {
+        throw new AssertionError("This method should not be called.");
+    }
+
+    @Override
+    public void displayFreeDatesForGroupAndWeek(Name groupName, Week week) {
+
         throw new AssertionError("This method should not be called.");
     }
 
