@@ -203,14 +203,13 @@ image::DeleteRestaurantSdForLogic.png[width="800"]
 
 [[Design-Model]]
 // tag::yewwoeiModel[]
-// tag::chelchia[]
+// tag::chelchia(1)[]
 === Model component
 
 .Structure of the Model Component
 image::ModelClassDiagramWithJio.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
-// end::chelchia[]
 
 The `Model`,
 
@@ -221,6 +220,7 @@ The `Model`,
 
 
 [[Design-Storage]]
+// end::chelchia(1)[]
 // end::yewwoeiModel[]
 
 === Storage component
@@ -440,7 +440,7 @@ Another alternative considered was to use the Calendar library in Java to store 
 as the NUS week system would be the most intuitive way of user input for students, this may only create additional work.
 // end::yewwoeiDate[]
 
-// tag::chelchia[]
+// tag::chelchia(2)[]
 === Jio Feature
 ==== Current Implementation
 A `Jio` object stores information about the jio in the following objects: `Name`, `Week`, `Day`, `Time`, `Address`. The
@@ -487,7 +487,7 @@ do not touch current user at all, but pass `Jio` objects on to `ModelManager`.
 ** Pros: All information about User is stored for possible retrieval in the future (eg. to view user timetables).
 ** Cons: Difficult to store in Xml file. Users cannot easily be converted in to a single string.
 ** Cons: May be storing unnecessary information.
-// end::chelchia[]
+// end::chelchia(2)[]
 
 // tag::yewwoeiFeature[]
 === User Schedule Feature
@@ -1544,7 +1544,7 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Sorry, the group that you want to delete does not exist in your list of groups
 // end::meena567[]
 
-// tag::chelchia[]
+// tag::chelchia(3)[]
 === Create a jio
 
 . Create a jio with vaild parameters
@@ -1590,7 +1590,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Prerequisites: User is logged in.
 ... Test case: `deleteJio n/randomjio` +
    Expected: Jio does not exist.
-// end::chelchia[]
+// end::chelchia(3)[]
 
 
 // tag::yewwoeiManual[]
