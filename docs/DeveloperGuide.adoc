@@ -1462,4 +1462,23 @@ These instructions only provide a starting point for testers to work on; testers
 
 === Block Date from your schedule.
 
-. Block a
+. Block a valid date from your schedule
+.. Prerequisites: User is logged in. The date is not blocked on your schedule.
+... Test case: `blockDate w/recess d/mon h/1800` +
+Expected: New date added on your schedule: [NUS Week: recess Day:mon Time:1800].
+
+
+. Block a valid date that is already on your schedule
+. Block a valid date from your schedule
+.. Prerequisites: User is logged in. The date is blocked on your schedule.
+... Test case: `blockDate w/recess d/mon h/1800` +
+Expected: This busy date already exists in your schedule.
+
+=== Free Date from your schedule.
+
+. Free a valid date from your schedule
+.. Prerequisites: User is logged in. The date is blocked on your schedule.
+... Test case: `freeDate w/recess d/mon h/1800` +
+Expected: Time has been unblocked on your schedule: [NUS Week: recess Day:mon Time:1800]
+
+
