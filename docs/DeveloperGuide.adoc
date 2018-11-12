@@ -1352,19 +1352,19 @@ These instructions only provide a starting point for testers to work on; testers
 
 === Write a Review
 
-. Login into an account and Write a proper review
+. Login into an account and write a proper review
 .. Prerequisites: User is currently logged in and review is in the proper format.
-... Test case: `writeReview 1 rate/3 rvw/The cold noodles and pork bulgogi were delicious. ` +
+... Test case: `writeReview 1 rate/3 rvw/The cold noodles and pork bulgogi were delicious.` +
    Expected: Successfully Wrote Review
 
 . Login into an account and Write an incorrect review with incorrect rating
 .. Prerequisites: User is currently logged in and rating given is not from 1 to 5.
-... Test case: `writeReview 1 rate/6 rvw/The cold noodles and pork bulgogi were delicious. ` +
+... Test case: `writeReview 1 rate/6 rvw/The cold noodles and pork bulgogi were delicious.` +
    Expected: Rating must be a positive integer from 1 to 5 where 1 is the lowest rating and 5, the highest rating.
 
 . Login into an account and Write an incorrect review with blank review
-.. Prerequisites: User is currently logged in and written review is a space " ".
-... Test case: `writeReview 1 rate/5 rvw/ ` +
+.. Prerequisites: User is currently logged in and written review is empty.
+... Test case: `writeReview 1 rate/5 rvw/` +
    Expected: Written Reviews can take any values, and it should not be blank.
 
 === Saving data
