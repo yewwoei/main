@@ -1435,11 +1435,11 @@ These instructions only provide a starting point for testers to work on; testers
 Expected: A debt request of 12.000000 SGD to katespades is sent
 
 . Add Debt to a invalid user with valid amount
-.. Test case: `addDebt u/test123 amt/12`
+.. Test case: `addDebt u/test123 amt/12` +
 Expected: Input user not exist.
 
 . Add debt to a valid user with invalid amount
-.. Test case: `addDebt u/katespades amt/99999999999`
+.. Test case: `addDebt u/katespades amt/99999999999` +
 Expected: Input amount must be larger than zero and less than a hundred million.
 
 === Add Group Debt
@@ -1484,7 +1484,7 @@ This is to ensure that mutiple debts can be recorded and differentiated.
 Expected: Debt request(ID: 181112172248904) from meena567 of 3.000000 SGD has been deleted.
 
 . Delete a non-existent debt request received
-.. Test case: `deleteDebtRequest u/meena567 amt/18 id/110111216482190` (random id and amount)+
+.. Test case: `deleteDebtRequest u/meena567 amt/18 id/110111216482190` (random id and amount) +
 Expected: Input debt not exist.
 
 === Clear Debt
@@ -1500,10 +1500,10 @@ Expected: Input debt not exist.
 Expected: katespades's debt of 7.000000 SGD is cleared.
 
 . Clear Debt to a invalid user(not your debtor) with valid amount
-.. Test case: `clearDebt u/chelchia amt/3`
+.. Test case: `clearDebt u/chelchia amt/3` +
 Expected: There are no debt between you and input user
 
 . Add debt to a valid user with invalid amount
-.. Test case: `clearDebt u/katespades amt/0`
+.. Test case: `clearDebt u/katespades amt/0` +
 Expected: Input amount should be larger than zero.
 // end::kate[]
