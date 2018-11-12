@@ -63,8 +63,6 @@ https://github.com/CS2103-AY1819S1-W10-2/main/pull/312[#312], https://github.com
 *** PRs reviewed (with non-trivial review comments) for other member.
 *** Reported bugs and suggestions for other teams in the class.
 
-_{you can add/remove categories in the list above}_
-
 == Contributions to the User Guide
 
 
