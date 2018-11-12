@@ -1433,6 +1433,71 @@ These instructions only provide a starting point for testers to work on; testers
 ... Test case: `deleteFriend u/katespades` +
    Expected: Sorry, the friend that you want to delete does not exist in your list of friends
 
+=== Adding groups
+
+. Adding a valid group
+.. Prerequisites: User is logged in as meena567 and wants to add a group with name CS2103. CS2103 is not the name of any other group in Makan Book.
+... Test case: `addGroup g/CS2103` +
+   Expected: Group created: CS2103
+
+. Adding an invalid group
+.. Prerequisites: User is logged in as meena567 and wants to add a group with name CS2103. However, there exists another group with name CS2103.
+... Test case: `addGroup u/CS2103` +
+   Expected: Sorry, a group with that name exists. Please choose a different group name.
+
+=== Accepting groups
+
+. Accepting a valid group request
+.. Prerequisites: User is logged in as meena567. meena567 has a group request from CS2103
+... Test case: `acceptGroup g/CS2103` +
+   Expected: Successfully accepted group request of: CS2103
+
+. Accepting an invalid group request
+.. Prerequisites: User is logged in as meena567. meena567 does not have a group request from CS2103
+... Test case: `acceptGroup g/CS2103` +
+   Expected: Sorry, that group is not in your group requests' list.
+
+=== Adding members to groups
+
+. Adding all valid members
+.. Prerequisites: User is logged in as meena567 and meena567 is part of group CS2103. meena567 wants to add users who are not part of the group and have previously received group request.
+... Test case: `addMembers g/CS2103 u/katespades u/thejrlinguist` +
+   Expected: Members added to group: CS2103=[katespades, thejrlinguist]
+
+. Adding some members who are part of the group
+.. Prerequisites: User is logged in as meena567 and meena567 is part of group CS2103. meena567 wants to add users thejrlinguist and katespades to the group. However, thejrlinguist is already part of the group but katespades is not.
+... Test case: `addMembers g/CS2103 u/katespades u/thejrlinguist` +
+   Expected: Sorry, username to be added is in the group. No users were added to the group.
+.... Even though katespades is not a part of the group, the command will not add any members to the group as thejrlinguist is already inside the group.
+
+. Adding users who already have a group request
+.. Prerequisites: User is logged in as meena567 and meena567 is part of group CS2103. meena567 wants to add katespades to the group. However, katespades already has a request to the group.
+... Test case: `addMembers g/CS2103 u/katespades` +
+   Expected: Sorry, User already has a request for that group.
+
+=== Deleting group requests
+
+. Deleting a valid group request
+.. Prerequisites: User is logged in as meena567. meena567 has a group request from CS2103
+... Test case: `deleteGroupRequest g/CS2103` +
+   Expected: Successfully deleted group request of group : CS2103
+
+. Deleting an invalid group request
+.. Prerequisites: User is logged in as meena567. meena567 does not have a group request from CS2103
+... Test case: `deleteGroupRequest g/CS2103` +
+   Expected: Sorry, you do not have that group request
+
+=== Deleting group
+
+. Deleting a valid group
+.. Prerequisites: User is logged in as meena567. meena567 is part of CS2103 group
+... Test case: `deleteGroup g/CS2103` +
+   Expected: Successfully deleted group with name: CS2103
+
+. Deleting an invalid group
+.. Prerequisites: User is logged in as meena567. meena567 is not in CS2103 group
+... Test case: `deleteGroup g/CS2103` +
+   Expected: Sorry, the group that you want to delete does not exist in your list of groups
 // end::meena567[]
 
 // tag::chelchia[]
