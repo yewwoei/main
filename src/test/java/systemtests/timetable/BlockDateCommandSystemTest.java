@@ -87,12 +87,10 @@ public class BlockDateCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: user logs in normally and attempts to block a date with invalid day -> not blocked. */
         command = createBlockDateCommand(VALID_WEEK, INVALID_DAY, VALID_TIME);
-        command = createBlockDateCommand(toBlock);
         assertCommandFailure(command, Day.MESSAGE_DAY_CONSTRAINTS);
 
         /* Case: user logs in normally and attempts to block a date with invalid time -> not blocked. */
         command = createBlockDateCommand(VALID_WEEK, VALID_DAY, INVALID_TIME);
-        command = createBlockDateCommand(toBlock);
         assertCommandFailure(command, Time.MESSAGE_TIME_CONSTRAINTS);
 
         /* Case: user logs in normally and attempts to block an already blocked date -> not blocked. */
