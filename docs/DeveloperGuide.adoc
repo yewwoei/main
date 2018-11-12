@@ -385,6 +385,7 @@ can be entered through the Command Line Interface. The implementation is aided b
 of whether a user is currently signed in and which user it is. In doing so, data relating to this particular user during his session
 can be saved.
 
+// tag::meena567[]
 === Adding, accepting and deleting friends and friend requests
 ==== Current Implementation for Friendships
 Friendships can have two statuses - ACCEPTED and PENDING. User A can send a friend request to User B which would then store
@@ -442,6 +443,7 @@ Friendships can be created from the XML element with the aid of the hashmap.
 Initially, I considered asking the initiating User to enter all the information about the other User to add them as a friend.
 This is so that I would be able to construct the User from the the information provided. However, this would be too
 inconvenient for the User and thus the hashmap mentioned before was used.
+// end::meena567[]
 
 // tag::kate[]
 === Payment Splitting Feature
