@@ -7,7 +7,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.timetable.FindDatesCommand;
-import seedu.address.logic.commands.timetable.ListScheduleCommand;
 import seedu.address.logic.parser.ArgumentMultimap;
 import seedu.address.logic.parser.ArgumentTokenizer;
 import seedu.address.logic.parser.Parser;
@@ -35,7 +34,7 @@ public class FindDatesCommandParser implements Parser<FindDatesCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_WEEK, PREFIX_GROUP)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListScheduleCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindDatesCommand.MESSAGE_USAGE));
         }
 
         Name groupName = ParserUserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get());

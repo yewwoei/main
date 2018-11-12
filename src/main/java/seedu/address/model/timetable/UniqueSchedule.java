@@ -17,7 +17,7 @@ import seedu.address.model.timetable.exceptions.DuplicateDateException;
 import seedu.address.model.user.Username;
 
 /**
- * Represents a user's busy schedule in the MakanBook.
+ * Represents a user's schedule of busy dates in the MakanBook.
  * Guarantees: data values are validated and immutable.
  */
 public class UniqueSchedule {
@@ -81,7 +81,8 @@ public class UniqueSchedule {
         weekDates.add(toAdd);
     }
 
-    /** Adds all the uniqueBusySchedule dates from another schedule into the current schedule.
+    /**
+     * Adds all the uniqueBusySchedule dates from another schedule into the current schedule.
      */
     public void addAll(UniqueSchedule otherSchedule) {
         // change all the reference pointers to point to otherSchedule's reference.

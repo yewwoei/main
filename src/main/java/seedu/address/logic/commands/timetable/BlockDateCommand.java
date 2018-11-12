@@ -30,7 +30,7 @@ public class BlockDateCommand extends Command {
             + PREFIX_DAY + "thu "
             + PREFIX_TIME + "1830 ";
 
-    public static final String MESSAGE_SUCCESS = "New time added on your schedule: %1$s.";
+    public static final String MESSAGE_SUCCESS = "New date added on your schedule: %1$s.";
 
     public static final String MESSAGE_DUPLICATE_DATE = "This busy date already exists in your schedule.";
 

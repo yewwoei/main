@@ -219,6 +219,8 @@ The `Model`,
 
 
 [[Design-Storage]]
+// end::yewwoei[]
+
 // tag::evanmok2401(1)[]
 === Storage component
 
@@ -412,6 +414,30 @@ it for self benefit.
 
 // end::kate[]
 
+// tag::yewwoei[]
+=== Internal Representation of Dates
+==== Current Implementation
+Each date consists of three points of data: the NUS Week, the Day of the week, and the Time of the day.
+The dates are separated into 30 minute intervals as represented by the time. The time is stored in 24-hour format.
+
+This implementation means that MakanBook is only tailored to work during the NUS semester. All features requiring some aspect of time
+will use this Date implementation.
+
+==== Reasons for this implementation
+Dates follow the NUS calendar to make it very intuitive for NUS students. Furthermore, this opens up ease of integrating with
+NUS mods in the future.
+
+Time-intervals are set at 30 minutes to ease implementation and reduce storage needs.
+
+==== Restrictions on usage of Date.
+Dates are all limited to the NUS calendar, and no dates in the range of 0000 to 0600 hours can be created.
+The rational for this is to discourage improper sleeping hours among students in NUS – at least in that small window of time.
+
+==== Alternatives considered
+Another alternative considered was to use the Calendar library in Java to store the dates as an underlying data structure. However,
+as the NUS week system would be the most intuitive way of user input for students, this may only create additional work.
+// end::yewwoei[]
+
 // tag::chelchia[]
 === Jio Feature
 ==== Current Implementation
@@ -462,39 +488,52 @@ do not touch current user at all, but pass `Jio` objects on to `ModelManager`.
 // end::chelchia[]
 
 // tag::yewwoei[]
-=== Timetable Feature
+=== User Schedule Feature
 
 ==== Benefits for the user
 * Any user using our MakanBook can add their schedules into their profile to block out dates that they are not free.
 * This way, any other person wanting to eat with other users can easily see which times they are free at.
-* MakanBook can also take in a list of people a user wants to eat with and will find the common free slots for them to
-eat at.
-* As an added feature, the user can also list the eating jios that fit his timetable.
+* To help the user arrange eating times with their groups, the user can also run the `findDates` command to find common timeslots to
+ eat at for groups.
 
 ==== Current Implementation
 In MakanBook, we implemented a schedule feature according to the NUS Calendar: 17 weeks in a semester, with each day
-split into 30 minute timeslots. Each timeslot is encapsulated by a `Date` object which contains the NUS `Week`, the `Day` of the week, and the `Time` that the 30 minute segment starts at.
+split into 30 minute timeslots as mentioned above. Each timeslot is encapsulated by a `Date` object which contains the NUS `Week`, the `Day` of the week, and the `Time` that the 30 minute segment starts at.
 
-A `UniqueBusySchedule` class is then used to encapsulate the list of busy timeslots for any individual user and `UniqueBusySchedule` contains two key pieces of information:
+A `UniqueSchedule` class is then used to encapsulate the list of busy timeslots for any individual user and `UniqueSchedule` contains two key pieces of information:
 the `Username` to identify which user the schedule belongs to, and a `HashMap` that stores the list of busy `Dates` for
 each corresponding NUS week.
 
+image::BlockDateSequenceDiagram.png[width="800"]
+
+
 **Storage of Timetable related Data** +
-The entire user's `UniqueBusySchedule` is stored in the users.xml file with each object as an XML element containing the username and all busy dates.
+The entire user's `UniqueSchedule` is stored in the users.xml file with each object as an XML element containing the username and all busy dates.
+
+**Algorithm for finding free timeslots to eat** +
+Currently, each time `listScheduleForUser` or `findDates` is run, the system will retrieve the list of all unavailable dates for that NUS week.
+Then, a complete list of free dates will be generated for that week. The list of blocked dates will be run against the complete free list, removing all blocked dates before the UI
+receives the finalised list to display.
+
+==== Reasons for this Implementation
+All lists of dates are stored in a `List` instead of a `Set`. In the future, utilising `Set` may be a safer alternative to completely prevent the possibility of duplicates.
+Currently, duplicate dates are checked through the `contains` method of `List`. Any programming violations are checked in the test suite.
+
+`Set` data structures are not currently used as it will not interact well with the current XML storage system. For lack of time, this low-priority consideration will be set aside.
 
 ==== Timetable Commands
 * `BlockDateCommand` is specific to the logged in user, allowing the current `User` to save a date on his schedule where he is not free. A `BlockDateCommandParser` is used to parse the arguments necessary.
 * `FreeDateCommand` is specific to the logged in user, allowing him to free up dates on his schedule. A `FreeDateCommandParser` is used to parse the arguments necessary.
 * `ListScheduleForWeek` is specific to the logged in user. The command lists the user's schedule for a given NUS week. A parser is necessary.
-* (NOT IMPLEMENTED) `FindDateCommand` finds common dates to eat between the current user and a list of users he inputs. A parser is necessary.
+* `FindDates` finds common dates to eat between all users the group is in. The command lists all free timeslots to eat for a given NUS week, among the NUS group. A parser is necessary.
 
 ==== Restrictions on usage of Timetable commands
-
 Timetable Commands can only be used when the `User` is logged into the MakanBook.
 Exceptions are handled with the `NotLoggedInCommandException` class in the `Logic` component.
 
-The algorithm for finding all the free dates for a user is found inside the UniqueSchedule class.
+The algorithm for finding all the free dates for a user or group is found inside the UniqueSchedule class.
 
+// end::yewwoei
 === Logging
 
 We are using `java.util.logging` package for logging. The `LogsCenter` class is used to manage the logging levels and logging destinations.
@@ -1271,6 +1310,8 @@ A contact detail that is not meant to be shared with others
 An event for users to meet up with friends (over food)
 
 [appendix]
+
+
 == Instructions for Manual Testing
 
 Given below are instructions to test the app manually.
@@ -1549,6 +1590,58 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Jio does not exist.
 // end::chelchia[]
 
+
+// tag::yewwoei[]
+=== Block Date from your schedule.
+
+. Block a valid date from your schedule
+.. Prerequisites: User is logged in. The date is not blocked on your schedule.
+... Test case: `blockDate w/recess d/mon h/1800` +
+Expected: New date added on your schedule: [NUS Week: recess Day:mon Time:1800].
+
+
+. Block a valid date that is already on your schedule
+. Block a valid date from your schedule
+.. Prerequisites: User is logged in. The date is blocked on your schedule.
+... Test case: `blockDate w/recess d/mon h/1800` +
+Expected: This busy date already exists in your schedule.
+
+=== Free Date from your schedule.
+
+. Free a valid date from your schedule
+.. Prerequisites: User is logged in. The date is blocked on your schedule.
+... Test case: `freeDate w/recess d/mon h/1800` +
+Expected: Time has been unblocked on your schedule: [NUS Week: recess Day:mon Time:1800]
+
+. Free a valid date from your schedule when it is already free.
+.. Prerequisites: User is logged in. The date is blocked on your schedule.
+... Test case: `freeDate w/recess d/mon h/1800` +
+Expected: This time block is already free on your schedule.
+
+=== List your schedule for the week.
+
+. List your schedule for a valid week.
+.. Prerequisites: User is logged in.
+... Test case: `listScheduleForWeek w/13` +
+Expected: Your schedule will be listed in the browser panel as a html document with the heading: These are your free dates for the Week: 13.
+
+=== Find free timeslots to meet among your group members for a week.
+
+. Find free timeslots to meet among group members for a valid group and a valid week.
+.. Prerequisites: User is logged in and part of a group.
+... Test case: `findDates g/2103 w/13` +
+Expected: The list of timeslots for meeting will be listed in the browser panel as a html document with the heading: These are the common free dates for Group: 2103 on Week: 13.
+
+
+. Find free timeslots to meet among group members for a invalid group and a valid week.
+.. Prerequisites: User is logged in and not part of the group.
+... Test case: `findDates g/krustycrab w/13` +
+Expected: You are not in that group.
+// end::yewwoei[]
+
+
+
+
 // tag::kate[]
 === Add Debt
 ** Prerequisites:
@@ -1634,3 +1727,4 @@ Expected: There are no debt between you and input user
 .. Test case: `clearDebt u/katespades amt/0` +
 Expected: Input amount should be larger than zero.
 // end::kate[]
+
