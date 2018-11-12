@@ -5,8 +5,8 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
-
 import org.junit.Test;
+
 import seedu.address.logic.commands.timetable.BlockDateCommand;
 import seedu.address.model.Model;
 import seedu.address.model.timetable.Date;
@@ -15,22 +15,21 @@ import seedu.address.model.timetable.Time;
 import seedu.address.model.timetable.Week;
 import seedu.address.model.user.User;
 import seedu.address.testutil.TypicalDates;
-import seedu.address.testutil.TypicalUsers;
 import seedu.address.testutil.UserBuilder;
 import systemtests.AddressBookSystemTest;
 
 public class BlockDateCommandSystemTest extends AddressBookSystemTest {
 
+    private static final String INVALID_DAY = "9999";
+    private static final String INVALID_TIME = "bla";
+    private static final String INVALID_WEEK = "hello";
     private static final Date VALID_DATE_A = TypicalDates.DATE_A;
     private static final Date VALID_DATE_RECESS = TypicalDates.DATE_RECESS;
     private static final Date VALID_DATE_READING = TypicalDates.DATE_READING;
-    public static final String VALID_WEEK = VALID_DATE_A.getWeek().toString();
-    public static final String VALID_DAY = VALID_DATE_A.getDay().toString();
-    public static final String VALID_TIME = VALID_DATE_A.getTime().toString();
-    public static final String INVALID_WEEK = "hello";
-    public static final String INVALID_TIME = "bla";
-    public static final String INVALID_DAY = "9999";
-    public static final User VALID_USER = new UserBuilder().withName("BOOYAH").withUsername("starfire").build();
+    private static final String VALID_WEEK = VALID_DATE_A.getWeek().toString();
+    private static final String VALID_DAY = VALID_DATE_A.getDay().toString();
+    private static final String VALID_TIME = VALID_DATE_A.getTime().toString();
+    private static final User VALID_USER = new UserBuilder().withName("BOOYAH").withUsername("starfire").build();
 
     @Test
     public void block() {
@@ -69,12 +68,14 @@ public class BlockDateCommandSystemTest extends AddressBookSystemTest {
         assertCommandSuccess(command, toBlock);
         model.freeDateForCurrentUser(toBlock);
 
-        /* Case: user logs in normally and attempts to block dates again after freeing it up. -> date blocked in user schedule. */
+        /* Case: user logs in normally and attempts to block dates again after freeing it up.
+        -> date blocked in user schedule. */
         command = createBlockDateCommand(toBlock);
         assertCommandSuccess(command, toBlock);
         model.freeDateForCurrentUser(toBlock);
 
-        /* Case: user logs in normally and attempts to block dates after listing schedule. -> date blocked in user schedule. */
+        /* Case: user logs in normally and attempts to block dates after listing schedule.
+        -> date blocked in user schedule. */
         command = createBlockDateCommand(toBlock);
         assertCommandSuccess(command, toBlock);
         model.freeDateForCurrentUser(toBlock);
@@ -94,6 +95,7 @@ public class BlockDateCommandSystemTest extends AddressBookSystemTest {
         assertCommandFailure(command, Time.MESSAGE_TIME_CONSTRAINTS);
 
         /* Case: user logs in normally and attempts to block an already blocked date -> not blocked. */
+        toBlock = VALID_DATE_READING;
         command = createBlockDateCommand(toBlock);
         assertCommandSuccess(command, toBlock);
         assertCommandFailure(command, BlockDateCommand.MESSAGE_DUPLICATE_DATE);
@@ -146,15 +148,19 @@ public class BlockDateCommandSystemTest extends AddressBookSystemTest {
 
     }
 
+    /**
+     * Creates a full valid block date command that the user will enter.
+     * @return the block date command string.
+     */
     private String createBlockDateCommand(Date toBlock) {
-        String command =  createBlockDateCommand(toBlock.getWeek().toString(),
+        String command = createBlockDateCommand(toBlock.getWeek().toString(),
                 toBlock.getDay().toString(),
                 toBlock.getTime().toString());
         return command;
     }
 
     String createBlockDateCommand(String week, String day, String time) {
-        String command =  BlockDateCommand.COMMAND_WORD + " " + PREFIX_WEEK + week + " "
+        String command = BlockDateCommand.COMMAND_WORD + " " + PREFIX_WEEK + week + " "
                 + PREFIX_DAY + day + " " + PREFIX_TIME + time;
         return command;
     }

@@ -542,7 +542,7 @@ do not touch current user at all, but pass `Jio` objects on to `ModelManager`.
 // end::chelchia[]
 
 // tag::yewwoei[]
-=== Timetable Feature
+=== User Schedule Feature
 
 ==== Benefits for the user
 * Any user using our MakanBook can add their schedules into their profile to block out dates that they are not free.
@@ -567,7 +567,7 @@ The entire user's `UniqueBusySchedule` is stored in the users.xml file with each
 * `BlockDateCommand` is specific to the logged in user, allowing the current `User` to save a date on his schedule where he is not free. A `BlockDateCommandParser` is used to parse the arguments necessary.
 * `FreeDateCommand` is specific to the logged in user, allowing him to free up dates on his schedule. A `FreeDateCommandParser` is used to parse the arguments necessary.
 * `ListScheduleForWeek` is specific to the logged in user. The command lists the user's schedule for a given NUS week. A parser is necessary.
-* (NOT IMPLEMENTED) `FindDateCommand` finds common dates to eat between the current user and a list of users he inputs. A parser is necessary.
+* `FindDates` finds common dates to eat between all users the group is in. The command lists all free timeslots to eat for a given NUS week, among the NUS group. A parser is necessary.
 
 ==== Restrictions on usage of Timetable commands
 
@@ -1338,6 +1338,7 @@ A contact detail that is not meant to be shared with others
 An event for users to meet up with friends (over food)
 
 [appendix]
+
 == Product Survey
 
 *Product Name*
