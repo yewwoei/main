@@ -1001,9 +1001,9 @@ Work Division
 - [x] V1.3:
 
 ==== Chelsea :
-- [x] V1.1:
-- [x] V1.2:
-- [x] V1.3:
+- [x] V1.1: User can create an empty jio with specified parameters.
+- [x] V1.2: Jio stores a list of users, users can delete and join a jio.
+- [x] V1.3: Only the creator can delete a jio. Allow for creation for of group jio. List all jios works with second list panel.
 
 ==== Aiden :
 - [x] V1.1:
@@ -1367,3 +1367,52 @@ These instructions only provide a starting point for testers to work on; testers
 .. Corrupted Xml: The application will start with an empty addressbook.xml and users.xml.
 .. Missing Xml: The application would generate sample addressbook.xml and users.xml and store it in the data folder
 // end::evanmok2401(2)[]
+
+// tag::chelchia[]
+=== Create a jio
+
+. Create a jio with vaild parameters
+.. Prerequisites: User is logged in as chelchia. A jio of the same name has not already been created
+... Test case: `createJio n/manualtestjio w/1 d/mon h/1200 a/FineFood` +
+   Expected: New jio added: manualtestjio Date: [NUS Week: 1 Day:mon Time:1200] Address: FineFood People: chelchia
+
+. Create a group jio with valid parameter
+.. Prerequisites: User is logged in as chelchia. A group 2103 exists
+... Test case: `createJio n/groupjio w/1 d/mon h/1200 a/FineFood g/2103` +
+   Expected: New jio added: groupjio Date: [NUS Week: 1 Day:mon Time:1200] Address: FineFood People: chelchia navekom meena567 aiden katespades
+
+. Create a jio with same jio name
+.. Prerequisites: User is logged in.
+... Test case: `createJio n/manualtestjio w/1 d/mon h/1200 a/FineFood` +
+   Expected: A jio with the same name already exists
+
+=== Join a jio
+
+. Join a valid jio
+.. Prerequisites: User is logged in. User is not creator of jio.
+... Test case: `joinJio n/manualtestjio` +
+   Expected: Jio joined: manualtestjio
+
+. Join a non-existent jio
+.. Prerequisites: User is logged in.
+... Test case: `joinJio n/randomjio` +
+   Expected: This jio does not exist
+
+=== Delete jio
+
+. Delete a valid jio user created
+.. Prerequisites: User is logged in. User is creator of jio.
+... Test case: `deleteJio n/manualtestjio` +
+   Expected: Jio deleted: manualtestjio
+
+. Delete a valid jio not created by user
+.. Prerequisites: User is logged in. User is not creator of jio.
+... Test case: `deleteJio n/manualtestjio` +
+   Expected: You are not the creator of this jio. Only the creator can delete a jio.
+
+. Join a non-existent jio
+.. Prerequisites: User is logged in.
+... Test case: `deleteJio n/randomjio` +
+   Expected: Jio does not exist.
+// end::chelchia[]
+
