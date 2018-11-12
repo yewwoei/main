@@ -91,9 +91,6 @@ public class SampleUserDataUtil {
                     new Email("kateSpades@gmail.com"))
                     .addRestaurantReviewToUser(katespades_reviews01)
                     .addRestaurantReviewToUser(katespades_reviews02),
-            new User(new Username("aideeeen"), new Password("yewwoei123"),
-                    new Name("Low Yew Woei"), new Phone("91765567"),
-                    new Email("yewwoei@gmail.com")),
             new User(new Username("themyth"), new Password("themyth2k18"),
                     new Name("AP Damith"), new Phone("91134567"),
                     new Email("damith@nus.edu.com"))

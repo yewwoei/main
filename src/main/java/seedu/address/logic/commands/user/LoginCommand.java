@@ -29,8 +29,7 @@ public class LoginCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Successfully Logged In";
     public static final String MESSAGE_ALREADY_LOGGEDIN = "User is already logged in";
-    public static final String MESSAGE_NO_SUCH_USER = "No such user found. Please sign up to ues the"
-            + " features of Makan Book";
+    public static final String MESSAGE_USERNAME_DOES_NOT_EXIST = "Either Username or Password is Incorrect";
     public static final String MESSAGE_INCORRECT_PASSWORD = "Either Username or Password is Incorrect";
 
     private final Username toLogin;
@@ -55,7 +54,7 @@ public class LoginCommand extends Command {
         }
 
         if (!model.hasUser(toLogin)) {
-            throw new CommandException(MESSAGE_NO_SUCH_USER);
+            throw new CommandException(MESSAGE_USERNAME_DOES_NOT_EXIST);
         }
 
         if (!model.verifyLogin(toLogin, password)) {
