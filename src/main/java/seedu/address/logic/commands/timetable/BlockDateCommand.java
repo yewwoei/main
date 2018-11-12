@@ -5,6 +5,7 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_DAY;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TIME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_WEEK;
 
+
 import seedu.address.logic.CommandHistory;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
@@ -30,7 +31,7 @@ public class BlockDateCommand extends Command {
             + PREFIX_DAY + "thu "
             + PREFIX_TIME + "1830 ";
 
-    public static final String MESSAGE_SUCCESS = "New time added on your schedule: %1$s.";
+    public static final String MESSAGE_SUCCESS = "New date added on your schedule: %1$s.";
 
     public static final String MESSAGE_DUPLICATE_DATE = "This busy date already exists in your schedule.";
 
