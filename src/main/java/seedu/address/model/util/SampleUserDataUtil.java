@@ -129,19 +129,26 @@ public class SampleUserDataUtil {
         ArrayList<User> pendingUsers = new ArrayList<> ();
         User evan = new User(new Username("navekom"), new Password("pwwd123"),
                 new Name("Evan Mok"), new Phone("91234567"),
-                new Email("evanm@gmail.com"));
+                new Email("evanm@gmail.com"))
+                .addRestaurantReviewToUser(navekom_reviews01);
         User meena = new User(new Username("meena567"), new Password("meenapwd123"),
                 new Name("Meena"), new Phone("98834568"),
-                new Email("meena567@gmail.com"));
+                new Email("meena567@gmail.com"))
+                .addRestaurantReviewToUser(meena567_reviews01)
+                .addRestaurantReviewToUser(meena567_reviews02);
         User yewwoei = new User(new Username("aideeeen"), new Password("yewwoei123"),
                 new Name("Low Yew Woei"), new Phone("91765567"),
                 new Email("yewwoei@gmail.com"));
         User kate = new User(new Username("katespades"), new Password("katepwd123"),
                 new Name("Kate Ng"), new Phone("91434567"),
-                new Email("kateSpades@gmail.com"));
+                new Email("kateSpades@gmail.com"))
+                .addRestaurantReviewToUser(katespades_reviews01)
+                .addRestaurantReviewToUser(katespades_reviews02);
         User chel = new User(new Username("chelchia"), new Password("chelpwd123"),
                 new Name("Chelsea Chia"), new Phone("90134569"),
-                new Email("chelchia@gmail.com"));
+                new Email("chelchia@gmail.com"))
+                .addRestaurantReviewToUser(chelchia_reviews01)
+                .addRestaurantReviewToUser(chelchia_reviews02);
         acceptedUsers.add(evan);
         acceptedUsers.add(meena);
         acceptedUsers.add(yewwoei);

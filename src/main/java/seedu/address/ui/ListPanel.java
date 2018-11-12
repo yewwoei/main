@@ -107,6 +107,7 @@ public class ListPanel<T> extends UiPart<Region> {
     @Subscribe
     private void handleJumpToListRequestEvent(JumpToListRequestEvent event) {
         logger.info(LogsCenter.getEventHandlingLogMessage(event));
+        scrollTo(0);
         scrollTo(event.targetIndex);
     }
 
