@@ -394,6 +394,8 @@ chooses to delete the friend request, the PENDING friendship under User B will b
 friend request, the friendship status will be changed from PENDING to ACCEPTED for User B and an identical friendship will
 be added to User A, the one who initiated the friendship.
 
+image::AddFriendSequenceDiagram.png[width="800"]
+
 Now moving on to deletion of friends. Assuming that two Users C and D are friends with each other, and User C deletes his
 or her friendship with User D. This would delete the friendship stored under both User C and User D even if User D did not
 initiate the deletion of friendship. It is also possible to list the existing list of friends (ACCEPTED) and friend
