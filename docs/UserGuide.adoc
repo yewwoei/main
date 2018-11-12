@@ -680,6 +680,8 @@ e.g. `login u/navekom pwd/pwwd123`
 * *Write a Review* : `writeReview INDEX rate/RATING rvw/WRITTEN_REVIEW` +
 e.g. `writeReview 2 rate/5 rvw/I tried the Salmon Mentaiko Chirashi and it was amazing.`
 * *Display User Profile*: `displayProfile`
+* *selectOther* : `selectOther INDEX` +
+e.g.`selectOther 2`
 * *Add Friend* : `addFriend u/USERNAME` +
 e.g. `addFriend u/meena567`
 * *Accept Friend Request* : `acceptFriend u/USERNAME` +
