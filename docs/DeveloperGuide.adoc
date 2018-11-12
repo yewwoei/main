@@ -203,12 +203,14 @@ image::DeleteRestaurantSdForLogic.png[width="800"]
 
 [[Design-Model]]
 // tag::yewwoeiModel[]
+// tag::chelchia[]
 === Model component
 
 .Structure of the Model Component
 image::ModelClassDiagramWithJio.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
+// end::chelchia[]
 
 The `Model`,
 
