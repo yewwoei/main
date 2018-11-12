@@ -274,7 +274,6 @@ Format: `listGroups`
 // tag::chelchia[]
 === Finding people to eat with: `createJio`
 
-=======
 Users can find other users to eat with through inviting users. “createJio” creates a jio that is added to the global list of jios. +
 Format: `createJio n/NAME w/WEEK d/DAY h/TIME a/PLACE [g/GROUP NAME]`
 
@@ -294,7 +293,6 @@ Examples:
 
 Examples:
 
-=======
 Users can join an existing jio to find people to eat with, without having to create one of their own. +
 Format: `joinJio n/NAME`
 
@@ -308,7 +306,6 @@ Examples:
 
 === Deleting old jios: `deleteJio`
 
-=======
 Users can specify a jio to delete. Only the creator of a jio can delete the jio. +
 Format: `deleteJio n/NAME`
 
@@ -318,7 +315,6 @@ Examples:
 
 === List jios: `listJio`
 
-=======
 Lists all jios created by all users, so that user can see which one to join.
 Format: `listJio`
 // end::chelchia[]
@@ -332,14 +328,14 @@ Format: `addDebt u/USERNAME amt/AMOUNT`
 
 Examples:
 
-* `addDebt u/Kate123 amt/4.30`
+* `addDebt u/katespades amt/4.30`
 
 === Sent add debt request to a group `addGroupDebt`
 
 User(Creditor) send a debt request to all other users in the group with specific amount.
 with amount will split equally to everyone in the group.
 Record will be created between with a `Pending` status. +
-Format: `addDebt g/GROUP amt/AMOUNT`
+Format: `addGroupDebt g/GROUP amt/AMOUNT`
 
 Examples:
 
@@ -353,49 +349,56 @@ Format: `clearDebt u/NAME amt/AMOUNT`
 
 Examples:
 
-* `clearDebt u/Kate123 amt/4.30`
+* `clearDebt u/katespades amt/4.30`
 
 ===  Accept debt request: `acceptDebtRequest`
+
+****
+Unique ID is generate for each debt, even though the input parameters are the same.
+This is to ensure that mutiple debts can be recorded and differentiated.
+****
 
 User(Debtor) accept request from another user(Creditor). The debt status will change
  from `Pending` to `Accepted`. If there are any other accepted debt between this two
  users, the debt will balanced off as one debt record. +
-Format: `acceptDebtRequest u/NAME amt/AMOUNT id/ID`
+Format: `acceptDebtRequest u/NAME amt/AMOUNT id/ID` +
+*ID is unique and should copy from the Debt Card in UI when you test it*
 
 Examples:
 
-* `acceptDebtRequest u/Kate123 amt/4.30 id/18103013460314`
+* `acceptDebtRequest u/katespades amt/4.30 id/18103013460314(copy from UI)`
 
 ===  Delete debt request: `deleteDebtRequest`
 
 User(Debtor) delete/reject request send by other user if it is a wrong request. +
-Format: `deleteDebtRequest u/USERNAME amt/AMOUNT id/ID`
+Format: `deleteDebtRequest u/USERNAME amt/AMOUNT id/ID` +
+*ID is unique and should copy from the Debt Card in UI when you test it*
 
 Examples:
 
-* `deleteDebtRequest u/Kate123 amt/4.30 id/18103013460314`
+* `deleteDebtRequest u/Kate123 amt/4.30 id/18103013460314(copy from UI)`
 
-=== List all login user's creditor
+=== List all login user's creditor `listCreditor`
 
 List all creditor of the login user in list panel. +
 Format: `listCreditor`
 
-=== List all login user's debtor
+=== List all login user's debtor `listDebtor`
 
 List all debtor of the login user in list panel. +
 Format: `listDebtor`
 
-=== List all login user's debt request received
+=== List all login user's debt request received `listDebtRequestReceived`
 
 List all debt request received by login user from other user in list panel. +
 Format: `listDebtRequestReceived`
 
-=== List all login user's debt request sent
+=== List all login user's debt request sent `listDebtRequestSent`
 
 List all debt request sent by login user to other user in list panel. +
 Format: `listDebtRequestSent`
 
-=== List all login user's debt history +
+=== List all login user's debt history `listDebtor`
 
 List all debt history(regardless of status) of the login user in list panel.
 Format: `listDebtor`
@@ -694,16 +697,16 @@ e.g. `freeDate w/11 d/tue h/0600`
 e.g. `listScheduleForWeek w/6`
 * *List free timeslots for your group for a week* : `findDates g/GROUP_NAME w/WEEK_NUMBER`
 e.g. `findDates g/2103 w/reading`
-* *Add Debt* : `addDebt` +
- e.g. `addDebt u/kate amt/2.3`
-* *Add Group Debt* : `addGroupDebt` +
-e.g. `addGroupDebt g/My Lonely Club amt/27`
-* *Clear Debt* : `clearDebt` +
-e.g. `clearDebt u/kate amt/1.3`
-* *Accept Debt Request* : `acceptDebtRequest` +
-e.g. `acceptDebtRequest u/kate amt/7.9 id/181030224951280`
-* *Delete Debt Request* : `deleteDebtRequest` +
-e.g. `deleteDebtRequest u/kate amt/7.9 id/181030224951280`
+* *Add Debt* : `addDebt u/USERNAME amt/AMOUNT` +
+ e.g. `addDebt u/katespades amt/2.3`
+* *Add Group Debt* : `addGroupDebt g/GROUP_NAME amt/AMOUNT` +
+e.g. `addGroupDebt g/2103 amt/27`
+* *Clear Debt* : `clearDebt u/USERNAME amt/AMOUNT` +
+e.g. `clearDebt u/katespades amt/1.3`
+* *Accept Debt Request* : `acceptDebtRequest u/USERNAME amt/AMOUNT id/DEBTID` +
+e.g. `acceptDebtRequest u/katespades amt/7.9 id/181030224951280`
+* *Delete Debt Request* : `deleteDebtRequest u/USERNAME amt/AMOUNT id/DEBTID` +
+e.g. `deleteDebtRequest u/katespades amt/7.9 id/181030224951280`
 * *List Creditor* : `listCreditor` +
 * *List Debtor* : `listDebtor` +
 * *List Debt Request Received* : `listDebtRequestReceived` +

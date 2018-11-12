@@ -1010,15 +1010,16 @@ Work Division
 - [x] V1.2: Jio stores a list of users, users can delete and join a jio.
 - [x] V1.3: Only the creator can delete a jio. Allow for creation for of group jio. List all jios works with second list panel.
 
+==== Kate :
+- [x] V1.1: Debt feature related model added.
+- [x] V1.2: User are able to add/delete/accept/clear/list a debt.
+- [x] V1.3: User are able to add debt to a group and auto balancing for debt is implemented. List different type of debt with second list panel.
+
 ==== Aiden :
 - [x] V1.1:
 - [x] V1.2:
 - [x] V1.3:
 
-==== Kate :
-- [x] V1.1:
-- [x] V1.2:
-- [x] V1.3:
 
 [appendix]
 == User Stories
@@ -1421,3 +1422,32 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Jio does not exist.
 // end::chelchia[]
 
+// tag::kate[]
+=== Add Debt
+** Prerequisites:
+* User is logged in.
+* Input debtor name should correspond to a valid user.
+* Input amount should be larger than zero,
+ less than a hundred million and less than two decimal places.
+
+. Add Debt to a valid user with valid amount
+.. Test case: `addDebt u/katespades amt/12` +
+Expected: A debt request of 12.000000 SGD to katespades is sent
+
+. Add Debt to a invalid user with valid amount
+.. Test case: `addDebt u/test123 amt/12`
+Expected: Input user not exist.
+
+. Add Debt to a valid user with invalid amount
+.. Test case: `addDebt u/katespades amt/99999999999`
+Expected: Input amount must be larger than zero and less than a hundred million.
+
+=== Add Group Debt
+
+=== Accept Debt Request
+
+=== Delete Debt Request
+
+=== Clear Debt
+
+// end::kate[]
