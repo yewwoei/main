@@ -341,7 +341,7 @@ Examples:
 User(Creditor) send a debt request to all other users in the group with specific amount.
 with amount will split equally to everyone in the group.
 Record will be created between with a `Pending` status. +
-Format: `addDebt g/GROUP amt/AMOUNT`
+Format: `addGroupDebt g/GROUP amt/AMOUNT`
 
 Examples:
 
