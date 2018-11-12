@@ -26,7 +26,7 @@ among the people in their group through a simple command.
 
 * *Minor enhancement*: Created NUS Dates system going from Week 1 to Week 15, including reading and recess week along with a random Date generator that can quickly generate a unique list of thousands of dates for testing.
 
-* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=yewwoei]
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=yewwoei[here]]
 
 * *Other contributions*:
 
