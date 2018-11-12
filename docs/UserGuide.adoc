@@ -66,7 +66,7 @@ Format: `help`
 
 Shows a list of all restaurants in the makan book. +
 Format: `list`
-// tag::evanmok2401(1)[]
+
 === Locating restaurants by name: `find`
 
 Finds restaurants whose names contain any of the given keywords. +
@@ -96,7 +96,7 @@ Format: `history`
 ====
 Pressing the kbd:[&uarr;] and kbd:[&darr;] arrows will display the previous and next input respectively in the command box.
 ====
-
+// tag::evanmok2401(1)[]
 === Selecting a restaurant : `selectRestaurant`
 
 Selects the restaurant identified by the index number used in the displayed restaurant list. It will display the webpage of the restaurant
