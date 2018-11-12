@@ -4,9 +4,9 @@ import static seedu.address.testutil.TypicalRestaurants.RESTAURANT_A;
 
 import org.junit.Before;
 
-import seedu.address.commons.events.ui.RestaurantPanelSelectionChangedEvent;
-
 import guitests.guihandles.BrowserPanelHandle;
+
+import seedu.address.commons.events.ui.RestaurantPanelSelectionChangedEvent;
 
 public class BrowserPanelTest extends GuiUnitTest {
     private RestaurantPanelSelectionChangedEvent selectionChangedEventStub;

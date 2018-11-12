@@ -61,7 +61,8 @@ https://github.com/CS2103-AY1819S1-W10-2/main/pull/312[#312], https://github.com
 ** Community:
 *** Helped other members on implementation and debugging.
 *** PRs reviewed (with non-trivial review comments) for other member.
-*** Reported bugs and suggestions for other teams in the class.
+*** Reported bugs and suggestions for other teams in the class: https://github.com/CS2103-AY1819S1-T13-1/main/issues/141[#141],
+https://github.com/CS2103-AY1819S1-T13-1/main/issues/152[#152], https://github.com/CS2103-AY1819S1-T13-1/main/issues/155[#155]
 
 == Contributions to the User Guide
 
