@@ -11,7 +11,6 @@ import java.util.List;
  * Represents a Restaurant's reviews in the address book.
  */
 public class Reviews {
-
     public static final String MESSAGE_OVERALL_RATING_CONSTRAINTS =
             "Overall Rating must be a Double in two Decimal Places from 1.00 to 5.00 with the exception of 0.00.";
 
@@ -45,8 +44,9 @@ public class Reviews {
             this.totalRatings = 0.00;
             this.restaurantRatingValue = "0.00";
         } else {
-            this.totalRatings = Double.parseDouble(restaurantRatingValue);
-            this.restaurantRatingValue = df.format(totalRatings);
+            this.totalRatings = totalRatings;
+            double average = totalRatings / userReviewList.size();
+            this.restaurantRatingValue = df.format(average);
         }
     }
 

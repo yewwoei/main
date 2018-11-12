@@ -14,7 +14,6 @@ import seedu.address.model.restaurant.UserReview;
  * JAXB-friendly adapted version of the Reviews.
  */
 public class XmlAdaptedReviews {
-
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Reviews's %s field is missing!";
 
     @XmlElement(required = true)
