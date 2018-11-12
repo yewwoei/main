@@ -996,9 +996,9 @@ Work Division
 - [x] V1.3: Users able to write reviews for restaurants and view the reviews they've written.
 
 ==== Meena :
-- [x] V1.1:
-- [x] V1.2:
-- [x] V1.3:
+- [x] V1.1: Adding of Friendship classes and adding and accepting of friends.
+- [x] V1.2: Deletion of friends and friendRequests.
+- [x] V1.3: Listing of friends and friendRequests.
 
 ==== Chelsea :
 - [x] V1.1:

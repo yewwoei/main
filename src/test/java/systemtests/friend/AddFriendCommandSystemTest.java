@@ -64,9 +64,6 @@ public class AddFriendCommandSystemTest extends AddressBookSystemTest {
         command = AddFriendCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USERNAME_B;
         assertCommandSuccess(command, model, userB);
 
-        listJio();
-        selectRestaurant(Index.fromOneBased(3));
-
         logout();
         model.logoutUser();
         assertCommandFailure(command, model, AddFriendCommand.MESSAGE_NOT_LOGGED_IN);
