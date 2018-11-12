@@ -1049,15 +1049,16 @@ Work Division
 - [x] V1.2: Jio stores a list of users, users can delete and join a jio.
 - [x] V1.3: Only the creator can delete a jio. Allow for creation for of group jio. List all jios works with second list panel.
 
+==== Kate :
+- [x] V1.1: Debt feature related model added.
+- [x] V1.2: User are able to add/delete/accept/clear/list a debt.
+- [x] V1.3: User are able to add debt to a group and auto balancing for debt is implemented. List different type of debt with second list panel.
+
 ==== Aiden :
 - [x] V1.1:
 - [x] V1.2:
 - [x] V1.3:
 
-==== Kate :
-- [x] V1.1:
-- [x] V1.2:
-- [x] V1.3:
 
 [appendix]
 == User Stories
@@ -1392,19 +1393,19 @@ These instructions only provide a starting point for testers to work on; testers
 
 === Write a Review
 
-. Login into an account and Write a proper review
+. Login into an account and write a proper review
 .. Prerequisites: User is currently logged in and review is in the proper format.
-... Test case: `writeReview 1 rate/3 rvw/The cold noodles and pork bulgogi were delicious. ` +
+... Test case: `writeReview 1 rate/3 rvw/The cold noodles and pork bulgogi were delicious.` +
    Expected: Successfully Wrote Review
 
 . Login into an account and Write an incorrect review with incorrect rating
 .. Prerequisites: User is currently logged in and rating given is not from 1 to 5.
-... Test case: `writeReview 1 rate/6 rvw/The cold noodles and pork bulgogi were delicious. ` +
+... Test case: `writeReview 1 rate/6 rvw/The cold noodles and pork bulgogi were delicious.` +
    Expected: Rating must be a positive integer from 1 to 5 where 1 is the lowest rating and 5, the highest rating.
 
 . Login into an account and Write an incorrect review with blank review
-.. Prerequisites: User is currently logged in and written review is a space " ".
-... Test case: `writeReview 1 rate/5 rvw/ ` +
+.. Prerequisites: User is currently logged in and written review is empty.
+... Test case: `writeReview 1 rate/5 rvw/` +
    Expected: Written Reviews can take any values, and it should not be blank.
 
 === Saving data
@@ -1462,6 +1463,7 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Jio does not exist.
 // end::chelchia[]
 
+
 // tag::yewwoei[]
 === Block Date from your schedule.
 
@@ -1511,4 +1513,91 @@ Expected: You are not in that group.
 // end::yewwoei[]
 
 
+
+
+// tag::kate[]
+=== Add Debt
+** Prerequisites:
+* User is logged in.
+* Input debtor name should correspond to a valid user.
+* Input amount should be larger than zero,
+ less than a hundred million and less than two decimal places.
+
+. Add Debt to a valid user with valid amount
+.. Test case: `addDebt u/katespades amt/12` +
+Expected: A debt request of 12.000000 SGD to katespades is sent
+
+. Add Debt to a invalid user with valid amount
+.. Test case: `addDebt u/test123 amt/12` +
+Expected: Input user not exist.
+
+. Add debt to a valid user with invalid amount
+.. Test case: `addDebt u/katespades amt/99999999999` +
+Expected: Input amount must be larger than zero and less than a hundred million.
+
+=== Add Group Debt
+** Prerequisites:
+* User is logged in.
+* Input group name should correspond to a valid group.
+* User is a accepted user for the correspond input group.
+* Input amount should be larger than zero, less than a hundred million and less than two decimal places.
+
+. Add debt to a valid group with valid amount
+.. Test case: `addGroupDebt g/2103 amt/12` +
+Expected: A debt request of 12.000000 SGD to other member in 2103 is sent
+
+=== Accept Debt Request
+** Prerequisites:
+* User is logged in.
+* Input creditor name should correspond to a valid user.
+* A `PENDING` debt exist between user(as a debtor) and input creditor, with amount and debt id match the input amount and debt id.
+****
+Unique ID is generate for each debt, even though the input parameters are the same.
+This is to ensure that mutiple debts can be recorded and differentiated.
+****
+. Accept a debt request received
+.. Test case: `acceptDebtRequest u/meena567 amt/12 id/18111216484190` +
+Expected: Debt request(ID: 18111216484190) from meena567 of 12.000000 SGD has been accepted.
+
+. Accept a non-existent debt request received
+.. Test case: `acceptDebtRequest u/meena567 amt/18 id/110111216482190` (random id and amount) +
+Expected: Input debt not exist.
+
+=== Delete Debt Request
+** Prerequisites:
+* User is logged in.
+* Input creditor name should correspond to a valid user.
+* A `PENDING` debt exist between user(as a debtor) and input creditor, with amount and debt id match the input amount and debt id.
+****
+Unique ID is generate for each debt, even though the input parameters are the same.
+This is to ensure that mutiple debts can be recorded and differentiated.
+****
+. Delete a debt request received
+.. Test case: `deleteDebtRequest u/meena567 amt/12 id/18111216484190` +
+Expected: Debt request(ID: 181112172248904) from meena567 of 3.000000 SGD has been deleted.
+
+. Delete a non-existent debt request received
+.. Test case: `deleteDebtRequest u/meena567 amt/18 id/110111216482190` (random id and amount) +
+Expected: Input debt not exist.
+
+=== Clear Debt
+** Prerequisites:
+* User is logged in.
+* Input debtor name should correspond to a valid user.
+* An `ACCEPTED` exist between user(as a creditor) and input debtor.
+* Input amount should be larger than zero,
+ less than the amount of corresponding debt.
+
+. Clear Debt to a valid user with valid amount
+.. Test case: `clearDebt u/katespades amt/7` +
+Expected: katespades's debt of 7.000000 SGD is cleared.
+
+. Clear Debt to a invalid user(not your debtor) with valid amount
+.. Test case: `clearDebt u/chelchia amt/3` +
+Expected: There are no debt between you and input user
+
+. Add debt to a valid user with invalid amount
+.. Test case: `clearDebt u/katespades amt/0` +
+Expected: Input amount should be larger than zero.
+// end::kate[]
 
