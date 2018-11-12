@@ -403,6 +403,7 @@ Format: `listDebtor`
 // end::kate[]
 
 // tag::yewwoei[]
+
 ===  Block unavailable timeslot manually: `blockDate`
 
 Blocks out that timeslot in the user’s schedule to signify that he is busy and not available to eat.
@@ -420,30 +421,22 @@ Format: `freeDate w/recess d/DAY h/HHHH`
 
 Examples:
 
-* `freeDate week5 tues 1900 2100`
+* `freeDate w/5 d/wed h/1800`
 
 ===  See free Time: `listScheduleForWeek`
 
 Views the list of free time to eat on a NUS week according to your calendar.
-Format: `listScheduleForWeek w/WEEKNUMBER`
+Format: `listScheduleForWeek w/WEEK_NUMBER`
 
 Examples:
 
 * `listScheduleForWeek w/5`
 
-
-
-Views the list of free time to eat on a NUS week according to your calendar. +
-Format: `listScheduleForWeek w/WEEKNUMBER`
-
-Examples:
-
-* `listScheduleForWeek w/5`
 
 ===  Find common group meeting times: `findDates`
 
 Views the available times to meet in your group. You must be a part of a group and the group name stated must exist. +
-Format: `findDates g/GROUPNAME w/WEEKNUMBER
+Format: `findDates g/GROUP_NAME w/WEEK_NUMBER`
 
 Examples:
 
