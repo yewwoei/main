@@ -20,6 +20,7 @@ By: `Team W10-2`      Since: `Aug 2018`      Licence: `MIT`
 
 Makan Book is for those who *prefer to use a desktop app to search for restaurants within NUS to eat at alone or with friends*. More importantly, MakanBook is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). MakanBook also allows users to add and manage friends and groups, start private and public jios and so much more! Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 // tag::evanmok2401(2)[]
+
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
