@@ -244,7 +244,7 @@ This section describes some noteworthy details on how certain components and fea
 === Storage Component Design
 ==== Current Implementation
 The storage of Makan book is split into two different xml files namely `users.xml` and `addressbook.xml` where data
-relating to users are stored in the formal and data relating to restaurants are stored in the latter. 
+relating to users are stored in the formal and data relating to restaurants are stored in the latter.
 
 ===== Aspect: Ease of Maintenance
 * **Alternative 1 (current choice):** Split Storage into into two different components.
@@ -984,25 +984,25 @@ Work Division
 - [x] V1.2: Users able to Sign Up, Login and Logout.
 - [x] V1.3: Users able to write reviews for restaurants and view the reviews they've written.
 
-==== Meena : 
-- [x] V1.1: 
-- [x] V1.2: 
-- [x] V1.3: 
+==== Meena :
+- [x] V1.1:
+- [x] V1.2:
+- [x] V1.3:
 
-==== Chelsea : 
-- [x] V1.1: 
-- [x] V1.2:  
-- [x] V1.3: 
+==== Chelsea :
+- [x] V1.1:
+- [x] V1.2:
+- [x] V1.3:
 
-==== Aiden : 
-- [x] V1.1: 
-- [x] V1.2: 
-- [x] V1.3: 
+==== Aiden :
+- [x] V1.1:
+- [x] V1.2:
+- [x] V1.3:
 
-==== Kate : 
-- [x] V1.1: 
-- [x] V1.2: 
-- [x] V1.3: 
+==== Kate :
+- [x] V1.1:
+- [x] V1.2:
+- [x] V1.3:
 
 [appendix]
 == User Stories
