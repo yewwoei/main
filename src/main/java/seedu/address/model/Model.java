@@ -298,9 +298,9 @@ public interface Model {
 
     boolean hasDateForCurrentUser(Date date);
 
-    void displayUserWeekSchedule(Week weekNumber);
+    void displayUserWeekSchedule(String header, Week weekNumber);
 
-    void displayFreeDatesForGroupAndWeek(Name groupName, Week week);
+    void displayFreeDatesForGroupAndWeek(String header, Name groupName, Week week);
 
     //=========== Jio methods ===============================================================================
 

@@ -202,6 +202,7 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 image::DeleteRestaurantSdForLogic.png[width="800"]
 
 [[Design-Model]]
+// tag::yewwoei[]
 === Model component
 
 .Structure of the Model Component
@@ -455,6 +456,7 @@ do not touch current user at all, but pass `Jio` objects on to `ModelManager`.
 ** Cons: May be storing unnecessary information.
 // end::chelchia[]
 
+// tag::yewwoei[]
 === Timetable Feature
 
 ==== Benefits for the user
@@ -472,7 +474,7 @@ A `UniqueBusySchedule` class is then used to encapsulate the list of busy timesl
 the `Username` to identify which user the schedule belongs to, and a `HashMap` that stores the list of busy `Dates` for
 each corresponding NUS week.
 
-** Storage of Timetable related Data **
+**Storage of Timetable related Data** +
 The entire user's `UniqueBusySchedule` is stored in the users.xml file with each object as an XML element containing the username and all busy dates.
 
 ==== Timetable Commands

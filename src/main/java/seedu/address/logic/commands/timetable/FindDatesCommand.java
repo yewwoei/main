@@ -34,6 +34,8 @@ public class FindDatesCommand extends Command {
 
     public static final String MESSAGE_NO_SUCH_GROUP = "You are not in that group.";
 
+    public static final String UI_PAGE_HEADER = "These are the common free dates for Group: %1$s on Week: %2$s";
+
     private final Week weekNumber;
     private final Name groupName;
 
@@ -60,7 +62,8 @@ public class FindDatesCommand extends Command {
             throw new CommandException(MESSAGE_NO_SUCH_GROUP);
         }
 
-        model.displayFreeDatesForGroupAndWeek(groupName, weekNumber);
+        model.displayFreeDatesForGroupAndWeek(String.format(UI_PAGE_HEADER, groupName, weekNumber),
+                groupName, weekNumber);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, weekNumber, groupName));
     }

@@ -14,10 +14,12 @@ reviews for restaurants within NUS. Additionally, Users are able to interact wit
 
 == Summary of contributions
 
-* *Major Enhancement*: Jio feature
-** What it does: Allow a jio to be created and deleted. Other users can list all jios, and can join a jio, which will update the list of people going on the jio.
-** Justification: This feature improves the product significantly by complementing the restaurant book (user can decide on a particular restaurant, and invite friends to eat there with him). It allows users to set an event (a Jio) to meet at a certain time and address. This is a public event, thus is free for all to see and join.
+* *Major Enhancement*: *Jio feature* - the creation, deletion and joining of jios
+** What it does: Allows a user to create a public event (a jio). Other users can view a list of all jios (details and people going), and can join a jio, which will update the list of people going on the jio. The jio event can only be deleted by the creator.
+** Justification: This feature improves the product significantly by complementing the restaurant book (user can decide on a particular restaurant, and invite friends to eat there with him). It allows users to set an event (a Jio) to meet at a certain time and address. This is a public event, thus is free for all to see and join. However it is managed by the creator only, who can delete the jio once over.
 ** Highlights: Works together with `Group` to create group jios.
+
+* *Minor Enhancement*: listJio command for listing all jios in the list panel
 
 * *Minor Enhancement*: created menubar for listing for other items
 
@@ -29,6 +31,8 @@ reviews for restaurants within NUS. Additionally, Users are able to interact wit
 
 ** Project management:
 *** Deliverables and Deadline
+*** Assigned issues and managed milestones and releases
+(Pull requests https://github.com/CS2103-AY1819S1-W10-2/main/pull/309[#309], https://github.com/CS2103-AY1819S1-W10-2/main/pull/42[#42])
 ** Enhancements to existing features:
 *** Updated the GUI for listing all items other than restaurant
 *** Worked on browser panel displays

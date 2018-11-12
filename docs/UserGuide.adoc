@@ -274,6 +274,7 @@ Format: `listGroups`
 // tag::chelchia[]
 === Finding people to eat with: `createJio`
 
+=======
 Users can find other users to eat with through inviting users. “createJio” creates a jio that is added to the global list of jios. +
 Format: `createJio n/NAME w/WEEK d/DAY h/TIME a/PLACE [g/GROUP NAME]`
 
@@ -291,6 +292,9 @@ Examples:
 
 === Joining an existing jio: `joinJio`
 
+Examples:
+
+=======
 Users can join an existing jio to find people to eat with, without having to create one of their own. +
 Format: `joinJio n/NAME`
 
@@ -304,6 +308,7 @@ Examples:
 
 === Deleting old jios: `deleteJio`
 
+=======
 Users can specify a jio to delete. Only the creator of a jio can delete the jio. +
 Format: `deleteJio n/NAME`
 
@@ -313,6 +318,7 @@ Examples:
 
 === List jios: `listJio`
 
+=======
 Lists all jios created by all users, so that user can see which one to join.
 Format: `listJio`
 // end::chelchia[]
@@ -396,9 +402,10 @@ Format: `listDebtor`
 
 // end::kate[]
 
+// tag::yewwoei[]
 ===  Block unavailable timeslot manually: `blockDate`
 
-Blocks out that timeslot in the user’s timetable to signify that he is busy and not available to eat. +
+Blocks out that timeslot in the user’s schedule to signify that he is busy and not available to eat. +
 Format: `blockDate w/WEEKNUMBER d/DAY h/HHHH`
 
 Examples:
@@ -407,7 +414,7 @@ Examples:
 
 ===  Free timeslot manually: `freeDate`
 
-Frees up that timeslot in the user’s timetable to signify that he is free and available to eat. +
+Frees up that timeslot in the user’s schedule to signify that he is free and available to eat. +
 Format: `freeDate w/recess d/DAY h/HHHH`
 
 Examples:
@@ -423,14 +430,21 @@ Examples:
 
 * `listScheduleForWeek w/5`
 
-===  Find jios that fit a user’s timetable for a given NUS academic week: `findJio`
 
-Views the list of free time to eat on those dates. +
-Format: `findJio WEEKNUMBER`
+
+Views the list of free time to eat on a NUS week according to your calendar. +
+Format: `listScheduleForWeek w/WEEKNUMBER`
 
 Examples:
 
-* `findJio week8`
+* `listScheduleForWeek w/5`
+
+===  Find common group meeting times: `findDates`
+
+Views the available times to meet in your group. You must be a part of a group. +
+Format: `findDates g/GROUPNAME w/WEEKNUMBER
+
+// end::yewwoei[]
 
 == Administrator Level Features
 === Adding a restaurant: `add` [DEPRECIATED, DO NOT USE, ONLY FOR ADMINISTRATORS]
@@ -583,13 +597,19 @@ Examples:
 Allows User to list the restaurants he has entered into his favourites. +
 Format: `listFavourites`
 // end::evanmok2401(1)[]
+
 ====  Find common timeslots with friends: `findTime`
 Find common eating timeslots with a list of friends. +
 Format: `findTime [w/week number] [u/USERNAME]…`
 
+===  Find jios that fit a user’s timetable for a given NUS academic week: `findJio`
+
+Views the list of free time to eat on those dates. +
+Format: `findJio w/WEEKNUMBER`
+
 Examples:
 
-* `findTime w/week6 u/Aiden u/Chelsea u/EvanMok u/Meena u/Kate`
+* `findJio w/8`
 
 ==== Add NUSMODS schedule to block out calendar: `addNUSMODS`
 
@@ -642,6 +662,8 @@ e.g. `createJio n/saporeFriends w/1 d/mon h/1800 a/Sapore g/mygroup`
 e.g. `joinJio n/MALA`
 * *Delete Jio* : `deleteJio` +
 e.g. `deleteJio n/MALA`
+* *List Jio* : `listJio` +
+e.g. `listJio`
 * *Add Friend* : `addFriend u/USERNAME` +
 e.g. `addFriend u/meena567`
 * *Accept Friend Request* : `acceptFriend u/USERNAME` +
@@ -666,10 +688,12 @@ e.g. deleteGroup g/2103
 * *List Groups* : `listGroups` +
 * *Block Date* : `blockDate w/WEEKNUMBER d/DAY h/HHHH`
 e.g. `blockDate w/reading d/thu h/1800`
-* *Free Date* : `freeDate w/WEEKNUMBER d/DAY h/HHHH`
+* *Free Date* : `freeDate w/WEEK_NUMBER d/DAY h/HHHH`
 e.g. `freeDate w/11 d/tue h/0600`
-* *List User's Free Timeslots for a Week* : `listScheduleForWeek w/`
+* *List User's Free Timeslots for a Week* : `listScheduleForWeek w/WEEK_NUMBER`
 e.g. `listScheduleForWeek w/6`
+* *List free timeslots for your group for a week* : `findDates g/GROUP_NAME w/WEEK_NUMBER`
+e.g. `findDates g/2103 w/reading`
 * *Add Debt* : `addDebt` +
  e.g. `addDebt u/kate amt/2.3`
 * *Add Group Debt* : `addGroupDebt` +
@@ -684,6 +708,7 @@ e.g. `deleteDebtRequest u/kate amt/7.9 id/181030224951280`
 * *List Debtor* : `listDebtor` +
 * *List Debt Request Received* : `listDebtRequestReceived` +
 * *List Debt Request Sent* : `listDebtRequestSent`
+* *List Debt History* : `listDebtHistory`
 
 === Depreciated Commands
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
