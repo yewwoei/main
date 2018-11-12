@@ -15,6 +15,7 @@ import seedu.address.model.accounting.Amount;
 import seedu.address.model.user.User;
 import seedu.address.model.user.Username;
 import seedu.address.testutil.TypicalUsers;
+import seedu.address.testutil.UserBuilder;
 import systemtests.AddressBookSystemTest;
 
 public class AddDebtCommandSystemTest extends AddressBookSystemTest {
@@ -48,11 +49,30 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         login(currentUser);
         //Create model(expected model)
         Model model = getModel();
+
+        User userACopy = new UserBuilder().withUsername(otherUserA.getUsername().toString())
+                .withPhone(otherUserA.getPhone().toString())
+                .withPassword(otherUserA.getPassword().toString())
+                .withName(otherUserA.getName().toString())
+                .withEmail(otherUserA.getEmail().toString())
+                .build();
+        User userBCopy = new UserBuilder().withUsername(otherUserB.getUsername().toString())
+                .withPhone(otherUserB.getPhone().toString())
+                .withPassword(otherUserB.getPassword().toString())
+                .withName(otherUserB.getName().toString())
+                .withEmail(otherUserB.getEmail().toString())
+                .build();
+        User currentUserCopy = new UserBuilder().withUsername(currentUser.getUsername().toString())
+                .withPhone(currentUser.getPhone().toString())
+                .withPassword(currentUser.getPassword().toString())
+                .withName(currentUser.getName().toString())
+                .withEmail(currentUser.getEmail().toString())
+                .build();
         //Add and login user to expected model
-        model.addUser(otherUserA);
-        model.addUser(otherUserB);
-        model.addUser(currentUser);
-        model.loginUser(currentUser);
+        model.addUser(userACopy);
+        model.addUser(userBCopy);
+        model.addUser(currentUserCopy);
+        model.loginUser(currentUserCopy);
 
         //Test success for AddDebtCommand with standard command format, valid input and model
         String command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_A
@@ -68,10 +88,6 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
         //Test success for AddDebtCommand with standard command format, valid input and model with different user
         command = AddDebtCommand.COMMAND_WORD + " " + PREFIX_USERNAME + VALID_USER_B
                 + " " + PREFIX_AMOUNT + VALID_AMOUNT;
-        assertCommandSuccess(command, model, userB, amount);
-
-        //Test success for AddDebtCommand when listing other type of item
-        listJio();
         assertCommandSuccess(command, model, userB, amount);
 
         //Test success for AddDebtCommand when selecting other type of item
