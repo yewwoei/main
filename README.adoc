@@ -30,7 +30,7 @@ endif::[]
 * <<team/yewwoei#, LOW YEW WOEI>>
 * <<team/evanmok2401#, MOK KEN HAN, EVAN>>
 * <<team/NgHoiYing#, NG HOI YING>>
-* <<team/meena#, SOLAYAPPAN MEENAKSHI>>
+* <<team/meena567#, SOLAYAPPAN MEENAKSHI>>
 
 
 == Acknowledgements
