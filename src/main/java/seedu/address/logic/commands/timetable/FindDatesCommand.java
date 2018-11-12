@@ -23,10 +23,10 @@ public class FindDatesCommand extends Command {
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Lists the common free times among friends for the week for a given group."
             + "Parameters: "
-            + PREFIX_WEEK + "NUS WEEK"
-            + PREFIX_GROUP + "GROUP"
+            + PREFIX_WEEK + "NUS WEEK "
+            + PREFIX_GROUP + "GROUP "
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_WEEK + "5"
+            + PREFIX_WEEK + "5 "
             + PREFIX_GROUP + "MALA";
 
     public static final String MESSAGE_SUCCESS = "Listed the common free dates for"

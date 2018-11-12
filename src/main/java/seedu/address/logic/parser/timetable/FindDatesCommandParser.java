@@ -35,7 +35,7 @@ public class FindDatesCommandParser implements Parser<FindDatesCommand> {
 
         if (!arePrefixesPresent(argMultimap, PREFIX_WEEK, PREFIX_GROUP)
                 || !argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, ListScheduleCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, FindDatesCommand.MESSAGE_USAGE));
         }
 
         Name groupName = ParserUserUtil.parseGroup(argMultimap.getValue(PREFIX_GROUP).get());
