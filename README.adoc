@@ -1,4 +1,5 @@
 = Makan Book
+:ext-relative: {outfilesuffix}
 ifdef::env-github,env-browser[:relfileprefix: docs/]
 
 https://travis-ci.org/CS2103-AY1819S1-W10-2/main[image:https://travis-ci.org/CS2103-AY1819S1-W10-2/main.svg?branch=master[Build Status]]
@@ -23,6 +24,14 @@ endif::[]
 * <<DeveloperGuide#, Developer Guide>>
 * <<AboutUs#, About Us>>
 * <<ContactUs#, Contact Us>>
+
+== Product Portfolio Pages
+* <<team/chelchia#, CHELSEA CHIA JIA HWA>>
+* <<team/yewwoei#, LOW YEW WOEI>>
+* <<team/evanmok2401#, MOK KEN HAN, EVAN>>
+* <<team/NgHoiYing#, NG HOI YING>>
+* <<team/meena#, SOLAYAPPAN MEENAKSHI>>
+
 
 == Acknowledgements
 
