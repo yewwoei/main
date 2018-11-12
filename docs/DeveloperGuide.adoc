@@ -1443,11 +1443,25 @@ Expected: Input user not exist.
 Expected: Input amount must be larger than zero and less than a hundred million.
 
 === Add Group Debt
+** Prerequisites:
+* User is logged in.
+* Input group name should correspond to a valid group.
+* User is a accepted user for the correspond input group.
+* Input amount should be larger than zero, less than a hundred million and less than two decimal places.
+
+. Add Debt to a valid group with valid amount
+.. Test case: `addGroupDebt g/2103 amt/12` +
+Expected: A debt request of 12.000000 SGD to other member in 2103 is sent
 
 === Accept Debt Request
+** Prerequisites:
+* User is logged in.
+* Input group name should correspond to a valid group.
+* User is a accepted user for the correspond input group.
+* Input amount should be larger than zero, less than a hundred million and less than two decimal places.
+
 
 === Delete Debt Request
 
 === Clear Debt
-
 // end::kate[]
