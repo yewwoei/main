@@ -34,7 +34,7 @@ Responsibilities: Testing, In charge of Logic Component
 image::meena567.png[width="150", align="left"]
 {empty}[https://github.com/meena567[github]]
 
-Role: Developer
+Role: Developer +
 Responsibilities: Documentation, Code Quality, In charge of Storage Component
 
 '''
