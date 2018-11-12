@@ -38,7 +38,7 @@ reviews for restaurants within NUS. Additionally, Users are able to interact wit
 *** Team Lead - Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
 *** Updated AboutUs.doc: https://github.com/CS2103-AY1819S1-W10-2/main/pull/37[#37]
 *** Updated ReadMe.doc: https://github.com/CS2103-AY1819S1-W10-2/main/pull/335[#335]
-*** Updated Sample Data: https://github.com/CS2103-AY1819S1-W10-2/main/pull/227
+*** Updated Sample Data: https://github.com/CS2103-AY1819S1-W10-2/main/pull/227[#227]
 
 ** Enhancements to existing features:
 *** Updated the GUI web pages for display in the browser panel
