@@ -405,7 +405,8 @@ Format: `listDebtor`
 // tag::yewwoei[]
 ===  Block unavailable timeslot manually: `blockDate`
 
-Blocks out that timeslot in the user’s schedule to signify that he is busy and not available to eat. +
+Blocks out that timeslot in the user’s schedule to signify that he is busy and not available to eat.
+Weeks only range from 1-6, recess, 7-13, reading, 15, 16 +
 Format: `blockDate w/WEEKNUMBER d/DAY h/HHHH`
 
 Examples:
@@ -441,8 +442,12 @@ Examples:
 
 ===  Find common group meeting times: `findDates`
 
-Views the available times to meet in your group. You must be a part of a group. +
+Views the available times to meet in your group. You must be a part of a group and the group name stated must exist. +
 Format: `findDates g/GROUPNAME w/WEEKNUMBER
+
+Examples:
+
+* `findDates g/2103 w/5`
 
 // end::yewwoei[]
 

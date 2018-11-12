@@ -407,6 +407,12 @@ it for self benefit.
 
 // end::kate[]
 
+// tag::yewwoeiDates[]
+=== Internal Representation of Dates
+==== Current Implementation
+Each date consists of three points of data: the NUS Week, the Day of the week, and the Time of the day.
+The dates are separated into 30 minute intervals as represented by the time
+
 // tag::chelchia[]
 === Jio Feature
 ==== Current Implementation
@@ -484,7 +490,6 @@ The entire user's `UniqueBusySchedule` is stored in the users.xml file with each
 * `FindDates` finds common dates to eat between all users the group is in. The command lists all free timeslots to eat for a given NUS week, among the NUS group. A parser is necessary.
 
 ==== Restrictions on usage of Timetable commands
-
 Timetable Commands can only be used when the `User` is logged into the MakanBook.
 Exceptions are handled with the `NotLoggedInCommandException` class in the `Logic` component.
 
