@@ -152,6 +152,7 @@ the reviews he's written. +
 Format: `displayProfile`
 // end::evan[]
 
+// tag::meena567[]
 === Adding friends: `addFriend`
 
 A User will send a friend request to another User who will then have to accept the friend request. +
@@ -164,7 +165,7 @@ Examples:
 === Accept friend request: `acceptFriend`
 
 A User can accept a friend request of another User so that the pair of them can become friends. +
-Format: `acceptFriend u/NAME`
+Format: `acceptFriend u/USERNAME`
 
 Examples:
 
@@ -204,7 +205,7 @@ A User will create a group by specifying the group name.  +
 Format: `addGroup g/GROUPNAME`
 
 ****
-* Every group will automatically add the user creating the group.
+* Every group will automatically add the user creating the group into its list of accepted Users.
 ****
 
 Examples:
@@ -213,8 +214,8 @@ Examples:
 
 === Adding members: `addMembers`
 
-A User will create a group and send out invitations to all the other users, which they will then have to accept to join the group.  +
-Format: `addMembers g/GROUPNAME [u/USERNAME]...`
+A User already in the group can add members to a particular group by specifying the group name and the usernames of the users they wish to add to that group. +
+Format: `addMembers g/GROUPNAME [Users… u/USERNAMES]`
 
 Examples:
 
@@ -256,6 +257,7 @@ Format: `listGroupRequests`
 
 A User can list groups that they are a part of. +
 Format: `listGroups`
+// end::meena567[]
 
 // tag::chelchia[]
 === Finding people to eat with: `createJio`
@@ -638,24 +640,28 @@ e.g. `createJio n/saporeFriends w/1 d/mon h/1800 a/Sapore g/mygroup`
 e.g. `joinJio n/MALA`
 * *Delete Jio* : `deleteJio` +
 e.g. `deleteJio n/MALA`
-* *Add Friend* : `addFriend u/USERNAME`
-e.g. `addFriend u/Meena567`
-* *Accept Friend Request* : `acceptFriend u/USERNAME`
-e.g. `acceptFriend u/Meena567`
-* *Delete Friend Request* : `deleteFriendRequest u/USERNAME`
-e.g. `deleteFriendRequest u/Meena567`
-* *Delete Friend* : `deleteFriend u/USERNAME`
-e.g. `deleteFriend u/Meena567`
-* *Add Group* : `addGroup g/GROUP_NAME`
+* *Add Friend* : `addFriend u/USERNAME` +
+e.g. `addFriend u/meena567`
+* *Accept Friend Request* : `acceptFriend u/USERNAME` +
+e.g. `acceptFriend u/meena567`
+* *Delete Friend Request* : `deleteFriendRequest u/USERNAME` +
+e.g. `deleteFriendRequest u/meena567`
+* *Delete Friend* : `deleteFriend u/USERNAME` +
+e.g. `deleteFriend u/meena567`
+* *List Friend Requests* : `listFriendRequests` +
+* *List Friends* : `listFriends` +
+* *Add Group* : `addGroup g/GROUP_NAME` +
 e.g. addGroup g/2103
-* *Add Members* : `addMembers g/GROUP_NAME [u/USERNAME...]`
-e.g. addMembers g/2103 u/katenhy u/aidenlow u/chelchia u/evanmok2401
-* *Accept Group* : `acceptGroup g/GROUP_NAME`
+* *Add Members* : `addMembers g/GROUP_NAME [u/USERNAME...]` +
+e.g. addMembers g/2103 u/thejrlinguist u/meena567
+* *Accept Group* : `acceptGroup g/GROUP_NAME` +
 e.g. acceptGroup g/2103
-* *Delete Group Request* : `deleteGroupRequest g/GROUP_NAME`
+* *Delete Group Request* : `deleteGroupRequest g/GROUP_NAME` +
 e.g. deleteGroupRequest g/2103
-* *Delete Group* : `deleteGroup g/GROUP_NAME`
+* *Delete Group* : `deleteGroup g/GROUP_NAME` +
 e.g. deleteGroup g/2103
+* *List Group Requests* : `listGroupRequests` +
+* *List Groups* : `listGroups` +
 * *Block Date* : `blockDate w/WEEKNUMBER d/DAY h/HHHH`
 e.g. `blockDate w/reading d/thu h/1800`
 * *Free Date* : `freeDate w/WEEKNUMBER d/DAY h/HHHH`
