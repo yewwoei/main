@@ -144,8 +144,6 @@ public class BlockDateCommandSystemTest extends AddressBookSystemTest {
         executeCommand(command);
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertCommandBoxShowsErrorStyle();
-        assertStatusBarUnchangedExceptSyncStatus();
-
     }
 
     /**
