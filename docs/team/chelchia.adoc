@@ -57,4 +57,11 @@ include::../UserGuide.adoc[tag=chelchia]
 |_Given below are sections I contributed to the Developer Guide._
 |===
 
-include::../DeveloperGuide.adoc[tag=chelchia]
+*Added the class diagram for `Jio` into the Model class diagram*:
+include::../DeveloperGuide.adoc[tag=chelchia(1)]
+
+*Detailed explanation of the implementation of Jio feature with UML sequence diagram*:
+include::../DeveloperGuide.adoc[tag=chelchia(2)]
+
+*Test cases for manual testing*:
+include::../DeveloperGuide.adoc[tag=chelchia(3)]
