@@ -504,6 +504,9 @@ A `UniqueSchedule` class is then used to encapsulate the list of busy timeslots 
 the `Username` to identify which user the schedule belongs to, and a `HashMap` that stores the list of busy `Dates` for
 each corresponding NUS week.
 
+image::BlockDateSequenceDiagram.png[width="800"]
+
+
 **Storage of Timetable related Data** +
 The entire user's `UniqueSchedule` is stored in the users.xml file with each object as an XML element containing the username and all busy dates.
 
