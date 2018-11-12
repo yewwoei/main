@@ -1438,7 +1438,7 @@ Expected: A debt request of 12.000000 SGD to katespades is sent
 .. Test case: `addDebt u/test123 amt/12`
 Expected: Input user not exist.
 
-. Add Debt to a valid user with invalid amount
+. Add debt to a valid user with invalid amount
 .. Test case: `addDebt u/katespades amt/99999999999`
 Expected: Input amount must be larger than zero and less than a hundred million.
 
@@ -1449,19 +1449,61 @@ Expected: Input amount must be larger than zero and less than a hundred million.
 * User is a accepted user for the correspond input group.
 * Input amount should be larger than zero, less than a hundred million and less than two decimal places.
 
-. Add Debt to a valid group with valid amount
+. Add debt to a valid group with valid amount
 .. Test case: `addGroupDebt g/2103 amt/12` +
 Expected: A debt request of 12.000000 SGD to other member in 2103 is sent
 
 === Accept Debt Request
 ** Prerequisites:
 * User is logged in.
-* Input group name should correspond to a valid group.
-* User is a accepted user for the correspond input group.
-* Input amount should be larger than zero, less than a hundred million and less than two decimal places.
+* Input creditor name should correspond to a valid user.
+* A `PENDING` debt exist between user(as a debtor) and input creditor, with amount and debt id match the input amount and debt id.
+****
+Unique ID is generate for each debt, even though the input parameters are the same.
+This is to ensure that mutiple debts can be recorded and differentiated.
+****
+. Accept a debt request received
+.. Test case: `acceptDebtRequest u/meena567 amt/12 id/18111216484190` +
+Expected: Debt request(ID: 18111216484190) from meena567 of 12.000000 SGD has been accepted.
 
+. Accept a non-existent debt request received
+.. Test case: `acceptDebtRequest u/meena567 amt/18 id/110111216482190` (random id and amount) +
+Expected: Input debt not exist.
 
 === Delete Debt Request
+** Prerequisites:
+* User is logged in.
+* Input creditor name should correspond to a valid user.
+* A `PENDING` debt exist between user(as a debtor) and input creditor, with amount and debt id match the input amount and debt id.
+****
+Unique ID is generate for each debt, even though the input parameters are the same.
+This is to ensure that mutiple debts can be recorded and differentiated.
+****
+. Delete a debt request received
+.. Test case: `deleteDebtRequest u/meena567 amt/12 id/18111216484190` +
+Expected: Debt request(ID: 181112172248904) from meena567 of 3.000000 SGD has been deleted.
+
+. Delete a non-existent debt request received
+.. Test case: `deleteDebtRequest u/meena567 amt/18 id/110111216482190` (random id and amount)+
+Expected: Input debt not exist.
 
 === Clear Debt
+** Prerequisites:
+* User is logged in.
+* Input debtor name should correspond to a valid user.
+* An `ACCEPTED` exist between user(as a creditor) and input debtor.
+* Input amount should be larger than zero,
+ less than the amount of corresponding debt.
+
+. Clear Debt to a valid user with valid amount
+.. Test case: `clearDebt u/katespades amt/7` +
+Expected: katespades's debt of 7.000000 SGD is cleared.
+
+. Clear Debt to a invalid user(not your debtor) with valid amount
+.. Test case: `clearDebt u/chelchia amt/3`
+Expected: There are no debt between you and input user
+
+. Add debt to a valid user with invalid amount
+.. Test case: `clearDebt u/katespades amt/0`
+Expected: Input amount should be larger than zero.
 // end::kate[]
