@@ -164,47 +164,6 @@ the reviews he's written. +
 Format: `displayProfile`
 // end::evanmok2401[]
 
-// tag::chelchia[]
-=== Finding people to eat with: `createJio`
-
-Users can find other users to eat with through inviting users. “createJio” creates a jio that is added to the global list of jios. +
-Format: `createJio n/NAME w/WEEK d/DAY h/TIME a/PLACE [g/GROUP NAME]`
-
-****
-* Jio -- an invitation to hang out.
-* Name, date, time, place must be provided. The other parameters are optional.
-* All users will be able to view the list of jios.
-* User can specify a group name for a group jio. All group members are automatically added to jio. Jio can still be viewed by others.
-****
-
-Examples:
-
-* `createJio n/MALA w/1 d/mon h/1200 a/FineFood`
-* `createJio n/saporeFriends w/1 d/mon h/1800 a/Sapore g/mygroup`
-
-=== Joining an existing jio: `joinJio`
-
-Users can join an existing jio to find people to eat with, without having to create one of their own. +
-Format: `joinJio n/NAME`
-
-****
-* User has to indicate the name of the jio.
-****
-
-Examples:
-
-* `joinJio n/MALA`
-
-=== Deleting old jios: `deleteJio`
-
-Users can specify a jio to delete. Only the creator of a jio can delete the jio. +
-Format: `deleteJio n/NAME`
-
-Examples:
-
-* `deleteJio n/MALA`
-// end::chelchia[]
-
 === Adding friends: `addFriend`
 
 A User will send a friend request to another User who will then have to accept the friend request. +
@@ -310,41 +269,51 @@ Format: `listGroupRequests`
 A User can list groups that they are a part of. +
 Format: `listGroups`
 
-===  Block unavailable timeslot manually: `blockDate`
+// tag::chelchia[]
+=== Finding people to eat with: `createJio`
 
-Blocks out that timeslot in the user’s timetable to signify that he is busy and not available to eat. +
-Format: `blockDate w/WEEKNUMBER d/DAY h/HHHH`
+Users can find other users to eat with through inviting users. “createJio” creates a jio that is added to the global list of jios. +
+Format: `createJio n/NAME w/WEEK d/DAY h/TIME a/PLACE [g/GROUP NAME]`
 
-Examples:
-
-* `blockDate w/5 d/tue h/1800`
-
-===  Free timeslot manually: `freeDate`
-
-Frees up that timeslot in the user’s timetable to signify that he is free and available to eat. +
-Format: `freeDate w/recess d/DAY h/HHHH`
-
-Examples:
-
-* `freeDate week5 tues 1900 2100`
-
-===  See free Time: `listScheduleForWeek`
-
-Views the list of free time to eat on a NUS week according to your calendar.
-Format: `listScheduleForWeek w/WEEKNUMBER`
+****
+* Jio -- an invitation to hang out.
+* Name, date, time, place must be provided. The other parameters are optional.
+* All users will be able to view the list of jios.
+* If group name is present, all group members are automatically added to jio. Jio is still visible to all.
+****
 
 Examples:
 
-* `listScheduleForWeek w/5`
+* `createJio n/MALA w/1 d/mon h/1200 a/FineFood`
+* `createJio n/saporeFriends w/1 d/mon h/1800 a/Sapore g/2103`
 
-===  Find jios that fit a user’s timetable for a given NUS academic week: `findJio`
+=== Joining an existing jio: `joinJio`
 
-Views the list of free time to eat on those dates. +
-Format: `findJio WEEKNUMBER`
+Users can join an existing jio to find people to eat with, without having to create one of their own. +
+Format: `joinJio n/NAME`
+
+****
+* User has to indicate the name of the jio.
+****
 
 Examples:
 
-* `findJio week8`
+* `joinJio n/MALA`
+
+=== Deleting old jios: `deleteJio`
+
+Users can specify a jio to delete. Only the creator of a jio can delete the jio. +
+Format: `deleteJio n/NAME`
+
+Examples:
+
+* `deleteJio n/MALA`
+
+=== List jios: `listJio`
+
+Lists all jios created by all users, so that user can see which one to join.
+Format: `listJio`
+// end::chelchia[]
 
 // tag::kate[]
 ===  Sent add debt request: `addDebt`
@@ -424,6 +393,42 @@ List all debt history(regardless of status) of the login user in list panel.
 Format: `listDebtor`
 
 // end::kate[]
+
+===  Block unavailable timeslot manually: `blockDate`
+
+Blocks out that timeslot in the user’s timetable to signify that he is busy and not available to eat. +
+Format: `blockDate w/WEEKNUMBER d/DAY h/HHHH`
+
+Examples:
+
+* `blockDate w/5 d/tue h/1800`
+
+===  Free timeslot manually: `freeDate`
+
+Frees up that timeslot in the user’s timetable to signify that he is free and available to eat. +
+Format: `freeDate w/recess d/DAY h/HHHH`
+
+Examples:
+
+* `freeDate week5 tues 1900 2100`
+
+===  See free Time: `listScheduleForWeek`
+
+Views the list of free time to eat on a NUS week according to your calendar.
+Format: `listScheduleForWeek w/WEEKNUMBER`
+
+Examples:
+
+* `listScheduleForWeek w/5`
+
+===  Find jios that fit a user’s timetable for a given NUS academic week: `findJio`
+
+Views the list of free time to eat on those dates. +
+Format: `findJio WEEKNUMBER`
+
+Examples:
+
+* `findJio week8`
 
 == Administrator Level Features
 === Adding a restaurant: `add` [DEPRECIATED, DO NOT USE, ONLY FOR ADMINISTRATORS]

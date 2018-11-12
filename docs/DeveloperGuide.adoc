@@ -205,7 +205,7 @@ image::DeleteRestaurantSdForLogic.png[width="800"]
 === Model component
 
 .Structure of the Model Component
-image::ModelClassDiagram.png[width="800"]
+image::ModelClassDiagramWithJio.png[width="800"]
 
 *API* : link:{repoURL}/src/main/java/seedu/address/model/Model.java[`Model.java`]
 
@@ -403,12 +403,17 @@ it for self benefit.
 
 // end::kate[]
 
+// tag::chelchia[]
 === Jio Feature
 ==== Current Implementation
 A `Jio` object stores information about the jio in the following objects: `Name`, `Week`, `Day`, `Time`, `Address`. The
 `Jio` object also stores the people going on the jio as a list of `Username`. A `Jio` object cannot be modified after
 creation, except to add a user (ie. append `Username` to the list). Jios are stored in the users.xml with each object
 as an Xml element.
+
+Creator (current user) is automatically added to the jio. If the group tag `g/` is added, users under the group specified is retrieved from `UserData` and added to the jio.
+
+image::CreateJioCommandSequenceDiagram.png[width="800"]
 
 ===== Jio-related Commands
 `createJio` is implemented by creating a `Jio` object with the specified parameters, but an empty list of `Username`.
@@ -445,6 +450,7 @@ do not touch current user at all, but pass `Jio` objects on to `ModelManager`.
 ** Pros: All information about User is stored for possible retrieval in the future (eg. to view user timetables).
 ** Cons: Difficult to store in Xml file. Users cannot easily be converted in to a single string.
 ** Cons: May be storing unnecessary information.
+// end::chelchia[]
 
 === Timetable Feature
 
