@@ -32,6 +32,7 @@ reviews for restaurants within NUS. Additionally, Users are able to interact wit
 ** Project management:
 *** Deliverables and Deadline
 *** Assigned issues and managed milestones and releases
+(Pull requests https://github.com/CS2103-AY1819S1-W10-2/main/pull/309[#309], https://github.com/CS2103-AY1819S1-W10-2/main/pull/42[#42])
 ** Enhancements to existing features:
 *** Updated the GUI for listing all items other than restaurant
 *** Worked on browser panel displays
