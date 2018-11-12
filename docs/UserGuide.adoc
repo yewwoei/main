@@ -18,9 +18,8 @@ By: `Team W10-2`      Since: `Aug 2018`      Licence: `MIT`
 
 == Introduction
 
-Makan Book is for those who *prefer to use a desktop app to search for restaurants within NUS to eat at alone or with friends*. More importantly, MakanBook is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). MakanBook also allows users to add and manage friends and groups, start private and public jios, see which jios fit your schedule and so much more! Interested? Jump to the <<Quick Start>> to get started. Enjoy!
-
-// tag::evan[]
+Makan Book is for those who *prefer to use a desktop app to search for restaurants within NUS to eat at alone or with friends*. More importantly, MakanBook is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). MakanBook also allows users to add and manage friends and groups, start private and public jios and so much more! Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+// tag::evanmok2401[]
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
@@ -42,7 +41,7 @@ Allows you to use Makan Book's many features
 .  Refer to <<Features>> for details of each command.
 
 [[Features]]
-== Features
+== Features (Does Not Require Login)
 
 ====
 *Command Format*
@@ -51,6 +50,12 @@ Allows you to use Makan Book's many features
 * Items in square brackets are optional e.g `n/NAME [u/USERNAME]` can be used as `n/Waa Cow u/navekom` or as `n/Waa Cow`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[u/USERNAME]...` can be used as `{nbsp}` (i.e. 0 times), `u/navekom`, `u/katespade u/themyth` etc.
 * Parameters can be in any order e.g. if the command specifies `u/USERNAME pwd/PASSWORD`, `pwd/PASSWORD u/USERNAME` is also acceptable.
+====
+
+[NOTE]
+====
+Makan Book data is saved in the hard disk automatically after any command that changes the data. +
+There is no need to save manually.
 ====
 
 === Viewing help : `help`
@@ -122,6 +127,13 @@ Example:
 
 * `signup u/davemyth pwd/pwd123123 n/Dave Batik p/92225822 e/davebaumb@gmail.com`
 
+=== Exiting the program : `exit`
+
+Exits the program. +
+Format: `exit`
+
+== Features (Requires Login)
+
 === Log In into an existing Makan Book Account: `login`
 
 Allows a User to log into an existing account in the Makan Book. +
@@ -150,7 +162,7 @@ Examples:
 Allows a user to view his own profile in the Makan Book. The browser panel will then contains the user's details and
 the reviews he's written. +
 Format: `displayProfile`
-// end::evan[]
+// end::evanmok2401[]
 
 // tag::chelchia[]
 === Finding people to eat with: `createJio`
@@ -413,16 +425,6 @@ Format: `listDebtor`
 
 // end::kate[]
 
-=== Exiting the program : `exit`
-
-Exits the program. +
-Format: `exit`
-
-=== Saving the data
-
-Makan Book data are saved in the hard disk automatically after any command that changes the data. +
-There is no need to save manually.
-
 == Administrator Level Features
 === Adding a restaurant: `add` [DEPRECIATED, DO NOT USE, ONLY FOR ADMINISTRATORS]
 
@@ -534,7 +536,7 @@ The `redo` command fails as there are no `undo` commands executed previously.
 // end::undoredo[]
 
 == Changes coming in v2.0
-
+// tag::evanmok2401[]
 === Restriction of Privileges to Makan Book
 Currently, all users are can add, delete, edit and make changes to restaurants in the makan book even if the User Guide says otherwise.
 This can affect all other users.
@@ -573,7 +575,7 @@ Examples:
 ==== List Favourites: `listFavourites`
 Allows User to list the restaurants he has entered into his favourites. +
 Format: `listFavourites`
-
+// end::evanmok2401[]
 ====  Find common timeslots with friends: `findTime`
 Find common eating timeslots with a list of friends. +
 Format: `findTime [w/week number] [u/USERNAME]…`
