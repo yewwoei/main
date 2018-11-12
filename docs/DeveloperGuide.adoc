@@ -1310,7 +1310,6 @@ An event for users to meet up with friends (over food)
 
 [appendix]
 
-=======
 
 == Instructions for Manual Testing
 
