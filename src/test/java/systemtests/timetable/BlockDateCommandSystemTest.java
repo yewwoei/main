@@ -37,17 +37,7 @@ public class BlockDateCommandSystemTest extends AddressBookSystemTest {
         User currentUser = VALID_USER;
 
         Date toBlock = VALID_DATE_A;
-        /* ------------------------ Perform block operations without logging in. ----------------------------- */
-
-        /* Case: add a valid date, user not logged in -> date blocked in user schedule. */
         String command = createBlockDateCommand(toBlock);
-        assertCommandFailure(command, String.format(MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND,
-                BlockDateCommand.COMMAND_WORD));
-
-        /* Case: add a invalid date, user not logged in -> date blocked in user schedule. */
-        command = createBlockDateCommand(INVALID_WEEK, INVALID_TIME, INVALID_DAY);
-        assertCommandFailure(command, String.format(MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND,
-                BlockDateCommand.COMMAND_WORD));
 
         /* ------------------------ Perform valid block operations ----------------------------- */
 
@@ -55,7 +45,6 @@ public class BlockDateCommandSystemTest extends AddressBookSystemTest {
         model.addUser(currentUser);
         model.loginUser(currentUser);
 
-        command = createBlockDateCommand(toBlock);
         assertCommandSuccess(command, toBlock);
         model.freeDateForCurrentUser(toBlock);
 
@@ -99,6 +88,20 @@ public class BlockDateCommandSystemTest extends AddressBookSystemTest {
         command = createBlockDateCommand(toBlock);
         assertCommandSuccess(command, toBlock);
         assertCommandFailure(command, BlockDateCommand.MESSAGE_DUPLICATE_DATE);
+        model.freeDateForCurrentUser(toBlock);
+
+        /* ------------------------ Perform block operations without logging in. ----------------------------- */
+
+        model.logoutUser();
+        /* Case: add a valid date, user not logged in -> date blocked in user schedule. */
+        assertCommandFailure(command, String.format(MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND,
+                BlockDateCommand.COMMAND_WORD));
+
+        /* Case: add a invalid date, user not logged in -> date blocked in user schedule. */
+        command = createBlockDateCommand(INVALID_WEEK, INVALID_TIME, INVALID_DAY);
+        assertCommandFailure(command, String.format(MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND,
+                BlockDateCommand.COMMAND_WORD));
+
     }
 
     /**
@@ -143,7 +146,6 @@ public class BlockDateCommandSystemTest extends AddressBookSystemTest {
 
         executeCommand(command);
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
-        assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();
     }
 
