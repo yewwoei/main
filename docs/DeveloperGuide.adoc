@@ -218,7 +218,7 @@ The `Model`,
 
 
 [[Design-Storage]]
-// tag::evanmok2401[]
+// tag::evanmok2401(1)[]
 === Storage component
 
 .Structure of the Storage Component
@@ -299,7 +299,7 @@ can be entered through the Command Line Interface. The implementation is aided b
 of whether a user is currently signed in and which user it is. In doing so, data relating to this particular user during his session
 can be saved.
 
-// end::evanmok2401[]
+// end::evanmok2401(1)[]
 
 === Adding, accepting and deleting friends and friend requests
 ==== Current Implementation for Friendships
@@ -1280,7 +1280,7 @@ These instructions only provide a starting point for testers to work on; testers
 .. Resize the window to an optimum size. Move the window to a different location. Close the window.
 .. Re-launch the app by double-clicking the jar file. +
    Expected: The most recent window size and location is retained.
-// tag::evanmok2401[]
+// tag::evanmok2401(2)[]
 === Sign Up for Makan Book
 
 . Signing Up for an Account in the Makan Book.
@@ -1361,4 +1361,4 @@ These instructions only provide a starting point for testers to work on; testers
 . Dealing with missing/corrupted data files
 .. Corrupted Xml: The application will start with an empty addressbook.xml and users.xml.
 .. Missing Xml: The application would generate sample addressbook.xml and users.xml and store it in the data folder
-// end::evanmok2401[]
+// end::evanmok2401(2)[]
