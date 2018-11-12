@@ -20,6 +20,7 @@ By: `Team W10-2`      Since: `Aug 2018`      Licence: `MIT`
 
 Makan Book is for those who *prefer to use a desktop app to search for restaurants within NUS to eat at alone or with friends*. More importantly, MakanBook is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). MakanBook also allows users to add and manage friends and groups, start private and public jios and so much more! Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 // tag::evanmok2401(2)[]
+
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
@@ -343,7 +344,7 @@ Format: `addDebt g/GROUP amt/AMOUNT`
 
 Examples:
 
-* `addGroupDebt g/2103 amt/4.30`
+* `addGroupDebt g/CS2103 amt/4.30`
 
 ===  Sent clear debt request: `clearDebt`
 
@@ -675,15 +676,15 @@ e.g. `deleteFriend u/meena567`
 * *List Friend Requests* : `listFriendRequests` +
 * *List Friends* : `listFriends` +
 * *Add Group* : `addGroup g/GROUP_NAME` +
-e.g. addGroup g/2103
-* *Add Members* : `addMembers g/GROUP_NAME [u/USERNAME...]` +
-e.g. addMembers g/2103 u/thejrlinguist u/meena567
+e.g. addGroup g/CS2103
+* *Add Members* : `addMembers g/GROUP_NAME [u/USERNAME]...` +
+e.g. addMembers g/CS2103 u/thejrlinguist u/meena567
 * *Accept Group* : `acceptGroup g/GROUP_NAME` +
-e.g. acceptGroup g/2103
+e.g. acceptGroup g/CS2103
 * *Delete Group Request* : `deleteGroupRequest g/GROUP_NAME` +
-e.g. deleteGroupRequest g/2103
+e.g. deleteGroupRequest g/CS2103
 * *Delete Group* : `deleteGroup g/GROUP_NAME` +
-e.g. deleteGroup g/2103
+e.g. deleteGroup g/CS2103
 * *List Group Requests* : `listGroupRequests` +
 * *List Groups* : `listGroups` +
 * *Block Date* : `blockDate w/WEEKNUMBER d/DAY h/HHHH`
