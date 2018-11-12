@@ -1460,6 +1460,7 @@ These instructions only provide a starting point for testers to work on; testers
    Expected: Jio does not exist.
 // end::chelchia[]
 
+// tag::yewwoei[]
 === Block Date from your schedule.
 
 . Block a valid date from your schedule
@@ -1480,5 +1481,32 @@ Expected: This busy date already exists in your schedule.
 .. Prerequisites: User is logged in. The date is blocked on your schedule.
 ... Test case: `freeDate w/recess d/mon h/1800` +
 Expected: Time has been unblocked on your schedule: [NUS Week: recess Day:mon Time:1800]
+
+. Free a valid date from your schedule when it is already free.
+.. Prerequisites: User is logged in. The date is blocked on your schedule.
+... Test case: `freeDate w/recess d/mon h/1800` +
+Expected: This time block is already free on your schedule.
+
+=== List your schedule for the week.
+
+. List your schedule for a valid week.
+.. Prerequisites: User is logged in.
+... Test case: `listScheduleForWeek w/13` +
+Expected: Your schedule will be listed in the browser panel as a html document with the heading: These are your free dates for the Week: 13.
+
+=== Find free timeslots to meet among your group members for a week.
+
+. Find free timeslots to meet among group members for a valid group and a valid week.
+.. Prerequisites: User is logged in and part of a group.
+... Test case: `findDates g/2103 w/13` +
+Expected: The list of timeslots for meeting will be listed in the browser panel as a html document with the heading: These are the common free dates for Group: 2103 on Week: 13.
+
+
+. Find free timeslots to meet among group members for a invalid group and a valid week.
+.. Prerequisites: User is logged in and not part of the group.
+... Test case: `findDates g/krustycrab w/13` +
+Expected: You are not in that group.
+// end::yewwoei[]
+
 
 
