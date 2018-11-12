@@ -21,7 +21,7 @@ By: `Team W10-2`      Since: `Aug 2018`      Licence: `MIT`
 Makan Book is for those who *prefer to use a desktop app to search for restaurants within NUS to eat at alone or with friends*. More importantly, MakanBook is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). MakanBook also allows users to add and manage friends and groups, start private and public jios and so much more! Interested? Jump to the <<Quick Start>> to get started. Enjoy!
 
 // tag::evanmok2401(2)[]
-[[Quick Start]]
+
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
@@ -48,7 +48,7 @@ Allows you to use Makan Book's many features
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Waa Cow`.
 * Items in square brackets are optional e.g `n/NAME [u/USERNAME]` can be used as `n/Waa Cow u/navekom` or as `n/Waa Cow`.
 * Items with `…`​ after them can be used multiple times including zero times e.g. `[u/USERNAME]...` can represent `u/navekom`, `u/katespade u/themyth` etc.
 * Parameters can be in any order e.g. if the command specifies `u/USERNAME pwd/PASSWORD`, `pwd/PASSWORD u/USERNAME` is also acceptable.
@@ -250,7 +250,7 @@ Examples:
 === Adding members: `addMembers`
 
 A User already in the group can add members to a particular group by specifying the group name and the usernames of the users they wish to add to that group. +
-Format: `addMembers g/GROUPNAME [Users… u/USERNAMES]`
+Format: `addMembers g/GROUPNAME [Users u/USERNAMES]...`
 
 Examples:
 
@@ -364,7 +364,7 @@ Format: `addGroupDebt g/GROUP amt/AMOUNT`
 
 Examples:
 
-* `addGroupDebt g/2103 amt/4.30`
+* `addGroupDebt g/CS2103 amt/4.30`
 
 ===  Sent clear debt request: `clearDebt`
 
@@ -698,15 +698,15 @@ e.g. `deleteFriend u/meena567`
 * *List Friend Requests* : `listFriendRequests` +
 * *List Friends* : `listFriends` +
 * *Add Group* : `addGroup g/GROUP_NAME` +
-e.g. `addGroup g/2103`
-* *Add Members* : `addMembers g/GROUP_NAME [u/USERNAME...]` +
-e.g. `addMembers g/2103 u/thejrlinguist u/meena567`
+e.g. addGroup g/CS2103
+* *Add Members* : `addMembers g/GROUP_NAME [u/USERNAME]...` +
+e.g. addMembers g/CS2103 u/thejrlinguist u/meena567
 * *Accept Group* : `acceptGroup g/GROUP_NAME` +
-e.g. `acceptGroup g/2103`
+e.g. acceptGroup g/CS2103
 * *Delete Group Request* : `deleteGroupRequest g/GROUP_NAME` +
-e.g. `deleteGroupRequest g/2103`
+e.g. deleteGroupRequest g/CS2103
 * *Delete Group* : `deleteGroup g/GROUP_NAME` +
-e.g. `deleteGroup g/2103`
+e.g. deleteGroup g/CS2103
 * *List Group Requests* : `listGroupRequests` +
 * *List Groups* : `listGroups` +
 * *Create Jio* : `createJio` +
