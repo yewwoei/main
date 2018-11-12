@@ -5,7 +5,6 @@ import static seedu.address.logic.parser.CliSyntax.PREFIX_USERNAME;
 
 import org.junit.Test;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.friend.AddFriendCommand;
 import seedu.address.model.Model;
 import seedu.address.model.user.User;
