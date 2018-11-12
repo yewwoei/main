@@ -324,6 +324,7 @@ Format: `listJio`
 // end::chelchia[]
 
 // tag::kate[]
+
 ===  Sent add debt request: `addDebt`
 
 User(Creditor) send a debt request to another user with specific amount.
