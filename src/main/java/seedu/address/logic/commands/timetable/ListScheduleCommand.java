@@ -26,6 +26,8 @@ public class ListScheduleCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "Listed your week: %1$s schedule below.";
 
+    public static final String UI_PAGE_HEADER = "These are your free dates for the Week: %1$s";
+
     private final Week weekNumber;
 
     /**
@@ -44,7 +46,7 @@ public class ListScheduleCommand extends Command {
             throw new NotLoggedInCommandException(COMMAND_WORD);
         }
 
-        model.displayUserWeekSchedule(weekNumber);
+        model.displayUserWeekSchedule(String.format(UI_PAGE_HEADER, weekNumber), weekNumber);
 
         return new CommandResult(String.format(MESSAGE_SUCCESS, weekNumber));
     }

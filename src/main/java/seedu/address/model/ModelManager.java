@@ -645,20 +645,20 @@ public class ModelManager extends ComponentManager implements Model {
     }
 
     @Override
-    public void displayUserWeekSchedule(Week weekNumber) {
+    public void displayUserWeekSchedule(String header, Week weekNumber) {
         updateDisplayedDatesUserWeek(weekNumber);
-        displayWeekSchedule(displayedDates);
+        displayWeekSchedule(header, displayedDates);
     }
 
     @Override
-    public void displayFreeDatesForGroupAndWeek(Name groupName, Week week) {
+    public void displayFreeDatesForGroupAndWeek(String header, Name groupName, Week week) {
         Group group = userData.getGroupHashmap().get(groupName);
         List<User> groupMembers = group.getAcceptedUsers();
         List<UniqueSchedule> allSchedules = new ArrayList<>();
         // getting all the schedules.
         groupMembers.stream().forEach(user -> allSchedules.add(user.getBusySchedule()));
         List<Date> datesForDisplay = UniqueSchedule.findFreeDatesAmongSchedulesForWeek(allSchedules, week);
-        displayWeekSchedule(datesForDisplay);
+        displayWeekSchedule(header, datesForDisplay);
     }
 
 
@@ -668,8 +668,8 @@ public class ModelManager extends ComponentManager implements Model {
 
     }
 
-    private void displayWeekSchedule(List<Date> dates) {
-        raise(new DisplayWeekScheduleEvent(dates));
+    private void displayWeekSchedule(String header, List<Date> dates) {
+        raise(new DisplayWeekScheduleEvent(header, dates));
     }
 
     private void resetDisplayedDates() {

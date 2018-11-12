@@ -439,12 +439,12 @@ public class ModelStub implements Model {
     }
 
     @Override
-    public void displayUserWeekSchedule(Week weekNumber) {
+    public void displayUserWeekSchedule(String header, Week weekNumber) {
         throw new AssertionError("This method should not be called.");
     }
 
     @Override
-    public void displayFreeDatesForGroupAndWeek(Name groupName, Week week) {
+    public void displayFreeDatesForGroupAndWeek(String header, Name groupName, Week week) {
 
         throw new AssertionError("This method should not be called.");
     }
