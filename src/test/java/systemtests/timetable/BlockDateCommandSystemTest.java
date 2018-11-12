@@ -41,12 +41,12 @@ public class BlockDateCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: add a valid date, user not logged in -> date blocked in user schedule. */
         String command = createBlockDateCommand(toBlock);
-        assertCommandFailure(command, String.format(MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND,
+        assertCommandFailure(command, model, String.format(MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND,
                 BlockDateCommand.COMMAND_WORD));
 
         /* Case: add a invalid date, user not logged in -> date blocked in user schedule. */
         command = createBlockDateCommand(INVALID_WEEK, INVALID_TIME, INVALID_DAY);
-        assertCommandFailure(command, String.format(MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND,
+        assertCommandFailure(command, model, String.format(MESSAGE_USER_NOT_LOGGED_IN_FOR_COMMAND,
                 BlockDateCommand.COMMAND_WORD));
 
         /* ------------------------ Perform valid block operations ----------------------------- */
@@ -84,21 +84,21 @@ public class BlockDateCommandSystemTest extends AddressBookSystemTest {
 
         /* Case: user logs in normally and attempts to block a date with invalid week -> not blocked. */
         command = createBlockDateCommand(INVALID_WEEK, VALID_DAY, VALID_TIME);
-        assertCommandFailure(command, Week.MESSAGE_WEEK_CONSTRAINTS);
+        assertCommandFailure(command, model, Week.MESSAGE_WEEK_CONSTRAINTS);
 
         /* Case: user logs in normally and attempts to block a date with invalid day -> not blocked. */
         command = createBlockDateCommand(VALID_WEEK, INVALID_DAY, VALID_TIME);
-        assertCommandFailure(command, Day.MESSAGE_DAY_CONSTRAINTS);
+        assertCommandFailure(command, model, Day.MESSAGE_DAY_CONSTRAINTS);
 
         /* Case: user logs in normally and attempts to block a date with invalid time -> not blocked. */
         command = createBlockDateCommand(VALID_WEEK, VALID_DAY, INVALID_TIME);
-        assertCommandFailure(command, Time.MESSAGE_TIME_CONSTRAINTS);
+        assertCommandFailure(command, model, Time.MESSAGE_TIME_CONSTRAINTS);
 
         /* Case: user logs in normally and attempts to block an already blocked date -> not blocked. */
         toBlock = VALID_DATE_READING;
         command = createBlockDateCommand(toBlock);
         assertCommandSuccess(command, toBlock);
-        assertCommandFailure(command, BlockDateCommand.MESSAGE_DUPLICATE_DATE);
+        assertCommandFailure(command, model, BlockDateCommand.MESSAGE_DUPLICATE_DATE);
     }
 
     /**
@@ -138,11 +138,10 @@ public class BlockDateCommandSystemTest extends AddressBookSystemTest {
      * {@code AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)}.<br>
      * @see AddressBookSystemTest#assertApplicationDisplaysExpected(String, String, Model)
      */
-    private void assertCommandFailure(String command, String expectedResultMessage) {
-        Model expectedModel = getModel();
-
+    private void assertCommandFailure(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
+        assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();
     }
 
