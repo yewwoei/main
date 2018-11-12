@@ -183,7 +183,6 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
      */
     private void assertCommandSuccess(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
-        addSleep();
         assertApplicationDisplaysExpected("", expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsDefaultStyle();
@@ -198,7 +197,6 @@ public class AddDebtCommandSystemTest extends AddressBookSystemTest {
      */
     private void assertCommandFailure(String command, Model expectedModel, String expectedResultMessage) {
         executeCommand(command);
-        addSleep();
         assertApplicationDisplaysExpected(command, expectedResultMessage, expectedModel);
         assertSelectedCardUnchanged();
         assertCommandBoxShowsErrorStyle();
