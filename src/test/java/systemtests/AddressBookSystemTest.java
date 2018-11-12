@@ -326,8 +326,4 @@ public abstract class AddressBookSystemTest {
     public void clearJio() {
         testApp.clearJio();
     }
-
-    public void addSleep() {
-        testApp.addSleep();
-    }
 }
