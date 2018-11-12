@@ -19,33 +19,27 @@ Makan Book aims to make it easy for users to eat together in NUS.
 == Summary of contributions
 
 * *Major enhancement*: added *the ability for users to manage schedules on the platform and easily find common eating times among their groups.*
-** What it does: After logging in, each user can add dates to
-** Justification: This feature improves the user experience on the application significantly as users can allow their friends to find a meeting time quickly
-** Highlights: This enhancement affects existing commands and commands to be added in future. It required an in-depth analysis of design alternatives. The implementation too was challenging as it required changes to existing commands.
+** What it does: Users are able to add or remove their busy timeslots on their schedule. Then, users can easily find common times to eat
+among the people in their group through a simple command.
+** Justification: This feature improves the user experience on the application significantly as users can find a meeting time quickly among their group.
+** Highlights: This feature is integrated to work with the Groups feature and User feature implemented by 2 other developers.
 
 * *Minor enhancement*: Created NUS Dates system going from Week 1 to Week 15, including reading and recess week along with a random Date generator that can quickly generate a unique list of thousands of dates for testing.
 
-* *Code contributed*: [https://github.com[Functional code]] [https://github.com[Test code]] _{give links to collated code files}_
+* *Code contributed*: [https://nus-cs2103-ay1819s1.github.io/cs2103-dashboard/#=undefined&search=yewwoei[here]]
 
 * *Other contributions*:
 
-** Project management:
-*** Managed releases `v1.3` - `v1.5rc` (3 releases) on GitHub
+** Developer
+*** Managed releases `v1.1` - `v1.4` (4 releases) on GitHub
 ** Enhancements to existing features:
-*** Updated the GUI color scheme (Pull requests https://github.com[#33], https://github.com[#34])
-*** Wrote additional tests for existing features to increase coverage from 88% to 92% (Pull requests https://github.com[#36], https://github.com[#38])
+*** Updated the GUI to display weekly schedules. (Pull requests https://github.com/CS2103-AY1819S1-W10-2/main/pull/220[#220], https://github.com/CS2103-AY1819S1-W10-2/main/pull/231[#226] https://github.com/CS2103-AY1819S1-W10-2/main/pull/346[#346])
 ** Documentation:
-*** Did cosmetic tweaks to existing contents of the User Guide: https://github.com[#14]
+*** Did cosmetic tweaks to existing contents of the User Guide and Developer Guide: (Pull requests https://github.com/CS2103-AY1819S1-W10-2/main/pull/161[#161], https://github.com/CS2103-AY1819S1-W10-2/main/pull/231[#231], https://github.com/CS2103-AY1819S1-W10-2/main/pull/238[#238], https://github.com/CS2103-AY1819S1-W10-2/main/pull/346[#346])
 ** Community:
-*** PRs reviewed (with non-trivial review comments): https://github.com[#12], https://github.com[#32], https://github.com[#19], https://github.com[#42]
-*** Contributed to forum discussions (examples:  https://github.com[1], https://github.com[2], https://github.com[3], https://github.com[4])
-*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com[1], https://github.com[2], https://github.com[3])
-*** Some parts of the history feature I added was adopted by several other class mates (https://github.com[1], https://github.com[2])
+*** Reported bugs and suggestions for other teams in the class (examples:  https://github.com/CS2103-AY1819S1-W16-3/main/issues/178[1], https://github.com/CS2103-AY1819S1-W16-3/main/issues/174[2], https://github.com/CS2103-AY1819S1-W16-3/main/issues/168[3])
 ** Tools:
-*** Integrated a third party library (Natty) to the project (https://github.com[#42])
-*** Integrated a new Github plugin (CircleCI) to the team repo
-
-_{you can add/remove categories in the list above}_
+*** Integrated Continuous Integration tools (Travis, AppVeyor) to the team repo.
 
 == Contributions to the User Guide
 
@@ -54,9 +48,7 @@ _{you can add/remove categories in the list above}_
 |_Given below are sections I contributed to the User Guide. They showcase my ability to write documentation targeting end-users._
 |===
 
-include::../UserGuide.adoc[tag=undoredo]
-
-include::../UserGuide.adoc[tag=dataencryption]
+include::../UserGuide.adoc[tag=yewwoei]
 
 == Contributions to the Developer Guide
 
@@ -64,13 +56,4 @@ include::../UserGuide.adoc[tag=dataencryption]
 |_Given below are sections I contributed to the Developer Guide. They showcase my ability to write technical documentation and the technical depth of my contributions to the project._
 |===
 
-include::../DeveloperGuide.adoc[tag=undoredo]
-
-include::../DeveloperGuide.adoc[tag=dataencryption]
-
-
-== PROJECT: PowerPointLabs
-
----
-
-_{Optionally, you may include other projects in your portfolio.}_
+include::../DeveloperGuide.adoc[tag=yewwoei]

@@ -19,6 +19,7 @@ By: `Team W10-2`      Since: `Aug 2018`      Licence: `MIT`
 == Introduction
 
 Makan Book is for those who *prefer to use a desktop app to search for restaurants within NUS to eat at alone or with friends*. More importantly, MakanBook is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). MakanBook also allows users to add and manage friends and groups, start private and public jios and so much more! Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+
 // tag::evanmok2401(2)[]
 
 == Quick Start
@@ -47,9 +48,9 @@ Allows you to use Makan Book's many features
 ====
 *Command Format*
 
-* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/John Doe`.
+* Words in `UPPER_CASE` are the parameters to be supplied by the user e.g. in `add n/NAME`, `NAME` is a parameter which can be used as `add n/Waa Cow`.
 * Items in square brackets are optional e.g `n/NAME [u/USERNAME]` can be used as `n/Waa Cow u/navekom` or as `n/Waa Cow`.
-* Items with `…`​ after them can be used multiple times including zero times e.g. `[u/USERNAME]...` can be used as `{nbsp}` (i.e. 0 times), `u/navekom`, `u/katespade u/themyth` etc.
+* Items with `…`​ after them can be used multiple times including zero times e.g. `[u/USERNAME]...` can represent `u/navekom`, `u/katespade u/themyth` etc.
 * Parameters can be in any order e.g. if the command specifies `u/USERNAME pwd/PASSWORD`, `pwd/PASSWORD u/USERNAME` is also acceptable.
 ====
 
@@ -113,11 +114,32 @@ Format: `selectRestaurant INDEX`
 Examples:
 
 * `list` +
-`select 2` +
+`selectRestaurant 2` +
 Selects the 2nd restaurant in the address book.
 * `find Hwangs` +
-`select 1` +
+`selectRestaurant 1` +
 Selects the 1st restaurant in the results of the `find` command.
+
+=== Selecting a restaurant : `selectOther`
+
+Selects the item (Friend, Group, Debt, Request, Jio) identified by the index number used in the displayed item list (the second list panel). It will display details of the item
+which varies based on the item selected (eg. Jio contains name, date, address, people) +
+Format: `selectOther INDEX`
+
+****
+* Selects the item and loads the item page at the specified `INDEX`.
+* The index refers to the index number shown in the displayed item list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `listJio` +
+`selectOther 2` +
+Selects the 2nd jio in the address book.
+* `listGroups` +
+`selectOther 1` +
+Selects the 1st group in the address book.
 
 === Signing Up for a Makan Book Account: `signup`
 
@@ -228,7 +250,7 @@ Examples:
 === Adding members: `addMembers`
 
 A User already in the group can add members to a particular group by specifying the group name and the usernames of the users they wish to add to that group. +
-Format: `addMembers g/GROUPNAME [Users… u/USERNAMES]`
+Format: `addMembers g/GROUPNAME [Users u/USERNAMES]...`
 
 Examples:
 
@@ -290,6 +312,7 @@ Examples:
 * `createJio n/MALA w/1 d/mon h/1200 a/FineFood`
 * `createJio n/saporeFriends w/1 d/mon h/1800 a/Sapore g/2103`
 
+
 === Joining an existing jio: `joinJio`
 
 Examples:
@@ -321,6 +344,7 @@ Format: `listJio`
 // end::chelchia[]
 
 // tag::kate[]
+
 ===  Sent add debt request: `addDebt`
 
 User(Creditor) send a debt request to another user with specific amount.
@@ -340,7 +364,7 @@ Format: `addGroupDebt g/GROUP amt/AMOUNT`
 
 Examples:
 
-* `addGroupDebt g/2103 amt/4.30`
+* `addGroupDebt g/CS2103 amt/4.30`
 
 ===  Sent clear debt request: `clearDebt`
 
@@ -407,9 +431,11 @@ Format: `listDebtor`
 // end::kate[]
 
 // tag::yewwoei[]
+
 ===  Block unavailable timeslot manually: `blockDate`
 
-Blocks out that timeslot in the user’s schedule to signify that he is busy and not available to eat. +
+Blocks out that timeslot in the user’s schedule to signify that he is busy and not available to eat.
+Weeks only range from 1-6, recess, 7-13, reading, 15, 16 +
 Format: `blockDate w/WEEKNUMBER d/DAY h/HHHH`
 
 Examples:
@@ -423,30 +449,26 @@ Format: `freeDate w/recess d/DAY h/HHHH`
 
 Examples:
 
-* `freeDate week5 tues 1900 2100`
+* `freeDate w/5 d/wed h/1800`
 
 ===  See free Time: `listScheduleForWeek`
 
 Views the list of free time to eat on a NUS week according to your calendar.
-Format: `listScheduleForWeek w/WEEKNUMBER`
+Format: `listScheduleForWeek w/WEEK_NUMBER`
 
 Examples:
 
 * `listScheduleForWeek w/5`
 
-
-
-Views the list of free time to eat on a NUS week according to your calendar. +
-Format: `listScheduleForWeek w/WEEKNUMBER`
-
-Examples:
-
-* `listScheduleForWeek w/5`
 
 ===  Find common group meeting times: `findDates`
 
-Views the available times to meet in your group. You must be a part of a group. +
-Format: `findDates g/GROUPNAME w/WEEKNUMBER
+Views the available times to meet in your group. You must be a part of a group and the group name stated must exist. +
+Format: `findDates g/GROUP_NAME w/WEEK_NUMBER`
+
+Examples:
+
+* `findDates g/2103 w/5`
 
 // end::yewwoei[]
 
@@ -527,7 +549,7 @@ Examples:
 `list` +
 `undo` (reverses the `delete 1` command) +
 
-* `select 1` +
+* `selectRestaurant 1` +
 `list` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
@@ -644,6 +666,8 @@ Examples:
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Waa Lao`
 * *List* : `list`
+* *List Jio* : `listJio` +
+e.g. `listJio`
 * *Help* : `help`
 * *selectRestaurant* : `selectRestaurant INDEX` +
 e.g.`selectRestaurant 2`
@@ -659,15 +683,8 @@ e.g. `login u/navekom pwd/pwwd123`
 * *Write a Review* : `writeReview INDEX rate/RATING rvw/WRITTEN_REVIEW` +
 e.g. `writeReview 2 rate/5 rvw/I tried the Salmon Mentaiko Chirashi and it was amazing.`
 * *Display User Profile*: `displayProfile`
-* *Create Jio* : `createJio` +
-e.g. `createJio n/MALA w/1 d/mon h/1200 a/FineFood`
-e.g. `createJio n/saporeFriends w/1 d/mon h/1800 a/Sapore g/mygroup`
-* *Join Jio* : `joinJio` +
-e.g. `joinJio n/MALA`
-* *Delete Jio* : `deleteJio` +
-e.g. `deleteJio n/MALA`
-* *List Jio* : `listJio` +
-e.g. `listJio`
+* *selectOther* : `selectOther INDEX` +
+e.g.`selectOther 2`
 * *Add Friend* : `addFriend u/USERNAME` +
 e.g. `addFriend u/meena567`
 * *Accept Friend Request* : `acceptFriend u/USERNAME` +
@@ -679,25 +696,24 @@ e.g. `deleteFriend u/meena567`
 * *List Friend Requests* : `listFriendRequests` +
 * *List Friends* : `listFriends` +
 * *Add Group* : `addGroup g/GROUP_NAME` +
-e.g. addGroup g/2103
-* *Add Members* : `addMembers g/GROUP_NAME [u/USERNAME...]` +
-e.g. addMembers g/2103 u/thejrlinguist u/meena567
+e.g. addGroup g/CS2103
+* *Add Members* : `addMembers g/GROUP_NAME [u/USERNAME]...` +
+e.g. addMembers g/CS2103 u/thejrlinguist u/meena567
 * *Accept Group* : `acceptGroup g/GROUP_NAME` +
-e.g. acceptGroup g/2103
+e.g. acceptGroup g/CS2103
 * *Delete Group Request* : `deleteGroupRequest g/GROUP_NAME` +
-e.g. deleteGroupRequest g/2103
+e.g. deleteGroupRequest g/CS2103
 * *Delete Group* : `deleteGroup g/GROUP_NAME` +
-e.g. deleteGroup g/2103
+e.g. deleteGroup g/CS2103
 * *List Group Requests* : `listGroupRequests` +
 * *List Groups* : `listGroups` +
-* *Block Date* : `blockDate w/WEEKNUMBER d/DAY h/HHHH`
-e.g. `blockDate w/reading d/thu h/1800`
-* *Free Date* : `freeDate w/WEEK_NUMBER d/DAY h/HHHH`
-e.g. `freeDate w/11 d/tue h/0600`
-* *List User's Free Timeslots for a Week* : `listScheduleForWeek w/WEEK_NUMBER`
-e.g. `listScheduleForWeek w/6`
-* *List free timeslots for your group for a week* : `findDates g/GROUP_NAME w/WEEK_NUMBER`
-e.g. `findDates g/2103 w/reading`
+* *Create Jio* : `createJio` +
+e.g. `createJio n/MALA w/1 d/mon h/1200 a/FineFood` +
+e.g. `createJio n/saporeFriends w/1 d/mon h/1800 a/Sapore g/mygroup`
+* *Join Jio* : `joinJio` +
+e.g. `joinJio n/MALA`
+* *Delete Jio* : `deleteJio` +
+e.g. `deleteJio n/MALA`
 * *Add Debt* : `addDebt u/USERNAME amt/AMOUNT` +
  e.g. `addDebt u/katespades amt/2.3`
 * *Add Group Debt* : `addGroupDebt g/GROUP_NAME amt/AMOUNT` +
@@ -713,6 +729,14 @@ e.g. `deleteDebtRequest u/katespades amt/7.9 id/181030224951280`
 * *List Debt Request Received* : `listDebtRequestReceived` +
 * *List Debt Request Sent* : `listDebtRequestSent`
 * *List Debt History* : `listDebtHistory`
+* *Block Date* : `blockDate w/WEEKNUMBER d/DAY h/HHHH` +
+e.g. `blockDate w/reading d/thu h/1800`
+* *Free Date* : `freeDate w/WEEK_NUMBER d/DAY h/HHHH` +
+e.g. `freeDate w/11 d/tue h/0600`
+* *List User's Free Timeslots for a Week* : `listScheduleForWeek w/WEEK_NUMBER` +
+e.g. `listScheduleForWeek w/6`
+* *List free timeslots for your group for a week* : `findDates g/GROUP_NAME w/WEEK_NUMBER` +
+e.g. `findDates g/2103 w/reading`
 
 === Depreciated Commands
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +

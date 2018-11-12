@@ -13,8 +13,9 @@ ifndef::env-github[]
 image::images/Ui.png[width="600"]
 endif::[]
 
-* This is a desktop Restaurant Address Book application. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
+* MakanBook is a desktop Restaurant application for students. It has a GUI but most of the user interactions happen using a CLI (Command Line Interface).
 * The target user of this application is student diners aiming to find eating places around the National University of Singapore.
+* Users of MakanBook not only have access to restaurant features, but also social features: the ability to create groups, schedule meetings, create jios, and manage finances after meals.
 
 == Site Map
 
