@@ -19,7 +19,9 @@ By: `Team W10-2`      Since: `Aug 2018`      Licence: `MIT`
 == Introduction
 
 Makan Book is for those who *prefer to use a desktop app to search for restaurants within NUS to eat at alone or with friends*. More importantly, MakanBook is *optimized for those who prefer to work with a Command Line Interface* (CLI) while still having the benefits of a Graphical User Interface (GUI). MakanBook also allows users to add and manage friends and groups, start private and public jios and so much more! Interested? Jump to the <<Quick Start>> to get started. Enjoy!
+
 // tag::evanmok2401(2)[]
+[[Quick Start]]
 == Quick Start
 
 .  Ensure you have Java version `9` or later installed in your Computer.
@@ -112,11 +114,32 @@ Format: `selectRestaurant INDEX`
 Examples:
 
 * `list` +
-`select 2` +
+`selectRestaurant 2` +
 Selects the 2nd restaurant in the address book.
 * `find Hwangs` +
-`select 1` +
+`selectRestaurant 1` +
 Selects the 1st restaurant in the results of the `find` command.
+
+=== Selecting a restaurant : `selectOther`
+
+Selects the item (Friend, Group, Debt, Request, Jio) identified by the index number used in the displayed item list (the second list panel). It will display details of the item
+which varies based on the item selected (eg. Jio contains name, date, address, people) +
+Format: `selectOther INDEX`
+
+****
+* Selects the item and loads the item page at the specified `INDEX`.
+* The index refers to the index number shown in the displayed item list.
+* The index *must be a positive integer* `1, 2, 3, ...`
+****
+
+Examples:
+
+* `listJio` +
+`selectOther 2` +
+Selects the 2nd jio in the address book.
+* `listGroups` +
+`selectOther 1` +
+Selects the 1st group in the address book.
 
 === Signing Up for a Makan Book Account: `signup`
 
@@ -444,7 +467,7 @@ Examples:
 ===  Find common group meeting times: `findDates`
 
 Views the available times to meet in your group. You must be a part of a group. +
-Format: `findDates g/GROUPNAME w/WEEKNUMBER
+Format: `findDates g/GROUPNAME w/WEEKNUMBER`
 
 // end::yewwoei[]
 
@@ -525,7 +548,7 @@ Examples:
 `list` +
 `undo` (reverses the `delete 1` command) +
 
-* `select 1` +
+* `selectRestaurant 1` +
 `list` +
 `undo` +
 The `undo` command fails as there are no undoable commands executed previously.
@@ -642,6 +665,8 @@ Examples:
 * *Find* : `find KEYWORD [MORE_KEYWORDS]` +
 e.g. `find Waa Lao`
 * *List* : `list`
+* *List Jio* : `listJio` +
+e.g. `listJio`
 * *Help* : `help`
 * *selectRestaurant* : `selectRestaurant INDEX` +
 e.g.`selectRestaurant 2`
@@ -657,15 +682,8 @@ e.g. `login u/navekom pwd/pwwd123`
 * *Write a Review* : `writeReview INDEX rate/RATING rvw/WRITTEN_REVIEW` +
 e.g. `writeReview 2 rate/5 rvw/I tried the Salmon Mentaiko Chirashi and it was amazing.`
 * *Display User Profile*: `displayProfile`
-* *Create Jio* : `createJio` +
-e.g. `createJio n/MALA w/1 d/mon h/1200 a/FineFood`
-e.g. `createJio n/saporeFriends w/1 d/mon h/1800 a/Sapore g/mygroup`
-* *Join Jio* : `joinJio` +
-e.g. `joinJio n/MALA`
-* *Delete Jio* : `deleteJio` +
-e.g. `deleteJio n/MALA`
-* *List Jio* : `listJio` +
-e.g. `listJio`
+* *selectOther* : `selectOther INDEX` +
+e.g.`selectOther 2`
 * *Add Friend* : `addFriend u/USERNAME` +
 e.g. `addFriend u/meena567`
 * *Accept Friend Request* : `acceptFriend u/USERNAME` +
@@ -677,27 +695,26 @@ e.g. `deleteFriend u/meena567`
 * *List Friend Requests* : `listFriendRequests` +
 * *List Friends* : `listFriends` +
 * *Add Group* : `addGroup g/GROUP_NAME` +
-e.g. addGroup g/2103
+e.g. `addGroup g/2103`
 * *Add Members* : `addMembers g/GROUP_NAME [u/USERNAME...]` +
-e.g. addMembers g/2103 u/thejrlinguist u/meena567
+e.g. `addMembers g/2103 u/thejrlinguist u/meena567`
 * *Accept Group* : `acceptGroup g/GROUP_NAME` +
-e.g. acceptGroup g/2103
+e.g. `acceptGroup g/2103`
 * *Delete Group Request* : `deleteGroupRequest g/GROUP_NAME` +
-e.g. deleteGroupRequest g/2103
+e.g. `deleteGroupRequest g/2103`
 * *Delete Group* : `deleteGroup g/GROUP_NAME` +
-e.g. deleteGroup g/2103
+e.g. `deleteGroup g/2103`
 * *List Group Requests* : `listGroupRequests` +
 * *List Groups* : `listGroups` +
-* *Block Date* : `blockDate w/WEEKNUMBER d/DAY h/HHHH`
-e.g. `blockDate w/reading d/thu h/1800`
-* *Free Date* : `freeDate w/WEEK_NUMBER d/DAY h/HHHH`
-e.g. `freeDate w/11 d/tue h/0600`
-* *List User's Free Timeslots for a Week* : `listScheduleForWeek w/WEEK_NUMBER`
-e.g. `listScheduleForWeek w/6`
-* *List free timeslots for your group for a week* : `findDates g/GROUP_NAME w/WEEK_NUMBER`
-e.g. `findDates g/2103 w/reading`
+* *Create Jio* : `createJio` +
+e.g. `createJio n/MALA w/1 d/mon h/1200 a/FineFood` +
+e.g. `createJio n/saporeFriends w/1 d/mon h/1800 a/Sapore g/mygroup`
+* *Join Jio* : `joinJio` +
+e.g. `joinJio n/MALA`
+* *Delete Jio* : `deleteJio` +
+e.g. `deleteJio n/MALA`
 * *Add Debt* : `addDebt` +
- e.g. `addDebt u/kate amt/2.3`
+e.g. `addDebt u/kate amt/2.3`
 * *Add Group Debt* : `addGroupDebt` +
 e.g. `addGroupDebt g/My Lonely Club amt/27`
 * *Clear Debt* : `clearDebt` +
@@ -711,6 +728,14 @@ e.g. `deleteDebtRequest u/kate amt/7.9 id/181030224951280`
 * *List Debt Request Received* : `listDebtRequestReceived` +
 * *List Debt Request Sent* : `listDebtRequestSent`
 * *List Debt History* : `listDebtHistory`
+* *Block Date* : `blockDate w/WEEKNUMBER d/DAY h/HHHH` +
+e.g. `blockDate w/reading d/thu h/1800`
+* *Free Date* : `freeDate w/WEEK_NUMBER d/DAY h/HHHH` +
+e.g. `freeDate w/11 d/tue h/0600`
+* *List User's Free Timeslots for a Week* : `listScheduleForWeek w/WEEK_NUMBER` +
+e.g. `listScheduleForWeek w/6`
+* *List free timeslots for your group for a week* : `findDates g/GROUP_NAME w/WEEK_NUMBER` +
+e.g. `findDates g/2103 w/reading`
 
 === Depreciated Commands
 * *Add* `add n/NAME p/PHONE_NUMBER e/EMAIL a/ADDRESS [t/TAG]...` +
