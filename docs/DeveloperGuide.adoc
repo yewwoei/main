@@ -221,7 +221,6 @@ The `Model`,
 [[Design-Storage]]
 // end::yewwoei[]
 
-// tag::evanmok2401(1)[]
 === Storage component
 
 .Structure of the Storage Component
@@ -240,6 +239,7 @@ The `Storage` component,
 
 Classes used by multiple components are in the `seedu.addressbook.commons` package.
 
+// tag::evanmok2401(1)[]
 == Implementation
 
 This section describes some noteworthy details on how certain components and features are implemented.
